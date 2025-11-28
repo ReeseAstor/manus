@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Instagram, Facebook, Send } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -15,10 +16,19 @@ export default function Contact() {
     message: "",
   });
 
+  const submitMutation = trpc.contact.submit.useMutation({
+    onSuccess: (data) => {
+      toast.success(data.message);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to send message. Please try again.");
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you for your message! I'll get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    submitMutation.mutate(formData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -100,9 +110,13 @@ export default function Contact() {
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                <Button
+                  type="submit"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                  disabled={submitMutation.isPending}
+                >
                   <Send className="mr-2 h-4 w-4" />
-                  Send Message
+                  {submitMutation.isPending ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </CardContent>

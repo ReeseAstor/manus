@@ -156,6 +156,52 @@ export const appRouter = router({
         return { success: true };
       }),
   }),
+
+  contact: router({
+    submit: publicProcedure
+      .input(
+        z.object({
+          name: z.string().min(1, "Name is required"),
+          email: z.string().email("Please enter a valid email address"),
+          subject: z.string().min(1, "Subject is required"),
+          message: z.string().min(10, "Message must be at least 10 characters"),
+        })
+      )
+      .mutation(async ({ input }) => {
+        const { notifyOwner } = await import("./_core/notification");
+        
+        const emailContent = `
+New Contact Form Submission
+
+From: ${input.name} (${input.email})
+Subject: ${input.subject}
+
+Message:
+${input.message}
+
+---
+This message was sent via the contact form on your website.
+Reply directly to: ${input.email}
+        `;
+
+        const success = await notifyOwner({
+          title: `New Contact: ${input.subject}`,
+          content: emailContent,
+        });
+
+        if (!success) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Failed to send message. Please try again later.",
+          });
+        }
+
+        return {
+          success: true,
+          message: "Thank you for your message! I'll get back to you soon.",
+        };
+      }),
+  }),
 });
 
 export type AppRouter = typeof appRouter;
