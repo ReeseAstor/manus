@@ -9,12 +9,12 @@ export default function Books() {
       id: 1,
       title: "The Billionaire's Executive Assistant",
       subtitle: "Manhattan Money Kings Book 1",
-      cover: "https://m.media-amazon.com/images/I/81n7gqi8zAL._SL1500_.jpg",
+      cover: "/book1-cover.jpg",
       description: "A steamy office romance between a ruthless billionaire and the assistant he can't resist. When forbidden attraction meets corporate rivalry, everything is at stake.",
       fullBlurb: "Sarah Shah never expected to work for Manhattan's most ruthless billionaire. Michael Hastings is demanding, arrogant, and devastatingly attractive. As his executive assistant, she's determined to keep things professional—but when late nights at the office turn into stolen glances and forbidden touches, the line between business and pleasure begins to blur. With a corporate takeover threatening everything they've built and a scandal that could destroy them both, Sarah must decide: is love worth risking her career, her reputation, and her heart?",
       price: "$0.99",
       regularPrice: "$4.99",
-      link: "https://amzn.to/4ja7blJ",
+      link: "https://www.amazon.com/dp/B0F2W8QL7S",
       genre: ["Billionaire Romance", "Office Romance", "Steamy"],
       pages: 320,
       rating: 4.5,
@@ -22,17 +22,35 @@ export default function Books() {
       available: true,
     },
     {
-      id: 3,
-      title: "The Billionaire's Baby Secret: Hidden and His",
-      subtitle: "Manhattan Money Kings Book 3",
-      cover: "https://m.media-amazon.com/images/I/81n7gqi8zAL._SL1500_.jpg",
-      description: "One night. One secret. One second chance he refuses to lose. When Dominic Kane reclaims his empire, he discovers the daughter Sophia Reed kept hidden.",
-      fullBlurb: "One passionate night changed everything. Sophia Reed never told Dominic Kane about their daughter—how could she, when he disappeared to rebuild his fallen empire? Three years later, he's back, more powerful and determined than ever. When he discovers the truth, Dominic demands his place in their lives. To protect their family from scandal and give their daughter the life she deserves, they must navigate a world of boardroom battles and paparazzi. But as forced proximity reignites their undeniable chemistry, can they trade power plays for trust and build the family they both secretly crave?",
-      price: "$0.99",
+      id: 2,
+      title: "The Billionaire's Fake Wife",
+      subtitle: "Manhattan Money Kings Book 2",
+      cover: "/book2-cover.jpg",
+      description: "He caught her breaking into his office. She was after evidence that could destroy his rival. His solution? A marriage contract neither expected to fulfill.",
+      fullBlurb: "When Russian reformer Elena Volkov breaks into billionaire David Kim's penthouse office, she expects prison. Instead, he offers a deal: become his wife for one year in exchange for the resources to expose corruption threatening thousands of families. It's strictly business. A merger of convenience. Until forced proximity ignites something neither can control. As they navigate Manhattan's elite circles, their fake relationship becomes a dangerous game of power and desire. But when enemies close in and secrets emerge, they must decide what they're truly fighting for. A marriage on paper. A war behind closed doors. And a victory neither saw coming.",
+      price: "$2.99",
       regularPrice: "$4.99",
-      preorder: true,
-      releaseDate: "December 1, 2025",
-      link: "https://swiy.co/3rd",
+      preorder: false,
+      releaseDate: "Available Now",
+      link: "https://www.amazon.com/dp/B0FCCBNF8X",
+      genre: ["Fake Marriage", "Suspense", "Billionaire Romance"],
+      pages: 350,
+      rating: 0,
+      reviews: 0,
+      available: true,
+    },
+    {
+      id: 3,
+      title: "The Billionaire's Baby Secret",
+      subtitle: "Manhattan Money Kings Book 3",
+      cover: "/book3-cover.jpg",
+      description: "One night. One secret. One second chance he refuses to lose. When Dominic Kane reclaims his empire, he discovers the daughter Sophia Reed kept hidden.",
+      fullBlurb: "Three years ago, Sophia Reed walked away from a hotel room and a man she should've never trusted—rising mogul Dominic Kane. She built stability the hard way: early trains, late invoices, and a tiny apartment where nothing could touch the life growing inside her. Now the CEO who controls outcomes for a living is back… and the daughter Sophia's protected has the storm-gray eyes he can't deny. When Dominic returns to reclaim his empire, he discovers the truth he was never meant to miss—and a city eager to devour the scandal. He can buy silence, clear rooms, bend markets. But Sophia has rules: boundaries around her child, transparency instead of power plays, and love that's earned, not purchased. Between boardroom wars, paparazzi flash storms, and a custody fight waiting to ignite, he has to become more than a headline and more than a boss. He has to be the father Bella needs…and the partner Sophia deserves.",
+      price: "$2.99",
+      regularPrice: "$4.99",
+      preorder: false,
+      releaseDate: "Available Now",
+      link: "https://www.amazon.com/dp/B0DRZG5KKD",
       genre: ["Secret Baby", "Second Chance", "Billionaire Romance"],
       pages: 340,
       rating: 0,
@@ -68,10 +86,10 @@ export default function Books() {
                         alt={book.title}
                         className="w-full max-w-md mx-auto rounded-lg shadow-2xl group-hover:scale-105 transition-transform duration-300"
                       />
-                      {book.preorder && (
+                      {book.id === 3 && (
                         <div className="absolute top-4 right-4">
                           <Badge className="bg-primary text-primary-foreground">
-                            Preorder
+                            New Release
                           </Badge>
                         </div>
                       )}

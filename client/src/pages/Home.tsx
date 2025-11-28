@@ -28,25 +28,34 @@ export default function Home() {
 
   const books = [
     {
-      id: 1,
-      title: "The Billionaire's Executive Assistant",
-      subtitle: "Manhattan Money Kings Book 1",
-      cover: "https://m.media-amazon.com/images/I/81n7gqi8zAL._SL1500_.jpg",
-      description: "A steamy office romance between a ruthless billionaire and the assistant he can't resist. When forbidden attraction meets corporate rivalry, everything is at stake.",
-      price: "$0.99",
-      link: "https://amzn.to/4ja7blJ",
+      id: 3,
+      title: "The Billionaire's Baby Secret",
+      subtitle: "Manhattan Money Kings Book 3",
+      cover: "/book3-cover.jpg",
+      description: "One night. One secret. One second chance he refuses to lose. When Dominic Kane discovers the daughter he never knew existed, he'll stop at nothing to claim his family—and win back the woman who got away.",
+      price: "$2.99",
+      link: "https://www.amazon.com/dp/B0DRZG5KKD",
       available: true,
+      badge: "New Release",
     },
     {
       id: 2,
-      title: "The Billionaire's Baby Secret: Hidden and His",
-      subtitle: "Manhattan Money Kings Book 3",
-      cover: "https://m.media-amazon.com/images/I/81n7gqi8zAL._SL1500_.jpg",
-      description: "One night. One secret. One second chance he refuses to lose. When Dominic Kane reclaims his empire, he discovers the daughter Sophia Reed kept hidden.",
+      title: "The Billionaire's Fake Wife",
+      subtitle: "Manhattan Money Kings Book 2",
+      cover: "/book2-cover.jpg",
+      description: "He caught her breaking into his office. She was after evidence that could destroy his rival. His solution? A marriage contract neither expected to fulfill.",
+      price: "$2.99",
+      link: "https://www.amazon.com/dp/B0FCCBNF8X",
+      available: true,
+    },
+    {
+      id: 1,
+      title: "The Billionaire's Executive Assistant",
+      subtitle: "Manhattan Money Kings Book 1",
+      cover: "/book1-cover.jpg",
+      description: "A steamy office romance between a ruthless billionaire and the assistant he can't resist. When forbidden attraction meets corporate rivalry, everything is at stake.",
       price: "$0.99",
-      preorder: true,
-      releaseDate: "December 1, 2025",
-      link: "https://swiy.co/3rd",
+      link: "https://www.amazon.com/dp/B0F2W8QL7S",
       available: true,
     },
   ];
@@ -101,42 +110,44 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {books.map((book) => (
               <Card key={book.id} className="overflow-hidden group hover:shadow-xl transition-shadow duration-300 bg-card border-border">
                 <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row gap-6">
-                    <div className="flex-shrink-0">
+                  <div className="space-y-4">
+                    <div className="relative">
                       <img
                         src={book.cover}
                         alt={book.title}
-                        className="w-full md:w-48 h-auto rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-auto rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
                       />
+                      {book.badge && (
+                        <div className="absolute top-2 right-2">
+                          <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full shadow-lg">
+                            {book.badge}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <div className="flex-1 space-y-4">
+                    <div className="space-y-3">
                       <div>
                         <p className="text-sm text-primary font-semibold mb-1">{book.subtitle}</p>
-                        <h3 className="font-playfair text-2xl font-bold text-foreground mb-2">
+                        <h3 className="font-playfair text-xl font-bold text-foreground mb-2">
                           {book.title}
                         </h3>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-sm text-muted-foreground line-clamp-3">
                           {book.description}
                         </p>
                       </div>
                       
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2">
                         <span className="text-2xl font-bold text-primary">{book.price}</span>
-                        {book.preorder && (
-                          <span className="text-sm text-muted-foreground">
-                            Preorder • {book.releaseDate}
-                          </span>
-                        )}
                       </div>
 
                       <a href={book.link} target="_blank" rel="noopener noreferrer">
                         <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
                           <Heart className="mr-2 h-4 w-4" />
-                          {book.preorder ? "Preorder Now" : "Get Your Copy"}
+                          Get Your Copy
                         </Button>
                       </a>
                     </div>
@@ -159,64 +170,46 @@ export default function Home() {
       {/* About Section */}
       <section className="py-20">
         <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
-                <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground">
-                  About Reese Astor
-                </h2>
-                <div className="space-y-4 text-muted-foreground">
-                  <p>
-                    Former VP in corporate finance turned bestselling romance author and business strategist. I help women transform their creative passion into profitable businesses.
-                  </p>
-                  <p>
-                    My Manhattan Money Kings series brings you steamy billionaire romance with strong heroines, powerful heroes, and happily-ever-afters that will make your heart race.
-                  </p>
-                  <p>
-                    Beyond writing, I coach aspiring authors on the business of romance writing, from crafting compelling stories to mastering KDP and building sustainable author careers.
-                  </p>
-                </div>
-                <Link href="/about">
-                  <Button variant="outline">
-                    Learn More About Me
-                  </Button>
-                </Link>
-              </div>
-              <div className="relative">
-                <div className="aspect-square rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                  <BookOpen className="h-32 w-32 text-primary/40" />
-                </div>
-              </div>
-            </div>
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground">
+              About Reese Astor
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Reese Astor writes steamy, high-glamour contemporary romance where ruthless billionaires fall hard for the women who refuse to be conquered. When she's not crafting swoon-worthy happily-ever-afters, you'll find her with coffee in hand, plotting her next novel during late-night writing sessions.
+            </p>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              As a writing coach, Reese helps aspiring authors turn their creative passion into a profitable career. She specializes in teaching romance writers how to craft compelling stories, build engaged readerships, and navigate the world of independent publishing.
+            </p>
+            <Link href="/about">
+              <Button variant="outline" size="lg" className="mt-4">
+                Learn More About Me
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-background">
+      <section className="py-20 bg-primary/5">
         <div className="container">
-          <div className="max-w-2xl mx-auto text-center space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <Mail className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Join the Community</span>
+          <div className="max-w-2xl mx-auto text-center space-y-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <Mail className="h-8 w-8 text-primary" />
             </div>
-            
             <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground">
-              Get Exclusive Updates
+              Join My Newsletter
             </h2>
-            
             <p className="text-lg text-muted-foreground">
-              Subscribe to receive updates on new releases, exclusive content, writing tips, and special promotions delivered straight to your inbox.
+              Get exclusive content, early access to new releases, and behind-the-scenes insights into my writing process.
             </p>
-
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <Input
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="flex-1 bg-background"
+                className="flex-1"
               />
               <Button 
                 type="submit" 
@@ -226,13 +219,8 @@ export default function Home() {
                 {subscribeMutation.isPending ? "Subscribing..." : "Subscribe"}
               </Button>
             </form>
-
-            <p className="text-xs text-muted-foreground">
-              No spam, unsubscribe anytime. Read our{" "}
-              <Link href="/privacy">
-                <a className="text-primary hover:underline">privacy policy</a>
-              </Link>
-              .
+            <p className="text-sm text-muted-foreground">
+              No spam, ever. Unsubscribe anytime.
             </p>
           </div>
         </div>

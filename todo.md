@@ -71,3 +71,23 @@
 - [x] Integrate email sending service (using Manus notification API)
 - [x] Update contact form to use new backend endpoint
 - [x] Test email delivery functionality
+
+## Book 3 Integration
+- [x] Copy book cover images to project public directory
+- [x] Extract book blurb and details from provided documents
+- [x] Update Books page with Book 3 information and cover
+- [ ] Create dedicated Book 3 landing page
+- [x] Add buy links for Book 3
+- [x] Update homepage to feature Book 3 as latest release
+
+## Book 2 Integration
+- [x] Copy Book 2 cover images to project public directory
+- [x] Extract book blurb from provided documents
+- [x] Update Books page with Book 2 information and cover
+- [x] Add Amazon link for Book 2
+- [x] Update homepage books section with Book 2
+
+## Book 1 Integration
+- [x] Copy Book 1 cover images to project public directory
+- [x] Update Books page with Book 1 cover and correct Amazon link
+- [x] Update homepage with Book 1 cover and correct Amazon link
