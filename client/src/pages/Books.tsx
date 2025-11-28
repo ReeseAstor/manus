@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Star, ShoppingCart } from "lucide-react";
+import { Heart, Star, ShoppingCart, BookOpen, Gift } from "lucide-react";
 
 export default function Books() {
   const books = [
@@ -62,6 +62,54 @@ export default function Books() {
   return (
     <div className="min-h-screen py-12">
       <div className="container">
+        {/* Free Prequel Banner */}
+        <div className="mb-12 p-8 rounded-lg bg-gradient-to-br from-primary/20 via-primary/10 to-background border-2 border-primary/30">
+          <div className="grid md:grid-cols-3 gap-6 items-center">
+            <div className="relative">
+              <div className="absolute -inset-2 bg-primary/20 blur-xl rounded-lg" />
+              <img
+                src="/prequel-cover.jpg"
+                alt="The Billionaire's One Night Stand - Free Prequel"
+                className="relative w-full max-w-xs mx-auto rounded-lg shadow-xl"
+              />
+            </div>
+            
+            <div className="md:col-span-2 space-y-4 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground font-bold text-sm">
+                <Gift className="h-4 w-4" />
+                FREE NEWSLETTER BONUS
+              </div>
+              
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-foreground">
+                The Billionaire's One Night Stand
+              </h2>
+              
+              <p className="text-lg text-muted-foreground">
+                A Manhattan Money Kings Prequel. Get this steamy standalone novella absolutely free! Discover where the Manhattan Money Kings saga began.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a href="https://dl.bookfunnel.com/xrodg0t77p" target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
+                    <BookOpen className="mr-2 h-5 w-5" />
+                    Download Free Now
+                  </Button>
+                </a>
+                <a href="https://www.amazon.com/dp/B0DSG7NKGP" target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" variant="outline" className="font-semibold">
+                    View on Amazon
+                  </Button>
+                </a>
+              </div>
+              
+              <div className="flex items-center justify-center md:justify-start gap-3 pt-2">
+                <img src="/prequel-qr.png" alt="QR Code" className="w-16 h-16" />
+                <p className="text-xs text-muted-foreground">Scan QR code for instant access</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Header */}
         <div className="text-center space-y-4 mb-16">
           <h1 className="font-playfair text-5xl md:text-6xl font-bold text-foreground">

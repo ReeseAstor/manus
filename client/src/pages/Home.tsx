@@ -98,6 +98,66 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Free Prequel Section */}
+      <section className="py-16 bg-gradient-to-br from-primary/20 via-primary/10 to-background border-y border-primary/20">
+        <div className="container">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              {/* Book Cover */}
+              <div className="relative">
+                <div className="absolute -inset-4 bg-primary/20 blur-2xl rounded-full" />
+                <img
+                  src="/prequel-cover.jpg"
+                  alt="The Billionaire's One Night Stand - Free Prequel"
+                  className="relative w-full max-w-sm mx-auto rounded-lg shadow-2xl"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="space-y-6 text-center md:text-left">
+                <div className="inline-block px-4 py-2 rounded-full bg-primary text-primary-foreground font-bold text-sm">
+                  FREE NEWSLETTER BONUS
+                </div>
+                
+                <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground">
+                  Get Your Free Prequel!
+                </h2>
+                
+                <p className="text-xl text-foreground font-semibold">
+                  The Billionaire's One Night Stand
+                </p>
+                
+                <p className="text-muted-foreground">
+                  A Manhattan Money Kings Prequel. Discover where it all began with this steamy standalone novella—absolutely free when you join my newsletter!
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a href="https://dl.bookfunnel.com/xrodg0t77p" target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
+                      <BookOpen className="mr-2 h-5 w-5" />
+                      Download Free Now
+                    </Button>
+                  </a>
+                </div>
+
+                <div className="flex items-center justify-center md:justify-start gap-4 pt-4">
+                  <div className="text-center">
+                    <img src="/prequel-qr.png" alt="QR Code" className="w-24 h-24 mx-auto mb-2" />
+                    <p className="text-xs text-muted-foreground">Scan to download</p>
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    <p>Also available on</p>
+                    <a href="https://www.amazon.com/dp/B0DSG7NKGP" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+                      Amazon Kindle
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Books Section */}
       <section className="py-20 bg-card/50">
         <div className="container">
@@ -200,7 +260,7 @@ export default function Home() {
               Join My Newsletter
             </h2>
             <p className="text-lg text-muted-foreground">
-              Get exclusive content, early access to new releases, and behind-the-scenes insights into my writing process.
+              Get your FREE prequel novella, exclusive content, early access to new releases, and behind-the-scenes insights into my writing process.
             </p>
             <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <Input

@@ -91,3 +91,12 @@
 - [x] Copy Book 1 cover images to project public directory
 - [x] Update Books page with Book 1 cover and correct Amazon link
 - [x] Update homepage with Book 1 cover and correct Amazon link
+
+## Free Prequel Integration
+- [x] Copy prequel cover image to project public directory
+- [x] Copy QR code image to project public directory
+- [x] Add free prequel to homepage as lead magnet
+- [x] Add free prequel to Books page
+- [x] Integrate BookFunnel download link
+- [x] Add QR code for easy mobile access
+- [x] Update newsletter signup messaging to mention free prequel
