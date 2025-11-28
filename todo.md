@@ -100,3 +100,30 @@
 - [x] Integrate BookFunnel download link
 - [x] Add QR code for easy mobile access
 - [x] Update newsletter signup messaging to mention free prequel
+
+## Free Book Landing Page
+- [x] Create dedicated /free-book route and page component
+- [x] Design compelling landing page with hero section
+- [x] Add book preview/sample chapter section
+- [x] Include reader testimonials and social proof
+- [x] Add multiple CTAs for BookFunnel download
+- [x] Include FAQ section about the free book
+- [x] Add social sharing buttons
+- [x] Update navigation to include free book link
+
+## Social Media Promotional Graphics
+- [x] Generate Instagram post graphic (1080x1080)
+- [x] Generate Facebook ad graphic (1200x628)
+- [x] Generate Pinterest pin graphic (1000x1500)
+- [x] Generate Instagram Story graphic (1080x1920)
+- [x] Save all graphics to project public directory
+
+## Email Automation Sequence
+- [x] Create comprehensive email sequence template document
+- [x] Write Email 1: Welcome + free book delivery
+- [x] Write Email 2: Character introduction and series overview
+- [x] Write Email 3: Behind-the-scenes writing process
+- [x] Write Email 4: Book 1 introduction with special offer
+- [x] Write Email 5: Complete series overview with limited-time discount
+- [x] Include subject lines, timing, and CTAs for each email
+- [x] Provide MailerLite setup instructions

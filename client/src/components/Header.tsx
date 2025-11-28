@@ -9,6 +9,7 @@ export function Header() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/books", label: "Books" },
+    { href: "/free-book", label: "Free Book", special: true },
     { href: "/blog", label: "Blog" },
     { href: "/coaching", label: "Coaching" },
     { href: "/about", label: "About" },
@@ -28,7 +29,11 @@ export function Header() {
         <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href}>
-              <a className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              <a className={`text-sm font-medium transition-colors ${
+                link.special 
+                  ? "text-primary font-bold hover:text-primary/80" 
+                  : "text-muted-foreground hover:text-primary"
+              }`}>
                 {link.label}
               </a>
             </Link>
@@ -53,7 +58,11 @@ export function Header() {
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
                 <a
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                  className={`text-sm font-medium transition-colors ${
+                    link.special 
+                      ? "text-primary font-bold hover:text-primary/80" 
+                      : "text-muted-foreground hover:text-primary"
+                  }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
