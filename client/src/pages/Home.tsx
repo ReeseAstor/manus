@@ -5,15 +5,24 @@ import { BookOpen, Heart, Sparkles, Mail } from "lucide-react";
 import { Link } from "wouter";
 import { useState } from "react";
 import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
 
 export default function Home() {
   const [email, setEmail] = useState("");
+  const subscribeMutation = trpc.newsletter.subscribe.useMutation({
+    onSuccess: () => {
+      toast.success("Thank you for subscribing! Check your email for confirmation.");
+      setEmail("");
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to subscribe. Please try again.");
+    },
+  });
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      toast.success("Thank you for subscribing! Check your email for confirmation.");
-      setEmail("");
+      subscribeMutation.mutate({ email });
     }
   };
 
@@ -209,8 +218,12 @@ export default function Home() {
                 required
                 className="flex-1 bg-background"
               />
-              <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                Subscribe
+              <Button 
+                type="submit" 
+                className="bg-primary text-primary-foreground hover:bg-primary/90"
+                disabled={subscribeMutation.isPending}
+              >
+                {subscribeMutation.isPending ? "Subscribing..." : "Subscribe"}
               </Button>
             </form>
 

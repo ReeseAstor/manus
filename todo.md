@@ -47,3 +47,10 @@
 - [x] Social media integration
 - [x] Contact page with form
 - [x] Privacy policy and terms pages
+
+## MailerLite Integration
+- [x] Request MailerLite API key from user
+- [x] Create backend API endpoint for newsletter signup
+- [x] Update homepage newsletter form to use MailerLite API
+- [x] Update blog page newsletter form to use MailerLite API
+- [x] Test newsletter signup functionality

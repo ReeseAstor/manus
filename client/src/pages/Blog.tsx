@@ -1,10 +1,32 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import { useState } from "react";
+import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
 
 export default function Blog() {
+  const [email, setEmail] = useState("");
+  const subscribeMutation = trpc.newsletter.subscribe.useMutation({
+    onSuccess: () => {
+      toast.success("Thank you for subscribing! Check your email for confirmation.");
+      setEmail("");
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to subscribe. Please try again.");
+    },
+  });
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      subscribeMutation.mutate({ email });
+    }
+  };
+
   const blogPosts = [
     {
       id: 1,
@@ -139,11 +161,24 @@ export default function Blog() {
           <p className="text-muted-foreground">
             Subscribe to get writing tips, publishing strategies, and exclusive content delivered to your inbox every week.
           </p>
-          <Link href="/">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Subscribe to Newsletter
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="flex-1 bg-background"
+            />
+            <Button 
+              type="submit" 
+              size="lg" 
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              disabled={subscribeMutation.isPending}
+            >
+              {subscribeMutation.isPending ? "Subscribing..." : "Subscribe"}
             </Button>
-          </Link>
+          </form>
         </div>
       </div>
     </div>
