@@ -2,7 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight, Loader2 } from "lucide-react";
+import { format } from "date-fns";
 import { Link } from "wouter";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -10,6 +11,10 @@ import { trpc } from "@/lib/trpc";
 
 export default function Blog() {
   const [email, setEmail] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  
+  const { data: blogPosts, isLoading } = trpc.blog.list.useQuery({ published: true });
+  
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
       toast.success("Thank you for subscribing! Check your email for confirmation.");
@@ -27,7 +32,16 @@ export default function Blog() {
     }
   };
 
-  const blogPosts = [
+  // Filter posts by category
+  const filteredPosts = blogPosts?.filter(
+    (post) => selectedCategory === "All" || post.category === selectedCategory
+  ) || [];
+
+  // Get unique categories
+  const uniqueCategories = blogPosts?.map((post) => post.category) || [];
+  const categories = ["All", ...Array.from(new Set(uniqueCategories))];
+
+  const placeholderPosts = [
     {
       id: 1,
       title: "5 Essential Tips for Writing Steamy Romance Scenes",
@@ -84,7 +98,8 @@ export default function Blog() {
     },
   ];
 
-  const categories = ["All", "Writing Tips", "Marketing", "Business Strategy", "Author Journey"];
+  // Use placeholder posts if no real posts exist
+  const displayPosts = filteredPosts.length > 0 ? filteredPosts : (selectedCategory === "All" ? placeholderPosts : []);
 
   return (
     <div className="min-h-screen py-12">
@@ -104,8 +119,9 @@ export default function Blog() {
           {categories.map((category) => (
             <Badge
               key={category}
-              variant={category === "All" ? "default" : "outline"}
+              variant={category === selectedCategory ? "default" : "outline"}
               className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors px-4 py-2"
+              onClick={() => setSelectedCategory(category)}
             >
               {category}
             </Badge>
@@ -113,8 +129,13 @@ export default function Blog() {
         </div>
 
         {/* Blog Posts Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {blogPosts.map((post) => (
+        {isLoading ? (
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        ) : displayPosts.length > 0 ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {displayPosts.map((post) => (
             <Card key={post.id} className="bg-card border-border hover:shadow-xl transition-shadow group">
               <CardContent className="p-6 space-y-4">
                 <div className="flex items-center gap-2">
@@ -134,7 +155,13 @@ export default function Blog() {
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" />
-                    <span>{post.date}</span>
+                    <span>
+                      {"publishedAt" in post && post.publishedAt
+                        ? format(new Date(post.publishedAt), "MMM d, yyyy")
+                        : "date" in post
+                        ? post.date
+                        : ""}
+                    </span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Clock className="h-4 w-4" />
@@ -151,7 +178,14 @@ export default function Blog() {
               </CardContent>
             </Card>
           ))}
-        </div>
+          </div>
+        ) : (
+          <Card className="bg-card border-border">
+            <CardContent className="p-12 text-center">
+              <p className="text-muted-foreground">No blog posts found in this category.</p>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Newsletter CTA */}
         <div className="max-w-3xl mx-auto text-center space-y-6 py-12 px-6 rounded-lg bg-gradient-to-br from-primary/10 via-background to-background border border-border">

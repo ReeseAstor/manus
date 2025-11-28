@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, blogPosts, InsertBlogPost } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +89,88 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+/**
+ * Blog post queries
+ */
+export async function getAllBlogPosts(published?: boolean) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get blog posts: database not available");
+    return [];
+  }
+
+  try {
+    let query = db.select().from(blogPosts);
+    
+    if (published) {
+      query = query.where(eq(blogPosts.published, "published")) as any;
+    }
+    
+    const result = await query.orderBy(desc(blogPosts.publishedAt));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get blog posts:", error);
+    return [];
+  }
+}
+
+export async function getBlogPostBySlug(slug: string) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get blog post: database not available");
+    return undefined;
+  }
+
+  try {
+    const result = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug)).limit(1);
+    return result.length > 0 ? result[0] : undefined;
+  } catch (error) {
+    console.error("[Database] Failed to get blog post:", error);
+    return undefined;
+  }
+}
+
+export async function createBlogPost(post: InsertBlogPost) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    const result = await db.insert(blogPosts).values(post);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to create blog post:", error);
+    throw error;
+  }
+}
+
+export async function updateBlogPost(id: number, post: Partial<InsertBlogPost>) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    const result = await db.update(blogPosts).set(post).where(eq(blogPosts.id, id));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to update blog post:", error);
+    throw error;
+  }
+}
+
+export async function deleteBlogPost(id: number) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    const result = await db.delete(blogPosts).where(eq(blogPosts.id, id));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to delete blog post:", error);
+    throw error;
+  }
+}

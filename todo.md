@@ -54,3 +54,13 @@
 - [x] Update homepage newsletter form to use MailerLite API
 - [x] Update blog page newsletter form to use MailerLite API
 - [x] Test newsletter signup functionality
+
+## Blog Content Management System
+- [x] Create database schema for blog posts
+- [x] Create backend API for CRUD operations on blog posts
+- [x] Build admin dashboard for blog management
+- [x] Create blog post editor with rich text support
+- [x] Update blog listing page to fetch from database
+- [x] Create individual blog post page with dynamic routing
+- [x] Add category filtering functionality
+- [x] Test blog CMS functionality
