@@ -132,12 +132,12 @@ export default function Home() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <a href="https://dl.bookfunnel.com/xrodg0t77p" target="_blank" rel="noopener noreferrer" className="flex-1">
-                    <Button size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
+                  <Button asChild size="lg" className="flex-1 w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
+                    <a href="https://dl.bookfunnel.com/xrodg0t77p" target="_blank" rel="noopener noreferrer">
                       <BookOpen className="mr-2 h-5 w-5" />
                       Download Free Now
-                    </Button>
-                  </a>
+                    </a>
+                  </Button>
                 </div>
 
                 <div className="flex items-center justify-center md:justify-start gap-4 pt-4">
@@ -204,12 +204,12 @@ export default function Home() {
                         <span className="text-2xl font-bold text-primary">{book.price}</span>
                       </div>
 
-                      <a href={book.link} target="_blank" rel="noopener noreferrer">
-                        <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                      <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                        <a href={book.link} target="_blank" rel="noopener noreferrer">
                           <Heart className="mr-2 h-4 w-4" />
                           Get Your Copy
-                        </Button>
-                      </a>
+                        </a>
+                      </Button>
                     </div>
                   </div>
                 </CardContent>
@@ -218,11 +218,11 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-12">
-            <Link href="/books">
-              <Button variant="outline" size="lg">
+            <Button asChild variant="outline" size="lg">
+              <Link href="/books">
                 View All Books
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -240,11 +240,11 @@ export default function Home() {
             <p className="text-lg text-muted-foreground leading-relaxed">
               As a writing coach, Reese helps aspiring authors turn their creative passion into a profitable career. She specializes in teaching romance writers how to craft compelling stories, build engaged readerships, and navigate the world of independent publishing.
             </p>
-            <Link href="/about">
-              <Button variant="outline" size="lg" className="mt-4">
+            <Button asChild variant="outline" size="lg" className="mt-4">
+              <Link href="/about">
                 Learn More About Me
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

@@ -137,3 +137,6 @@
 - [x] Display category badges on blog post cards
 - [x] Add "All Categories" option to show all posts
 - [x] Test category filtering functionality
+
+## Bug Fixes
+- [x] Fix nested anchor tag error on homepage
