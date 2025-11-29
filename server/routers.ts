@@ -56,10 +56,11 @@ export const appRouter = router({
       .input(
         z.object({
           published: z.boolean().optional(),
+          category: z.string().optional(),
         }).optional()
       )
       .query(async ({ input }) => {
-        const posts = await getAllBlogPosts(input?.published);
+        const posts = await getAllBlogPosts(input?.published, input?.category);
         return posts;
       }),
 

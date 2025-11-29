@@ -11,9 +11,12 @@ import { trpc } from "@/lib/trpc";
 
 export default function Blog() {
   const [email, setEmail] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
   
-  const { data: blogPosts, isLoading } = trpc.blog.list.useQuery({ published: true });
+  const { data: blogPosts, isLoading } = trpc.blog.list.useQuery({ 
+    published: true,
+    category: selectedCategory 
+  });
   
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
@@ -32,13 +35,9 @@ export default function Blog() {
     }
   };
 
-  // Filter posts by category
-  const filteredPosts = blogPosts?.filter(
-    (post) => selectedCategory === "All" || post.category === selectedCategory
-  ) || [];
-
-  // Get unique categories
-  const uniqueCategories = blogPosts?.map((post) => post.category) || [];
+  // Get unique categories from all posts (fetch without category filter for category list)
+  const { data: allPosts } = trpc.blog.list.useQuery({ published: true });
+  const uniqueCategories = allPosts?.map((post) => post.category) || [];
   const categories = ["All", ...Array.from(new Set(uniqueCategories))];
 
   const placeholderPosts = [
@@ -99,7 +98,7 @@ export default function Blog() {
   ];
 
   // Use placeholder posts if no real posts exist
-  const displayPosts = filteredPosts.length > 0 ? filteredPosts : (selectedCategory === "All" ? placeholderPosts : []);
+  const displayPosts = blogPosts && blogPosts.length > 0 ? blogPosts : (!selectedCategory ? placeholderPosts : []);
 
   return (
     <div className="min-h-screen py-12">
@@ -119,9 +118,9 @@ export default function Blog() {
           {categories.map((category) => (
             <Badge
               key={category}
-              variant={category === selectedCategory ? "default" : "outline"}
+              variant={(category === "All" && !selectedCategory) || category === selectedCategory ? "default" : "outline"}
               className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors px-4 py-2"
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => setSelectedCategory(category === "All" ? undefined : category)}
             >
               {category}
             </Badge>

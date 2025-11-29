@@ -188,6 +188,8 @@ export default function BlogEditor() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="Writing Tips">Writing Tips</SelectItem>
+                        <SelectItem value="Romance Recommendations">Romance Recommendations</SelectItem>
+                        <SelectItem value="Behind the Scenes">Behind the Scenes</SelectItem>
                         <SelectItem value="Marketing">Marketing</SelectItem>
                         <SelectItem value="Business Strategy">Business Strategy</SelectItem>
                         <SelectItem value="Author Journey">Author Journey</SelectItem>

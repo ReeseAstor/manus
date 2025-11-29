@@ -1,4 +1,4 @@
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { InsertUser, users, blogPosts, InsertBlogPost } from "../drizzle/schema";
 import { ENV } from './_core/env';
@@ -92,7 +92,7 @@ export async function getUserByOpenId(openId: string) {
 /**
  * Blog post queries
  */
-export async function getAllBlogPosts(published?: boolean) {
+export async function getAllBlogPosts(published?: boolean, category?: string) {
   const db = await getDb();
   if (!db) {
     console.warn("[Database] Cannot get blog posts: database not available");
@@ -100,10 +100,20 @@ export async function getAllBlogPosts(published?: boolean) {
   }
 
   try {
-    let query = db.select().from(blogPosts);
+    const conditions = [];
     
     if (published) {
-      query = query.where(eq(blogPosts.published, "published")) as any;
+      conditions.push(eq(blogPosts.published, "published"));
+    }
+    
+    if (category) {
+      conditions.push(eq(blogPosts.category, category));
+    }
+    
+    let query = db.select().from(blogPosts);
+    
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions)) as any;
     }
     
     const result = await query.orderBy(desc(blogPosts.publishedAt));

@@ -127,3 +127,13 @@
 - [x] Write Email 5: Complete series overview with limited-time discount
 - [x] Include subject lines, timing, and CTAs for each email
 - [x] Provide MailerLite setup instructions
+
+## Blog Category Filtering System
+- [x] Update database schema to add category field to blog posts
+- [x] Run database migration (pnpm db:push)
+- [x] Update tRPC procedures to support category filtering
+- [x] Add category filter UI to blog listing page
+- [x] Add category selection dropdown to admin blog editor
+- [x] Display category badges on blog post cards
+- [x] Add "All Categories" option to show all posts
+- [x] Test category filtering functionality
