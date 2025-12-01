@@ -134,3 +134,10 @@
 - [ ] Add ambient background animations
 - [ ] Implement glass morphism effects for cards
 - [ ] Add gradient overlays and lighting effects
+
+## Premium Typography Upgrade
+- [x] Replace Playfair Display with luxury serif font (Cormorant Garamond or Bodoni Moda)
+- [x] Replace Inter with premium sans-serif (Montserrat or Raleway)
+- [x] Update font imports in index.html
+- [x] Update CSS font variables in index.css
+- [x] Adjust font weights and letter spacing for luxury feel
