@@ -110,3 +110,27 @@
 - [x] Fix plot summaries and book blurbs
 - [x] Update AI chatbot system instruction with accurate information
 - [x] Verify all book information is consistent across the site
+
+## Stripe Payment Integration
+- [ ] Add Stripe feature to project using webdev_add_feature
+- [ ] Request Stripe API keys from user
+- [ ] Create products page for digital products (writing guides, courses)
+- [ ] Create subscription tiers page for premium content
+- [ ] Build checkout flow with Stripe
+- [ ] Add payment success/cancel pages
+- [ ] Test Stripe integration in test mode
+
+## Luxury Website Redesign (10/10 World-Class)
+- [x] Generate luxury background graphics and textures
+- [x] Create cinematic hero section with parallax scrolling
+- [x] Add 3D book cover animations with Framer Motion
+- [x] Implement interactive book showcase with hover effects
+- [x] Add smooth page transitions and scroll animations
+- [ ] Create luxury color scheme with gold accents
+- [ ] Add micro-interactions (button hovers, card animations)
+- [ ] Implement particle effects for premium feel
+- [ ] Add animated section reveals on scroll
+- [ ] Create custom cursor effects for luxury experience
+- [ ] Add ambient background animations
+- [ ] Implement glass morphism effects for cards
+- [ ] Add gradient overlays and lighting effects
