@@ -16,8 +16,10 @@ import Admin from "./pages/Admin";
 import BlogEditor from "./pages/BlogEditor";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import CharacterQuiz from "./pages/CharacterQuiz";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { AIChatbot } from "./components/AIChatbot";
 
 function Router() {
   return (
@@ -25,6 +27,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/books"} component={Books} />
       <Route path={"/free-book"} component={FreeBook} />
+      <Route path={"/quiz"} component={CharacterQuiz} />
       <Route path={"/about"} component={About} />
       <Route path={"/coaching"} component={Coaching} />
       <Route path={"/contact"} component={Contact} />
@@ -60,6 +63,7 @@ function App() {
               <Router />
             </main>
             <Footer />
+            <AIChatbot />
           </div>
         </TooltipProvider>
       </ThemeProvider>

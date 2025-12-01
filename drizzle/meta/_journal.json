@@ -15,6 +15,13 @@
       "when": 1764352814617,
       "tag": "0001_conscious_dakota_north",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1764445776104,
+      "tag": "0002_mean_tarot",
+      "breakpoints": true
     }
   ]
 }

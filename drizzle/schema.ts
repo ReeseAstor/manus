@@ -45,3 +45,52 @@ export const blogPosts = mysqlTable("blog_posts", {
 
 export type BlogPost = typeof blogPosts.$inferSelect;
 export type InsertBlogPost = typeof blogPosts.$inferInsert;
+/**
+ * AI Chat Messages - stores conversation history
+ */
+export const aiChatMessages = mysqlTable('ai_chat_messages', {
+  id: int('id').autoincrement().primaryKey(),
+  sessionId: varchar('session_id', { length: 255 }).notNull(),
+  role: mysqlEnum('role', ['user', 'assistant']).notNull(),
+  content: text('content').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export type AiChatMessage = typeof aiChatMessages.$inferSelect;
+export type InsertAiChatMessage = typeof aiChatMessages.$inferInsert;
+
+/**
+ * Character Quiz Results - stores quiz completions
+ */
+export const quizResults = mysqlTable('quiz_results', {
+  id: int('id').autoincrement().primaryKey(),
+  email: varchar('email', { length: 320 }),
+  result: varchar('result', { length: 255 }).notNull(),
+  personality: text('personality').notNull(),
+  answers: text('answers').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export type QuizResult = typeof quizResults.$inferSelect;
+export type InsertQuizResult = typeof quizResults.$inferInsert;
+
+/**
+ * AI Generated Content - tracks AI usage
+ */
+export const aiGeneratedContent = mysqlTable('ai_generated_content', {
+  id: int('id').autoincrement().primaryKey(),
+  userId: int('user_id').references(() => users.id),
+  contentType: mysqlEnum('content_type', [
+    'blog_post',
+    'story_idea',
+    'book_cover',
+    'character_portrait',
+    'social_graphic',
+  ]).notNull(),
+  prompt: text('prompt').notNull(),
+  result: text('result').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export type AiGeneratedContent = typeof aiGeneratedContent.$inferSelect;
+export type InsertAiGeneratedContent = typeof aiGeneratedContent.$inferInsert;

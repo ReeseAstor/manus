@@ -1,6 +1,7 @@
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
+import { aiRouter } from "./routers/ai-simple";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite } from "./mailerlite";
 import { z } from "zod";
@@ -157,6 +158,8 @@ export const appRouter = router({
         return { success: true };
       }),
   }),
+
+  ai: aiRouter,
 
   contact: router({
     submit: publicProcedure

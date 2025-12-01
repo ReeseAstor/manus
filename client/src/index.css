@@ -174,4 +174,19 @@
       max-width: 1280px; /* Standard content width */
     }
   }
+
+  /* Cinematic Hero Animations */
+  @keyframes gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
 }
