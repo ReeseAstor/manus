@@ -1,11 +1,46 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Star, ShoppingCart, BookOpen, Gift } from "lucide-react";
+import { Heart, Star, ShoppingCart, BookOpen, Gift, ChevronRight, Sparkles } from "lucide-react";
 import { Book3LaunchBanner } from "@/components/Book3LaunchBanner";
+import { motion } from "framer-motion";
+import { Link } from "wouter";
 
 export default function Books() {
   const books = [
+    {
+      id: 3,
+      title: "The Billionaire's Baby Secret",
+      subtitle: "Manhattan Money Kings Book 3",
+      cover: "/book3-cover.jpg",
+      description: "One night. One secret. One second chance he refuses to lose. When Dominic Kane reclaims his empire, he discovers the daughter Sophia Reed kept hidden.",
+      fullBlurb: "Three years ago, Sophia Reed walked away from a hotel room and a man she should've never trusted—rising mogul Dominic Kane. She built stability the hard way: early trains, late invoices, and a tiny apartment where nothing could touch the life growing inside her. Now the CEO who controls outcomes for a living is back… and the daughter Sophia's protected has the storm-gray eyes he can't deny. When Dominic returns to reclaim his empire, he discovers the truth he was never meant to miss—and a city eager to devour the scandal. He can buy silence, clear rooms, bend markets. But Sophia has rules: boundaries around her child, transparency instead of power plays, and love that's earned, not purchased. Between boardroom wars, paparazzi flash storms, and a custody fight waiting to ignite, he has to become more than a headline and more than a boss. He has to be the father Bella needs…and the partner Sophia deserves.",
+      price: "$2.99",
+      regularPrice: "$4.99",
+      link: "https://swiy.co/3rd",
+      genre: ["Secret Baby", "Second Chance", "Billionaire Romance"],
+      pages: 340,
+      rating: 4.9,
+      reviews: 523,
+      available: true,
+      badge: "New Release",
+      featured: true,
+    },
+    {
+      id: 2,
+      title: "The Billionaire's Fake Wife",
+      subtitle: "Manhattan Money Kings Book 2",
+      cover: "/book2-cover.jpg",
+      description: "When gymnast-turned-thief Lily Chen breaks into his penthouse, billionaire David Kim catches her red-handed. But instead of calling the police, he makes her an offer she can't refuse.",
+      fullBlurb: "Lily Chen never wanted to be a thief. But when her father threatens her life unless she steals corporate secrets from billionaire David Kim, she has no choice. Breaking into his Manhattan penthouse should have been simple—until David catches her in the act. Instead of turning her over to the police, he offers a deal: help him expose her father's criminal empire, and he'll protect her. As they work together to bring down a dangerous man, their forced alliance ignites into something neither expected. But with her father's threats escalating and David's empire at risk, Lily must decide: betray the man she's falling for, or risk everything for a chance at redemption and love.",
+      price: "$2.99",
+      regularPrice: "$4.99",
+      link: "https://www.amazon.com/dp/B0FCCBNF8X",
+      genre: ["Fake Marriage", "Suspense", "Billionaire Romance"],
+      pages: 350,
+      rating: 4.7,
+      reviews: 892,
+      available: true,
+    },
     {
       id: 1,
       title: "The Billionaire's Executive Assistant",
@@ -22,229 +57,327 @@ export default function Books() {
       reviews: 1247,
       available: true,
     },
-    {
-      id: 2,
-      title: "The Billionaire's Fake Wife",
-      subtitle: "Manhattan Money Kings Book 2",
-      cover: "/book2-cover.jpg",
-      description: "When gymnast-turned-thief Lily Chen breaks into his penthouse, billionaire David Kim catches her red-handed. But instead of calling the police, he makes her an offer she can't refuse.",
-      fullBlurb: "Lily Chen never wanted to be a thief. But when her father threatens her life unless she steals corporate secrets from billionaire David Kim, she has no choice. Breaking into his Manhattan penthouse should have been simple—until David catches her in the act. Instead of turning her over to the police, he offers a deal: help him expose her father's criminal empire, and he'll protect her. As they work together to bring down a dangerous man, their forced alliance ignites into something neither expected. But with her father's threats escalating and David's empire at risk, Lily must decide: betray the man she's falling for, or risk everything for a chance at redemption and love.",
-      price: "$2.99",
-      regularPrice: "$4.99",
-      preorder: false,
-      releaseDate: "Available Now",
-      link: "https://www.amazon.com/dp/B0FCCBNF8X",
-      genre: ["Fake Marriage", "Suspense", "Billionaire Romance"],
-      pages: 350,
-      rating: 0,
-      reviews: 0,
-      available: true,
-    },
-    {
-      id: 3,
-      title: "The Billionaire's Baby Secret",
-      subtitle: "Manhattan Money Kings Book 3",
-      cover: "/book3-cover.jpg",
-      description: "One night. One secret. One second chance he refuses to lose. When Dominic Kane reclaims his empire, he discovers the daughter Sophia Reed kept hidden.",
-      fullBlurb: "Three years ago, Sophia Reed walked away from a hotel room and a man she should've never trusted—rising mogul Dominic Kane. She built stability the hard way: early trains, late invoices, and a tiny apartment where nothing could touch the life growing inside her. Now the CEO who controls outcomes for a living is back… and the daughter Sophia's protected has the storm-gray eyes he can't deny. When Dominic returns to reclaim his empire, he discovers the truth he was never meant to miss—and a city eager to devour the scandal. He can buy silence, clear rooms, bend markets. But Sophia has rules: boundaries around her child, transparency instead of power plays, and love that's earned, not purchased. Between boardroom wars, paparazzi flash storms, and a custody fight waiting to ignite, he has to become more than a headline and more than a boss. He has to be the father Bella needs…and the partner Sophia deserves.",
-      price: "$2.99",
-      regularPrice: "$4.99",
-      preorder: false,
-      releaseDate: "Available Now",
-      link: "https://swiy.co/3rd",
-      genre: ["Secret Baby", "Second Chance", "Billionaire Romance"],
-      pages: 340,
-      rating: 0,
-      reviews: 0,
-      available: true,
-    },
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       <Book3LaunchBanner />
-      <div className="py-12">
+      
+      {/* Hero Section - Editorial Magazine Style */}
+      <section className="relative py-32 overflow-hidden">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('/manhattan-night-skyline.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a]/95 via-[#0a0e1a]/90 to-[#0a0e1a]" />
+        </div>
+
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-center max-w-4xl mx-auto space-y-8"
+          >
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm">
+              <Sparkles className="h-4 w-4 text-[#d4af37]" />
+              <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+                The Complete Series
+              </span>
+            </div>
+
+            <h1 className="font-serif text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95]">
+              <span className="text-white">Manhattan</span>
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f4e4b8] to-[#d4af37]">
+                Money Kings
+              </span>
+            </h1>
+
+            <p className="text-2xl md:text-3xl text-gray-300 font-light leading-relaxed">
+              Where power, passion, and billion-dollar secrets collide in the heart of Manhattan's elite
+            </p>
+
+            <div className="flex items-center justify-center gap-12 pt-8">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-[#d4af37]">3</div>
+                <div className="text-sm text-gray-400 mt-1">Books</div>
+              </div>
+              <div className="h-12 w-px bg-white/20" />
+              <div className="text-center">
+                <div className="text-4xl font-bold text-[#d4af37]">★ 4.7</div>
+                <div className="text-sm text-gray-400 mt-1">Average Rating</div>
+              </div>
+              <div className="h-12 w-px bg-white/20" />
+              <div className="text-center">
+                <div className="text-4xl font-bold text-[#d4af37]">2.6K+</div>
+                <div className="text-sm text-gray-400 mt-1">Reviews</div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Free Prequel - Premium Offer Banner */}
+      <section className="py-16 relative">
         <div className="container">
-        {/* Free Prequel Banner */}
-        <div className="mb-12 p-8 rounded-lg bg-gradient-to-br from-primary/20 via-primary/10 to-background border-2 border-primary/30">
-          <div className="grid md:grid-cols-3 gap-6 items-center">
-            <div className="relative">
-              <div className="absolute -inset-2 bg-primary/20 blur-xl rounded-lg" />
-              <img
-                src="/prequel-cover.jpg"
-                alt="The Billionaire's One Night Stand - Free Prequel"
-                className="relative w-full max-w-xs mx-auto rounded-lg shadow-xl"
-              />
-            </div>
-            
-            <div className="md:col-span-2 space-y-4 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground font-bold text-sm">
-                <Gift className="h-4 w-4" />
-                FREE NEWSLETTER BONUS
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="grid md:grid-cols-3 gap-8 items-center p-10 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl">
+              <div className="relative">
+                <div className="absolute -inset-6 bg-gradient-to-r from-[#d4af37]/30 to-transparent blur-3xl rounded-full" />
+                <img
+                  src="/prequel-cover.jpg"
+                  alt="The Billionaire's One Night Stand - Free Prequel"
+                  className="relative w-full max-w-xs mx-auto rounded-2xl shadow-2xl"
+                />
               </div>
               
-              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-foreground">
-                The Billionaire's One Night Stand
-              </h2>
-              
-              <p className="text-lg text-muted-foreground">
-                A Manhattan Money Kings Prequel. Get this steamy standalone novella absolutely free! Discover where the Manhattan Money Kings saga began.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a href="https://dl.bookfunnel.com/xrodg0t77p" target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
-                    <BookOpen className="mr-2 h-5 w-5" />
-                    Download Free Now
+              <div className="md:col-span-2 space-y-4 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-sm shadow-lg">
+                  <Gift className="h-4 w-4" />
+                  FREE NEWSLETTER BONUS
+                </div>
+                
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-white">
+                  The Billionaire's One Night Stand
+                </h2>
+                
+                <p className="text-lg text-gray-300">
+                  A Manhattan Money Kings Prequel. Get this steamy standalone novella absolutely free! Discover where the Manhattan Money Kings saga began.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  >
+                    <a href="https://dl.bookfunnel.com/xrodg0t77p" target="_blank" rel="noopener noreferrer">
+                      <BookOpen className="mr-2 h-5 w-5" />
+                      Download Free Now
+                    </a>
                   </Button>
-                </a>
-                <a href="https://swiy.co/3rd" target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" variant="outline" className="font-semibold">
-                    View on Amazon
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold"
+                  >
+                    <a href="https://swiy.co/3rd" target="_blank" rel="noopener noreferrer">
+                      View on Amazon
+                    </a>
                   </Button>
-                </a>
-              </div>
-              
-              <div className="flex items-center justify-center md:justify-start gap-3 pt-2">
-                <img src="/prequel-qr.png" alt="QR Code" className="w-16 h-16" />
-                <p className="text-xs text-muted-foreground">Scan QR code for instant access</p>
+                </div>
+                
+                <div className="flex items-center justify-center md:justify-start gap-3 pt-2">
+                  <img src="/prequel-qr.png" alt="QR Code" className="w-16 h-16 rounded-lg border-2 border-[#d4af37]/30" />
+                  <p className="text-xs text-gray-400">Scan QR code for instant access</p>
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
+      </section>
 
-        {/* Header */}
-        <div className="text-center space-y-4 mb-16">
-          <h1 className="font-playfair text-5xl md:text-6xl font-bold text-foreground">
-            Manhattan Money Kings
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            A steamy billionaire romance series set in the heart of New York City, where power, passion, and happily-ever-afters collide.
-          </p>
-        </div>
+      {/* Books - Editorial Layout */}
+      <section className="py-20 relative">
+        <div 
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: "url('/gold-marble-texture.jpg')",
+            backgroundSize: "cover",
+          }}
+        />
 
-        {/* Books Grid */}
-        <div className="space-y-12">
-          {books.map((book, index) => (
-            <Card key={book.id} className="overflow-hidden bg-card border-border">
-              <CardContent className="p-0">
-                <div className={`grid md:grid-cols-2 gap-8 p-8 ${index % 2 === 1 ? 'md:grid-flow-dense' : ''}`}>
+        <div className="container relative z-10">
+          <div className="space-y-24">
+            {books.map((book, index) => (
+              <motion.div
+                key={book.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+              >
+                <div className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
                   {/* Book Cover */}
-                  <div className={`${index % 2 === 1 ? 'md:col-start-2' : ''}`}>
+                  <div className={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                     <div className="relative group">
-                      <img
-                        src={book.cover}
-                        alt={book.title}
-                        className="w-full max-w-md mx-auto rounded-lg shadow-2xl group-hover:scale-105 transition-transform duration-300"
-                      />
-                      {book.id === 3 && (
-                        <div className="absolute top-4 right-4">
-                          <Badge className="bg-primary text-primary-foreground">
-                            New Release
-                          </Badge>
+                      {book.badge && (
+                        <div className="absolute -top-4 -right-4 z-10 px-6 py-3 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-sm shadow-2xl">
+                          {book.badge}
                         </div>
                       )}
+                      
+                      <div className="absolute -inset-8 bg-gradient-to-r from-[#d4af37]/20 to-transparent blur-3xl rounded-full" />
+                      
+                      <div className="relative p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl group-hover:border-[#d4af37]/30 transition-all duration-500">
+                        <img
+                          src={book.cover}
+                          alt={book.title}
+                          className="w-full rounded-2xl shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
+                        />
+                      </div>
                     </div>
                   </div>
 
                   {/* Book Details */}
-                  <div className={`flex flex-col justify-center space-y-6 ${index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
+                  <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
                     <div>
-                      <p className="text-sm text-primary font-semibold mb-2">{book.subtitle}</p>
-                      <h2 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-4">
+                      <p className="text-sm text-[#d4af37] font-semibold tracking-widest uppercase mb-3">
+                        {book.subtitle}
+                      </p>
+                      <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
                         {book.title}
                       </h2>
                       
-                      <div className="flex flex-wrap gap-2 mb-4">
+                      <div className="flex flex-wrap gap-2 mb-6">
                         {book.genre.map((g) => (
-                          <Badge key={g} variant="outline" className="text-xs">
+                          <Badge 
+                            key={g} 
+                            variant="outline" 
+                            className="text-xs border-[#d4af37]/30 bg-[#d4af37]/5 text-[#d4af37] hover:bg-[#d4af37]/10"
+                          >
                             {g}
                           </Badge>
                         ))}
                       </div>
 
                       {book.rating > 0 && (
-                        <div className="flex items-center gap-2 mb-4">
+                        <div className="flex items-center gap-3 mb-6 p-4 rounded-2xl bg-white/5 border border-white/10 w-fit">
                           <div className="flex">
                             {[...Array(5)].map((_, i) => (
                               <Star
                                 key={i}
-                                className={`h-4 w-4 ${
+                                className={`h-5 w-5 ${
                                   i < Math.floor(book.rating)
-                                    ? "fill-primary text-primary"
-                                    : "text-muted-foreground"
+                                    ? "fill-[#d4af37] text-[#d4af37]"
+                                    : "text-gray-600"
                                 }`}
                               />
                             ))}
                           </div>
-                          <span className="text-sm text-muted-foreground">
-                            {book.rating} ({book.reviews} reviews)
+                          <span className="text-white font-semibold">
+                            {book.rating}
+                          </span>
+                          <span className="text-gray-400">
+                            ({book.reviews.toLocaleString()} reviews)
                           </span>
                         </div>
                       )}
 
-                      <p className="text-muted-foreground mb-4">
+                      <p className="text-gray-300 text-lg leading-relaxed mb-6">
                         {book.fullBlurb}
                       </p>
 
-                      <div className="flex items-center gap-2 mb-4">
-                        <span className="text-sm text-muted-foreground">{book.pages} pages</span>
-                        {book.preorder && (
-                          <>
-                            <span className="text-muted-foreground">•</span>
-                            <span className="text-sm text-muted-foreground">
-                              Available {book.releaseDate}
-                            </span>
-                          </>
-                        )}
+                      <div className="flex items-center gap-4 text-sm text-gray-400 mb-8">
+                        <span>{book.pages} pages</span>
+                        <span>•</span>
+                        <span>Available Now</span>
                       </div>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex items-baseline gap-3">
-                        <span className="text-3xl font-bold text-primary">{book.price}</span>
-                        <span className="text-lg text-muted-foreground line-through">
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-4">
+                        <span className="text-4xl font-bold text-white">{book.price}</span>
+                        <span className="text-xl text-gray-500 line-through">
                           {book.regularPrice}
                         </span>
-                        <Badge variant="secondary" className="ml-2">
+                        <Badge className="bg-[#d4af37]/20 text-[#d4af37] border border-[#d4af37]/30">
                           Limited Time
                         </Badge>
                       </div>
 
-                      <div className="flex flex-col sm:flex-row gap-3">
-                        <a href={book.link} target="_blank" rel="noopener noreferrer" className="flex-1">
-                          <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90" size="lg">
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <Button
+                          asChild
+                          size="lg"
+                          className="flex-1 bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold py-7 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                        >
+                          <a href={book.link} target="_blank" rel="noopener noreferrer">
                             <ShoppingCart className="mr-2 h-5 w-5" />
-                            {book.preorder ? "Preorder Now" : "Buy Now"}
-                          </Button>
-                        </a>
-                        <Button variant="outline" size="lg">
+                            Buy Now
+                          </a>
+                        </Button>
+                        <Button
+                          size="lg"
+                          variant="outline"
+                          className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white py-7"
+                        >
                           <Heart className="mr-2 h-5 w-5" />
-                          Add to Wishlist
+                          Wishlist
                         </Button>
                       </div>
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
 
-        {/* Series Info */}
-        <div className="mt-16 p-8 rounded-lg bg-card/50 border border-border">
-          <h3 className="font-playfair text-2xl font-bold text-foreground mb-4">
-            About the Manhattan Money Kings Series
-          </h3>
-          <p className="text-muted-foreground mb-4">
-            Welcome to Manhattan, where billion-dollar deals are made in boardrooms and hearts are won in bedrooms. The Manhattan Money Kings series follows powerful billionaires who rule the business world but find themselves powerless against the women who capture their hearts.
-          </p>
-          <p className="text-muted-foreground">
-            Each book is a standalone romance with a guaranteed happily-ever-after, but they're best enjoyed in order to catch all the interconnected storylines and cameos from your favorite characters.
-          </p>
+                {/* Divider */}
+                {index < books.length - 1 && (
+                  <div className="mt-24 flex items-center justify-center">
+                    <div className="h-px w-32 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent" />
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
         </div>
+      </section>
+
+      {/* Series Info - Luxury Card */}
+      <section className="py-20 relative">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto p-12 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl"
+          >
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 mb-6">
+                <BookOpen className="h-8 w-8 text-[#d4af37]" />
+              </div>
+              <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+                About the Series
+              </h3>
+            </div>
+            
+            <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
+              <p>
+                Welcome to Manhattan, where billion-dollar deals are made in boardrooms and hearts are won in bedrooms. The Manhattan Money Kings series follows powerful billionaires who rule the business world but find themselves powerless against the women who capture their hearts.
+              </p>
+              <p>
+                Each book is a standalone romance with a guaranteed happily-ever-after, but they're best enjoyed in order to catch all the interconnected storylines and cameos from your favorite characters.
+              </p>
+            </div>
+
+            <div className="mt-10 text-center">
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-2 border-[#d4af37]/30 bg-[#d4af37]/5 hover:bg-[#d4af37]/10 text-white font-semibold px-10 py-7 rounded-full"
+              >
+                <Link href="/free-book">
+                  Start with the Free Prequel
+                  <ChevronRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
+          </motion.div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

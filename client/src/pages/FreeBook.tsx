@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Download, Gift, Star, Heart, CheckCircle, Share2 } from "lucide-react";
+import { BookOpen, Download, Gift, Star, CheckCircle, Share2, Mail, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
+import { motion } from "framer-motion";
 
 export default function FreeBook() {
   const [email, setEmail] = useState("");
@@ -75,360 +75,324 @@ export default function FreeBook() {
   ];
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden bg-gradient-to-br from-primary/20 via-primary/10 to-background">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(212,175,55,0.1),transparent_50%)]" />
-        <div className="container relative">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+      {/* Hero Section - Premium Offer */}
+      <section className="relative py-32 overflow-hidden">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('/manhattan-penthouse-view.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/98 via-[#0a0e1a]/95 to-[#0a0e1a]/90" />
+        </div>
+
+        {/* Gold ambient glow */}
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-[#d4af37]/10 blur-[120px] rounded-full" />
+
+        <div className="container relative z-10">
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Book Cover */}
-              <div className="relative">
-                <div className="absolute -inset-8 bg-primary/20 blur-3xl rounded-full" />
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1 }}
+                className="relative"
+              >
+                <div className="absolute -inset-12 bg-gradient-to-r from-[#d4af37]/30 to-transparent blur-3xl rounded-full" />
                 <div className="relative">
-                  <div className="absolute top-4 right-4 z-10">
-                    <div className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold text-lg shadow-xl">
-                      100% FREE
-                    </div>
+                  <div className="absolute -top-6 -right-6 z-10 px-8 py-4 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-xl shadow-2xl animate-pulse">
+                    100% FREE
                   </div>
-                  <img
-                    src="/prequel-cover.jpg"
-                    alt="The Billionaire's One Night Stand - Free Prequel"
-                    className="w-full max-w-md mx-auto rounded-lg shadow-2xl"
-                  />
+                  <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
+                    <img
+                      src="/prequel-cover.jpg"
+                      alt="The Billionaire's One Night Stand - Free Prequel"
+                      className="w-full rounded-2xl shadow-2xl"
+                    />
+                  </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Content */}
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-                  <Gift className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-medium text-primary">FREE READER MAGNET</span>
-                </div>
-
-                <h1 className="font-playfair text-4xl md:text-6xl font-bold text-foreground leading-tight">
-                  Get Your Free Book Today!
-                </h1>
-
-                <p className="text-2xl font-semibold text-foreground">
-                  The Billionaire's One Night Stand
-                </p>
-
-                <p className="text-lg text-muted-foreground">
-                  A Manhattan Money Kings Prequel Novella
-                </p>
-
-                <div className="flex items-center gap-2">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-primary text-primary" />
-                  ))}
-                  <span className="text-sm text-muted-foreground ml-2">
-                    Loved by thousands of readers
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.2 }}
+                className="space-y-8"
+              >
+                <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm">
+                  <Gift className="h-5 w-5 text-[#d4af37]" />
+                  <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+                    Exclusive Reader Gift
                   </span>
                 </div>
 
-                <p className="text-muted-foreground text-lg">
+                <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[0.95]">
+                  Get Your<br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f4e4b8] to-[#d4af37]">
+                    Free Book
+                  </span>
+                </h1>
+
+                <div>
+                  <p className="text-3xl font-serif font-bold text-white mb-2">
+                    The Billionaire's One Night Stand
+                  </p>
+                  <p className="text-xl text-[#d4af37]">
+                    A Manhattan Money Kings Prequel Novella
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 w-fit">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-[#d4af37] text-[#d4af37]" />
+                    ))}
+                  </div>
+                  <span className="text-white font-semibold">
+                    Loved by thousands
+                  </span>
+                </div>
+
+                <p className="text-gray-300 text-xl leading-relaxed">
                   One night. One mistake. One billionaire who never forgets. Discover where the Manhattan Money Kings saga began with this steamy standalone novella—absolutely free!
                 </p>
 
                 {/* Email Signup Form */}
-                <Card className="bg-card/50 border-primary/20">
-                  <CardContent className="p-6">
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div>
-                        <label className="text-sm font-medium text-foreground mb-2 block">
-                          Enter your email to get instant access:
-                        </label>
-                        <div className="flex gap-2">
-                          <Input
-                            type="email"
-                            placeholder="your@email.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            className="flex-1"
-                          />
-                          <Button 
-                            type="submit" 
-                            size="lg"
-                            className="bg-primary text-primary-foreground hover:bg-primary/90"
-                            disabled={subscribeMutation.isPending}
-                          >
-                            {subscribeMutation.isPending ? (
-                              "Sending..."
-                            ) : (
-                              <>
-                                <Download className="mr-2 h-5 w-5" />
-                                Get Free Book
-                              </>
-                            )}
-                          </Button>
-                        </div>
+                <div className="p-8 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl">
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium text-white mb-3 block tracking-wide uppercase">
+                        Enter your email for instant access:
+                      </label>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <Input
+                          type="email"
+                          placeholder="your@email.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                          className="flex-1 px-6 py-7 text-lg rounded-full border-2 border-white/20 focus:border-[#d4af37] bg-white/5 backdrop-blur-sm text-white placeholder:text-gray-500"
+                        />
+                        <Button
+                          type="submit"
+                          size="lg"
+                          disabled={subscribeMutation.isPending}
+                          className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                        >
+                          <Mail className="mr-2 h-5 w-5" />
+                          {subscribeMutation.isPending ? "Sending..." : "Get Free Book"}
+                        </Button>
                       </div>
-                      <p className="text-xs text-muted-foreground">
-                        By subscribing, you'll also receive exclusive updates, bonus content, and special offers. Unsubscribe anytime.
-                      </p>
-                    </form>
-                  </CardContent>
-                </Card>
-
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button 
-                    variant="outline" 
-                    size="lg"
-                    onClick={handleDirectDownload}
-                    className="flex-1"
-                  >
-                    <BookOpen className="mr-2 h-5 w-5" />
-                    Direct Download Link
-                  </Button>
-                  <a 
-                    href="https://swiy.co/3rd" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex-1"
-                  >
-                    <Button variant="outline" size="lg" className="w-full">
-                      View on Amazon
-                    </Button>
-                  </a>
+                    </div>
+                    <p className="text-xs text-gray-400 text-center">
+                      No spam. Unsubscribe anytime. Your privacy is protected.
+                    </p>
+                  </form>
                 </div>
 
-                <div className="flex items-center justify-center gap-4 pt-4">
-                  <img src="/prequel-qr.png" alt="QR Code" className="w-24 h-24" />
-                  <div className="text-sm text-muted-foreground">
-                    <p className="font-semibold">Scan to download</p>
-                    <p>on your mobile device</p>
+                <div className="flex items-center justify-center gap-4">
+                  <Button
+                    onClick={handleDirectDownload}
+                    variant="outline"
+                    size="lg"
+                    className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold px-8 py-6 rounded-full"
+                  >
+                    <Download className="mr-2 h-5 w-5" />
+                    Direct Download
+                  </Button>
+                  <div className="flex items-center gap-2">
+                    <img src="/prequel-qr.png" alt="QR Code" className="w-16 h-16 rounded-lg border-2 border-[#d4af37]/30" />
+                    <span className="text-xs text-gray-400">Scan to<br />download</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* What You'll Get Section */}
-      <section className="py-20 bg-card/50">
-        <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-playfair text-4xl font-bold text-center text-foreground mb-12">
-              What You'll Get
-            </h2>
+      {/* What You Get - Benefits Section */}
+      <section className="py-20 relative">
+        <div 
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: "url('/gold-marble-texture.jpg')",
+            backgroundSize: "cover",
+          }}
+        />
+
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="text-center mb-16">
+              <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
+                What You'll Get
+              </h2>
+              <p className="text-xl text-gray-400">
+                More than just a free book—an exclusive VIP experience
+              </p>
+            </div>
+
             <div className="grid md:grid-cols-2 gap-6">
               {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <CheckCircle className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
-                  <p className="text-lg text-muted-foreground">{benefit}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Book Preview Section */}
-      <section className="py-20">
-        <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-playfair text-4xl font-bold text-center text-foreground mb-8">
-              A Taste of What's Inside
-            </h2>
-            <Card className="bg-card border-border">
-              <CardContent className="p-8">
-                <div className="prose prose-invert max-w-none">
-                  <p className="text-lg text-muted-foreground italic mb-6">
-                    "The moment our eyes met across the crowded Manhattan ballroom, I knew this night would change everything. He was power in a tuxedo. Danger wrapped in charm. And I was about to make the biggest mistake of my life..."
-                  </p>
-                  <p className="text-muted-foreground">
-                    <strong className="text-foreground">The Billionaire's One Night Stand</strong> introduces you to the glittering, cutthroat world of Manhattan's elite. When an ambitious journalist crosses paths with a ruthless tech billionaire at a charity gala, one impulsive decision sets off a chain of events that will ripple through the entire series.
-                  </p>
-                  <p className="text-muted-foreground mt-4">
-                    This standalone prequel can be read before or after the main series, giving you exclusive insight into the connections, rivalries, and secrets that drive the Manhattan Money Kings.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-card/50">
-        <div className="container">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="font-playfair text-4xl font-bold text-center text-foreground mb-12">
-              What Readers Are Saying
-            </h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-card border-border">
-                  <CardContent className="p-6">
-                    <div className="flex mb-3">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                      ))}
-                    </div>
-                    <p className="text-muted-foreground mb-4 italic">
-                      "{testimonial.text}"
-                    </p>
-                    <p className="text-sm font-semibold text-foreground">
-                      — {testimonial.name}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About the Series Section */}
-      <section className="py-20">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <h2 className="font-playfair text-4xl font-bold text-foreground">
-              Fall in Love with the Manhattan Money Kings Series
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              After you devour the free prequel, continue the journey with three full-length novels featuring ruthless billionaires, forbidden romance, and happily-ever-afters that will leave you breathless.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-              <a href="/books">
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  <BookOpen className="mr-2 h-5 w-5" />
-                  Explore the Full Series
-                </Button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20 bg-card/50">
-        <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="font-playfair text-4xl font-bold text-center text-foreground mb-12">
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-6">
-              <Card className="bg-card border-border">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-lg text-foreground mb-2">
-                    Is this really free?
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Yes! Absolutely 100% free. No credit card required. Just enter your email and get instant access to the complete novella.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-lg text-foreground mb-2">
-                    What format will I receive?
-                  </h3>
-                  <p className="text-muted-foreground">
-                    You'll receive the book through BookFunnel, which allows you to download in multiple formats including EPUB, MOBI (Kindle), and PDF. Read on any device!
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-lg text-foreground mb-2">
-                    Do I need to read this before the main series?
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Not required! This prequel can be enjoyed before or after reading the main Manhattan Money Kings series. It's a standalone story that enriches the overall experience.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-lg text-foreground mb-2">
-                    Will I receive spam emails?
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Never! You'll only receive occasional updates about new releases, exclusive content, and special offers. You can unsubscribe at any time with one click.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/20 via-primary/10 to-background">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center space-y-8">
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground">
-              Ready to Start Reading?
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Join thousands of readers who've fallen in love with the Manhattan Money Kings. Get your free book now!
-            </p>
-            
-            <Card className="bg-card/50 border-primary/20">
-              <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Input
-                      type="email"
-                      placeholder="Enter your email address"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="flex-1 text-lg h-14"
-                    />
-                    <Button 
-                      type="submit" 
-                      size="lg"
-                      className="bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-8"
-                      disabled={subscribeMutation.isPending}
-                    >
-                      {subscribeMutation.isPending ? "Sending..." : "Get My Free Book"}
-                    </Button>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    100% free. No credit card required. Instant access.
-                  </p>
-                </form>
-              </CardContent>
-            </Card>
-
-            <div className="pt-6">
-              <p className="text-sm text-muted-foreground mb-4">Share this free book with friends:</p>
-              <div className="flex gap-3 justify-center">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleShare("facebook")}
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="flex items-start gap-4 p-6 rounded-2xl bg-gradient-to-r from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10"
                 >
-                  <Share2 className="mr-2 h-4 w-4" />
+                  <div className="flex-shrink-0 mt-1">
+                    <CheckCircle className="h-6 w-6 text-[#d4af37]" />
+                  </div>
+                  <span className="text-gray-300 text-lg">{benefit}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Testimonials - Luxury Cards */}
+      <section className="py-20 relative overflow-hidden">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('/manhattan-night-skyline.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/98 via-[#0a0e1a]/95 to-[#0a0e1a]/98" />
+        </div>
+
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="text-center mb-16">
+              <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
+                What Readers Are Saying
+              </h2>
+              <p className="text-xl text-gray-400">
+                Join thousands of satisfied readers
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-xl"
+                >
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-[#d4af37] text-[#d4af37]" />
+                    ))}
+                  </div>
+                  <p className="text-gray-300 leading-relaxed mb-6 italic">
+                    "{testimonial.text}"
+                  </p>
+                  <p className="text-white font-semibold">— {testimonial.name}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Final CTA - Premium */}
+      <section className="py-32 relative">
+        <div 
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: "url('/gold-marble-texture.jpg')",
+            backgroundSize: "cover",
+          }}
+        />
+
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center p-12 md:p-16 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl"
+          >
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 mb-8">
+              <BookOpen className="h-8 w-8 text-[#d4af37]" />
+            </div>
+
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
+              Ready to Dive In?
+            </h2>
+            
+            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+              Get instant access to your free prequel and discover why readers can't get enough of the Manhattan Money Kings.
+            </p>
+
+            <Button
+              onClick={handleDirectDownload}
+              size="lg"
+              className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-12 py-8 rounded-full text-xl shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
+            >
+              <Download className="mr-3 h-6 w-6" />
+              Download Your Free Book Now
+            </Button>
+
+            <div className="mt-12 pt-8 border-t border-white/10">
+              <p className="text-gray-400 mb-6">Share this free book with friends:</p>
+              <div className="flex justify-center gap-4">
+                <Button
+                  onClick={() => handleShare('facebook')}
+                  variant="outline"
+                  size="lg"
+                  className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white rounded-full"
+                >
+                  <Share2 className="mr-2 h-5 w-5" />
                   Facebook
                 </Button>
                 <Button
+                  onClick={() => handleShare('twitter')}
                   variant="outline"
-                  size="sm"
-                  onClick={() => handleShare("twitter")}
+                  size="lg"
+                  className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white rounded-full"
                 >
-                  <Share2 className="mr-2 h-4 w-4" />
+                  <Share2 className="mr-2 h-5 w-5" />
                   Twitter
                 </Button>
                 <Button
+                  onClick={() => handleShare('pinterest')}
                   variant="outline"
-                  size="sm"
-                  onClick={() => handleShare("pinterest")}
+                  size="lg"
+                  className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white rounded-full"
                 >
-                  <Share2 className="mr-2 h-4 w-4" />
+                  <Share2 className="mr-2 h-5 w-5" />
                   Pinterest
                 </Button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
