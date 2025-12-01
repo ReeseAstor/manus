@@ -11,7 +11,6 @@ export function Header() {
     { href: "/books", label: "Books" },
     { href: "/free-book", label: "Free Book", special: true },
     { href: "/blog", label: "Blog" },
-    { href: "/coaching", label: "Coaching" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];

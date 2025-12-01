@@ -8,7 +8,6 @@ import Home from "./pages/Home";
 import Books from "./pages/Books";
 import FreeBook from "./pages/FreeBook";
 import About from "./pages/About";
-import Coaching from "./pages/Coaching";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -29,7 +28,6 @@ function Router() {
       <Route path={"/free-book"} component={FreeBook} />
       <Route path={"/quiz"} component={CharacterQuiz} />
       <Route path={"/about"} component={About} />
-      <Route path={"/coaching"} component={Coaching} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/:slug"} component={BlogPost} />

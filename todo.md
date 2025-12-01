@@ -158,3 +158,9 @@
 - [x] Update Books page Book 3 link
 - [x] Update Home page Book 3 link
 - [x] Update any other Book 3 references
+
+## Remove Coaching Section
+- [x] Remove Coaching link from navigation (Header.tsx)
+- [x] Remove Coaching page route from App.tsx
+- [x] Delete Coaching.tsx page file
+- [x] Remove any coaching references from other pages
