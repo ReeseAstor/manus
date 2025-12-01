@@ -43,7 +43,7 @@ export default function Home() {
       title: "The Billionaire's Fake Wife",
       subtitle: "Manhattan Money Kings Book 2",
       cover: "/book2-cover.jpg",
-      description: "He caught her breaking into his office. She was after evidence that could destroy his rival. His solution? A marriage contract neither expected to fulfill.",
+      description: "When gymnast-turned-thief Lily Chen breaks into his penthouse, billionaire David Kim catches her red-handed. But instead of calling the police, he makes her an offer she can't refuse.",
       price: "$2.99",
       link: "https://www.amazon.com/dp/B0FCCBNF8X",
       available: true,
