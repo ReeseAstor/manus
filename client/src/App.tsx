@@ -19,6 +19,7 @@ import CharacterQuiz from "./pages/CharacterQuiz";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AIChatbot } from "./components/AIChatbot";
+import { EmailCapturePopup } from "./components/EmailCapturePopup";
 
 function Router() {
   return (
@@ -62,6 +63,7 @@ function App() {
             </main>
             <Footer />
             <AIChatbot />
+            <EmailCapturePopup />
           </div>
         </TooltipProvider>
       </ThemeProvider>

@@ -164,3 +164,12 @@
 - [x] Remove Coaching page route from App.tsx
 - [x] Delete Coaching.tsx page file
 - [x] Remove any coaching references from other pages
+
+## Email Capture Popup
+- [x] Create popup component with 30-second delay
+- [x] Design elegant popup with free book offer
+- [x] Add email input and validation
+- [x] Integrate with MailerLite API for subscriptions
+- [x] Add close button and "No thanks" option
+- [x] Store popup dismissal in localStorage to prevent repeated shows
+- [x] Add success message after signup
