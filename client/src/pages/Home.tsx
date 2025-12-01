@@ -36,7 +36,7 @@ export default function Home() {
       cover: "/book3-cover.jpg",
       description: "One night. One secret. One second chance he refuses to lose. When Dominic Kane discovers the daughter he never knew existed, he'll stop at nothing to claim his family.",
       price: "$2.99",
-      link: "https://www.amazon.com/dp/B0DRZG5KKD",
+      link: "https://swiy.co/3rd",
       badge: "New Release",
     },
     {
@@ -131,7 +131,7 @@ export default function Home() {
                   <img src="/prequel-qr.png" alt="QR Code" className="w-24 h-24" />
                   <div className="text-sm text-muted-foreground text-left">
                     <p className="font-semibold">Scan to download</p>
-                    <p>or get it on <a href="https://www.amazon.com/dp/B0DSG7NKGP" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Amazon</a></p>
+                    <p>or get it on <a href="https://swiy.co/3rd" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Amazon</a></p>
                   </div>
                 </div>
               </div>

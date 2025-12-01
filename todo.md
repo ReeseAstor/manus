@@ -151,3 +151,10 @@
 - [ ] Add social sharing buttons for Book 3
 - [ ] Create "Complete the Series" bundle promotion
 - [ ] Add Book 3 launch announcement to blog
+
+## Book 3 Link Update
+- [x] Replace all Book 3 Amazon links with https://swiy.co/3rd
+- [x] Update Book3LaunchBanner component
+- [x] Update Books page Book 3 link
+- [x] Update Home page Book 3 link
+- [x] Update any other Book 3 references

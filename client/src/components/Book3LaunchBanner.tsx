@@ -58,7 +58,7 @@ export function Book3LaunchBanner() {
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group"
             >
-              <a href="https://www.amazon.com/dp/B0DSG7NKGP" target="_blank" rel="noopener noreferrer">
+              <a href="https://swiy.co/3rd" target="_blank" rel="noopener noreferrer">
                 Get It Now
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>

@@ -51,7 +51,7 @@ export default function Books() {
       regularPrice: "$4.99",
       preorder: false,
       releaseDate: "Available Now",
-      link: "https://www.amazon.com/dp/B0DRZG5KKD",
+      link: "https://swiy.co/3rd",
       genre: ["Secret Baby", "Second Chance", "Billionaire Romance"],
       pages: 340,
       rating: 0,
@@ -98,7 +98,7 @@ export default function Books() {
                     Download Free Now
                   </Button>
                 </a>
-                <a href="https://www.amazon.com/dp/B0DSG7NKGP" target="_blank" rel="noopener noreferrer">
+                <a href="https://swiy.co/3rd" target="_blank" rel="noopener noreferrer">
                   <Button size="lg" variant="outline" className="font-semibold">
                     View on Amazon
                   </Button>

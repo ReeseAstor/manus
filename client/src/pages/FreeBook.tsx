@@ -183,7 +183,7 @@ export default function FreeBook() {
                     Direct Download Link
                   </Button>
                   <a 
-                    href="https://www.amazon.com/dp/B0DSG7NKGP" 
+                    href="https://swiy.co/3rd" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex-1"
