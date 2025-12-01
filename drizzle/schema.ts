@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { int, mysqlTable, text, timestamp, varchar, mysqlEnum, boolean } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -94,3 +94,66 @@ export const aiGeneratedContent = mysqlTable('ai_generated_content', {
 
 export type AiGeneratedContent = typeof aiGeneratedContent.$inferSelect;
 export type InsertAiGeneratedContent = typeof aiGeneratedContent.$inferInsert;
+
+/**
+ * Digital Products table for Stripe integration
+ */
+export const products = mysqlTable("products", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  description: text("description").notNull(),
+  price: int("price").notNull(), // Price in cents
+  currency: varchar("currency", { length: 3 }).default("usd").notNull(),
+  type: mysqlEnum("type", ["one_time", "subscription"]).notNull(),
+  stripeProductId: varchar("stripeProductId", { length: 255 }),
+  stripePriceId: varchar("stripePriceId", { length: 255 }),
+  features: text("features"), // JSON array of features
+  downloadUrl: text("downloadUrl"), // For digital products
+  active: boolean("active").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Product = typeof products.$inferSelect;
+export type InsertProduct = typeof products.$inferInsert;
+
+/**
+ * Orders table for tracking purchases
+ */
+export const orders = mysqlTable("orders", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").references(() => users.id),
+  productId: int("productId").notNull().references(() => products.id),
+  stripeSessionId: varchar("stripeSessionId", { length: 255 }),
+  stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 255 }),
+  amount: int("amount").notNull(), // Amount in cents
+  currency: varchar("currency", { length: 3 }).default("usd").notNull(),
+  status: mysqlEnum("status", ["pending", "completed", "failed", "refunded"]).default("pending").notNull(),
+  customerEmail: varchar("customerEmail", { length: 320 }),
+  customerName: varchar("customerName", { length: 255 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Order = typeof orders.$inferSelect;
+export type InsertOrder = typeof orders.$inferInsert;
+
+/**
+ * Subscriptions table for recurring payments
+ */
+export const subscriptions = mysqlTable("subscriptions", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id),
+  productId: int("productId").notNull().references(() => products.id),
+  stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }).notNull(),
+  stripeCustomerId: varchar("stripeCustomerId", { length: 255 }).notNull(),
+  status: mysqlEnum("status", ["active", "canceled", "past_due", "unpaid"]).default("active").notNull(),
+  currentPeriodStart: timestamp("currentPeriodStart").notNull(),
+  currentPeriodEnd: timestamp("currentPeriodEnd").notNull(),
+  cancelAtPeriodEnd: boolean("cancelAtPeriodEnd").default(false).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Subscription = typeof subscriptions.$inferSelect;
+export type InsertSubscription = typeof subscriptions.$inferInsert;

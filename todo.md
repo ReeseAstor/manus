@@ -173,3 +173,19 @@
 - [x] Add close button and "No thanks" option
 - [x] Store popup dismissal in localStorage to prevent repeated shows
 - [x] Add success message after signup
+
+## Stripe Payment System Implementation
+- [ ] Create Stripe webhook endpoint at /api/stripe/webhook
+- [ ] Set up webhook signature verification
+- [ ] Handle payment success/failure events
+- [ ] Create database schema for orders and subscriptions
+- [ ] Build checkout page for one-time products
+- [ ] Build subscription checkout flow
+- [ ] Create customer portal for subscription management
+- [ ] Add payment success/cancel pages
+- [ ] Integrate Stripe Elements for secure card input
+- [ ] Test webhook with Stripe CLI
+
+## Book 1 Cover Update
+- [x] Copy new Book 1 cover image to project
+- [x] Update Book 1 cover references on all pages
