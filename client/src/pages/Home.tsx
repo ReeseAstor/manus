@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import LuxuryHero from "@/components/LuxuryHero";
 import Interactive3DBookShowcase from "@/components/Interactive3DBookShowcase";
+import { Book3LaunchBanner } from "@/components/Book3LaunchBanner";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -60,6 +61,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <Book3LaunchBanner />
       {/* Luxury Hero Section */}
       <LuxuryHero />
 

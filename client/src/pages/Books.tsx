@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Star, ShoppingCart, BookOpen, Gift } from "lucide-react";
+import { Book3LaunchBanner } from "@/components/Book3LaunchBanner";
 
 export default function Books() {
   const books = [
@@ -60,8 +61,10 @@ export default function Books() {
   ];
 
   return (
-    <div className="min-h-screen py-12">
-      <div className="container">
+    <div className="min-h-screen bg-background">
+      <Book3LaunchBanner />
+      <div className="py-12">
+        <div className="container">
         {/* Free Prequel Banner */}
         <div className="mb-12 p-8 rounded-lg bg-gradient-to-br from-primary/20 via-primary/10 to-background border-2 border-primary/30">
           <div className="grid md:grid-cols-3 gap-6 items-center">
@@ -239,6 +242,7 @@ export default function Books() {
           <p className="text-muted-foreground">
             Each book is a standalone romance with a guaranteed happily-ever-after, but they're best enjoyed in order to catch all the interconnected storylines and cameos from your favorite characters.
           </p>
+        </div>
         </div>
       </div>
     </div>
