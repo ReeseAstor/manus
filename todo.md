@@ -211,3 +211,14 @@
 - [x] Redesign Contact page with high-end form design
 - [x] Test all pages for consistency
 - [x] Verify all luxury design elements are working
+
+## Blog Post Detail Pages Feature
+- [x] Create BlogPost detail page component with luxury Manhattan design
+- [x] Add rich content formatting with typography and spacing
+- [x] Implement author bio section at bottom of posts
+- [x] Add related posts recommendations based on category
+- [x] Add social sharing buttons
+- [x] Add route for /blog/:slug in App.tsx (already exists)
+- [x] Test blog post detail pages
+- [x] Create database seed script for sample blog posts
+- [x] Run seed script to populate blog posts
