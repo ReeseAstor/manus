@@ -222,3 +222,13 @@
 - [x] Test blog post detail pages
 - [x] Create database seed script for sample blog posts
 - [x] Run seed script to populate blog posts
+
+## Admin Dashboard for Blog Management
+- [x] Install rich text editor dependencies (TipTap or similar)
+- [x] Create admin dashboard layout with Manhattan luxury aesthetic
+- [x] Build blog post list view with search and filtering
+- [x] Create visual blog editor with rich text formatting
+- [x] Add image upload functionality for blog posts (via URL)
+- [x] Implement draft/publish workflow
+- [x] Add blog post preview functionality (view published posts)
+- [x] Test admin dashboard thoroughly
