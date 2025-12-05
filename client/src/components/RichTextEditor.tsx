@@ -27,6 +27,7 @@ import {
   AlignRight,
 } from 'lucide-react';
 import { useState } from 'react';
+import { ImageUpload } from './ImageUpload';
 
 interface RichTextEditorProps {
   content: string;
@@ -37,8 +38,7 @@ interface RichTextEditorProps {
 export function RichTextEditor({ content, onChange, placeholder }: RichTextEditorProps) {
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
-  const [showImageInput, setShowImageInput] = useState(false);
-  const [imageUrl, setImageUrl] = useState('');
+  const [showImageUpload, setShowImageUpload] = useState(false);
 
   const editor = useEditor({
     extensions: [
@@ -89,12 +89,9 @@ export function RichTextEditor({ content, onChange, placeholder }: RichTextEdito
     }
   };
 
-  const addImage = () => {
-    if (imageUrl) {
-      editor.chain().focus().setImage({ src: imageUrl }).run();
-      setImageUrl('');
-      setShowImageInput(false);
-    }
+  const handleImageUploaded = (url: string) => {
+    editor.chain().focus().setImage({ src: url }).run();
+    setShowImageUpload(false);
   };
 
   const ToolbarButton = ({ 
@@ -237,9 +234,9 @@ export function RichTextEditor({ content, onChange, placeholder }: RichTextEdito
             label="Add Link"
           />
           <ToolbarButton
-            onClick={() => setShowImageInput(!showImageInput)}
+            onClick={() => setShowImageUpload(!showImageUpload)}
             icon={ImageIcon}
-            label="Add Image"
+            label="Upload Image"
           />
         </div>
 
@@ -298,40 +295,16 @@ export function RichTextEditor({ content, onChange, placeholder }: RichTextEdito
         </div>
       )}
 
-      {/* Image Input */}
-      {showImageInput && (
-        <div className="border-b border-white/10 p-4 bg-white/5 flex items-center gap-3">
-          <input
-            type="url"
-            placeholder="Enter image URL..."
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                addImage();
-              }
-            }}
-            className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#d4af37]/50"
-            autoFocus
-          />
+      {/* Image Upload */}
+      {showImageUpload && (
+        <div className="border-b border-white/10 p-4 bg-white/5">
+          <ImageUpload onImageUploaded={handleImageUploaded} />
           <Button
             type="button"
-            onClick={addImage}
-            size="sm"
-            className="bg-[#d4af37] hover:bg-[#c9a961] text-black font-semibold px-6 rounded-lg"
-          >
-            Add
-          </Button>
-          <Button
-            type="button"
-            onClick={() => {
-              setShowImageInput(false);
-              setImageUrl('');
-            }}
+            onClick={() => setShowImageUpload(false)}
             size="sm"
             variant="ghost"
-            className="text-gray-400 hover:text-white"
+            className="text-gray-400 hover:text-white mt-3"
           >
             Cancel
           </Button>

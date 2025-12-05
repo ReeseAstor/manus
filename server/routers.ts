@@ -7,12 +7,23 @@ import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite } from "./mailerlite";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
+import { storagePut } from "./storage";
 import {
   getAllBlogPosts,
   getBlogPostBySlug,
   createBlogPost,
   updateBlogPost,
   deleteBlogPost,
+  getAllBooks,
+  getBookBySlug,
+  getBookById,
+  createBook,
+  updateBook,
+  deleteBook,
+  getBookReviews,
+  createBookReview,
+  deleteBookReview,
+  getRelatedBooks,
 } from "./db";
 
 export const appRouter = router({
@@ -55,6 +66,36 @@ export const appRouter = router({
   }),
 
   blog: router({
+    uploadImage: protectedProcedure
+      .input(
+        z.object({
+          fileName: z.string(),
+          fileType: z.string(),
+          fileData: z.string(), // base64 encoded
+        })
+      )
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Only admins can upload images",
+          });
+        }
+
+        // Decode base64 and upload to S3
+        const buffer = Buffer.from(input.fileData, "base64");
+        const timestamp = Date.now();
+        const randomSuffix = Math.random().toString(36).substring(7);
+        const key = `blog-images/${timestamp}-${randomSuffix}-${input.fileName}`;
+        
+        const result = await storagePut(key, buffer, input.fileType);
+        
+        return {
+          url: result.url,
+          key: result.key,
+        };
+      }),
+
     list: publicProcedure
       .input(
         z.object({
@@ -157,6 +198,126 @@ export const appRouter = router({
         }
 
         await deleteBlogPost(input.id);
+        return { success: true };
+      }),
+  }),
+
+  books: router({
+    list: publicProcedure
+      .input(z.object({ featuredOnly: z.boolean().optional() }).optional())
+      .query(async ({ input }) => {
+        return await getAllBooks(input?.featuredOnly);
+      }),
+
+    getBySlug: publicProcedure
+      .input(z.object({ slug: z.string() }))
+      .query(async ({ input }) => {
+        const book = await getBookBySlug(input.slug);
+        if (!book) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Book not found",
+          });
+        }
+        return book;
+      }),
+
+    getReviews: publicProcedure
+      .input(z.object({ bookId: z.number(), featuredOnly: z.boolean().optional() }))
+      .query(async ({ input }) => {
+        return await getBookReviews(input.bookId, input.featuredOnly);
+      }),
+
+    getRelated: publicProcedure
+      .input(z.object({ bookId: z.number(), limit: z.number().optional() }))
+      .query(async ({ input }) => {
+        return await getRelatedBooks(input.bookId, input.limit);
+      }),
+
+    create: protectedProcedure
+      .input(
+        z.object({
+          title: z.string().min(1),
+          slug: z.string().min(1),
+          series: z.string().optional(),
+          seriesOrder: z.number().optional(),
+          coverImage: z.string().min(1),
+          description: z.string().min(1),
+          sampleChapter: z.string().optional(),
+          rating: z.number().min(1).max(5).optional(),
+          reviewCount: z.number().optional(),
+          tropes: z.string().optional(),
+          heatLevel: z.number().min(1).max(5).optional(),
+          pageCount: z.number().optional(),
+          publishDate: z.string().optional(),
+          amazonUrl: z.string().optional(),
+          appleUrl: z.string().optional(),
+          koboUrl: z.string().optional(),
+          barnesNobleUrl: z.string().optional(),
+          googlePlayUrl: z.string().optional(),
+          featured: z.boolean().optional(),
+          displayOrder: z.number().optional(),
+        })
+      )
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Only admins can create books",
+          });
+        }
+        await createBook(input);
+        return { success: true };
+      }),
+
+    update: protectedProcedure
+      .input(
+        z.object({
+          id: z.number(),
+          title: z.string().optional(),
+          slug: z.string().optional(),
+          series: z.string().optional(),
+          seriesOrder: z.number().optional(),
+          coverImage: z.string().optional(),
+          description: z.string().optional(),
+          sampleChapter: z.string().optional(),
+          rating: z.number().min(1).max(5).optional(),
+          reviewCount: z.number().optional(),
+          tropes: z.string().optional(),
+          heatLevel: z.number().min(1).max(5).optional(),
+          pageCount: z.number().optional(),
+          publishDate: z.string().optional(),
+          amazonUrl: z.string().optional(),
+          appleUrl: z.string().optional(),
+          koboUrl: z.string().optional(),
+          barnesNobleUrl: z.string().optional(),
+          googlePlayUrl: z.string().optional(),
+          featured: z.boolean().optional(),
+          displayOrder: z.number().optional(),
+        })
+      )
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Only admins can update books",
+          });
+        }
+        const { id, ...updateData } = input;
+        await updateBook(id, updateData);
+        return { success: true };
+      }),
+
+    delete: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Only admins can delete books",
+          });
+        }
+        await deleteBook(input.id);
         return { success: true };
       }),
   }),

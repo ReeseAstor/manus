@@ -1,6 +1,6 @@
 import { eq, desc, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, blogPosts, InsertBlogPost } from "../drizzle/schema";
+import { InsertUser, users, blogPosts, InsertBlogPost, books, bookReviews, type Book, type InsertBook, type BookReview, type InsertBookReview } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -181,6 +181,190 @@ export async function deleteBlogPost(id: number) {
     return result;
   } catch (error) {
     console.error("[Database] Failed to delete blog post:", error);
+    throw error;
+  }
+}
+
+// ==================== BOOKS ====================
+
+export async function getAllBooks(featuredOnly?: boolean) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    if (featuredOnly) {
+      return await db.select().from(books).where(eq(books.featured, true)).orderBy(desc(books.displayOrder));
+    }
+    return await db.select().from(books).orderBy(desc(books.displayOrder));
+  } catch (error) {
+    console.error("[Database] Failed to get books:", error);
+    throw error;
+  }
+}
+
+export async function getBookBySlug(slug: string) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    const result = await db.select().from(books).where(eq(books.slug, slug)).limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Failed to get book by slug:", error);
+    throw error;
+  }
+}
+
+export async function getBookById(id: number) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    const result = await db.select().from(books).where(eq(books.id, id)).limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Failed to get book by id:", error);
+    throw error;
+  }
+}
+
+export async function createBook(book: InsertBook) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db.insert(books).values(book);
+  } catch (error) {
+    console.error("[Database] Failed to create book:", error);
+    throw error;
+  }
+}
+
+export async function updateBook(id: number, book: Partial<InsertBook>) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db.update(books).set(book).where(eq(books.id, id));
+  } catch (error) {
+    console.error("[Database] Failed to update book:", error);
+    throw error;
+  }
+}
+
+export async function deleteBook(id: number) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db.delete(books).where(eq(books.id, id));
+  } catch (error) {
+    console.error("[Database] Failed to delete book:", error);
+    throw error;
+  }
+}
+
+// ==================== BOOK REVIEWS ====================
+
+export async function getBookReviews(bookId: number, featuredOnly?: boolean) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    if (featuredOnly) {
+      return await db
+        .select()
+        .from(bookReviews)
+        .where(and(eq(bookReviews.bookId, bookId), eq(bookReviews.featured, true)))
+        .orderBy(desc(bookReviews.createdAt));
+    }
+    return await db
+      .select()
+      .from(bookReviews)
+      .where(eq(bookReviews.bookId, bookId))
+      .orderBy(desc(bookReviews.createdAt));
+  } catch (error) {
+    console.error("[Database] Failed to get book reviews:", error);
+    throw error;
+  }
+}
+
+export async function createBookReview(review: InsertBookReview) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db.insert(bookReviews).values(review);
+  } catch (error) {
+    console.error("[Database] Failed to create book review:", error);
+    throw error;
+  }
+}
+
+export async function deleteBookReview(id: number) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db.delete(bookReviews).where(eq(bookReviews.id, id));
+  } catch (error) {
+    console.error("[Database] Failed to delete book review:", error);
+    throw error;
+  }
+}
+
+// Helper: Get related books (same series or similar)
+export async function getRelatedBooks(bookId: number, limit: number = 3) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    const book = await getBookById(bookId);
+    if (!book) return [];
+
+    // If book is part of a series, get other books in the series
+    if (book.series) {
+      const seriesBooks = await db
+        .select()
+        .from(books)
+        .where(and(eq(books.series, book.series), eq(books.id, bookId)))
+        .orderBy(books.seriesOrder)
+        .limit(limit);
+      
+      if (seriesBooks.length > 0) {
+        return seriesBooks;
+      }
+    }
+
+    // Otherwise, get other featured books
+    return await db
+      .select()
+      .from(books)
+      .where(and(eq(books.featured, true), eq(books.id, bookId)))
+      .orderBy(desc(books.displayOrder))
+      .limit(limit);
+  } catch (error) {
+    console.error("[Database] Failed to get related books:", error);
     throw error;
   }
 }

@@ -232,3 +232,39 @@
 - [x] Implement draft/publish workflow
 - [x] Add blog post preview functionality (view published posts)
 - [x] Test admin dashboard thoroughly
+
+## Email Newsletter Signup Popup
+- [x] Research MailerLite API integration requirements
+- [x] Create NewsletterPopup component with Manhattan luxury design
+- [x] Implement exit-intent detection (mouse leaving viewport)
+- [x] Add localStorage to prevent showing popup multiple times
+- [x] Integrate MailerLite API for email subscription
+- [x] Add success/error states and alert notifications
+- [ ] Test popup functionality thoroughly
+
+## High-Value Enhancements
+
+### Direct S3 Image Upload in Blog Editor
+- [x] Create image upload component with drag-and-drop support
+- [x] Add tRPC endpoint for S3 image upload
+- [x] Integrate image upload into TipTap editor
+- [x] Add image preview functionality
+- [x] Test image upload flow thoroughly
+
+### Individual Book Detail Pages
+- [x] Update database schema to add book details (description, sample chapter, reviews)
+- [ ] Create BookDetail page component with luxury Manhattan design
+- [ ] Add buy links section for multiple retailers
+- [ ] Implement related books recommendations
+- [ ] Add reader reviews section
+- [ ] Update Books page to link to detail pages
+- [ ] Create admin interface for managing book details
+
+### Private Reader's Club Area
+- [ ] Create members table in database for Reader's Club
+- [ ] Build ReaderClub page with authentication check
+- [ ] Create admin interface for managing exclusive content
+- [ ] Add exclusive content types (bonus chapters, character interviews, behind-the-scenes)
+- [ ] Implement join/subscribe flow for Reader's Club
+- [ ] Add member-only content display
+- [ ] Test authentication and access control

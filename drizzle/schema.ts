@@ -45,6 +45,56 @@ export const blogPosts = mysqlTable("blog_posts", {
 
 export type BlogPost = typeof blogPosts.$inferSelect;
 export type InsertBlogPost = typeof blogPosts.$inferInsert;
+
+/**
+ * Books table for book catalog and details
+ */
+export const books = mysqlTable("books", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  series: varchar("series", { length: 255 }),
+  seriesOrder: int("seriesOrder"),
+  coverImage: text("coverImage").notNull(),
+  description: text("description").notNull(),
+  sampleChapter: text("sampleChapter"),
+  rating: int("rating").default(5), // 1-5 stars
+  reviewCount: int("reviewCount").default(0),
+  tropes: text("tropes"), // JSON array of tropes
+  heatLevel: int("heatLevel").default(3), // 1-5 heat level
+  pageCount: int("pageCount"),
+  publishDate: varchar("publishDate", { length: 100 }),
+  amazonUrl: text("amazonUrl"),
+  appleUrl: text("appleUrl"),
+  koboUrl: text("koboUrl"),
+  barnesNobleUrl: text("barnesNobleUrl"),
+  googlePlayUrl: text("googlePlayUrl"),
+  featured: boolean("featured").default(false),
+  displayOrder: int("displayOrder").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Book = typeof books.$inferSelect;
+export type InsertBook = typeof books.$inferInsert;
+
+/**
+ * Book reviews table for reader testimonials
+ */
+export const bookReviews = mysqlTable("book_reviews", {
+  id: int("id").autoincrement().primaryKey(),
+  bookId: int("bookId").notNull().references(() => books.id),
+  reviewerName: varchar("reviewerName", { length: 255 }).notNull(),
+  reviewerPhoto: text("reviewerPhoto"),
+  rating: int("rating").notNull(), // 1-5 stars
+  review: text("review").notNull(),
+  source: varchar("source", { length: 100 }), // e.g., "Amazon", "Goodreads"
+  featured: boolean("featured").default(false),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type BookReview = typeof bookReviews.$inferSelect;
+export type InsertBookReview = typeof bookReviews.$inferInsert;
 /**
  * AI Chat Messages - stores conversation history
  */
