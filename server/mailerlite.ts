@@ -106,3 +106,109 @@ export async function getMailerLiteGroups() {
     throw error;
   }
 }
+
+/**
+ * Send a campaign via MailerLite
+ */
+export async function sendMailerLiteCampaign(
+  subject: string,
+  htmlContent: string,
+  groupId?: string
+): Promise<MailerLiteResponse> {
+  if (!MAILERLITE_API_KEY) {
+    console.error("MailerLite API key is not configured");
+    return {
+      success: false,
+      message: "Newsletter service is not configured",
+    };
+  }
+
+  try {
+    // Create campaign
+    const campaignData = {
+      name: subject,
+      type: "regular",
+      emails: [
+        {
+          subject,
+          from_name: "Reese Astor",
+          from: "hello@reeseastor.com", // Update with your actual sender email
+          content: htmlContent,
+        },
+      ],
+      groups: groupId ? [groupId] : undefined,
+    };
+
+    const createResponse = await axios.post(
+      `${MAILERLITE_API_URL}/campaigns`,
+      campaignData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${MAILERLITE_API_KEY}`,
+          Accept: "application/json",
+        },
+      }
+    );
+
+    const campaignId = createResponse.data.data.id;
+
+    // Schedule campaign for immediate sending
+    await axios.post(
+      `${MAILERLITE_API_URL}/campaigns/${campaignId}/schedule`,
+      {
+        delivery: "instant",
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${MAILERLITE_API_KEY}`,
+          Accept: "application/json",
+        },
+      }
+    );
+
+    return {
+      success: true,
+      message: "Campaign sent successfully",
+      data: createResponse.data,
+    };
+  } catch (error: any) {
+    console.error("MailerLite campaign error:", error.response?.data || error.message);
+    return {
+      success: false,
+      message: error.response?.data?.message || "Failed to send campaign. Please try again later.",
+    };
+  }
+}
+
+/**
+ * Get all active subscribers from MailerLite
+ */
+export async function getMailerLiteSubscribers(groupId?: string) {
+  if (!MAILERLITE_API_KEY) {
+    throw new Error("MailerLite API key is not configured");
+  }
+
+  try {
+    const url = groupId
+      ? `${MAILERLITE_API_URL}/groups/${groupId}/subscribers`
+      : `${MAILERLITE_API_URL}/subscribers`;
+
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${MAILERLITE_API_KEY}`,
+        Accept: "application/json",
+      },
+      params: {
+        filter: { status: "active" },
+        limit: 1000,
+      },
+    });
+
+    return response.data;
+  } catch (error: any) {
+    console.error("Failed to fetch MailerLite subscribers:", error.response?.data || error.message);
+    throw error;
+  }
+}

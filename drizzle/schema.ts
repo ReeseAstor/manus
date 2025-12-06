@@ -95,6 +95,46 @@ export const bookReviews = mysqlTable("book_reviews", {
 
 export type BookReview = typeof bookReviews.$inferSelect;
 export type InsertBookReview = typeof bookReviews.$inferInsert;
+
+/**
+ * Newsletters table for managing email campaigns
+ */
+export const newsletters = mysqlTable("newsletters", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  subject: varchar("subject", { length: 255 }).notNull(),
+  preheader: varchar("preheader", { length: 255 }),
+  content: text("content").notNull(), // HTML content
+  status: mysqlEnum("status", ["draft", "scheduled", "sent"]).default("draft").notNull(),
+  scheduledAt: timestamp("scheduledAt"),
+  sentAt: timestamp("sentAt"),
+  recipientCount: int("recipientCount").default(0),
+  openCount: int("openCount").default(0),
+  clickCount: int("clickCount").default(0),
+  createdBy: int("createdBy").notNull().references(() => users.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Newsletter = typeof newsletters.$inferSelect;
+export type InsertNewsletter = typeof newsletters.$inferInsert;
+
+/**
+ * Newsletter subscribers table
+ */
+export const newsletterSubscribers = mysqlTable("newsletter_subscribers", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  name: varchar("name", { length: 255 }),
+  status: mysqlEnum("status", ["active", "unsubscribed"]).default("active").notNull(),
+  source: varchar("source", { length: 100 }), // e.g., "website", "free_book", "quiz"
+  mailerLiteId: varchar("mailerLiteId", { length: 100 }), // MailerLite subscriber ID
+  subscribedAt: timestamp("subscribedAt").defaultNow().notNull(),
+  unsubscribedAt: timestamp("unsubscribedAt"),
+});
+
+export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
+export type InsertNewsletterSubscriber = typeof newsletterSubscribers.$inferInsert;
 /**
  * AI Chat Messages - stores conversation history
  */

@@ -13,6 +13,8 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Admin from "./pages/Admin";
 import BlogEditor from "./pages/BlogEditor";
+import { NewsletterManager } from "./pages/NewsletterManager";
+import { NewsletterEditor } from "./pages/NewsletterEditor";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import CharacterQuiz from "./pages/CharacterQuiz";
@@ -35,6 +37,8 @@ function Router() {
       <Route path={"/admin"} component={Admin} />
       <Route path={"/admin/blog/new"} component={BlogEditor} />
       <Route path={"/admin/blog/edit/:id"} component={BlogEditor} />
+      <Route path={"/admin/newsletters"} component={NewsletterManager} />
+      <Route path={"/admin/newsletter/:id"} component={NewsletterEditor} />
       <Route path={"/privacy"} component={Privacy} />
       <Route path={"/terms"} component={Terms} />
       <Route path={"/404"} component={NotFound} />

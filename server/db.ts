@@ -1,6 +1,6 @@
 import { eq, desc, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, blogPosts, InsertBlogPost, books, bookReviews, type Book, type InsertBook, type BookReview, type InsertBookReview } from "../drizzle/schema";
+import { InsertUser, users, blogPosts, InsertBlogPost, books, bookReviews, type Book, type InsertBook, type BookReview, type InsertBookReview, newsletters, newsletterSubscribers, type Newsletter, type InsertNewsletter, type NewsletterSubscriber, type InsertNewsletterSubscriber } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -365,6 +365,166 @@ export async function getRelatedBooks(bookId: number, limit: number = 3) {
       .limit(limit);
   } catch (error) {
     console.error("[Database] Failed to get related books:", error);
+    throw error;
+  }
+}
+
+// ==================== NEWSLETTERS ====================
+
+export async function getAllNewsletters() {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db.select().from(newsletters).orderBy(desc(newsletters.createdAt));
+  } catch (error) {
+    console.error("[Database] Failed to get newsletters:", error);
+    throw error;
+  }
+}
+
+export async function getNewsletterById(id: number) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    const result = await db.select().from(newsletters).where(eq(newsletters.id, id)).limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Failed to get newsletter:", error);
+    throw error;
+  }
+}
+
+export async function createNewsletter(newsletter: InsertNewsletter) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db.insert(newsletters).values(newsletter);
+  } catch (error) {
+    console.error("[Database] Failed to create newsletter:", error);
+    throw error;
+  }
+}
+
+export async function updateNewsletter(id: number, newsletter: Partial<InsertNewsletter>) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db.update(newsletters).set(newsletter).where(eq(newsletters.id, id));
+  } catch (error) {
+    console.error("[Database] Failed to update newsletter:", error);
+    throw error;
+  }
+}
+
+export async function deleteNewsletter(id: number) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db.delete(newsletters).where(eq(newsletters.id, id));
+  } catch (error) {
+    console.error("[Database] Failed to delete newsletter:", error);
+    throw error;
+  }
+}
+
+// ==================== NEWSLETTER SUBSCRIBERS ====================
+
+export async function getAllSubscribers(activeOnly?: boolean) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    if (activeOnly) {
+      return await db
+        .select()
+        .from(newsletterSubscribers)
+        .where(eq(newsletterSubscribers.status, "active"))
+        .orderBy(desc(newsletterSubscribers.subscribedAt));
+    }
+    return await db.select().from(newsletterSubscribers).orderBy(desc(newsletterSubscribers.subscribedAt));
+  } catch (error) {
+    console.error("[Database] Failed to get subscribers:", error);
+    throw error;
+  }
+}
+
+export async function getSubscriberByEmail(email: string) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    const result = await db
+      .select()
+      .from(newsletterSubscribers)
+      .where(eq(newsletterSubscribers.email, email))
+      .limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Failed to get subscriber:", error);
+    throw error;
+  }
+}
+
+export async function createSubscriber(subscriber: InsertNewsletterSubscriber) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db.insert(newsletterSubscribers).values(subscriber);
+  } catch (error) {
+    console.error("[Database] Failed to create subscriber:", error);
+    throw error;
+  }
+}
+
+export async function updateSubscriber(id: number, subscriber: Partial<InsertNewsletterSubscriber>) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db.update(newsletterSubscribers).set(subscriber).where(eq(newsletterSubscribers.id, id));
+  } catch (error) {
+    console.error("[Database] Failed to update subscriber:", error);
+    throw error;
+  }
+}
+
+export async function unsubscribeByEmail(email: string) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    return await db
+      .update(newsletterSubscribers)
+      .set({ status: "unsubscribed", unsubscribedAt: new Date() })
+      .where(eq(newsletterSubscribers.email, email));
+  } catch (error) {
+    console.error("[Database] Failed to unsubscribe:", error);
     throw error;
   }
 }

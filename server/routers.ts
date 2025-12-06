@@ -4,7 +4,8 @@ import { systemRouter } from "./_core/systemRouter";
 import { aiRouter } from "./routers/ai-simple";
 import { stripeRouter } from "./routers/stripe";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
-import { subscribeToMailerLite } from "./mailerlite";
+import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
+import { generateEmailTemplate, sanitizeEmailContent } from "./emailTemplate";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { storagePut } from "./storage";
@@ -24,6 +25,16 @@ import {
   createBookReview,
   deleteBookReview,
   getRelatedBooks,
+  getAllNewsletters,
+  getNewsletterById,
+  createNewsletter,
+  updateNewsletter,
+  deleteNewsletter,
+  getAllSubscribers,
+  getSubscriberByEmail,
+  createSubscriber,
+  updateSubscriber,
+  unsubscribeByEmail,
 } from "./db";
 
 export const appRouter = router({
@@ -319,6 +330,185 @@ export const appRouter = router({
         }
         await deleteBook(input.id);
         return { success: true };
+      }),
+  }),
+
+  newsletters: router({
+    list: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== "admin") {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "Only admins can view newsletters",
+        });
+      }
+      return await getAllNewsletters();
+    }),
+
+    getById: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Only admins can view newsletters",
+          });
+        }
+        const newsletter = await getNewsletterById(input.id);
+        if (!newsletter) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Newsletter not found",
+          });
+        }
+        return newsletter;
+      }),
+
+    getStats: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== "admin") {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "Only admins can view stats",
+        });
+      }
+      const newsletters = await getAllNewsletters();
+      const subscribers = await getAllSubscribers(true);
+      const sentNewsletters = newsletters.filter((n) => n.status === "sent");
+      const totalOpens = sentNewsletters.reduce((sum, n) => sum + (n.openCount || 0), 0);
+      const totalRecipients = sentNewsletters.reduce((sum, n) => sum + (n.recipientCount || 0), 0);
+      
+      return {
+        totalNewsletters: newsletters.length,
+        sentNewsletters: sentNewsletters.length,
+        totalSubscribers: subscribers.length,
+        averageOpenRate: totalRecipients > 0 ? Math.round((totalOpens / totalRecipients) * 100) : 0,
+      };
+    }),
+
+    create: protectedProcedure
+      .input(
+        z.object({
+          title: z.string().min(1),
+          subject: z.string().min(1),
+          preheader: z.string().optional(),
+          content: z.string().min(1),
+          status: z.enum(["draft", "scheduled", "sent"]).optional(),
+          scheduledAt: z.date().optional(),
+        })
+      )
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Only admins can create newsletters",
+          });
+        }
+        await createNewsletter({
+          ...input,
+          createdBy: ctx.user.id,
+        });
+        return { success: true };
+      }),
+
+    update: protectedProcedure
+      .input(
+        z.object({
+          id: z.number(),
+          title: z.string().optional(),
+          subject: z.string().optional(),
+          preheader: z.string().optional(),
+          content: z.string().optional(),
+          status: z.enum(["draft", "scheduled", "sent"]).optional(),
+          scheduledAt: z.date().optional(),
+        })
+      )
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Only admins can update newsletters",
+          });
+        }
+        const { id, ...updateData } = input;
+        await updateNewsletter(id, updateData);
+        return { success: true };
+      }),
+
+    delete: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Only admins can delete newsletters",
+          });
+        }
+        await deleteNewsletter(input.id);
+        return { success: true };
+      }),
+
+    listSubscribers: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== "admin") {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "Only admins can view subscribers",
+        });
+      }
+      return await getAllSubscribers();
+    }),
+
+    send: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Only admins can send newsletters",
+          });
+        }
+
+        const newsletter = await getNewsletterById(input.id);
+        if (!newsletter) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Newsletter not found",
+          });
+        }
+
+        // Get active subscribers count
+        const subscribers = await getAllSubscribers(true);
+        const recipientCount = subscribers.length;
+
+        // Generate email HTML from template
+        const sanitizedContent = sanitizeEmailContent(newsletter.content);
+        const emailHtml = generateEmailTemplate({
+          subject: newsletter.subject,
+          preheader: newsletter.preheader || undefined,
+          content: sanitizedContent,
+        });
+
+        // Send via MailerLite
+        const groupId = process.env.MAILERLITE_GROUP_ID;
+        const result = await sendMailerLiteCampaign(
+          newsletter.subject,
+          emailHtml,
+          groupId
+        );
+
+        if (!result.success) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: result.message,
+          });
+        }
+
+        // Update newsletter status
+        await updateNewsletter(input.id, {
+          status: "sent",
+          sentAt: new Date(),
+          recipientCount,
+        });
+
+        return { success: true, recipientCount };
       }),
   }),
 
