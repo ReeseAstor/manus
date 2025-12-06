@@ -297,3 +297,17 @@
 - [x] Implement unsubscribe handling
 - [x] Add email analytics tracking
 - [x] Test complete send workflow (existing tests pass)
+
+## Book Detail Pages
+
+- [x] Create BookDetail page component with luxury Manhattan design
+- [x] Add full book description section
+- [x] Implement sample chapter preview with expandable content
+- [x] Create reader reviews carousel with ratings
+- [x] Add multi-retailer buy buttons (Amazon, Apple Books, Kobo, etc.)
+- [x] Display book metadata (series, tropes, heat level, page count)
+- [x] Add related books recommendations section
+- [x] Create route for /books/:slug
+- [x] Update Books page to link to detail pages
+- [x] Create seed data for sample books with full content
+- [x] Test book detail pages
