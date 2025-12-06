@@ -35,6 +35,18 @@ import {
   createSubscriber,
   updateSubscriber,
   unsubscribeByEmail,
+  getAllExclusiveContent,
+  getFeaturedExclusiveContent,
+  getExclusiveContentBySlug,
+  getExclusiveContentById,
+  createExclusiveContent,
+  updateExclusiveContent,
+  deleteExclusiveContent,
+  getReaderClubMemberByEmail,
+  createReaderClubMember,
+  updateReaderClubMemberAccess,
+  trackContentAccess,
+  getContentAccessStats,
 } from "./db";
 
 export const appRouter = router({
@@ -513,6 +525,164 @@ export const appRouter = router({
   }),
 
   ai: aiRouter,
+
+  readerClub: router({
+    // Get all exclusive content
+    getAllContent: publicProcedure.query(async () => {
+      return await getAllExclusiveContent();
+    }),
+
+    // Get featured exclusive content
+    getFeaturedContent: publicProcedure.query(async () => {
+      return await getFeaturedExclusiveContent();
+    }),
+
+    // Get exclusive content by slug
+    getContentBySlug: publicProcedure
+      .input(z.object({ slug: z.string() }))
+      .query(async ({ input }) => {
+        const content = await getExclusiveContentBySlug(input.slug);
+        if (!content) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Content not found" });
+        }
+        return content;
+      }),
+
+    // Check membership status
+    checkMembership: publicProcedure
+      .input(z.object({ email: z.string().email() }))
+      .query(async ({ input }) => {
+        return await getReaderClubMemberByEmail(input.email);
+      }),
+
+    // Join Reader's Club
+    join: publicProcedure
+      .input(
+        z.object({
+          email: z.string().email(),
+          name: z.string().optional(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        // Check if already a member
+        const existing = await getReaderClubMemberByEmail(input.email);
+        if (existing) {
+          return { success: true, message: "You're already a member!" };
+        }
+
+        // Create new member
+        const memberId = await createReaderClubMember({
+          email: input.email,
+          name: input.name || null,
+        });
+
+        // Also subscribe to newsletter
+        try {
+          await subscribeToMailerLite(input.email, input.name || "");
+        } catch (error) {
+          console.error("Failed to subscribe to MailerLite:", error);
+        }
+
+        return { success: true, memberId, message: "Welcome to the Reader's Club!" };
+      }),
+
+    // Track content access
+    trackAccess: publicProcedure
+      .input(
+        z.object({
+          email: z.string().email(),
+          contentId: z.number(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        const member = await getReaderClubMemberByEmail(input.email);
+        if (!member) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Not a member" });
+        }
+
+        await updateReaderClubMemberAccess(member.id);
+        await trackContentAccess(member.id, input.contentId);
+
+        return { success: true };
+      }),
+
+    // Admin: Create exclusive content
+    createContent: protectedProcedure
+      .input(
+        z.object({
+          title: z.string(),
+          slug: z.string(),
+          type: z.enum(["bonus_chapter", "interview", "behind_scenes"]),
+          category: z.string().optional(),
+          description: z.string().optional(),
+          content: z.string(),
+          coverImage: z.string().optional(),
+          bookId: z.number().optional(),
+          featured: z.boolean().optional(),
+          displayOrder: z.number().optional(),
+          publishDate: z.date(),
+        })
+      )
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user?.role !== "admin") {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+
+        const contentId = await createExclusiveContent(input);
+        return { success: true, contentId };
+      }),
+
+    // Admin: Update exclusive content
+    updateContent: protectedProcedure
+      .input(
+        z.object({
+          id: z.number(),
+          title: z.string().optional(),
+          slug: z.string().optional(),
+          type: z.enum(["bonus_chapter", "interview", "behind_scenes"]).optional(),
+          category: z.string().optional(),
+          description: z.string().optional(),
+          content: z.string().optional(),
+          coverImage: z.string().optional(),
+          bookId: z.number().optional(),
+          featured: z.boolean().optional(),
+          displayOrder: z.number().optional(),
+          publishDate: z.date().optional(),
+        })
+      )
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user?.role !== "admin") {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+
+        const { id, ...updates } = input;
+        await updateExclusiveContent(id, updates);
+        return { success: true };
+      }),
+
+    // Admin: Delete exclusive content
+    deleteContent: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user?.role !== "admin") {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+
+        await deleteExclusiveContent(input.id);
+        return { success: true };
+      }),
+
+    // Admin: Get content access stats
+    getContentStats: protectedProcedure
+      .input(z.object({ contentId: z.number() }))
+      .query(async ({ input, ctx }) => {
+        if (ctx.user?.role !== "admin") {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+
+        return await getContentAccessStats(input.contentId);
+      }),
+  }),
 
   contact: router({
     submit: publicProcedure

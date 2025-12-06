@@ -1,6 +1,6 @@
 import { eq, desc, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, blogPosts, InsertBlogPost, books, bookReviews, type Book, type InsertBook, type BookReview, type InsertBookReview, newsletters, newsletterSubscribers, type Newsletter, type InsertNewsletter, type NewsletterSubscriber, type InsertNewsletterSubscriber } from "../drizzle/schema";
+import { InsertUser, users, blogPosts, InsertBlogPost, books, bookReviews, type Book, type InsertBook, type BookReview, type InsertBookReview, newsletters, newsletterSubscribers, type Newsletter, type InsertNewsletter, type NewsletterSubscriber, type InsertNewsletterSubscriber, exclusiveContent, readerClubMembers, contentAccess, type ExclusiveContent, type InsertExclusiveContent, type ReaderClubMember, type InsertReaderClubMember, type ContentAccess, type InsertContentAccess } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -527,4 +527,122 @@ export async function unsubscribeByEmail(email: string) {
     console.error("[Database] Failed to unsubscribe:", error);
     throw error;
   }
+}
+
+
+// ============================================================================
+// Reader's Club Functions
+// ============================================================================
+
+export async function getAllExclusiveContent(): Promise<ExclusiveContent[]> {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(exclusiveContent).orderBy(desc(exclusiveContent.displayOrder), desc(exclusiveContent.publishDate));
+}
+
+export async function getFeaturedExclusiveContent(): Promise<ExclusiveContent[]> {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(exclusiveContent).where(eq(exclusiveContent.featured, true)).orderBy(desc(exclusiveContent.displayOrder));
+}
+
+export async function getExclusiveContentBySlug(slug: string): Promise<ExclusiveContent | null> {
+  const db = await getDb();
+  if (!db) return null;
+  const results = await db.select().from(exclusiveContent).where(eq(exclusiveContent.slug, slug)).limit(1);
+  return results[0] || null;
+}
+
+export async function getExclusiveContentById(id: number): Promise<ExclusiveContent | null> {
+  const db = await getDb();
+  if (!db) return null;
+  const results = await db.select().from(exclusiveContent).where(eq(exclusiveContent.id, id)).limit(1);
+  return results[0] || null;
+}
+
+export async function getExclusiveContentByType(type: "bonus_chapter" | "interview" | "behind_scenes"): Promise<ExclusiveContent[]> {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(exclusiveContent).where(eq(exclusiveContent.type, type)).orderBy(desc(exclusiveContent.publishDate));
+}
+
+export async function createExclusiveContent(content: InsertExclusiveContent): Promise<number> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.insert(exclusiveContent).values(content);
+  return result[0].insertId;
+}
+
+export async function updateExclusiveContent(id: number, content: Partial<InsertExclusiveContent>): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(exclusiveContent).set(content).where(eq(exclusiveContent.id, id));
+}
+
+export async function deleteExclusiveContent(id: number): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(exclusiveContent).where(eq(exclusiveContent.id, id));
+}
+
+// Reader's Club Members
+
+export async function getReaderClubMemberByEmail(email: string): Promise<ReaderClubMember | null> {
+  const db = await getDb();
+  if (!db) return null;
+  const results = await db.select().from(readerClubMembers).where(eq(readerClubMembers.email, email)).limit(1);
+  return results[0] || null;
+}
+
+export async function createReaderClubMember(member: InsertReaderClubMember): Promise<number> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.insert(readerClubMembers).values(member);
+  return result[0].insertId;
+}
+
+export async function updateReaderClubMemberAccess(memberId: number): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(readerClubMembers).set({ lastAccessAt: new Date() }).where(eq(readerClubMembers.id, memberId));
+}
+
+export async function getAllReaderClubMembers(): Promise<ReaderClubMember[]> {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(readerClubMembers).orderBy(desc(readerClubMembers.joinedAt));
+}
+
+// Content Access Tracking
+
+export async function trackContentAccess(memberId: number, contentId: number): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  // Check if access record exists
+  const existing = await db.select().from(contentAccess)
+    .where(and(eq(contentAccess.memberId, memberId), eq(contentAccess.contentId, contentId)))
+    .limit(1);
+  
+  if (existing.length > 0) {
+    // Update view count
+    const currentCount = existing[0].viewCount || 0;
+    await db.update(contentAccess)
+      .set({ viewCount: currentCount + 1, accessedAt: new Date() })
+      .where(eq(contentAccess.id, existing[0].id));
+  } else {
+    // Create new access record
+    await db.insert(contentAccess).values({ memberId, contentId });
+  }
+}
+
+export async function getContentAccessStats(contentId: number): Promise<{ totalViews: number; uniqueMembers: number }> {
+  const db = await getDb();
+  if (!db) return { totalViews: 0, uniqueMembers: 0 };
+  
+  const results = await db.select().from(contentAccess).where(eq(contentAccess.contentId, contentId));
+  const totalViews = results.reduce((sum, record) => sum + (record.viewCount || 0), 0);
+  const uniqueMembers = results.length;
+  
+  return { totalViews, uniqueMembers };
 }

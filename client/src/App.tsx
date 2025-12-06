@@ -7,6 +7,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Books from "./pages/Books";
 import BookDetail from "./pages/BookDetail";
+import ReaderClub from "./pages/ReaderClub";
+import ExclusiveContentDetail from "./pages/ExclusiveContentDetail";
 import FreeBook from "./pages/FreeBook";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -28,8 +30,9 @@ function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/books"} component={Books} />
-      <Route path={"/books/:slug"} component={BookDetail} />
+      <Route path={"/books"} component={Books} />      <Route path={"/books/:slug"} component={BookDetail} />
+      <Route path={"/reader-club"} component={ReaderClub} />
+      <Route path={"/reader-club/:slug"} component={ExclusiveContentDetail} />
       <Route path={"/free-book"} component={FreeBook} />
       <Route path={"/quiz"} component={CharacterQuiz} />
       <Route path={"/about"} component={About} />

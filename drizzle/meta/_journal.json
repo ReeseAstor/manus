@@ -43,6 +43,13 @@
       "when": 1764988613987,
       "tag": "0005_luxuriant_sue_storm",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1765052445596,
+      "tag": "0006_elite_fat_cobra",
+      "breakpoints": true
     }
   ]
 }

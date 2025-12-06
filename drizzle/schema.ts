@@ -120,6 +120,59 @@ export type Newsletter = typeof newsletters.$inferSelect;
 export type InsertNewsletter = typeof newsletters.$inferInsert;
 
 /**
+ * Reader's Club exclusive content
+ */
+export const exclusiveContent = mysqlTable("exclusive_content", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  type: mysqlEnum("type", ["bonus_chapter", "interview", "behind_scenes"]).notNull(),
+  category: varchar("category", { length: 100 }),
+  description: text("description"),
+  content: text("content").notNull(),
+  coverImage: text("coverImage"),
+  bookId: int("bookId").references(() => books.id),
+  featured: boolean("featured").default(false),
+  displayOrder: int("displayOrder").default(0),
+  publishDate: timestamp("publishDate").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ExclusiveContent = typeof exclusiveContent.$inferSelect;
+export type InsertExclusiveContent = typeof exclusiveContent.$inferInsert;
+
+/**
+ * Reader's Club members tracking
+ */
+export const readerClubMembers = mysqlTable("reader_club_members", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").references(() => users.id),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  name: varchar("name", { length: 255 }),
+  joinedAt: timestamp("joinedAt").defaultNow().notNull(),
+  lastAccessAt: timestamp("lastAccessAt"),
+  active: boolean("active").default(true),
+});
+
+export type ReaderClubMember = typeof readerClubMembers.$inferSelect;
+export type InsertReaderClubMember = typeof readerClubMembers.$inferInsert;
+
+/**
+ * Content access tracking
+ */
+export const contentAccess = mysqlTable("content_access", {
+  id: int("id").autoincrement().primaryKey(),
+  memberId: int("memberId").notNull().references(() => readerClubMembers.id),
+  contentId: int("contentId").notNull().references(() => exclusiveContent.id),
+  accessedAt: timestamp("accessedAt").defaultNow().notNull(),
+  viewCount: int("viewCount").default(1),
+});
+
+export type ContentAccess = typeof contentAccess.$inferSelect;
+export type InsertContentAccess = typeof contentAccess.$inferInsert;
+
+/**
  * Newsletter subscribers table
  */
 export const newsletterSubscribers = mysqlTable("newsletter_subscribers", {
