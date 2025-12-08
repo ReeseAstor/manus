@@ -343,3 +343,44 @@
 - [x] Test authentication and access control
 - [x] Verify content unlock system works correctly
 - [x] Test membership signup flow (seed data created)
+
+
+## Automated Welcome Email Sequence
+
+### Email Templates
+- [x] Design welcome email template (Email 1: Immediate)
+- [x] Create content highlights email template (Email 2: Day 1)
+- [x] Build engagement email template (Email 3: Day 3)
+- [x] Add behind-the-scenes email template (Email 4: Day 7)
+
+### MailerLite Integration
+- [x] Research MailerLite automation API endpoints
+- [x] Create automation workflow instructions for MailerLite
+- [x] Integrate automation triggers with Reader's Club signup (already connected via group)
+- [x] Add email tracking and analytics (built into MailerLite)
+
+### Testing
+- [ ] Test welcome sequence trigger
+- [ ] Verify email delivery and timing
+- [ ] Check email rendering across clients
+
+
+## Character & Worldbuilding Database
+
+### Character Profiles
+- [x] Create detailed profiles for main characters (Alexander, Sophia, Marcus, Damian)
+- [x] Document supporting characters and their relationships
+- [x] Track character arcs and development across series
+- [x] Record physical descriptions, personality traits, backgrounds
+
+### Worldbuilding Elements
+- [ ] Document Manhattan locations (buildings, restaurants, clubs)
+- [ ] Create business/company profiles (Steele Industries, etc.)
+- [ ] Define social hierarchy and power dynamics
+- [ ] Record wealth indicators and lifestyle details
+
+### Series Continuity
+- [ ] Build timeline of events across all books
+- [ ] Map character relationships and connections
+- [ ] Track recurring themes and motifs
+- [ ] Document series-specific terminology and rules
