@@ -550,3 +550,9 @@
 - [x] Generate sitemap.xml with all website pages
 - [x] Add robots.txt file
 - [x] Create Google Search Console submission guide
+
+
+## Structured Data / Rich Snippets (December 2024)
+- [x] Add JSON-LD schema for book detail pages
+- [x] Add JSON-LD schema for books listing (Author + BookSeries)
+- [x] Test structured data injection

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { Book3LaunchBanner } from "@/components/Book3LaunchBanner";
+import { AuthorStructuredData, BookSeriesStructuredData } from "@/components/BookStructuredData";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 
@@ -122,6 +123,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+      {/* Structured Data for SEO Rich Snippets */}
+      <AuthorStructuredData />
+      <BookSeriesStructuredData />
+      
       <Book3LaunchBanner />
       
       {/* Manhattan Penthouse Hero Section */}
