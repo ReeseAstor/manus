@@ -566,3 +566,7 @@
 - [x] Add download functionality with multiple formats
 - [x] Integrate with Stripe webhook for automatic purchase recording
 - [x] Write tests for purchase functionality
+
+
+## Navigation Enhancement (December 2024)
+- [x] Add My Purchases link to navigation for logged-in users
