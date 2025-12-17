@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE books SET \n  retailPrice = CASE \n    WHEN seriesOrder = 1 THEN 499\n    WHEN seriesOrder = 2 THEN 499\n    WHEN seriesOrder = 3 THEN 599\n    WHEN seriesOrder = 0 THEN 299\n    ELSE 499\n  END,\n  directPrice = CASE \n    WHEN seriesOrder = 1 THEN 399\n    WHEN seriesOrder = 2 THEN 399\n    WHEN seriesOrder = 3 THEN 499\n    WHEN seriesOrder = 0 THEN 0\n    ELSE 399\n  END,\n  memberPrice = CASE \n    WHEN seriesOrder = 1 THEN 299\n    WHEN seriesOrder = 2 THEN 299\n    WHEN seriesOrder = 3 THEN 399\n    WHEN seriesOrder = 0 THEN 0\n    ELSE 299\n  END\nWHERE series = 'Manhattan Money Kings';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute UPDATE books SET \n  retailPrice = CASE \n    WHEN seriesOrder = 1 THEN 499\n    WHEN seriesOrder = 2 THEN 499\n    WHEN seriesOrder = 3 THEN 599\n    WHEN seriesOrder = 0 THEN 299\n    ELSE 499\n  END,\n  directPrice = CASE \n    WHEN seriesOrder = 1 THEN 399\n    WHEN seriesOrder = 2 THEN 399\n    WHEN seriesOrder = 3 THEN 499\n    WHEN seriesOrder = 0 THEN 0\n    ELSE 399\n  END,\n  memberPrice = CASE \n    WHEN seriesOrder = 1 THEN 299\n    WHEN seriesOrder = 2 THEN 299\n    WHEN seriesOrder = 3 THEN 399\n    WHEN seriesOrder = 0 THEN 0\n    ELSE 299\n  END\nWHERE series = 'Manhattan Money Kings';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 161
+}

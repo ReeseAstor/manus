@@ -69,6 +69,11 @@ export const books = mysqlTable("books", {
   koboUrl: text("koboUrl"),
   barnesNobleUrl: text("barnesNobleUrl"),
   googlePlayUrl: text("googlePlayUrl"),
+  // Pricing fields for direct sales
+  retailPrice: int("retailPrice").default(499), // Price in cents (e.g., 499 = $4.99)
+  directPrice: int("directPrice").default(399), // Direct sales price in cents
+  memberPrice: int("memberPrice").default(299), // Reader's Club member price in cents
+  directSaleUrl: text("directSaleUrl"), // URL for direct purchase
   featured: boolean("featured").default(false),
   displayOrder: int("displayOrder").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),

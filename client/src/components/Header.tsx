@@ -9,7 +9,8 @@ export function Header() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/books", label: "Books" },
-    { href: "/free-book", label: "Free Book", special: true },
+    { href: "/shop", label: "Shop", special: true },
+    { href: "/free-book", label: "Free Book" },
     { href: "/blog", label: "Blog" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },

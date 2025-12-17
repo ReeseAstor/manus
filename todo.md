@@ -425,3 +425,57 @@
 - [ ] Create workflow documentation with setup instructions
 - [ ] Export n8n workflows as JSON for easy import
 - [ ] Test complete book launch sequence end-to-end
+
+
+## Marketing Strategy Implementation - Website Enhancements
+
+### Buy-Direct Prominence & Pricing
+- [ ] Add prominent "Buy Direct & Save 20%!" buttons on all book pages
+- [ ] Implement price comparison display showing savings vs retail
+- [ ] Add strikethrough original prices with discount percentages
+- [ ] Create value proposition badges (instant delivery, exclusive content, support author)
+
+### Why Buy Direct Section
+- [ ] Create "Why Buy Direct?" educational component
+- [ ] Add side-by-side comparison of direct vs retailer benefits
+- [ ] Include author earnings transparency messaging
+- [ ] Add trust badges and secure checkout indicators
+
+### Series Bundle Page
+- [ ] Create dedicated /bundles or /shop page
+- [ ] Build tiered pricing display (single book, 3-book bundle, complete collection)
+- [ ] Add savings calculator showing bundle discounts
+- [ ] Implement "Best Value" badges on optimal purchase options
+
+### Enhanced Book Detail Pages
+- [ ] Add sample chapter preview with "Continue Reading - Buy Now" CTA
+- [ ] Integrate reader reviews/testimonials section
+- [ ] Add "Readers Also Bought" recommendations
+- [ ] Include series reading order with progress indicators
+
+### Reader's Club Enhancements
+- [ ] Add member benefits display (40% discount, early access, exclusive content)
+- [ ] Create member-only pricing tier visibility
+- [ ] Add exclusive content preview teasers
+- [ ] Implement single-step signup flow optimization
+
+### Conversion Optimization
+- [ ] Add exit-intent popup for cart abandonment
+- [ ] Implement urgency indicators (limited time offers, countdown timers)
+- [ ] Add social proof notifications ("X readers bought this today")
+- [ ] Create mobile-optimized checkout flow
+
+
+
+## Marketing Strategy Implementation (Dec 2024)
+- [x] Buy-direct button prominence with discount messaging
+- [x] Pricing comparison displays (direct vs retail)
+- [x] "Why Buy Direct" educational page
+- [x] Series bundle page with tiered pricing (Shop page)
+- [x] Reader's Club member benefits section
+- [x] Shop link in navigation with special styling
+- [x] BuyDirectSection component on book detail pages
+- [x] MemberBenefits component for Reader's Club
+- [ ] SEO optimization for book pages
+- [ ] Blog content calendar implementation
+- [ ] Amazon Ads campaign setup documentation

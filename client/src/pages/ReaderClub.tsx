@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Lock, Unlock, Star, Calendar, BookOpen, Sparkles } from "lucide-react";
+import { MemberBenefits } from "@/components/MemberBenefits";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -249,6 +250,9 @@ export default function ReaderClub() {
           </div>
         )}
       </div>
+
+      {/* Member Benefits Section */}
+      {!isMember && <MemberBenefits />}
 
       {/* CTA Section for Non-Members */}
       {!isMember && (

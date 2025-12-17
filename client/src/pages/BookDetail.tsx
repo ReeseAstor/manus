@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useRoute, Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
-import { Star, ShoppingCart, ChevronDown, ChevronUp, Heart, Share2 } from "lucide-react";
+import { Star, ChevronDown, ChevronUp, Heart, Share2 } from "lucide-react";
+import { BuyDirectSection } from "@/components/BuyDirectSection";
+import { WhyBuyDirectInline } from "@/components/WhyBuyDirect";
 import { motion } from "framer-motion";
 
 export default function BookDetail() {
@@ -184,28 +186,18 @@ export default function BookDetail() {
                 </motion.div>
               )}
 
-              {/* Buy Buttons */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.9 }}
-                className="flex flex-wrap gap-3 pt-4"
-              >
-                {buyLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.url!}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group"
-                  >
-                    <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-semibold px-6 py-6 text-lg rounded-xl transition-all group-hover:scale-105">
-                      <ShoppingCart className="w-5 h-5 mr-2" />
-                      {link.icon} {link.name}
-                    </Button>
-                  </a>
-                ))}
-              </motion.div>
+              {/* Buy Direct Section */}
+              <BuyDirectSection
+                retailPrice={book.retailPrice || 499}
+                directPrice={book.directPrice || 399}
+                memberPrice={book.memberPrice || 299}
+                directSaleUrl={book.directSaleUrl}
+                amazonUrl={book.amazonUrl}
+                bookTitle={book.title}
+              />
+              
+              {/* Why Buy Direct */}
+              <WhyBuyDirectInline />
 
               {/* Action Buttons */}
               <motion.div

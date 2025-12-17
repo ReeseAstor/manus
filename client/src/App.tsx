@@ -21,6 +21,8 @@ import { NewsletterEditor } from "./pages/NewsletterEditor";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import CharacterQuiz from "./pages/CharacterQuiz";
+import Shop from "./pages/Shop";
+import WhyBuyDirectPage from "./pages/WhyBuyDirectPage";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AIChatbot } from "./components/AIChatbot";
@@ -35,6 +37,8 @@ function Router() {
       <Route path={"/reader-club/:slug"} component={ExclusiveContentDetail} />
       <Route path={"/free-book"} component={FreeBook} />
       <Route path={"/quiz"} component={CharacterQuiz} />
+      <Route path={"/shop"} component={Shop} />
+      <Route path={"/why-buy-direct"} component={WhyBuyDirectPage} />
       <Route path={"/about"} component={About} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/blog"} component={Blog} />
