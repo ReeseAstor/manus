@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Calendar, Clock, ArrowRight, Loader2, Sparkles, Mail } from "lucide-react";
+import { Calendar, Clock, ArrowRight, Loader2, Sparkles, Mail, PenTool, BookOpen, Heart, TrendingUp, User, Filter } from "lucide-react";
 import { format } from "date-fns";
 import { Link } from "wouter";
 import { useState } from "react";
@@ -35,10 +35,21 @@ export default function Blog() {
     }
   };
 
-  // Get unique categories from all posts (fetch without category filter for category list)
+  // Predefined categories for consistent filtering
+  const predefinedCategories = [
+    "All",
+    "Writing Tips",
+    "Book Updates",
+    "Reading Recommendations",
+    "Marketing",
+    "Author Journey"
+  ];
+  
+  // Get unique categories from all posts and merge with predefined
   const { data: allPosts } = trpc.blog.list.useQuery({ published: true });
-  const uniqueCategories = allPosts?.map((post) => post.category) || [];
-  const categories = ["All", ...Array.from(new Set(uniqueCategories))];
+  const dbCategories = allPosts?.map((post) => post.category).filter(Boolean) || [];
+  const allCategories = new Set([...predefinedCategories.slice(1), ...dbCategories]);
+  const categories = ["All", ...Array.from(allCategories)];
 
   const placeholderPosts = [
     {
@@ -144,8 +155,8 @@ export default function Blog() {
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="py-8 relative">
+      {/* Categories Filter Section */}
+      <section className="py-12 relative">
         <div 
           className="absolute inset-0 opacity-10"
           style={{
@@ -155,32 +166,60 @@ export default function Blog() {
         />
 
         <div className="container relative z-10">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-center mb-8"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 mb-4">
+              <Filter className="h-4 w-4 text-[#d4af37]" />
+              <span className="text-sm font-medium text-[#d4af37] tracking-wider uppercase">Filter by Category</span>
+            </div>
+          </motion.div>
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-wrap gap-3 justify-center"
           >
-            {categories.map((category, index) => (
-              <motion.div
-                key={category}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 + index * 0.05 }}
-              >
-                <Badge
-                  variant={(category === "All" && !selectedCategory) || category === selectedCategory ? "default" : "outline"}
-                  className={`cursor-pointer px-6 py-3 text-sm font-medium rounded-full transition-all duration-300 ${
-                    (category === "All" && !selectedCategory) || category === selectedCategory
-                      ? "bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black border-0 hover:shadow-lg hover:shadow-[#d4af37]/30"
-                      : "border-2 border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-[#d4af37]/50"
-                  }`}
-                  onClick={() => setSelectedCategory(category === "All" ? undefined : category)}
+            {categories.map((category, index) => {
+              // Category icon mapping
+              const getCategoryIcon = (cat: string) => {
+                switch(cat) {
+                  case "Writing Tips": return <PenTool className="h-4 w-4" />;
+                  case "Book Updates": return <BookOpen className="h-4 w-4" />;
+                  case "Reading Recommendations": return <Heart className="h-4 w-4" />;
+                  case "Marketing": return <TrendingUp className="h-4 w-4" />;
+                  case "Author Journey": return <User className="h-4 w-4" />;
+                  default: return <Sparkles className="h-4 w-4" />;
+                }
+              };
+              
+              return (
+                <motion.div
+                  key={category}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.4 + index * 0.05 }}
                 >
-                  {category}
-                </Badge>
-              </motion.div>
-            ))}
+                  <Badge
+                    variant={(category === "All" && !selectedCategory) || category === selectedCategory ? "default" : "outline"}
+                    className={`cursor-pointer px-5 py-3 text-sm font-medium rounded-full transition-all duration-300 flex items-center gap-2 ${
+                      (category === "All" && !selectedCategory) || category === selectedCategory
+                        ? "bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black border-0 hover:shadow-lg hover:shadow-[#d4af37]/30"
+                        : "border-2 border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-[#d4af37]/50"
+                    }`}
+                    onClick={() => setSelectedCategory(category === "All" ? undefined : category)}
+                  >
+                    {category !== "All" && getCategoryIcon(category)}
+                    {category}
+                  </Badge>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>

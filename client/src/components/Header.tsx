@@ -19,23 +19,23 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/">
-          <a className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors">
-            <span className="font-playfair text-2xl font-bold">Reese Astor</span>
-          </a>
+        <Link href="/" className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors">
+          <span className="font-playfair text-2xl font-bold">Reese Astor</span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              <a className={`text-sm font-medium transition-colors ${
+            <Link 
+              key={link.href} 
+              href={link.href}
+              className={`text-sm font-medium transition-colors ${
                 link.special 
                   ? "text-primary font-bold hover:text-primary/80" 
                   : "text-muted-foreground hover:text-primary"
-              }`}>
-                {link.label}
-              </a>
+              }`}
+            >
+              {link.label}
             </Link>
           ))}
         </nav>
@@ -56,17 +56,17 @@ export function Header() {
         <div className="md:hidden border-t border-border/40 bg-background">
           <nav className="container flex flex-col space-y-4 py-4">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <a
-                  className={`text-sm font-medium transition-colors ${
-                    link.special 
-                      ? "text-primary font-bold hover:text-primary/80" 
-                      : "text-muted-foreground hover:text-primary"
-                  }`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
+              <Link 
+                key={link.href} 
+                href={link.href}
+                className={`text-sm font-medium transition-colors ${
+                  link.special 
+                    ? "text-primary font-bold hover:text-primary/80" 
+                    : "text-muted-foreground hover:text-primary"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
               </Link>
             ))}
           </nav>

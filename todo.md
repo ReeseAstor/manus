@@ -528,3 +528,19 @@
 - [x] Connect Shop page to Stripe checkout
 - [x] Create purchase success page
 - [x] Test checkout flow with Stripe sandbox
+
+
+## Blog Category Filtering Enhancement (December 2024)
+- [ ] Review current blog page category implementation
+- [ ] Add visual category filter buttons/tabs to blog page
+- [ ] Ensure categories include 'Writing Tips' and 'Book Updates'
+- [ ] Style filter UI with Manhattan luxury design
+- [ ] Test category filtering functionality
+
+
+## Homepage SEO Fixes (December 2024)
+- [x] Add meta keywords for homepage
+- [x] Optimize page title (30-60 characters)
+- [x] Add meta description (50-160 characters)
+- [x] Test SEO improvements
+- [x] Fix nested anchor tag error in Header component
