@@ -556,3 +556,13 @@
 - [x] Add JSON-LD schema for book detail pages
 - [x] Add JSON-LD schema for books listing (Author + BookSeries)
 - [x] Test structured data injection
+
+
+## My Purchases Page (December 2024)
+- [x] Create purchases database table
+- [x] Create ebook_files table for download links
+- [x] Add backend API endpoints for purchases
+- [x] Build My Purchases page UI
+- [x] Add download functionality with multiple formats
+- [x] Integrate with Stripe webhook for automatic purchase recording
+- [x] Write tests for purchase functionality

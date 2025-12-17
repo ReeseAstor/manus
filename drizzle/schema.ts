@@ -305,3 +305,40 @@ export const subscriptions = mysqlTable("subscriptions", {
 
 export type Subscription = typeof subscriptions.$inferSelect;
 export type InsertSubscription = typeof subscriptions.$inferInsert;
+
+
+/**
+ * Ebook Files table - stores download links for purchased books
+ */
+export const ebookFiles = mysqlTable("ebook_files", {
+  id: int("id").autoincrement().primaryKey(),
+  bookId: int("bookId").notNull().references(() => books.id),
+  format: mysqlEnum("format", ["epub", "mobi", "pdf"]).notNull(),
+  fileUrl: text("fileUrl").notNull(), // S3 URL or external link
+  fileSize: varchar("fileSize", { length: 50 }), // e.g., "2.5 MB"
+  version: varchar("version", { length: 50 }).default("1.0"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type EbookFile = typeof ebookFiles.$inferSelect;
+export type InsertEbookFile = typeof ebookFiles.$inferInsert;
+
+/**
+ * User Purchases table - tracks which books users have purchased
+ */
+export const userPurchases = mysqlTable("user_purchases", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id),
+  bookId: int("bookId").notNull().references(() => books.id),
+  orderId: int("orderId").references(() => orders.id),
+  purchaseType: mysqlEnum("purchaseType", ["single", "bundle"]).default("single").notNull(),
+  purchasePrice: int("purchasePrice").notNull(), // Price paid in cents
+  bonusContentUnlocked: boolean("bonusContentUnlocked").default(true),
+  downloadCount: int("downloadCount").default(0),
+  lastDownloadAt: timestamp("lastDownloadAt"),
+  purchasedAt: timestamp("purchasedAt").defaultNow().notNull(),
+});
+
+export type UserPurchase = typeof userPurchases.$inferSelect;
+export type InsertUserPurchase = typeof userPurchases.$inferInsert;
