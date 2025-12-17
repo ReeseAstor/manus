@@ -26,6 +26,30 @@ export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
 /**
+ * User preferences for email and notification settings
+ */
+export const userPreferences = mysqlTable("user_preferences", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id).unique(),
+  // Email preferences
+  emailNewReleases: boolean("emailNewReleases").default(true).notNull(),
+  emailNewsletter: boolean("emailNewsletter").default(true).notNull(),
+  emailPromotions: boolean("emailPromotions").default(true).notNull(),
+  emailBlogPosts: boolean("emailBlogPosts").default(false).notNull(),
+  // Reading preferences
+  preferredFormat: mysqlEnum("preferredFormat", ["epub", "mobi", "pdf"]).default("epub").notNull(),
+  // Profile info
+  displayName: varchar("displayName", { length: 100 }),
+  bio: text("bio"),
+  favoriteGenres: text("favoriteGenres"), // JSON array
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type UserPreferences = typeof userPreferences.$inferSelect;
+export type InsertUserPreferences = typeof userPreferences.$inferInsert;
+
+/**
  * Blog posts table for content management
  */
 export const blogPosts = mysqlTable("blog_posts", {

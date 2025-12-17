@@ -48,6 +48,9 @@ import {
   trackContentAccess,
   getContentAccessStats,
   getUserPurchases,
+  getUserPreferences,
+  upsertUserPreferences,
+  getUserWithPreferences,
   getUserPurchaseByBook,
   createUserPurchase,
   updatePurchaseDownloadCount,
@@ -830,6 +833,86 @@ Reply directly to: ${input.email}
           fileSize: file.fileSize,
         };
       }),
+  }),
+
+  // ==================== Profile Router ====================
+  profile: router({
+    // Get current user's profile with preferences
+    get: protectedProcedure.query(async ({ ctx }) => {
+      const profile = await getUserWithPreferences(ctx.user.id);
+      if (!profile) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Profile not found",
+        });
+      }
+      return profile;
+    }),
+
+    // Get user preferences
+    getPreferences: protectedProcedure.query(async ({ ctx }) => {
+      const prefs = await getUserPreferences(ctx.user.id);
+      return prefs || {
+        emailNewReleases: true,
+        emailNewsletter: true,
+        emailPromotions: true,
+        emailBlogPosts: false,
+        preferredFormat: "epub",
+        displayName: null,
+        bio: null,
+        favoriteGenres: null,
+      };
+    }),
+
+    // Update user preferences
+    updatePreferences: protectedProcedure
+      .input(
+        z.object({
+          emailNewReleases: z.boolean().optional(),
+          emailNewsletter: z.boolean().optional(),
+          emailPromotions: z.boolean().optional(),
+          emailBlogPosts: z.boolean().optional(),
+          preferredFormat: z.enum(["epub", "mobi", "pdf"]).optional(),
+          displayName: z.string().max(100).nullable().optional(),
+          bio: z.string().max(500).nullable().optional(),
+          favoriteGenres: z.string().nullable().optional(),
+        })
+      )
+      .mutation(async ({ ctx, input }) => {
+        const updated = await upsertUserPreferences(ctx.user.id, input);
+        return updated;
+      }),
+
+    // Get purchase history with stats
+    getPurchaseHistory: protectedProcedure.query(async ({ ctx }) => {
+      const purchases = await getUserPurchases(ctx.user.id);
+      
+      // Calculate stats
+      const totalSpent = purchases.reduce((sum, p) => sum + (p.purchase.purchasePrice || 0), 0);
+      const totalBooks = purchases.length;
+      const totalDownloads = purchases.reduce((sum, p) => sum + (p.purchase.downloadCount || 0), 0);
+      
+      return {
+        purchases: purchases.map(p => ({
+          id: p.purchase.id,
+          bookId: p.purchase.bookId,
+          bookTitle: p.book.title,
+          bookCover: p.book.coverImage,
+          bookSlug: p.book.slug,
+          purchaseType: p.purchase.purchaseType,
+          purchasePrice: p.purchase.purchasePrice,
+          downloadCount: p.purchase.downloadCount,
+          lastDownloadAt: p.purchase.lastDownloadAt,
+          purchasedAt: p.purchase.purchasedAt,
+        })),
+        stats: {
+          totalSpent,
+          totalBooks,
+          totalDownloads,
+          memberSince: ctx.user.createdAt,
+        },
+      };
+    }),
   }),
 });
 

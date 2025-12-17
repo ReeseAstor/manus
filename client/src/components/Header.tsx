@@ -65,6 +65,12 @@ export function Header() {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-48">
+                    <Link href="/profile">
+                      <DropdownMenuItem className="cursor-pointer">
+                        <User className="w-4 h-4 mr-2" />
+                        My Profile
+                      </DropdownMenuItem>
+                    </Link>
                     <Link href="/my-purchases">
                       <DropdownMenuItem className="cursor-pointer">
                         <BookOpen className="w-4 h-4 mr-2" />
@@ -141,8 +147,16 @@ export function Header() {
                 {user ? (
                   <>
                     <Link 
-                      href="/my-purchases"
+                      href="/profile"
                       className="flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors py-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <User className="w-4 h-4 mr-2" />
+                      My Profile
+                    </Link>
+                    <Link 
+                      href="/my-purchases"
+                      className="flex items-center text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <BookOpen className="w-4 h-4 mr-2" />

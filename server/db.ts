@@ -776,3 +776,68 @@ export async function deleteEbookFile(id: number) {
     throw error;
   }
 }
+
+
+// ==================== User Profile Helpers ====================
+import { userPreferences, type UserPreferences, type InsertUserPreferences } from "../drizzle/schema";
+
+export async function getUserPreferences(userId: number): Promise<UserPreferences | null> {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const [prefs] = await db
+    .select()
+    .from(userPreferences)
+    .where(eq(userPreferences.userId, userId));
+  
+  return prefs || null;
+}
+
+export async function upsertUserPreferences(
+  userId: number,
+  preferences: Partial<InsertUserPreferences>
+): Promise<UserPreferences | null> {
+  const db = await getDb();
+  if (!db) return null;
+  
+  // Check if preferences exist
+  const existing = await getUserPreferences(userId);
+  
+  if (existing) {
+    // Update existing preferences
+    await db
+      .update(userPreferences)
+      .set({
+        ...preferences,
+        updatedAt: new Date(),
+      })
+      .where(eq(userPreferences.userId, userId));
+  } else {
+    // Create new preferences
+    await db.insert(userPreferences).values({
+      userId,
+      ...preferences,
+    });
+  }
+  
+  return getUserPreferences(userId);
+}
+
+export async function getUserWithPreferences(userId: number) {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, userId));
+  
+  if (!user) return null;
+  
+  const prefs = await getUserPreferences(userId);
+  
+  return {
+    ...user,
+    preferences: prefs,
+  };
+}

@@ -570,3 +570,12 @@
 
 ## Navigation Enhancement (December 2024)
 - [x] Add My Purchases link to navigation for logged-in users
+
+
+## User Profile Page (December 2024)
+- [x] Add user preferences to database schema
+- [x] Create backend API for profile management
+- [x] Build profile page UI with email preferences
+- [x] Add purchase history section
+- [x] Add profile link to user menu
+- [x] Write tests for profile functionality
