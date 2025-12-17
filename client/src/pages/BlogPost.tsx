@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Streamdown } from "streamdown";
+import { useEffect } from "react";
 
 export default function BlogPost() {
   const params = useParams();
@@ -22,6 +23,79 @@ export default function BlogPost() {
   const filteredRelatedPosts = relatedPosts
     ?.filter((p) => p.slug !== slug)
     .slice(0, 3) || [];
+
+  // SEO Meta Tags - Update document head when post loads
+  useEffect(() => {
+    if (post) {
+      // Update page title
+      document.title = `${post.title} | Reese Astor - Romance Author`;
+      
+      // Update or create meta description
+      let metaDescription = document.querySelector('meta[name="description"]');
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.setAttribute('name', 'description');
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.setAttribute('content', post.excerpt);
+      
+      // Update or create Open Graph tags for social sharing
+      const ogTags = [
+        { property: 'og:title', content: post.title },
+        { property: 'og:description', content: post.excerpt },
+        { property: 'og:type', content: 'article' },
+        { property: 'og:url', content: window.location.href },
+        { property: 'og:site_name', content: 'Reese Astor - Romance Author' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: post.title },
+        { name: 'twitter:description', content: post.excerpt },
+      ];
+      
+      ogTags.forEach(tag => {
+        const selector = tag.property 
+          ? `meta[property="${tag.property}"]` 
+          : `meta[name="${tag.name}"]`;
+        let metaTag = document.querySelector(selector);
+        if (!metaTag) {
+          metaTag = document.createElement('meta');
+          if (tag.property) metaTag.setAttribute('property', tag.property);
+          if (tag.name) metaTag.setAttribute('name', tag.name);
+          document.head.appendChild(metaTag);
+        }
+        metaTag.setAttribute('content', tag.content);
+      });
+      
+      // Add article-specific meta tags
+      let articleAuthor = document.querySelector('meta[name="author"]');
+      if (!articleAuthor) {
+        articleAuthor = document.createElement('meta');
+        articleAuthor.setAttribute('name', 'author');
+        document.head.appendChild(articleAuthor);
+      }
+      articleAuthor.setAttribute('content', 'Reese Astor');
+      
+      // Add keywords based on category
+      let metaKeywords = document.querySelector('meta[name="keywords"]');
+      if (!metaKeywords) {
+        metaKeywords = document.createElement('meta');
+        metaKeywords.setAttribute('name', 'keywords');
+        document.head.appendChild(metaKeywords);
+      }
+      const baseKeywords = 'romance books, billionaire romance, Manhattan Money Kings, Reese Astor';
+      const categoryKeywords: Record<string, string> = {
+        'Reading Recommendations': 'book recommendations, romance series, best romance books 2024',
+        'Writing Tips': 'romance writing tips, how to write romance, author advice',
+        'Author Journey': 'self-publishing, indie author, author business',
+        'Marketing': 'book marketing, author platform, social media for authors',
+      };
+      metaKeywords.setAttribute('content', `${baseKeywords}, ${categoryKeywords[post.category] || ''}`);
+    }
+    
+    // Cleanup - reset title when leaving page
+    return () => {
+      document.title = 'Reese Astor - Romance Author & Writing Coach';
+    };
+  }, [post]);
 
   const handleShare = (platform: string) => {
     const url = window.location.href;

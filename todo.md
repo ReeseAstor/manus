@@ -488,3 +488,43 @@
 - [x] Write blog post: Manhattan Romance Reading Guide
 - [x] Add posts to database via admin or seed script
 - [x] Test blog posts display correctly
+
+
+## SEO & Marketing Enhancements (Dec 2024)
+- [ ] Add SEO meta tags to blog post pages (title, description, keywords)
+- [ ] Create Instagram post graphic for Best Billionaire Romance post
+- [ ] Create Facebook/Twitter share graphic for blog posts
+- [ ] Connect Stripe checkout to Shop page buy buttons
+- [ ] Create Stripe products for book bundles
+- [ ] Test checkout flow end-to-end
+
+
+## Marketing Strategy Implementation (December 2024)
+
+### Website Feature Enhancements
+- [x] Buy-direct button prominence with discount messaging
+- [x] Pricing comparison displays (direct vs retail)
+- [x] "Why Buy Direct" educational page
+- [x] Series bundle page with tiered pricing
+- [x] Reader's Club member benefits section
+- [x] Shop link in navigation
+
+### SEO & Content Marketing
+- [x] Research romance reader search keywords
+- [x] Write blog post: Best Billionaire Romance Series 2024
+- [x] Write blog post: Secret Baby Romance Books Guide
+- [x] Write blog post: Manhattan Romance Reading Guide
+- [x] Add posts to database via seed script
+- [x] Test blog posts display correctly
+- [x] SEO meta tags for blog posts (Open Graph, Twitter Cards)
+- [x] Social media graphics for blog sharing
+
+### Stripe Checkout Integration
+- [x] Create Stripe products for book bundles
+- [x] Set up Single Book product ($3.99)
+- [x] Set up Complete Trilogy product ($9.99)
+- [x] Set up Ultimate Collection product ($12.99)
+- [x] Set up individual book products
+- [x] Connect Shop page to Stripe checkout
+- [x] Create purchase success page
+- [x] Test checkout flow with Stripe sandbox

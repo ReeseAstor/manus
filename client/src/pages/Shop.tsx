@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Check, Star, Gift, Sparkles, ArrowRight, Crown } from "lucide-react";
+import { ShoppingCart, Check, Star, Gift, Sparkles, ArrowRight, Crown, Loader2 } from "lucide-react";
 import { Link } from "wouter";
+import { toast } from "sonner";
+import { useState } from "react";
 
 interface BundleOption {
   id: string;
@@ -15,6 +17,7 @@ interface BundleOption {
   features: string[];
   popular?: boolean;
   bestValue?: boolean;
+  productId: number; // Database product ID for Stripe checkout
 }
 
 const bundleOptions: BundleOption[] = [
@@ -26,6 +29,7 @@ const bundleOptions: BundleOption[] = [
     originalPrice: 499,
     bundlePrice: 399,
     memberPrice: 299,
+    productId: 30001, // Single Book product
     features: [
       "Choose any book in the series",
       "Instant digital delivery",
@@ -40,6 +44,7 @@ const bundleOptions: BundleOption[] = [
     originalPrice: 1497,
     bundlePrice: 999,
     memberPrice: 799,
+    productId: 30002, // Complete Trilogy product
     features: [
       "All 3 Manhattan Money Kings books",
       "Instant digital delivery",
@@ -57,6 +62,7 @@ const bundleOptions: BundleOption[] = [
     originalPrice: 1796,
     bundlePrice: 1299,
     memberPrice: 999,
+    productId: 30003, // Ultimate Collection product
     features: [
       "Complete trilogy + prequel",
       "Instant digital delivery",
@@ -71,12 +77,50 @@ const bundleOptions: BundleOption[] = [
   },
 ];
 
+// Map book slugs to product IDs
+const bookProductMap: Record<string, number> = {
+  "the-billionaires-executive-assistant": 30004,
+  "the-billionaires-fake-wife": 30005,
+  "the-billionaires-baby-secret": 30006,
+};
+
 export default function Shop() {
   const { data: books } = trpc.books.list.useQuery();
+  const createCheckout = trpc.stripe.createCheckoutSession.useMutation();
+  const [loadingProductId, setLoadingProductId] = useState<number | null>(null);
 
   const formatPrice = (cents: number) => `$${(cents / 100).toFixed(2)}`;
   const calculateSavings = (original: number, sale: number) =>
     Math.round(((original - sale) / original) * 100);
+
+  const handlePurchase = async (productId: number, productName: string) => {
+    setLoadingProductId(productId);
+    try {
+      const result = await createCheckout.mutateAsync({
+        productId,
+        successUrl: `${window.location.origin}/purchase-success?product=${encodeURIComponent(productName)}`,
+        cancelUrl: `${window.location.origin}/shop`,
+      });
+
+      if (result.url) {
+        window.location.href = result.url;
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast.error("Unable to start checkout. Please try again.");
+    } finally {
+      setLoadingProductId(null);
+    }
+  };
+
+  const handleBookPurchase = async (bookSlug: string, bookTitle: string) => {
+    const productId = bookProductMap[bookSlug];
+    if (!productId) {
+      toast.error("This book is not available for direct purchase yet.");
+      return;
+    }
+    await handlePurchase(productId, bookTitle);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27]">
@@ -212,14 +256,20 @@ export default function Shop() {
 
                   {/* CTA Button */}
                   <Button
+                    onClick={() => handlePurchase(bundle.productId, bundle.name)}
+                    disabled={loadingProductId === bundle.productId}
                     className={`w-full py-6 font-bold text-lg rounded-xl transition-all hover:scale-[1.02] ${
                       bundle.popular || bundle.bestValue
                         ? "bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27]"
                         : "bg-white/10 hover:bg-white/20 text-[#e5e5e5] border border-[#d4af37]/30"
                     }`}
                   >
-                    <ShoppingCart className="w-5 h-5 mr-2" />
-                    Get {bundle.name}
+                    {loadingProductId === bundle.productId ? (
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                    ) : (
+                      <ShoppingCart className="w-5 h-5 mr-2" />
+                    )}
+                    {loadingProductId === bundle.productId ? "Processing..." : `Get ${bundle.name}`}
                   </Button>
                 </div>
               </motion.div>
@@ -255,51 +305,67 @@ export default function Shop() {
                 transition={{ delay: index * 0.1 }}
                 className="group"
               >
-                <Link href={`/books/${book.slug}`}>
-                  <div className="relative bg-white/5 backdrop-blur-xl border border-[#d4af37]/20 rounded-2xl overflow-hidden hover:border-[#d4af37]/40 transition-all">
-                    {/* Savings Badge */}
-                    {book.retailPrice && book.directPrice && book.retailPrice > book.directPrice && (
-                      <div className="absolute top-3 left-3 z-10">
-                        <span className="bg-[#d4af37] text-[#0a0e27] px-2 py-1 rounded-full text-xs font-bold">
-                          Save {calculateSavings(book.retailPrice, book.directPrice)}%
-                        </span>
-                      </div>
-                    )}
+                <div className="relative bg-white/5 backdrop-blur-xl border border-[#d4af37]/20 rounded-2xl overflow-hidden hover:border-[#d4af37]/40 transition-all">
+                  {/* Savings Badge */}
+                  {book.retailPrice && book.directPrice && book.retailPrice > book.directPrice && (
+                    <div className="absolute top-3 left-3 z-10">
+                      <span className="bg-[#d4af37] text-[#0a0e27] px-2 py-1 rounded-full text-xs font-bold">
+                        Save {calculateSavings(book.retailPrice, book.directPrice)}%
+                      </span>
+                    </div>
+                  )}
 
-                    {/* Book Cover */}
-                    <div className="relative overflow-hidden">
+                  {/* Book Cover */}
+                  <Link href={`/books/${book.slug}`}>
+                    <div className="relative overflow-hidden cursor-pointer">
                       <img
                         src={book.coverImage}
                         alt={book.title}
                         className="w-full aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
+                  </Link>
 
-                    {/* Book Info */}
-                    <div className="p-4">
-                      <h3 className="text-lg font-serif font-bold text-[#e5e5e5] mb-1 line-clamp-2 group-hover:text-[#d4af37] transition-colors">
+                  {/* Book Info */}
+                  <div className="p-4">
+                    <Link href={`/books/${book.slug}`}>
+                      <h3 className="text-lg font-serif font-bold text-[#e5e5e5] mb-1 line-clamp-2 group-hover:text-[#d4af37] transition-colors cursor-pointer">
                         {book.title}
                       </h3>
-                      {book.series && (
-                        <p className="text-[#e5e5e5]/50 text-xs mb-3">
-                          {book.series} • Book {book.seriesOrder}
-                        </p>
-                      )}
+                    </Link>
+                    {book.series && (
+                      <p className="text-[#e5e5e5]/50 text-xs mb-3">
+                        {book.series} • Book {book.seriesOrder}
+                      </p>
+                    )}
 
-                      {/* Pricing */}
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-xl font-bold text-[#d4af37]">
-                          {formatPrice(book.directPrice || 399)}
+                    {/* Pricing */}
+                    <div className="flex items-baseline gap-2 mb-4">
+                      <span className="text-xl font-bold text-[#d4af37]">
+                        {formatPrice(book.directPrice || 399)}
+                      </span>
+                      {book.retailPrice && book.directPrice && book.retailPrice > book.directPrice && (
+                        <span className="text-sm text-[#e5e5e5]/40 line-through">
+                          {formatPrice(book.retailPrice)}
                         </span>
-                        {book.retailPrice && book.directPrice && book.retailPrice > book.directPrice && (
-                          <span className="text-sm text-[#e5e5e5]/40 line-through">
-                            {formatPrice(book.retailPrice)}
-                          </span>
-                        )}
-                      </div>
+                      )}
                     </div>
+
+                    {/* Buy Button */}
+                    <Button
+                      onClick={() => handleBookPurchase(book.slug, book.title)}
+                      disabled={loadingProductId === bookProductMap[book.slug]}
+                      className="w-full bg-[#d4af37]/20 hover:bg-[#d4af37]/30 text-[#d4af37] border border-[#d4af37]/30 font-semibold"
+                    >
+                      {loadingProductId === bookProductMap[book.slug] ? (
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      ) : (
+                        <ShoppingCart className="w-4 h-4 mr-2" />
+                      )}
+                      {loadingProductId === bookProductMap[book.slug] ? "Processing..." : "Buy Now"}
+                    </Button>
                   </div>
-                </Link>
+                </div>
               </motion.div>
             ))}
           </div>
