@@ -530,52 +530,18 @@
 - [x] Test checkout flow with Stripe sandbox
 
 
-## Blog Category Filtering Enhancement (December 2024)
-- [ ] Review current blog page category implementation
-- [ ] Add visual category filter buttons/tabs to blog page
-- [ ] Ensure categories include 'Writing Tips' and 'Book Updates'
-- [ ] Style filter UI with Manhattan luxury design
-- [ ] Test category filtering functionality
+## Recently Viewed Feature (December 2024)
+- [ ] Create browsing_history database table
+- [ ] Add API endpoints for tracking and retrieving history
+- [ ] Track book views on BookDetail page
+- [ ] Add Recently Viewed section to Profile page
+- [ ] Write tests for browsing history
 
 
-## Homepage SEO Fixes (December 2024)
-- [x] Add meta keywords for homepage
-- [x] Optimize page title (30-60 characters)
-- [x] Add meta description (50-160 characters)
-- [x] Test SEO improvements
-- [x] Fix nested anchor tag error in Header component
-
-
-## SEO Sitemap Generation (December 2024)
-- [x] Generate sitemap.xml with all website pages
-- [x] Add robots.txt file
-- [x] Create Google Search Console submission guide
-
-
-## Structured Data / Rich Snippets (December 2024)
-- [x] Add JSON-LD schema for book detail pages
-- [x] Add JSON-LD schema for books listing (Author + BookSeries)
-- [x] Test structured data injection
-
-
-## My Purchases Page (December 2024)
-- [x] Create purchases database table
-- [x] Create ebook_files table for download links
-- [x] Add backend API endpoints for purchases
-- [x] Build My Purchases page UI
-- [x] Add download functionality with multiple formats
-- [x] Integrate with Stripe webhook for automatic purchase recording
-- [x] Write tests for purchase functionality
-
-
-## Navigation Enhancement (December 2024)
-- [x] Add My Purchases link to navigation for logged-in users
-
-
-## User Profile Page (December 2024)
-- [x] Add user preferences to database schema
-- [x] Create backend API for profile management
-- [x] Build profile page UI with email preferences
-- [x] Add purchase history section
-- [x] Add profile link to user menu
-- [x] Write tests for profile functionality
+## Recently Viewed Feature (December 2024)
+- [x] Create browsing_history database table
+- [x] Add backend API for tracking and retrieving history
+- [x] Track book views on BookDetail page
+- [x] Add Recently Viewed section to Profile page
+- [x] Add clear history functionality
+- [x] Add Profile link to Header user menu

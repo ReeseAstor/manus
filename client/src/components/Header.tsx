@@ -1,20 +1,26 @@
 import { Link } from "wouter";
 import { Button } from "./ui/button";
-import { Menu, X, BookOpen, LogOut, User } from "lucide-react";
-import { useState } from "react";
+import { Menu, X, User, ShoppingBag, Settings, LogOut, ChevronDown } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
   const { user, loading, logout } = useAuth();
+
+  // Close user menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -29,85 +35,94 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors">
-          <span className="font-playfair text-2xl font-bold">Reese Astor</span>
+        <Link href="/">
+          <span className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors cursor-pointer">
+            <span className="font-playfair text-2xl font-bold">Reese Astor</span>
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
-            <Link 
-              key={link.href} 
-              href={link.href}
-              className={`text-sm font-medium transition-colors ${
+            <Link key={link.href} href={link.href}>
+              <span className={`text-sm font-medium transition-colors cursor-pointer ${
                 link.special 
                   ? "text-primary font-bold hover:text-primary/80" 
                   : "text-muted-foreground hover:text-primary"
-              }`}
-            >
-              {link.label}
+              }`}>
+                {link.label}
+              </span>
             </Link>
           ))}
-
+          
           {/* User Menu */}
           {!loading && (
-            <>
-              {user ? (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      className="border-primary/50 text-primary hover:bg-primary/10"
-                    >
-                      <User className="w-4 h-4 mr-2" />
-                      {user.name?.split(' ')[0] || 'Account'}
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-48">
+            user ? (
+              <div className="relative" ref={userMenuRef}>
+                <button
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#d4af37]/30 hover:bg-[#d4af37]/10 transition-colors"
+                >
+                  <User className="w-4 h-4 text-[#d4af37]" />
+                  <span className="text-sm text-[#e5e5e5]">{user.name || "Account"}</span>
+                  <ChevronDown className={`w-4 h-4 text-[#e5e5e5]/60 transition-transform ${userMenuOpen ? "rotate-180" : ""}`} />
+                </button>
+                
+                {userMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-[#1a1f3a] border border-[#d4af37]/20 rounded-lg shadow-xl overflow-hidden">
                     <Link href="/profile">
-                      <DropdownMenuItem className="cursor-pointer">
-                        <User className="w-4 h-4 mr-2" />
+                      <button 
+                        className="w-full px-4 py-2 text-left text-sm text-[#e5e5e5] hover:bg-[#d4af37]/10 flex items-center gap-2"
+                        onClick={() => setUserMenuOpen(false)}
+                      >
+                        <User className="w-4 h-4" />
                         My Profile
-                      </DropdownMenuItem>
+                      </button>
                     </Link>
                     <Link href="/my-purchases">
-                      <DropdownMenuItem className="cursor-pointer">
-                        <BookOpen className="w-4 h-4 mr-2" />
+                      <button 
+                        className="w-full px-4 py-2 text-left text-sm text-[#e5e5e5] hover:bg-[#d4af37]/10 flex items-center gap-2"
+                        onClick={() => setUserMenuOpen(false)}
+                      >
+                        <ShoppingBag className="w-4 h-4" />
                         My Purchases
-                      </DropdownMenuItem>
+                      </button>
                     </Link>
-                    {user.role === 'admin' && (
-                      <>
-                        <DropdownMenuSeparator />
-                        <Link href="/admin">
-                          <DropdownMenuItem className="cursor-pointer">
-                            Admin Dashboard
-                          </DropdownMenuItem>
-                        </Link>
-                      </>
+                    {user.role === "admin" && (
+                      <Link href="/admin">
+                        <button 
+                          className="w-full px-4 py-2 text-left text-sm text-[#e5e5e5] hover:bg-[#d4af37]/10 flex items-center gap-2"
+                          onClick={() => setUserMenuOpen(false)}
+                        >
+                          <Settings className="w-4 h-4" />
+                          Admin Dashboard
+                        </button>
+                      </Link>
                     )}
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem 
-                      className="cursor-pointer text-red-500 focus:text-red-500"
-                      onClick={() => logout()}
+                    <hr className="border-[#d4af37]/10" />
+                    <button
+                      onClick={() => {
+                        logout();
+                        setUserMenuOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-sm text-red-400 hover:bg-red-500/10 flex items-center gap-2"
                     >
-                      <LogOut className="w-4 h-4 mr-2" />
+                      <LogOut className="w-4 h-4" />
                       Sign Out
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  className="border-primary/50 text-primary hover:bg-primary/10"
-                  onClick={() => window.location.href = getLoginUrl()}
-                >
-                  Sign In
-                </Button>
-              )}
-            </>
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10"
+                onClick={() => window.location.href = getLoginUrl()}
+              >
+                Sign In
+              </Button>
+            )
           )}
         </nav>
 
@@ -127,72 +142,75 @@ export function Header() {
         <div className="md:hidden border-t border-border/40 bg-background">
           <nav className="container flex flex-col space-y-4 py-4">
             {navLinks.map((link) => (
-              <Link 
-                key={link.href} 
-                href={link.href}
-                className={`text-sm font-medium transition-colors ${
-                  link.special 
-                    ? "text-primary font-bold hover:text-primary/80" 
-                    : "text-muted-foreground hover:text-primary"
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.label}
+              <Link key={link.href} href={link.href}>
+                <span
+                  className={`text-sm font-medium transition-colors cursor-pointer ${
+                    link.special 
+                      ? "text-primary font-bold hover:text-primary/80" 
+                      : "text-muted-foreground hover:text-primary"
+                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </span>
               </Link>
             ))}
             
             {/* Mobile User Menu */}
             {!loading && (
-              <div className="pt-4 border-t border-border/40">
-                {user ? (
-                  <>
-                    <Link 
-                      href="/profile"
-                      className="flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors py-2"
+              user ? (
+                <>
+                  <hr className="border-border/40" />
+                  <Link href="/profile">
+                    <span 
+                      className="text-sm font-medium text-muted-foreground hover:text-primary flex items-center gap-2 cursor-pointer"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <User className="w-4 h-4 mr-2" />
+                      <User className="w-4 h-4" />
                       My Profile
-                    </Link>
-                    <Link 
-                      href="/my-purchases"
-                      className="flex items-center text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2"
+                    </span>
+                  </Link>
+                  <Link href="/my-purchases">
+                    <span 
+                      className="text-sm font-medium text-muted-foreground hover:text-primary flex items-center gap-2 cursor-pointer"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <BookOpen className="w-4 h-4 mr-2" />
+                      <ShoppingBag className="w-4 h-4" />
                       My Purchases
-                    </Link>
-                    {user.role === 'admin' && (
-                      <Link 
-                        href="/admin"
-                        className="flex items-center text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2"
+                    </span>
+                  </Link>
+                  {user.role === "admin" && (
+                    <Link href="/admin">
+                      <span 
+                        className="text-sm font-medium text-muted-foreground hover:text-primary flex items-center gap-2 cursor-pointer"
                         onClick={() => setMobileMenuOpen(false)}
                       >
+                        <Settings className="w-4 h-4" />
                         Admin Dashboard
-                      </Link>
-                    )}
-                    <button
-                      className="flex items-center text-sm font-medium text-red-500 hover:text-red-400 transition-colors py-2 w-full text-left"
-                      onClick={() => {
-                        logout();
-                        setMobileMenuOpen(false);
-                      }}
-                    >
-                      <LogOut className="w-4 h-4 mr-2" />
-                      Sign Out
-                    </button>
-                  </>
-                ) : (
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="w-full border-primary/50 text-primary hover:bg-primary/10"
-                    onClick={() => window.location.href = getLoginUrl()}
+                      </span>
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => {
+                      logout();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="text-sm font-medium text-red-400 hover:text-red-300 flex items-center gap-2"
                   >
-                    Sign In
-                  </Button>
-                )}
-              </div>
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 w-fit"
+                  onClick={() => window.location.href = getLoginUrl()}
+                >
+                  Sign In
+                </Button>
+              )
             )}
           </nav>
         </div>

@@ -1,78 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail, BookOpen, Sparkles, ChevronRight, Star } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { Book3LaunchBanner } from "@/components/Book3LaunchBanner";
-import { AuthorStructuredData, BookSeriesStructuredData } from "@/components/BookStructuredData";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 
 export default function Home() {
   const [email, setEmail] = useState("");
-
-  // SEO Meta Tags
-  useEffect(() => {
-    // Title: 54 characters (within 30-60 range)
-    document.title = "Reese Astor | Billionaire Romance Author & Bestseller";
-    
-    // Meta description: 156 characters (within 50-160 range)
-    const metaDescription = document.querySelector('meta[name="description"]');
-    const descriptionContent = "Discover the Manhattan Money Kings series by USA Today bestselling author Reese Astor. Steamy billionaire romance with alpha heroes and happily ever afters.";
-    if (metaDescription) {
-      metaDescription.setAttribute('content', descriptionContent);
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = descriptionContent;
-      document.head.appendChild(meta);
-    }
-    
-    // Meta keywords
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    const keywordsContent = "billionaire romance, romance author, Manhattan Money Kings, steamy romance, alpha billionaire, contemporary romance, Reese Astor, romance books, secret baby romance, fake marriage romance";
-    if (metaKeywords) {
-      metaKeywords.setAttribute('content', keywordsContent);
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'keywords';
-      meta.content = keywordsContent;
-      document.head.appendChild(meta);
-    }
-
-    // Open Graph tags for social sharing
-    const setOgMeta = (property: string, content: string) => {
-      let meta = document.querySelector(`meta[property="${property}"]`);
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute('property', property);
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute('content', content);
-    };
-    
-    setOgMeta('og:title', 'Reese Astor | Billionaire Romance Author');
-    setOgMeta('og:description', 'USA Today bestselling author of the Manhattan Money Kings series. Steamy billionaire romance with alpha heroes.');
-    setOgMeta('og:type', 'website');
-    setOgMeta('og:image', '/book3-cover.jpg');
-
-    // Twitter Card tags
-    const setTwitterMeta = (name: string, content: string) => {
-      let meta = document.querySelector(`meta[name="${name}"]`);
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute('name', name);
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute('content', content);
-    };
-    
-    setTwitterMeta('twitter:card', 'summary_large_image');
-    setTwitterMeta('twitter:title', 'Reese Astor | Billionaire Romance Author');
-    setTwitterMeta('twitter:description', 'USA Today bestselling author of the Manhattan Money Kings series.');
-    setTwitterMeta('twitter:image', '/book3-cover.jpg');
-  }, []);
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
       toast.success("Thank you for subscribing! Check your email for confirmation.");
@@ -123,10 +60,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
-      {/* Structured Data for SEO Rich Snippets */}
-      <AuthorStructuredData />
-      <BookSeriesStructuredData />
-      
       <Book3LaunchBanner />
       
       {/* Manhattan Penthouse Hero Section */}

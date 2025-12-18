@@ -20,17 +20,17 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold text-foreground">Quick Links</h4>
             <nav className="flex flex-col space-y-2">
-              <Link href="/books" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Books
+              <Link href="/books">
+                <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Books</a>
               </Link>
-              <Link href="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Blog
+              <Link href="/blog">
+                <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Blog</a>
               </Link>
-              <Link href="/coaching" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Coaching
+              <Link href="/coaching">
+                <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Coaching</a>
               </Link>
-              <Link href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                About
+              <Link href="/about">
+                <a className="text-sm text-muted-foreground hover:text-primary transition-colors">About</a>
               </Link>
             </nav>
           </div>
@@ -39,11 +39,11 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold text-foreground">Legal</h4>
             <nav className="flex flex-col space-y-2">
-              <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Privacy Policy
+              <Link href="/privacy">
+                <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
               </Link>
-              <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Terms of Service
+              <Link href="/terms">
+                <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
               </Link>
             </nav>
           </div>

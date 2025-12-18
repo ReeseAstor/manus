@@ -47,15 +47,13 @@ import {
   updateReaderClubMemberAccess,
   trackContentAccess,
   getContentAccessStats,
-  getUserPurchases,
   getUserPreferences,
   upsertUserPreferences,
   getUserWithPreferences,
-  getUserPurchaseByBook,
-  createUserPurchase,
-  updatePurchaseDownloadCount,
-  getEbookFiles,
-  createEbookFile,
+  trackBookView,
+  getRecentlyViewedBooks,
+  clearBrowsingHistory,
+  getUserPurchases,
 } from "./db";
 
 export const appRouter = router({
@@ -739,102 +737,6 @@ Reply directly to: ${input.email}
       }),
   }),
 
-  // ==================== USER PURCHASES ====================
-  purchases: router({
-    // Get all purchases for the logged-in user
-    list: protectedProcedure.query(async ({ ctx }) => {
-      const purchases = await getUserPurchases(ctx.user.id);
-      return purchases.map(p => ({
-        id: p.purchase.id,
-        bookId: p.purchase.bookId,
-        bookTitle: p.book.title,
-        bookCover: p.book.coverImage,
-        bookSlug: p.book.slug,
-        purchaseType: p.purchase.purchaseType,
-        purchasePrice: p.purchase.purchasePrice,
-        bonusContentUnlocked: p.purchase.bonusContentUnlocked,
-        downloadCount: p.purchase.downloadCount,
-        lastDownloadAt: p.purchase.lastDownloadAt,
-        purchasedAt: p.purchase.purchasedAt,
-      }));
-    }),
-
-    // Check if user owns a specific book
-    checkOwnership: protectedProcedure
-      .input(z.object({ bookId: z.number() }))
-      .query(async ({ ctx, input }) => {
-        const purchase = await getUserPurchaseByBook(ctx.user.id, input.bookId);
-        return { owned: !!purchase, purchase };
-      }),
-
-    // Get download links for a purchased book
-    getDownloads: protectedProcedure
-      .input(z.object({ bookId: z.number() }))
-      .query(async ({ ctx, input }) => {
-        // Verify user owns the book
-        const purchase = await getUserPurchaseByBook(ctx.user.id, input.bookId);
-        if (!purchase) {
-          throw new TRPCError({
-            code: "FORBIDDEN",
-            message: "You don't own this book",
-          });
-        }
-
-        // Get available download formats
-        const files = await getEbookFiles(input.bookId);
-        return {
-          purchaseId: purchase.id,
-          files: files.map(f => ({
-            id: f.id,
-            format: f.format,
-            fileSize: f.fileSize,
-            version: f.version,
-          })),
-        };
-      }),
-
-    // Record a download (increment counter)
-    recordDownload: protectedProcedure
-      .input(z.object({ purchaseId: z.number(), format: z.string() }))
-      .mutation(async ({ ctx, input }) => {
-        await updatePurchaseDownloadCount(input.purchaseId);
-        return { success: true };
-      }),
-
-    // Get download URL for a specific format
-    getDownloadUrl: protectedProcedure
-      .input(z.object({ bookId: z.number(), format: z.enum(["epub", "mobi", "pdf"]) }))
-      .query(async ({ ctx, input }) => {
-        // Verify user owns the book
-        const purchase = await getUserPurchaseByBook(ctx.user.id, input.bookId);
-        if (!purchase) {
-          throw new TRPCError({
-            code: "FORBIDDEN",
-            message: "You don't own this book",
-          });
-        }
-
-        // Get the file URL
-        const files = await getEbookFiles(input.bookId);
-        const file = files.find(f => f.format === input.format);
-        if (!file) {
-          throw new TRPCError({
-            code: "NOT_FOUND",
-            message: `${input.format.toUpperCase()} format not available for this book`,
-          });
-        }
-
-        // Update download count
-        await updatePurchaseDownloadCount(purchase.id);
-
-        return {
-          url: file.fileUrl,
-          format: file.format,
-          fileSize: file.fileSize,
-        };
-      }),
-  }),
-
   // ==================== Profile Router ====================
   profile: router({
     // Get current user's profile with preferences
@@ -912,6 +814,37 @@ Reply directly to: ${input.email}
           memberSince: ctx.user.createdAt,
         },
       };
+    }),
+
+    // Track book view
+    trackView: protectedProcedure
+      .input(z.object({ bookId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await trackBookView(ctx.user.id, input.bookId);
+        return { success: true };
+      }),
+
+    // Get recently viewed books
+    getRecentlyViewed: protectedProcedure
+      .input(z.object({ limit: z.number().min(1).max(20).default(10) }).optional())
+      .query(async ({ ctx, input }) => {
+        const limit = input?.limit || 10;
+        const history = await getRecentlyViewedBooks(ctx.user.id, limit);
+        return history.map(h => ({
+          bookId: h.book.id,
+          bookTitle: h.book.title,
+          bookSlug: h.book.slug,
+          bookCover: h.book.coverImage,
+          bookSeries: h.book.series,
+          viewCount: h.history.viewCount,
+          lastViewedAt: h.history.lastViewedAt,
+        }));
+      }),
+
+    // Clear browsing history
+    clearHistory: protectedProcedure.mutation(async ({ ctx }) => {
+      await clearBrowsingHistory(ctx.user.id);
+      return { success: true };
     }),
   }),
 });

@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRoute, Link } from "wouter";
 import { trpc } from "@/lib/trpc";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Star, ChevronDown, ChevronUp, Heart, Share2 } from "lucide-react";
 import { BuyDirectSection } from "@/components/BuyDirectSection";
 import { WhyBuyDirectInline } from "@/components/WhyBuyDirect";
-import { BookStructuredData } from "@/components/BookStructuredData";
 import { motion } from "framer-motion";
 
 export default function BookDetail() {
@@ -23,6 +23,16 @@ export default function BookDetail() {
     { bookId: book?.id!, limit: 3 },
     { enabled: !!book?.id }
   );
+
+  // Track book view for logged-in users
+  const { user } = useAuth();
+  const trackViewMutation = trpc.profile.trackView.useMutation();
+  
+  useEffect(() => {
+    if (user && book?.id) {
+      trackViewMutation.mutate({ bookId: book.id });
+    }
+  }, [user, book?.id]);
 
   if (isLoading) {
     return (
@@ -66,22 +76,8 @@ export default function BookDetail() {
     { name: "Google Play", url: book.googlePlayUrl, icon: "▶️" },
   ].filter((link) => link.url);
 
-  // Calculate average rating from reviews
-  const averageRating = reviews && reviews.length > 0
-    ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
-    : 4.8; // Default rating
-  const reviewCount = reviews?.length || 0;
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27]">
-      {/* Structured Data for SEO */}
-      <BookStructuredData 
-        book={book} 
-        reviews={reviews} 
-        averageRating={averageRating}
-        reviewCount={reviewCount}
-      />
-      
       {/* Hero Section */}
       <div className="relative py-20 px-4 overflow-hidden">
         <div

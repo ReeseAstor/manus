@@ -648,133 +648,67 @@ export async function getContentAccessStats(contentId: number): Promise<{ totalV
 }
 
 
-// ==================== USER PURCHASES ====================
+// ==================== Browsing History Helpers ====================
+import { browsingHistory, type BrowsingHistory, type InsertBrowsingHistory } from "../drizzle/schema";
 
-import { userPurchases, ebookFiles, type UserPurchase, type InsertUserPurchase, type EbookFile, type InsertEbookFile } from "../drizzle/schema";
-
-export async function getUserPurchases(userId: number) {
+export async function trackBookView(userId: number, bookId: number): Promise<void> {
   const db = await getDb();
-  if (!db) {
-    throw new Error("Database not available");
-  }
-
-  try {
-    const purchases = await db
-      .select({
-        purchase: userPurchases,
-        book: books,
+  if (!db) return;
+  
+  // Check if entry exists
+  const [existing] = await db
+    .select()
+    .from(browsingHistory)
+    .where(and(
+      eq(browsingHistory.userId, userId),
+      eq(browsingHistory.bookId, bookId)
+    ));
+  
+  if (existing) {
+    // Update existing entry
+    await db
+      .update(browsingHistory)
+      .set({
+        viewCount: existing.viewCount + 1,
+        lastViewedAt: new Date(),
       })
-      .from(userPurchases)
-      .innerJoin(books, eq(userPurchases.bookId, books.id))
-      .where(eq(userPurchases.userId, userId))
-      .orderBy(desc(userPurchases.purchasedAt));
-    
-    return purchases;
-  } catch (error) {
-    console.error("[Database] Failed to get user purchases:", error);
-    throw error;
+      .where(eq(browsingHistory.id, existing.id));
+  } else {
+    // Create new entry
+    await db.insert(browsingHistory).values({
+      userId,
+      bookId,
+      viewCount: 1,
+      lastViewedAt: new Date(),
+    });
   }
 }
 
-export async function getUserPurchaseByBook(userId: number, bookId: number) {
+export async function getRecentlyViewedBooks(userId: number, limit: number = 10) {
   const db = await getDb();
-  if (!db) {
-    throw new Error("Database not available");
-  }
-
-  try {
-    const result = await db
-      .select()
-      .from(userPurchases)
-      .where(and(eq(userPurchases.userId, userId), eq(userPurchases.bookId, bookId)))
-      .limit(1);
-    
-    return result[0] || null;
-  } catch (error) {
-    console.error("[Database] Failed to get user purchase:", error);
-    throw error;
-  }
+  if (!db) return [];
+  
+  const history = await db
+    .select({
+      history: browsingHistory,
+      book: books,
+    })
+    .from(browsingHistory)
+    .innerJoin(books, eq(browsingHistory.bookId, books.id))
+    .where(eq(browsingHistory.userId, userId))
+    .orderBy(desc(browsingHistory.lastViewedAt))
+    .limit(limit);
+  
+  return history;
 }
 
-export async function createUserPurchase(purchase: InsertUserPurchase) {
+export async function clearBrowsingHistory(userId: number): Promise<void> {
   const db = await getDb();
-  if (!db) {
-    throw new Error("Database not available");
-  }
-
-  try {
-    return await db.insert(userPurchases).values(purchase);
-  } catch (error) {
-    console.error("[Database] Failed to create user purchase:", error);
-    throw error;
-  }
-}
-
-export async function updatePurchaseDownloadCount(purchaseId: number) {
-  const db = await getDb();
-  if (!db) {
-    throw new Error("Database not available");
-  }
-
-  try {
-    const purchase = await db.select().from(userPurchases).where(eq(userPurchases.id, purchaseId)).limit(1);
-    if (purchase[0]) {
-      await db.update(userPurchases).set({
-        downloadCount: (purchase[0].downloadCount || 0) + 1,
-        lastDownloadAt: new Date(),
-      }).where(eq(userPurchases.id, purchaseId));
-    }
-  } catch (error) {
-    console.error("[Database] Failed to update download count:", error);
-    throw error;
-  }
-}
-
-// ==================== EBOOK FILES ====================
-
-export async function getEbookFiles(bookId: number) {
-  const db = await getDb();
-  if (!db) {
-    throw new Error("Database not available");
-  }
-
-  try {
-    return await db
-      .select()
-      .from(ebookFiles)
-      .where(eq(ebookFiles.bookId, bookId));
-  } catch (error) {
-    console.error("[Database] Failed to get ebook files:", error);
-    throw error;
-  }
-}
-
-export async function createEbookFile(file: InsertEbookFile) {
-  const db = await getDb();
-  if (!db) {
-    throw new Error("Database not available");
-  }
-
-  try {
-    return await db.insert(ebookFiles).values(file);
-  } catch (error) {
-    console.error("[Database] Failed to create ebook file:", error);
-    throw error;
-  }
-}
-
-export async function deleteEbookFile(id: number) {
-  const db = await getDb();
-  if (!db) {
-    throw new Error("Database not available");
-  }
-
-  try {
-    return await db.delete(ebookFiles).where(eq(ebookFiles.id, id));
-  } catch (error) {
-    console.error("[Database] Failed to delete ebook file:", error);
-    throw error;
-  }
+  if (!db) return;
+  
+  await db
+    .delete(browsingHistory)
+    .where(eq(browsingHistory.userId, userId));
 }
 
 
@@ -840,4 +774,24 @@ export async function getUserWithPreferences(userId: number) {
     ...user,
     preferences: prefs,
   };
+}
+
+// ==================== User Purchases Helpers ====================
+import { userPurchases, type UserPurchase, type InsertUserPurchase } from "../drizzle/schema";
+
+export async function getUserPurchases(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const purchases = await db
+    .select({
+      purchase: userPurchases,
+      book: books,
+    })
+    .from(userPurchases)
+    .innerJoin(books, eq(userPurchases.bookId, books.id))
+    .where(eq(userPurchases.userId, userId))
+    .orderBy(desc(userPurchases.purchasedAt));
+  
+  return purchases;
 }

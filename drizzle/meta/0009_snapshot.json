@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "565afef0-0cea-4d26-b4d7-1e7bdfbff5d7",
-  "prevId": "d4cab68c-50e0-4f3d-8cc0-661c00e42005",
+  "id": "1b04e9c6-b5ca-4bbf-b37d-215876174c1d",
+  "prevId": "4887facf-74ec-4b93-9067-b75e5192e0d0",
   "tables": {
     "ai_chat_messages": {
       "name": "ai_chat_messages",
@@ -577,6 +577,95 @@
       },
       "checkConstraint": {}
     },
+    "browsing_history": {
+      "name": "browsing_history",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "bookId": {
+          "name": "bookId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "viewCount": {
+          "name": "viewCount",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "lastViewedAt": {
+          "name": "lastViewedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "browsing_history_userId_users_id_fk": {
+          "name": "browsing_history_userId_users_id_fk",
+          "tableFrom": "browsing_history",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "browsing_history_bookId_books_id_fk": {
+          "name": "browsing_history_bookId_books_id_fk",
+          "tableFrom": "browsing_history",
+          "tableTo": "books",
+          "columnsFrom": [
+            "bookId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "browsing_history_id": {
+          "name": "browsing_history_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
     "content_access": {
       "name": "content_access",
       "columns": {
@@ -650,97 +739,6 @@
       "compositePrimaryKeys": {
         "content_access_id": {
           "name": "content_access_id",
-          "columns": [
-            "id"
-          ]
-        }
-      },
-      "uniqueConstraints": {},
-      "checkConstraint": {}
-    },
-    "ebook_files": {
-      "name": "ebook_files",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "int",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": true
-        },
-        "bookId": {
-          "name": "bookId",
-          "type": "int",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "format": {
-          "name": "format",
-          "type": "enum('epub','mobi','pdf')",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "fileUrl": {
-          "name": "fileUrl",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "fileSize": {
-          "name": "fileSize",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "version": {
-          "name": "version",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'1.0'"
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "(now())"
-        },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "onUpdate": true,
-          "default": "(now())"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "ebook_files_bookId_books_id_fk": {
-          "name": "ebook_files_bookId_books_id_fk",
-          "tableFrom": "ebook_files",
-          "tableTo": "books",
-          "columnsFrom": [
-            "bookId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "ebook_files_id": {
-          "name": "ebook_files_id",
           "columns": [
             "id"
           ]
@@ -1792,7 +1790,7 @@
         },
         "purchaseType": {
           "name": "purchaseType",
-          "type": "enum('single','bundle')",
+          "type": "enum('single','bundle','subscription')",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
@@ -1802,22 +1800,22 @@
           "name": "purchasePrice",
           "type": "int",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "bonusContentUnlocked": {
           "name": "bonusContentUnlocked",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false,
-          "default": true
+          "default": false
         },
         "downloadCount": {
           "name": "downloadCount",
           "type": "int",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false,
           "default": 0
         },
@@ -1845,32 +1843,6 @@
           "tableTo": "users",
           "columnsFrom": [
             "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "user_purchases_bookId_books_id_fk": {
-          "name": "user_purchases_bookId_books_id_fk",
-          "tableFrom": "user_purchases",
-          "tableTo": "books",
-          "columnsFrom": [
-            "bookId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "user_purchases_orderId_orders_id_fk": {
-          "name": "user_purchases_orderId_orders_id_fk",
-          "tableFrom": "user_purchases",
-          "tableTo": "orders",
-          "columnsFrom": [
-            "orderId"
           ],
           "columnsTo": [
             "id"

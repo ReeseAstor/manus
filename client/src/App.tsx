@@ -24,7 +24,6 @@ import CharacterQuiz from "./pages/CharacterQuiz";
 import Shop from "./pages/Shop";
 import WhyBuyDirectPage from "./pages/WhyBuyDirectPage";
 import PurchaseSuccess from "./pages/PurchaseSuccess";
-import MyPurchases from "./pages/MyPurchases";
 import Profile from "./pages/Profile";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
@@ -43,7 +42,6 @@ function Router() {
       <Route path={"/shop"} component={Shop} />
       <Route path={"/why-buy-direct"} component={WhyBuyDirectPage} />
       <Route path={"/purchase-success"} component={PurchaseSuccess} />
-      <Route path={"/my-purchases"} component={MyPurchases} />
       <Route path={"/profile"} component={Profile} />
       <Route path={"/about"} component={About} />
       <Route path={"/contact"} component={Contact} />
