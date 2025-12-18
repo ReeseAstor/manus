@@ -795,3 +795,29 @@ export async function getUserPurchases(userId: number) {
   
   return purchases;
 }
+
+
+export async function recordPurchase(data: {
+  userId: number;
+  productId: number;
+  stripeSessionId: string;
+  amount: number;
+  currency: string;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  // For now, we'll create a simplified purchase record
+  // In a real implementation, you'd want to link this to actual products/books
+  const result = await db.insert(userPurchases).values({
+    userId: data.userId,
+    bookId: data.productId, // Assuming productId maps to bookId
+    purchasedAt: new Date(),
+  });
+
+  // Return the purchase record
+  return {
+    id: Date.now(), // Use timestamp as temporary ID
+    ...data,
+  };
+}
