@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
-      {/* Hero Section - Sophisticated Profile */}
+      {/* Hero Section - Sophisticated Profile with Author Photo */}
       <section className="relative py-32 overflow-hidden">
         <div 
           className="absolute inset-0"
@@ -21,44 +21,73 @@ export default function About() {
         </div>
 
         <div className="container relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="max-w-5xl mx-auto text-center space-y-8"
-          >
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm">
-              <Sparkles className="h-4 w-4 text-[#d4af37]" />
-              <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
-                About the Author
-              </span>
-            </div>
-
-            <h1 className="font-serif text-6xl md:text-7xl font-bold text-white leading-tight">
-              Reese Astor
-            </h1>
-
-            <p className="text-2xl md:text-3xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
-              From Corporate Finance VP to USA TODAY Bestselling Romance Author
-            </p>
-
-            <div className="flex items-center justify-center gap-12 pt-8">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-[#d4af37]">10K+</div>
-                <div className="text-sm text-gray-400 mt-1">Readers</div>
+          <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+            {/* Author Photo */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+              className="relative order-2 lg:order-1"
+            >
+              <div className="relative max-w-md mx-auto">
+                {/* Decorative frame */}
+                <div className="absolute -inset-4 bg-gradient-to-br from-[#d4af37]/20 to-transparent rounded-2xl" />
+                <div className="absolute -inset-2 bg-gradient-to-br from-[#d4af37]/10 to-transparent rounded-xl" />
+                
+                <img
+                  src="/images/reese-astor-author.png"
+                  alt="Reese Astor - Romance Author"
+                  className="relative rounded-xl shadow-2xl w-full object-cover aspect-[3/4]"
+                />
+                
+                {/* Floating badge */}
+                <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] px-4 py-2 rounded-full font-semibold shadow-lg flex items-center gap-2">
+                  <Sparkles className="w-4 h-4" />
+                  USA Today Bestseller
+                </div>
               </div>
-              <div className="h-12 w-px bg-white/20" />
-              <div className="text-center">
-                <div className="text-4xl font-bold text-[#d4af37]">4</div>
-                <div className="text-sm text-gray-400 mt-1">Books Published</div>
+            </motion.div>
+
+            {/* Author Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="order-1 lg:order-2 text-center lg:text-left space-y-8"
+            >
+              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm">
+                <Sparkles className="h-4 w-4 text-[#d4af37]" />
+                <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+                  About the Author
+                </span>
               </div>
-              <div className="h-12 w-px bg-white/20" />
-              <div className="text-center">
-                <div className="text-4xl font-bold text-[#d4af37]">★ 4.7</div>
-                <div className="text-sm text-gray-400 mt-1">Average Rating</div>
+
+              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                Reese Astor
+              </h1>
+
+              <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
+                From Corporate Finance VP to USA TODAY Bestselling Romance Author
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-[#d4af37]">100K+</div>
+                  <div className="text-sm text-gray-400 mt-1">Readers</div>
+                </div>
+                <div className="h-12 w-px bg-white/20 hidden sm:block" />
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-[#d4af37]">4</div>
+                  <div className="text-sm text-gray-400 mt-1">Books Published</div>
+                </div>
+                <div className="h-12 w-px bg-white/20 hidden sm:block" />
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-[#d4af37]">★ 4.7</div>
+                  <div className="text-sm text-gray-400 mt-1">Average Rating</div>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
