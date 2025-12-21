@@ -306,6 +306,141 @@ export default function About() {
         </div>
       </section>
 
+      {/* My Writing Desk - Gallery Section */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-6xl mx-auto"
+          >
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm mb-6">
+                <Sparkles className="h-4 w-4 text-[#d4af37]" />
+                <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+                  Behind the Scenes
+                </span>
+              </div>
+              <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
+                My Writing Desk
+              </h2>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                A peek into where the magic happens—my cozy workspace and favorite writing tools
+              </p>
+            </div>
+
+            {/* Main Desk Image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="mb-8 relative group"
+            >
+              <div className="absolute -inset-4 bg-gradient-to-br from-[#d4af37]/20 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <img
+                src="/images/writing-desk-main.png"
+                alt="My cozy writing desk setup"
+                className="relative w-full h-[400px] md:h-[500px] object-cover rounded-2xl shadow-2xl"
+              />
+              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-black/60 backdrop-blur-md">
+                <p className="text-white font-medium">Where Every Story Begins</p>
+                <p className="text-gray-300 text-sm">My antique desk by the window, complete with fresh flowers and endless cups of coffee</p>
+              </div>
+            </motion.div>
+
+            {/* Gallery Grid */}
+            <div className="grid md:grid-cols-3 gap-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="group relative overflow-hidden rounded-2xl"
+              >
+                <img
+                  src="/images/writing-tools-notebook.png"
+                  alt="Leather journal and fountain pen"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h4 className="text-white font-semibold mb-1">Plot Planning</h4>
+                  <p className="text-gray-300 text-sm">My leather journal where every love story starts as handwritten notes</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="group relative overflow-hidden rounded-2xl"
+              >
+                <img
+                  src="/images/writing-tools-books.png"
+                  alt="Bookshelf with romance novels"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h4 className="text-white font-semibold mb-1">Inspiration Corner</h4>
+                  <p className="text-gray-300 text-sm">My collection of favorite romance novels and writing guides</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="group relative overflow-hidden rounded-2xl"
+              >
+                <img
+                  src="/images/writing-tools-coffee.png"
+                  alt="Coffee and reading setup"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h4 className="text-white font-semibold mb-1">Morning Ritual</h4>
+                  <p className="text-gray-300 text-sm">Coffee, chocolate, and a good book—the perfect writing fuel</p>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Writing Tools List */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10"
+            >
+              <h3 className="font-serif text-2xl font-bold text-white mb-6 text-center">My Favorite Writing Tools</h3>
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+                {[
+                  { name: "Scrivener", desc: "For organizing complex plots" },
+                  { name: "Leather Journal", desc: "For handwritten brainstorms" },
+                  { name: "Noise-canceling headphones", desc: "For deep focus sessions" },
+                  { name: "Endless coffee", desc: "The real secret ingredient" },
+                ].map((tool, index) => (
+                  <div key={tool.name} className="text-center">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 mb-3">
+                      <span className="text-[#d4af37] font-bold">{index + 1}</span>
+                    </div>
+                    <h4 className="text-white font-semibold mb-1">{tool.name}</h4>
+                    <p className="text-gray-400 text-sm">{tool.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA Section - Elegant */}
       <section className="py-32 relative">
         <div className="container">
