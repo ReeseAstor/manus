@@ -420,6 +420,12 @@ export default function About() {
               className="mt-12 p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10"
             >
               <h3 className="font-serif text-2xl font-bold text-white mb-6 text-center">My Favorite Writing Tools</h3>
+              <p className="text-gray-400 text-center mb-8">
+                Want to know more about my daily writing routine?{" "}
+                <Link href="/blog/day-in-the-life-romance-author" className="text-[#d4af37] hover:text-[#c9a961] underline font-medium">
+                  Read my full "Day in the Life" blog post →
+                </Link>
+              </p>
               <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
                 {[
                   { name: "Scrivener", desc: "For organizing complex plots" },
