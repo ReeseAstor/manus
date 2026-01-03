@@ -623,3 +623,17 @@
 - [x] Update database with correct book information (fixed Elena vs Lily error)
 - [x] Verify all book pages display accurate content
 - [x] Test book information across all pages
+
+
+## Book 3 Information Verification (December 2024)
+- [x] Read Book 3 actual content
+- [x] Compare website Book 3 info with actual book
+- [x] Fix any character name or plot discrepancies (NONE FOUND - all correct!)
+- [x] Test Book 3 display on website
+
+
+## Book 1 Information Verification (December 2024)
+- [x] Read Book 1 actual content
+- [x] Compare website Book 1 info with actual book (MISMATCH FOUND - needs update)
+- [x] Fix any character name or plot discrepancies (updated to actual book blurb)
+- [x] Test Book 1 display on website
