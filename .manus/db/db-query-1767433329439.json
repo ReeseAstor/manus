@@ -1,0 +1,28 @@
+{
+  "query": "SELECT id, title, slug, SUBSTRING(description, 1, 100) as desc_preview FROM books ORDER BY seriesOrder;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute SELECT id, title, slug, SUBSTRING(description, 1, 100) as desc_preview FROM books ORDER BY seriesOrder;",
+  "rows": [
+    {
+      "id": "3",
+      "title": "The Billionaire's Executive Assistant",
+      "slug": "the-billionaire-s-executive-assistant",
+      "desc_preview": "Sarah Shah never expected to work for Manhattan's most ruthless billionaire. Michael Hastings is dem"
+    },
+    {
+      "id": "2",
+      "title": "The Billionaire's Fake Wife",
+      "slug": "the-billionaire-s-fake-wife",
+      "desc_preview": "Lily Chen never wanted to be a thief. But when her father threatens her life unless she steals corpo"
+    },
+    {
+      "id": "1",
+      "title": "The Billionaire's Baby Secret",
+      "slug": "the-billionaire-s-baby-secret",
+      "desc_preview": "Three years ago, Sophia Reed walked away from a hotel room and a man she should've never trusted—ris"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tslug\tdesc_preview\n3\tThe Billionaire's Executive Assistant\tthe-billionaire-s-executive-assistant\tSarah Shah never expected to work for Manhattan's most ruthless billionaire. Michael Hastings is dem\n2\tThe Billionaire's Fake Wife\tthe-billionaire-s-fake-wife\tLily Chen never wanted to be a thief. But when her father threatens her life unless she steals corpo\n1\tThe Billionaire's Baby Secret\tthe-billionaire-s-baby-secret\tThree years ago, Sophia Reed walked away from a hotel room and a man she should've never trusted—ris\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}

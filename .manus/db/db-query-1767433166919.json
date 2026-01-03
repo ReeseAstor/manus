@@ -1,0 +1,45 @@
+{
+  "query": "SELECT id, title, slug, series, seriesOrder, description FROM books ORDER BY seriesOrder;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute SELECT id, title, slug, series, seriesOrder, description FROM books ORDER BY seriesOrder;",
+  "rows": [
+    {
+      "id": "3",
+      "title": "The Billionaire's Executive Assistant",
+      "slug": "the-billionaire-s-executive-assistant",
+      "series": "Manhattan Money Kings",
+      "seriesOrder": "1",
+      "description": "Sarah Shah never expected to work for Manhattan's most ruthless billionaire. Michael Hastings is demanding, arrogant, and devastatingly attractive."
+    },
+    {
+      "id": "2",
+      "title": "The Billionaire's Fake Wife",
+      "slug": "the-billionaire-s-fake-wife",
+      "series": "Manhattan Money Kings",
+      "seriesOrder": "2",
+      "description": "Lily Chen never wanted to be a thief. But when her father threatens her life unless she steals corporate secrets from billionaire David Kim, she has no choice."
+    },
+    {
+      "id": "1",
+      "title": "The Billionaire's Baby Secret",
+      "slug": "the-billionaire-s-baby-secret",
+      "series": "Manhattan Money Kings",
+      "seriesOrder": "3",
+      "description": "Three years ago, Sophia Reed walked away from a hotel room and a man she should've never trusted—rising mogul Dominic Kane. She built stability the hard way: early trains, late invoices, and a tiny apartment where nothing could touch the life growing inside her."
+    }
+  ],
+  "messages": [
+    "As his executive assistant, she's determined to keep things professional—but when late nights at the office turn into stolen glances and forbidden touches, the line between business and pleasure begins to blur.",
+    "Michael built his empire on control, but Sarah makes him lose it. She challenges him, stands up to him, and ignites a fire he can't ignore. But mixing business with pleasure has consequences, especially when a corporate takeover threatens everything they've built.",
+    "With a scandal that could destroy them both brewing and enemies circling, Sarah must decide: is love worth risking her career, her reputation, and her heart?",
+    "Breaking into his Manhattan penthouse should have been simple—until David catches her in the act.",
+    "Instead of turning her over to the police, he offers a deal: help him expose her father's criminal empire, and he'll protect her. But there's a catch—they have to pretend to be married to make it convincing.",
+    "As they work together to bring down a dangerous man, their forced alliance ignites into something neither expected. Late nights planning their next move turn into stolen kisses. Fake touches for the cameras become all too real.",
+    "But with her father's threats escalating and David's empire at risk, Lily must decide: betray the man she's falling for, or risk everything for a chance at redemption and love.",
+    "Now the CEO who controls outcomes for a living is back… and the daughter Sophia's protected has the storm-gray eyes he can't deny.",
+    "When Dominic returns to reclaim his empire, he discovers the truth he was never meant to miss—and a city eager to devour the scandal. He can buy silence, clear rooms, bend markets. But Sophia has rules: boundaries around her child, transparency instead of power plays, and love that's earned, not purchased.",
+    "Between boardroom wars, paparazzi flash storms, and a custody fight waiting to ignite, he has to become more than a headline and more than a boss. He has to be the father Bella needs…and the partner Sophia deserves."
+  ],
+  "stdout": "id\ttitle\tslug\tseries\tseriesOrder\tdescription\n3\tThe Billionaire's Executive Assistant\tthe-billionaire-s-executive-assistant\tManhattan Money Kings\t1\tSarah Shah never expected to work for Manhattan's most ruthless billionaire. Michael Hastings is demanding, arrogant, and devastatingly attractive.\n\nAs his executive assistant, she's determined to keep things professional—but when late nights at the office turn into stolen glances and forbidden touches, the line between business and pleasure begins to blur.\n\nMichael built his empire on control, but Sarah makes him lose it. She challenges him, stands up to him, and ignites a fire he can't ignore. But mixing business with pleasure has consequences, especially when a corporate takeover threatens everything they've built.\n\nWith a scandal that could destroy them both brewing and enemies circling, Sarah must decide: is love worth risking her career, her reputation, and her heart?\n2\tThe Billionaire's Fake Wife\tthe-billionaire-s-fake-wife\tManhattan Money Kings\t2\tLily Chen never wanted to be a thief. But when her father threatens her life unless she steals corporate secrets from billionaire David Kim, she has no choice.\n\nBreaking into his Manhattan penthouse should have been simple—until David catches her in the act.\n\nInstead of turning her over to the police, he offers a deal: help him expose her father's criminal empire, and he'll protect her. But there's a catch—they have to pretend to be married to make it convincing.\n\nAs they work together to bring down a dangerous man, their forced alliance ignites into something neither expected. Late nights planning their next move turn into stolen kisses. Fake touches for the cameras become all too real.\n\nBut with her father's threats escalating and David's empire at risk, Lily must decide: betray the man she's falling for, or risk everything for a chance at redemption and love.\n1\tThe Billionaire's Baby Secret\tthe-billionaire-s-baby-secret\tManhattan Money Kings\t3\tThree years ago, Sophia Reed walked away from a hotel room and a man she should've never trusted—rising mogul Dominic Kane. She built stability the hard way: early trains, late invoices, and a tiny apartment where nothing could touch the life growing inside her.\n\nNow the CEO who controls outcomes for a living is back… and the daughter Sophia's protected has the storm-gray eyes he can't deny.\n\nWhen Dominic returns to reclaim his empire, he discovers the truth he was never meant to miss—and a city eager to devour the scandal. He can buy silence, clear rooms, bend markets. But Sophia has rules: boundaries around her child, transparency instead of power plays, and love that's earned, not purchased.\n\nBetween boardroom wars, paparazzi flash storms, and a custody fight waiting to ignite, he has to become more than a headline and more than a boss. He has to be the father Bella needs…and the partner Sophia deserves.\n",
+  "stderr": "",
+  "execution_time_ms": 50
+}

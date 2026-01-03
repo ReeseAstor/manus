@@ -1,0 +1,21 @@
+{
+  "query": "SELECT id, title, slug, description FROM books WHERE title LIKE '%Fake Wife%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute SELECT id, title, slug, description FROM books WHERE title LIKE '%Fake Wife%';",
+  "rows": [
+    {
+      "id": "2",
+      "title": "The Billionaire's Fake Wife",
+      "slug": "the-billionaire-s-fake-wife",
+      "description": "Lily Chen never wanted to be a thief. But when her father threatens her life unless she steals corporate secrets from billionaire David Kim, she has no choice."
+    }
+  ],
+  "messages": [
+    "Breaking into his Manhattan penthouse should have been simple—until David catches her in the act.",
+    "Instead of turning her over to the police, he offers a deal: help him expose her father's criminal empire, and he'll protect her. But there's a catch—they have to pretend to be married to make it convincing.",
+    "As they work together to bring down a dangerous man, their forced alliance ignites into something neither expected. Late nights planning their next move turn into stolen kisses. Fake touches for the cameras become all too real.",
+    "But with her father's threats escalating and David's empire at risk, Lily must decide: betray the man she's falling for, or risk everything for a chance at redemption and love."
+  ],
+  "stdout": "id\ttitle\tslug\tdescription\n2\tThe Billionaire's Fake Wife\tthe-billionaire-s-fake-wife\tLily Chen never wanted to be a thief. But when her father threatens her life unless she steals corporate secrets from billionaire David Kim, she has no choice.\n\nBreaking into his Manhattan penthouse should have been simple—until David catches her in the act.\n\nInstead of turning her over to the police, he offers a deal: help him expose her father's criminal empire, and he'll protect her. But there's a catch—they have to pretend to be married to make it convincing.\n\nAs they work together to bring down a dangerous man, their forced alliance ignites into something neither expected. Late nights planning their next move turn into stolen kisses. Fake touches for the cameras become all too real.\n\nBut with her father's threats escalating and David's empire at risk, Lily must decide: betray the man she's falling for, or risk everything for a chance at redemption and love.\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}
