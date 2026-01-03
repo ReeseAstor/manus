@@ -24,6 +24,7 @@ export default function Books() {
       available: true,
       badge: "New Release",
       featured: true,
+      audioSampleUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book3-sample-1767436046982.mp3",
     },
     {
       id: 2,
@@ -40,6 +41,7 @@ export default function Books() {
       rating: 4.7,
       reviews: 892,
       available: true,
+      audioSampleUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book2-sample-1767436022553.mp3",
     },
     {
       id: 1,
@@ -56,6 +58,7 @@ export default function Books() {
       rating: 4.5,
       reviews: 1247,
       available: true,
+      audioSampleUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book1-sample-1767436000744.mp3",
     },
   ];
 
@@ -156,6 +159,32 @@ export default function Books() {
                   Victoria Cruz was just passed over for partnership at Manhattan's most prestigious law firm. James Chen is the billionaire tech mogul who offers her one night to forget everything. But when James acquires her firm without warning, their passionate encounter becomes a corporate battlefield.
                 </p>
                 
+                {/* Audio Sample for Prequel */}
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5 border border-[#d4af37]/20 mb-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 rounded-full bg-[#d4af37]/20">
+                      <svg className="h-5 w-5 text-[#d4af37]" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">Listen to Sample</p>
+                      <p className="text-xs text-gray-400">Narrated excerpt from the prequel</p>
+                    </div>
+                  </div>
+                  <audio 
+                    controls 
+                    className="w-full"
+                    style={{
+                      height: '40px',
+                      filter: 'invert(1) hue-rotate(180deg)',
+                    }}
+                  >
+                    <source src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book05-sample-1767435983947.mp3" type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
+
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <Button
                     asChild
@@ -288,6 +317,34 @@ export default function Books() {
                     </div>
 
                     <div className="space-y-6">
+                      {/* Audio Sample Player */}
+                      {book.audioSampleUrl && (
+                        <div className="p-6 rounded-2xl bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5 border border-[#d4af37]/20">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="p-2 rounded-full bg-[#d4af37]/20">
+                              <svg className="h-5 w-5 text-[#d4af37]" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
+                              </svg>
+                            </div>
+                            <div>
+                              <p className="text-sm font-semibold text-white">Listen to Sample</p>
+                              <p className="text-xs text-gray-400">Narrated excerpt from the book</p>
+                            </div>
+                          </div>
+                          <audio 
+                            controls 
+                            className="w-full"
+                            style={{
+                              height: '40px',
+                              filter: 'invert(1) hue-rotate(180deg)',
+                            }}
+                          >
+                            <source src={book.audioSampleUrl} type="audio/mpeg" />
+                            Your browser does not support the audio element.
+                          </audio>
+                        </div>
+                      )}
+
                       <div className="flex items-center gap-4">
                         <span className="text-4xl font-bold text-white">{book.price}</span>
                         <span className="text-xl text-gray-500 line-through">

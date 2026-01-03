@@ -644,3 +644,12 @@
 - [x] Compare website Book 0.5 info with actual book (INCOMPLETE - needs detailed blurb)
 - [x] Fix any character name or plot discrepancies (added Victoria Cruz & James Chen with detailed plot)
 - [x] Test Book 0.5 display on website
+
+
+## Audio Samples from Book Excerpts (December 2024)
+- [x] Extract steamy scene excerpts from provided book files
+- [x] Generate audio samples using ElevenLabs for each book
+- [x] Upload audio files to S3 storage
+- [x] Add "Listen to Sample" buttons to Books page
+- [x] Create audio player component for book samples
+- [x] Test audio playback on all book cards
