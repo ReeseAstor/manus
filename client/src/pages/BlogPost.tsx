@@ -275,6 +275,34 @@ export default function BlogPost() {
               </p>
             </div>
 
+            {/* Audio Player */}
+            {post.audioUrl && (
+              <div className="mb-12 p-8 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#d4af37] to-[#c9a961] flex items-center justify-center">
+                    <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-xl font-bold text-white">Listen to this Article</h3>
+                    <p className="text-sm text-gray-400">Audio narration available</p>
+                  </div>
+                </div>
+                <audio
+                  controls
+                  className="w-full"
+                  style={{
+                    filter: 'invert(1) hue-rotate(180deg)',
+                    borderRadius: '12px',
+                  }}
+                >
+                  <source src={post.audioUrl} type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            )}
+
             {/* Main Content */}
             <div className="prose prose-lg prose-invert max-w-none mb-16">
               <div className="text-gray-300 leading-relaxed space-y-6 text-lg">

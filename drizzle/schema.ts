@@ -81,6 +81,7 @@ export const blogPosts = mysqlTable("blog_posts", {
   readTime: varchar("readTime", { length: 50 }).notNull(),
   published: mysqlEnum("published", ["draft", "published"]).default("draft").notNull(),
   authorId: int("authorId").notNull().references(() => users.id),
+  audioUrl: text("audioUrl"), // URL to generated audio narration
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   publishedAt: timestamp("publishedAt"),

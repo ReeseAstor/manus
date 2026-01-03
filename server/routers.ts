@@ -230,6 +230,44 @@ export const appRouter = router({
         await deleteBlogPost(input.id);
         return { success: true };
       }),
+
+    generateAudio: protectedProcedure
+      .input(z.object({ slug: z.string() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Only admins can generate audio",
+          });
+        }
+
+        const { generateSpeech } = await import("./_core/textToSpeech");
+        
+        // Get the blog post
+        const post = await getBlogPostBySlug(input.slug);
+        if (!post) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Blog post not found",
+          });
+        }
+
+        // Generate audio from blog content
+        const audioBuffer = await generateSpeech(post.content);
+        
+        // Upload to S3
+        const timestamp = Date.now();
+        const key = `blog-audio/${post.slug}-${timestamp}.mp3`;
+        const result = await storagePut(key, audioBuffer, "audio/mpeg");
+        
+        // Update blog post with audio URL
+        await updateBlogPost(post.id, { audioUrl: result.url });
+        
+        return {
+          success: true,
+          audioUrl: result.url,
+        };
+      }),
   }),
 
   books: router({

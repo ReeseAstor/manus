@@ -16,6 +16,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Admin from "./pages/Admin";
 import BlogEditor from "./pages/BlogEditor";
+import AdminAudioGenerator from "./pages/AdminAudioGenerator";
 import { NewsletterManager } from "./pages/NewsletterManager";
 import { NewsletterEditor } from "./pages/NewsletterEditor";
 import Privacy from "./pages/Privacy";
@@ -48,6 +49,7 @@ function Router() {
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/:slug"} component={BlogPost} />
       <Route path={"/admin"} component={Admin} />
+      <Route path={"/admin/audio"} component={AdminAudioGenerator} />
       <Route path={"/admin/blog/new"} component={BlogEditor} />
       <Route path={"/admin/blog/edit/:id"} component={BlogEditor} />
       <Route path={"/admin/newsletters"} component={NewsletterManager} />

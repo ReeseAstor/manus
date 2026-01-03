@@ -581,3 +581,29 @@
 - [x] Add blog post to database
 - [x] Link blog post from My Writing Desk section
 - [x] Test blog post display and navigation
+
+
+## Related Posts Section (December 2024)
+- [ ] Create RelatedPosts component
+- [ ] Add logic to fetch related posts by category
+- [ ] Integrate Related Posts section into BlogPost page
+- [ ] Test related posts display and navigation
+
+
+## ElevenLabs Revenue Generation Features (December 2024)
+- [x] Research ElevenLabs API capabilities
+- [x] Design audiobook sample feature (free preview chapters)
+- [x] Create premium audio content tier (paid narrated chapters)
+- [x] Implement voice-narrated blog posts (premium feature)
+- [x] Add personalized voice messages for top-tier subscribers
+- [x] Create revenue generation strategy document
+- [ ] Test audio features and pricing models
+
+
+## Blog Audio Narration (December 2024)
+- [x] Create ElevenLabs audio generation helper function
+- [x] Add audio generation tRPC procedure
+- [x] Store audio URLs in blog_posts table
+- [x] Add audio player component to BlogPost page
+- [x] Generate audio for "Day in the Life" blog post
+- [x] Test audio playback and quality

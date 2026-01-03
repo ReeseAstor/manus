@@ -10,4 +10,5 @@ export const ENV = {
   geminiApiKey: process.env.GEMINI_API_KEY ?? "",
   STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY ?? "",
   STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET ?? "",
+  ELEVENLABS_API_KEY: process.env.ELEVENLABS_API_KEY ?? "",
 };
