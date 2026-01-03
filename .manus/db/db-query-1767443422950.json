@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE books \nSET audioSampleUrl = CASE id\n  WHEN 1 THEN 'https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book1-sample-1767436000744.mp3'\n  WHEN 2 THEN 'https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book2-sample-1767436022553.mp3'\n  WHEN 3 THEN 'https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book3-sample-1767436046982.mp3'\nEND\nWHERE id IN (1, 2, 3);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute UPDATE books \nSET audioSampleUrl = CASE id\n  WHEN 1 THEN 'https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book1-sample-1767436000744.mp3'\n  WHEN 2 THEN 'https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book2-sample-1767436022553.mp3'\n  WHEN 3 THEN 'https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book3-sample-1767436046982.mp3'\nEND\nWHERE id IN (1, 2, 3);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 716
+}

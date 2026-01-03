@@ -653,3 +653,11 @@
 - [x] Add "Listen to Sample" buttons to Books page
 - [x] Create audio player component for book samples
 - [x] Test audio playback on all book cards
+
+
+## Audio Samples on Book Detail Pages (January 2025)
+- [x] Locate individual book detail page components
+- [x] Add audio players to Book 1 detail page
+- [x] Add audio players to Book 2 detail page
+- [x] Add audio players to Book 3 detail page
+- [x] Test audio playback on all detail pages
