@@ -160,7 +160,7 @@ export default function FreeBook() {
                 </div>
 
                 <p className="text-gray-300 text-xl leading-relaxed">
-                  One night. One mistake. One billionaire who never forgets. Discover where the Manhattan Money Kings saga began with this steamy standalone novella—absolutely free!
+                  Victoria Cruz was just passed over for partnership at Manhattan's most prestigious law firm. James Chen is the billionaire tech mogul who offers her one night to forget everything. But when James acquires her firm without warning, their passionate encounter becomes a corporate battlefield. Now Victoria must decide: destroy the man who betrayed her trust, or risk everything for a second chance at love.
                 </p>
 
                 {/* Email Signup Form */}

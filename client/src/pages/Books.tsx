@@ -153,7 +153,7 @@ export default function Books() {
                 </h2>
                 
                 <p className="text-lg text-gray-300">
-                  A Manhattan Money Kings Prequel. Get this steamy standalone novella absolutely free! Discover where the Manhattan Money Kings saga began.
+                  Victoria Cruz was just passed over for partnership at Manhattan's most prestigious law firm. James Chen is the billionaire tech mogul who offers her one night to forget everything. But when James acquires her firm without warning, their passionate encounter becomes a corporate battlefield.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">

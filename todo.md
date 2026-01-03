@@ -637,3 +637,10 @@
 - [x] Compare website Book 1 info with actual book (MISMATCH FOUND - needs update)
 - [x] Fix any character name or plot discrepancies (updated to actual book blurb)
 - [x] Test Book 1 display on website
+
+
+## Book 0.5 Prequel Information Verification (December 2024)
+- [x] Read Book 0.5 actual content
+- [x] Compare website Book 0.5 info with actual book (INCOMPLETE - needs detailed blurb)
+- [x] Fix any character name or plot discrepancies (added Victoria Cruz & James Chen with detailed plot)
+- [x] Test Book 0.5 display on website
