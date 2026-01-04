@@ -679,3 +679,43 @@
 - [x] Add Stripe subscription for VIP tiers
 - [x] Build VIP content library page
 - [x] Test membership flow and audio playback
+
+
+## Audio Integration System (January 2025)
+
+### Phase 1: Architecture & Scoping
+- [x] Define v1 audio features (scene narration, chapter read-aloud, character voices)
+- [x] Define voice library (romantic, dramatic, sensual voices)
+- [x] Define subscription tiers (Free, Bronze, Silver, Gold limits)
+- [x] Create technical architecture document
+- [x] Define data models (voices, usage tracking, audio scenes)
+
+### Phase 2: Core Audio Pipeline
+- [x] Enhance ElevenLabs API wrapper with voice selection
+- [x] Build text → audio pipeline with chunking for long content
+- [x] Build voice selection system with preview
+- [x] Build character → voice mapping system
+- [x] Build scene narration with multiple character voices
+- [x] Build chapter read-aloud functionality
+- [x] Build audio export (download MP3)
+
+### Phase 3: UX Implementation
+- [x] Build audio player component with progress, speed controls
+- [x] Build character voice assignment UI
+- [x] Build audio hub dashboard for members
+- [x] Add audio controls to story pages
+- [x] Add "Listen" buttons throughout the site
+
+### Phase 4: Monetization System
+- [x] Implement usage tracking (minutes generated per user)
+- [x] Build paywall logic (free tier limits, upgrade prompts)
+- [x] Create premium voice packs (locked behind Gold tier)
+- [x] Add upgrade CTAs at limit points
+- [x] Integrate with existing Stripe subscription
+
+### Phase 5: Launch Prep
+- [ ] Generate demo audio for all existing stories
+- [ ] Create marketing assets (audio samples, promotional content)
+- [ ] Write launch announcement for VIP club
+- [ ] Update landing page with audio features
+- [ ] Final QA testing

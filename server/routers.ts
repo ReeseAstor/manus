@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { aiRouter } from "./routers/ai-simple";
 import { stripeRouter } from "./routers/stripe";
 import { vipRouter } from "./routers/vip";
+import { audioRouter } from "./routers/audio";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
 import { generateEmailTemplate, sanitizeEmailContent } from "./emailTemplate";
@@ -62,6 +63,7 @@ export const appRouter = router({
   system: systemRouter,
   stripe: stripeRouter,
   vip: vipRouter,
+  audio: audioRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

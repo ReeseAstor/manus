@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
-import { Crown, Headphones, Heart, Sparkles, Star, Check, Play, Lock, Flame } from "lucide-react";
+import { Crown, Headphones, Heart, Sparkles, Star, Check, Play, Lock, Flame, Music } from "lucide-react";
 
 export default function VipClub() {
   const { user, isAuthenticated } = useAuth();
@@ -102,9 +102,10 @@ export default function VipClub() {
               <span className="text-lg text-white">
                 You're a <strong className="text-yellow-400">{membership.tier.name}</strong> member!
               </span>
-              <Link href="/vip-club/library">
+              <Link href="/vip-audio">
                 <Button variant="outline" className="border-pink-500/50 text-pink-400 hover:bg-pink-500/10">
-                  Access Your Stories
+                  <Music className="w-4 h-4 mr-2" />
+                  Open Audio Hub
                 </Button>
               </Link>
             </div>

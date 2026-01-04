@@ -27,6 +27,7 @@ import WhyBuyDirectPage from "./pages/WhyBuyDirectPage";
 import PurchaseSuccess from "./pages/PurchaseSuccess";
 import Profile from "./pages/Profile";
 import VipClub from "./pages/VipClub";
+import VipAudioHub from "./pages/VipAudioHub";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AIChatbot } from "./components/AIChatbot";
@@ -46,6 +47,7 @@ function Router() {
       <Route path={"/purchase-success"} component={PurchaseSuccess} />
       <Route path={"/profile"} component={Profile} />
       <Route path={"/vip-club"} component={VipClub} />
+      <Route path={"/vip-audio"} component={VipAudioHub} />
       <Route path={"/about"} component={About} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/blog"} component={Blog} />

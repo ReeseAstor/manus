@@ -490,3 +490,77 @@ export const storyPlayHistory = mysqlTable("story_play_history", {
 
 export type StoryPlayHistory = typeof storyPlayHistory.$inferSelect;
 export type InsertStoryPlayHistory = typeof storyPlayHistory.$inferInsert;
+
+
+/**
+ * Audio Usage Tracking - tracks ElevenLabs usage per user
+ */
+export const audioUsage = mysqlTable("audio_usage", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id),
+  minutesUsed: int("minutesUsed").notNull(), // Minutes of audio generated
+  characterCount: int("characterCount").notNull(), // Characters processed
+  voiceId: varchar("voiceId", { length: 100 }).notNull(), // Voice used
+  storyId: varchar("storyId", { length: 255 }), // Optional story reference
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type AudioUsage = typeof audioUsage.$inferSelect;
+export type InsertAudioUsage = typeof audioUsage.$inferInsert;
+
+/**
+ * Generated Audio Library - stores user's generated audio files
+ */
+export const generatedAudio = mysqlTable("generated_audio", {
+  id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  userId: int("userId").notNull().references(() => users.id),
+  storyId: varchar("storyId", { length: 255 }), // Optional story reference
+  title: varchar("title", { length: 255 }).notNull(),
+  audioUrl: text("audioUrl").notNull(),
+  durationSeconds: int("durationSeconds").notNull(),
+  voiceId: varchar("voiceId", { length: 100 }).notNull(),
+  characterCount: int("characterCount").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type GeneratedAudio = typeof generatedAudio.$inferSelect;
+export type InsertGeneratedAudio = typeof generatedAudio.$inferInsert;
+
+/**
+ * Voice Library - custom voices and presets
+ */
+export const voicePresets = mysqlTable("voice_presets", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").references(() => users.id), // null = system preset
+  name: varchar("name", { length: 100 }).notNull(),
+  elevenLabsVoiceId: varchar("elevenLabsVoiceId", { length: 100 }).notNull(),
+  description: text("description"),
+  style: varchar("style", { length: 50 }), // warm, commanding, sensual, etc.
+  gender: mysqlEnum("gender", ["male", "female", "neutral"]).notNull(),
+  isPremium: boolean("isPremium").default(false).notNull(),
+  stability: int("stability").default(50), // 0-100
+  similarityBoost: int("similarityBoost").default(75), // 0-100
+  styleIntensity: int("styleIntensity").default(50), // 0-100
+  isActive: boolean("isActive").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type VoicePreset = typeof voicePresets.$inferSelect;
+export type InsertVoicePreset = typeof voicePresets.$inferInsert;
+
+/**
+ * Character Voice Assignments - map characters to voices
+ */
+export const characterVoiceAssignments = mysqlTable("character_voice_assignments", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").references(() => users.id), // null = default assignment
+  characterName: varchar("characterName", { length: 100 }).notNull(),
+  bookTitle: varchar("bookTitle", { length: 255 }),
+  voicePresetId: int("voicePresetId").references(() => voicePresets.id),
+  elevenLabsVoiceId: varchar("elevenLabsVoiceId", { length: 100 }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CharacterVoiceAssignment = typeof characterVoiceAssignments.$inferSelect;
+export type InsertCharacterVoiceAssignment = typeof characterVoiceAssignments.$inferInsert;
