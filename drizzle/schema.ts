@@ -366,3 +366,127 @@ export const browsingHistory = mysqlTable("browsing_history", {
 
 export type BrowsingHistory = typeof browsingHistory.$inferSelect;
 export type InsertBrowsingHistory = typeof browsingHistory.$inferInsert;
+
+
+/**
+ * VIP Membership Tiers
+ */
+export const vipTiers = mysqlTable("vip_tiers", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 100 }).notNull(), // Bronze, Silver, Gold
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  description: text("description").notNull(),
+  price: int("price").notNull(), // Monthly price in cents
+  features: text("features").notNull(), // JSON array of features
+  stripePriceId: varchar("stripePriceId", { length: 255 }),
+  stripeProductId: varchar("stripeProductId", { length: 255 }),
+  storiesPerMonth: int("storiesPerMonth").default(0), // Number of new stories per month
+  customStoriesAllowed: boolean("customStoriesAllowed").default(false),
+  personalizedMessages: boolean("personalizedMessages").default(false),
+  displayOrder: int("displayOrder").default(0),
+  active: boolean("active").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type VipTier = typeof vipTiers.$inferSelect;
+export type InsertVipTier = typeof vipTiers.$inferInsert;
+
+/**
+ * VIP Members - tracks VIP subscription status
+ */
+export const vipMembers = mysqlTable("vip_members", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id).unique(),
+  tierId: int("tierId").notNull().references(() => vipTiers.id),
+  stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }),
+  stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
+  status: mysqlEnum("status", ["active", "canceled", "past_due", "trial"]).default("active").notNull(),
+  currentPeriodStart: timestamp("currentPeriodStart").notNull(),
+  currentPeriodEnd: timestamp("currentPeriodEnd").notNull(),
+  cancelAtPeriodEnd: boolean("cancelAtPeriodEnd").default(false).notNull(),
+  customStoriesUsed: int("customStoriesUsed").default(0), // Track custom story requests this month
+  joinedAt: timestamp("joinedAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type VipMember = typeof vipMembers.$inferSelect;
+export type InsertVipMember = typeof vipMembers.$inferInsert;
+
+/**
+ * Steamy Audio Stories - exclusive VIP content
+ */
+export const steamyStories = mysqlTable("steamy_stories", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  description: text("description").notNull(),
+  content: text("content").notNull(), // Full story text
+  excerpt: text("excerpt"), // Preview text for non-VIP
+  audioUrl: text("audioUrl"), // ElevenLabs generated audio URL
+  audioDuration: int("audioDuration"), // Duration in seconds
+  coverImage: text("coverImage"),
+  category: mysqlEnum("category", ["romance", "passion", "fantasy", "reunion", "forbidden", "first_time"]).default("romance").notNull(),
+  heatLevel: int("heatLevel").default(4), // 1-5 heat level
+  characters: text("characters"), // JSON array of character names
+  bookId: int("bookId").references(() => books.id), // Optional link to a book
+  minTier: int("minTier").default(1), // Minimum tier required (1=Bronze, 2=Silver, 3=Gold)
+  featured: boolean("featured").default(false),
+  published: boolean("published").default(false),
+  publishedAt: timestamp("publishedAt"),
+  playCount: int("playCount").default(0),
+  likeCount: int("likeCount").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SteamyStory = typeof steamyStories.$inferSelect;
+export type InsertSteamyStory = typeof steamyStories.$inferInsert;
+
+/**
+ * Custom Story Requests - Gold tier feature
+ */
+export const customStoryRequests = mysqlTable("custom_story_requests", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id),
+  prompt: text("prompt").notNull(), // User's story request/fantasy
+  characters: text("characters"), // Preferred characters
+  setting: varchar("setting", { length: 255 }), // Story setting
+  heatLevel: int("heatLevel").default(4), // Requested heat level
+  status: mysqlEnum("status", ["pending", "generating", "completed", "failed"]).default("pending").notNull(),
+  generatedStoryId: int("generatedStoryId").references(() => steamyStories.id),
+  audioUrl: text("audioUrl"), // Generated audio URL
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  completedAt: timestamp("completedAt"),
+});
+
+export type CustomStoryRequest = typeof customStoryRequests.$inferSelect;
+export type InsertCustomStoryRequest = typeof customStoryRequests.$inferInsert;
+
+/**
+ * Story Likes - track user favorites
+ */
+export const storyLikes = mysqlTable("story_likes", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id),
+  storyId: int("storyId").notNull().references(() => steamyStories.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type StoryLike = typeof storyLikes.$inferSelect;
+export type InsertStoryLike = typeof storyLikes.$inferInsert;
+
+/**
+ * Story Play History - track listening history
+ */
+export const storyPlayHistory = mysqlTable("story_play_history", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id),
+  storyId: int("storyId").notNull().references(() => steamyStories.id),
+  progress: int("progress").default(0), // Playback progress in seconds
+  completed: boolean("completed").default(false),
+  playedAt: timestamp("playedAt").defaultNow().notNull(),
+});
+
+export type StoryPlayHistory = typeof storyPlayHistory.$inferSelect;
+export type InsertStoryPlayHistory = typeof storyPlayHistory.$inferInsert;
