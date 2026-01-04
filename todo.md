@@ -712,6 +712,7 @@
 - [x] Create premium voice packs (locked behind Gold tier)
 - [x] Add upgrade CTAs at limit points
 - [x] Integrate with existing Stripe subscription
+- [x] Fix Character Voices section UI display (show formatted cards instead of raw data)
 
 ### Phase 5: Launch Prep
 - [ ] Generate demo audio for all existing stories

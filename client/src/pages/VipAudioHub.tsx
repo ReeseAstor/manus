@@ -266,31 +266,59 @@ export default function VipAudioHub() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {characterVoices && Object.entries(characterVoices).map(([bookKey, characters]) => (
-              <Card key={bookKey} className="bg-slate-900/50 border-amber-500/20">
-                <CardHeader>
-                  <CardTitle className="text-lg text-amber-300 capitalize">
-                    {bookKey.replace(/_/g, " ")}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {Object.entries(characters as unknown as Record<string, string>).map(([character, voiceId]) => {
-                      const voice = voices?.all.find(v => v.id === voiceId);
-                      return (
-                        <div key={character} className="flex items-center justify-between">
-                          <span className="text-white capitalize">{character.replace(/_/g, " ")}</span>
-                          <Badge variant="outline" className="border-amber-500/30 text-amber-300">
-                            <Mic className="h-3 w-3 mr-1" />
-                            {voice?.name || voiceId}
-                          </Badge>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {/* Group characters by book */}
+            {characterVoices && (() => {
+              // Group by book title
+              const bookGroups: Record<string, typeof characterVoices> = {};
+              characterVoices.forEach((mapping) => {
+                if (!bookGroups[mapping.bookTitle]) {
+                  bookGroups[mapping.bookTitle] = [];
+                }
+                bookGroups[mapping.bookTitle].push(mapping);
+              });
+              
+              return Object.entries(bookGroups).map(([bookTitle, characters]) => (
+                <Card key={bookTitle} className="bg-slate-900/50 border-amber-500/20">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg text-amber-300">
+                      {bookTitle}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {characters.map((mapping) => {
+                        const defaultVoice = voices?.all.find(v => v.id === mapping.defaultVoiceId);
+                        const premiumVoice = voices?.all.find(v => v.id === mapping.premiumVoiceId);
+                        return (
+                          <div key={mapping.characterName} className="flex items-center justify-between gap-4">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500/30 to-pink-500/30 flex items-center justify-center">
+                                <span className="text-xs font-bold text-amber-300">
+                                  {mapping.characterName.split(' ').map(n => n[0]).join('')}
+                                </span>
+                              </div>
+                              <span className="text-white font-medium">{mapping.characterName}</span>
+                            </div>
+                            <div className="flex gap-2">
+                              <Badge variant="outline" className="border-amber-500/30 text-amber-300 text-xs">
+                                <Mic className="h-3 w-3 mr-1" />
+                                {defaultVoice?.name || mapping.defaultVoiceId}
+                              </Badge>
+                              {premiumVoice && (
+                                <Badge className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 text-pink-300 border border-pink-500/30 text-xs">
+                                  <Crown className="h-3 w-3 mr-1" />
+                                  {premiumVoice.name}
+                                </Badge>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </CardContent>
+                </Card>
+              ));
+            })()}
           </div>
         </div>
       </section>
