@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,6 +16,27 @@ export default function VipClub() {
     enabled: isAuthenticated,
   });
   const { data: featuredStories } = trpc.vip.getFeaturedStories.useQuery();
+  const audioRefs = useRef<{ [key: number]: HTMLAudioElement | null }>({});
+
+  const handlePreviewPlay = (storyId: number, previewUrl: string) => {
+    // Stop all other audio
+    Object.values(audioRefs.current).forEach(audio => {
+      if (audio) audio.pause();
+    });
+    
+    // Play this audio
+    if (!audioRefs.current[storyId]) {
+      audioRefs.current[storyId] = new Audio(previewUrl);
+    }
+    audioRefs.current[storyId]?.play();
+  };
+
+  const handlePreviewStop = (storyId: number) => {
+    audioRefs.current[storyId]?.pause();
+    if (audioRefs.current[storyId]) {
+      audioRefs.current[storyId]!.currentTime = 0;
+    }
+  };
   
   const subscribeMutation = trpc.vip.subscribe.useMutation({
     onSuccess: (data: { checkoutUrl: string | null }) => {
@@ -75,7 +96,7 @@ export default function VipClub() {
               Listen to professionally narrated scenes that go beyond the books.
             </p>
             
-            <div className="flex flex-wrap justify-center gap-6 mb-12">
+            <div className="flex flex-wrap justify-center gap-6 mb-8">
               <div className="flex items-center gap-2 text-gray-300">
                 <Headphones className="w-5 h-5 text-pink-400" />
                 <span>Professional Narration</span>
@@ -88,6 +109,20 @@ export default function VipClub() {
                 <Sparkles className="w-5 h-5 text-pink-400" />
                 <span>New Stories Monthly</span>
               </div>
+            </div>
+            
+            {/* Listen to Sample Button */}
+            <div className="flex justify-center">
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="border-pink-500/50 text-pink-400 hover:bg-pink-500/10 hover:text-pink-300 gap-2"
+                onClick={() => document.querySelector('#featured-stories')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <Play className="w-5 h-5" />
+                Listen to Audio Samples
+                <span className="text-xs text-gray-400">(Hover over stories below)</span>
+              </Button>
             </div>
           </div>
         </div>
@@ -194,7 +229,7 @@ export default function VipClub() {
       </section>
 
       {/* Featured Stories Preview */}
-      <section className="py-20 bg-gray-900/50">
+      <section id="featured-stories" className="py-20 bg-gray-900/50">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
@@ -207,7 +242,7 @@ export default function VipClub() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {featuredStories?.map((story: { id: number; title: string; slug: string; description: string; excerpt: string | null; coverImage: string | null; category: string; heatLevel: number | null; audioDuration: number | null; playCount: number | null }) => (
+            {featuredStories?.map((story: { id: number; title: string; slug: string; description: string; excerpt: string | null; coverImage: string | null; category: string; heatLevel: number | null; audioDuration: number | null; playCount: number | null; previewAudioUrl?: string | null }) => (
               <Card key={story.id} className="bg-gray-800/50 border-gray-700 overflow-hidden group">
                 <div className="relative aspect-[4/3] bg-gradient-to-br from-pink-900/30 to-rose-900/30">
                   {story.coverImage ? (
@@ -217,12 +252,25 @@ export default function VipClub() {
                       <Headphones className="w-16 h-16 text-pink-500/50" />
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div 
+                    className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                    onMouseEnter={() => story.previewAudioUrl && !membership && handlePreviewPlay(story.id, story.previewAudioUrl)}
+                    onMouseLeave={() => story.previewAudioUrl && !membership && handlePreviewStop(story.id)}
+                  >
                     {membership ? (
                       <Button size="lg" className="bg-pink-500 hover:bg-pink-400">
                         <Play className="w-5 h-5 mr-2" />
                         Listen Now
                       </Button>
+                    ) : story.previewAudioUrl ? (
+                      <div className="text-center">
+                        <div className="relative">
+                          <Headphones className="w-12 h-12 text-pink-400 mx-auto mb-2 animate-pulse" />
+                          <Play className="w-6 h-6 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                        </div>
+                        <span className="text-white font-medium">Hover to Preview</span>
+                        <p className="text-gray-400 text-sm mt-1">10-second sample</p>
+                      </div>
                     ) : (
                       <div className="text-center">
                         <Lock className="w-8 h-8 text-gray-400 mx-auto mb-2" />

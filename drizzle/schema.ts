@@ -423,7 +423,8 @@ export const steamyStories = mysqlTable("steamy_stories", {
   description: text("description").notNull(),
   content: text("content").notNull(), // Full story text
   excerpt: text("excerpt"), // Preview text for non-VIP
-  audioUrl: text("audioUrl"), // ElevenLabs generated audio URL
+  audioUrl: text("audioUrl"), // ElevenLabs generated audio URL (full story)
+  previewAudioUrl: text("previewAudioUrl"), // Short preview clip for non-members (10-15 seconds)
   audioDuration: int("audioDuration"), // Duration in seconds
   coverImage: text("coverImage"),
   category: mysqlEnum("category", ["romance", "passion", "fantasy", "reunion", "forbidden", "first_time"]).default("romance").notNull(),

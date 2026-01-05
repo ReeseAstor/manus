@@ -1,0 +1,1 @@
+ALTER TABLE `steamy_stories` ADD `previewAudioUrl` text;

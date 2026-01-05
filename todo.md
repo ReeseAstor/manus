@@ -731,3 +731,13 @@
 - [x] Generate audio sample for story 5 using ElevenLabs (Second Chance Seduction - Rachel voice)
 - [x] Update database with audio URLs
 - [x] Verify audio playback on VIP club page
+
+
+## VIP Audio Enhancement - Preview & Full Stories (January 2025)
+- [x] Generate 10-15 second preview clips for each story (non-member teaser)
+- [x] Add audio player component to story cards with hover preview
+- [x] Create prominent "Listen to Sample" button on VIP Club hero section
+- [ ] Generate full-length audio narrations for complete story content (deferred - generate on-demand for VIP members)
+- [x] Update database schema to include preview audio URLs
+- [x] Test audio preview functionality for non-members
+- [x] Verify hover-to-play functionality on VIP Club page

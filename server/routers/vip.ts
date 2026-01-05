@@ -72,6 +72,7 @@ export const vipRouter = router({
         heatLevel: steamyStories.heatLevel,
         audioDuration: steamyStories.audioDuration,
         playCount: steamyStories.playCount,
+        previewAudioUrl: steamyStories.previewAudioUrl,
       })
       .from(steamyStories)
       .where(and(eq(steamyStories.featured, true), eq(steamyStories.published, true)))
