@@ -1,0 +1,75 @@
+{
+  "query": "SELECT id, title, slug, description, content, excerpt, audioUrl, heatLevel, characters, minTier, published FROM steamy_stories WHERE published = 1 LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute SELECT id, title, slug, description, content, excerpt, audioUrl, heatLevel, characters, minTier, published FROM steamy_stories WHERE published = 1 LIMIT 5;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "The Penthouse Reunion",
+      "slug": "the-penthouse-reunion",
+      "description": "Elena and David finally give in to the tension that has been building since their first encounter. A night in his Manhattan penthouse changes everything.",
+      "content": "Full story content here...",
+      "excerpt": "The elevator doors opened to reveal David's penthouse, and Elena felt her breath catch. Floor-to-ceiling windows showcased the glittering Manhattan skyline...",
+      "audioUrl": "NULL",
+      "heatLevel": "5",
+      "characters": "[\"Elena Kim\", \"David Kim\"]",
+      "minTier": "1",
+      "published": "1"
+    },
+    {
+      "id": "2",
+      "title": "Late Night at Chen Technologies",
+      "slug": "late-night-chen-technologies",
+      "description": "Sarah stays late to finish the Redwood project, but she's not alone. Michael has been watching her all evening, and tonight, he can't hold back anymore.",
+      "content": "Full story content here...",
+      "excerpt": "The office was empty except for the soft glow of Sarah's computer screen. She didn't hear him approach until his voice came from the doorway...",
+      "audioUrl": "NULL",
+      "heatLevel": "4",
+      "characters": "[\"Sarah\", \"Michael Chen\"]",
+      "minTier": "1",
+      "published": "1"
+    },
+    {
+      "id": "3",
+      "title": "Three Years Later",
+      "slug": "three-years-later",
+      "description": "Sophia never expected to see Dominic again. But when she walks into Kane Industries for a job interview, the past comes rushing back—along with feelings she thought she'd buried.",
+      "content": "Full story content here...",
+      "excerpt": "Sophia's heart stopped when she saw him. Three years hadn't changed those storm-gray eyes, the ones that haunted her dreams...",
+      "audioUrl": "NULL",
+      "heatLevel": "4",
+      "characters": "[\"Sophia Reed\", \"Dominic Kane\"]",
+      "minTier": "1",
+      "published": "1"
+    },
+    {
+      "id": "4",
+      "title": "The Charity Gala",
+      "slug": "the-charity-gala",
+      "description": "At the Met's most exclusive event, Victoria and James find themselves drawn together despite knowing they shouldn't. What happens in the Temple of Dendur stays in the Temple of Dendur.",
+      "content": "Full story content here...",
+      "excerpt": "The champagne was flowing, the diamonds were sparkling, but Victoria only had eyes for one man across the crowded gallery...",
+      "audioUrl": "NULL",
+      "heatLevel": "5",
+      "characters": "[\"Victoria Cruz\", \"James Chen\"]",
+      "minTier": "2",
+      "published": "1"
+    },
+    {
+      "id": "5",
+      "title": "The Private Jet",
+      "slug": "the-private-jet",
+      "description": "A business trip to Paris becomes something much more when Elena and David are alone at 40,000 feet. The mile-high club has never been so exclusive.",
+      "content": "Full story content here...",
+      "excerpt": "The Gulfstream leveled off above the clouds, and David dismissed the flight attendant. They had eight hours to Paris, and he intended to use every minute...",
+      "audioUrl": "NULL",
+      "heatLevel": "5",
+      "characters": "[\"Elena Kim\", \"David Kim\"]",
+      "minTier": "3",
+      "published": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tslug\tdescription\tcontent\texcerpt\taudioUrl\theatLevel\tcharacters\tminTier\tpublished\n1\tThe Penthouse Reunion\tthe-penthouse-reunion\tElena and David finally give in to the tension that has been building since their first encounter. A night in his Manhattan penthouse changes everything.\tFull story content here...\tThe elevator doors opened to reveal David's penthouse, and Elena felt her breath catch. Floor-to-ceiling windows showcased the glittering Manhattan skyline...\tNULL\t5\t[\"Elena Kim\", \"David Kim\"]\t1\t1\n2\tLate Night at Chen Technologies\tlate-night-chen-technologies\tSarah stays late to finish the Redwood project, but she's not alone. Michael has been watching her all evening, and tonight, he can't hold back anymore.\tFull story content here...\tThe office was empty except for the soft glow of Sarah's computer screen. She didn't hear him approach until his voice came from the doorway...\tNULL\t4\t[\"Sarah\", \"Michael Chen\"]\t1\t1\n3\tThree Years Later\tthree-years-later\tSophia never expected to see Dominic again. But when she walks into Kane Industries for a job interview, the past comes rushing back—along with feelings she thought she'd buried.\tFull story content here...\tSophia's heart stopped when she saw him. Three years hadn't changed those storm-gray eyes, the ones that haunted her dreams...\tNULL\t4\t[\"Sophia Reed\", \"Dominic Kane\"]\t1\t1\n4\tThe Charity Gala\tthe-charity-gala\tAt the Met's most exclusive event, Victoria and James find themselves drawn together despite knowing they shouldn't. What happens in the Temple of Dendur stays in the Temple of Dendur.\tFull story content here...\tThe champagne was flowing, the diamonds were sparkling, but Victoria only had eyes for one man across the crowded gallery...\tNULL\t5\t[\"Victoria Cruz\", \"James Chen\"]\t2\t1\n5\tThe Private Jet\tthe-private-jet\tA business trip to Paris becomes something much more when Elena and David are alone at 40,000 feet. The mile-high club has never been so exclusive.\tFull story content here...\tThe Gulfstream leveled off above the clouds, and David dismissed the flight attendant. They had eight hours to Paris, and he intended to use every minute...\tNULL\t5\t[\"Elena Kim\", \"David Kim\"]\t3\t1\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}

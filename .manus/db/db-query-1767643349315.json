@@ -1,0 +1,35 @@
+{
+  "query": "SELECT id, title, LEFT(content, 500) as content_preview FROM steamy_stories WHERE published = 1 ORDER BY id LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute SELECT id, title, LEFT(content, 500) as content_preview FROM steamy_stories WHERE published = 1 ORDER BY id LIMIT 5;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "The Penthouse Reunion",
+      "content_preview": "Full story content here..."
+    },
+    {
+      "id": "2",
+      "title": "Late Night at Chen Technologies",
+      "content_preview": "Full story content here..."
+    },
+    {
+      "id": "3",
+      "title": "Three Years Later",
+      "content_preview": "Full story content here..."
+    },
+    {
+      "id": "4",
+      "title": "The Charity Gala",
+      "content_preview": "Full story content here..."
+    },
+    {
+      "id": "5",
+      "title": "The Private Jet",
+      "content_preview": "Full story content here..."
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tcontent_preview\n1\tThe Penthouse Reunion\tFull story content here...\n2\tLate Night at Chen Technologies\tFull story content here...\n3\tThree Years Later\tFull story content here...\n4\tThe Charity Gala\tFull story content here...\n5\tThe Private Jet\tFull story content here...\n",
+  "stderr": "",
+  "execution_time_ms": 67
+}

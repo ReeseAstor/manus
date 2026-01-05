@@ -1,0 +1,35 @@
+{
+  "query": "SELECT id, title, audioUrl FROM steamy_stories WHERE audioUrl IS NOT NULL LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute SELECT id, title, audioUrl FROM steamy_stories WHERE audioUrl IS NOT NULL LIMIT 5;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "The Penthouse Reunion",
+      "audioUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audio/vip-stories/story-1-1767643415899-0gno1.mp3"
+    },
+    {
+      "id": "2",
+      "title": "Late Night at Chen Technologies",
+      "audioUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audio/vip-stories/story-2-1767643432416-o5k77e.mp3"
+    },
+    {
+      "id": "3",
+      "title": "Three Years Later",
+      "audioUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audio/vip-stories/story-3-1767643453419-exh0g.mp3"
+    },
+    {
+      "id": "4",
+      "title": "The Charity Gala",
+      "audioUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audio/vip-stories/story-4-1767643476471-upnc0q.mp3"
+    },
+    {
+      "id": "5",
+      "title": "The Private Jet",
+      "audioUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audio/vip-stories/story-5-1767643498291-ua9lel.mp3"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\taudioUrl\n1\tThe Penthouse Reunion\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audio/vip-stories/story-1-1767643415899-0gno1.mp3\n2\tLate Night at Chen Technologies\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audio/vip-stories/story-2-1767643432416-o5k77e.mp3\n3\tThree Years Later\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audio/vip-stories/story-3-1767643453419-exh0g.mp3\n4\tThe Charity Gala\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audio/vip-stories/story-4-1767643476471-upnc0q.mp3\n5\tThe Private Jet\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audio/vip-stories/story-5-1767643498291-ua9lel.mp3\n",
+  "stderr": "",
+  "execution_time_ms": 51
+}
