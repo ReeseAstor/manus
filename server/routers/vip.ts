@@ -116,15 +116,19 @@ export const vipRouter = router({
 
       const tierLevel = tier[0]?.displayOrder || 1;
 
+      const conditions = [
+        eq(steamyStories.published, true),
+        sql`${steamyStories.minTier} <= ${tierLevel}`
+      ];
+
+      if (input.category) {
+        conditions.push(eq(steamyStories.category, input.category as any));
+      }
+
       const stories = await db
         .select()
         .from(steamyStories)
-        .where(
-          and(
-            eq(steamyStories.published, true),
-            sql`${steamyStories.minTier} <= ${tierLevel}`
-          )
-        )
+        .where(and(...conditions))
         .orderBy(desc(steamyStories.publishedAt))
         .limit(input.limit)
         .offset(input.offset);

@@ -28,6 +28,7 @@ import PurchaseSuccess from "./pages/PurchaseSuccess";
 import Profile from "./pages/Profile";
 import VipClub from "./pages/VipClub";
 import VipAudioHub from "./pages/VipAudioHub";
+import VipAudioLibrary from "./pages/VipAudioLibrary";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AIChatbot } from "./components/AIChatbot";
@@ -48,6 +49,7 @@ function Router() {
       <Route path={"/profile"} component={Profile} />
       <Route path={"/vip-club"} component={VipClub} />
       <Route path={"/vip-audio"} component={VipAudioHub} />
+      <Route path={"/vip-audio-library"} component={VipAudioLibrary} />
       <Route path={"/about"} component={About} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/blog"} component={Blog} />

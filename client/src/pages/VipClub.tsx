@@ -17,6 +17,8 @@ export default function VipClub() {
   });
   const { data: featuredStories } = trpc.vip.getFeaturedStories.useQuery();
   const audioRefs = useRef<{ [key: number]: HTMLAudioElement | null }>({});
+  const [audioDurations, setAudioDurations] = useState<{ [key: number]: number }>({});
+  const [audioProgress, setAudioProgress] = useState<{ [key: number]: number }>({});
 
   const handlePreviewPlay = (storyId: number, previewUrl: string) => {
     // Stop all other audio
@@ -26,7 +28,25 @@ export default function VipClub() {
     
     // Play this audio
     if (!audioRefs.current[storyId]) {
-      audioRefs.current[storyId] = new Audio(previewUrl);
+      const audio = new Audio(previewUrl);
+      
+      // Set up duration listener
+      audio.addEventListener('loadedmetadata', () => {
+        setAudioDurations(prev => ({ ...prev, [storyId]: Math.ceil(audio.duration) }));
+      });
+      
+      // Set up progress listener
+      audio.addEventListener('timeupdate', () => {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        setAudioProgress(prev => ({ ...prev, [storyId]: progress }));
+      });
+      
+      // Reset progress when ended
+      audio.addEventListener('ended', () => {
+        setAudioProgress(prev => ({ ...prev, [storyId]: 0 }));
+      });
+      
+      audioRefs.current[storyId] = audio;
     }
     audioRefs.current[storyId]?.play();
   };
@@ -36,6 +56,7 @@ export default function VipClub() {
     if (audioRefs.current[storyId]) {
       audioRefs.current[storyId]!.currentTime = 0;
     }
+    setAudioProgress(prev => ({ ...prev, [storyId]: 0 }));
   };
   
   const subscribeMutation = trpc.vip.subscribe.useMutation({
@@ -269,7 +290,18 @@ export default function VipClub() {
                           <Play className="w-6 h-6 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                         </div>
                         <span className="text-white font-medium">Hover to Preview</span>
-                        <p className="text-gray-400 text-sm mt-1">10-second sample</p>
+                        <p className="text-gray-400 text-sm mt-1">
+                          {audioDurations[story.id] ? `${audioDurations[story.id]}s sample` : 'Loading...'}
+                        </p>
+                        {/* Progress Bar */}
+                        {audioProgress[story.id] > 0 && (
+                          <div className="w-32 h-1 bg-gray-600 rounded-full mt-2 overflow-hidden">
+                            <div 
+                              className="h-full bg-pink-400 transition-all duration-100"
+                              style={{ width: `${audioProgress[story.id]}%` }}
+                            />
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <div className="text-center">
