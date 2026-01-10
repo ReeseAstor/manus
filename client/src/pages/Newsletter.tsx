@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
-import { Heart, Mail, BookOpen, Sparkles, CheckCircle } from 'lucide-react';
+import { Heart, Mail, BookOpen, Sparkles, CheckCircle, Calendar, ArrowRight } from 'lucide-react';
+import { Link } from 'wouter';
 
 /**
  * Newsletter Signup Page
@@ -267,13 +268,108 @@ export default function Newsletter() {
         </div>
 
         {/* Social Proof */}
-        <div className="bg-white rounded-xl p-8 shadow-lg text-center">
+        <div className="bg-white rounded-xl p-8 shadow-lg text-center mb-12">
           <p className="text-gray-600 italic mb-4">
             "I love getting Reese's newsletters! The deleted scenes are my favorite - 
             I get to spend more time with my favorite characters. Highly recommend subscribing!"
           </p>
           <p className="font-semibold text-gray-900">— Sarah M., Newsletter Subscriber</p>
         </div>
+
+        {/* Recent News Section */}
+        <RecentNewsSection />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Recent News Section Component
+ * Displays latest 3 blog posts to showcase newsletter content
+ */
+function RecentNewsSection() {
+  const { data: posts, isLoading } = trpc.blog.list.useQuery({ published: true });
+  
+  const recentPosts = posts?.slice(0, 3) || [];
+
+  if (isLoading) {
+    return (
+      <div className="text-center py-12">
+        <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600"></div>
+      </div>
+    );
+  }
+
+  if (recentPosts.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="mb-12">
+      {/* Section Header */}
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+          <Calendar className="w-4 h-4" />
+          Recent News
+        </div>
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Latest Updates from Reese
+        </h2>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Here's a taste of what you'll get in your inbox when you subscribe
+        </p>
+      </div>
+
+      {/* Blog Posts Grid */}
+      <div className="grid md:grid-cols-3 gap-6 mb-8">
+        {recentPosts.map((post) => (
+          <Link key={post.id} href={`/blog/${post.slug}`}>
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col">
+              {/* Category Badge */}
+              <div className="p-4 pb-0">
+                <span className="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full">
+                  {post.category}
+                </span>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                  {post.title}
+                </h3>
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-1">
+                  {post.excerpt}
+                </p>
+
+                {/* Meta */}
+                <div className="flex items-center justify-between text-sm text-gray-500 pt-4 border-t border-gray-100">
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    {new Date(post.publishedAt || post.createdAt).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric'
+                    })}
+                  </span>
+                  <span className="text-pink-600 font-semibold flex items-center gap-1 hover:gap-2 transition-all">
+                    Read More
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* View All Link */}
+      <div className="text-center">
+        <Link href="/blog">
+          <a className="inline-flex items-center gap-2 text-purple-600 font-semibold hover:text-purple-700 transition">
+            View All Blog Posts
+            <ArrowRight className="w-5 h-5" />
+          </a>
+        </Link>
       </div>
     </div>
   );

@@ -800,3 +800,9 @@
 - [x] Create dedicated newsletter signup page
 - [x] Add route for /newsletter
 - [x] Test newsletter signup flow
+
+
+## Newsletter Page Enhancement (January 2025)
+- [x] Add Recent News section to newsletter page
+- [x] Display latest 3 blog posts with images and excerpts
+- [x] Test Recent News display
