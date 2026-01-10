@@ -794,3 +794,9 @@
 - [x] Add login/signup UI components
 - [ ] Test authentication flow
 - [ ] Configure subdomain routing for auth.reeseastor.com
+
+
+## Newsletter Signup Page (January 2025)
+- [x] Create dedicated newsletter signup page
+- [x] Add route for /newsletter
+- [x] Test newsletter signup flow
