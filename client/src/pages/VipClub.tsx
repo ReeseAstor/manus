@@ -5,7 +5,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
-import { Crown, Headphones, Heart, Sparkles, Star, Check, Play, Lock, Flame, Music } from "lucide-react";
+import { Crown, Headphones, Heart, Sparkles, Star, Check, Play, Lock, Flame, Music, Pause, X } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 export default function VipClub() {
   const { user, isAuthenticated } = useAuth();
@@ -19,6 +20,11 @@ export default function VipClub() {
   const audioRefs = useRef<{ [key: number]: HTMLAudioElement | null }>({});
   const [audioDurations, setAudioDurations] = useState<{ [key: number]: number }>({});
   const [audioProgress, setAudioProgress] = useState<{ [key: number]: number }>({});
+  const [previewAudioPlaying, setPreviewAudioPlaying] = useState(false);
+  const [previewAudioProgress, setPreviewAudioProgress] = useState(0);
+  const [previewAudioDuration, setPreviewAudioDuration] = useState(15);
+  const previewAudioRef = useRef<HTMLAudioElement | null>(null);
+  const [showExcerptModal, setShowExcerptModal] = useState(false);
 
   const handlePreviewPlay = (storyId: number, previewUrl: string) => {
     // Stop all other audio
@@ -418,7 +424,10 @@ export default function VipClub() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Preview Card 1: Story Excerpt */}
-            <Card className="bg-gradient-to-br from-pink-950/50 to-purple-950/30 border-pink-500/20 hover:border-pink-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/20">
+            <Card 
+              className="bg-gradient-to-br from-pink-950/50 to-purple-950/30 border-pink-500/20 hover:border-pink-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/20 cursor-pointer"
+              onClick={() => setShowExcerptModal(true)}
+            >
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30">
@@ -469,18 +478,54 @@ export default function VipClub() {
                 <div className="bg-gray-950/50 p-6 rounded-lg border border-purple-500/10 mb-4">
                   <div className="flex items-center justify-center mb-4">
                     <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
-                      <button className="relative bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-full p-6 transition-all duration-300 hover:scale-110 shadow-lg">
-                        <Play className="w-8 h-8" fill="currentColor" />
+                      <div className={`absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-30 ${previewAudioPlaying ? 'animate-pulse' : ''}`}></div>
+                      <button 
+                        onClick={() => {
+                          if (!previewAudioRef.current) {
+                            // Create audio element with sample preview URL
+                            // Using a sample audio file - replace with actual preview URL
+                            const audio = new Audio('https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav');
+                            audio.addEventListener('loadedmetadata', () => {
+                              setPreviewAudioDuration(Math.ceil(audio.duration));
+                            });
+                            audio.addEventListener('timeupdate', () => {
+                              const progress = (audio.currentTime / audio.duration) * 100;
+                              setPreviewAudioProgress(progress);
+                            });
+                            audio.addEventListener('ended', () => {
+                              setPreviewAudioPlaying(false);
+                              setPreviewAudioProgress(0);
+                            });
+                            previewAudioRef.current = audio;
+                          }
+                          
+                          if (previewAudioPlaying) {
+                            previewAudioRef.current?.pause();
+                            setPreviewAudioPlaying(false);
+                          } else {
+                            previewAudioRef.current?.play();
+                            setPreviewAudioPlaying(true);
+                          }
+                        }}
+                        className="relative bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-full p-6 transition-all duration-300 hover:scale-110 shadow-lg"
+                      >
+                        {previewAudioPlaying ? (
+                          <Pause className="w-8 h-8" fill="currentColor" />
+                        ) : (
+                          <Play className="w-8 h-8" fill="currentColor" />
+                        )}
                       </button>
                     </div>
                   </div>
                   <div className="flex items-center justify-between text-xs text-gray-400">
-                    <span>0:00</span>
+                    <span>{Math.floor((previewAudioProgress / 100) * previewAudioDuration)}s</span>
                     <div className="flex-1 mx-3 h-1 bg-gray-800 rounded-full overflow-hidden">
-                      <div className="h-full w-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                      <div 
+                        className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-100"
+                        style={{ width: `${previewAudioProgress}%` }}
+                      ></div>
                     </div>
-                    <span>0:15</span>
+                    <span>{previewAudioDuration}s</span>
                   </div>
                   <p className="text-center text-gray-400 text-xs mt-3">15-second sample</p>
                 </div>
@@ -544,6 +589,81 @@ export default function VipClub() {
               </CardContent>
             </Card>
           </div>
+
+          {/* Read Full Excerpt Modal */}
+          <Dialog open={showExcerptModal} onOpenChange={setShowExcerptModal}>
+            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-gray-900 to-gray-950 border-pink-500/30">
+              <DialogHeader>
+                <div className="flex items-center justify-between">
+                  <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">
+                    Story Excerpt
+                  </Badge>
+                  <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">
+                    Heat Level: 🔥🔥🔥🔥
+                  </Badge>
+                </div>
+                <DialogTitle className="text-2xl text-white">
+                  "The Boardroom Confession"
+                </DialogTitle>
+                <DialogDescription className="text-gray-400">
+                  Elena & David • Manhattan Money Kings
+                </DialogDescription>
+              </DialogHeader>
+              <div className="mt-6 space-y-4 text-gray-300 leading-relaxed">
+                <p className="italic">
+                  David's hand found the small of my back, his touch sending electricity through the silk of my dress. 'We shouldn't,' I whispered, even as I leaned into him. His gilded eyes darkened. 'Then tell me to stop.' But we both knew I wouldn't.
+                </p>
+                <p>
+                  The boardroom was empty, the city lights of Manhattan twinkling through the floor-to-ceiling windows. We'd stayed late to finalize the merger, but the tension between us had nothing to do with business.
+                </p>
+                <p>
+                  "Elena," he murmured, his voice low and rough. His fingers traced the curve of my spine, and I shivered despite the warmth flooding through me. "I've been trying to resist this. Trying to be professional."
+                </p>
+                <p>
+                  "And how's that working out for you?" I managed, my breath catching as he stepped closer, eliminating the space between us.
+                </p>
+                <p>
+                  "Terribly." His lips brushed my ear, and my knees nearly buckled. "Every meeting, every glance across the conference table... I can't stop thinking about you."
+                </p>
+                <p>
+                  I turned to face him, my hands finding his chest. Through the crisp fabric of his shirt, I could feel his heart racing as fast as mine. "Then stop trying to resist."
+                </p>
+                <p>
+                  That was all the permission he needed. His mouth claimed mine with a hunger that stole my breath, his hands tangling in my hair as he backed me against the mahogany conference table. The cool wood pressed against my thighs as he lifted me onto it, never breaking the kiss.
+                </p>
+                <p>
+                  "God, Elena," he groaned against my lips. "Do you have any idea what you do to me?"
+                </p>
+                <p>
+                  I could feel exactly what I did to him, and it sent a thrill through my entire body. My fingers worked at his tie, loosening it, then moving to the buttons of his shirt. He caught my wrists gently, his eyes searching mine.
+                </p>
+                <p>
+                  "Are you sure about this?" he asked, his voice strained with the effort of holding back. "Once we cross this line..."
+                </p>
+                <p>
+                  "I've never been more sure of anything," I breathed, pulling him back to me.
+                </p>
+                <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-6 text-center">
+                  <Lock className="w-12 h-12 text-pink-400 mx-auto mb-3" />
+                  <p className="text-white font-semibold mb-2">Continue Reading</p>
+                  <p className="text-gray-400 text-sm mb-4">
+                    This story continues for another 2,000+ words of steamy content.
+                  </p>
+                  <Button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowExcerptModal(false);
+                      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"
+                  >
+                    <Crown className="w-4 h-4 mr-2" />
+                    Unlock Full Story
+                  </Button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
 
           {/* CTA */}
           <div className="text-center mt-12">

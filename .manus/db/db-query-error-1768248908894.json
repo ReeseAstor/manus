@@ -1,0 +1,8 @@
+{
+  "query": "SELECT id, title, preview_audio_url FROM steamy_stories WHERE title LIKE '%Midnight%' LIMIT 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute SELECT id, title, preview_audio_url FROM steamy_stories WHERE title LIKE '%Midnight%' LIMIT 1;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'preview_audio_url' in 'field list'"
+  ]
+}

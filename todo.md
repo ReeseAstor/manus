@@ -830,3 +830,11 @@
 - [x] Add audio preview clips with waveform visualization
 - [x] Include bonus content showcase (deleted scenes, character interviews)
 - [x] Test preview section functionality
+
+
+## VIP Club Preview Enhancements (January 2025)
+- [x] Make audio preview functional with play/pause controls
+- [x] Add progress bar tracking to audio preview
+- [x] Create "Read Full Excerpt" modal for story preview
+- [x] Add modal open/close functionality
+- [x] Test audio playback and modal functionality
