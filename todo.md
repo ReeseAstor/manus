@@ -813,3 +813,12 @@
 - [x] Display all past newsletters with search and filter
 - [x] Add newsletter detail view
 - [x] Test archive functionality
+
+
+## VIP Club Authentication Fix (January 2025)
+- [x] Investigate VIP Club authentication redirect issue (blank OAuth page)
+- [x] Switch VIP Club from Manus OAuth to Supabase Auth
+- [x] Update authentication hooks to support Supabase users
+- [x] Update auth callback to handle redirect parameter
+- [x] Test VIP Club signup and access with Supabase
+- [x] Deploy fix to production

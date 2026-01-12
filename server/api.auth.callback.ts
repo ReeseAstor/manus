@@ -14,7 +14,7 @@ import { eq } from 'drizzle-orm';
  * Query params: code, error, error_description
  */
 export async function authCallback(req: Request, res: Response) {
-  const { code, error, error_description } = req.query;
+  const { code, error, error_description, redirect } = req.query;
 
   // Handle OAuth errors
   if (error) {
@@ -62,8 +62,9 @@ export async function authCallback(req: Request, res: Response) {
     // const token = await createJWT({ userId: supabaseUser.id, email: supabaseUser.email });
     // res.cookie('auth_token', token, { ... });
 
-    // Redirect to home or dashboard
-    return res.redirect('/dashboard');
+    // Redirect to original destination or dashboard
+    const redirectUrl = (redirect && typeof redirect === 'string') ? redirect : '/dashboard';
+    return res.redirect(redirectUrl);
 
   } catch (err) {
     console.error('Unexpected error in auth callback:', err);

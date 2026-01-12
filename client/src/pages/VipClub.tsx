@@ -69,8 +69,8 @@ export default function VipClub() {
 
   const handleSubscribe = (tierSlug: string) => {
     if (!isAuthenticated) {
-      // Redirect to login
-      window.location.href = `/api/oauth/login?redirect=/vip-club`;
+      // Redirect to Supabase Auth login
+      window.location.href = `/auth/login?redirect=/vip-club`;
       return;
     }
     subscribeMutation.mutate({ tierSlug });

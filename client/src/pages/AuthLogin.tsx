@@ -14,6 +14,10 @@ export default function AuthLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  
+  // Get redirect parameter from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectTo = urlParams.get('redirect') || '/';
 
   if (!isSupabaseConfigured) {
     return (
@@ -42,8 +46,8 @@ export default function AuthLogin() {
       if (error) throw error;
 
       if (data.session) {
-        // Redirect to callback to sync with local database
-        window.location.href = `/api/auth/callback?code=${data.session.access_token}`;
+        // Redirect to callback to sync with local database, then to original destination
+        window.location.href = `/api/auth/callback?code=${data.session.access_token}&redirect=${encodeURIComponent(redirectTo)}`;
       }
     } catch (err: any) {
       setError(err.message || 'Failed to sign in');
@@ -72,7 +76,7 @@ export default function AuthLogin() {
       if (data.user && !data.session) {
         setMessage('Check your email for the confirmation link!');
       } else if (data.session) {
-        window.location.href = `/api/auth/callback?code=${data.session.access_token}`;
+        window.location.href = `/api/auth/callback?code=${data.session.access_token}&redirect=${encodeURIComponent(redirectTo)}`;
       }
     } catch (err: any) {
       setError(err.message || 'Failed to sign up');
