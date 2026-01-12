@@ -846,3 +846,14 @@
 - [x] Create story excerpt modal for Sarah & Michael
 - [x] Create story excerpt modal for Sophia & Dominic
 - [x] Test all excerpt modals and audio playback
+
+
+## Preview Audio & Full Story Content (January 2025)
+- [x] Check for existing preview audio files from earlier generation
+- [ ] Upload preview audio files to S3 (deferred - generate via Admin Audio Generator)
+- [ ] Update VipClub.tsx with actual S3 audio URLs (deferred - pending audio generation)
+- [x] Write complete "The Boardroom Confession" story (Elena & David, 2,400 words)
+- [x] Write complete "Midnight at Chen Technologies" story (Sarah & Michael, 1,800 words)
+- [x] Write complete "Three Years Later" story (Sophia & Dominic, 2,200 words)
+- [x] Add all three stories to database
+- [x] Verify stories were added correctly to database
