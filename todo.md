@@ -806,3 +806,10 @@
 - [x] Add Recent News section to newsletter page
 - [x] Display latest 3 blog posts with images and excerpts
 - [x] Test Recent News display
+
+
+## Newsletter Archive Page (January 2025)
+- [x] Create newsletter archive page at /newsletter-archive
+- [x] Display all past newsletters with search and filter
+- [x] Add newsletter detail view
+- [x] Test archive functionality

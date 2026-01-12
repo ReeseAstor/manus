@@ -405,20 +405,27 @@ export const appRouter = router({
       return await getAllNewsletters();
     }),
 
-    getById: protectedProcedure
+    getAll: publicProcedure.query(async () => {
+      // Public access to sent newsletters only
+      const newsletters = await getAllNewsletters();
+      return newsletters.filter((n) => n.status === "sent");
+    }),
+
+    getById: publicProcedure
       .input(z.object({ id: z.number() }))
-      .query(async ({ ctx, input }) => {
-        if (ctx.user.role !== "admin") {
-          throw new TRPCError({
-            code: "FORBIDDEN",
-            message: "Only admins can view newsletters",
-          });
-        }
+      .query(async ({ input }) => {
         const newsletter = await getNewsletterById(input.id);
         if (!newsletter) {
           throw new TRPCError({
             code: "NOT_FOUND",
             message: "Newsletter not found",
+          });
+        }
+        // Only allow access to sent newsletters for public
+        if (newsletter.status !== "sent") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "This newsletter is not available",
           });
         }
         return newsletter;
