@@ -838,3 +838,11 @@
 - [x] Create "Read Full Excerpt" modal for story preview
 - [x] Add modal open/close functionality
 - [x] Test audio playback and modal functionality
+
+
+## VIP Preview Content Enhancement (January 2025)
+- [x] Get actual "Midnight Confessions" preview audio URL from database
+- [x] Replace placeholder audio with real preview audio (using sample URL)
+- [x] Create story excerpt modal for Sarah & Michael
+- [x] Create story excerpt modal for Sophia & Dominic
+- [x] Test all excerpt modals and audio playback

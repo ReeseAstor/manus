@@ -25,6 +25,7 @@ export default function VipClub() {
   const [previewAudioDuration, setPreviewAudioDuration] = useState(15);
   const previewAudioRef = useRef<HTMLAudioElement | null>(null);
   const [showExcerptModal, setShowExcerptModal] = useState(false);
+  const [currentExcerpt, setCurrentExcerpt] = useState<'elena' | 'sarah' | 'sophia'>('elena');
 
   const handlePreviewPlay = (storyId: number, previewUrl: string) => {
     // Stop all other audio
@@ -426,7 +427,7 @@ export default function VipClub() {
             {/* Preview Card 1: Story Excerpt */}
             <Card 
               className="bg-gradient-to-br from-pink-950/50 to-purple-950/30 border-pink-500/20 hover:border-pink-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/20 cursor-pointer"
-              onClick={() => setShowExcerptModal(true)}
+              onClick={() => { setCurrentExcerpt('elena'); setShowExcerptModal(true); }}
             >
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
@@ -590,78 +591,178 @@ export default function VipClub() {
             </Card>
           </div>
 
-          {/* Read Full Excerpt Modal */}
-          <Dialog open={showExcerptModal} onOpenChange={setShowExcerptModal}>
-            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-gray-900 to-gray-950 border-pink-500/30">
-              <DialogHeader>
-                <div className="flex items-center justify-between">
-                  <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">
+          {/* Second Row: More Story Excerpts */}
+          <div className="grid md:grid-cols-2 gap-8 mt-8">
+            {/* Sarah & Michael Excerpt */}
+            <Card 
+              className="bg-gradient-to-br from-blue-950/50 to-indigo-950/30 border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/20 cursor-pointer"
+              onClick={() => { setCurrentExcerpt('sarah'); setShowExcerptModal(true); }}
+            >
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2">
+                  <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
                     Story Excerpt
                   </Badge>
-                  <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">
-                    Heat Level: 🔥🔥🔥🔥
-                  </Badge>
+                  <Heart className="w-5 h-5 text-blue-400" />
                 </div>
-                <DialogTitle className="text-2xl text-white">
-                  "The Boardroom Confession"
-                </DialogTitle>
-                <DialogDescription className="text-gray-400">
-                  Elena & David • Manhattan Money Kings
-                </DialogDescription>
-              </DialogHeader>
-              <div className="mt-6 space-y-4 text-gray-300 leading-relaxed">
-                <p className="italic">
-                  David's hand found the small of my back, his touch sending electricity through the silk of my dress. 'We shouldn't,' I whispered, even as I leaned into him. His gilded eyes darkened. 'Then tell me to stop.' But we both knew I wouldn't.
-                </p>
-                <p>
-                  The boardroom was empty, the city lights of Manhattan twinkling through the floor-to-ceiling windows. We'd stayed late to finalize the merger, but the tension between us had nothing to do with business.
-                </p>
-                <p>
-                  "Elena," he murmured, his voice low and rough. His fingers traced the curve of my spine, and I shivered despite the warmth flooding through me. "I've been trying to resist this. Trying to be professional."
-                </p>
-                <p>
-                  "And how's that working out for you?" I managed, my breath catching as he stepped closer, eliminating the space between us.
-                </p>
-                <p>
-                  "Terribly." His lips brushed my ear, and my knees nearly buckled. "Every meeting, every glance across the conference table... I can't stop thinking about you."
-                </p>
-                <p>
-                  I turned to face him, my hands finding his chest. Through the crisp fabric of his shirt, I could feel his heart racing as fast as mine. "Then stop trying to resist."
-                </p>
-                <p>
-                  That was all the permission he needed. His mouth claimed mine with a hunger that stole my breath, his hands tangling in my hair as he backed me against the mahogany conference table. The cool wood pressed against my thighs as he lifted me onto it, never breaking the kiss.
-                </p>
-                <p>
-                  "God, Elena," he groaned against my lips. "Do you have any idea what you do to me?"
-                </p>
-                <p>
-                  I could feel exactly what I did to him, and it sent a thrill through my entire body. My fingers worked at his tie, loosening it, then moving to the buttons of his shirt. He caught my wrists gently, his eyes searching mine.
-                </p>
-                <p>
-                  "Are you sure about this?" he asked, his voice strained with the effort of holding back. "Once we cross this line..."
-                </p>
-                <p>
-                  "I've never been more sure of anything," I breathed, pulling him back to me.
-                </p>
-                <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-6 text-center">
-                  <Lock className="w-12 h-12 text-pink-400 mx-auto mb-3" />
-                  <p className="text-white font-semibold mb-2">Continue Reading</p>
-                  <p className="text-gray-400 text-sm mb-4">
-                    This story continues for another 2,000+ words of steamy content.
+                <CardTitle className="text-white text-xl">
+                  "Midnight at Chen Technologies"
+                </CardTitle>
+                <CardDescription className="text-gray-400">
+                  Sarah & Michael • Heat Level: 🔥🔥🔥🔥
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-gray-950/50 p-4 rounded-lg border border-blue-500/10 mb-4">
+                  <p className="text-gray-300 text-sm italic leading-relaxed">
+                    "The office was silent except for the hum of my computer and the pounding of my heart. I didn't hear Michael approach until his shadow fell across my desk. 'You're still here,' he said, his voice rough with exhaustion—or something else entirely..."
                   </p>
-                  <Button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowExcerptModal(false);
-                      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"
-                  >
-                    <Crown className="w-4 h-4 mr-2" />
-                    Unlock Full Story
-                  </Button>
+                  <div className="mt-3 text-center">
+                    <span className="text-blue-400 text-xs font-semibold">— Continues for 1,800 words —</span>
+                  </div>
                 </div>
-              </div>
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                  <Lock className="w-4 h-4 text-blue-400" />
+                  <span>Full story available to Bronze+ members</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Sophia & Dominic Excerpt */}
+            <Card 
+              className="bg-gradient-to-br from-rose-950/50 to-red-950/30 border-rose-500/20 hover:border-rose-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-rose-500/20 cursor-pointer"
+              onClick={() => { setCurrentExcerpt('sophia'); setShowExcerptModal(true); }}
+            >
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2">
+                  <Badge className="bg-rose-500/20 text-rose-300 border-rose-500/30">
+                    Story Excerpt
+                  </Badge>
+                  <Flame className="w-5 h-5 text-rose-400" />
+                </div>
+                <CardTitle className="text-white text-xl">
+                  "Three Years Later"
+                </CardTitle>
+                <CardDescription className="text-gray-400">
+                  Sophia & Dominic • Heat Level: 🔥🔥🔥🔥🔥
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-gray-950/50 p-4 rounded-lg border border-rose-500/10 mb-4">
+                  <p className="text-gray-300 text-sm italic leading-relaxed">
+                    "The last person I expected to see at Kane Industries was Dominic Kane himself. Three years hadn't changed him—same intense dark eyes, same commanding presence that once made my knees weak. Still made them weak, apparently..."
+                  </p>
+                  <div className="mt-3 text-center">
+                    <span className="text-rose-400 text-xs font-semibold">— Continues for 2,200 words —</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                  <Lock className="w-4 h-4 text-rose-400" />
+                  <span>Full story available to Silver+ members</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Read Full Excerpt Modal - Dynamic Content */}
+          <Dialog open={showExcerptModal} onOpenChange={setShowExcerptModal}>
+            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-gray-900 to-gray-950 border-pink-500/30">
+              {currentExcerpt === 'elena' && (
+                <>
+                  <DialogHeader>
+                    <div className="flex items-center justify-between">
+                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Story Excerpt</Badge>
+                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Heat Level: 🔥🔥🔥🔥</Badge>
+                    </div>
+                    <DialogTitle className="text-2xl text-white">"The Boardroom Confession"</DialogTitle>
+                    <DialogDescription className="text-gray-400">Elena & David • Manhattan Money Kings</DialogDescription>
+                  </DialogHeader>
+                  <div className="mt-6 space-y-4 text-gray-300 leading-relaxed">
+                    <p className="italic">David's hand found the small of my back, his touch sending electricity through the silk of my dress. 'We shouldn't,' I whispered, even as I leaned into him. His gilded eyes darkened. 'Then tell me to stop.' But we both knew I wouldn't.</p>
+                    <p>The boardroom was empty, the city lights of Manhattan twinkling through the floor-to-ceiling windows. We'd stayed late to finalize the merger, but the tension between us had nothing to do with business.</p>
+                    <p>"Elena," he murmured, his voice low and rough. His fingers traced the curve of my spine, and I shivered despite the warmth flooding through me. "I've been trying to resist this. Trying to be professional."</p>
+                    <p>"And how's that working out for you?" I managed, my breath catching as he stepped closer, eliminating the space between us.</p>
+                    <p>"Terribly." His lips brushed my ear, and my knees nearly buckled. "Every meeting, every glance across the conference table... I can't stop thinking about you."</p>
+                    <p>I turned to face him, my hands finding his chest. Through the crisp fabric of his shirt, I could feel his heart racing as fast as mine. "Then stop trying to resist."</p>
+                    <p>That was all the permission he needed. His mouth claimed mine with a hunger that stole my breath, his hands tangling in my hair as he backed me against the mahogany conference table. The cool wood pressed against my thighs as he lifted me onto it, never breaking the kiss.</p>
+                    <p>"God, Elena," he groaned against my lips. "Do you have any idea what you do to me?"</p>
+                    <p>I could feel exactly what I did to him, and it sent a thrill through my entire body. My fingers worked at his tie, loosening it, then moving to the buttons of his shirt. He caught my wrists gently, his eyes searching mine.</p>
+                    <p>"Are you sure about this?" he asked, his voice strained with the effort of holding back. "Once we cross this line..."</p>
+                    <p>"I've never been more sure of anything," I breathed, pulling him back to me.</p>
+                    <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-6 text-center">
+                      <Lock className="w-12 h-12 text-pink-400 mx-auto mb-3" />
+                      <p className="text-white font-semibold mb-2">Continue Reading</p>
+                      <p className="text-gray-400 text-sm mb-4">This story continues for another 2,000+ words of steamy content.</p>
+                      <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
+                    </div>
+                  </div>
+                </>
+              )}
+              {currentExcerpt === 'sarah' && (
+                <>
+                  <DialogHeader>
+                    <div className="flex items-center justify-between">
+                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Story Excerpt</Badge>
+                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Heat Level: 🔥🔥🔥🔥</Badge>
+                    </div>
+                    <DialogTitle className="text-2xl text-white">"Midnight at Chen Technologies"</DialogTitle>
+                    <DialogDescription className="text-gray-400">Sarah & Michael • Manhattan Money Kings</DialogDescription>
+                  </DialogHeader>
+                  <div className="mt-6 space-y-4 text-gray-300 leading-relaxed">
+                    <p className="italic">The office was silent except for the hum of my computer and the pounding of my heart. I didn't hear Michael approach until his shadow fell across my desk. 'You're still here,' he said, his voice rough with exhaustion—or something else entirely.</p>
+                    <p>I looked up to find him standing there, tie loosened, shirt sleeves rolled up, looking more human than I'd ever seen him. More dangerous, too.</p>
+                    <p>"The Redwood Project deadline is tomorrow," I managed, trying to ignore how my pulse quickened at his proximity. "I wanted to make sure everything was perfect."</p>
+                    <p>"It already is." He moved closer, perching on the edge of my desk. "You're perfect, Sarah. Do you know that?"</p>
+                    <p>My breath caught. We'd been dancing around this for months—stolen glances, accidental touches, tension thick enough to cut. But we'd never crossed the line. Until now.</p>
+                    <p>"Mr. Hastings—" I started, but he cut me off with a look that made heat pool low in my belly.</p>
+                    <p>"Michael," he corrected softly. "When we're alone like this, I want to hear you say my name."</p>
+                    <p>"Michael," I whispered, and something in his eyes ignited. He reached out, tucking a strand of hair behind my ear, his fingers lingering against my cheek.</p>
+                    <p>"I've been trying to be professional," he murmured. "Trying to keep my distance. But Sarah, I can't anymore. Tell me you feel this too."</p>
+                    <p>Instead of answering, I stood, closing the space between us. His hands found my waist immediately, pulling me flush against him. The heat of his body through my blouse made me dizzy.</p>
+                    <p>"I feel it," I breathed against his lips. "Every single day."</p>
+                    <p>His mouth crashed into mine with a hunger that stole my breath. One hand tangled in my hair while the other pressed against the small of my back, holding me to him as if he'd never let go. I melted into him, all my reservations burning away in the heat between us.</p>
+                    <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-6 text-center">
+                      <Lock className="w-12 h-12 text-pink-400 mx-auto mb-3" />
+                      <p className="text-white font-semibold mb-2">Continue Reading</p>
+                      <p className="text-gray-400 text-sm mb-4">This story continues for another 1,800+ words of steamy content.</p>
+                      <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
+                    </div>
+                  </div>
+                </>
+              )}
+              {currentExcerpt === 'sophia' && (
+                <>
+                  <DialogHeader>
+                    <div className="flex items-center justify-between">
+                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Story Excerpt</Badge>
+                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Heat Level: 🔥🔥🔥🔥🔥</Badge>
+                    </div>
+                    <DialogTitle className="text-2xl text-white">"Three Years Later"</DialogTitle>
+                    <DialogDescription className="text-gray-400">Sophia & Dominic • Manhattan Money Kings</DialogDescription>
+                  </DialogHeader>
+                  <div className="mt-6 space-y-4 text-gray-300 leading-relaxed">
+                    <p className="italic">The last person I expected to see at Kane Industries was Dominic Kane himself. Three years hadn't changed him—same intense dark eyes, same commanding presence that once made my knees weak. Still made them weak, apparently.</p>
+                    <p>"Sophia." My name on his lips sent a shiver down my spine. "I didn't know you were the candidate."</p>
+                    <p>"Would it have mattered?" I kept my voice steady despite my racing heart. "You made it clear three years ago that we were a mistake."</p>
+                    <p>His jaw tightened. "That's not what I said."</p>
+                    <p>"You said we wanted different things. That your career came first. That I deserved someone who could give me more." The words still stung, even after all this time.</p>
+                    <p>"And I was an idiot." He moved closer, and I backed up until I hit his desk. "I've regretted it every single day since."</p>
+                    <p>"Dominic—" I warned, but he was already there, caging me in with his arms on either side of me.</p>
+                    <p>"Tell me you haven't thought about us," he challenged, his voice low and dangerous. "Tell me you don't remember how good we were together."</p>
+                    <p>I couldn't. Because I did remember. Every heated kiss, every whispered promise, every night tangled in his sheets. I remembered it all too well.</p>
+                    <p>"That was a long time ago," I managed weakly.</p>
+                    <p>"Then let me remind you." His hand cupped my face, thumb brushing my lower lip. "Unless you want me to stop?"</p>
+                    <p>I should have said yes. Should have pushed him away. Instead, I grabbed his tie and pulled him down to me, our lips meeting in a kiss that was three years of longing and regret and desperate need all rolled into one.</p>
+                    <p>He groaned against my mouth, lifting me onto the desk and stepping between my thighs. His hands were everywhere—my hair, my waist, sliding up my thighs beneath my skirt. I arched into him, all rational thought abandoning me as his lips trailed down my neck.</p>
+                    <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-6 text-center">
+                      <Lock className="w-12 h-12 text-pink-400 mx-auto mb-3" />
+                      <p className="text-white font-semibold mb-2">Continue Reading</p>
+                      <p className="text-gray-400 text-sm mb-4">This story continues for another 2,200+ words of steamy content.</p>
+                      <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
+                    </div>
+                  </div>
+                </>
+              )}
             </DialogContent>
           </Dialog>
 
