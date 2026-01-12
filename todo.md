@@ -857,3 +857,21 @@
 - [x] Write complete "Three Years Later" story (Sophia & Dominic, 2,200 words)
 - [x] Add all three stories to database
 - [x] Verify stories were added correctly to database
+
+
+## Supabase Authentication Flow Testing (January 2025)
+- [x] Test VIP Club signup flow with Supabase Auth
+- [x] Test login flow and redirect back to VIP Club
+- [x] Verify redirect parameter preservation
+- [x] Confirm OAuth providers are available (Google, GitHub)
+
+
+## Stripe Payment Flow Integration (January 2025)
+- [x] Review existing Stripe integration and subscription setup
+- [x] Update VIP Club Join Now buttons to create Stripe checkout sessions
+- [x] Add VIP tier products to database (Bronze $9.99, Silver $19.99, Gold $29.99)
+- [x] Update Stripe checkout URLs to production domain
+- [x] Verify VIP tiers exist in database
+- [ ] Create Stripe Price IDs in Stripe Dashboard (see stripe-vip-setup-guide.md)
+- [ ] Update database with Stripe Price IDs
+- [ ] Test complete signup → auth → payment → access flow

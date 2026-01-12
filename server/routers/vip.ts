@@ -259,8 +259,8 @@ export const vipRouter = router({
             quantity: 1,
           },
         ],
-        success_url: `https://reeseastor-rvrncdwc.manus.space/vip-club/welcome?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `https://reeseastor-rvrncdwc.manus.space/vip-club`,
+        success_url: `https://reeseastor.com/vip-club/welcome?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `https://reeseastor.com/vip-club`,
         metadata: {
           userId: ctx.user.id.toString(),
           tierId: tier[0].id.toString(),
