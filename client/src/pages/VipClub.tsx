@@ -402,11 +402,168 @@ export default function VipClub() {
             </div>
           </div>
         </div>
+      </section>      {/* Exclusive Content      {/* Pricing Tiers */}
+      <section id="pricing" className="py-20 bg-gradient-to-b from-gray-900 to-gray-950">   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0">
+              Exclusive Previews
+            </Badge>
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Taste What Awaits You
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Get a glimpse of the exclusive steamy content, bonus chapters, and behind-the-scenes material available to VIP members.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Preview Card 1: Story Excerpt */}
+            <Card className="bg-gradient-to-br from-pink-950/50 to-purple-950/30 border-pink-500/20 hover:border-pink-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/20">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2">
+                  <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30">
+                    Story Excerpt
+                  </Badge>
+                  <Sparkles className="w-5 h-5 text-pink-400" />
+                </div>
+                <CardTitle className="text-white text-xl">
+                  "The Boardroom Confession"
+                </CardTitle>
+                <CardDescription className="text-gray-400">
+                  Elena & David • Heat Level: 🔥🔥🔥🔥
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-gray-950/50 p-4 rounded-lg border border-pink-500/10 mb-4">
+                  <p className="text-gray-300 text-sm italic leading-relaxed">
+                    "David's hand found the small of my back, his touch sending electricity through the silk of my dress. 'We shouldn't,' I whispered, even as I leaned into him. His gilded eyes darkened. 'Then tell me to stop.' But we both knew I wouldn't..."
+                  </p>
+                  <div className="mt-3 text-center">
+                    <span className="text-pink-400 text-xs font-semibold">— Continues for 2,400 words —</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                  <Lock className="w-4 h-4 text-pink-400" />
+                  <span>Full story available to Bronze+ members</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Preview Card 2: Audio Sample */}
+            <Card className="bg-gradient-to-br from-purple-950/50 to-pink-950/30 border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2">
+                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                    Audio Preview
+                  </Badge>
+                  <Headphones className="w-5 h-5 text-purple-400" />
+                </div>
+                <CardTitle className="text-white text-xl">
+                  "Midnight Confessions"
+                </CardTitle>
+                <CardDescription className="text-gray-400">
+                  Sarah & Michael • Narrated by Bella
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-gray-950/50 p-6 rounded-lg border border-purple-500/10 mb-4">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
+                      <button className="relative bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-full p-6 transition-all duration-300 hover:scale-110 shadow-lg">
+                        <Play className="w-8 h-8" fill="currentColor" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-gray-400">
+                    <span>0:00</span>
+                    <div className="flex-1 mx-3 h-1 bg-gray-800 rounded-full overflow-hidden">
+                      <div className="h-full w-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                    </div>
+                    <span>0:15</span>
+                  </div>
+                  <p className="text-center text-gray-400 text-xs mt-3">15-second sample</p>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                  <Music className="w-4 h-4 text-purple-400" />
+                  <span>Full 8-minute audio for Silver+ members</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Preview Card 3: Bonus Content */}
+            <Card className="bg-gradient-to-br from-amber-950/50 to-yellow-950/30 border-amber-500/20 hover:border-amber-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/20">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2">
+                  <Badge className="bg-amber-500/20 text-amber-300 border-amber-500/30">
+                    Bonus Content
+                  </Badge>
+                  <Star className="w-5 h-5 text-amber-400" />
+                </div>
+                <CardTitle className="text-white text-xl">
+                  Deleted Scene Collection
+                </CardTitle>
+                <CardDescription className="text-gray-400">
+                  Behind the Books • Exclusive
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3 mb-4">
+                  <div className="bg-gray-950/50 p-3 rounded-lg border border-amber-500/10 hover:border-amber-500/30 transition-colors">
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-amber-400 mt-2"></div>
+                      <div>
+                        <p className="text-white text-sm font-medium">"The First Kiss" (Deleted Chapter)</p>
+                        <p className="text-gray-400 text-xs mt-1">What really happened at the charity gala...</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-gray-950/50 p-3 rounded-lg border border-amber-500/10 hover:border-amber-500/30 transition-colors">
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-amber-400 mt-2"></div>
+                      <div>
+                        <p className="text-white text-sm font-medium">Character Interview: Elena</p>
+                        <p className="text-gray-400 text-xs mt-1">Exclusive Q&A about her relationship with David</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-gray-950/50 p-3 rounded-lg border border-amber-500/10 hover:border-amber-500/30 transition-colors">
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-amber-400 mt-2"></div>
+                      <div>
+                        <p className="text-white text-sm font-medium">Author's Notes & Insights</p>
+                        <p className="text-gray-400 text-xs mt-1">Behind-the-scenes writing process</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                  <Lock className="w-4 h-4 text-amber-400" />
+                  <span>12+ bonus items for Gold members</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center mt-12">
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl hover:shadow-pink-500/30 transition-all duration-300"
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <Crown className="w-5 h-5 mr-2" />
+              Unlock All Exclusive Content
+            </Button>
+            <p className="text-gray-400 text-sm mt-4">
+              Join thousands of readers enjoying exclusive steamy content
+            </p>
+          </div>
+        </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-pink-900/30 to-rose-900/30">
-        <div className="container">
+      {/* What's Inside Section */}
+      <section className="py-20 bg-gradient-to-b from-gray-950 to-gray-900">       <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
               Ready to Unlock Your Fantasies?
