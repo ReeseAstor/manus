@@ -33,6 +33,8 @@ import AuthLogin from "./pages/AuthLogin";
 import Newsletter from "./pages/Newsletter";
 import NewsletterArchive from "./pages/NewsletterArchive";
 import NewsletterDetail from "./pages/NewsletterDetail";
+import VipWelcome from "./pages/VipWelcome";
+import VipDashboard from "./pages/VipDashboard";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AIChatbot } from "./components/AIChatbot";
@@ -52,6 +54,8 @@ function Router() {
       <Route path={"/purchase-success"} component={PurchaseSuccess} />
       <Route path={"/profile"} component={Profile} />
       <Route path={"/vip-club"} component={VipClub} />
+      <Route path={"/vip-club/welcome"} component={VipWelcome} />
+      <Route path={"/vip-club/dashboard"} component={VipDashboard} />
       <Route path={"/auth/login"} component={AuthLogin} />
       <Route path={"/newsletter"} component={Newsletter} />
       <Route path={"/newsletter-archive"} component={NewsletterArchive} />
