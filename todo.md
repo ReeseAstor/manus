@@ -875,3 +875,10 @@
 - [ ] Create Stripe Price IDs in Stripe Dashboard (see stripe-vip-setup-guide.md)
 - [ ] Update database with Stripe Price IDs
 - [ ] Test complete signup → auth → payment → access flow
+
+
+## Update Database with Stripe Price IDs (January 2025)
+- [x] Update Bronze tier with price_1SoxraKiQaEeeJopaigc8GAX
+- [x] Update Silver tier with price_1SoxsEkiQaEeeJopRtehIuaL
+- [x] Update Gold tier with price_1SoxsoKiQaEeeJopovyT8VUh
+- [x] Verify Price IDs are correctly saved
