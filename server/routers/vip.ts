@@ -81,6 +81,23 @@ export const vipRouter = router({
     return stories;
   }),
 
+  // Get welcome story for new members (doesn't require active membership yet)
+  getWelcomeStory: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return null;
+    
+    // Just return the first published story for welcome page
+    // Don't check membership since webhook may not have processed yet
+    const stories = await db
+      .select()
+      .from(steamyStories)
+      .where(eq(steamyStories.published, true))
+      .orderBy(desc(steamyStories.publishedAt))
+      .limit(1);
+
+    return stories[0] || null;
+  }),
+
   // Get all stories for VIP members
   getStories: protectedProcedure
     .input(

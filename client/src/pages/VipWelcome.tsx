@@ -14,13 +14,11 @@ export default function VipWelcome() {
   // Display subscription tier info (will be populated after webhook processes payment)
   const subscription = null; // TODO: Fetch from user's subscription data after webhook
 
-  // Get first story to showcase
-  const { data: stories } = trpc.vip.getStories.useQuery(
-    { limit: 1 },
+  // Get first story to showcase (doesn't require active membership yet)
+  const { data: firstStory } = trpc.vip.getWelcomeStory.useQuery(
+    undefined,
     { enabled: !!user }
   );
-
-  const firstStory = stories?.[0];
 
   useEffect(() => {
     if (!sessionId) {
