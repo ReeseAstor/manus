@@ -913,3 +913,8 @@
 - [x] Test welcome page → dashboard navigation
 - [x] Test dashboard → audio library access
 - [x] Verify complete end-to-end signup flow
+
+
+## Welcome Page Loading Animation (January 2025)
+- [x] Add loading animation while first story is being fetched
+- [x] Test loading state on welcome page

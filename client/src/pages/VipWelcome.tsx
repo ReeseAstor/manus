@@ -15,7 +15,7 @@ export default function VipWelcome() {
   const subscription = null; // TODO: Fetch from user's subscription data after webhook
 
   // Get first story to showcase (doesn't require active membership yet)
-  const { data: firstStory } = trpc.vip.getWelcomeStory.useQuery(
+  const { data: firstStory, isLoading: isLoadingStory } = trpc.vip.getWelcomeStory.useQuery(
     undefined,
     { enabled: !!user }
   );
@@ -111,7 +111,28 @@ export default function VipWelcome() {
         </div>
 
         {/* First Story Showcase */}
-        {firstStory && (
+        {isLoadingStory ? (
+          <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              Start with Your First Story
+            </h2>
+            <div className="flex flex-col items-center justify-center py-12">
+              {/* Animated Loading Spinner */}
+              <div className="relative w-20 h-20 mb-6">
+                <div className="absolute inset-0 rounded-full border-4 border-pink-200"></div>
+                <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-pink-600 animate-spin"></div>
+                <div className="absolute inset-2 rounded-full border-4 border-transparent border-t-purple-600 animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+                <Headphones className="absolute inset-0 m-auto w-8 h-8 text-pink-600 animate-pulse" />
+              </div>
+              <p className="text-gray-600 text-lg animate-pulse">Loading your first steamy story...</p>
+              <div className="flex gap-1 mt-4">
+                <span className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                <span className="w-2 h-2 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                <span className="w-2 h-2 bg-pink-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+              </div>
+            </div>
+          </div>
+        ) : firstStory ? (
           <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">
               Start with Your First Story
@@ -175,7 +196,7 @@ export default function VipWelcome() {
               </div>
             </div>
           </div>
-        )}
+        ) : null}
 
         {/* Next Steps */}
         <div className="bg-gradient-to-r from-pink-600 to-purple-600 rounded-2xl shadow-xl p-8 text-white text-center">
