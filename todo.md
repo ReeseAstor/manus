@@ -934,6 +934,11 @@
 - [x] Implement subscriber.updated event handler
 - [x] Implement subscriber.unsubscribed event handler
 - [x] Implement subscriber.added_to_group event handler
-- [ ] Add webhook signature verification for security
+- [x] Add webhook signature verification for security
+- [x] Request MAILERLITE_WEBHOOK_SECRET from user
+- [x] Create admin dashboard page at /admin/webhooks
+- [x] Add webhook event logs table to admin dashboard
+- [x] Add filtering and search to webhook logs
+- [x] Implement email alerts for failed webhook processing
 - [ ] Test webhook endpoint with MailerLite test events
 - [x] Document webhook URL for MailerLite dashboard configuration

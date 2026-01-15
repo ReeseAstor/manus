@@ -5,6 +5,7 @@ import { aiRouter } from "./routers/ai-simple";
 import { stripeRouter } from "./routers/stripe";
 import { vipRouter } from "./routers/vip";
 import { audioRouter } from "./routers/audio";
+import { adminRouter } from "./routers/admin";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
 import { generateEmailTemplate, sanitizeEmailContent } from "./emailTemplate";
@@ -64,6 +65,7 @@ export const appRouter = router({
   stripe: stripeRouter,
   vip: vipRouter,
   audio: audioRouter,
+  admin: adminRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

@@ -1,9 +1,65 @@
 import express from 'express';
+import crypto from 'crypto';
 import { getDb } from './db';
 import { mailerLiteWebhookEvents, newsletterSubscribers } from '../drizzle/schema';
 import { eq } from 'drizzle-orm';
+import { sendEmail } from './email-service';
+import { ENV } from './_core/env';
 
 const router = express.Router();
+
+/**
+ * Send email alert for failed webhook processing
+ */
+async function sendWebhookErrorAlert(eventType: string, error: unknown, payload: any) {
+  try {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : '';
+    
+    const emailBody = `
+      <h2>Webhook Processing Failed</h2>
+      <p>A MailerLite webhook event failed to process.</p>
+      
+      <h3>Event Details:</h3>
+      <ul>
+        <li><strong>Event Type:</strong> ${eventType}</li>
+        <li><strong>Subscriber Email:</strong> ${payload.data?.subscriber?.email || 'N/A'}</li>
+        <li><strong>Subscriber ID:</strong> ${payload.data?.subscriber?.id || 'N/A'}</li>
+        <li><strong>Timestamp:</strong> ${new Date().toISOString()}</li>
+      </ul>
+      
+      <h3>Error Message:</h3>
+      <pre style="background: #f5f5f5; padding: 10px; border-radius: 4px;">${errorMessage}</pre>
+      
+      ${errorStack ? `
+        <h3>Stack Trace:</h3>
+        <pre style="background: #f5f5f5; padding: 10px; border-radius: 4px; font-size: 12px;">${errorStack}</pre>
+      ` : ''}
+      
+      <h3>Full Payload:</h3>
+      <pre style="background: #f5f5f5; padding: 10px; border-radius: 4px; font-size: 12px; max-height: 300px; overflow-y: auto;">${JSON.stringify(payload, null, 2)}</pre>
+      
+      <hr>
+      <p style="color: #666; font-size: 12px;">This is an automated alert from your Reese Astor website webhook monitoring system.</p>
+    `;
+    
+    // Send email to site owner
+    const ownerEmail = process.env.OWNER_NAME;
+    if (ownerEmail) {
+      await sendEmail({
+        to: ownerEmail,
+        subject: `⚠️ Webhook Processing Failed: ${eventType}`,
+        html: emailBody,
+      });
+      
+      console.log('[MailerLite Webhook] Error alert email sent to:', ownerEmail);
+    } else {
+      console.warn('[MailerLite Webhook] No owner email configured for error alerts');
+    }
+  } catch (emailError) {
+    console.error('[MailerLite Webhook] Failed to send error alert email:', emailError);
+  }
+}
 
 /**
  * MailerLite Webhook Endpoint
@@ -14,8 +70,26 @@ const router = express.Router();
 router.post('/webhook', express.json(), async (req, res) => {
   try {
     const payload = req.body;
+    const signature = req.headers['signature'] as string;
     
     console.log('[MailerLite Webhook] Received event:', payload.type);
+    
+    // Verify webhook signature for security
+    if (process.env.MAILERLITE_WEBHOOK_SECRET) {
+      const expectedSignature = crypto
+        .createHmac('sha256', process.env.MAILERLITE_WEBHOOK_SECRET)
+        .update(JSON.stringify(payload))
+        .digest('hex');
+      
+      if (signature !== expectedSignature) {
+        console.error('[MailerLite Webhook] Invalid signature');
+        return res.status(401).json({ error: 'Invalid signature' });
+      }
+      
+      console.log('[MailerLite Webhook] Signature verified');
+    } else {
+      console.warn('[MailerLite Webhook] No webhook secret configured - signature verification skipped');
+    }
     
     const db = await getDb();
     if (!db) {
@@ -125,6 +199,9 @@ async function handleSubscriberCreated(payload: any, eventId: number) {
         error: error instanceof Error ? error.message : 'Unknown error' 
       })
       .where(eq(mailerLiteWebhookEvents.id, eventId));
+    
+    // Send email alert for failed webhook processing
+    await sendWebhookErrorAlert('subscriber.created', error, payload);
   }
 }
 
@@ -165,6 +242,8 @@ async function handleSubscriberUpdated(payload: any, eventId: number) {
         error: error instanceof Error ? error.message : 'Unknown error' 
       })
       .where(eq(mailerLiteWebhookEvents.id, eventId));
+    
+    await sendWebhookErrorAlert('subscriber.updated', error, payload);
   }
 }
 
@@ -205,6 +284,8 @@ async function handleSubscriberUnsubscribed(payload: any, eventId: number) {
         error: error instanceof Error ? error.message : 'Unknown error' 
       })
       .where(eq(mailerLiteWebhookEvents.id, eventId));
+    
+    await sendWebhookErrorAlert('subscriber.unsubscribed', error, payload);
   }
 }
 
@@ -239,6 +320,8 @@ async function handleSubscriberAddedToGroup(payload: any, eventId: number) {
         error: error instanceof Error ? error.message : 'Unknown error' 
       })
       .where(eq(mailerLiteWebhookEvents.id, eventId));
+    
+    await sendWebhookErrorAlert('subscriber.added_to_group', error, payload);
   }
 }
 
@@ -273,6 +356,8 @@ async function handleSubscriberRemovedFromGroup(payload: any, eventId: number) {
         error: error instanceof Error ? error.message : 'Unknown error' 
       })
       .where(eq(mailerLiteWebhookEvents.id, eventId));
+    
+    await sendWebhookErrorAlert('subscriber.removed_from_group', error, payload);
   }
 }
 
