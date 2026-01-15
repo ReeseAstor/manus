@@ -9,23 +9,6 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const subscribeMutation = trpc.newsletter.subscribe.useMutation({
-    onSuccess: () => {
-      toast.success("Thank you for subscribing! Check your email for confirmation.");
-      setEmail("");
-    },
-    onError: (error) => {
-      toast.error(error.message || "Failed to subscribe. Please try again.");
-    },
-  });
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      subscribeMutation.mutate({ email });
-    }
-  };
 
   const books = [
     {
@@ -425,25 +408,15 @@ export default function Home() {
                 Get exclusive updates, free books, sneak peeks, and behind-the-scenes content delivered to your inbox.
               </p>
 
-              <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-                <Input
-                  type="email"
-                  placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="flex-1 px-6 py-7 text-lg rounded-full border-2 border-white/20 focus:border-[#d4af37] bg-white/5 backdrop-blur-sm text-white placeholder:text-gray-500"
-                />
-                <Button
-                  type="submit"
-                  size="lg"
-                  disabled={subscribeMutation.isPending}
-                  className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              <div className="flex justify-center">
+                <button
+                  className="ml-onclick-form bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2 text-lg"
+                  onClick={() => (window as any).ml('show', 'duEMh6', true)}
                 >
-                  <Mail className="mr-2 h-5 w-5" />
-                  {subscribeMutation.isPending ? "Subscribing..." : "Subscribe"}
-                </Button>
-              </form>
+                  <Mail className="h-5 w-5" />
+                  Subscribe
+                </button>
+              </div>
 
               <p className="text-sm text-gray-500 mt-6">
                 No spam. Unsubscribe anytime. Your privacy is protected.

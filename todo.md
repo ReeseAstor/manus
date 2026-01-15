@@ -942,3 +942,14 @@
 - [x] Implement email alerts for failed webhook processing
 - [ ] Test webhook endpoint with MailerLite test events
 - [x] Document webhook URL for MailerLite dashboard configuration
+
+
+## MailerLite Universal Tracking (January 2025)
+- [x] Add MailerLite Universal script to HTML head
+- [x] Test tracking snippet on all pages
+
+
+## MailerLite Form Embed (January 2025)
+- [x] Replace newsletter subscription form with MailerLite popup button
+- [x] Test MailerLite form popup on homepage
+- [x] Test MailerLite form popup on other pages with newsletter sections
