@@ -925,3 +925,15 @@
 - [x] Configure index URL routing
 - [x] Set up 404 route handling in App.tsx
 - [x] Test 404 page with invalid URLs
+
+
+## MailerLite Webhook Integration (January 2025)
+- [x] Create database schema for webhook events log
+- [x] Create webhook endpoint at /api/mailerlite/webhook
+- [x] Implement subscriber.created event handler
+- [x] Implement subscriber.updated event handler
+- [x] Implement subscriber.unsubscribed event handler
+- [x] Implement subscriber.added_to_group event handler
+- [ ] Add webhook signature verification for security
+- [ ] Test webhook endpoint with MailerLite test events
+- [x] Document webhook URL for MailerLite dashboard configuration

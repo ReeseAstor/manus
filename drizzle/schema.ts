@@ -1,4 +1,4 @@
-import { int, mysqlTable, text, timestamp, varchar, mysqlEnum, boolean } from "drizzle-orm/mysql-core";
+import { int, mysqlTable, text, timestamp, varchar, mysqlEnum, boolean, json } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -565,3 +565,23 @@ export const characterVoiceAssignments = mysqlTable("character_voice_assignments
 
 export type CharacterVoiceAssignment = typeof characterVoiceAssignments.$inferSelect;
 export type InsertCharacterVoiceAssignment = typeof characterVoiceAssignments.$inferInsert;
+
+/**
+ * MailerLite Webhook Events Log - tracks all webhook events received
+ */
+export const mailerLiteWebhookEvents = mysqlTable("mailerlite_webhook_events", {
+  id: int("id").autoincrement().primaryKey(),
+  eventType: varchar("eventType", { length: 100 }).notNull(), // e.g., "subscriber.created"
+  subscriberId: varchar("subscriberId", { length: 100 }), // MailerLite subscriber ID
+  subscriberEmail: varchar("subscriberEmail", { length: 320 }),
+  groupId: varchar("groupId", { length: 100 }), // For group-related events
+  groupName: varchar("groupName", { length: 255 }),
+  payload: text("payload").notNull(), // Full webhook payload as JSON string
+  processed: boolean("processed").default(false).notNull(),
+  processedAt: timestamp("processedAt"),
+  error: text("error"), // Error message if processing failed
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type MailerLiteWebhookEvent = typeof mailerLiteWebhookEvents.$inferSelect;
+export type InsertMailerLiteWebhookEvent = typeof mailerLiteWebhookEvents.$inferInsert;

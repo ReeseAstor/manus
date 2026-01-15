@@ -8,6 +8,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { handleStripeWebhook } from "../stripe-webhook";
+import mailerLiteWebhookRouter from "../mailerlite.webhook";
 import { authCallback } from "../api.auth.callback";
 
 function isPortAvailable(port: number): Promise<boolean> {
@@ -37,6 +38,9 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // Stripe webhook (must be before JSON body parser)
   app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), handleStripeWebhook);
+  
+  // MailerLite webhook
+  app.use("/api/mailerlite", mailerLiteWebhookRouter);
   
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
