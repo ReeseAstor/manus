@@ -918,3 +918,10 @@
 ## Welcome Page Loading Animation (January 2025)
 - [x] Add loading animation while first story is being fetched
 - [x] Test loading state on welcome page
+
+
+## Custom Routing & 404 Page (January 2025)
+- [x] Create custom 404 not found page
+- [x] Configure index URL routing
+- [x] Set up 404 route handling in App.tsx
+- [x] Test 404 page with invalid URLs
