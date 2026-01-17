@@ -953,3 +953,24 @@
 - [x] Replace newsletter subscription form with MailerLite popup button
 - [x] Test MailerLite form popup on homepage
 - [x] Test MailerLite form popup on other pages with newsletter sections
+
+
+## MailerLite Welcome Email Automation (January 2025)
+- [x] Create welcome automation setup guide
+- [x] Design welcome email template with bonus epilogue
+- [x] Document automation workflow steps
+
+
+## Welcome Email Templates (January 2025)
+- [x] Create HTML email template with download button
+- [x] Create plain text email template
+- [x] Test email rendering across email clients
+
+
+## Twilio SMS/Voice Configuration (January 2025)
+- [x] Create admin page at /admin/twilio for Twilio configuration
+- [x] Add Twilio settings form (Account SID, Auth Token, Phone Number)
+- [x] Create backend routes for Twilio configuration
+- [x] Add SMS/voice testing functionality
+- [x] Request Twilio API credentials from user
+- [x] Test Twilio integration
