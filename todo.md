@@ -987,3 +987,13 @@
 - [x] Store SMS preferences in database
 - [x] Implement automatic SMS sending on VIP signup
 - [x] Test complete SMS opt-in flow
+
+
+## SMS Unsubscribe Handling (January 2025)
+- [x] Create Twilio incoming SMS webhook endpoint at /api/sms/incoming
+- [x] Implement STOP keyword detection and processing
+- [x] Update user SMS preferences in database on unsubscribe
+- [x] Send confirmation message after unsubscribe
+- [x] Handle re-subscribe with START keyword
+- [x] Configure Twilio webhook URL for incoming messages
+- [x] Test SMS unsubscribe flow

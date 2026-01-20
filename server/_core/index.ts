@@ -9,6 +9,7 @@ import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { handleStripeWebhook } from "../stripe-webhook";
 import mailerLiteWebhookRouter from "../mailerlite.webhook";
+import twilioSmsWebhookRouter from "../twilio-sms-webhook";
 import { authCallback } from "../api.auth.callback";
 
 function isPortAvailable(port: number): Promise<boolean> {
@@ -41,6 +42,9 @@ async function startServer() {
   
   // MailerLite webhook
   app.use("/api/mailerlite", mailerLiteWebhookRouter);
+  
+  // Twilio SMS webhook for incoming messages (STOP/START handling)
+  app.use("/api/sms", twilioSmsWebhookRouter);
   
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
