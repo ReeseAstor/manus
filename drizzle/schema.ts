@@ -585,3 +585,61 @@ export const mailerLiteWebhookEvents = mysqlTable("mailerlite_webhook_events", {
 
 export type MailerLiteWebhookEvent = typeof mailerLiteWebhookEvents.$inferSelect;
 export type InsertMailerLiteWebhookEvent = typeof mailerLiteWebhookEvents.$inferInsert;
+
+
+/**
+ * SMS notification templates for automated messaging
+ */
+export const smsTemplates = mysqlTable("sms_templates", {
+  id: int("id").autoincrement().primaryKey(),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  name: varchar("name", { length: 200 }).notNull(),
+  description: text("description"),
+  messageTemplate: text("messageTemplate").notNull(),
+  category: mysqlEnum("category", ["vip", "order", "marketing", "system"]).default("system").notNull(),
+  isActive: boolean("isActive").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SmsTemplate = typeof smsTemplates.$inferSelect;
+export type InsertSmsTemplate = typeof smsTemplates.$inferInsert;
+
+/**
+ * User SMS preferences and phone number storage
+ */
+export const userSmsPreferences = mysqlTable("user_sms_preferences", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id).unique(),
+  phoneNumber: varchar("phoneNumber", { length: 20 }),
+  phoneVerified: boolean("phoneVerified").default(false).notNull(),
+  smsOptIn: boolean("smsOptIn").default(false).notNull(),
+  smsNewReleases: boolean("smsNewReleases").default(true).notNull(),
+  smsVipAlerts: boolean("smsVipAlerts").default(true).notNull(),
+  smsOrderUpdates: boolean("smsOrderUpdates").default(true).notNull(),
+  smsMarketing: boolean("smsMarketing").default(false).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type UserSmsPreferences = typeof userSmsPreferences.$inferSelect;
+export type InsertUserSmsPreferences = typeof userSmsPreferences.$inferInsert;
+
+/**
+ * SMS message log for tracking sent messages
+ */
+export const smsMessageLog = mysqlTable("sms_message_log", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").references(() => users.id),
+  templateId: int("templateId").references(() => smsTemplates.id),
+  toPhoneNumber: varchar("toPhoneNumber", { length: 20 }).notNull(),
+  messageBody: text("messageBody").notNull(),
+  twilioSid: varchar("twilioSid", { length: 64 }),
+  status: mysqlEnum("status", ["queued", "sent", "delivered", "failed", "undelivered"]).default("queued").notNull(),
+  errorMessage: text("errorMessage"),
+  sentAt: timestamp("sentAt").defaultNow().notNull(),
+  deliveredAt: timestamp("deliveredAt"),
+});
+
+export type SmsMessageLog = typeof smsMessageLog.$inferSelect;
+export type InsertSmsMessageLog = typeof smsMessageLog.$inferInsert;

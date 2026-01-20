@@ -12,6 +12,7 @@ import {
   sendPurchaseConfirmationEmail,
   generateDownloadLinks,
 } from "./email-service";
+import { upsertUserSmsPreferences, sendVipWelcomeSms } from "./sms";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2025-11-17.clover",
@@ -64,6 +65,40 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     const bookId = session.metadata?.bookId;
     const bookTitle = session.metadata?.bookTitle;
     const bookCover = session.metadata?.bookCover;
+    
+    // VIP subscription metadata
+    const tierId = session.metadata?.tierId;
+    const tierSlug = session.metadata?.tierSlug;
+    const smsOptIn = session.metadata?.smsOptIn === "true";
+    const phoneNumber = session.metadata?.phoneNumber;
+
+    // Handle VIP subscription SMS opt-in
+    if (userId && smsOptIn && phoneNumber && tierSlug) {
+      try {
+        // Save SMS preferences
+        await upsertUserSmsPreferences(parseInt(userId), {
+          phoneNumber,
+          smsOptIn: true,
+          smsVipAlerts: true,
+          smsNewReleases: true,
+        });
+        
+        // Send welcome SMS
+        const customerName = session.customer_details?.name || "VIP Member";
+        const tierName = tierSlug.charAt(0).toUpperCase() + tierSlug.slice(1);
+        await sendVipWelcomeSms(parseInt(userId), customerName, tierName);
+        
+        console.log(`[Webhook] SMS opt-in processed for user ${userId}`);
+      } catch (smsError) {
+        console.error("[Webhook] Error processing SMS opt-in:", smsError);
+      }
+    }
+
+    // Skip book purchase processing if this is a VIP subscription
+    if (tierId && !productId) {
+      console.log(`[Webhook] VIP subscription processed for tier ${tierSlug}`);
+      return;
+    }
 
     if (!userId || !productId) {
       console.error("Missing required metadata in checkout session");

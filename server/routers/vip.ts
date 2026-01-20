@@ -198,7 +198,11 @@ export const vipRouter = router({
 
   // Subscribe to VIP tier
   subscribe: protectedProcedure
-    .input(z.object({ tierSlug: z.string() }))
+    .input(z.object({ 
+      tierSlug: z.string(),
+      smsOptIn: z.boolean().optional(),
+      phoneNumber: z.string().optional(),
+    }))
     .mutation(async ({ ctx, input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
@@ -282,6 +286,8 @@ export const vipRouter = router({
           userId: ctx.user.id.toString(),
           tierId: tier[0].id.toString(),
           tierSlug: tier[0].slug,
+          smsOptIn: input.smsOptIn ? "true" : "false",
+          phoneNumber: input.phoneNumber || "",
         },
       });
 

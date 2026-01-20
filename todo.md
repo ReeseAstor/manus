@@ -974,3 +974,16 @@
 - [x] Add SMS/voice testing functionality
 - [x] Request Twilio API credentials from user
 - [x] Test Twilio integration
+
+
+## SMS Features Enhancement (January 2025)
+- [x] Test SMS integration end-to-end with real phone number
+- [x] Create SMS notification templates database table
+- [x] Build template management UI
+- [x] Create order confirmation template
+- [x] Create VIP membership welcome template
+- [x] Create new story release template
+- [x] Add SMS opt-in checkbox to VIP checkout
+- [x] Store SMS preferences in database
+- [x] Implement automatic SMS sending on VIP signup
+- [x] Test complete SMS opt-in flow

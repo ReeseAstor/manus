@@ -5,12 +5,19 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
-import { Crown, Headphones, Heart, Sparkles, Star, Check, Play, Lock, Flame, Music, Pause, X } from "lucide-react";
+import { Crown, Headphones, Heart, Sparkles, Star, Check, Play, Lock, Flame, Music, Pause, X, Phone, MessageSquare } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 export default function VipClub() {
   const { user, isAuthenticated } = useAuth();
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
+  const [smsOptIn, setSmsOptIn] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [showSmsModal, setShowSmsModal] = useState(false);
+  const [pendingTierSlug, setPendingTierSlug] = useState<string | null>(null);
   
   const { data: tiers, isLoading: tiersLoading } = trpc.vip.getTiers.useQuery();
   const { data: membership } = trpc.vip.getMembership.useQuery(undefined, {
@@ -80,7 +87,19 @@ export default function VipClub() {
       window.location.href = `/auth/login?redirect=/vip-club`;
       return;
     }
-    subscribeMutation.mutate({ tierSlug });
+    // Show SMS opt-in modal before checkout
+    setPendingTierSlug(tierSlug);
+    setShowSmsModal(true);
+  };
+
+  const proceedToCheckout = () => {
+    if (!pendingTierSlug) return;
+    setShowSmsModal(false);
+    subscribeMutation.mutate({ 
+      tierSlug: pendingTierSlug,
+      smsOptIn: smsOptIn,
+      phoneNumber: smsOptIn ? phoneNumber : undefined,
+    });
   };
 
   const getTierIcon = (tierName: string) => {
@@ -782,6 +801,96 @@ export default function VipClub() {
           </div>
         </div>
       </section>
+
+      {/* SMS Opt-in Modal */}
+      <Dialog open={showSmsModal} onOpenChange={setShowSmsModal}>
+        <DialogContent className="bg-gray-900 border-gray-800 text-white max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-serif flex items-center gap-2">
+              <MessageSquare className="w-6 h-6 text-pink-400" />
+              Stay Connected
+            </DialogTitle>
+            <DialogDescription className="text-gray-400">
+              Get exclusive SMS alerts for new story releases and VIP perks!
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-6 py-4">
+            <div className="flex items-start space-x-3">
+              <Checkbox 
+                id="sms-optin" 
+                checked={smsOptIn}
+                onCheckedChange={(checked) => setSmsOptIn(checked as boolean)}
+                className="mt-1 border-pink-500 data-[state=checked]:bg-pink-500"
+              />
+              <div>
+                <Label htmlFor="sms-optin" className="text-white font-medium cursor-pointer">
+                  Yes! Send me SMS notifications
+                </Label>
+                <p className="text-gray-400 text-sm mt-1">
+                  Get instant alerts when new steamy stories drop and exclusive VIP offers.
+                </p>
+              </div>
+            </div>
+            
+            {smsOptIn && (
+              <div className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                <Label htmlFor="phone" className="text-gray-300">Phone Number</Label>
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="+1 (555) 123-4567"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    className="pl-10 bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-pink-500"
+                  />
+                </div>
+                <p className="text-gray-500 text-xs">
+                  Standard message rates may apply. You can opt out anytime.
+                </p>
+              </div>
+            )}
+            
+            <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-4">
+              <div className="flex items-center gap-2 text-pink-300 mb-2">
+                <Sparkles className="w-4 h-4" />
+                <span className="font-medium">VIP SMS Benefits</span>
+              </div>
+              <ul className="text-gray-400 text-sm space-y-1">
+                <li>• First to know about new story releases</li>
+                <li>• Exclusive flash sales & promo codes</li>
+                <li>• Behind-the-scenes author updates</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="flex gap-3 pt-2">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setShowSmsModal(false);
+                setSmsOptIn(false);
+                setPhoneNumber("");
+                if (pendingTierSlug) {
+                  subscribeMutation.mutate({ tierSlug: pendingTierSlug });
+                }
+              }}
+              className="flex-1 border-gray-700 text-gray-300 hover:bg-gray-800"
+            >
+              Skip for Now
+            </Button>
+            <Button
+              onClick={proceedToCheckout}
+              disabled={smsOptIn && !phoneNumber}
+              className="flex-1 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"
+            >
+              Continue to Checkout
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* What's Inside Section */}
       <section className="py-20 bg-gradient-to-b from-gray-950 to-gray-900">       <div className="container">
