@@ -1,4 +1,4 @@
-import { int, mysqlTable, text, timestamp, varchar, mysqlEnum, boolean, json } from "drizzle-orm/mysql-core";
+import { int, mysqlTable, text, timestamp, varchar, mysqlEnum, boolean, json, decimal } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -643,3 +643,57 @@ export const smsMessageLog = mysqlTable("sms_message_log", {
 
 export type SmsMessageLog = typeof smsMessageLog.$inferSelect;
 export type InsertSmsMessageLog = typeof smsMessageLog.$inferInsert;
+
+
+/**
+ * SMS analytics daily aggregation for dashboard metrics
+ */
+export const smsAnalyticsDaily = mysqlTable("sms_analytics_daily", {
+  id: int("id").autoincrement().primaryKey(),
+  date: timestamp("date").notNull(),
+  totalSent: int("totalSent").default(0).notNull(),
+  totalDelivered: int("totalDelivered").default(0).notNull(),
+  totalFailed: int("totalFailed").default(0).notNull(),
+  totalOptIns: int("totalOptIns").default(0).notNull(),
+  totalOptOuts: int("totalOptOuts").default(0).notNull(),
+  totalResponses: int("totalResponses").default(0).notNull(),
+  deliveryRate: decimal("deliveryRate", { precision: 5, scale: 2 }),
+  responseRate: decimal("responseRate", { precision: 5, scale: 2 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SmsAnalyticsDaily = typeof smsAnalyticsDaily.$inferSelect;
+export type InsertSmsAnalyticsDaily = typeof smsAnalyticsDaily.$inferInsert;
+
+/**
+ * SMS opt-in/opt-out events for tracking trends
+ */
+export const smsOptEvents = mysqlTable("sms_opt_events", {
+  id: int("id").autoincrement().primaryKey(),
+  phoneNumber: varchar("phoneNumber", { length: 20 }).notNull(),
+  userId: int("userId").references(() => users.id),
+  eventType: mysqlEnum("eventType", ["opt_in", "opt_out", "resubscribe"]).notNull(),
+  source: varchar("source", { length: 50 }), // e.g., "vip_signup", "sms_reply", "admin", "webhook"
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type SmsOptEvent = typeof smsOptEvents.$inferSelect;
+export type InsertSmsOptEvent = typeof smsOptEvents.$inferInsert;
+
+/**
+ * SMS incoming messages for response tracking
+ */
+export const smsIncomingMessages = mysqlTable("sms_incoming_messages", {
+  id: int("id").autoincrement().primaryKey(),
+  fromPhoneNumber: varchar("fromPhoneNumber", { length: 20 }).notNull(),
+  messageBody: text("messageBody").notNull(),
+  twilioSid: varchar("twilioSid", { length: 64 }),
+  keyword: varchar("keyword", { length: 20 }), // STOP, START, HELP, etc.
+  processed: boolean("processed").default(false).notNull(),
+  responseStatus: mysqlEnum("responseStatus", ["success", "failed", "pending"]).default("pending").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type SmsIncomingMessage = typeof smsIncomingMessages.$inferSelect;
+export type InsertSmsIncomingMessage = typeof smsIncomingMessages.$inferInsert;

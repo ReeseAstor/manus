@@ -7,6 +7,7 @@ import { vipRouter } from "./routers/vip";
 import { audioRouter } from "./routers/audio";
 import { adminRouter } from "./routers/admin";
 import { twilioRouter } from "./routers/twilio";
+import { smsAnalyticsRouter } from "./routers/smsAnalytics";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
 import { generateEmailTemplate, sanitizeEmailContent } from "./emailTemplate";
@@ -68,6 +69,7 @@ export const appRouter = router({
   audio: audioRouter,
   admin: adminRouter,
   twilio: twilioRouter,
+  smsAnalytics: smsAnalyticsRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

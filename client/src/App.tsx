@@ -19,6 +19,7 @@ import BlogEditor from "./pages/BlogEditor";
 import AdminAudioGenerator from "./pages/AdminAudioGenerator";
 import AdminWebhooks from "./pages/AdminWebhooks";
 import AdminTwilio from "./pages/AdminTwilio";
+import AdminSmsAnalytics from "./pages/AdminSmsAnalytics";
 import { NewsletterManager } from "./pages/NewsletterManager";
 import { NewsletterEditor } from "./pages/NewsletterEditor";
 import Privacy from "./pages/Privacy";
@@ -72,6 +73,7 @@ function Router() {
       <Route path={"/admin/audio"} component={AdminAudioGenerator} />
       <Route path={"/admin/webhooks"} component={AdminWebhooks} />
       <Route path={"/admin/twilio"} component={AdminTwilio} />
+      <Route path={"/admin/sms-analytics"} component={AdminSmsAnalytics} />
       <Route path={"/admin/blog/new"} component={BlogEditor} />
       <Route path={"/admin/blog/edit/:id"} component={BlogEditor} />
       <Route path={"/admin/newsletters"} component={NewsletterManager} />
