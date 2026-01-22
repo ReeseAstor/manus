@@ -1019,3 +1019,18 @@
 - [x] Add response rate tracking
 - [x] Create backend routes for analytics data
 - [x] Test SMS analytics dashboard
+
+
+## Book 4 Launch & Audio Content (January 2026)
+
+### Book 4 Website Integration
+- [x] Add Book 4 (The Billionaire's Forbidden Nanny) to books page
+- [x] Create pre-order promotion banner ($0.99 until 2/3/2026)
+- [x] Add countdown timer for launch date
+- [x] Update series navigation to include Book 4
+
+### Audio Scripts for BookFunnel/MVP
+- [x] Create Chapter 1 audio script (sample teaser)
+- [x] Create Prologue audio script (hook content)
+- [x] Create Big Sister bonus epilogue audio script
+- [x] Package audio scripts for delivery

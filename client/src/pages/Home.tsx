@@ -4,13 +4,23 @@ import { Mail, BookOpen, Sparkles, ChevronRight, Star } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
-import { Book3LaunchBanner } from "@/components/Book3LaunchBanner";
+import { Book4PreorderBanner } from "@/components/Book4PreorderBanner";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 
 export default function Home() {
 
   const books = [
+    {
+      id: 4,
+      title: "The Billionaire's Forbidden Nanny",
+      subtitle: "Manhattan Money Kings Book 4",
+      cover: "/book4-cover.jpg",
+      description: "He hired her to care for his daughter. He never expected to fall for her. A forbidden romance between a billionaire single dad and the nanny who breaks all his rules.",
+      price: "$0.99",
+      link: "https://swiy.co/4rd",
+      badge: "Pre-Order",
+    },
     {
       id: 3,
       title: "The Billionaire's Baby Secret",
@@ -43,7 +53,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
-      <Book3LaunchBanner />
+      <Book4PreorderBanner />
       
       {/* Manhattan Penthouse Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -144,30 +154,30 @@ export default function Home() {
               <div className="absolute -inset-12 bg-gradient-to-r from-[#d4af37]/20 to-transparent blur-3xl rounded-full" />
               
               <div className="relative p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
-                <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black text-sm font-bold shadow-lg">
-                  NEW RELEASE
+                <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-gradient-to-r from-[#e8c4c4] to-[#d4af37] text-black text-sm font-bold shadow-lg animate-pulse">
+                  PRE-ORDER $0.99
                 </div>
 
                 <img
-                  src="/book3-cover.jpg"
-                  alt="The Billionaire's Baby Secret"
+                  src="/book4-cover.jpg"
+                  alt="The Billionaire's Forbidden Nanny"
                   className="w-full rounded-2xl shadow-2xl mb-6"
                 />
 
                 <h3 className="font-serif text-3xl font-bold text-white mb-2">
-                  The Billionaire's Baby Secret
+                  The Billionaire's Forbidden Nanny
                 </h3>
-                <p className="text-[#d4af37] font-medium mb-4">Manhattan Money Kings Book 3</p>
+                <p className="text-[#d4af37] font-medium mb-4">Manhattan Money Kings Book 4</p>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                  One night. One secret. One second chance he refuses to lose.
+                  He hired her to care for his daughter. He never expected to fall for her.
                 </p>
 
                 <Button
                   asChild
                   className="w-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                 >
-                  <a href="https://swiy.co/3rd" target="_blank" rel="noopener noreferrer">
-                    Get It Now - $2.99
+                  <a href="https://swiy.co/4rd" target="_blank" rel="noopener noreferrer">
+                    Pre-Order Now - $0.99
                   </a>
                 </Button>
               </div>
@@ -211,14 +221,14 @@ export default function Home() {
               </span>
             </div>
             <h2 className="font-serif text-5xl md:text-6xl font-bold text-white mb-6">
-              Three Billionaires.<br />Three Unforgettable Romances.
+              Four Billionaires.<br />Four Unforgettable Romances.
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               Dive into the world of Manhattan's most powerful men and the women who capture their hearts.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {books.map((book, index) => (
               <motion.div
                 key={book.id}

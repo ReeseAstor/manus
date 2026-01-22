@@ -1,12 +1,32 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Star, ShoppingCart, BookOpen, Gift, ChevronRight, Sparkles } from "lucide-react";
-import { Book3LaunchBanner } from "@/components/Book3LaunchBanner";
+import { Book4PreorderBanner } from "@/components/Book4PreorderBanner";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 
 export default function Books() {
   const books = [
+    {
+      id: 4,
+      title: "The Billionaire's Forbidden Nanny",
+      subtitle: "Manhattan Money Kings Book 4",
+      cover: "/book4-cover.jpg",
+      description: "He hired her to care for his daughter. He never expected to fall for her. When single father and tech billionaire Ethan Cole brings Lily Chen into his penthouse, the rules are clear: no attachments, no complications.",
+      fullBlurb: "He hired her to care for his daughter. He never expected to fall for her. When single father and tech billionaire Ethan Cole brings Lily Chen into his penthouse, the rules are clear: no attachments, no complications. But Lily isn't like anyone he's ever met. She's warm where he's cold, patient where he's demanding, and she sees right through the walls he's built. As Lily bonds with his daughter and slowly breaks down his defenses, Ethan faces an impossible choice: protect his heart or risk everything for a love that could destroy his carefully controlled world. With his ex-wife threatening custody and the media circling, one wrong move could cost him everything—including the woman who's become his whole world.",
+      price: "$0.99",
+      regularPrice: "$4.99",
+      link: "https://swiy.co/4rd",
+      genre: ["Forbidden Romance", "Single Dad", "Nanny Romance"],
+      pages: 360,
+      rating: 0,
+      reviews: 0,
+      available: true,
+      badge: "Pre-Order",
+      featured: true,
+      preorder: true,
+      launchDate: "February 3, 2026",
+    },
     {
       id: 3,
       title: "The Billionaire's Baby Secret",
@@ -64,7 +84,7 @@ export default function Books() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
-      <Book3LaunchBanner />
+      <Book4PreorderBanner />
       
       {/* Hero Section - Editorial Magazine Style */}
       <section className="relative py-32 overflow-hidden">
@@ -108,7 +128,7 @@ export default function Books() {
 
             <div className="flex items-center justify-center gap-12 pt-8">
               <div className="text-center">
-                <div className="text-4xl font-bold text-[#d4af37]">3</div>
+                <div className="text-4xl font-bold text-[#d4af37]">4</div>
                 <div className="text-sm text-gray-400 mt-1">Books</div>
               </div>
               <div className="h-12 w-px bg-white/20" />
