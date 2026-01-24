@@ -697,3 +697,221 @@ export const smsIncomingMessages = mysqlTable("sms_incoming_messages", {
 
 export type SmsIncomingMessage = typeof smsIncomingMessages.$inferSelect;
 export type InsertSmsIncomingMessage = typeof smsIncomingMessages.$inferInsert;
+
+
+/**
+ * QA Checks - tracks daily consistency checks across the website
+ */
+export const qaChecks = mysqlTable("qa_checks", {
+  id: int("id").autoincrement().primaryKey(),
+  checkDate: timestamp("checkDate").notNull(),
+  checkType: mysqlEnum("checkType", ["pricing", "links", "content", "characters", "full_audit"]).notNull(),
+  status: mysqlEnum("status", ["passed", "failed", "warning"]).default("passed").notNull(),
+  itemsChecked: int("itemsChecked").default(0).notNull(),
+  issuesFound: int("issuesFound").default(0).notNull(),
+  details: text("details"), // JSON with detailed check results
+  autoResolved: int("autoResolved").default(0), // Issues auto-fixed
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type QaCheck = typeof qaChecks.$inferSelect;
+export type InsertQaCheck = typeof qaChecks.$inferInsert;
+
+/**
+ * QA Issues - individual issues found during QA checks
+ */
+export const qaIssues = mysqlTable("qa_issues", {
+  id: int("id").autoincrement().primaryKey(),
+  checkId: int("checkId").references(() => qaChecks.id),
+  issueType: mysqlEnum("issueType", ["pricing_mismatch", "broken_link", "content_error", "character_inconsistency", "missing_data"]).notNull(),
+  severity: mysqlEnum("severity", ["critical", "warning", "info"]).default("warning").notNull(),
+  location: varchar("location", { length: 255 }).notNull(), // Page/component where issue was found
+  description: text("description").notNull(),
+  expectedValue: text("expectedValue"),
+  actualValue: text("actualValue"),
+  status: mysqlEnum("status", ["open", "resolved", "ignored"]).default("open").notNull(),
+  resolvedAt: timestamp("resolvedAt"),
+  resolvedBy: int("resolvedBy").references(() => users.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type QaIssue = typeof qaIssues.$inferSelect;
+export type InsertQaIssue = typeof qaIssues.$inferInsert;
+
+/**
+ * External Links - tracks all external links used across the website
+ */
+export const externalLinks = mysqlTable("external_links", {
+  id: int("id").autoincrement().primaryKey(),
+  url: text("url").notNull(),
+  displayText: varchar("displayText", { length: 255 }),
+  linkType: mysqlEnum("linkType", ["amazon", "social", "affiliate", "resource", "other"]).default("other").notNull(),
+  location: varchar("location", { length: 255 }).notNull(), // Page where link appears
+  componentPath: varchar("componentPath", { length: 255 }), // Component file path
+  lastChecked: timestamp("lastChecked"),
+  lastStatus: mysqlEnum("lastStatus", ["active", "broken", "redirected", "unknown"]).default("unknown").notNull(),
+  httpStatus: int("httpStatus"),
+  responseTime: int("responseTime"), // in milliseconds
+  checkCount: int("checkCount").default(0).notNull(),
+  failCount: int("failCount").default(0).notNull(),
+  isActive: boolean("isActive").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ExternalLink = typeof externalLinks.$inferSelect;
+export type InsertExternalLink = typeof externalLinks.$inferInsert;
+
+/**
+ * Book Characters - detailed character information for each book
+ */
+export const bookCharacters = mysqlTable("book_characters", {
+  id: int("id").autoincrement().primaryKey(),
+  bookId: int("bookId").notNull().references(() => books.id),
+  fullName: varchar("fullName", { length: 255 }).notNull(),
+  nickname: varchar("nickname", { length: 100 }),
+  role: mysqlEnum("role", ["protagonist", "love_interest", "antagonist", "supporting", "minor"]).notNull(),
+  description: text("description"),
+  physicalDescription: text("physicalDescription"),
+  personality: text("personality"),
+  backstory: text("backstory"),
+  occupation: varchar("occupation", { length: 255 }),
+  age: varchar("age", { length: 50 }),
+  displayOrder: int("displayOrder").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type BookCharacter = typeof bookCharacters.$inferSelect;
+export type InsertBookCharacter = typeof bookCharacters.$inferInsert;
+
+/**
+ * Character Relationships - tracks relationships between characters
+ */
+export const characterRelationships = mysqlTable("character_relationships", {
+  id: int("id").autoincrement().primaryKey(),
+  character1Id: int("character1Id").notNull().references(() => bookCharacters.id),
+  character2Id: int("character2Id").notNull().references(() => bookCharacters.id),
+  relationshipType: mysqlEnum("relationshipType", ["romantic", "family", "friend", "rival", "colleague", "enemy"]).notNull(),
+  description: text("description"),
+  bookId: int("bookId").references(() => books.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type CharacterRelationship = typeof characterRelationships.$inferSelect;
+export type InsertCharacterRelationship = typeof characterRelationships.$inferInsert;
+
+/**
+ * Book Storylines - tracks main plot points and storylines
+ */
+export const bookStorylines = mysqlTable("book_storylines", {
+  id: int("id").autoincrement().primaryKey(),
+  bookId: int("bookId").notNull().references(() => books.id),
+  title: varchar("title", { length: 255 }).notNull(),
+  storylineType: mysqlEnum("storylineType", ["main_plot", "subplot", "romance_arc", "character_arc", "mystery"]).notNull(),
+  description: text("description").notNull(),
+  keyEvents: text("keyEvents"), // JSON array of key plot points
+  resolution: text("resolution"),
+  displayOrder: int("displayOrder").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type BookStoryline = typeof bookStorylines.$inferSelect;
+export type InsertBookStoryline = typeof bookStorylines.$inferInsert;
+
+/**
+ * Book Pricing History - tracks pricing changes over time
+ */
+export const bookPricingHistory = mysqlTable("book_pricing_history", {
+  id: int("id").autoincrement().primaryKey(),
+  bookId: int("bookId").notNull().references(() => books.id),
+  platform: mysqlEnum("platform", ["amazon", "apple", "kobo", "barnes_noble", "google_play", "direct"]).notNull(),
+  price: varchar("price", { length: 50 }).notNull(), // e.g., "$2.99"
+  priceInCents: int("priceInCents"),
+  currency: varchar("currency", { length: 3 }).default("USD"),
+  verifiedAt: timestamp("verifiedAt").notNull(),
+  verificationSource: varchar("verificationSource", { length: 100 }), // "manual", "api", "scrape"
+  previousPrice: varchar("previousPrice", { length: 50 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type BookPricingHistory = typeof bookPricingHistory.$inferSelect;
+export type InsertBookPricingHistory = typeof bookPricingHistory.$inferInsert;
+
+/**
+ * Daily Reports - automated daily website health reports
+ */
+export const dailyReports = mysqlTable("daily_reports", {
+  id: int("id").autoincrement().primaryKey(),
+  reportDate: timestamp("reportDate").notNull(),
+  reportType: mysqlEnum("reportType", ["daily_overview", "weekly_summary", "monthly_summary"]).default("daily_overview").notNull(),
+  // Traffic metrics
+  pageViews: int("pageViews").default(0),
+  uniqueVisitors: int("uniqueVisitors").default(0),
+  bounceRate: decimal("bounceRate", { precision: 5, scale: 2 }),
+  avgSessionDuration: int("avgSessionDuration"), // in seconds
+  // Content metrics
+  newSubscribers: int("newSubscribers").default(0),
+  unsubscribes: int("unsubscribes").default(0),
+  blogPostViews: int("blogPostViews").default(0),
+  bookPageViews: int("bookPageViews").default(0),
+  // QA metrics
+  qaChecksPassed: int("qaChecksPassed").default(0),
+  qaChecksFailed: int("qaChecksFailed").default(0),
+  openIssues: int("openIssues").default(0),
+  resolvedIssues: int("resolvedIssues").default(0),
+  brokenLinksFound: int("brokenLinksFound").default(0),
+  // Revenue metrics
+  totalOrders: int("totalOrders").default(0),
+  totalRevenue: int("totalRevenue").default(0), // in cents
+  // Summary
+  summary: text("summary"), // AI-generated or manual summary
+  alerts: text("alerts"), // JSON array of important alerts
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type DailyReport = typeof dailyReports.$inferSelect;
+export type InsertDailyReport = typeof dailyReports.$inferInsert;
+
+/**
+ * Admin Reminders - scheduled reminders for admin tasks
+ */
+export const adminReminders = mysqlTable("admin_reminders", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").references(() => users.id),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  reminderType: mysqlEnum("reminderType", ["broken_link", "pricing_check", "content_review", "qa_issue", "custom"]).notNull(),
+  priority: mysqlEnum("priority", ["low", "medium", "high", "urgent"]).default("medium").notNull(),
+  relatedEntityType: varchar("relatedEntityType", { length: 50 }), // "book", "link", "blog", etc.
+  relatedEntityId: int("relatedEntityId"),
+  dueDate: timestamp("dueDate"),
+  status: mysqlEnum("status", ["pending", "completed", "dismissed", "snoozed"]).default("pending").notNull(),
+  snoozedUntil: timestamp("snoozedUntil"),
+  completedAt: timestamp("completedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AdminReminder = typeof adminReminders.$inferSelect;
+export type InsertAdminReminder = typeof adminReminders.$inferInsert;
+
+/**
+ * Content Audit Log - tracks all content changes for QA
+ */
+export const contentAuditLog = mysqlTable("content_audit_log", {
+  id: int("id").autoincrement().primaryKey(),
+  entityType: varchar("entityType", { length: 50 }).notNull(), // "book", "blog", "character", etc.
+  entityId: int("entityId").notNull(),
+  action: mysqlEnum("action", ["create", "update", "delete", "publish", "unpublish"]).notNull(),
+  fieldChanged: varchar("fieldChanged", { length: 100 }),
+  oldValue: text("oldValue"),
+  newValue: text("newValue"),
+  changedBy: int("changedBy").references(() => users.id),
+  changeReason: text("changeReason"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ContentAuditLog = typeof contentAuditLog.$inferSelect;
+export type InsertContentAuditLog = typeof contentAuditLog.$inferInsert;

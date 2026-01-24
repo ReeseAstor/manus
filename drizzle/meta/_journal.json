@@ -127,6 +127,13 @@
       "when": 1768919651488,
       "tag": "0017_medical_goliath",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "5",
+      "when": 1769281503541,
+      "tag": "0018_hard_turbo",
+      "breakpoints": true
     }
   ]
 }
