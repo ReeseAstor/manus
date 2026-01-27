@@ -1093,3 +1093,7 @@
 - [x] Update Home page with accurate Book 4 details
 - [x] Update Book 4 detail page with accurate content
 - [x] Verify all Book 4 information is consistent across site
+
+
+## Out of Service Update
+- [x] Change homepage to display "Out of Service" message
