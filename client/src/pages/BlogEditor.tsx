@@ -154,7 +154,7 @@ export default function BlogEditor() {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: "url('/manhattan-night-skyline.jpg')",
+            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/spKnuylVHBnEgELK.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
@@ -200,7 +200,7 @@ export default function BlogEditor() {
         <div 
           className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: "url('/gold-marble-texture.jpg')",
+            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/nkhgPTPhVEhCBAIZ.jpg')",
             backgroundSize: "cover",
           }}
         />

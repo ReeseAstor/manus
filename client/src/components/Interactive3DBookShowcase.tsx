@@ -29,7 +29,7 @@ export default function Interactive3DBookShowcase({ books }: Interactive3DBookSh
       <div 
         className="absolute inset-0 opacity-30"
         style={{
-          backgroundImage: "url('/luxury-texture.jpg')",
+          backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/WKTzFGYzDSyGQTbf.jpg')",
           backgroundSize: "cover",
         }}
       />

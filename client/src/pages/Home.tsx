@@ -13,8 +13,8 @@ export default function Home() {
   const books = [
     {
       id: 4,
-      title: "The Billionaire's Forbidden Nanny",
-      subtitle: "Manhattan Money Kings Book 4 (Final Book)",
+      title: "The Billionaire's Forbidden Nanny: Forbidden and Forever",
+      subtitle: "Manhattan Money Kings Book 4 (LAST BOOK)",
       cover: "/book4-cover.jpg",
       description: "She's the nanny. He's her boss. His mother wants her gone. When Camille Torres takes a job caring for Ethan Calloway's silent daughter, she becomes the family they both desperately need.",
       price: "$0.99",
@@ -61,7 +61,7 @@ export default function Home() {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: "url('/manhattan-penthouse-view.jpg')",
+            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/HErRnyWsgwDErssZ.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
@@ -202,7 +202,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: "url('/gold-marble-texture.jpg')",
+            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/nkhgPTPhVEhCBAIZ.jpg')",
             backgroundSize: "cover",
           }}
         />
@@ -312,7 +312,7 @@ export default function Home() {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: "url('/manhattan-night-skyline.jpg')",
+            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/spKnuylVHBnEgELK.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
@@ -392,7 +392,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: "url('/gold-marble-texture.jpg')",
+            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/nkhgPTPhVEhCBAIZ.jpg')",
             backgroundSize: "cover",
           }}
         />

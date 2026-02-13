@@ -9,8 +9,8 @@ export default function Books() {
   const books = [
     {
       id: 4,
-      title: "The Billionaire's Forbidden Nanny",
-      subtitle: "Manhattan Money Kings Book 4 (Final Book)",
+      title: "The Billionaire's Forbidden Nanny: Forbidden and Forever",
+      subtitle: "Manhattan Money Kings Book 4 (LAST BOOK)",
       cover: "/book4-cover.jpg",
       description: "She's the nanny. He's her boss. His mother wants her gone. When Camille Torres takes a job caring for billionaire Ethan Calloway's silent daughter, she never expected to become the family they both desperately need.",
       fullBlurb: "She's the nanny. He's her boss. His mother wants her gone.\n\nCamille Torres doesn't belong in a Park Avenue penthouse. She belongs in the Bronx, finishing her teaching degree and keeping her family afloat. But when a billionaire offers her a salary that could change everything, she takes the job—and walks straight into trouble.\n\nEthan Calloway hasn't smiled since his wife died. His five-year-old daughter hasn't spoken. Seven nannies have quit. He doesn't need another complication—especially not one with quick wit, warm hands, and a mouth that talks back.\n\nBut Lily starts drawing again. Then laughing. Then reaching for Camille like she's safety.\n\nAnd Ethan? He's reaching too.\n\nOne kiss in the kitchen. One night that changes everything. One secret that his mother will use to destroy them both.\n\nGloria Calloway doesn't lose. She has money, connections, and a custody lawyer on speed dial. Camille has a thrift-store blazer and the Bronx.\n\nBut she also has something Gloria will never understand:\nA little girl who finally calls her Mama.",
@@ -91,7 +91,7 @@ export default function Books() {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: "url('/manhattan-night-skyline.jpg')",
+            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/spKnuylVHBnEgELK.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
@@ -243,7 +243,7 @@ export default function Books() {
         <div 
           className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: "url('/gold-marble-texture.jpg')",
+            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/nkhgPTPhVEhCBAIZ.jpg')",
             backgroundSize: "cover",
           }}
         />

@@ -1093,3 +1093,15 @@
 - [x] Update Home page with accurate Book 4 details
 - [x] Update Book 4 detail page with accurate content
 - [x] Verify all Book 4 information is consistent across site
+
+
+## Book 4 Verification & Update (Current Task)
+- [x] Audit current Book 4 data in database
+- [x] Verify Book 4 title: "The Billionaire's Forbidden Nanny: Forbidden and Forever"
+- [x] Confirm "LAST BOOK OF MMK" designation
+- [x] Check Book 4 character names (Camille Torres, Ethan Calloway, Lily)
+- [x] Review Book 4 blurb accuracy from approved manuscript
+- [x] Update database with any corrections needed
+- [x] Update all website pages (Home, Books, Book detail)
+- [x] Verify Book 4 pre-order link (https://swiy.co/4rd) and $0.99 pricing
+- [x] Test Book 4 integration across entire site

@@ -1,0 +1,8 @@
+{
+  "query": "SELECT * FROM books WHERE series_order = 4 OR title LIKE '%Forbidden Nanny%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute SELECT * FROM books WHERE series_order = 4 OR title LIKE '%Forbidden Nanny%';",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'series_order' in 'where clause'"
+  ]
+}

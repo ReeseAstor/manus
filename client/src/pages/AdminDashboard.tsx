@@ -139,7 +139,7 @@ export default function AdminDashboard() {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: "url('/manhattan-night-skyline.jpg')",
+            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/spKnuylVHBnEgELK.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
