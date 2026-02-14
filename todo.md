@@ -1105,3 +1105,15 @@
 - [x] Update all website pages (Home, Books, Book detail)
 - [x] Verify Book 4 pre-order link (https://swiy.co/4rd) and $0.99 pricing
 - [x] Test Book 4 integration across entire site
+
+
+## Sharing URL Updates (Current Task)
+- [x] Update Book 1 URL to https://swiy.co/b01
+- [x] Update Book 2 URL to https://swiy.co/2rd
+- [x] Update Book 3 URL to https://swiy.co/3rd
+- [x] Update Book 4 URL to https://swiy.co/4rd
+- [x] Update all book URLs in website pages (Books.tsx, Home.tsx)
+- [x] Add author page URL https://swiy.co/raa
+- [x] Add series page URL https://swiy.co/mmk
+- [x] Add all URLs to External Links Tracker
+- [x] Test all sharing URLs

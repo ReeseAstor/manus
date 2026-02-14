@@ -38,7 +38,7 @@ export default function Home() {
       cover: "/book2-cover.jpg",
       description: "When thief Elena Kim breaks into his penthouse, billionaire David Kim catches her red-handed. But instead of calling the police, he makes her an offer she can't refuse.",
       price: "$2.99",
-      link: "https://www.amazon.com/dp/B0FCCBNF8X",
+      link: "https://swiy.co/2rd",
     },
     {
       id: 1,
@@ -47,7 +47,7 @@ export default function Home() {
       cover: "/book1-cover.jpg",
       description: "A steamy office romance between a ruthless billionaire and the assistant he can't resist. When forbidden attraction meets corporate rivalry, everything is at stake.",
       price: "$0.99",
-      link: "https://www.amazon.com/dp/B0F2W8QL7S",
+      link: "https://swiy.co/b01",
     },
   ];
 
