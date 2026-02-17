@@ -4,7 +4,7 @@ import { Mail, BookOpen, Sparkles, ChevronRight, Star } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
-import { Book4PreorderBanner } from "@/components/Book4PreorderBanner";
+
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 
@@ -15,11 +15,11 @@ export default function Home() {
       id: 4,
       title: "The Billionaire's Forbidden Nanny: Forbidden and Forever",
       subtitle: "Manhattan Money Kings Book 4 (LAST BOOK)",
-      cover: "/book4-cover.jpg",
+      cover: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/wyOruOlpqOcFfhnS.jpg",
       description: "She's the nanny. He's her boss. His mother wants her gone. When Camille Torres takes a job caring for Ethan Calloway's silent daughter, she becomes the family they both desperately need.",
-      price: "$0.99",
+      price: "$4.99",
       link: "https://swiy.co/4rd",
-      badge: "Pre-Order - Final Book",
+      badge: "Final Book",
     },
     {
       id: 3,
@@ -53,7 +53,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
-      <Book4PreorderBanner />
+
       
       {/* Manhattan Penthouse Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -159,7 +159,7 @@ export default function Home() {
                 </div>
 
                 <img
-                  src="/book4-cover.jpg"
+                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/wyOruOlpqOcFfhnS.jpg"
                   alt="The Billionaire's Forbidden Nanny"
                   className="w-full rounded-2xl shadow-2xl mb-6"
                 />

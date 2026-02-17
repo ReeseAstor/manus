@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Star, ShoppingCart, BookOpen, Gift, ChevronRight, Sparkles } from "lucide-react";
-import { Book4PreorderBanner } from "@/components/Book4PreorderBanner";
+
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 
@@ -11,10 +11,10 @@ export default function Books() {
       id: 4,
       title: "The Billionaire's Forbidden Nanny: Forbidden and Forever",
       subtitle: "Manhattan Money Kings Book 4 (LAST BOOK)",
-      cover: "/book4-cover.jpg",
+      cover: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/wyOruOlpqOcFfhnS.jpg",
       description: "She's the nanny. He's her boss. His mother wants her gone. When Camille Torres takes a job caring for billionaire Ethan Calloway's silent daughter, she never expected to become the family they both desperately need.",
       fullBlurb: "She's the nanny. He's her boss. His mother wants her gone.\n\nCamille Torres doesn't belong in a Park Avenue penthouse. She belongs in the Bronx, finishing her teaching degree and keeping her family afloat. But when a billionaire offers her a salary that could change everything, she takes the job—and walks straight into trouble.\n\nEthan Calloway hasn't smiled since his wife died. His five-year-old daughter hasn't spoken. Seven nannies have quit. He doesn't need another complication—especially not one with quick wit, warm hands, and a mouth that talks back.\n\nBut Lily starts drawing again. Then laughing. Then reaching for Camille like she's safety.\n\nAnd Ethan? He's reaching too.\n\nOne kiss in the kitchen. One night that changes everything. One secret that his mother will use to destroy them both.\n\nGloria Calloway doesn't lose. She has money, connections, and a custody lawyer on speed dial. Camille has a thrift-store blazer and the Bronx.\n\nBut she also has something Gloria will never understand:\nA little girl who finally calls her Mama.",
-      price: "$0.99",
+      price: "$4.99",
       regularPrice: "$4.99",
       link: "https://swiy.co/4rd",
       genre: ["Nanny Romance", "Widower", "Forbidden Love", "Found Family"],
@@ -22,9 +22,9 @@ export default function Books() {
       rating: 0,
       reviews: 0,
       available: true,
-      badge: "Pre-Order - Final Book",
+      badge: "Final Book",
       featured: true,
-      preorder: true,
+      preorder: false,
       launchDate: "February 3, 2026",
     },
     {
@@ -84,7 +84,7 @@ export default function Books() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
-      <Book4PreorderBanner />
+
       
       {/* Hero Section - Editorial Magazine Style */}
       <section className="relative py-32 overflow-hidden">
