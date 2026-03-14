@@ -26,6 +26,7 @@ import {
 } from "../kie-service";
 import { getDb } from "../db";
 import { createNewsletter } from "../db";
+import { sendEmail } from "../email-service";
 import { aiStudioConversations } from "../../drizzle/schema";
 import { eq, desc } from "drizzle-orm";
 
@@ -415,6 +416,59 @@ export const kieRouter = router({
           message: `Failed to save to newsletter: ${err.message}`,
         });
       }
+    }),
+
+  // ─── Send Test Email ─────────────────────────────────────────────────
+  sendTestEmail: protectedProcedure
+    .input(
+      z.object({
+        newsletterId: z.number(),
+        recipientEmail: z.string().email(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      if (ctx.user.role !== "admin") {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
+      }
+
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      // Fetch the newsletter from the database
+      const { newsletters } = await import("../../drizzle/schema");
+      const [newsletter] = await db
+        .select()
+        .from(newsletters)
+        .where(eq(newsletters.id, input.newsletterId))
+        .limit(1);
+
+      if (!newsletter) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Newsletter not found" });
+      }
+
+      const subject = `[TEST] ${newsletter.subject || newsletter.title || "Newsletter Draft"}`;
+      const testBanner = `<div style="background:#d4af37;color:#1a1a2e;padding:12px 20px;text-align:center;font-family:sans-serif;font-size:14px;font-weight:bold;">⚠️ TEST EMAIL — This is a preview, not sent to subscribers</div>`;
+      const html = testBanner + (newsletter.content || "<p>No content</p>");
+
+      const success = await sendEmail({
+        to: input.recipientEmail,
+        subject,
+        html,
+        from: {
+          email: "noreply@reeseastor.us",
+          name: "Reese Astor (Test)",
+        },
+      });
+
+      if (!success) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to send test email. Check MailerLite configuration.",
+        });
+      }
+
+      console.log(`[Newsletter] Test email sent to ${input.recipientEmail} for draft #${input.newsletterId}`);
+      return { success: true, sentTo: input.recipientEmail };
     }),
 });
 

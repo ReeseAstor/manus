@@ -1028,6 +1028,9 @@ function NewsletterDraftsPanel() {
   const [deletingId, setDeletingId] = useState<number | null>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [sendingTestId, setSendingTestId] = useState<number | null>(null);
+  const sendTestMut = trpc.kie.sendTestEmail.useMutation();
+  const { user } = useAuth();
   const [, setLocation] = useLocation();
 
   // Filter to show only drafts (not sent/scheduled)
@@ -1181,13 +1184,47 @@ function NewsletterDraftsPanel() {
                                     <Eye className="h-3 w-3" />
                                     HTML Preview
                                   </span>
-                                  <Button
-                                    onClick={(e) => { e.stopPropagation(); setExpandedId(null); }}
-                                    variant="ghost"
-                                    className="text-gray-400 hover:text-white h-6 w-6 p-0"
-                                  >
-                                    <X className="h-3 w-3" />
-                                  </Button>
+                                  <div className="flex items-center gap-1">
+                                    <Button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        if (!user?.email) {
+                                          toast.error("No email found", { description: "Your account doesn't have an email address set." });
+                                          return;
+                                        }
+                                        setSendingTestId(draft.id);
+                                        sendTestMut.mutate(
+                                          { newsletterId: draft.id, recipientEmail: user.email },
+                                          {
+                                            onSuccess: (data) => {
+                                              toast.success("Test email sent!", { description: `Sent to ${data.sentTo}` });
+                                              setSendingTestId(null);
+                                            },
+                                            onError: (err) => {
+                                              toast.error("Failed to send test", { description: err.message });
+                                              setSendingTestId(null);
+                                            },
+                                          }
+                                        );
+                                      }}
+                                      disabled={sendingTestId === draft.id}
+                                      variant="ghost"
+                                      className="text-[#d4af37] hover:text-[#d4af37] hover:bg-[#d4af37]/10 h-6 px-2 text-xs gap-1"
+                                    >
+                                      {sendingTestId === draft.id ? (
+                                        <><Loader2 className="h-3 w-3 animate-spin" /> Sending...</>
+                                      ) : (
+                                        <><Send className="h-3 w-3" /> Send Test</>
+                                      )}
+                                    </Button>
+                                    <Button
+                                      onClick={(e) => { e.stopPropagation(); setExpandedId(null); }}
+                                      variant="ghost"
+                                      className="text-gray-400 hover:text-white h-6 w-6 p-0"
+                                    >
+                                      <X className="h-3 w-3" />
+                                    </Button>
+                                  </div>
                                 </div>
                                 <iframe
                                   srcDoc={draft.content || "<p style='color:#999;padding:20px;font-family:sans-serif;'>No content to preview</p>"}

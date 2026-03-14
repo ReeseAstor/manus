@@ -1249,3 +1249,11 @@
 - [x] Add chevron rotation indicator, X close button, and Eye toggle
 - [x] Show subject line in expanded view
 - [x] All 190 tests passing
+
+## Send Test Email from Draft Preview
+- [x] Review existing email service and newsletter send capabilities
+- [x] Add backend endpoint (kie.sendTestEmail) to send test email with [TEST] prefix and gold banner
+- [x] Add "Send Test" button to expanded draft card preview header
+- [x] Show loading state (spinner) and success/error toast feedback
+- [x] Write vitest tests (6 tests passing)
+- [x] All 196 tests passing
