@@ -1240,3 +1240,12 @@
 - [x] Add "Open Newsletter Manager" link and refresh button
 - [x] Styled to match AI Studio dark theme with gold accents
 - [x] All 190 tests passing
+
+## Expandable HTML Preview on Draft Cards
+- [x] Add click-to-expand functionality on newsletter draft cards
+- [x] Render full HTML content in sandboxed iframe with auto-height (200-500px)
+- [x] Add smooth expand/collapse animation (AnimatePresence + motion.div)
+- [x] Expand card to full-width (col-span-full) with gold border highlight
+- [x] Add chevron rotation indicator, X close button, and Eye toggle
+- [x] Show subject line in expanded view
+- [x] All 190 tests passing

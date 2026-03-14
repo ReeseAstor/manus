@@ -15,7 +15,8 @@ import {
   Download, RefreshCw, CheckCircle, XCircle, Clock,
   Sparkles, Grid3X3, ArrowLeft, ExternalLink, Copy,
   Save, Trash2, History, Plus, Wand2, ChevronDown,
-  Mail, FileText, Eye, Pencil, AlertTriangle, Send
+  Mail, FileText, Eye, Pencil, AlertTriangle, Send,
+  ChevronUp, Maximize2, Minimize2, X
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
@@ -1026,6 +1027,7 @@ function NewsletterDraftsPanel() {
   const deleteMut = trpc.newsletters.delete.useMutation();
   const [deletingId, setDeletingId] = useState<number | null>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
   const [, setLocation] = useLocation();
 
   // Filter to show only drafts (not sent/scheduled)
@@ -1110,46 +1112,122 @@ function NewsletterDraftsPanel() {
                       key={draft.id}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="group"
+                      layout
+                      className={`group ${expandedId === draft.id ? "col-span-full" : ""}`}
                     >
-                      <Card className="p-4 bg-white/5 border border-white/10 hover:border-[#d4af37]/30 transition-all h-full flex flex-col">
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex-1 min-w-0">
-                            <h4 className="text-white font-semibold text-sm truncate">{draft.title}</h4>
-                            <p className="text-gray-500 text-xs mt-0.5">
-                              {new Date(draft.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
-                            </p>
+                      <Card className={`bg-white/5 border transition-all ${
+                        expandedId === draft.id
+                          ? "border-[#d4af37]/50 shadow-lg shadow-[#d4af37]/5"
+                          : "border-white/10 hover:border-[#d4af37]/30 cursor-pointer"
+                      } h-full flex flex-col`}>
+                        {/* Card header - always visible, clickable to toggle */}
+                        <div
+                          className="p-4 cursor-pointer"
+                          onClick={() => setExpandedId(expandedId === draft.id ? null : draft.id)}
+                        >
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <h4 className="text-white font-semibold text-sm truncate">{draft.title}</h4>
+                                <ChevronDown className={`h-4 w-4 text-gray-500 transition-transform flex-shrink-0 ${
+                                  expandedId === draft.id ? "rotate-180" : ""
+                                }`} />
+                              </div>
+                              <p className="text-gray-500 text-xs mt-0.5">
+                                {new Date(draft.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+                              </p>
+                            </div>
+                            <Badge className={`${sc.color} border text-xs flex-shrink-0 ml-2`}>
+                              <StatusIcon className="h-3 w-3 mr-1" />
+                              {sc.label}
+                            </Badge>
                           </div>
-                          <Badge className={`${sc.color} border text-xs flex-shrink-0 ml-2`}>
-                            <StatusIcon className="h-3 w-3 mr-1" />
-                            {sc.label}
-                          </Badge>
+
+                          {/* Collapsed text preview */}
+                          {expandedId !== draft.id && (
+                            <p className="text-gray-400 text-xs leading-relaxed line-clamp-3">
+                              {stripHtml(draft.content) || "No content yet..."}
+                            </p>
+                          )}
+
+                          {/* Subject line */}
+                          {draft.subject && expandedId !== draft.id && (
+                            <p className="text-gray-500 text-xs mt-3 truncate">
+                              <span className="text-gray-600">Subject:</span> {draft.subject}
+                            </p>
+                          )}
                         </div>
 
-                        {/* Content preview */}
-                        <p className="text-gray-400 text-xs leading-relaxed mb-4 flex-1 line-clamp-3">
-                          {stripHtml(draft.content) || "No content yet..."}
-                        </p>
-
-                        {/* Subject line */}
-                        {draft.subject && (
-                          <p className="text-gray-500 text-xs mb-3 truncate">
-                            <span className="text-gray-600">Subject:</span> {draft.subject}
-                          </p>
-                        )}
+                        {/* Expanded HTML preview */}
+                        <AnimatePresence>
+                          {expandedId === draft.id && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.3, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              {draft.subject && (
+                                <div className="px-4 pb-2">
+                                  <p className="text-gray-400 text-xs">
+                                    <span className="text-gray-500 font-medium">Subject:</span> {draft.subject}
+                                  </p>
+                                </div>
+                              )}
+                              <div className="mx-4 mb-3 rounded-lg border border-white/10 overflow-hidden bg-white">
+                                <div className="flex items-center justify-between px-3 py-1.5 bg-gray-900 border-b border-white/10">
+                                  <span className="text-gray-400 text-xs flex items-center gap-1.5">
+                                    <Eye className="h-3 w-3" />
+                                    HTML Preview
+                                  </span>
+                                  <Button
+                                    onClick={(e) => { e.stopPropagation(); setExpandedId(null); }}
+                                    variant="ghost"
+                                    className="text-gray-400 hover:text-white h-6 w-6 p-0"
+                                  >
+                                    <X className="h-3 w-3" />
+                                  </Button>
+                                </div>
+                                <iframe
+                                  srcDoc={draft.content || "<p style='color:#999;padding:20px;font-family:sans-serif;'>No content to preview</p>"}
+                                  className="w-full border-0"
+                                  style={{ minHeight: "300px", maxHeight: "500px" }}
+                                  sandbox="allow-same-origin"
+                                  title={`Preview: ${draft.title}`}
+                                  onLoad={(e) => {
+                                    const iframe = e.target as HTMLIFrameElement;
+                                    if (iframe.contentDocument) {
+                                      const h = iframe.contentDocument.documentElement.scrollHeight;
+                                      iframe.style.height = Math.min(Math.max(h, 200), 500) + "px";
+                                    }
+                                  }}
+                                />
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
 
                         {/* Actions */}
-                        <div className="flex items-center gap-2 pt-3 border-t border-white/5">
+                        <div className="flex items-center gap-2 px-4 pb-4 pt-3 border-t border-white/5 mt-auto">
                           <Link href={`/admin/newsletters?edit=${draft.id}`} className="flex-1">
                             <Button variant="ghost" className="w-full text-[#d4af37] hover:text-[#d4af37] hover:bg-[#d4af37]/10 text-xs h-8 gap-1.5">
                               <Pencil className="h-3 w-3" />
                               Edit
                             </Button>
                           </Link>
+                          <Button
+                            onClick={(e) => { e.stopPropagation(); setExpandedId(expandedId === draft.id ? null : draft.id); }}
+                            variant="ghost"
+                            className="text-gray-500 hover:text-[#d4af37] hover:bg-[#d4af37]/10 text-xs h-8 px-2"
+                            title={expandedId === draft.id ? "Collapse preview" : "Preview HTML"}
+                          >
+                            <Eye className="h-3 w-3" />
+                          </Button>
                           {confirmDeleteId === draft.id ? (
                             <div className="flex items-center gap-1">
                               <Button
-                                onClick={() => handleDelete(draft.id)}
+                                onClick={(e) => { e.stopPropagation(); handleDelete(draft.id); }}
                                 disabled={deletingId === draft.id}
                                 variant="ghost"
                                 className="text-red-400 hover:text-red-300 hover:bg-red-500/10 text-xs h-8 px-2"
@@ -1157,7 +1235,7 @@ function NewsletterDraftsPanel() {
                                 {deletingId === draft.id ? <Loader2 className="h-3 w-3 animate-spin" /> : "Yes"}
                               </Button>
                               <Button
-                                onClick={() => setConfirmDeleteId(null)}
+                                onClick={(e) => { e.stopPropagation(); setConfirmDeleteId(null); }}
                                 variant="ghost"
                                 className="text-gray-400 hover:text-white text-xs h-8 px-2"
                               >
@@ -1166,7 +1244,7 @@ function NewsletterDraftsPanel() {
                             </div>
                           ) : (
                             <Button
-                              onClick={() => setConfirmDeleteId(draft.id)}
+                              onClick={(e) => { e.stopPropagation(); setConfirmDeleteId(draft.id); }}
                               variant="ghost"
                               className="text-gray-500 hover:text-red-400 hover:bg-red-500/10 text-xs h-8 px-2"
                             >
