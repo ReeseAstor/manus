@@ -6,7 +6,7 @@ import {
   LayoutDashboard, BookOpen, Link2, AlertTriangle, FileText, 
   Users, TrendingUp, Bell, Settings, CheckCircle2, XCircle,
   Clock, BarChart3, Loader2, RefreshCw, ChevronRight,
-  AlertCircle, BookMarked, MessageSquare, Mail, Smartphone
+  AlertCircle, BookMarked, MessageSquare, Mail, Smartphone, Sparkles
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -128,6 +128,16 @@ export default function AdminDashboard() {
       color: "from-indigo-500/20 to-indigo-600/10",
       borderColor: "border-indigo-500/30",
       iconColor: "text-indigo-400",
+      stats: undefined,
+    },
+    {
+      title: "AI Studio",
+      description: "Generate images, videos & music for campaigns",
+      icon: Sparkles,
+      href: "/admin/ai-studio",
+      color: "from-yellow-500/20 to-yellow-600/10",
+      borderColor: "border-yellow-500/30",
+      iconColor: "text-yellow-400",
       stats: undefined,
     },
   ];

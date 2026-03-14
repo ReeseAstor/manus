@@ -1153,3 +1153,24 @@
 - [x] Handle errors gracefully (don't fail sign-up if email fails)
 - [x] Write vitest tests for the welcome email flow (11 tests passing)
 - [x] Verify end-to-end functionality (162 total tests passing)
+
+## KIE API Integration - Newsletter Admin Dashboard
+- [x] Audit existing admin dashboard structure and routes
+- [x] Create KIE API server-side service layer (kie-service.ts)
+- [x] Implement Nano Banana Pro image generation endpoint (text-to-image, image-to-image)
+- [x] Implement Nano Banana 2 with web search support
+- [x] Implement grid workflow (2x2 / 3x3 generation + slicing)
+- [x] Implement Kling 3.0 video generation endpoint (single/multi-shot)
+- [x] Implement Suno music generation endpoint (V4/V4.5/V5)
+- [x] Implement Gemini LLM chat endpoint (4 models: 3-pro, 3-flash, 2.5-pro, 2.5-flash)
+- [x] Add credit checker utility endpoint
+- [x] Create admin tRPC router (routers/kie.ts) with admin-only access
+- [x] Create admin dashboard AI Studio page (/admin/ai-studio)
+- [x] Add image generation tab with model selection and grid support
+- [x] Add video generation tab with Kling 3.0 controls
+- [x] Add music generation tab with Suno custom/simple modes
+- [x] Add LLM chat tab with system prompt and model selection
+- [x] Add task polling and result display with status badges
+- [x] Add AI Studio link to admin dashboard modules
+- [x] Write vitest tests for KIE service layer (28 tests passing)
+- [x] Verify end-to-end flow (190 total tests passing)
