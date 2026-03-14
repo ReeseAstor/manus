@@ -25,6 +25,7 @@ import {
   type GeminiMessage,
 } from "../kie-service";
 import { getDb } from "../db";
+import { createNewsletter } from "../db";
 import { aiStudioConversations } from "../../drizzle/schema";
 import { eq, desc } from "drizzle-orm";
 
@@ -353,6 +354,67 @@ export const kieRouter = router({
       await db.delete(aiStudioConversations)
         .where(eq(aiStudioConversations.id, input.id));
       return { success: true };
+    }),
+
+  // Save generated assets to a newsletter draft
+  saveToNewsletter: protectedProcedure
+    .input(z.object({
+      type: z.enum(["image", "video", "music", "text"]),
+      title: z.string().min(1),
+      content: z.string().min(1), // HTML content or text to insert
+      imageUrls: z.array(z.string()).optional(),
+      audioUrl: z.string().optional(),
+      videoUrl: z.string().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      requireAdmin(ctx.user.role);
+      
+      // Build HTML content for the newsletter draft
+      let htmlContent = "";
+      
+      if (input.type === "image" && input.imageUrls?.length) {
+        htmlContent = `<div style="text-align: center; padding: 20px;">\n`;
+        for (const url of input.imageUrls) {
+          htmlContent += `  <img src="${url}" alt="AI Generated Image" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0;" />\n`;
+        }
+        htmlContent += `</div>\n`;
+        if (input.content) {
+          htmlContent += `<div style="padding: 20px;">${input.content}</div>`;
+        }
+      } else if (input.type === "video" && input.videoUrl) {
+        htmlContent = `<div style="text-align: center; padding: 20px;">\n`;
+        htmlContent += `  <p style="color: #666;">🎬 Video Asset: <a href="${input.videoUrl}" target="_blank">${input.videoUrl}</a></p>\n`;
+        htmlContent += `</div>\n`;
+        if (input.content) {
+          htmlContent += `<div style="padding: 20px;">${input.content}</div>`;
+        }
+      } else if (input.type === "music" && input.audioUrl) {
+        htmlContent = `<div style="text-align: center; padding: 20px;">\n`;
+        htmlContent += `  <p style="color: #666;">🎵 Audio Asset: <a href="${input.audioUrl}" target="_blank">${input.audioUrl}</a></p>\n`;
+        htmlContent += `</div>\n`;
+        if (input.content) {
+          htmlContent += `<div style="padding: 20px;">${input.content}</div>`;
+        }
+      } else {
+        // Text/copy content from AI chat
+        htmlContent = `<div style="padding: 20px; font-family: Georgia, serif; line-height: 1.8;">${input.content}</div>`;
+      }
+
+      try {
+        await createNewsletter({
+          title: input.title,
+          subject: input.title,
+          content: htmlContent,
+          status: "draft",
+          createdBy: ctx.user.id,
+        });
+        return { success: true };
+      } catch (err: any) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: `Failed to save to newsletter: ${err.message}`,
+        });
+      }
     }),
 });
 

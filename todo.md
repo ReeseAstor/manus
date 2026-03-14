@@ -1209,3 +1209,23 @@
 - [x] Add Common Workflows sidebar (Write→Publish, Draft→Send, Generate→Use, Audit→Fix→Report)
 - [x] Improve visual hierarchy with color-coded workflow groups
 - [x] All 190 tests passing
+
+## Save to Newsletter Button in AI Studio
+- [x] Add "Save to Newsletter" button on generated images/video/music in AI Studio TaskCard
+- [x] Add "Save to Newsletter" button on AI chat assistant messages
+- [x] Create server endpoint (saveToNewsletter) to create newsletter drafts with content
+- [x] Connect to newsletter editor for inserting saved assets
+- [x] TypeScript compiles clean, 190 tests passing
+
+## Book Price Update (Amazon Confirmed)
+- [x] Update all book prices to Kindle $3.99 on Books page
+- [x] Update all book prices to Kindle $3.99 on Home page
+- [x] Update AI chatbot knowledge base with $3.99 Kindle / $19.99 Print
+- [x] Verified price consistency across Home, Books, and chatbot
+
+## Reusable Skill: Newsletter Sign-Up + Welcome Email
+- [x] Read skill-creator SKILL.md instructions
+- [x] Initialize skill with init_skill.py
+- [x] Create SKILL.md with full workflow documentation
+- [x] Include welcome email HTML template in templates/
+- [x] Validate skill structure (passed)

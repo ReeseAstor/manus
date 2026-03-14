@@ -14,7 +14,8 @@ import {
   Image, Video, Music, MessageSquare, Coins, Loader2,
   Download, RefreshCw, CheckCircle, XCircle, Clock,
   Sparkles, Grid3X3, ArrowLeft, ExternalLink, Copy,
-  Save, Trash2, History, Plus, Wand2, ChevronDown
+  Save, Trash2, History, Plus, Wand2, ChevronDown,
+  Mail, FileText
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
@@ -638,6 +639,53 @@ function MusicGenerator({ onSubmit, generateMusic }: {
   );
 }
 
+// ─── Save Chat to Newsletter Helper ─────────────────────────────────────
+
+function SaveChatToNewsletter({ content }: { content: string }) {
+  const saveToNewsletterMut = trpc.kie.saveToNewsletter.useMutation();
+  const [saving, setSaving] = useState(false);
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      // Convert markdown to simple HTML for newsletter
+      const htmlContent = content
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+        .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        .replace(/(<li>[\s\S]*<\/li>)/, '<ul>$1</ul>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br/>');
+
+      const title = `AI Chat Copy - ${new Date().toLocaleDateString()}`;
+      await saveToNewsletterMut.mutateAsync({
+        type: "text",
+        title,
+        content: htmlContent,
+      });
+      toast.success("Saved to newsletter draft!", { description: "Open Newsletter Manager to edit and send." });
+    } catch (err: any) {
+      toast.error("Failed to save", { description: err.message });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleSave}
+      disabled={saving}
+      className="text-xs text-[#d4af37]/70 hover:text-[#d4af37] flex items-center gap-1 transition-colors"
+    >
+      {saving ? <Loader2 className="h-3 w-3 animate-spin" /> : <Mail className="h-3 w-3" />}
+      Save to Newsletter
+    </button>
+  );
+}
+
 // ─── LLM Chat (with markdown, prompt enhancement, and history) ──────────
 
 function LLMChat({ geminiChat }: { geminiChat: any }) {
@@ -908,6 +956,7 @@ function LLMChat({ geminiChat }: { geminiChat: any }) {
                       >
                         <Copy className="h-3 w-3" /> Copy
                       </button>
+                      <SaveChatToNewsletter content={msg.content} />
                     </div>
                   )}
                 </div>
@@ -962,6 +1011,31 @@ function LLMChat({ geminiChat }: { geminiChat: any }) {
 // ─── Task Card ────────────────────────────────────────────────────────────
 
 function TaskCard({ task }: { task: ActiveTask }) {
+  const saveToNewsletterMut = trpc.kie.saveToNewsletter.useMutation();
+  const [saving, setSaving] = useState(false);
+
+  const handleSaveToNewsletter = async () => {
+    if (!task.resultUrls?.length) return;
+    setSaving(true);
+    try {
+      const typeLabel = task.type.charAt(0).toUpperCase() + task.type.slice(1);
+      const title = `AI Studio ${typeLabel} - ${new Date().toLocaleDateString()}`;
+      await saveToNewsletterMut.mutateAsync({
+        type: task.type as "image" | "video" | "music",
+        title,
+        content: `Generated via AI Studio on ${new Date().toLocaleString()}`,
+        imageUrls: task.type === "image" ? task.resultUrls : undefined,
+        videoUrl: task.type === "video" ? task.resultUrls[0] : undefined,
+        audioUrl: task.type === "music" ? task.resultUrls[0] : undefined,
+      });
+      toast.success("Saved to newsletter draft!", { description: "Open Newsletter Manager to edit and send." });
+    } catch (err: any) {
+      toast.error("Failed to save", { description: err.message });
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const typeConfig: Record<Tab, { icon: any; color: string }> = {
     image: { icon: Image, color: "text-purple-400" },
     video: { icon: Video, color: "text-blue-400" },
@@ -994,6 +1068,15 @@ function TaskCard({ task }: { task: ActiveTask }) {
               </a>
             </div>
           ))}
+          {/* Save to Newsletter button */}
+          <button
+            onClick={handleSaveToNewsletter}
+            disabled={saving}
+            className="mt-2 w-full flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 hover:bg-[#d4af37]/20 transition-all disabled:opacity-50"
+          >
+            {saving ? <Loader2 className="h-3 w-3 animate-spin" /> : <Mail className="h-3 w-3" />}
+            Save to Newsletter Draft
+          </button>
         </div>
       )}
 

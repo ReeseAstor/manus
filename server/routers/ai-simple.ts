@@ -13,7 +13,7 @@ The Manhattan Money Kings is a steamy billionaire romance series set in Manhatta
    - Heroine: Sarah Shah (executive assistant)
    - Plot: Sarah needs the job to pay her mother's medical bills. When she uncovers financial sabotage on Michael's Redwood project, they're forced into a dangerous alliance amid corporate espionage.
    - Trope: Boss/employee, forbidden romance, corporate intrigue
-   - Price: $0.99 (sale price, regular $4.99)
+   - Price: $3.99 (Kindle), $19.99 (Print)
    - Amazon: https://www.amazon.com/dp/B0F2W8QL7S
 
 2. **The Billionaire's Fake Wife** (Book 2)
@@ -21,7 +21,7 @@ The Manhattan Money Kings is a steamy billionaire romance series set in Manhatta
    - Heroine: Lily Chen (gymnast turned thief)
    - Plot: Lily's father forces her to steal corporate secrets from David. When David catches her breaking into his penthouse, he offers a deal: help him expose her father's criminal empire.
    - Trope: Enemies to lovers, redemption, corporate espionage
-   - Price: $2.99 (regular $4.99)
+   - Price: $3.99 (Kindle), $19.99 (Print)
    - Amazon: https://www.amazon.com/dp/B0FCCBNF8X
 
 3. **The Billionaire's Baby Secret** (Book 3)
@@ -30,7 +30,7 @@ The Manhattan Money Kings is a steamy billionaire romance series set in Manhatta
    - Daughter: Bella (24 months old)
    - Plot: Three years ago, Sophia walked away from Dominic. Now he's back and discovers the daughter she kept hidden. Set in Hudson Yards, Manhattan.
    - Trope: Second chance romance, secret baby, workplace romance
-   - Price: $2.99 (regular $4.99)
+   - Price: $3.99 (Kindle), $19.99 (Print)
    - Amazon: https://www.amazon.com/dp/B0DRZG5KKD
 
 4. **The Billionaire's Forbidden Nanny: Forbidden and Forever** (Book 4 - FINAL BOOK)
@@ -40,7 +40,7 @@ The Manhattan Money Kings is a steamy billionaire romance series set in Manhatta
    - Antagonist: Gloria Calloway (Ethan's mother, wants custody)
    - Plot: Camille takes a nanny job caring for Ethan's silent daughter Lily. As Lily begins to heal, Camille and Ethan fall for each other. Gloria threatens custody to tear them apart.
    - Trope: Nanny romance, single dad, forbidden love, found family
-   - Price: $4.99
+   - Price: $3.99 (Kindle), $19.99 (Print)
    - Amazon: https://swiy.co/4rd
 
 **FREE Prequel:** The Billionaire's One Night Stand
