@@ -24,8 +24,7 @@ export default function Books() {
       available: true,
       badge: "Final Book",
       featured: true,
-      preorder: false,
-      launchDate: "February 3, 2026",
+
     },
     {
       id: 3,
@@ -367,12 +366,16 @@ export default function Books() {
 
                       <div className="flex items-center gap-4">
                         <span className="text-4xl font-bold text-white">{book.price}</span>
-                        <span className="text-xl text-gray-500 line-through">
-                          {book.regularPrice}
-                        </span>
-                        <Badge className="bg-[#d4af37]/20 text-[#d4af37] border border-[#d4af37]/30">
-                          Limited Time
-                        </Badge>
+                        {book.price !== book.regularPrice && (
+                          <>
+                            <span className="text-xl text-gray-500 line-through">
+                              {book.regularPrice}
+                            </span>
+                            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border border-[#d4af37]/30">
+                              Limited Time
+                            </Badge>
+                          </>
+                        )}
                       </div>
 
                       <div className="flex flex-col sm:flex-row gap-4">

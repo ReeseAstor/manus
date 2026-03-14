@@ -72,7 +72,7 @@ describe("blog.list", () => {
       title: "Test Blog Post",
       slug: "test-blog-post",
     });
-    expect(db.getAllBlogPosts).toHaveBeenCalledWith(undefined);
+    expect(db.getAllBlogPosts).toHaveBeenCalledWith(undefined, undefined);
   });
 
   it("filters published posts when requested", async () => {
@@ -84,7 +84,7 @@ describe("blog.list", () => {
     const result = await caller.blog.list({ published: true });
 
     expect(result).toHaveLength(1);
-    expect(db.getAllBlogPosts).toHaveBeenCalledWith(true);
+    expect(db.getAllBlogPosts).toHaveBeenCalledWith(true, undefined);
   });
 });
 

@@ -154,8 +154,8 @@ export default function Home() {
               <div className="absolute -inset-12 bg-gradient-to-r from-[#d4af37]/20 to-transparent blur-3xl rounded-full" />
               
               <div className="relative p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
-                <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-gradient-to-r from-[#e8c4c4] to-[#d4af37] text-black text-sm font-bold shadow-lg animate-pulse">
-                  PRE-ORDER $0.99
+                <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-gradient-to-r from-[#e8c4c4] to-[#d4af37] text-black text-sm font-bold shadow-lg">
+                  Final Book
                 </div>
 
                 <img
@@ -177,7 +177,7 @@ export default function Home() {
                   className="w-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                 >
                   <a href="https://swiy.co/4rd" target="_blank" rel="noopener noreferrer">
-                    Pre-Order Now - $0.99
+                    Buy Now
                   </a>
                 </Button>
               </div>

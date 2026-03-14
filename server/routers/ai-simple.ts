@@ -33,6 +33,16 @@ The Manhattan Money Kings is a steamy billionaire romance series set in Manhatta
    - Price: $2.99 (regular $4.99)
    - Amazon: https://www.amazon.com/dp/B0DRZG5KKD
 
+4. **The Billionaire's Forbidden Nanny: Forbidden and Forever** (Book 4 - FINAL BOOK)
+   - Hero: Ethan Calloway (billionaire widower)
+   - Heroine: Camille Torres (nanny from the Bronx)
+   - Child: Lily (5-year-old, selectively mute since mother's death)
+   - Antagonist: Gloria Calloway (Ethan's mother, wants custody)
+   - Plot: Camille takes a nanny job caring for Ethan's silent daughter Lily. As Lily begins to heal, Camille and Ethan fall for each other. Gloria threatens custody to tear them apart.
+   - Trope: Nanny romance, single dad, forbidden love, found family
+   - Price: $4.99
+   - Amazon: https://swiy.co/4rd
+
 **FREE Prequel:** The Billionaire's One Night Stand
 - Hero: James Chen (billionaire tech mogul)
 - Heroine: Victoria (corporate lawyer)

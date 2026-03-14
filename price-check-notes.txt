@@ -1,0 +1,20 @@
+Live Website Price Check Notes (March 6, 2026)
+==============================================
+Source: reeseastor.com/books (live deployed site)
+
+CURRENT PRICES ON LIVE SITE:
+Book 4 (The Billionaire's Forbidden Nanny): $4.99 (crossed out $4.99) - "Limited Time" - "Final Book" badge - Available Now
+Book 3 (The Billionaire's Baby Secret): $2.99 (crossed out $4.99) - "Limited Time" - "New Release" badge - Available Now
+Book 2 (The Billionaire's Fake Wife): $2.99 (crossed out $4.99) - "Limited Time" - Available Now
+Book 1 (The Billionaire's Executive Assistant): $0.99 (crossed out $4.99) - "Limited Time" - Available Now
+
+ISSUES FOUND:
+1. Book 4 shows "$4.99 crossed out $4.99" which makes no sense - the sale price equals the original price
+2. No pre-order text visible on live site - but need to check dev version
+3. Need to verify these prices match actual Amazon Kindle prices
+4. Cannot access Amazon directly (503 errors and policy restrictions)
+
+ACTION NEEDED:
+- Ask user to confirm actual Amazon Kindle prices for all 4 books
+- Remove any pre-order references from dev version
+- Fix Book 4 pricing display (sale price = original price is incorrect)

@@ -1117,3 +1117,21 @@
 - [x] Add series page URL https://swiy.co/mmk
 - [x] Add all URLs to External Links Tracker
 - [x] Test all sharing URLs
+
+
+## Book 4 Trailer Marketing Plan
+- [x] Create comprehensive trailer launch marketing plan
+- [x] Define pre-launch, launch, and post-launch phases
+- [x] Develop cross-platform promotion strategy
+- [x] Create influencer outreach plan
+- [x] Set up paid advertising campaigns
+- [x] Establish performance tracking metrics
+
+
+## Pre-Order Removal & Price Verification
+- [ ] Check actual Amazon prices for all 4 MMK books (need user confirmation)
+- [x] Remove ALL remaining pre-order references from website
+- [x] Fix Book 4 pricing display (removed crossed-out price when same as current price)
+- [x] Update AI chatbot with Book 4 character and pricing info
+- [ ] Verify price consistency across Home, Books, and database (pending user confirmation)
+- [ ] Test and save checkpoint

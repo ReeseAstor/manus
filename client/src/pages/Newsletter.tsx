@@ -72,7 +72,7 @@ export default function Newsletter() {
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">New Releases</h3>
                 <p className="text-sm text-gray-600">
-                  Be the first to know about new books, cover reveals, and exclusive pre-orders
+                  Be the first to know about new books, cover reveals, and exclusive deals
                 </p>
               </div>
               <div>
@@ -218,7 +218,7 @@ export default function Newsletter() {
               <div>
                 <h3 className="font-bold text-gray-900 mb-2">Early Access to New Releases</h3>
                 <p className="text-gray-600 text-sm">
-                  Get notified before anyone else when a new book drops, plus exclusive pre-order bonuses
+                  Get notified before anyone else when a new book drops, plus exclusive bonuses and early access
                 </p>
               </div>
             </div>
