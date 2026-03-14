@@ -10,6 +10,8 @@ import { twilioRouter } from "./routers/twilio";
 import { smsAnalyticsRouter } from "./routers/smsAnalytics";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
+import { sendEmail } from "./email-service";
+import { generateWelcomeEmail } from "./email-templates/welcome";
 import { generateEmailTemplate, sanitizeEmailContent } from "./emailTemplate";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
@@ -99,6 +101,22 @@ export const appRouter = router({
         
         if (!result.success) {
           throw new Error(result.message);
+        }
+
+        // Send welcome email with free prequel link (fire-and-forget)
+        try {
+          const welcomeHtml = generateWelcomeEmail({
+            subscriberName: input.name,
+          });
+          await sendEmail({
+            to: input.email,
+            subject: "Welcome! Your Free Book Is Waiting \u{1F4D6}",
+            html: welcomeHtml,
+          });
+          console.log(`[Newsletter] Welcome email sent to ${input.email}`);
+        } catch (emailError) {
+          // Log but don't fail the subscription if the welcome email fails
+          console.error("[Newsletter] Failed to send welcome email:", emailError);
         }
         
         return result;

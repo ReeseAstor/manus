@@ -1145,3 +1145,11 @@
 - [x] Style to match Manhattan luxury aesthetic
 - [x] Write vitest tests for the new form (5 tests passing)
 - [x] Verify form works end-to-end
+
+## Welcome Email with Free Prequel Link
+- [x] Review existing email service and email template system
+- [x] Create welcome email template with free prequel download link
+- [x] Integrate welcome email sending into newsletter subscribe mutation
+- [x] Handle errors gracefully (don't fail sign-up if email fails)
+- [x] Write vitest tests for the welcome email flow (11 tests passing)
+- [x] Verify end-to-end functionality (162 total tests passing)
