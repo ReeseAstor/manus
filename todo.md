@@ -1229,3 +1229,14 @@
 - [x] Create SKILL.md with full workflow documentation
 - [x] Include welcome email HTML template in templates/
 - [x] Validate skill structure (passed)
+
+## Newsletter Drafts Section in AI Studio
+- [x] Reused existing newsletters.list and newsletters.delete endpoints (no new backend needed)
+- [x] Build Newsletter Drafts panel below generator in AI Studio page
+- [x] Display draft title, content preview (HTML stripped), creation date, and status badges
+- [x] Group by status: Drafts, Scheduled, Recently Sent with counts
+- [x] Add edit link to open draft in newsletter editor
+- [x] Add delete button with Yes/No confirmation
+- [x] Add "Open Newsletter Manager" link and refresh button
+- [x] Styled to match AI Studio dark theme with gold accents
+- [x] All 190 tests passing

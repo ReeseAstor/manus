@@ -15,7 +15,7 @@ import {
   Download, RefreshCw, CheckCircle, XCircle, Clock,
   Sparkles, Grid3X3, ArrowLeft, ExternalLink, Copy,
   Save, Trash2, History, Plus, Wand2, ChevronDown,
-  Mail, FileText
+  Mail, FileText, Eye, Pencil, AlertTriangle, Send
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
@@ -310,6 +310,15 @@ export default function AdminAIStudio() {
                 )}
               </div>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Drafts Section */}
+      <section className="py-8 border-t border-white/5">
+        <div className="container">
+          <div className="max-w-7xl mx-auto">
+            <NewsletterDraftsPanel />
           </div>
         </div>
       </section>
@@ -1004,6 +1013,246 @@ function LLMChat({ geminiChat }: { geminiChat: any }) {
           </div>
         </Card>
       </div>
+    </div>
+  );
+}
+
+// ─── Newsletter Drafts Panel ─────────────────────────────────────────────
+
+function NewsletterDraftsPanel() {
+  const { data: drafts, refetch, isLoading } = trpc.newsletters.list.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
+  const deleteMut = trpc.newsletters.delete.useMutation();
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
+  const [, setLocation] = useLocation();
+
+  // Filter to show only drafts (not sent/scheduled)
+  const draftItems = drafts?.filter(n => n.status === "draft") ?? [];
+  const sentItems = drafts?.filter(n => n.status === "sent") ?? [];
+  const scheduledItems = drafts?.filter(n => n.status === "scheduled") ?? [];
+
+  const handleDelete = async (id: number) => {
+    setDeletingId(id);
+    try {
+      await deleteMut.mutateAsync({ id });
+      toast.success("Newsletter draft deleted");
+      refetch();
+    } catch (err: any) {
+      toast.error("Failed to delete", { description: err.message });
+    } finally {
+      setDeletingId(null);
+      setConfirmDeleteId(null);
+    }
+  };
+
+  const stripHtml = (html: string) => {
+    return html.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").trim().slice(0, 120);
+  };
+
+  const statusConfig: Record<string, { color: string; icon: any; label: string }> = {
+    draft: { color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30", icon: FileText, label: "Draft" },
+    scheduled: { color: "bg-blue-500/20 text-blue-400 border-blue-500/30", icon: Clock, label: "Scheduled" },
+    sent: { color: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30", icon: Send, label: "Sent" },
+  };
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2 rounded-lg bg-[#d4af37]/20">
+            <Mail className="h-5 w-5 text-[#d4af37]" />
+          </div>
+          <div>
+            <h2 className="font-serif text-2xl font-bold text-white">Newsletter Drafts</h2>
+            <p className="text-gray-400 text-sm">Manage content saved from AI Studio</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button onClick={() => refetch()} variant="ghost" className="text-gray-400 hover:text-white p-2">
+            <RefreshCw className="h-4 w-4" />
+          </Button>
+          <Link href="/admin/newsletters">
+            <Button variant="ghost" className="text-[#d4af37] hover:text-[#d4af37] hover:bg-[#d4af37]/10 text-sm gap-1.5">
+              <ExternalLink className="h-4 w-4" />
+              Open Newsletter Manager
+            </Button>
+          </Link>
+        </div>
+      </div>
+
+      {isLoading ? (
+        <div className="flex items-center justify-center py-12">
+          <Loader2 className="h-6 w-6 animate-spin text-[#d4af37]" />
+        </div>
+      ) : !drafts || drafts.length === 0 ? (
+        <Card className="p-8 bg-white/5 border border-white/10 text-center">
+          <Mail className="h-10 w-10 text-gray-600 mx-auto mb-3" />
+          <p className="text-gray-400 font-medium mb-1">No newsletter drafts yet</p>
+          <p className="text-gray-500 text-sm">Generate content above and click "Save to Newsletter Draft" to get started.</p>
+        </Card>
+      ) : (
+        <div className="space-y-6">
+          {/* Draft newsletters */}
+          {draftItems.length > 0 && (
+            <div>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <FileText className="h-4 w-4" />
+                Drafts ({draftItems.length})
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {draftItems.map(draft => {
+                  const sc = statusConfig[draft.status];
+                  const StatusIcon = sc.icon;
+                  return (
+                    <motion.div
+                      key={draft.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="group"
+                    >
+                      <Card className="p-4 bg-white/5 border border-white/10 hover:border-[#d4af37]/30 transition-all h-full flex flex-col">
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="flex-1 min-w-0">
+                            <h4 className="text-white font-semibold text-sm truncate">{draft.title}</h4>
+                            <p className="text-gray-500 text-xs mt-0.5">
+                              {new Date(draft.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+                            </p>
+                          </div>
+                          <Badge className={`${sc.color} border text-xs flex-shrink-0 ml-2`}>
+                            <StatusIcon className="h-3 w-3 mr-1" />
+                            {sc.label}
+                          </Badge>
+                        </div>
+
+                        {/* Content preview */}
+                        <p className="text-gray-400 text-xs leading-relaxed mb-4 flex-1 line-clamp-3">
+                          {stripHtml(draft.content) || "No content yet..."}
+                        </p>
+
+                        {/* Subject line */}
+                        {draft.subject && (
+                          <p className="text-gray-500 text-xs mb-3 truncate">
+                            <span className="text-gray-600">Subject:</span> {draft.subject}
+                          </p>
+                        )}
+
+                        {/* Actions */}
+                        <div className="flex items-center gap-2 pt-3 border-t border-white/5">
+                          <Link href={`/admin/newsletters?edit=${draft.id}`} className="flex-1">
+                            <Button variant="ghost" className="w-full text-[#d4af37] hover:text-[#d4af37] hover:bg-[#d4af37]/10 text-xs h-8 gap-1.5">
+                              <Pencil className="h-3 w-3" />
+                              Edit
+                            </Button>
+                          </Link>
+                          {confirmDeleteId === draft.id ? (
+                            <div className="flex items-center gap-1">
+                              <Button
+                                onClick={() => handleDelete(draft.id)}
+                                disabled={deletingId === draft.id}
+                                variant="ghost"
+                                className="text-red-400 hover:text-red-300 hover:bg-red-500/10 text-xs h-8 px-2"
+                              >
+                                {deletingId === draft.id ? <Loader2 className="h-3 w-3 animate-spin" /> : "Yes"}
+                              </Button>
+                              <Button
+                                onClick={() => setConfirmDeleteId(null)}
+                                variant="ghost"
+                                className="text-gray-400 hover:text-white text-xs h-8 px-2"
+                              >
+                                No
+                              </Button>
+                            </div>
+                          ) : (
+                            <Button
+                              onClick={() => setConfirmDeleteId(draft.id)}
+                              variant="ghost"
+                              className="text-gray-500 hover:text-red-400 hover:bg-red-500/10 text-xs h-8 px-2"
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          )}
+                        </div>
+                      </Card>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Scheduled newsletters */}
+          {scheduledItems.length > 0 && (
+            <div>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                Scheduled ({scheduledItems.length})
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {scheduledItems.map(item => {
+                  const sc = statusConfig[item.status];
+                  const StatusIcon = sc.icon;
+                  return (
+                    <Card key={item.id} className="p-4 bg-white/5 border border-blue-500/20">
+                      <div className="flex items-start justify-between mb-2">
+                        <h4 className="text-white font-semibold text-sm truncate flex-1">{item.title}</h4>
+                        <Badge className={`${sc.color} border text-xs ml-2`}>
+                          <StatusIcon className="h-3 w-3 mr-1" />
+                          {sc.label}
+                        </Badge>
+                      </div>
+                      <p className="text-gray-400 text-xs leading-relaxed line-clamp-2 mb-2">
+                        {stripHtml(item.content) || "No content"}
+                      </p>
+                      {item.scheduledAt && (
+                        <p className="text-blue-400 text-xs">
+                          Scheduled: {new Date(item.scheduledAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+                        </p>
+                      )}
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Recently sent newsletters */}
+          {sentItems.length > 0 && (
+            <div>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <CheckCircle className="h-4 w-4" />
+                Recently Sent ({sentItems.length})
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {sentItems.slice(0, 6).map(item => {
+                  const sc = statusConfig[item.status];
+                  const StatusIcon = sc.icon;
+                  return (
+                    <Card key={item.id} className="p-4 bg-white/5 border border-emerald-500/10">
+                      <div className="flex items-start justify-between mb-2">
+                        <h4 className="text-white font-semibold text-sm truncate flex-1">{item.title}</h4>
+                        <Badge className={`${sc.color} border text-xs ml-2`}>
+                          <StatusIcon className="h-3 w-3 mr-1" />
+                          {sc.label}
+                        </Badge>
+                      </div>
+                      <p className="text-gray-400 text-xs leading-relaxed line-clamp-2 mb-2">
+                        {stripHtml(item.content) || "No content"}
+                      </p>
+                      <div className="flex items-center gap-3 text-xs text-gray-500">
+                        {(item.recipientCount ?? 0) > 0 && <span>{item.recipientCount} recipients</span>}
+                        {(item.openCount ?? 0) > 0 && <span>{item.openCount} opens</span>}
+                        {item.sentAt && <span>{new Date(item.sentAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>}
+                      </div>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
