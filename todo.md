@@ -1135,3 +1135,13 @@
 - [x] Update AI chatbot with Book 4 character and pricing info
 - [ ] Verify price consistency across Home, Books, and database (pending user confirmation)
 - [ ] Test and save checkpoint
+
+## Homepage Mailing List Sign-Up Form (New Releases)
+- [x] Review existing MailerLite integration and newsletter components
+- [x] Design a dedicated "New Releases" sign-up section for the homepage
+- [x] Implement the sign-up form with email validation
+- [x] Connect form to MailerLite API for subscriber management
+- [x] Add success/error states and loading indicator
+- [x] Style to match Manhattan luxury aesthetic
+- [x] Write vitest tests for the new form (5 tests passing)
+- [x] Verify form works end-to-end

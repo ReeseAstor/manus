@@ -1,12 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Mail, BookOpen, Sparkles, ChevronRight, Star } from "lucide-react";
-import { useState } from "react";
-import { toast } from "sonner";
-import { trpc } from "@/lib/trpc";
+import { BookOpen, ChevronRight, Star } from "lucide-react";
 
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import NewReleaseSignup from "@/components/NewReleaseSignup";
 
 export default function Home() {
 
@@ -387,54 +384,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Newsletter Section - Elegant Signup */}
-      <section className="py-32 relative">
-        <div 
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/nkhgPTPhVEhCBAIZ.jpg')",
-            backgroundSize: "cover",
-          }}
-        />
-        
-        <div className="container relative z-10">
-          <motion.div
-            className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="p-12 md:p-16 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 mb-8">
-                <Sparkles className="h-8 w-8 text-[#d4af37]" />
-              </div>
-              
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
-                Join the Inner Circle
-              </h2>
-              
-              <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-                Get exclusive updates, free books, sneak peeks, and behind-the-scenes content delivered to your inbox.
-              </p>
-
-              <div className="flex justify-center">
-                <button
-                  className="ml-onclick-form bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2 text-lg"
-                  onClick={() => (window as any).ml('show', 'duEMh6', true)}
-                >
-                  <Mail className="h-5 w-5" />
-                  Subscribe
-                </button>
-              </div>
-
-              <p className="text-sm text-gray-500 mt-6">
-                No spam. Unsubscribe anytime. Your privacy is protected.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* New Release Mailing List Sign-Up */}
+      <NewReleaseSignup />
     </div>
   );
 }
