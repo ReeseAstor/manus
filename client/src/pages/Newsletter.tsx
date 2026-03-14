@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
-import { Heart, Mail, BookOpen, Sparkles, CheckCircle, Calendar, ArrowRight } from 'lucide-react';
+import { 
+  BookOpen, Mail, Sparkles, CheckCircle, Calendar, ArrowRight, 
+  Heart, Gift, Star, Bell, Shield, Download
+} from 'lucide-react';
 import { Link } from 'wouter';
+import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 
 /**
- * Newsletter Signup Page
+ * Newsletter Signup Page — Manhattan Luxury Redesign
  * 
- * Standalone page optimized for converting book readers into newsletter subscribers.
- * Can be linked from books, social media, or promotional materials.
+ * Premium landing page optimized for converting book readers into newsletter subscribers.
+ * Features the free prequel as lead magnet, social proof, and Manhattan luxury aesthetic.
  * URL: /newsletter
  */
 export default function Newsletter() {
@@ -20,8 +25,7 @@ export default function Newsletter() {
     onSuccess: () => {
       setIsSubmitted(true);
       setError(null);
-      setEmail('');
-      setName('');
+      toast.success("Welcome to the inner circle!");
     },
     onError: (err: any) => {
       setError(err.message || 'Failed to subscribe. Please try again.');
@@ -40,335 +44,620 @@ export default function Newsletter() {
     subscribeMutation.mutate({ email, name: name || undefined });
   };
 
+  // ─── Success State ──────────────────────────────────────────────────────
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 flex items-center justify-center px-4 py-12">
-        <div className="max-w-2xl w-full text-center">
-          {/* Success Animation */}
-          <div className="mb-8 flex justify-center">
-            <div className="relative">
-              <div className="absolute inset-0 bg-green-400 rounded-full animate-ping opacity-20"></div>
-              <div className="relative bg-green-500 text-white rounded-full p-6">
-                <CheckCircle className="w-16 h-16" />
-              </div>
-            </div>
-          </div>
-
-          {/* Success Message */}
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Welcome to the Family! 💕
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            You're officially part of my reader community. Check your inbox for a special welcome gift!
-          </p>
-
-          {/* What to Expect */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">What to Expect:</h2>
-            <div className="grid md:grid-cols-3 gap-6 text-left">
-              <div>
-                <div className="bg-pink-100 rounded-full w-12 h-12 flex items-center justify-center mb-4">
-                  <BookOpen className="w-6 h-6 text-pink-600" />
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">New Releases</h3>
-                <p className="text-sm text-gray-600">
-                  Be the first to know about new books, cover reveals, and exclusive deals
-                </p>
-              </div>
-              <div>
-                <div className="bg-purple-100 rounded-full w-12 h-12 flex items-center justify-center mb-4">
-                  <Sparkles className="w-6 h-6 text-purple-600" />
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Bonus Content</h3>
-                <p className="text-sm text-gray-600">
-                  Deleted scenes, character interviews, and behind-the-scenes writing updates
-                </p>
-              </div>
-              <div>
-                <div className="bg-pink-100 rounded-full w-12 h-12 flex items-center justify-center mb-4">
-                  <Heart className="w-6 h-6 text-pink-600" />
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Exclusive Deals</h3>
-                <p className="text-sm text-gray-600">
-                  Special discounts, giveaways, and subscriber-only promotions
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/books"
-              className="inline-flex items-center justify-center px-8 py-4 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 transition"
+      <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a] relative overflow-hidden">
+        {/* Ambient glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#d4af37]/5 rounded-full blur-[120px]" />
+        
+        <div className="relative z-10 flex items-center justify-center min-h-screen px-4 py-16">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl w-full text-center"
+          >
+            {/* Success Icon */}
+            <motion.div 
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+              className="mb-8 flex justify-center"
             >
-              Browse My Books
-            </a>
-            <a
-              href="/vip-club"
-              className="inline-flex items-center justify-center px-8 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition"
+              <div className="relative">
+                <div className="absolute inset-0 bg-[#d4af37] rounded-full animate-ping opacity-20" />
+                <div className="relative bg-gradient-to-br from-[#d4af37] to-[#b8962e] text-[#0a0e1a] rounded-full p-6">
+                  <CheckCircle className="w-16 h-16" />
+                </div>
+              </div>
+            </motion.div>
+
+            <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl font-bold text-white mb-4">
+              You're In the Inner Circle
+            </h1>
+            <p className="text-xl text-gray-300 mb-4 font-['Montserrat']">
+              Check your inbox for your free copy of <em className="text-[#d4af37]">The Billionaire's One Night Stand</em>
+            </p>
+            <p className="text-gray-400 mb-10 font-['Montserrat']">
+              Welcome to the Manhattan Money Kings world. Your journey starts now.
+            </p>
+
+            {/* What's Coming Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="bg-white/5 backdrop-blur-sm border border-[#d4af37]/20 rounded-2xl p-8 mb-10"
             >
-              Join VIP Club
-            </a>
-          </div>
+              <h2 className="font-['Cormorant_Garamond'] text-2xl font-bold text-[#d4af37] mb-6">What's Coming Your Way</h2>
+              <div className="grid md:grid-cols-3 gap-6 text-left">
+                <div className="flex items-start gap-3">
+                  <div className="bg-[#d4af37]/10 rounded-lg p-2 flex-shrink-0">
+                    <Download className="w-5 h-5 text-[#d4af37]" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white text-sm mb-1">Free Prequel</h3>
+                    <p className="text-xs text-gray-400">Download link in your welcome email</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="bg-[#d4af37]/10 rounded-lg p-2 flex-shrink-0">
+                    <Bell className="w-5 h-5 text-[#d4af37]" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white text-sm mb-1">New Releases</h3>
+                    <p className="text-xs text-gray-400">First to know about every new book</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="bg-[#d4af37]/10 rounded-lg p-2 flex-shrink-0">
+                    <Sparkles className="w-5 h-5 text-[#d4af37]" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white text-sm mb-1">Bonus Content</h3>
+                    <p className="text-xs text-gray-400">Deleted scenes and extended epilogues</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/books">
+                <motion.span
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#d4af37] to-[#b8962e] text-[#0a0e1a] rounded-lg font-bold font-['Montserrat'] hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all cursor-pointer"
+                >
+                  <BookOpen className="w-5 h-5" />
+                  Explore the Series
+                </motion.span>
+              </Link>
+              <Link href="/free-book">
+                <motion.span
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#d4af37]/40 text-[#d4af37] rounded-lg font-bold font-['Montserrat'] hover:bg-[#d4af37]/10 transition-all cursor-pointer"
+                >
+                  <Gift className="w-5 h-5" />
+                  Get Your Free Book
+                </motion.span>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </div>
     );
   }
 
+  // ─── Main Page ──────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50">
-      {/* Hero Section */}
-      <div className="max-w-4xl mx-auto px-4 py-16 md:py-24">
-        <div className="text-center mb-12">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-pink-100 text-pink-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-            <Mail className="w-4 h-4" />
-            Join 10,000+ Romance Readers
-          </div>
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a] relative overflow-hidden">
+      {/* Ambient lighting effects */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-[#d4af37]/5 rounded-full blur-[150px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[300px] bg-[#d4af37]/3 rounded-full blur-[120px]" />
 
-          {/* Headline */}
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            Get Exclusive Romance Content
-            <span className="block text-pink-600">Delivered to Your Inbox</span>
-          </h1>
-
-          {/* Subheadline */}
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Subscribe to my newsletter for new release alerts, deleted scenes, character deep-dives, 
-            and special subscriber-only giveaways. Plus, get a <strong>free bonus epilogue</strong> when you join!
-          </p>
-        </div>
-
-        {/* Signup Form */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 mb-12">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Error Message */}
-            {error && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-red-800 text-sm">{error}</p>
-              </div>
-            )}
-
-            {/* Name Field */}
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                First Name (Optional)
-              </label>
-              <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="What should I call you?"
-                className="w-full px-4 py-4 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition text-lg"
-              />
-            </div>
-
-            {/* Email Field */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address *
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="you@example.com"
-                className="w-full px-4 py-4 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition text-lg"
-              />
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={subscribeMutation.isPending}
-              className="w-full bg-gradient-to-r from-pink-600 to-purple-600 text-white py-5 rounded-lg font-bold text-lg hover:from-pink-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition shadow-lg hover:shadow-xl"
+      {/* ─── Hero Section ──────────────────────────────────────────────── */}
+      <section className="relative z-10 pt-12 md:pt-20 pb-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Copy */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              {subscribeMutation.isPending ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                  </svg>
-                  Subscribing...
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-4 py-2 rounded-full text-sm font-semibold font-['Montserrat'] mb-6">
+                <Mail className="w-4 h-4" />
+                Join 10,000+ Romance Readers
+              </div>
+
+              <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.1]">
+                Get a Free Book
+                <span className="block text-[#d4af37] italic mt-2">
+                  & Never Miss a Release
                 </span>
-              ) : (
-                'Yes! Send Me Free Bonus Content'
-              )}
-            </button>
+              </h1>
 
-            {/* Privacy Note */}
-            <p className="text-xs text-gray-500 text-center">
-              I respect your privacy. Unsubscribe anytime. No spam, ever. 
-              By subscribing, you agree to receive emails from Reese Astor.
+              <p className="text-lg text-gray-300 mb-8 font-['Montserrat'] leading-relaxed max-w-lg">
+                Join the Manhattan Money Kings inner circle. Get your free copy of 
+                <em className="text-[#d4af37]"> The Billionaire's One Night Stand</em>, 
+                plus new release alerts, deleted scenes, and exclusive bonus content delivered 
+                straight to your inbox.
+              </p>
+
+              {/* Trust indicators */}
+              <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400 font-['Montserrat']">
+                <span className="flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-[#d4af37]/60" />
+                  No spam, ever
+                </span>
+                <span className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-[#d4af37]/60" />
+                  Unsubscribe anytime
+                </span>
+                <span className="flex items-center gap-2">
+                  <Gift className="w-4 h-4 text-[#d4af37]/60" />
+                  Instant free book
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Right: Book Cover + Form Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="bg-white/5 backdrop-blur-sm border border-[#d4af37]/20 rounded-2xl p-6 md:p-8 relative">
+                {/* Gold corner accent */}
+                <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden rounded-tr-2xl">
+                  <div className="absolute top-0 right-0 w-[140%] h-[2px] bg-gradient-to-l from-[#d4af37] to-transparent origin-top-right rotate-[-45deg] translate-y-[14px] translate-x-[14px]" />
+                </div>
+
+                {/* Book Preview */}
+                <div className="flex items-center gap-4 mb-6 pb-6 border-b border-white/10">
+                  <div className="relative flex-shrink-0">
+                    <div className="absolute -inset-1 bg-gradient-to-br from-[#d4af37]/40 to-transparent rounded-lg blur-sm" />
+                    <img 
+                      src="/prequel-cover.jpg" 
+                      alt="The Billionaire's One Night Stand" 
+                      className="relative w-20 h-28 object-cover rounded-lg shadow-xl"
+                    />
+                    <div className="absolute -top-2 -right-2 bg-[#d4af37] text-[#0a0e1a] text-[10px] font-bold px-2 py-0.5 rounded-full font-['Montserrat']">
+                      FREE
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-[#d4af37] text-xs font-semibold font-['Montserrat'] uppercase tracking-wider mb-1">
+                      Your Free Gift
+                    </p>
+                    <h3 className="font-['Cormorant_Garamond'] text-lg font-bold text-white leading-tight">
+                      The Billionaire's One Night Stand
+                    </h3>
+                    <p className="text-gray-400 text-xs font-['Montserrat'] mt-1">
+                      Manhattan Money Kings Prequel
+                    </p>
+                  </div>
+                </div>
+
+                {/* Form */}
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {error && (
+                    <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
+                      <p className="text-red-400 text-sm font-['Montserrat']">{error}</p>
+                    </div>
+                  )}
+
+                  <div>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="First name (optional)"
+                      className="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#d4af37]/50 focus:ring-1 focus:ring-[#d4af37]/30 transition font-['Montserrat'] text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      placeholder="Your email address"
+                      className="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#d4af37]/50 focus:ring-1 focus:ring-[#d4af37]/30 transition font-['Montserrat'] text-sm"
+                    />
+                  </div>
+
+                  <motion.button
+                    type="submit"
+                    disabled={subscribeMutation.isPending}
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    className="w-full bg-gradient-to-r from-[#d4af37] to-[#b8962e] text-[#0a0e1a] py-4 rounded-lg font-bold text-base font-['Montserrat'] hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  >
+                    {subscribeMutation.isPending ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        Subscribing...
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-2">
+                        <Download className="w-5 h-5" />
+                        Get My Free Book
+                      </span>
+                    )}
+                  </motion.button>
+
+                  <p className="text-[11px] text-gray-500 text-center font-['Montserrat']">
+                    By subscribing, you agree to receive emails from Reese Astor. Unsubscribe anytime.
+                  </p>
+                </form>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Benefits Section ──────────────────────────────────────────── */}
+      <section className="relative z-10 py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <p className="text-[#d4af37] text-sm font-semibold font-['Montserrat'] uppercase tracking-widest mb-3">
+              What You'll Get
             </p>
-          </form>
-        </div>
+            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white">
+              More Than Just a Newsletter
+            </h2>
+          </motion.div>
 
-        {/* Benefits Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          <div className="bg-white rounded-xl p-6 shadow-lg">
-            <div className="flex items-start gap-4">
-              <div className="bg-pink-100 rounded-full p-3 flex-shrink-0">
-                <BookOpen className="w-6 h-6 text-pink-600" />
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900 mb-2">Early Access to New Releases</h3>
-                <p className="text-gray-600 text-sm">
-                  Get notified before anyone else when a new book drops, plus exclusive bonuses and early access
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: BookOpen,
+                title: "New Release Alerts",
+                description: "Be the first to know when a new Manhattan Money Kings book drops, with exclusive early access deals",
+              },
+              {
+                icon: Sparkles,
+                title: "Bonus Chapters",
+                description: "Deleted scenes, extended epilogues, and character POV chapters you won't find anywhere else",
+              },
+              {
+                icon: Heart,
+                title: "Behind the Scenes",
+                description: "Character inspiration, writing process updates, and sneak peeks at upcoming storylines",
+              },
+              {
+                icon: Star,
+                title: "Exclusive Giveaways",
+                description: "Subscriber-only contests for signed books, merchandise, and special reader experiences",
+              },
+            ].map((benefit, i) => (
+              <motion.div
+                key={benefit.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-[#d4af37]/30 transition-all duration-300"
+              >
+                <div className="bg-[#d4af37]/10 rounded-lg w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-[#d4af37]/20 transition-colors">
+                  <benefit.icon className="w-6 h-6 text-[#d4af37]" />
+                </div>
+                <h3 className="font-['Cormorant_Garamond'] text-xl font-bold text-white mb-2">
+                  {benefit.title}
+                </h3>
+                <p className="text-gray-400 text-sm font-['Montserrat'] leading-relaxed">
+                  {benefit.description}
                 </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-6 shadow-lg">
-            <div className="flex items-start gap-4">
-              <div className="bg-purple-100 rounded-full p-3 flex-shrink-0">
-                <Sparkles className="w-6 h-6 text-purple-600" />
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900 mb-2">Deleted Scenes & Bonus Chapters</h3>
-                <p className="text-gray-600 text-sm">
-                  Read the scenes that didn't make it into the books, plus extended epilogues
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-6 shadow-lg">
-            <div className="flex items-start gap-4">
-              <div className="bg-pink-100 rounded-full p-3 flex-shrink-0">
-                <Heart className="w-6 h-6 text-pink-600" />
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900 mb-2">Behind-the-Scenes Updates</h3>
-                <p className="text-gray-600 text-sm">
-                  Get a peek into my writing process, character inspiration, and what I'm working on next
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-6 shadow-lg">
-            <div className="flex items-start gap-4">
-              <div className="bg-purple-100 rounded-full p-3 flex-shrink-0">
-                <Mail className="w-6 h-6 text-purple-600" />
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900 mb-2">Subscriber-Only Giveaways</h3>
-                <p className="text-gray-600 text-sm">
-                  Enter exclusive contests for signed books, merchandise, and special prizes
-                </p>
-              </div>
-            </div>
+              </motion.div>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* Social Proof */}
-        <div className="bg-white rounded-xl p-8 shadow-lg text-center mb-12">
-          <p className="text-gray-600 italic mb-4">
-            "I love getting Reese's newsletters! The deleted scenes are my favorite - 
-            I get to spend more time with my favorite characters. Highly recommend subscribing!"
-          </p>
-          <p className="font-semibold text-gray-900">— Sarah M., Newsletter Subscriber</p>
+      {/* ─── Social Proof Section ──────────────────────────────────────── */}
+      <section className="relative z-10 py-16">
+        <div className="max-w-4xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-10"
+          >
+            <p className="text-[#d4af37] text-sm font-semibold font-['Montserrat'] uppercase tracking-widest mb-3">
+              Reader Love
+            </p>
+            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white">
+              What Subscribers Are Saying
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                quote: "I love getting Reese's newsletters! The deleted scenes are my favorite — I get to spend more time with my favorite characters.",
+                name: "Sarah M.",
+                detail: "Subscriber since 2024",
+              },
+              {
+                quote: "The free prequel hooked me instantly. I ended up buying the entire series in one weekend. Absolutely addictive writing!",
+                name: "Jessica R.",
+                detail: "Verified Reader",
+              },
+              {
+                quote: "Being first to know about new releases is amazing. Plus the bonus content makes me feel like a true insider.",
+                name: "Amanda K.",
+                detail: "VIP Member",
+              },
+            ].map((testimonial, i) => (
+              <motion.div
+                key={testimonial.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 relative"
+              >
+                {/* Gold quote mark */}
+                <div className="absolute -top-3 left-6 text-[#d4af37] text-5xl font-serif leading-none">"</div>
+                <p className="text-gray-300 text-sm font-['Montserrat'] leading-relaxed mb-4 pt-4 italic">
+                  {testimonial.quote}
+                </p>
+                <div className="flex items-center gap-2 pt-4 border-t border-white/10">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, j) => (
+                      <Star key={j} className="w-3 h-3 fill-[#d4af37] text-[#d4af37]" />
+                    ))}
+                  </div>
+                  <span className="text-white text-sm font-semibold font-['Montserrat']">
+                    {testimonial.name}
+                  </span>
+                  <span className="text-gray-500 text-xs font-['Montserrat']">
+                    — {testimonial.detail}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Recent News Section */}
-        <RecentNewsSection />
-      </div>
+      {/* ─── Book Series Preview ───────────────────────────────────────── */}
+      <section className="relative z-10 py-16 md:py-24">
+        <div className="max-w-5xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <p className="text-[#d4af37] text-sm font-semibold font-['Montserrat'] uppercase tracking-widest mb-3">
+              The Manhattan Money Kings
+            </p>
+            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white mb-4">
+              Four Billionaires. Four Love Stories.
+            </h2>
+            <p className="text-gray-400 font-['Montserrat'] max-w-2xl mx-auto">
+              Start with the free prequel and discover why readers can't put this series down.
+            </p>
+          </motion.div>
+
+          {/* Book covers row */}
+          <div className="flex justify-center items-end gap-3 md:gap-6 mb-12">
+            {[
+              { src: "/prequel-cover.jpg", label: "FREE", alt: "Prequel" },
+              { src: "/book1-cover.jpg", label: "Book 1", alt: "Book 1" },
+              { src: "/book2-cover.jpg", label: "Book 2", alt: "Book 2" },
+              { src: "/book3-cover.jpg", label: "Book 3", alt: "Book 3" },
+              { src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/wyOruOlpqOcFfhnS.jpg", label: "Book 4", alt: "Book 4" },
+            ].map((book, i) => (
+              <motion.div
+                key={book.alt}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className={`relative group ${i === 0 ? 'z-10' : ''}`}
+              >
+                <div className={`relative ${i === 0 ? 'ring-2 ring-[#d4af37]/50 rounded-lg' : ''}`}>
+                  <img
+                    src={book.src}
+                    alt={book.alt}
+                    className={`rounded-lg shadow-xl object-cover transition-transform duration-300 group-hover:scale-105 ${
+                      i === 0 ? 'w-24 h-36 md:w-32 md:h-48' : 'w-20 h-30 md:w-28 md:h-42'
+                    }`}
+                  />
+                  <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-bold font-['Montserrat'] px-2 py-0.5 rounded-full whitespace-nowrap ${
+                    i === 0 
+                      ? 'bg-[#d4af37] text-[#0a0e1a]' 
+                      : 'bg-white/10 text-gray-300 border border-white/20'
+                  }`}>
+                    {book.label}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="text-center">
+            <Link href="/books">
+              <motion.span
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 text-[#d4af37] font-semibold font-['Montserrat'] hover:underline underline-offset-4 cursor-pointer transition-all"
+              >
+                View the Complete Series
+                <ArrowRight className="w-4 h-4" />
+              </motion.span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Recent Blog Posts ─────────────────────────────────────────── */}
+      <section className="relative z-10 py-16">
+        <div className="max-w-5xl mx-auto px-4">
+          <RecentNewsSection />
+        </div>
+      </section>
+
+      {/* ─── Final CTA Section ─────────────────────────────────────────── */}
+      <section className="relative z-10 py-16 md:py-24">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="bg-gradient-to-br from-[#d4af37]/10 to-transparent border border-[#d4af37]/20 rounded-2xl p-8 md:p-12">
+              <Gift className="w-10 h-10 text-[#d4af37] mx-auto mb-4" />
+              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white mb-4">
+                Don't Miss Out
+              </h2>
+              <p className="text-gray-300 font-['Montserrat'] mb-8 max-w-lg mx-auto">
+                Join thousands of readers who get exclusive content, early access to new releases, 
+                and a free book — all delivered to their inbox.
+              </p>
+
+              {/* Inline mini form */}
+              <form 
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+              >
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="Your email address"
+                  className="flex-1 px-4 py-3.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#d4af37]/50 focus:ring-1 focus:ring-[#d4af37]/30 transition font-['Montserrat'] text-sm"
+                />
+                <motion.button
+                  type="submit"
+                  disabled={subscribeMutation.isPending}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-6 py-3.5 bg-gradient-to-r from-[#d4af37] to-[#b8962e] text-[#0a0e1a] rounded-lg font-bold text-sm font-['Montserrat'] hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] disabled:opacity-50 transition-all whitespace-nowrap"
+                >
+                  {subscribeMutation.isPending ? 'Joining...' : 'Get Free Book'}
+                </motion.button>
+              </form>
+              {error && (
+                <p className="text-red-400 text-sm mt-3 font-['Montserrat']">{error}</p>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }
 
 /**
- * Recent News Section Component
- * Displays latest 3 blog posts to showcase newsletter content
+ * Recent News Section — Manhattan Luxury Theme
  */
 function RecentNewsSection() {
   const { data: posts, isLoading } = trpc.blog.list.useQuery({ published: true });
-  
   const recentPosts = posts?.slice(0, 3) || [];
 
   if (isLoading) {
     return (
       <div className="text-center py-12">
-        <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600"></div>
+        <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-[#d4af37]" />
       </div>
     );
   }
 
-  if (recentPosts.length === 0) {
-    return null;
-  }
+  if (recentPosts.length === 0) return null;
 
   return (
-    <div className="mb-12">
-      {/* Section Header */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-          <Calendar className="w-4 h-4" />
-          Recent News
-        </div>
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Latest Updates from Reese
-        </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Here's a taste of what you'll get in your inbox when you subscribe
+    <div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="text-center mb-10"
+      >
+        <p className="text-[#d4af37] text-sm font-semibold font-['Montserrat'] uppercase tracking-widest mb-3">
+          Latest from Reese
         </p>
-      </div>
+        <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white mb-3">
+          A Taste of What's in Your Inbox
+        </h2>
+        <p className="text-gray-400 font-['Montserrat']">
+          Here's the kind of content subscribers get first
+        </p>
+      </motion.div>
 
-      {/* Blog Posts Grid */}
       <div className="grid md:grid-cols-3 gap-6 mb-8">
-        {recentPosts.map((post) => (
-          <Link key={post.id} href={`/blog/${post.slug}`}>
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col">
-              {/* Category Badge */}
-              <div className="p-4 pb-0">
-                <span className="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full">
-                  {post.category}
-                </span>
-              </div>
-
-              {/* Content */}
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                  {post.title}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-1">
-                  {post.excerpt}
-                </p>
-
-                {/* Meta */}
-                <div className="flex items-center justify-between text-sm text-gray-500 pt-4 border-t border-gray-100">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {new Date(post.publishedAt || post.createdAt).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric'
-                    })}
-                  </span>
-                  <span className="text-pink-600 font-semibold flex items-center gap-1 hover:gap-2 transition-all">
-                    Read More
-                    <ArrowRight className="w-4 h-4" />
+        {recentPosts.map((post, i) => (
+          <motion.div
+            key={post.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.1 }}
+          >
+            <Link href={`/blog/${post.slug}`}>
+              <div className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-[#d4af37]/30 transition-all duration-300 cursor-pointer h-full flex flex-col">
+                <div className="p-5 pb-0">
+                  <span className="inline-block bg-[#d4af37]/10 text-[#d4af37] text-xs font-semibold font-['Montserrat'] px-3 py-1 rounded-full">
+                    {post.category}
                   </span>
                 </div>
+                <div className="p-5 flex-1 flex flex-col">
+                  <h3 className="font-['Cormorant_Garamond'] text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-[#d4af37] transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm font-['Montserrat'] mb-4 line-clamp-3 flex-1">
+                    {post.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between text-sm pt-4 border-t border-white/10">
+                    <span className="flex items-center gap-1 text-gray-500 font-['Montserrat']">
+                      <Calendar className="w-4 h-4" />
+                      {new Date(post.publishedAt || post.createdAt).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </span>
+                    <span className="text-[#d4af37] font-semibold font-['Montserrat'] flex items-center gap-1 group-hover:gap-2 transition-all text-xs">
+                      Read More
+                      <ArrowRight className="w-3 h-3" />
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </motion.div>
         ))}
       </div>
 
-      {/* View All Link */}
       <div className="text-center">
         <Link href="/blog">
-          <a className="inline-flex items-center gap-2 text-purple-600 font-semibold hover:text-purple-700 transition">
+          <span className="inline-flex items-center gap-2 text-[#d4af37] font-semibold font-['Montserrat'] hover:underline underline-offset-4 cursor-pointer transition-all">
             View All Blog Posts
-            <ArrowRight className="w-5 h-5" />
-          </a>
+            <ArrowRight className="w-4 h-4" />
+          </span>
         </Link>
       </div>
     </div>

@@ -1174,3 +1174,19 @@
 - [x] Add AI Studio link to admin dashboard modules
 - [x] Write vitest tests for KIE service layer (28 tests passing)
 - [x] Verify end-to-end flow (190 total tests passing)
+
+## SEO Fixes
+- [ ] Fix homepage title to be 30-60 characters (currently 28)
+
+## Newsletter Sign-Up Page Redesign
+- [x] Audit current newsletter page layout and identify issues
+- [x] Redesign with premium Manhattan luxury dark theme (gold accents, glass morphism)
+- [x] Add compelling hero section with free prequel lead magnet and book cover
+- [x] Improve sign-up form UX with dark glass card and gold CTA
+- [x] Add social proof testimonials section (3 reader testimonials)
+- [x] Add book series preview with all 5 covers
+- [x] Add benefits grid (New Release Alerts, Bonus Chapters, Behind the Scenes, Giveaways)
+- [x] Add final CTA section with inline email form
+- [x] Add premium success state with animated checkmark
+- [x] Ensure responsive design across all breakpoints
+- [x] All 190 tests passing, verified and checkpoint saved
