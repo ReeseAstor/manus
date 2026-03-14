@@ -24,6 +24,9 @@ import {
   RESOLUTIONS,
   type GeminiMessage,
 } from "../kie-service";
+import { getDb } from "../db";
+import { aiStudioConversations } from "../../drizzle/schema";
+import { eq, desc } from "drizzle-orm";
 
 function requireAdmin(role: string | undefined) {
   if (role !== "admin") {
@@ -213,13 +216,27 @@ export const kieRouter = router({
       })),
       temperature: z.number().min(0).max(2).optional(),
       maxTokens: z.number().min(1).max(32000).optional(),
+      enhancePrompt: z.boolean().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
       requireAdmin(ctx.user.role);
       try {
+        let messages = input.messages as GeminiMessage[];
+        
+        // Auto-enhance the user's prompt if requested
+        if (input.enhancePrompt) {
+          const lastUserMsg = [...messages].reverse().find(m => m.role === "user");
+          if (lastUserMsg) {
+            const enhancedPrompt = await enhanceUserPrompt(lastUserMsg.content, input.model as any);
+            messages = messages.map(m => 
+              m === lastUserMsg ? { ...m, content: enhancedPrompt } : m
+            );
+          }
+        }
+        
         const content = await geminiChat({
           model: input.model as any,
-          messages: input.messages as GeminiMessage[],
+          messages,
           temperature: input.temperature,
           maxTokens: input.maxTokens,
         });
@@ -228,4 +245,149 @@ export const kieRouter = router({
         throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: err.message });
       }
     }),
+
+  // ─── Prompt Enhancement ────────────────────────────────────────────
+
+  enhancePrompt: protectedProcedure
+    .input(z.object({
+      prompt: z.string().min(1),
+      context: z.enum(["newsletter", "social_media", "email", "blog", "general"]).default("general"),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      requireAdmin(ctx.user.role);
+      try {
+        const enhanced = await enhanceUserPrompt(input.prompt, "gemini-3-flash", input.context);
+        return { enhanced };
+      } catch (err: any) {
+        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: err.message });
+      }
+    }),
+
+  // ─── Conversation History ──────────────────────────────────────────
+
+  listConversations: protectedProcedure
+    .query(async ({ ctx }) => {
+      requireAdmin(ctx.user.role);
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const conversations = await db.select({
+        id: aiStudioConversations.id,
+        title: aiStudioConversations.title,
+        model: aiStudioConversations.model,
+        createdAt: aiStudioConversations.createdAt,
+        updatedAt: aiStudioConversations.updatedAt,
+      })
+        .from(aiStudioConversations)
+        .where(eq(aiStudioConversations.userId, ctx.user.id))
+        .orderBy(desc(aiStudioConversations.updatedAt))
+        .limit(50);
+      return conversations;
+    }),
+
+  getConversation: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ ctx, input }) => {
+      requireAdmin(ctx.user.role);
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const [conversation] = await db.select()
+        .from(aiStudioConversations)
+        .where(eq(aiStudioConversations.id, input.id))
+        .limit(1);
+      if (!conversation || conversation.userId !== ctx.user.id) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Conversation not found" });
+      }
+      return {
+        ...conversation,
+        messages: JSON.parse(conversation.messages) as { role: string; content: string }[],
+      };
+    }),
+
+  saveConversation: protectedProcedure
+    .input(z.object({
+      id: z.number().optional(),
+      title: z.string().min(1).max(255),
+      model: z.string(),
+      systemPrompt: z.string().optional(),
+      messages: z.array(z.object({
+        role: z.enum(["user", "assistant"]),
+        content: z.string(),
+      })),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      requireAdmin(ctx.user.role);
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const messagesJson = JSON.stringify(input.messages);
+      
+      if (input.id) {
+        // Update existing
+        await db.update(aiStudioConversations)
+          .set({
+            title: input.title,
+            model: input.model,
+            systemPrompt: input.systemPrompt || null,
+            messages: messagesJson,
+          })
+          .where(eq(aiStudioConversations.id, input.id));
+        return { id: input.id };
+      } else {
+        // Create new
+        const [result] = await db.insert(aiStudioConversations).values({
+          userId: ctx.user.id,
+          title: input.title,
+          model: input.model,
+          systemPrompt: input.systemPrompt || null,
+          messages: messagesJson,
+        });
+        return { id: Number(result.insertId) };
+      }
+    }),
+
+  deleteConversation: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      requireAdmin(ctx.user.role);
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      await db.delete(aiStudioConversations)
+        .where(eq(aiStudioConversations.id, input.id));
+      return { success: true };
+    }),
 });
+
+// ─── Prompt Enhancement Helper ───────────────────────────────────────────
+
+async function enhanceUserPrompt(
+  prompt: string,
+  model: GeminiMessage extends any ? any : never,
+  context: string = "general"
+): Promise<string> {
+  const contextInstructions: Record<string, string> = {
+    newsletter: "for a romance author's newsletter campaign",
+    social_media: "for social media posts promoting romance books",
+    email: "for email marketing copy for a romance book series",
+    blog: "for a blog post on a romance author's website",
+    general: "for content creation",
+  };
+
+  const enhanceMessages: GeminiMessage[] = [
+    {
+      role: "system",
+      content: `You are a prompt enhancement specialist. Your job is to take a user's brief prompt and expand it into a more detailed, effective prompt ${contextInstructions[context] || contextInstructions.general}. Keep the original intent but add specificity, tone guidance, and structure. Return ONLY the enhanced prompt text, nothing else. Do not wrap in quotes.`,
+    },
+    {
+      role: "user",
+      content: `Enhance this prompt: "${prompt}"`,
+    },
+  ];
+
+  const enhanced = await geminiChat({
+    model: "gemini-3-flash",
+    messages: enhanceMessages,
+    temperature: 0.7,
+    maxTokens: 1000,
+  });
+
+  return enhanced;
+}

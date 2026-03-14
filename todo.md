@@ -1190,3 +1190,22 @@
 - [x] Add premium success state with animated checkmark
 - [x] Ensure responsive design across all breakpoints
 - [x] All 190 tests passing, verified and checkpoint saved
+
+## AI Studio Chat Improvements
+- [x] Add markdown rendering for AI chat output (react-markdown + remark-gfm + prose styles)
+- [x] Implement automatic prompt enhancement before sending to LLM
+- [x] Create database table for chat history persistence (ai_studio_conversations)
+- [x] Save chat conversations to database (auto-save after each response)
+- [x] Load chat history from database on page load
+- [x] Add chat history sidebar with browsing past conversations
+- [x] Add Copy button on assistant messages
+- [x] Verified end-to-end: test message generated formatted table + bold text + headings
+
+## Admin Dashboard Redesign for Best Workflows
+- [x] Audit all 12 admin pages and current dashboard layout
+- [x] Redesign as "Command Center" with 5 workflow groups
+- [x] Group modules: Content & Publishing, Marketing & Outreach, AI Creative Studio, Quality & Monitoring, Analytics & Insights
+- [x] Add quick actions bar (New Blog Post, New Newsletter, AI Studio, Run QA, Scan Links, Generate Report)
+- [x] Add Common Workflows sidebar (Write→Publish, Draft→Send, Generate→Use, Audit→Fix→Report)
+- [x] Improve visual hierarchy with color-coded workflow groups
+- [x] All 190 tests passing

@@ -289,6 +289,23 @@ export type AiGeneratedContent = typeof aiGeneratedContent.$inferSelect;
 export type InsertAiGeneratedContent = typeof aiGeneratedContent.$inferInsert;
 
 /**
+ * AI Studio Conversations - stores admin AI chat history
+ */
+export const aiStudioConversations = mysqlTable('ai_studio_conversations', {
+  id: int('id').autoincrement().primaryKey(),
+  userId: int('user_id').notNull().references(() => users.id),
+  title: varchar('title', { length: 255 }).notNull(),
+  model: varchar('model', { length: 100 }).notNull(),
+  systemPrompt: text('system_prompt'),
+  messages: text('messages').notNull(), // JSON array of {role, content}
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
+});
+
+export type AiStudioConversation = typeof aiStudioConversations.$inferSelect;
+export type InsertAiStudioConversation = typeof aiStudioConversations.$inferInsert;
+
+/**
  * Digital Products table for Stripe integration
  */
 export const products = mysqlTable("products", {

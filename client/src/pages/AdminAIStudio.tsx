@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
@@ -8,10 +8,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import {
   Image, Video, Music, MessageSquare, Coins, Loader2,
   Download, RefreshCw, CheckCircle, XCircle, Clock,
-  Sparkles, Grid3X3, ArrowLeft, ExternalLink, Copy
+  Sparkles, Grid3X3, ArrowLeft, ExternalLink, Copy,
+  Save, Trash2, History, Plus, Wand2, ChevronDown
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
@@ -29,6 +32,19 @@ interface ActiveTask {
   startedAt: number;
 }
 
+interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
+
+interface ConversationSummary {
+  id: number;
+  title: string;
+  model: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 // ─── Task Polling Hook ────────────────────────────────────────────────────
 
 function useTaskPoller(taskId: string | null, type: Tab, onComplete: (task: ActiveTask) => void) {
@@ -43,13 +59,11 @@ function useTaskPoller(taskId: string | null, type: Tab, onComplete: (task: Acti
         let result: any;
         if (type === "music") {
           result = await utils.kie.getSunoTaskStatus.fetch({ taskId });
-          // Suno has different response structure
           const data = result?.data;
           if (!data) return;
           const state = data.status;
           if (state === "SUCCESS" || state === "FIRST_SUCCESS") {
             if (pollRef.current) clearInterval(pollRef.current);
-            // Extract audio URLs from Suno response
             const audioUrls: string[] = [];
             if (data.response?.sunoData) {
               for (const item of data.response.sunoData) {
@@ -76,7 +90,6 @@ function useTaskPoller(taskId: string | null, type: Tab, onComplete: (task: Acti
       }
     };
 
-    // Initial poll after 3 seconds, then every 5 seconds
     const timeout = setTimeout(() => {
       poll();
       pollRef.current = setInterval(poll, 5000);
@@ -106,6 +119,28 @@ function StateBadge({ state }: { state: TaskState | string }) {
       <Icon className={`h-3 w-3 ${state === "generating" ? "animate-spin" : ""}`} />
       {c.label}
     </Badge>
+  );
+}
+
+// ─── Markdown Message Renderer ───────────────────────────────────────────
+
+function MarkdownContent({ content }: { content: string }) {
+  return (
+    <div className="prose prose-invert prose-sm max-w-none
+      prose-headings:text-white prose-headings:font-serif prose-headings:mb-2 prose-headings:mt-3
+      prose-h1:text-xl prose-h2:text-lg prose-h3:text-base
+      prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-2
+      prose-strong:text-white prose-em:text-gray-200
+      prose-ul:text-gray-300 prose-ol:text-gray-300
+      prose-li:mb-0.5 prose-li:marker:text-emerald-400
+      prose-code:text-emerald-300 prose-code:bg-emerald-500/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs prose-code:before:content-none prose-code:after:content-none
+      prose-pre:bg-black/40 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-lg
+      prose-blockquote:border-emerald-500/40 prose-blockquote:text-gray-400
+      prose-a:text-emerald-400 prose-a:no-underline hover:prose-a:underline
+      prose-table:text-sm prose-th:text-white prose-td:text-gray-300 prose-th:border-white/20 prose-td:border-white/10
+    ">
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+    </div>
   );
 }
 
@@ -246,7 +281,7 @@ export default function AdminAIStudio() {
         <div className="container">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Generator Panel */}
-            <div className="lg:col-span-2">
+            <div className={activeTab === "llm" ? "lg:col-span-3" : "lg:col-span-2"}>
               <AnimatePresence mode="wait">
                 <motion.div key={activeTab} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
                   {activeTab === "image" && <ImageGenerator onSubmit={startPolling} generateImage={generateImageMut} generateGrid={generateGridMut} />}
@@ -257,21 +292,23 @@ export default function AdminAIStudio() {
               </AnimatePresence>
             </div>
 
-            {/* Task History */}
-            <div>
-              <h3 className="font-serif text-xl font-bold text-white mb-4">Recent Tasks</h3>
-              {activeTasks.length === 0 ? (
-                <Card className="p-6 bg-white/5 border border-white/10 text-center">
-                  <p className="text-gray-500 text-sm">No tasks yet. Generate something!</p>
-                </Card>
-              ) : (
-                <div className="space-y-3">
-                  {activeTasks.map(task => (
-                    <TaskCard key={task.taskId} task={task} />
-                  ))}
-                </div>
-              )}
-            </div>
+            {/* Task History (hidden when LLM tab is active - it has its own sidebar) */}
+            {activeTab !== "llm" && (
+              <div>
+                <h3 className="font-serif text-xl font-bold text-white mb-4">Recent Tasks</h3>
+                {activeTasks.length === 0 ? (
+                  <Card className="p-6 bg-white/5 border border-white/10 text-center">
+                    <p className="text-gray-500 text-sm">No tasks yet. Generate something!</p>
+                  </Card>
+                ) : (
+                  <div className="space-y-3">
+                    {activeTasks.map(task => (
+                      <TaskCard key={task.taskId} task={task} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -378,8 +415,8 @@ function ImageGenerator({ onSubmit, generateImage, generateGrid }: {
               {gridMode && (
                 <select value={gridSize} onChange={e => setGridSize(e.target.value as any)}
                   className="bg-white/5 border border-white/10 text-white rounded-md px-3 py-2 text-sm">
-                  <option value="2x2">2×2 Grid</option>
-                  <option value="3x3">3×3 Grid</option>
+                  <option value="2x2">2x2 Grid</option>
+                  <option value="3x3">3x3 Grid</option>
                 </select>
               )}
             </div>
@@ -601,23 +638,54 @@ function MusicGenerator({ onSubmit, generateMusic }: {
   );
 }
 
-// ─── LLM Chat ─────────────────────────────────────────────────────────────
+// ─── LLM Chat (with markdown, prompt enhancement, and history) ──────────
 
 function LLMChat({ geminiChat }: { geminiChat: any }) {
-  const [messages, setMessages] = useState<{ role: "user" | "assistant"; content: string }[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [model, setModel] = useState("gemini-3-flash");
-  const [systemPrompt, setSystemPrompt] = useState("You are a helpful newsletter content assistant for a romance author. Help generate subject lines, email copy, social media captions, and campaign ideas.");
+  const [systemPrompt, setSystemPrompt] = useState("You are a helpful newsletter content assistant for a romance author. Help generate subject lines, email copy, social media captions, and campaign ideas. Format your responses with markdown for readability.");
   const [loading, setLoading] = useState(false);
+  const [enhancePrompt, setEnhancePrompt] = useState(true);
+  const [showHistory, setShowHistory] = useState(false);
+  const [activeConversationId, setActiveConversationId] = useState<number | null>(null);
+  const [showSystemPrompt, setShowSystemPrompt] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
+
+  // Conversation history queries
+  const { data: conversations, refetch: refetchConversations } = trpc.kie.listConversations.useQuery(undefined, {
+    enabled: showHistory,
+  });
+  const saveConversationMut = trpc.kie.saveConversation.useMutation();
+  const deleteConversationMut = trpc.kie.deleteConversation.useMutation();
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Auto-save after each assistant response
+  const autoSave = useCallback(async (msgs: ChatMessage[]) => {
+    if (msgs.length < 2) return; // Need at least 1 exchange
+    const title = msgs[0]?.content.slice(0, 80) || "Untitled";
+    try {
+      const result = await saveConversationMut.mutateAsync({
+        id: activeConversationId || undefined,
+        title,
+        model,
+        systemPrompt,
+        messages: msgs,
+      });
+      if (!activeConversationId && result.id) {
+        setActiveConversationId(result.id);
+      }
+    } catch (err) {
+      console.error("Auto-save failed:", err);
+    }
+  }, [activeConversationId, model, systemPrompt]);
+
   const handleSend = async () => {
     if (!input.trim() || loading) return;
-    const userMsg = { role: "user" as const, content: input };
+    const userMsg: ChatMessage = { role: "user", content: input };
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
     setInput("");
@@ -628,8 +696,15 @@ function LLMChat({ geminiChat }: { geminiChat: any }) {
         { role: "system" as const, content: systemPrompt },
         ...newMessages,
       ];
-      const result = await geminiChat.mutateAsync({ model, messages: apiMessages });
-      setMessages(prev => [...prev, { role: "assistant", content: result.content }]);
+      const result = await geminiChat.mutateAsync({
+        model,
+        messages: apiMessages,
+        enhancePrompt,
+      });
+      const updatedMessages = [...newMessages, { role: "assistant" as const, content: result.content }];
+      setMessages(updatedMessages);
+      // Auto-save
+      autoSave(updatedMessages);
     } catch (err: any) {
       toast.error("Chat failed", { description: err.message });
       setMessages(prev => [...prev, { role: "assistant", content: `Error: ${err.message}` }]);
@@ -638,79 +713,249 @@ function LLMChat({ geminiChat }: { geminiChat: any }) {
     }
   };
 
+  const loadConversation = async (conv: ConversationSummary) => {
+    try {
+      const utils = trpc.useUtils();
+      // We'll fetch via the getConversation query - but since it's a query, 
+      // we'll use a simple approach: set the conversation data
+      const response = await fetch(`/api/trpc/kie.getConversation?input=${encodeURIComponent(JSON.stringify({ id: conv.id }))}`, {
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (data?.result?.data) {
+        const convData = data.result.data;
+        setMessages(convData.messages || []);
+        setModel(convData.model || "gemini-3-flash");
+        if (convData.systemPrompt) setSystemPrompt(convData.systemPrompt);
+        setActiveConversationId(conv.id);
+        setShowHistory(false);
+        toast.success("Conversation loaded");
+      }
+    } catch (err: any) {
+      toast.error("Failed to load conversation", { description: err.message });
+    }
+  };
+
+  const handleDeleteConversation = async (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      await deleteConversationMut.mutateAsync({ id });
+      if (activeConversationId === id) {
+        setActiveConversationId(null);
+        setMessages([]);
+      }
+      refetchConversations();
+      toast.success("Conversation deleted");
+    } catch (err: any) {
+      toast.error("Failed to delete", { description: err.message });
+    }
+  };
+
+  const startNewConversation = () => {
+    setMessages([]);
+    setActiveConversationId(null);
+    setShowHistory(false);
+  };
+
   return (
-    <Card className="p-6 bg-gradient-to-br from-emerald-500/5 to-emerald-600/[0.02] border border-emerald-500/20">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-emerald-500/20">
-          <MessageSquare className="h-5 w-5 text-emerald-400" />
-        </div>
-        <h2 className="font-serif text-2xl font-bold text-white">AI Chat</h2>
-        <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 border text-xs">Gemini</Badge>
-        <select value={model} onChange={e => setModel(e.target.value)}
-          className="ml-auto bg-white/5 border border-white/10 text-white rounded-md px-2 py-1 text-xs">
-          <option value="gemini-3-flash">Gemini 3 Flash</option>
-          <option value="gemini-3-pro">Gemini 3 Pro</option>
-          <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
-          <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
-        </select>
-      </div>
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      {/* History Sidebar */}
+      <div className="lg:col-span-1">
+        <Card className="p-4 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 h-full">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+              <History className="h-4 w-4 text-emerald-400" />
+              History
+            </h3>
+            <Button onClick={startNewConversation} variant="ghost" size="sm" className="text-emerald-400 hover:text-emerald-300 h-7 px-2">
+              <Plus className="h-3.5 w-3.5 mr-1" />
+              New
+            </Button>
+          </div>
 
-      <div>
-        <label className="text-xs text-gray-500 mb-1 block">System Prompt</label>
-        <Textarea
-          value={systemPrompt} onChange={e => setSystemPrompt(e.target.value)}
-          className="bg-white/5 border-white/10 text-gray-300 text-xs min-h-[60px] focus:border-emerald-500/50 mb-4"
-        />
-      </div>
+          <div className="space-y-1.5 max-h-[500px] overflow-y-auto">
+            {/* Current conversation indicator */}
+            {messages.length > 0 && !activeConversationId && (
+              <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                <p className="text-xs text-emerald-400 font-medium truncate">
+                  {messages[0]?.content.slice(0, 50)}...
+                </p>
+                <p className="text-[10px] text-gray-500 mt-0.5">Unsaved</p>
+              </div>
+            )}
 
-      {/* Chat Messages */}
-      <div className="bg-black/20 rounded-xl border border-white/5 p-4 mb-4 max-h-[400px] overflow-y-auto space-y-3">
-        {messages.length === 0 && (
-          <p className="text-gray-500 text-sm text-center py-8">Start a conversation to generate newsletter content ideas...</p>
-        )}
-        {messages.map((msg, i) => (
-          <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-            <div className={`max-w-[80%] rounded-xl px-4 py-2.5 text-sm ${
-              msg.role === "user"
-                ? "bg-emerald-500/20 text-emerald-100 border border-emerald-500/20"
-                : "bg-white/5 text-gray-300 border border-white/10"
-            }`}>
-              <div className="whitespace-pre-wrap">{msg.content}</div>
-              {msg.role === "assistant" && (
+            {conversations && conversations.length > 0 ? (
+              conversations.map((conv) => (
                 <button
-                  onClick={() => { navigator.clipboard.writeText(msg.content); toast.success("Copied!"); }}
-                  className="mt-2 text-xs text-gray-500 hover:text-gray-300 flex items-center gap-1"
+                  key={conv.id}
+                  onClick={() => loadConversation(conv)}
+                  className={`w-full text-left p-2.5 rounded-lg transition-all group ${
+                    activeConversationId === conv.id
+                      ? "bg-emerald-500/10 border border-emerald-500/20"
+                      : "bg-white/5 hover:bg-white/10 border border-transparent"
+                  }`}
                 >
-                  <Copy className="h-3 w-3" /> Copy
+                  <div className="flex items-start justify-between gap-1">
+                    <p className="text-xs text-white truncate flex-1">{conv.title}</p>
+                    <button
+                      onClick={(e) => handleDeleteConversation(conv.id, e)}
+                      className="opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-300 p-0.5 transition-opacity"
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-2 mt-1">
+                    <Badge className="text-[9px] bg-white/5 text-gray-500 border-0 px-1 py-0">{conv.model}</Badge>
+                    <span className="text-[10px] text-gray-600">
+                      {(conv.updatedAt instanceof Date ? conv.updatedAt : new Date(conv.updatedAt)).toLocaleDateString()}
+                    </span>
+                  </div>
                 </button>
+              ))
+            ) : (
+              <p className="text-gray-600 text-xs text-center py-6">No saved conversations</p>
+            )}
+          </div>
+
+          {!showHistory && conversations === undefined && (
+            <Button
+              onClick={() => setShowHistory(true)}
+              variant="ghost"
+              className="w-full mt-2 text-gray-500 hover:text-white text-xs"
+            >
+              Load History
+            </Button>
+          )}
+        </Card>
+      </div>
+
+      {/* Chat Area */}
+      <div className="lg:col-span-3">
+        <Card className="p-6 bg-gradient-to-br from-emerald-500/5 to-emerald-600/[0.02] border border-emerald-500/20">
+          {/* Header */}
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-lg bg-emerald-500/20">
+              <MessageSquare className="h-5 w-5 text-emerald-400" />
+            </div>
+            <h2 className="font-serif text-2xl font-bold text-white">AI Chat</h2>
+            <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 border text-xs">Gemini</Badge>
+
+            <div className="ml-auto flex items-center gap-2">
+              {/* Enhance Toggle */}
+              <button
+                onClick={() => setEnhancePrompt(!enhancePrompt)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  enhancePrompt
+                    ? "bg-amber-500/20 text-amber-400 border border-amber-500/40"
+                    : "bg-white/5 text-gray-500 border border-white/10"
+                }`}
+                title="Automatically enhance your prompts for better results"
+              >
+                <Wand2 className="h-3 w-3" />
+                Auto-Enhance
+              </button>
+
+              {/* Model Selector */}
+              <select value={model} onChange={e => setModel(e.target.value)}
+                className="bg-white/5 border border-white/10 text-white rounded-md px-2 py-1.5 text-xs">
+                <option value="gemini-3-flash">Gemini 3 Flash</option>
+                <option value="gemini-3-pro">Gemini 3 Pro</option>
+                <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+                <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
+              </select>
+            </div>
+          </div>
+
+          {/* System Prompt (collapsible) */}
+          <div className="mb-4">
+            <button
+              onClick={() => setShowSystemPrompt(!showSystemPrompt)}
+              className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-400 transition-colors"
+            >
+              <ChevronDown className={`h-3 w-3 transition-transform ${showSystemPrompt ? "rotate-180" : ""}`} />
+              System Prompt
+            </button>
+            {showSystemPrompt && (
+              <Textarea
+                value={systemPrompt} onChange={e => setSystemPrompt(e.target.value)}
+                className="mt-2 bg-white/5 border-white/10 text-gray-300 text-xs min-h-[60px] focus:border-emerald-500/50"
+              />
+            )}
+          </div>
+
+          {/* Chat Messages */}
+          <div className="bg-black/20 rounded-xl border border-white/5 p-4 mb-4 max-h-[500px] overflow-y-auto space-y-4">
+            {messages.length === 0 && (
+              <p className="text-gray-500 text-sm text-center py-8">Start a conversation to generate newsletter content ideas...</p>
+            )}
+            {messages.map((msg, i) => (
+              <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                <div className={`max-w-[85%] rounded-xl px-4 py-3 ${
+                  msg.role === "user"
+                    ? "bg-emerald-500/20 text-emerald-100 border border-emerald-500/20"
+                    : "bg-white/5 border border-white/10"
+                }`}>
+                  {msg.role === "user" ? (
+                    <div className="text-sm whitespace-pre-wrap">{msg.content}</div>
+                  ) : (
+                    <MarkdownContent content={msg.content} />
+                  )}
+                  {msg.role === "assistant" && (
+                    <div className="mt-3 pt-2 border-t border-white/5 flex items-center gap-2">
+                      <button
+                        onClick={() => { navigator.clipboard.writeText(msg.content); toast.success("Copied!"); }}
+                        className="text-xs text-gray-500 hover:text-gray-300 flex items-center gap-1 transition-colors"
+                      >
+                        <Copy className="h-3 w-3" /> Copy
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+            {loading && (
+              <div className="flex justify-start">
+                <div className="bg-white/5 rounded-xl px-4 py-3 border border-white/10 flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin text-emerald-400" />
+                  <span className="text-xs text-gray-500">
+                    {enhancePrompt ? "Enhancing prompt & generating..." : "Generating..."}
+                  </span>
+                </div>
+              </div>
+            )}
+            <div ref={chatEndRef} />
+          </div>
+
+          {/* Input */}
+          <div className="flex gap-2">
+            <Input
+              value={input} onChange={e => setInput(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && !e.shiftKey && handleSend()}
+              placeholder="Ask for newsletter content ideas, subject lines, email copy..."
+              className="flex-1 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-emerald-500/50"
+            />
+            <Button onClick={handleSend} disabled={loading || !input.trim()}
+              className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold px-6">
+              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Send"}
+            </Button>
+          </div>
+
+          {/* Status Bar */}
+          <div className="flex items-center justify-between mt-3 text-[10px] text-gray-600">
+            <div className="flex items-center gap-3">
+              <span>{messages.length} messages</span>
+              {activeConversationId && <span className="text-emerald-600">Auto-saved</span>}
+              {enhancePrompt && (
+                <span className="flex items-center gap-1 text-amber-600">
+                  <Wand2 className="h-2.5 w-2.5" /> Prompt enhancement on
+                </span>
               )}
             </div>
+            <span>{model}</span>
           </div>
-        ))}
-        {loading && (
-          <div className="flex justify-start">
-            <div className="bg-white/5 rounded-xl px-4 py-3 border border-white/10">
-              <Loader2 className="h-4 w-4 animate-spin text-emerald-400" />
-            </div>
-          </div>
-        )}
-        <div ref={chatEndRef} />
+        </Card>
       </div>
-
-      {/* Input */}
-      <div className="flex gap-2">
-        <Input
-          value={input} onChange={e => setInput(e.target.value)}
-          onKeyDown={e => e.key === "Enter" && !e.shiftKey && handleSend()}
-          placeholder="Ask for newsletter content ideas, subject lines, email copy..."
-          className="flex-1 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-emerald-500/50"
-        />
-        <Button onClick={handleSend} disabled={loading || !input.trim()}
-          className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold px-6">
-          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Send"}
-        </Button>
-      </div>
-    </Card>
+    </div>
   );
 }
 

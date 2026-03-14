@@ -134,6 +134,13 @@
       "when": 1769281503541,
       "tag": "0018_hard_turbo",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "5",
+      "when": 1773482356918,
+      "tag": "0019_lazy_shooting_star",
+      "breakpoints": true
     }
   ]
 }
