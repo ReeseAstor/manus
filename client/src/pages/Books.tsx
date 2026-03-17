@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Star, ShoppingCart, BookOpen, Gift, ChevronRight, Sparkles } from "lucide-react";
-
+import { Heart, Star, ShoppingCart, BookOpen, Gift, ChevronRight, Sparkles, Bell, Mail, CheckCircle } from "lucide-react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
 
 export default function Books() {
   const books = [
@@ -461,6 +464,148 @@ export default function Books() {
           </motion.div>
         </div>
       </section>
+
+      {/* Newsletter Sign-Up Section */}
+      <section className="py-20 relative overflow-hidden">
+        {/* Subtle gold ambient glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#d4af37]/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="container relative z-10">
+          <BooksNewsletterSignup />
+        </div>
+      </section>
     </div>
+  );
+}
+
+function BooksNewsletterSignup() {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const subscribeMutation = trpc.newsletter.subscribe.useMutation({
+    onSuccess: () => {
+      setIsSubmitted(true);
+      toast.success("Welcome to the inner circle!");
+    },
+    onError: (error) => {
+      if (error.message?.includes("already subscribed")) {
+        setIsSubmitted(true);
+        toast.info("You're already on the list!");
+      } else {
+        toast.error(error.message || "Something went wrong. Please try again.");
+      }
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      toast.error("Please enter your email address.");
+      return;
+    }
+    subscribeMutation.mutate({ email: email.trim(), name: name.trim() || undefined });
+  };
+
+  if (isSubmitted) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="max-w-2xl mx-auto text-center p-10 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5 border border-[#d4af37]/30"
+      >
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#d4af37]/20 mb-5">
+          <CheckCircle className="h-8 w-8 text-[#d4af37]" />
+        </div>
+        <h3 className="font-serif text-2xl font-bold text-white mb-3">You're In!</h3>
+        <p className="text-gray-300 text-base">
+          Check your inbox for your free prequel — <em>The Billionaire's One Night Stand</em>.
+        </p>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className="max-w-4xl mx-auto rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden"
+    >
+      <div className="grid md:grid-cols-2 gap-0">
+        {/* Left — value proposition */}
+        <div className="p-10 md:p-12 flex flex-col justify-center">
+          <div className="inline-flex items-center gap-2 text-[#d4af37] text-xs font-semibold tracking-widest uppercase mb-4">
+            <Sparkles className="h-3.5 w-3.5" />
+            Reader's Inner Circle
+          </div>
+          <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+            Never Miss a New
+            <span className="text-[#d4af37]"> Release</span>
+          </h3>
+          <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            Join thousands of readers who get first access to new books, bonus chapters, and exclusive content — plus a free prequel instantly.
+          </p>
+          <ul className="space-y-3">
+            {[
+              { icon: Bell, text: "New release alerts before anyone else" },
+              { icon: Gift, text: "Exclusive bonus chapters & epilogues" },
+              { icon: BookOpen, text: "Free prequel delivered to your inbox" },
+            ].map(({ icon: Icon, text }) => (
+              <li key={text} className="flex items-center gap-3 text-gray-300 text-sm">
+                <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[#d4af37]/15 flex items-center justify-center">
+                  <Icon className="h-3.5 w-3.5 text-[#d4af37]" />
+                </div>
+                {text}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Right — form */}
+        <div className="p-10 md:p-12 bg-white/[0.03] border-l border-white/5 flex flex-col justify-center">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-8 h-8 rounded-full bg-[#d4af37]/20 flex items-center justify-center">
+              <Mail className="h-4 w-4 text-[#d4af37]" />
+            </div>
+            <span className="text-white font-semibold text-sm">Get New Release Alerts</span>
+          </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <Input
+              type="text"
+              placeholder="First name (optional)"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/50 h-12 rounded-xl"
+            />
+            <Input
+              type="email"
+              placeholder="Your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/50 h-12 rounded-xl"
+            />
+            <Button
+              type="submit"
+              disabled={subscribeMutation.isPending}
+              className="w-full h-12 bg-gradient-to-r from-[#d4af37] to-[#b8960c] hover:from-[#e5c84a] hover:to-[#d4af37] text-black font-bold rounded-xl text-sm tracking-wide transition-all duration-300"
+            >
+              {subscribeMutation.isPending ? (
+                <span className="flex items-center gap-2">
+                  <span className="h-4 w-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                  Subscribing...
+                </span>
+              ) : (
+                "Get New Release Alerts →"
+              )}
+            </Button>
+            <p className="text-gray-600 text-xs text-center">
+              No spam, ever. Unsubscribe anytime.
+            </p>
+          </form>
+        </div>
+      </div>
+    </motion.div>
   );
 }

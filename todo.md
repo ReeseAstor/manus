@@ -1265,3 +1265,11 @@
 - [x] Show spinner loading state and success/error toast on duplication
 - [x] Refresh the drafts list after duplication
 - [x] TypeScript clean, 196 tests passing
+
+## Newsletter Sign-Up on Books Page
+- [x] Review Books page layout and identify optimal placement
+- [x] Add inline newsletter sign-up form after "About the Series" section
+- [x] Created BooksNewsletterSignup component (two-column card: value prop + form)
+- [x] Styled to match Books page dark theme with gold accents
+- [x] Success state with animated checkmark
+- [x] TypeScript clean, 196 tests passing
