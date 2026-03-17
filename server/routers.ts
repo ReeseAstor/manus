@@ -604,6 +604,33 @@ export const appRouter = router({
 
         return { success: true, recipientCount };
       }),
+
+    duplicate: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin") {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Only admins can duplicate newsletters",
+          });
+        }
+        const original = await getNewsletterById(input.id);
+        if (!original) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Newsletter not found",
+          });
+        }
+        await createNewsletter({
+          title: `Copy of ${original.title}`,
+          subject: original.subject,
+          preheader: original.preheader ?? undefined,
+          content: original.content,
+          status: "draft",
+          createdBy: ctx.user.id,
+        });
+        return { success: true };
+      }),
   }),
 
   ai: aiRouter,

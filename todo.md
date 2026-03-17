@@ -1257,3 +1257,11 @@
 - [x] Show loading state (spinner) and success/error toast feedback
 - [x] Write vitest tests (6 tests passing)
 - [x] All 196 tests passing
+
+## Duplicate Newsletter Campaign Button
+- [x] Add backend newsletters.duplicate procedure (creates "Copy of..." draft with status=draft)
+- [x] Add Duplicate (CopyPlus) button to draft cards in AI Studio
+- [x] Add Clone (CopyPlus) button to sent campaign cards in AI Studio
+- [x] Show spinner loading state and success/error toast on duplication
+- [x] Refresh the drafts list after duplication
+- [x] TypeScript clean, 196 tests passing

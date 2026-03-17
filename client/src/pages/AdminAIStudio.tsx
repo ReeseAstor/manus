@@ -16,7 +16,7 @@ import {
   Sparkles, Grid3X3, ArrowLeft, ExternalLink, Copy,
   Save, Trash2, History, Plus, Wand2, ChevronDown,
   Mail, FileText, Eye, Pencil, AlertTriangle, Send,
-  ChevronUp, Maximize2, Minimize2, X
+  ChevronUp, Maximize2, Minimize2, X, CopyPlus
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
@@ -1030,8 +1030,24 @@ function NewsletterDraftsPanel() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [sendingTestId, setSendingTestId] = useState<number | null>(null);
   const sendTestMut = trpc.kie.sendTestEmail.useMutation();
+  const duplicateMut = trpc.newsletters.duplicate.useMutation();
+  const [duplicatingId, setDuplicatingId] = useState<number | null>(null);
   const { user } = useAuth();
   const [, setLocation] = useLocation();
+
+  const handleDuplicate = async (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDuplicatingId(id);
+    try {
+      await duplicateMut.mutateAsync({ id });
+      toast.success("Campaign duplicated!", { description: "A new draft has been created." });
+      refetch();
+    } catch (err: any) {
+      toast.error("Failed to duplicate", { description: err.message });
+    } finally {
+      setDuplicatingId(null);
+    }
+  };
 
   // Filter to show only drafts (not sent/scheduled)
   const draftItems = drafts?.filter(n => n.status === "draft") ?? [];
@@ -1254,6 +1270,15 @@ function NewsletterDraftsPanel() {
                             </Button>
                           </Link>
                           <Button
+                            onClick={(e) => handleDuplicate(draft.id, e)}
+                            disabled={duplicatingId === draft.id}
+                            variant="ghost"
+                            className="text-gray-500 hover:text-blue-400 hover:bg-blue-500/10 text-xs h-8 px-2"
+                            title="Duplicate as new draft"
+                          >
+                            {duplicatingId === draft.id ? <Loader2 className="h-3 w-3 animate-spin" /> : <CopyPlus className="h-3 w-3" />}
+                          </Button>
+                          <Button
                             onClick={(e) => { e.stopPropagation(); setExpandedId(expandedId === draft.id ? null : draft.id); }}
                             variant="ghost"
                             className="text-gray-500 hover:text-[#d4af37] hover:bg-[#d4af37]/10 text-xs h-8 px-2"
@@ -1355,10 +1380,25 @@ function NewsletterDraftsPanel() {
                       <p className="text-gray-400 text-xs leading-relaxed line-clamp-2 mb-2">
                         {stripHtml(item.content) || "No content"}
                       </p>
-                      <div className="flex items-center gap-3 text-xs text-gray-500">
-                        {(item.recipientCount ?? 0) > 0 && <span>{item.recipientCount} recipients</span>}
-                        {(item.openCount ?? 0) > 0 && <span>{item.openCount} opens</span>}
-                        {item.sentAt && <span>{new Date(item.sentAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>}
+                      <div className="flex items-center justify-between mt-3">
+                        <div className="flex items-center gap-3 text-xs text-gray-500">
+                          {(item.recipientCount ?? 0) > 0 && <span>{item.recipientCount} recipients</span>}
+                          {(item.openCount ?? 0) > 0 && <span>{item.openCount} opens</span>}
+                          {item.sentAt && <span>{new Date(item.sentAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>}
+                        </div>
+                        <Button
+                          onClick={(e) => handleDuplicate(item.id, e)}
+                          disabled={duplicatingId === item.id}
+                          variant="ghost"
+                          className="text-gray-500 hover:text-blue-400 hover:bg-blue-500/10 text-xs h-7 px-2 gap-1"
+                          title="Clone as new draft"
+                        >
+                          {duplicatingId === item.id ? (
+                            <Loader2 className="h-3 w-3 animate-spin" />
+                          ) : (
+                            <><CopyPlus className="h-3 w-3" /> Clone</>  
+                          )}
+                        </Button>
                       </div>
                     </Card>
                   );
