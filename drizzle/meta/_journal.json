@@ -141,6 +141,13 @@
       "when": 1773482356918,
       "tag": "0019_lazy_shooting_star",
       "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "5",
+      "when": 1774055794004,
+      "tag": "0020_slimy_victor_mancha",
+      "breakpoints": true
     }
   ]
 }

@@ -51,6 +51,23 @@ async function startServer() {
   
   // Supabase auth callback
   app.get("/api/auth/callback", authCallback);
+
+  // Daily Briefing cron endpoint (can be triggered by external cron service)
+  app.post("/api/cron/daily-briefing", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.JWT_SECRET; // Reuse JWT secret for cron auth
+    if (authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    try {
+      const { runDailyBriefing } = await import("../cron/dailyBriefing");
+      const result = await runDailyBriefing();
+      res.json(result);
+    } catch (error) {
+      console.error("[Cron] Daily briefing error:", error);
+      res.status(500).json({ error: String(error) });
+    }
+  });
   // tRPC API
   app.use(
     "/api/trpc",

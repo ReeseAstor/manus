@@ -9,6 +9,7 @@ import { adminRouter } from "./routers/admin";
 import { twilioRouter } from "./routers/twilio";
 import { smsAnalyticsRouter } from "./routers/smsAnalytics";
 import { kieRouter } from "./routers/kie";
+import { commandCenterRouter } from "./routers/commandCenter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
 import { sendEmail } from "./email-service";
@@ -74,6 +75,7 @@ export const appRouter = router({
   twilio: twilioRouter,
   smsAnalytics: smsAnalyticsRouter,
   kie: kieRouter,
+  commandCenter: commandCenterRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

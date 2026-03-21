@@ -932,3 +932,116 @@ export const contentAuditLog = mysqlTable("content_audit_log", {
 
 export type ContentAuditLog = typeof contentAuditLog.$inferSelect;
 export type InsertContentAuditLog = typeof contentAuditLog.$inferInsert;
+
+
+/**
+ * Business Metrics - daily tracking of KDP business KPIs
+ */
+export const businessMetrics = mysqlTable("business_metrics", {
+  id: int("id").autoincrement().primaryKey(),
+  date: timestamp("date").notNull(),
+  // MailerLite metrics
+  totalSubscribers: int("totalSubscribers").default(0),
+  newSubscribers: int("newSubscribers").default(0),
+  unsubscribes: int("unsubscribes").default(0),
+  emailOpenRate: decimal("emailOpenRate", { precision: 5, scale: 2 }),
+  emailClickRate: decimal("emailClickRate", { precision: 5, scale: 2 }),
+  // Website metrics
+  pageViews: int("pageViews").default(0),
+  uniqueVisitors: int("uniqueVisitors").default(0),
+  // Revenue metrics
+  dailyRevenue: int("dailyRevenue").default(0), // in cents
+  ordersCount: int("ordersCount").default(0),
+  // Social metrics
+  instagramFollowers: int("instagramFollowers"),
+  tiktokFollowers: int("tiktokFollowers"),
+  goodreadsFollowers: int("goodreadsFollowers"),
+  // Book metrics
+  amazonRanking: int("amazonRanking"),
+  reviewCount: int("reviewCount"),
+  averageRating: decimal("averageRating", { precision: 3, scale: 2 }),
+  // KDP-specific
+  kdpRoyalties: int("kdpRoyalties"), // in cents
+  pagesRead: int("pagesRead"), // Kindle Unlimited
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type BusinessMetric = typeof businessMetrics.$inferSelect;
+export type InsertBusinessMetric = typeof businessMetrics.$inferInsert;
+
+/**
+ * Business Goals - monthly/quarterly goal tracking
+ */
+export const businessGoals = mysqlTable("business_goals", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  category: mysqlEnum("category", [
+    "subscribers", "revenue", "books", "content", "social", "launches", "other"
+  ]).notNull(),
+  targetValue: int("targetValue").notNull(),
+  currentValue: int("currentValue").default(0).notNull(),
+  unit: varchar("unit", { length: 50 }).notNull(), // e.g., "subscribers", "dollars", "posts"
+  startDate: timestamp("startDate").notNull(),
+  endDate: timestamp("endDate").notNull(),
+  status: mysqlEnum("status", ["active", "completed", "missed", "paused"]).default("active").notNull(),
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type BusinessGoal = typeof businessGoals.$inferSelect;
+export type InsertBusinessGoal = typeof businessGoals.$inferInsert;
+
+/**
+ * Tool Inventory - catalog of all AppSumo and business tools
+ */
+export const toolInventory = mysqlTable("tool_inventory", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  url: text("url").notNull(),
+  category: mysqlEnum("category", [
+    "video", "audio", "design", "writing", "marketing", "analytics", "kdp", "social", "email", "other"
+  ]).notNull(),
+  plan: varchar("plan", { length: 100 }), // e.g., "AppSumo Single", "All Access", "Premium"
+  loginEmail: varchar("loginEmail", { length: 320 }),
+  loginMethod: varchar("loginMethod", { length: 50 }), // "email", "google", "manual"
+  status: mysqlEnum("status", ["active", "needs_login", "expired", "pending"]).default("active").notNull(),
+  description: text("description"),
+  kdpUseCases: text("kdpUseCases"), // JSON array of use cases
+  features: text("features"), // JSON array of features
+  usageLimits: text("usageLimits"), // JSON object with usage/limits info
+  lastChecked: timestamp("lastChecked"),
+  iconEmoji: varchar("iconEmoji", { length: 10 }),
+  displayOrder: int("displayOrder").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ToolInventoryItem = typeof toolInventory.$inferSelect;
+export type InsertToolInventoryItem = typeof toolInventory.$inferInsert;
+
+/**
+ * Daily Briefings - AI-generated executive summaries
+ */
+export const dailyBriefings = mysqlTable("daily_briefings", {
+  id: int("id").autoincrement().primaryKey(),
+  briefingDate: timestamp("briefingDate").notNull(),
+  // Sections
+  executiveSummary: text("executiveSummary").notNull(),
+  subscriberUpdate: text("subscriberUpdate"),
+  revenueUpdate: text("revenueUpdate"),
+  contentUpdate: text("contentUpdate"),
+  goalProgress: text("goalProgress"),
+  actionItems: text("actionItems"), // JSON array of action items
+  alerts: text("alerts"), // JSON array of alerts/warnings
+  toolRecommendations: text("toolRecommendations"), // JSON array
+  // Metadata
+  dataSnapshot: text("dataSnapshot"), // JSON object with all raw data used
+  emailSent: boolean("emailSent").default(false),
+  emailSentAt: timestamp("emailSentAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type DailyBriefing = typeof dailyBriefings.$inferSelect;
+export type InsertDailyBriefing = typeof dailyBriefings.$inferInsert;

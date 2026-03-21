@@ -222,6 +222,15 @@ export default function AdminDashboard() {
           borderColor: "border-cyan-500/30",
           iconColor: "text-cyan-400",
         },
+        {
+          title: "Business Command Center",
+          description: "KDP business metrics, goals, tools & daily briefings",
+          icon: Zap,
+          href: "/admin/command-center",
+          color: "from-amber-500/20 to-amber-600/10",
+          borderColor: "border-amber-500/30",
+          iconColor: "text-amber-400",
+        },
       ],
     },
   ];
@@ -233,6 +242,7 @@ export default function AdminDashboard() {
     { label: "Run QA Check", icon: CheckCircle2, href: "/admin/qa", color: "text-emerald-400" },
     { label: "Scan Links", icon: Link2, href: "/admin/links", color: "text-purple-400" },
     { label: "Generate Report", icon: FileText, href: "/admin/reports", color: "text-indigo-400" },
+    { label: "Command Center", icon: Zap, href: "/admin/command-center", color: "text-amber-400" },
   ];
 
   return (
