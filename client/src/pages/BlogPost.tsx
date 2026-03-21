@@ -93,7 +93,7 @@ export default function BlogPost() {
     
     // Cleanup - reset title when leaving page
     return () => {
-      document.title = 'Reese Astor - Romance Author & Writing Coach';
+      document.title = 'Reese Astor | USA Today Bestselling Romance Author';
     };
   }, [post]);
 

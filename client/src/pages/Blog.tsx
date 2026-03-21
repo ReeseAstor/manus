@@ -4,12 +4,16 @@ import { Input } from "@/components/ui/input";
 import { Calendar, Clock, ArrowRight, Loader2, Sparkles, Mail } from "lucide-react";
 import { format } from "date-fns";
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
 
 export default function Blog() {
+  useEffect(() => {
+    document.title = "Romance Writing Blog | Tips & Insights by Reese Astor";
+  }, []);
+
   const [email, setEmail] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
   

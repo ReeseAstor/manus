@@ -1,9 +1,14 @@
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 import { BookOpen, Heart, Sparkles, Quote, ChevronRight } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 
 export default function About() {
+  useEffect(() => {
+    document.title = "About Reese Astor | USA Today Bestselling Romance Author";
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       {/* Hero Section - Sophisticated Profile with Author Photo */}

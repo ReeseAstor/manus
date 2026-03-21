@@ -1,12 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { BookOpen, Download, Gift, Star, CheckCircle, Share2, Mail, ChevronRight, Heart, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
 
 export default function FreeBook() {
+  useEffect(() => {
+    document.title = "Free Book: The First Acquisition | Reese Astor Romance";
+  }, []);
+
   const [email, setEmail] = useState("");
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {

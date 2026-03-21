@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Star, ShoppingCart, BookOpen, Gift, ChevronRight, Sparkles, Bell, Mail, CheckCircle } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -9,6 +9,10 @@ import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 
 export default function Books() {
+  useEffect(() => {
+    document.title = "Manhattan Money Kings Series | Reese Astor Romance Books";
+  }, []);
+
   const books = [
     {
       id: 4,

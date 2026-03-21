@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCart, Check, Star, Gift, Sparkles, ArrowRight, Crown, Loader2 } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface BundleOption {
   id: string;
@@ -85,6 +85,10 @@ const bookProductMap: Record<string, number> = {
 };
 
 export default function Shop() {
+  useEffect(() => {
+    document.title = "Shop Signed Books & Bundles | Reese Astor Romance Store";
+  }, []);
+
   const { data: books } = trpc.books.list.useQuery();
   const createCheckout = trpc.stripe.createCheckoutSession.useMutation();
   const [loadingProductId, setLoadingProductId] = useState<number | null>(null);

@@ -1349,3 +1349,11 @@
 
 ## SEO Fixes
 - [x] Fix homepage title to be between 30-60 characters (currently 28 chars) → now 50 chars via document.title
+- [x] Add SEO document.title to Books page (56 chars)
+- [x] Add SEO document.title to About page (56 chars)
+- [x] Add SEO document.title to Blog page (53 chars)
+- [x] Add SEO document.title to Free Book page (54 chars)
+- [x] Add SEO document.title to Contact page (52 chars)
+- [x] Add SEO document.title to Shop page (55 chars)
+- [x] Update VITE_APP_TITLE secret to match new title (built-in, user must update in Settings)
+- [ ] Publish the site (user action required)
