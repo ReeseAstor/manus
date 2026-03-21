@@ -1,6 +1,18 @@
+import { useEffect } from "react";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
+
 export default function Privacy() {
+  useEffect(() => {
+    document.title = "Privacy Policy | Reese Astor";
+  }, []);
+
   return (
     <div className="min-h-screen py-12">
+      <EnhancedSEOHead
+        title="Privacy Policy | Reese Astor"
+        description="Privacy policy for reeseastor.com. Learn how we collect, use, and protect your personal data when you visit our website or subscribe to our newsletter."
+        canonical="/privacy"
+      />
       <div className="container max-w-4xl">
         <h1 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mb-8">
           Privacy Policy

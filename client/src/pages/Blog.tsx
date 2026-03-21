@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 
 export default function Blog() {
   useEffect(() => {
@@ -106,6 +107,14 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+      <EnhancedSEOHead
+        title="Romance Writing Blog | Tips & Insights by Reese Astor"
+        description="Writing tips, behind-the-scenes insights, and romance industry advice from USA Today Bestselling author Reese Astor. Learn the craft of storytelling."
+        canonical="/blog"
+        ogType="website"
+        keywords={["romance writing tips", "author blog", "writing advice", "Reese Astor blog", "romance author insights", "storytelling craft"]}
+      />
+
       {/* Hero Section */}
       <section className="relative py-32 overflow-hidden">
         <div 

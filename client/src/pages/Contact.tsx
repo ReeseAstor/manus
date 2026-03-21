@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 
 export default function Contact() {
   useEffect(() => {
@@ -44,6 +45,13 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+      <EnhancedSEOHead
+        title="Contact Reese Astor | Romance Author & Writing Coach"
+        description="Get in touch with Reese Astor for book signings, writing coaching, media inquiries, or reader questions. Connect with a USA Today Bestselling romance author."
+        canonical="/contact"
+        keywords={["contact Reese Astor", "romance author contact", "writing coach inquiry", "book signing request", "media inquiry romance author"]}
+      />
+
       {/* Hero Section */}
       <section className="relative py-32 overflow-hidden">
         <div 

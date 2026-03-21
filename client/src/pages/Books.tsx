@@ -7,11 +7,22 @@ import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 
 export default function Books() {
   useEffect(() => {
     document.title = "Manhattan Money Kings Series | Reese Astor Romance Books";
   }, []);
+
+  const booksStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BookSeries",
+    "name": "Manhattan Money Kings",
+    "author": { "@type": "Person", "name": "Reese Astor" },
+    "genre": "Billionaire Romance",
+    "numberOfBooks": 4,
+    "url": "https://reeseastor.com/books"
+  };
 
   const books = [
     {
@@ -90,6 +101,14 @@ export default function Books() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+      <EnhancedSEOHead
+        title="Manhattan Money Kings Series | Reese Astor Romance Books"
+        description="Explore the complete Manhattan Money Kings billionaire romance series by Reese Astor. Four steamy books of power, passion, and love in New York City. Read in order."
+        canonical="/books"
+        ogType="book"
+        keywords={["Manhattan Money Kings", "billionaire romance series", "Reese Astor books", "steamy romance", "New York romance", "book series order"]}
+        structuredData={[booksStructuredData]}
+      />
 
       
       {/* Hero Section - Editorial Magazine Style */}

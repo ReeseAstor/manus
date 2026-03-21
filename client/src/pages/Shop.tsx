@@ -5,6 +5,7 @@ import { ShoppingCart, Check, Star, Gift, Sparkles, ArrowRight, Crown, Loader2 }
 import { Link } from "wouter";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 
 interface BundleOption {
   id: string;
@@ -89,6 +90,15 @@ export default function Shop() {
     document.title = "Shop Signed Books & Bundles | Reese Astor Romance Store";
   }, []);
 
+  const shopStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Reese Astor Book Shop",
+    "url": "https://reeseastor.com/shop",
+    "description": "Official store for signed books and exclusive bundles from Reese Astor.",
+    "brand": { "@type": "Brand", "name": "Reese Astor" }
+  };
+
   const { data: books } = trpc.books.list.useQuery();
   const createCheckout = trpc.stripe.createCheckoutSession.useMutation();
   const [loadingProductId, setLoadingProductId] = useState<number | null>(null);
@@ -128,6 +138,15 @@ export default function Shop() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27]">
+      <EnhancedSEOHead
+        title="Shop Signed Books & Bundles | Reese Astor Romance Store"
+        description="Shop signed paperbacks, exclusive bundles, and digital editions of the Manhattan Money Kings series. Direct from USA Today Bestselling author Reese Astor."
+        canonical="/shop"
+        ogType="product"
+        keywords={["signed romance books", "Reese Astor shop", "Manhattan Money Kings paperback", "romance book bundles", "signed author copies", "buy direct from author"]}
+        structuredData={[shopStructuredData]}
+      />
+
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
         <div

@@ -1357,3 +1357,21 @@
 - [x] Add SEO document.title to Shop page (55 chars)
 - [x] Update VITE_APP_TITLE secret to match new title (built-in, user must update in Settings)
 - [ ] Publish the site (user action required)
+
+## SEO Meta Descriptions
+- [x] Add HelmetProvider to main.tsx
+- [x] Add meta description to Home page with Open Graph + structured data
+- [x] Add meta description to Books page with Open Graph + structured data
+- [x] Add meta description to About page with Open Graph + structured data
+- [x] Add meta description to Blog page with Open Graph
+- [x] Add meta description to Free Book page with Open Graph + structured data
+- [x] Add meta description to Contact page with Open Graph
+- [x] Add meta description to Shop page with Open Graph + structured data
+- [x] Add meta description to Newsletter page with Open Graph
+- [x] Add meta description to Reader Club page with Open Graph
+- [x] Add meta description to Character Quiz page with Open Graph
+- [x] Add meta description to Privacy page
+- [x] Add meta description to Terms page
+- [x] Add meta description to WhyBuyDirect page with Open Graph
+- [x] Add dynamic meta description to BookDetail page with structured data (JSON-LD)
+- [x] Add dynamic meta description to BlogPost page with Open Graph

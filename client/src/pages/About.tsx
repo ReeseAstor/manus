@@ -3,14 +3,36 @@ import { useEffect } from "react";
 import { BookOpen, Heart, Sparkles, Quote, ChevronRight } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 
 export default function About() {
   useEffect(() => {
     document.title = "About Reese Astor | USA Today Bestselling Romance Author";
   }, []);
 
+  const authorStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Reese Astor",
+    "url": "https://reeseastor.com/about",
+    "jobTitle": "Romance Author & Writing Coach",
+    "description": "USA Today Bestselling romance author of the Manhattan Money Kings series.",
+    "sameAs": [
+      "https://www.amazon.com/Reese-Astor/e/B0DVGQY6TX",
+      "https://www.instagram.com/reeseastor"
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+      <EnhancedSEOHead
+        title="About Reese Astor | USA Today Bestselling Romance Author"
+        description="Meet Reese Astor, USA Today Bestselling author of steamy billionaire romances. From the Bronx to bestseller lists, discover the story behind the Manhattan Money Kings series."
+        canonical="/about"
+        keywords={["Reese Astor biography", "romance author", "USA Today bestselling", "writing coach", "Manhattan Money Kings author", "about Reese Astor"]}
+        structuredData={[authorStructuredData]}
+      />
+
       {/* Hero Section - Sophisticated Profile with Author Photo */}
       <section className="relative py-32 overflow-hidden">
         <div 

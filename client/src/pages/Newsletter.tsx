@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { trpc } from '@/lib/trpc';
 import { 
   BookOpen, Mail, Sparkles, CheckCircle, Calendar, ArrowRight, 
@@ -7,6 +7,7 @@ import {
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
+import { EnhancedSEOHead } from '@/components/ui/enhanced-seo-head';
 
 /**
  * Newsletter Signup Page — Manhattan Luxury Redesign
@@ -16,6 +17,10 @@ import { toast } from 'sonner';
  * URL: /newsletter
  */
 export default function Newsletter() {
+  useEffect(() => {
+    document.title = "Join Reese Astor's Newsletter | Free Book & Exclusive Content";
+  }, []);
+
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -154,6 +159,13 @@ export default function Newsletter() {
   // ─── Main Page ──────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a] relative overflow-hidden">
+      <EnhancedSEOHead
+        title="Join Reese Astor's Newsletter | Free Book & Exclusive Content"
+        description="Subscribe to Reese Astor's newsletter and get The First Acquisition free. Receive exclusive bonus scenes, early cover reveals, and new release alerts."
+        canonical="/newsletter"
+        keywords={["romance newsletter", "Reese Astor newsletter", "free romance book", "book release alerts", "exclusive bonus content", "reader newsletter"]}
+      />
+
       {/* Ambient lighting effects */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-[#d4af37]/5 rounded-full blur-[150px]" />
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[300px] bg-[#d4af37]/3 rounded-full blur-[120px]" />

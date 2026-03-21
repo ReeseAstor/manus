@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { EnhancedSEOHead } from '@/components/ui/enhanced-seo-head';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
@@ -50,6 +51,10 @@ const questions = [
 ];
 
 export default function CharacterQuiz() {
+  useEffect(() => {
+    document.title = "Which Manhattan Billionaire Is Your Match? | Reese Astor";
+  }, []);
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
@@ -156,6 +161,12 @@ export default function CharacterQuiz() {
 
   return (
     <div className="min-h-screen py-20 bg-gradient-to-b from-background to-primary/5">
+      <EnhancedSEOHead
+        title="Which Manhattan Billionaire Is Your Match? | Reese Astor"
+        description="Take the fun character quiz to discover which Manhattan Money Kings billionaire is your perfect match. Find your book boyfriend from Reese Astor's romance series."
+        canonical="/character-quiz"
+        keywords={["romance character quiz", "book boyfriend quiz", "Manhattan Money Kings quiz", "billionaire romance quiz", "Reese Astor quiz"]}
+      />
       <div className="container max-w-2xl">
         <div className="text-center mb-8">
           <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-4">

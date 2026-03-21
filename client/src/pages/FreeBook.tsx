@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
+import { EnhancedSEOHead, generateBookSchema } from "@/components/ui/enhanced-seo-head";
 
 export default function FreeBook() {
   useEffect(() => {
@@ -85,8 +86,28 @@ export default function FreeBook() {
     "Behind-the-scenes author updates",
   ];
 
+  const freeBookSchema = generateBookSchema({
+    name: "The First Acquisition: A Manhattan Billionaire Romance",
+    description: "A steamy billionaire romance where power, passion, and Manhattan collide. The first book in the Manhattan Money Kings series by Reese Astor.",
+    url: "https://reeseastor.com/free-book",
+    genre: "Billionaire Romance",
+    price: "0",
+    currency: "USD",
+    rating: 4.7,
+    reviewCount: 45,
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+      <EnhancedSEOHead
+        title="Free Book: The First Acquisition | Reese Astor Romance"
+        description="Download The First Acquisition for free. A steamy Manhattan billionaire romance by USA Today Bestselling author Reese Astor. Join the newsletter and start reading today."
+        canonical="/free-book"
+        ogType="book"
+        keywords={["free romance book", "The First Acquisition", "free billionaire romance", "Reese Astor free book", "Manhattan Money Kings", "reader magnet"]}
+        structuredData={[freeBookSchema]}
+      />
+
       {/* Hero Section - Premium Offer */}
       <section className="relative py-32 overflow-hidden">
         <div 

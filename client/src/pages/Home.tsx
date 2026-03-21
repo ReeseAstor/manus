@@ -1,15 +1,33 @@
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import { BookOpen, ChevronRight, Star, Gift } from "lucide-react";
-
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import NewReleaseSignup from "@/components/NewReleaseSignup";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 
 export default function Home() {
   useEffect(() => {
     document.title = "Reese Astor | USA Today Bestselling Romance Author";
   }, []);
+
+  const homeStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Reese Astor",
+    "url": "https://reeseastor.com",
+    "description": "Official website of Reese Astor, USA Today Bestselling romance author of the Manhattan Money Kings series.",
+    "author": {
+      "@type": "Person",
+      "name": "Reese Astor",
+      "url": "https://reeseastor.com/about",
+      "jobTitle": "Romance Author & Writing Coach",
+      "sameAs": [
+        "https://www.amazon.com/Reese-Astor/e/B0DVGQY6TX",
+        "https://www.instagram.com/reeseastor"
+      ]
+    }
+  };
 
   const books = [
     {
@@ -54,6 +72,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+      <EnhancedSEOHead
+        title="Reese Astor | USA Today Bestselling Romance Author"
+        description="Discover the Manhattan Money Kings series by USA Today Bestselling author Reese Astor. Steamy billionaire romances set in New York City. Get a free book today."
+        canonical="/"
+        keywords={["Reese Astor", "romance author", "billionaire romance", "Manhattan Money Kings", "steamy romance books", "USA Today bestselling author", "free romance book"]}
+        structuredData={[homeStructuredData]}
+      />
 
       
       {/* Manhattan Penthouse Hero Section */}

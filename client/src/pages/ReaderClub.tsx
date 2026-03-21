@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import { Lock, Unlock, Star, Calendar, BookOpen, Sparkles } from "lucide-react";
 import { MemberBenefits } from "@/components/MemberBenefits";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,10 @@ import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 
 export default function ReaderClub() {
+  useEffect(() => {
+    document.title = "Reader Club | Exclusive Content from Reese Astor";
+  }, []);
+
   const [email, setEmail] = useState("");
   const { data: member, isLoading: memberLoading } = trpc.readerClub.checkMembership.useQuery({ email });
   const { data: content, isLoading: contentLoading } = trpc.readerClub.getAllContent.useQuery();
@@ -65,6 +70,13 @@ export default function ReaderClub() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#1a1f2e] to-[#0a0e1a]">
+      <EnhancedSEOHead
+        title="Reader Club | Exclusive Content from Reese Astor"
+        description="Join Reese Astor's Reader Club for exclusive bonus chapters, early cover reveals, behind-the-scenes content, and special giveaways. Free to join."
+        canonical="/reader-club"
+        keywords={["reader club", "Reese Astor exclusive content", "bonus chapters", "romance reader community", "book giveaways", "early access"]}
+      />
+
       {/* Hero Section */}
       <div
         className="relative h-[60vh] flex items-center justify-center overflow-hidden"

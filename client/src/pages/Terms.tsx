@@ -1,6 +1,18 @@
+import { useEffect } from "react";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
+
 export default function Terms() {
+  useEffect(() => {
+    document.title = "Terms of Service | Reese Astor";
+  }, []);
+
   return (
     <div className="min-h-screen py-12">
+      <EnhancedSEOHead
+        title="Terms of Service | Reese Astor"
+        description="Terms of service for reeseastor.com. Review the terms and conditions for using our website, purchasing products, and subscribing to our services."
+        canonical="/terms"
+      />
       <div className="container max-w-4xl">
         <h1 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mb-8">
           Terms of Service

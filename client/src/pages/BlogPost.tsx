@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Streamdown } from "streamdown";
 import { useEffect } from "react";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 
 export default function BlogPost() {
   const params = useParams();
@@ -150,6 +151,14 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+      <EnhancedSEOHead
+        title={`${post.title} | Reese Astor Blog`}
+        description={post.excerpt?.slice(0, 155) || `${post.title} - Read the latest from romance author Reese Astor's blog.`}
+        canonical={`/blog/${slug}`}
+        ogType="article"
+        keywords={[post.title, post.category || "romance", "Reese Astor blog", "romance writing"].filter(Boolean) as string[]}
+      />
+
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div 

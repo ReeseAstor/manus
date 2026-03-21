@@ -3,10 +3,23 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 
 export default function WhyBuyDirectPage() {
+  useEffect(() => {
+    document.title = "Why Buy Direct from Reese Astor | Support Your Author";
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27]">
+      <EnhancedSEOHead
+        title="Why Buy Direct from Reese Astor | Support Your Author"
+        description="Learn why buying directly from Reese Astor means more royalties for the author, exclusive signed editions, and special bonuses you won't find on Amazon."
+        canonical="/why-buy-direct"
+        keywords={["buy direct from author", "support romance authors", "signed books", "author royalties", "buy books direct"]}
+      />
+
       {/* Back Navigation */}
       <div className="container max-w-6xl mx-auto px-4 pt-8">
         <Link href="/shop">

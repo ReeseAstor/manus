@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRoute, Link } from "wouter";
+import { EnhancedSEOHead, generateBookSchema } from "@/components/ui/enhanced-seo-head";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -76,8 +77,27 @@ export default function BookDetail() {
     { name: "Google Play", url: book.googlePlayUrl, icon: "▶️" },
   ].filter((link) => link.url);
 
+  const bookSchema = generateBookSchema({
+    name: book.title,
+    description: book.description || `${book.title} by Reese Astor - A Manhattan Money Kings billionaire romance.`,
+    url: `https://reeseastor.com/books/${slug}`,
+    genre: "Billionaire Romance",
+    currency: "USD",
+    rating: book.rating || undefined,
+    reviewCount: reviews?.length || undefined,
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27]">
+      <EnhancedSEOHead
+        title={`${book.title} | Reese Astor Romance`}
+        description={book.description?.slice(0, 155) || `Read ${book.title} by Reese Astor. A steamy Manhattan billionaire romance from the Manhattan Money Kings series.`}
+        canonical={`/books/${slug}`}
+        ogType="book"
+        keywords={[book.title, "Reese Astor", "billionaire romance", "Manhattan Money Kings", slug.replace(/-/g, " ")]}
+        structuredData={[bookSchema]}
+      />
+
       {/* Hero Section */}
       <div className="relative py-20 px-4 overflow-hidden">
         <div
