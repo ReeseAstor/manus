@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Facebook, Instagram, Mail } from "lucide-react";
+import { Facebook, Instagram, Mail, BookOpen, Gift } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -12,8 +12,18 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-playfair text-xl font-bold text-primary">Reese Astor</h3>
             <p className="text-sm text-muted-foreground">
-              Bestselling romance author and writing coach helping women turn their creative passion into profitable businesses.
+              USA Today Bestselling romance author. Power, passion, and Manhattan collide in the Manhattan Money Kings series.
             </p>
+            {/* Free Book CTA in Footer */}
+            <a
+              href="https://get.reeseastor.com/kw1yge3479"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-semibold hover:bg-primary/20 transition-colors"
+            >
+              <Gift className="h-4 w-4" />
+              Get a Free Book
+            </a>
           </div>
 
           {/* Quick Links */}
@@ -23,11 +33,17 @@ export function Footer() {
               <Link href="/books">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Books</a>
               </Link>
+              <Link href="/free-book">
+                <a className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+                  <BookOpen className="h-3 w-3" />
+                  Free Book
+                </a>
+              </Link>
               <Link href="/blog">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Blog</a>
               </Link>
-              <Link href="/coaching">
-                <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Coaching</a>
+              <Link href="/shop">
+                <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Shop</a>
               </Link>
               <Link href="/about">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">About</a>
@@ -44,6 +60,9 @@ export function Footer() {
               </Link>
               <Link href="/terms">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
+              </Link>
+              <Link href="/contact">
+                <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</a>
               </Link>
             </nav>
           </div>
@@ -75,6 +94,9 @@ export function Footer() {
                 <Mail className="h-5 w-5" />
               </a>
             </div>
+            <p className="text-xs text-muted-foreground mt-4">
+              Join 1,700+ readers on the VIP list for exclusive content and new release alerts.
+            </p>
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { BookOpen, ChevronRight, Star } from "lucide-react";
+import { BookOpen, ChevronRight, Star, Gift } from "lucide-react";
 
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -105,10 +105,10 @@ export default function Home() {
                   size="lg"
                   className="group bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-semibold px-8 py-7 rounded-full text-lg shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
                 >
-                  <Link href="/books">
-                    Explore the Series
-                    <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  <a href="https://get.reeseastor.com/kw1yge3479" target="_blank" rel="noopener noreferrer">
+                    <Gift className="mr-2 h-5 w-5" />
+                    Get Your Free Book
+                  </a>
                 </Button>
 
                 <Button
@@ -117,9 +117,9 @@ export default function Home() {
                   variant="outline"
                   className="border-2 border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white font-semibold px-8 py-7 rounded-full text-lg transition-all duration-300 hover:border-[#d4af37]/50"
                 >
-                  <Link href="/free-book">
+                  <Link href="/books">
                     <BookOpen className="mr-2 h-5 w-5" />
-                    Get Free Prequel
+                    Explore the Series
                   </Link>
                 </Button>
               </div>
@@ -192,6 +192,106 @@ export default function Home() {
             <div className="w-1 h-3 bg-[#d4af37] rounded-full" />
           </div>
         </motion.div>
+      </section>
+
+      {/* FREE BOOK OFFER - Prominent Lead Magnet Section */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#1a1020] to-[#0a0e1a]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#d4af37]/5 blur-[200px] rounded-full pointer-events-none" />
+        
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-6xl mx-auto"
+          >
+            <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center p-10 md:p-16 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-[#1a1428]/80 to-[#d4af37]/5 border-2 border-[#d4af37]/30 backdrop-blur-xl shadow-2xl shadow-[#d4af37]/5 relative overflow-hidden">
+              {/* Decorative corner accents */}
+              <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-[#d4af37]/40 rounded-tl-3xl pointer-events-none" />
+              <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-[#d4af37]/40 rounded-br-3xl pointer-events-none" />
+              
+              {/* Book Cover */}
+              <motion.div
+                className="relative"
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="absolute -inset-8 bg-gradient-to-r from-[#d4af37]/30 to-transparent blur-3xl rounded-full" />
+                <div className="relative">
+                  <div className="absolute -top-5 -right-5 z-10 px-6 py-3 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-lg shadow-2xl">
+                    100% FREE
+                  </div>
+                  <img
+                    src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/uMHRMKanHXREGUzc.jpeg"
+                    alt="The First Acquisition - Free Book"
+                    className="relative w-full max-w-md mx-auto rounded-2xl shadow-2xl shadow-black/50"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Content */}
+              <div className="space-y-6 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-sm shadow-xl">
+                  <Gift className="h-4 w-4" />
+                  FREE BOOK FOR NEW READERS
+                </div>
+                
+                <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                  Start the Series<br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f4e4b8] to-[#d4af37]">For Free</span>
+                </h2>
+                
+                <p className="text-2xl text-white font-semibold font-serif">
+                  The First Acquisition
+                </p>
+                <p className="text-[#d4af37] font-medium">
+                  A Manhattan Billionaire Romance
+                </p>
+                
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  Power. Passion. Manhattan. When a ruthless billionaire sets his sights on what he wants, nothing stands in his way — not even the woman who was never part of the deal. Get this steamy full-length romance free when you join Reese Astor's VIP reader list.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-lg px-10 py-7 rounded-full shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
+                  >
+                    <a href="https://get.reeseastor.com/kw1yge3479" target="_blank" rel="noopener noreferrer">
+                      <BookOpen className="mr-2 h-6 w-6" />
+                      Get My Free Book
+                    </a>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold px-8 py-7 rounded-full transition-all duration-300 hover:border-[#d4af37]/50"
+                  >
+                    <Link href="/free-book">
+                      Learn More
+                      <ChevronRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="flex items-center gap-3 pt-2">
+                  <div className="flex -space-x-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-[#d4af37] text-[#d4af37]" />
+                    ))}
+                  </div>
+                  <span className="text-gray-300 text-sm">
+                    Loved by <span className="text-white font-semibold">1,700+</span> readers
+                  </span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Editorial Book Showcase - Magazine Style */}
@@ -300,86 +400,6 @@ export default function Home() {
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Free Prequel - Luxury Offer Section */}
-      <section className="py-32 relative overflow-hidden">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/spKnuylVHBnEgELK.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/98 via-[#0a0e1a]/95 to-[#0a0e1a]/98" />
-        </div>
-
-        <div className="container relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-6xl mx-auto"
-          >
-            <div className="grid md:grid-cols-2 gap-12 items-center p-12 md:p-16 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl">
-              {/* Book Cover */}
-              <motion.div
-                className="relative"
-                whileHover={{ scale: 1.05, rotateY: 5 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="absolute -inset-8 bg-gradient-to-r from-[#d4af37]/30 to-transparent blur-3xl rounded-full" />
-                <img
-                  src="/prequel-cover.jpg"
-                  alt="The Billionaire's One Night Stand - Free Prequel"
-                  className="relative w-full max-w-md mx-auto rounded-2xl shadow-2xl"
-                />
-              </motion.div>
-
-              {/* Content */}
-              <div className="space-y-6 text-center md:text-left">
-                <div className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-sm shadow-xl">
-                  FREE NEWSLETTER BONUS
-                </div>
-                
-                <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  Start Your Journey<br />
-                  <span className="text-[#d4af37]">For Free</span>
-                </h2>
-                
-                <p className="text-2xl text-white font-semibold">
-                  The Billionaire's One Night Stand
-                </p>
-                
-                <p className="text-gray-300 text-lg leading-relaxed">
-                  Victoria Cruz was just passed over for partnership. James Chen is the billionaire who offers her one night to forget. But when he acquires her firm without warning, their passionate encounter becomes a corporate battlefield. Get this steamy enemies-to-lovers novella free!
-                </p>
-
-                <Button
-                  asChild
-                  size="lg"
-                  className="w-full md:w-auto bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-lg px-10 py-7 rounded-full shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
-                >
-                  <a href="https://dl.bookfunnel.com/xrodg0t77p" target="_blank" rel="noopener noreferrer">
-                    <BookOpen className="mr-2 h-6 w-6" />
-                    Download Free Now
-                  </a>
-                </Button>
-
-                <div className="flex items-center justify-center md:justify-start gap-4 pt-4">
-                  <img src="/prequel-qr.png" alt="QR Code" className="w-24 h-24 rounded-lg border-2 border-[#d4af37]/30" />
-                  <div className="text-sm text-gray-400 text-left">
-                    <p className="font-semibold text-white">Scan to download</p>
-                    <p>or get it on <a href="https://swiy.co/3rd" target="_blank" rel="noopener noreferrer" className="text-[#d4af37] hover:underline">Amazon</a></p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </motion.div>
         </div>
       </section>

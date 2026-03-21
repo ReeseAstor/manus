@@ -486,10 +486,10 @@ export default function About() {
                 variant="outline"
                 className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold px-10 py-7 rounded-full"
               >
-                <Link href="/free-book">
-                  Get Free Prequel
+                <a href="https://get.reeseastor.com/kw1yge3479" target="_blank" rel="noopener noreferrer">
+                  Get Your Free Book
                   <ChevronRight className="ml-2 h-5 w-5" />
-                </Link>
+                </a>
               </Button>
             </div>
           </motion.div>

@@ -14,7 +14,11 @@ export default function NewReleaseSignup() {
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
       setIsSubmitted(true);
-      toast.success("Welcome to the inner circle!");
+      toast.success("Welcome to the inner circle! Your free book is on its way.");
+      // Open BookFunnel after signup
+      setTimeout(() => {
+        window.open("https://get.reeseastor.com/kw1yge3479", "_blank");
+      }, 2000);
     },
     onError: (error) => {
       if (error.message?.includes("already subscribed")) {
@@ -36,9 +40,9 @@ export default function NewReleaseSignup() {
   };
 
   const benefits = [
+    { icon: Gift, text: "Free copy of The First Acquisition" },
     { icon: Bell, text: "New release alerts before anyone else" },
-    { icon: Gift, text: "Exclusive bonus chapters & epilogues" },
-    { icon: BookOpen, text: "Free prequel delivered instantly" },
+    { icon: BookOpen, text: "Exclusive bonus chapters & epilogues" },
   ];
 
   return (
@@ -77,11 +81,14 @@ export default function NewReleaseSignup() {
 
                 {/* Heading */}
                 <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
-                  Never Miss a Release
+                  Join the VIP Reader List
                 </h2>
-                <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-                  Be the first to know when the next steamy Manhattan romance drops. Plus, get a
-                  free book just for signing up.
+                <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto leading-relaxed">
+                  Get a <span className="text-[#d4af37] font-semibold">free copy of The First Acquisition</span> plus
+                  exclusive content, early release alerts, and bonus chapters.
+                </p>
+                <p className="text-sm text-gray-400 mb-10">
+                  Join 1,700+ readers who already love the Manhattan Money Kings series.
                 </p>
 
                 {/* Benefits */}
@@ -154,8 +161,8 @@ export default function NewReleaseSignup() {
                       </span>
                     ) : (
                       <span className="flex items-center gap-2">
-                        <Mail className="h-5 w-5" />
-                        Get New Release Alerts
+                        <Gift className="h-5 w-5" />
+                        Get My Free Book
                       </span>
                     )}
                   </Button>
@@ -181,15 +188,22 @@ export default function NewReleaseSignup() {
                   You're In!
                 </h2>
                 <p className="text-xl text-gray-300 mb-6 max-w-lg mx-auto leading-relaxed">
-                  Check your inbox for a welcome email with your free copy of{" "}
+                  Your free copy of{" "}
                   <span className="text-[#d4af37] font-semibold">
-                    The Billionaire's One Night Stand
+                    The First Acquisition
                   </span>
-                  .
+                  {" "}is being delivered to your inbox now. A download page should open in a new tab shortly.
                 </p>
-                <p className="text-gray-400">
+                <p className="text-gray-400 mb-8">
                   You'll be the first to know about every new Manhattan Money Kings release.
                 </p>
+                <Button
+                  onClick={() => window.open("https://get.reeseastor.com/kw1yge3479", "_blank")}
+                  className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                >
+                  <BookOpen className="mr-2 h-5 w-5" />
+                  Download Your Free Book
+                </Button>
               </motion.div>
             )}
           </div>

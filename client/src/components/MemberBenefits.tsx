@@ -33,8 +33,8 @@ const benefits: Benefit[] = [
   },
   {
     icon: Gift,
-    title: "Free Prequel",
-    description: "Get 'The Billionaire's One Night Stand' absolutely free when you join. Start the story from the beginning!",
+    title: "Free Book",
+    description: "Get 'The First Acquisition' absolutely free when you join. Start the Manhattan Money Kings series from the beginning!",
     highlight: "FREE BOOK",
   },
   {
@@ -159,7 +159,7 @@ export function MemberBenefits() {
                   "10-14 days early access",
                   "Exclusive bonus chapters",
                   "Character interviews",
-                  "Free prequel book",
+                  "Free copy of The First Acquisition",
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-[#e5e5e5]">
                     <div className="w-5 h-5 rounded-full bg-[#d4af37] flex items-center justify-center">

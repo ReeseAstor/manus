@@ -1315,3 +1315,29 @@
 - [x] Analyze Amazon book listings and reviews
 - [x] Define and create strategic business goals in Command Center
 - [x] Update Bookclicker tool status from "needs login" to "active"
+
+## BookFunnel Lead Magnet Setup
+- [x] Log into BookFunnel account
+- [x] Upload "The First Acquisition" ebook file
+- [x] Set up book cover and metadata
+- [x] Configure landing page for lead magnet
+- [x] Connect to MailerLite for subscriber collection
+- [ ] Test the download funnel end-to-end (ready for testing)
+- [ ] Update BookFunnel tool status in Command Center
+
+## Free Book & Newsletter Signup Website Integration
+- [x] Update homepage hero section with free book CTA
+- [x] Add prominent "Get Your Free Book" banner/section on homepage
+- [x] Update newsletter signup forms to mention free book incentive
+- [x] Add BookFunnel link (https://get.reeseastor.com/kw1yge3479) to CTAs
+- [x] Update footer newsletter signup with free book mention
+- [x] Add free book section to Books page
+- [x] Update About page with reader magnet CTA
+- [x] Ensure all newsletter signups reference the free book offer
+- [x] Update FreeBook.tsx with full The First Acquisition landing page
+- [x] Update NewReleaseSignup component with free book offer
+- [x] Update MemberBenefits component references
+- [x] Update Contact page reference from prequel to The First Acquisition
+- [x] Replace prequel cover image with The First Acquisition cover
+- [x] Generate new QR code for BookFunnel link
+- [x] Remove all old BookFunnel links (xrodg0t77p)

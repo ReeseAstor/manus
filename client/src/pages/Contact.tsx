@@ -316,7 +316,7 @@ export default function Contact() {
               Looking for something specific?
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Check out my books, coaching services, or grab your free prequel novella.
+              Check out my books, coaching services, or grab your free copy of The First Acquisition.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button

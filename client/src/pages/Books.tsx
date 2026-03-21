@@ -161,8 +161,8 @@ export default function Books() {
               <div className="relative">
                 <div className="absolute -inset-6 bg-gradient-to-r from-[#d4af37]/30 to-transparent blur-3xl rounded-full" />
                 <img
-                  src="/prequel-cover.jpg"
-                  alt="The Billionaire's One Night Stand - Free Prequel"
+                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/uMHRMKanHXREGUzc.jpeg"
+                  alt="The First Acquisition - Free Book"
                   className="relative w-full max-w-xs mx-auto rounded-2xl shadow-2xl"
                 />
               </div>
@@ -170,15 +170,15 @@ export default function Books() {
               <div className="md:col-span-2 space-y-4 text-center md:text-left">
                 <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-sm shadow-lg">
                   <Gift className="h-4 w-4" />
-                  FREE NEWSLETTER BONUS
+                  FREE BOOK FOR NEW READERS
                 </div>
                 
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-white">
-                  The Billionaire's One Night Stand
+                  The First Acquisition
                 </h2>
                 
                 <p className="text-lg text-gray-300">
-                  Victoria Cruz was just passed over for partnership at Manhattan's most prestigious law firm. James Chen is the billionaire tech mogul who offers her one night to forget everything. But when James acquires her firm without warning, their passionate encounter becomes a corporate battlefield.
+                  Power. Passion. Manhattan. When a ruthless billionaire sets his sights on what he wants, nothing stands in his way — not even the woman who was never part of the deal. Get this steamy full-length romance free when you join Reese Astor's VIP reader list.
                 </p>
                 
                 {/* Audio Sample for Prequel */}
@@ -191,7 +191,7 @@ export default function Books() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-white">Listen to Sample</p>
-                      <p className="text-xs text-gray-400">Narrated excerpt from the prequel</p>
+                      <p className="text-xs text-gray-400">Narrated excerpt from the book</p>
                     </div>
                   </div>
                   <audio 
@@ -213,7 +213,7 @@ export default function Books() {
                     size="lg"
                     className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                   >
-                    <a href="https://dl.bookfunnel.com/xrodg0t77p" target="_blank" rel="noopener noreferrer">
+                    <a href="https://get.reeseastor.com/kw1yge3479" target="_blank" rel="noopener noreferrer">
                       <BookOpen className="mr-2 h-5 w-5" />
                       Download Free Now
                     </a>
@@ -518,7 +518,7 @@ function BooksNewsletterSignup() {
         </div>
         <h3 className="font-serif text-2xl font-bold text-white mb-3">You're In!</h3>
         <p className="text-gray-300 text-base">
-          Check your inbox for your free prequel — <em>The Billionaire's One Night Stand</em>.
+          Check your inbox for your free copy of <em>The First Acquisition</em>.
         </p>
       </motion.div>
     );
@@ -544,13 +544,13 @@ function BooksNewsletterSignup() {
             <span className="text-[#d4af37]"> Release</span>
           </h3>
           <p className="text-gray-400 text-sm leading-relaxed mb-6">
-            Join thousands of readers who get first access to new books, bonus chapters, and exclusive content — plus a free prequel instantly.
+            Join 1,700+ readers who get first access to new books, bonus chapters, and exclusive content — plus a free copy of The First Acquisition.
           </p>
           <ul className="space-y-3">
             {[
               { icon: Bell, text: "New release alerts before anyone else" },
               { icon: Gift, text: "Exclusive bonus chapters & epilogues" },
-              { icon: BookOpen, text: "Free prequel delivered to your inbox" },
+              { icon: BookOpen, text: "Free copy of The First Acquisition" },
             ].map(({ icon: Icon, text }) => (
               <li key={text} className="flex items-center gap-3 text-gray-300 text-sm">
                 <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[#d4af37]/15 flex items-center justify-center">

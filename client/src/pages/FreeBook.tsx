@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { BookOpen, Download, Gift, Star, CheckCircle, Share2, Mail, ChevronRight } from "lucide-react";
+import { BookOpen, Download, Gift, Star, CheckCircle, Share2, Mail, ChevronRight, Heart, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -10,15 +10,22 @@ export default function FreeBook() {
   const [email, setEmail] = useState("");
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
-      toast.success("Success! Check your email for your free book download link.");
+      toast.success("Success! Redirecting you to download your free book...");
       setEmail("");
       // Redirect to BookFunnel after a short delay
       setTimeout(() => {
-        window.open("https://dl.bookfunnel.com/xrodg0t77p", "_blank");
+        window.open("https://get.reeseastor.com/kw1yge3479", "_blank");
       }, 1500);
     },
     onError: (error) => {
-      toast.error(error.message || "Failed to subscribe. Please try again.");
+      if (error.message?.includes("already subscribed")) {
+        toast.info("You're already on the list! Redirecting to your free book...");
+        setTimeout(() => {
+          window.open("https://get.reeseastor.com/kw1yge3479", "_blank");
+        }, 1500);
+      } else {
+        toast.error(error.message || "Failed to subscribe. Please try again.");
+      }
     },
   });
 
@@ -30,12 +37,12 @@ export default function FreeBook() {
   };
 
   const handleDirectDownload = () => {
-    window.open("https://dl.bookfunnel.com/xrodg0t77p", "_blank");
+    window.open("https://get.reeseastor.com/kw1yge3479", "_blank");
   };
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
-    const text = "Get a FREE steamy billionaire romance novella by Reese Astor!";
+    const text = "Get a FREE steamy billionaire romance by USA Today Bestselling Author Reese Astor!";
     
     const shareUrls: Record<string, string> = {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
@@ -52,25 +59,25 @@ export default function FreeBook() {
     {
       name: "Sarah M.",
       rating: 5,
-      text: "This prequel hooked me instantly! The chemistry is off the charts and I immediately bought the entire series.",
+      text: "This book hooked me from page one! The chemistry between the leads is off the charts. I immediately bought the entire series.",
     },
     {
       name: "Jessica T.",
       rating: 5,
-      text: "Steamy, sophisticated, and utterly addictive. Reese Astor knows how to write billionaire romance!",
+      text: "Steamy, sophisticated, and utterly addictive. Reese Astor knows how to write billionaire romance that feels real!",
     },
     {
       name: "Amanda R.",
       rating: 5,
-      text: "I couldn't put it down! The perfect introduction to the Manhattan Money Kings world.",
+      text: "The perfect introduction to the Manhattan Money Kings world. I couldn't put it down and devoured all four books in a week.",
     },
   ];
 
   const benefits = [
-    "Instant access to the complete novella",
-    "Exclusive bonus content and character insights",
+    "Instant access to the complete full-length novel",
+    "The perfect introduction to the Manhattan Money Kings series",
     "Early notifications for new releases",
-    "Special reader-only discounts on the series",
+    "Exclusive bonus content and character insights",
     "Behind-the-scenes author updates",
   ];
 
@@ -110,8 +117,8 @@ export default function FreeBook() {
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
                     <img
-                      src="/prequel-cover.jpg"
-                      alt="The Billionaire's One Night Stand - Free Prequel"
+                      src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/uMHRMKanHXREGUzc.jpeg"
+                      alt="The First Acquisition - A Manhattan Billionaire Romance"
                       className="w-full rounded-2xl shadow-2xl"
                     />
                   </div>
@@ -128,7 +135,7 @@ export default function FreeBook() {
                 <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm">
                   <Gift className="h-5 w-5 text-[#d4af37]" />
                   <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
-                    Exclusive Reader Gift
+                    Free Book for New Readers
                   </span>
                 </div>
 
@@ -141,10 +148,10 @@ export default function FreeBook() {
 
                 <div>
                   <p className="text-3xl font-serif font-bold text-white mb-2">
-                    The Billionaire's One Night Stand
+                    The First Acquisition
                   </p>
                   <p className="text-xl text-[#d4af37]">
-                    A Manhattan Money Kings Prequel Novella
+                    A Manhattan Billionaire Romance
                   </p>
                 </div>
 
@@ -155,12 +162,12 @@ export default function FreeBook() {
                     ))}
                   </div>
                   <span className="text-white font-semibold">
-                    Loved by thousands
+                    Loved by 1,700+ readers
                   </span>
                 </div>
 
                 <p className="text-gray-300 text-xl leading-relaxed">
-                  Victoria Cruz was just passed over for partnership at Manhattan's most prestigious law firm. James Chen is the billionaire tech mogul who offers her one night to forget everything. But when James acquires her firm without warning, their passionate encounter becomes a corporate battlefield. Now Victoria must decide: destroy the man who betrayed her trust, or risk everything for a second chance at love.
+                  Power. Passion. Manhattan. When a ruthless billionaire sets his sights on what he wants, nothing stands in his way — not even the woman who was never part of the deal. This steamy full-length romance is the perfect introduction to the Manhattan Money Kings world.
                 </p>
 
                 {/* Email Signup Form */}
@@ -206,10 +213,6 @@ export default function FreeBook() {
                     <Download className="mr-2 h-5 w-5" />
                     Direct Download
                   </Button>
-                  <div className="flex items-center gap-2">
-                    <img src="/prequel-qr.png" alt="QR Code" className="w-16 h-16 rounded-lg border-2 border-[#d4af37]/30" />
-                    <span className="text-xs text-gray-400">Scan to<br />download</span>
-                  </div>
                 </div>
               </motion.div>
             </div>
@@ -240,7 +243,7 @@ export default function FreeBook() {
                 What You'll Get
               </h2>
               <p className="text-xl text-gray-400">
-                More than just a free book—an exclusive VIP experience
+                More than just a free book — your VIP pass to the Manhattan Money Kings world
               </p>
             </div>
 
@@ -252,12 +255,10 @@ export default function FreeBook() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex items-start gap-4 p-6 rounded-2xl bg-gradient-to-r from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10"
+                  className="flex items-center gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#d4af37]/30 transition-all duration-300"
                 >
-                  <div className="flex-shrink-0 mt-1">
-                    <CheckCircle className="h-6 w-6 text-[#d4af37]" />
-                  </div>
-                  <span className="text-gray-300 text-lg">{benefit}</span>
+                  <CheckCircle className="h-6 w-6 text-[#d4af37] flex-shrink-0" />
+                  <span className="text-gray-200 text-lg">{benefit}</span>
                 </motion.div>
               ))}
             </div>
@@ -265,55 +266,47 @@ export default function FreeBook() {
         </div>
       </section>
 
-      {/* Testimonials - Luxury Cards */}
-      <section className="py-20 relative overflow-hidden">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/spKnuylVHBnEgELK.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/98 via-[#0a0e1a]/95 to-[#0a0e1a]/98" />
-        </div>
-
+      {/* Reader Reviews */}
+      <section className="py-20 relative">
         <div className="container relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+            className="max-w-5xl mx-auto"
           >
             <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 mb-6">
+                <Heart className="h-4 w-4 text-[#d4af37]" fill="#d4af37" />
+                <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+                  Reader Reviews
+                </span>
+              </div>
               <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
                 What Readers Are Saying
               </h2>
-              <p className="text-xl text-gray-400">
-                Join thousands of satisfied readers
-              </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {testimonials.map((testimonial, index) => (
+            <div className="grid md:grid-cols-3 gap-6">
+              {testimonials.map((review, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-xl"
+                  className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/20 transition-all duration-300"
                 >
                   <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
+                    {[...Array(review.rating)].map((_, i) => (
                       <Star key={i} className="h-5 w-5 fill-[#d4af37] text-[#d4af37]" />
                     ))}
                   </div>
                   <p className="text-gray-300 leading-relaxed mb-6 italic">
-                    "{testimonial.text}"
+                    "{review.text}"
                   </p>
-                  <p className="text-white font-semibold">— {testimonial.name}</p>
+                  <p className="text-white font-semibold">— {review.name}</p>
                 </motion.div>
               ))}
             </div>
@@ -321,77 +314,70 @@ export default function FreeBook() {
         </div>
       </section>
 
-      {/* Final CTA - Premium */}
-      <section className="py-32 relative">
-        <div 
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/nkhgPTPhVEhCBAIZ.jpg')",
-            backgroundSize: "cover",
-          }}
-        />
-
+      {/* Share Section */}
+      <section className="py-16 relative">
         <div className="container relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center p-12 md:p-16 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl"
+            className="max-w-2xl mx-auto text-center"
           >
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 mb-8">
-              <BookOpen className="h-8 w-8 text-[#d4af37]" />
-            </div>
-
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Dive In?
+            <h2 className="font-serif text-3xl font-bold text-white mb-6">
+              Know Someone Who'd Love This?
             </h2>
-            
-            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Get instant access to your free prequel and discover why readers can't get enough of the Manhattan Money Kings.
+            <p className="text-gray-400 mb-8">
+              Share the love — tell a friend about this free book offer.
             </p>
-
-            <Button
-              onClick={handleDirectDownload}
-              size="lg"
-              className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-12 py-8 rounded-full text-xl shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
-            >
-              <Download className="mr-3 h-6 w-6" />
-              Download Your Free Book Now
-            </Button>
-
-            <div className="mt-12 pt-8 border-t border-white/10">
-              <p className="text-gray-400 mb-6">Share this free book with friends:</p>
-              <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-4">
+              {["facebook", "twitter", "pinterest"].map((platform) => (
                 <Button
-                  onClick={() => handleShare('facebook')}
+                  key={platform}
+                  onClick={() => handleShare(platform)}
                   variant="outline"
-                  size="lg"
-                  className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white rounded-full"
+                  className="border-white/20 bg-white/5 hover:bg-[#d4af37]/10 hover:border-[#d4af37]/30 text-white px-6 py-5 rounded-full capitalize"
                 >
-                  <Share2 className="mr-2 h-5 w-5" />
-                  Facebook
+                  <Share2 className="mr-2 h-4 w-4" />
+                  {platform}
                 </Button>
-                <Button
-                  onClick={() => handleShare('twitter')}
-                  variant="outline"
-                  size="lg"
-                  className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white rounded-full"
-                >
-                  <Share2 className="mr-2 h-5 w-5" />
-                  Twitter
-                </Button>
-                <Button
-                  onClick={() => handleShare('pinterest')}
-                  variant="outline"
-                  size="lg"
-                  className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white rounded-full"
-                >
-                  <Share2 className="mr-2 h-5 w-5" />
-                  Pinterest
-                </Button>
-              </div>
+              ))}
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a1020] to-[#0a0e1a]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#d4af37]/8 blur-[160px] rounded-full pointer-events-none" />
+        
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <Sparkles className="h-12 w-12 text-[#d4af37] mx-auto mb-6" />
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
+              Ready to Enter the World of<br />
+              <span className="text-[#d4af37]">Manhattan's Most Powerful Men?</span>
+            </h2>
+            <p className="text-xl text-gray-300 mb-10 leading-relaxed">
+              Join 1,700+ readers who've already fallen for the Manhattan Money Kings. Your free copy of The First Acquisition is waiting.
+            </p>
+            <Button
+              asChild
+              size="lg"
+              className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-xl px-12 py-8 rounded-full shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
+            >
+              <a href="https://get.reeseastor.com/kw1yge3479" target="_blank" rel="noopener noreferrer">
+                <BookOpen className="mr-3 h-7 w-7" />
+                Claim Your Free Copy Now
+              </a>
+            </Button>
           </motion.div>
         </div>
       </section>
