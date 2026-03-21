@@ -451,23 +451,32 @@ export default function Home() {
               <div className="absolute top-0 left-0 w-24 h-24 border-t-2 border-l-2 border-[#d4af37]/30 rounded-tl-3xl pointer-events-none" />
               <div className="absolute bottom-0 right-0 w-24 h-24 border-b-2 border-r-2 border-[#d4af37]/30 rounded-br-3xl pointer-events-none" />
 
-              {/* Book Cover */}
+              {/* Book Covers - Dual Display */}
               <motion.div
                 className="relative"
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.5 }}
               >
                 <div className="absolute -inset-6 bg-gradient-to-r from-[#d4af37]/20 to-transparent blur-3xl rounded-full" />
-                <div className="relative">
-                  <div className="absolute -top-4 -right-4 z-10 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-sm shadow-2xl flex items-center gap-2">
+                <div className="relative flex items-end justify-center gap-4">
+                  <div className="absolute -top-4 right-0 z-10 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-sm shadow-2xl flex items-center gap-2">
                     <Clock className="h-4 w-4" />
                     Coming Soon
                   </div>
-                  <img
-                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-gzFnDFV4qXq5hJL3hemQjQ.webp"
-                    alt="Audit of the Heart - Hudson Dynasty Book 1"
-                    className="relative w-full max-w-sm mx-auto rounded-2xl shadow-2xl shadow-black/50"
-                  />
+                  <Link href="/books/audit-of-the-heart">
+                    <img
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-gzFnDFV4qXq5hJL3hemQjQ.webp"
+                      alt="Audit of the Heart - Hudson Dynasty Book 1"
+                      className="relative w-full max-w-[200px] rounded-xl shadow-2xl shadow-black/50 hover:scale-105 transition-transform duration-300"
+                    />
+                  </Link>
+                  <Link href="/books/hostile-tender">
+                    <img
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-iLqpNEdWTN6p5dnBYDuiJL.webp"
+                      alt="Hostile Tender - Hudson Dynasty Book 2"
+                      className="relative w-full max-w-[200px] rounded-xl shadow-2xl shadow-black/50 hover:scale-105 transition-transform duration-300"
+                    />
+                  </Link>
                 </div>
               </motion.div>
 
@@ -484,15 +493,15 @@ export default function Home() {
                   Hudson Dynasty
                 </h2>
                 
-                <p className="text-2xl text-white font-semibold font-serif">
-                  Audit of the Heart
+                <p className="text-xl text-white font-semibold font-serif">
+                  Audit of the Heart &bull; Hostile Tender
                 </p>
                 <p className="text-[#d4af37] font-medium">
-                  Book 1 &bull; Corporate Billionaire Romance
+                  2 Books &bull; Corporate Billionaire Romance
                 </p>
                 
                 <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                  {["Forced Proximity", "Fake Engagement", "Office Romance"].map((trope) => (
+                  {["Enemies to Lovers", "Forced Proximity", "Fake Engagement", "Cat & Mouse"].map((trope) => (
                     <Badge 
                       key={trope} 
                       variant="outline" 
@@ -504,7 +513,7 @@ export default function Home() {
                 </div>
 
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  She's hired to clean up Sebastian Hudson's image, not get tangled in his empire. He's Manhattan's most dangerous billionaire &mdash; cold, controlled, and one scandal away from losing everything. When the board forces a fake engagement, professional boundaries shatter.
+                  Manhattan high finance meets scorching romance. Compliance attorneys, forensic auditors, and the billionaires who can't control them. Two standalone novels of power, scandal, and irresistible desire.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 pt-2">

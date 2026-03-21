@@ -1404,3 +1404,19 @@
 - [x] Update structured data to reflect two series
 - [x] Test all changes and verify site integrity
 - [x] Write vitest tests for Hudson Dynasty book data (7 tests passing)
+
+## Hostile Tender (Hudson Dynasty Book 2) Addition
+- [x] Generate AI book cover for "Hostile Tender"
+- [x] Add "Hostile Tender" coming soon card to Books page Hudson Dynasty section
+- [x] Create dedicated /books/hostile-tender detail page with character profiles, story breakdown
+- [x] Insert "Hostile Tender" into books database
+- [x] Update Home page Hudson Dynasty teaser to show both books
+- [x] Write vitest tests for Hostile Tender book data (10 tests passing)
+
+## Replace Free Book Lead Magnet with "Big Sister" Bonus Epilogue
+- [x] CANCELLED: "The First Acquisition" stays as the free book lead magnet
+- [x] Big Sister bonus epilogue to be added as exclusive VIP content instead
+
+## Add Big Sister Bonus Epilogue as Exclusive VIP Content
+- [x] Add Big Sister epilogue entry to VIP/Reader Club exclusive content
+- [x] Include description: Lily's POV, meeting baby Mateo, "Love doesn't run out" quote

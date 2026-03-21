@@ -128,6 +128,45 @@ const mockAuditOfTheHeart = {
   updatedAt: new Date(),
 };
 
+const mockHostileTender = {
+  id: 6,
+  title: "Hostile Tender",
+  slug: "hostile-tender",
+  series: "Hudson Dynasty",
+  seriesOrder: 2,
+  coverImage: "https://example.com/hostile-tender-cover.webp",
+  description:
+    "She's the federal auditor sent to dismantle his empire. He's Manhattan's most dangerous billionaire fighting to save it.",
+  sampleChapter: null,
+  rating: 5,
+  reviewCount: 0,
+  tropes: JSON.stringify([
+    "Enemies to Lovers",
+    "Forced Proximity",
+    "Cat & Mouse",
+    "Forbidden Attraction",
+    "Billionaire Romance",
+    "Corporate Power Romance",
+  ]),
+  heatLevel: 5,
+  pageCount: 320,
+  publishDate: "Coming Soon",
+  amazonUrl: null,
+  appleUrl: null,
+  koboUrl: null,
+  barnesNobleUrl: null,
+  googlePlayUrl: null,
+  retailPrice: 499,
+  directPrice: 399,
+  memberPrice: 299,
+  directSaleUrl: null,
+  audioSampleUrl: null,
+  featured: true,
+  displayOrder: 0,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
+
 const mockMMKBook = {
   id: 1,
   title: "The Billionaire's Baby Secret",
@@ -236,12 +275,53 @@ describe("Hudson Dynasty Series - Books API", () => {
     expect(book.directSaleUrl).toBeNull();
   });
 
-  it("should correctly distinguish between two series", async () => {
+  it("should return Hostile Tender by slug", async () => {
+    vi.mocked(db.getBookBySlug).mockResolvedValue(mockHostileTender);
+
+    const book = await caller.books.getBySlug({ slug: "hostile-tender" });
+
+    expect(book.title).toBe("Hostile Tender");
+    expect(book.series).toBe("Hudson Dynasty");
+    expect(book.seriesOrder).toBe(2);
+    expect(book.publishDate).toBe("Coming Soon");
+    expect(book.heatLevel).toBe(5);
+  });
+
+  it("should have correct tropes for Hostile Tender", async () => {
+    vi.mocked(db.getBookBySlug).mockResolvedValue(mockHostileTender);
+
+    const book = await caller.books.getBySlug({ slug: "hostile-tender" });
+    const tropes = JSON.parse(book.tropes as string);
+
+    expect(tropes).toContain("Enemies to Lovers");
+    expect(tropes).toContain("Forced Proximity");
+    expect(tropes).toContain("Cat & Mouse");
+    expect(tropes).toContain("Forbidden Attraction");
+    expect(tropes).toHaveLength(6);
+  });
+
+  it("should return both Hudson Dynasty books together", async () => {
+    vi.mocked(db.getAllBooks).mockResolvedValue([
+      mockMMKBook,
+      mockAuditOfTheHeart,
+      mockHostileTender,
+    ]);
+
+    const books = await caller.books.list();
+    const hdBooks = books.filter((b: any) => b.series === "Hudson Dynasty");
+
+    expect(hdBooks).toHaveLength(2);
+    expect(hdBooks.find((b: any) => b.seriesOrder === 1)?.title).toBe("Audit of the Heart");
+    expect(hdBooks.find((b: any) => b.seriesOrder === 2)?.title).toBe("Hostile Tender");
+  });
+
+  it("should correctly distinguish between two series with all books", async () => {
     vi.mocked(db.getAllBooks).mockResolvedValue([
       mockMMKBook,
       { ...mockMMKBook, id: 2, title: "The Billionaire's Fake Wife", seriesOrder: 2 },
       { ...mockMMKBook, id: 3, title: "The Billionaire's Executive Assistant", seriesOrder: 1 },
       mockAuditOfTheHeart,
+      mockHostileTender,
     ]);
 
     const books = await caller.books.list();
@@ -250,7 +330,8 @@ describe("Hudson Dynasty Series - Books API", () => {
     const hdBooks = books.filter((b: any) => b.series === "Hudson Dynasty");
 
     expect(mmkBooks).toHaveLength(3);
-    expect(hdBooks).toHaveLength(1);
-    expect(hdBooks[0].title).toBe("Audit of the Heart");
+    expect(hdBooks).toHaveLength(2);
+    expect(hdBooks.map((b: any) => b.title)).toContain("Audit of the Heart");
+    expect(hdBooks.map((b: any) => b.title)).toContain("Hostile Tender");
   });
 });

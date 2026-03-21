@@ -30,7 +30,7 @@ export default function Books() {
     "name": "Hudson Dynasty",
     "author": { "@type": "Person", "name": "Reese Astor" },
     "genre": "Corporate Billionaire Romance",
-    "numberOfBooks": 1,
+    "numberOfBooks": 2,
     "url": "https://reeseastor.com/books"
   };
 
@@ -633,6 +633,103 @@ export default function Books() {
                       Get Notified at Launch
                     </Link>
                   </Button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Hostile Tender - Coming Soon Book 2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mt-20"
+          >
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+              {/* Book Details - Left side for alternating layout */}
+              <div className="space-y-6 order-2 lg:order-1">
+                <div>
+                  <p className="text-sm text-[#d4af37] font-semibold tracking-widest uppercase mb-3">
+                    Hudson Dynasty Book 2
+                  </p>
+                  <h3 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                    Hostile Tender
+                  </h3>
+                  <p className="text-lg text-[#d4af37]/80 font-medium mb-6">
+                    A Corporate Billionaire Romance
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {["Enemies to Lovers", "Forced Proximity", "Cat & Mouse", "Forbidden Attraction", "Billionaire Romance"].map((trope) => (
+                    <Badge 
+                      key={trope} 
+                      variant="outline" 
+                      className="text-xs border-[#d4af37]/30 bg-[#d4af37]/5 text-[#d4af37] hover:bg-[#d4af37]/10"
+                    >
+                      {trope}
+                    </Badge>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 w-fit">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Flame key={i} className="h-4 w-4 text-[#d4af37] fill-[#d4af37]" />
+                    ))}
+                  </div>
+                  <span className="text-white font-medium text-sm">High Heat</span>
+                </div>
+
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  She's the federal auditor sent to dismantle his empire. He's Manhattan's most dangerous billionaire fighting to save it. When the RIVIERA Ledger exposes three generations of Hudson secrets, SDNY forensic auditor Nia Carter is dispatched to untangle the truth — and she's the one woman Sebastian Hudson can't control.
+                </p>
+
+                <blockquote className="border-l-4 border-[#d4af37]/50 pl-6 py-2 italic text-gray-400 text-lg">
+                  "Every foundation develops fault lines, Mr. Hudson. I am merely the specialist tasked with mapping them."
+                </blockquote>
+
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold py-7 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  >
+                    <Link href="/books/hostile-tender">
+                      <BookOpen className="mr-2 h-5 w-5" />
+                      Read More
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white py-7"
+                  >
+                    <Link href="/free-book">
+                      <Gift className="mr-2 h-5 w-5" />
+                      Get Notified at Launch
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Book Cover - Right side */}
+              <div className="relative order-1 lg:order-2">
+                <div className="absolute -inset-8 bg-gradient-to-l from-[#d4af37]/20 to-transparent blur-3xl rounded-full" />
+                <div className="relative group">
+                  <div className="absolute -top-5 -left-5 z-10 px-6 py-3 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-sm shadow-2xl flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    Coming Soon
+                  </div>
+                  <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl group-hover:border-[#d4af37]/30 transition-all duration-500">
+                    <img
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-iLqpNEdWTN6p5dnBYDuiJL.webp"
+                      alt="Hostile Tender - Hudson Dynasty Book 2"
+                      className="w-full rounded-2xl shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

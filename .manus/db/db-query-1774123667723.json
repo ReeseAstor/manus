@@ -1,0 +1,37 @@
+{
+  "query": "SELECT id, title, slug, type, category, featured, bookId FROM exclusive_content ORDER BY displayOrder;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute SELECT id, title, slug, type, category, featured, bookId FROM exclusive_content ORDER BY displayOrder;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "Bonus Chapter: Alexander's First Meeting",
+      "slug": "alexander-first-meeting",
+      "type": "bonus_chapter",
+      "category": "Manhattan Money Kings",
+      "featured": "1",
+      "bookId": "NULL"
+    },
+    {
+      "id": "2",
+      "title": "Character Interview: Sophia Carter",
+      "slug": "interview-sophia-carter",
+      "type": "interview",
+      "category": "Manhattan Money Kings",
+      "featured": "1",
+      "bookId": "NULL"
+    },
+    {
+      "id": "3",
+      "title": "Behind the Scenes: Creating the Manhattan Money Kings",
+      "slug": "behind-scenes-manhattan-money-kings",
+      "type": "behind_scenes",
+      "category": "Writing Process",
+      "featured": "0",
+      "bookId": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tslug\ttype\tcategory\tfeatured\tbookId\n1\tBonus Chapter: Alexander's First Meeting\talexander-first-meeting\tbonus_chapter\tManhattan Money Kings\t1\tNULL\n2\tCharacter Interview: Sophia Carter\tinterview-sophia-carter\tinterview\tManhattan Money Kings\t1\tNULL\n3\tBehind the Scenes: Creating the Manhattan Money Kings\tbehind-scenes-manhattan-money-kings\tbehind_scenes\tWriting Process\t0\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 138
+}
