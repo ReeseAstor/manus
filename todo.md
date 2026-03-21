@@ -1341,3 +1341,11 @@
 - [x] Replace prequel cover image with The First Acquisition cover
 - [x] Generate new QR code for BookFunnel link
 - [x] Remove all old BookFunnel links (xrodg0t77p)
+
+## Daily Briefing Automation
+- [x] Set up 7 AM daily recurring scheduled task for executive briefing
+- [x] Configure cron to call /api/cron/daily-briefing endpoint
+- [x] Briefing emails delivered to info@reeseastor.com
+
+## SEO Fixes
+- [x] Fix homepage title to be between 30-60 characters (currently 28 chars) → now 50 chars via document.title

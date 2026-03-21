@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 import { BookOpen, ChevronRight, Star, Gift } from "lucide-react";
 
 import { motion } from "framer-motion";
@@ -6,6 +7,9 @@ import { Link } from "wouter";
 import NewReleaseSignup from "@/components/NewReleaseSignup";
 
 export default function Home() {
+  useEffect(() => {
+    document.title = "Reese Astor | USA Today Bestselling Romance Author";
+  }, []);
 
   const books = [
     {
