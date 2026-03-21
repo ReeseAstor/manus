@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Star, ShoppingCart, BookOpen, Gift, ChevronRight, Sparkles, Bell, Mail, CheckCircle, Clock, Flame } from "lucide-react";
+import { Heart, Star, ShoppingCart, BookOpen, Gift, ChevronRight, Sparkles, Bell, Mail, CheckCircle, Clock, Flame, Camera, MapPin, User, Building2, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -735,6 +735,9 @@ export default function Books() {
             </div>
           </motion.div>
 
+          {/* Behind the Scenes Gallery */}
+          <BehindTheScenes />
+
           {/* Series Description */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -899,6 +902,242 @@ function BooksNewsletterSignup() {
           </form>
         </div>
       </div>
+    </motion.div>
+  );
+}
+
+function BehindTheScenes() {
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+
+  const btsItems = [
+    {
+      id: 1,
+      type: "character" as const,
+      title: "Sebastian Hudson",
+      subtitle: "The Ice King",
+      description: "CEO of Hudson Vale. Cold, calculated, strategic — a man who spent thirty-two years constructing barriers of glass, steel, and silence. Manhattan's most dangerous billionaire.",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/bts-sebastian-hudson-FZbNqjAYLdPfLQ9RumWYon.webp",
+      book: "Both Books",
+      quote: "\"Every empire has a price. Mine was silence.\"",
+    },
+    {
+      id: 2,
+      type: "character" as const,
+      title: "Nadia",
+      subtitle: "Compliance Attorney",
+      description: "Razor-smart, controlled, relentless. Hired to audit the risk at Hudson Vale — but Sebastian may be the biggest risk of all. A woman with a moral spine of steel and sharp humor under pressure.",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/bts-nadia-compliance-TXbz4WyuwT8tkCNvZtdmXy.webp",
+      book: "Audit of the Heart",
+      quote: "\"I audit the risk. He may be the biggest risk of all.\"",
+    },
+    {
+      id: 3,
+      type: "character" as const,
+      title: "Nia Carter",
+      subtitle: "SDNY Forensic Auditor",
+      description: "Clinical, precise, immutable. The daughter of a disgraced SEC investigator, Nia carries her father's Ghurka briefcase and a decade of preparation. She trusts nothing she hasn't personally encrypted.",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/bts-nia-carter-knwbSZm9f2FyVybKKMcLXC.webp",
+      book: "Hostile Tender",
+      quote: "\"Every foundation develops fault lines, Mr. Hudson. I am merely the specialist tasked with mapping them.\"",
+    },
+    {
+      id: 4,
+      type: "location" as const,
+      title: "Hudson Vale Tower",
+      subtitle: "Midtown Manhattan",
+      description: "The glass citadel where empires are built and destroyed. Sebastian's 42nd-floor office overlooks all of Manhattan — a kingdom of steel and silence where every window reflects the weight of a dynasty.",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/bts-hudson-vale-hq-9vMxaXEgcdHBd7hoi2oHXw.webp",
+      book: "Both Books",
+      quote: null,
+    },
+    {
+      id: 5,
+      type: "location" as const,
+      title: "The Boardroom",
+      subtitle: "42nd Floor, Hudson Vale",
+      description: "Where hostile takeovers are plotted and billion-dollar deals collapse. The mahogany table has witnessed three generations of Hudson power plays — and the night Nia Carter changed everything.",
+      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/bts-boardroom-jUkYNPaXJVemAicAXt2tre.webp",
+      book: "Hostile Tender",
+      quote: null,
+    },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className="mt-24"
+    >
+      {/* Section Header */}
+      <div className="text-center mb-14">
+        <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm mb-6">
+          <Camera className="h-4 w-4 text-[#d4af37]" />
+          <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+            Behind the Scenes
+          </span>
+        </div>
+        <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          Inside the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f4e4b8] to-[#d4af37]">Hudson Dynasty</span>
+        </h3>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          Meet the characters and explore the world of Manhattan high finance, corporate warfare, and irresistible desire.
+        </p>
+      </div>
+
+      {/* Gallery Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+        {btsItems.map((item, index) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="group cursor-pointer"
+            onClick={() => setSelectedImage(index)}
+          >
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 aspect-[3/4] shadow-lg hover:shadow-2xl hover:shadow-[#d4af37]/10 transition-all duration-500">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+              />
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+              
+              {/* Type badge */}
+              <div className="absolute top-3 left-3">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/10">
+                  {item.type === "character" ? (
+                    <User className="h-3 w-3 text-[#d4af37]" />
+                  ) : (
+                    <MapPin className="h-3 w-3 text-[#d4af37]" />
+                  )}
+                  <span className="text-[10px] font-medium text-gray-300 uppercase tracking-wider">
+                    {item.type === "character" ? "Character" : "Location"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Bottom info */}
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h4 className="font-serif text-base font-bold text-white leading-tight mb-0.5">
+                  {item.title}
+                </h4>
+                <p className="text-[#d4af37] text-xs font-medium">
+                  {item.subtitle}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Lightbox Modal */}
+      {selectedImage !== null && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+          onClick={() => setSelectedImage(null)}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" />
+          
+          {/* Content */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="relative z-10 max-w-5xl w-full grid md:grid-cols-2 gap-0 rounded-3xl overflow-hidden bg-gradient-to-br from-[#1a1a2e] to-[#0d0d1a] border border-white/10 shadow-2xl max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 text-white hover:text-[#d4af37] hover:border-[#d4af37]/30 transition-all duration-300"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {/* Image */}
+            <div className="relative aspect-[3/4] md:aspect-auto overflow-hidden">
+              <img
+                src={btsItems[selectedImage].image}
+                alt={btsItems[selectedImage].title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#1a1a2e]/30 hidden md:block" />
+            </div>
+
+            {/* Details */}
+            <div className="p-8 md:p-10 flex flex-col justify-center overflow-y-auto">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20">
+                  {btsItems[selectedImage].type === "character" ? (
+                    <User className="h-3.5 w-3.5 text-[#d4af37]" />
+                  ) : (
+                    <Building2 className="h-3.5 w-3.5 text-[#d4af37]" />
+                  )}
+                  <span className="text-xs font-medium text-[#d4af37] uppercase tracking-wider">
+                    {btsItems[selectedImage].type}
+                  </span>
+                </div>
+                <span className="text-xs text-gray-500">•</span>
+                <span className="text-xs text-gray-400">{btsItems[selectedImage].book}</span>
+              </div>
+
+              <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-1">
+                {btsItems[selectedImage].title}
+              </h3>
+              <p className="text-[#d4af37] font-medium mb-6">
+                {btsItems[selectedImage].subtitle}
+              </p>
+
+              <p className="text-gray-300 leading-relaxed mb-6">
+                {btsItems[selectedImage].description}
+              </p>
+
+              {btsItems[selectedImage].quote && (
+                <blockquote className="border-l-2 border-[#d4af37]/50 pl-4 py-2">
+                  <p className="text-gray-400 italic text-sm leading-relaxed">
+                    {btsItems[selectedImage].quote}
+                  </p>
+                </blockquote>
+              )}
+
+              {/* Navigation */}
+              <div className="flex items-center gap-3 mt-8 pt-6 border-t border-white/10">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedImage(selectedImage > 0 ? selectedImage - 1 : btsItems.length - 1);
+                  }}
+                  className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-gray-300 hover:text-white hover:border-[#d4af37]/30 transition-all duration-300"
+                >
+                  ← Previous
+                </button>
+                <span className="text-gray-600 text-sm">
+                  {selectedImage + 1} / {btsItems.length}
+                </span>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedImage(selectedImage < btsItems.length - 1 ? selectedImage + 1 : 0);
+                  }}
+                  className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-gray-300 hover:text-white hover:border-[#d4af37]/30 transition-all duration-300"
+                >
+                  Next →
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </motion.div>
   );
 }

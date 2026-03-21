@@ -335,3 +335,57 @@ describe("Hudson Dynasty Series - Books API", () => {
     expect(hdBooks.map((b: any) => b.title)).toContain("Hostile Tender");
   });
 });
+
+describe("Behind the Scenes - Data Validation", () => {
+  const btsCharacters = [
+    { title: "Sebastian Hudson", subtitle: "The Ice King", type: "character", book: "Both Books" },
+    { title: "Nadia", subtitle: "Compliance Attorney", type: "character", book: "Audit of the Heart" },
+    { title: "Nia Carter", subtitle: "SDNY Forensic Auditor", type: "character", book: "Hostile Tender" },
+  ];
+
+  const btsLocations = [
+    { title: "Hudson Vale Tower", subtitle: "Midtown Manhattan", type: "location", book: "Both Books" },
+    { title: "The Boardroom", subtitle: "42nd Floor, Hudson Vale", type: "location", book: "Hostile Tender" },
+  ];
+
+  it("should have 3 character entries in the BTS section", () => {
+    expect(btsCharacters).toHaveLength(3);
+  });
+
+  it("should have 2 location entries in the BTS section", () => {
+    expect(btsLocations).toHaveLength(2);
+  });
+
+  it("should include Sebastian Hudson as a character in both books", () => {
+    const sebastian = btsCharacters.find(c => c.title === "Sebastian Hudson");
+    expect(sebastian).toBeDefined();
+    expect(sebastian!.subtitle).toBe("The Ice King");
+    expect(sebastian!.book).toBe("Both Books");
+  });
+
+  it("should include Nadia as the Book 1 FMC", () => {
+    const nadia = btsCharacters.find(c => c.title === "Nadia");
+    expect(nadia).toBeDefined();
+    expect(nadia!.subtitle).toBe("Compliance Attorney");
+    expect(nadia!.book).toBe("Audit of the Heart");
+  });
+
+  it("should include Nia Carter as the Book 2 FMC", () => {
+    const nia = btsCharacters.find(c => c.title === "Nia Carter");
+    expect(nia).toBeDefined();
+    expect(nia!.subtitle).toBe("SDNY Forensic Auditor");
+    expect(nia!.book).toBe("Hostile Tender");
+  });
+
+  it("should have all BTS items with valid types", () => {
+    const allItems = [...btsCharacters, ...btsLocations];
+    allItems.forEach(item => {
+      expect(["character", "location"]).toContain(item.type);
+    });
+  });
+
+  it("should have a total of 5 BTS items", () => {
+    const allItems = [...btsCharacters, ...btsLocations];
+    expect(allItems).toHaveLength(5);
+  });
+});

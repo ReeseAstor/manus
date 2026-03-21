@@ -1427,3 +1427,19 @@
 - [x] Upload new covers to CDN via manus-upload-file
 - [x] Replace cover URLs across entire site (Books page, detail pages, Home page teaser)
 - [x] Verify all pages display new covers correctly
+
+## Behind-the-Scenes Section - Hudson Dynasty
+- [x] Generate character art: Nadia (compliance attorney, Book 1 FMC)
+- [x] Generate character art: Sebastian Hudson (billionaire CEO, both books MMC)
+- [x] Generate character art: Nia Carter (forensic auditor, Book 2 FMC)
+- [x] Generate location imagery: Hudson Vale headquarters (corporate tower)
+- [x] Generate location imagery: Manhattan skyline / penthouse office (combined with boardroom)
+- [x] Generate location imagery: The boardroom (power scene setting)
+- [x] Build BTS gallery section on Books page in Hudson Dynasty area
+- [x] Add lightbox/modal for full-size image viewing
+- [x] Add captions and descriptions for each BTS image
+- [x] Write vitest tests for the new section (17 tests passing)
+- [x] Verify section displays correctly on desktop and mobile
+
+## Remove Big Sister Bonus Epilogue
+- [x] Remove Big Sister bonus epilogue from VIP/Reader Club exclusive content database (id=30001 deleted)
