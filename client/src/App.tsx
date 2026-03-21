@@ -44,6 +44,7 @@ import Newsletter from "./pages/Newsletter";
 import NewsletterArchive from "./pages/NewsletterArchive";
 import NewsletterDetail from "./pages/NewsletterDetail";
 import VipWelcome from "./pages/VipWelcome";
+import AuditOfTheHeart from "./pages/AuditOfTheHeart";
 import VipDashboard from "./pages/VipDashboard";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
@@ -54,7 +55,9 @@ function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/books"} component={Books} />      <Route path={"/books/:slug"} component={BookDetail} />
+      <Route path={"/books"} component={Books} />
+      <Route path={"/books/audit-of-the-heart"} component={AuditOfTheHeart} />
+      <Route path={"/books/:slug"} component={BookDetail} />
       <Route path={"/reader-club"} component={ReaderClub} />
       <Route path={"/reader-club/:slug"} component={ExclusiveContentDetail} />
       <Route path={"/free-book"} component={FreeBook} />

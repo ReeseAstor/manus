@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { BookOpen, Download, Gift, Star, CheckCircle, Share2, Mail, ChevronRight, Heart, Sparkles } from "lucide-react";
+import { BookOpen, Gift, Star, CheckCircle, Share2, Mail, ChevronRight, Heart, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -39,10 +39,6 @@ export default function FreeBook() {
     if (email) {
       subscribeMutation.mutate({ email });
     }
-  };
-
-  const handleDirectDownload = () => {
-    window.open("https://get.reeseastor.com/kw1yge3479", "_blank");
   };
 
   const handleShare = (platform: string) => {
@@ -228,17 +224,7 @@ export default function FreeBook() {
                   </form>
                 </div>
 
-                <div className="flex items-center justify-center gap-4">
-                  <Button
-                    onClick={handleDirectDownload}
-                    variant="outline"
-                    size="lg"
-                    className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold px-8 py-6 rounded-full"
-                  >
-                    <Download className="mr-2 h-5 w-5" />
-                    Direct Download
-                  </Button>
-                </div>
+
               </motion.div>
             </div>
           </div>

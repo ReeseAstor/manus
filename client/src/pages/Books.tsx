@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Star, ShoppingCart, BookOpen, Gift, ChevronRight, Sparkles, Bell, Mail, CheckCircle } from "lucide-react";
+import { Heart, Star, ShoppingCart, BookOpen, Gift, ChevronRight, Sparkles, Bell, Mail, CheckCircle, Clock, Flame } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -11,16 +11,26 @@ import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 
 export default function Books() {
   useEffect(() => {
-    document.title = "Manhattan Money Kings Series | Reese Astor Romance Books";
+    document.title = "Book Series by Reese Astor | Romance Novels";
   }, []);
 
-  const booksStructuredData = {
+  const mmkStructuredData = {
     "@context": "https://schema.org",
     "@type": "BookSeries",
     "name": "Manhattan Money Kings",
     "author": { "@type": "Person", "name": "Reese Astor" },
     "genre": "Billionaire Romance",
     "numberOfBooks": 4,
+    "url": "https://reeseastor.com/books"
+  };
+
+  const hdStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BookSeries",
+    "name": "Hudson Dynasty",
+    "author": { "@type": "Person", "name": "Reese Astor" },
+    "genre": "Corporate Billionaire Romance",
+    "numberOfBooks": 1,
     "url": "https://reeseastor.com/books"
   };
 
@@ -102,12 +112,12 @@ export default function Books() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       <EnhancedSEOHead
-        title="Manhattan Money Kings Series | Reese Astor Romance Books"
-        description="Explore the complete Manhattan Money Kings billionaire romance series by Reese Astor. Four steamy books of power, passion, and love in New York City. Read in order."
+        title="Book Series by Reese Astor | Romance Novels"
+        description="Explore the Manhattan Money Kings and Hudson Dynasty series by Reese Astor. Steamy billionaire romances of power, passion, and love in New York City."
         canonical="/books"
         ogType="book"
         keywords={["Manhattan Money Kings", "billionaire romance series", "Reese Astor books", "steamy romance", "New York romance", "book series order"]}
-        structuredData={[booksStructuredData]}
+        structuredData={[mmkStructuredData, hdStructuredData]}
       />
 
       
@@ -135,26 +145,26 @@ export default function Books() {
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 text-[#d4af37]" />
               <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
-                The Complete Series
+                Two Series. One World.
               </span>
             </div>
 
             <h1 className="font-serif text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95]">
-              <span className="text-white">Manhattan</span>
+              <span className="text-white">Reese Astor</span>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f4e4b8] to-[#d4af37]">
-                Money Kings
+                Book Series
               </span>
             </h1>
 
             <p className="text-2xl md:text-3xl text-gray-300 font-light leading-relaxed">
-              Where power, passion, and billion-dollar secrets collide in the heart of Manhattan's elite
+              Manhattan Money Kings &bull; Hudson Dynasty
             </p>
 
             <div className="flex items-center justify-center gap-12 pt-8">
               <div className="text-center">
-                <div className="text-4xl font-bold text-[#d4af37]">4</div>
-                <div className="text-sm text-gray-400 mt-1">Books</div>
+                <div className="text-4xl font-bold text-[#d4af37]">2</div>
+                <div className="text-sm text-gray-400 mt-1">Series</div>
               </div>
               <div className="h-12 w-px bg-white/20" />
               <div className="text-center">
@@ -238,19 +248,10 @@ export default function Books() {
                   >
                     <a href="https://get.reeseastor.com/kw1yge3479" target="_blank" rel="noopener noreferrer">
                       <BookOpen className="mr-2 h-5 w-5" />
-                      Download Free Now
+                      Get Free via BookFunnel
                     </a>
                   </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold"
-                  >
-                    <a href="https://swiy.co/3rd" target="_blank" rel="noopener noreferrer">
-                      View on Amazon
-                    </a>
-                  </Button>
+
                 </div>
                 
                 <div className="flex items-center justify-center md:justify-start gap-3 pt-2">
@@ -263,8 +264,8 @@ export default function Books() {
         </div>
       </section>
 
-      {/* Books - Editorial Layout */}
-      <section className="py-20 relative">
+      {/* Manhattan Money Kings Series */}
+      <section className="py-20 relative" id="manhattan-money-kings">
         <div 
           className="absolute inset-0 opacity-10"
           style={{
@@ -274,6 +275,27 @@ export default function Books() {
         />
 
         <div className="container relative z-10">
+          {/* Series Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-20"
+          >
+            <div className="inline-block px-6 py-2 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 mb-6">
+              <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+                Complete 4-Book Series
+              </span>
+            </div>
+            <h2 className="font-serif text-5xl md:text-6xl font-bold text-white mb-4">
+              Manhattan Money Kings
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Where power, passion, and billion-dollar secrets collide in the heart of Manhattan's elite.
+            </p>
+          </motion.div>
+
           <div className="space-y-24">
             {books.map((book, index) => (
               <motion.div
@@ -483,6 +505,157 @@ export default function Books() {
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Hudson Dynasty Series - Coming Soon */}
+      <section className="py-24 relative overflow-hidden" id="hudson-dynasty">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#12091e] to-[#0a0e1a]" />
+        <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-[#d4af37]/5 blur-[200px] rounded-full pointer-events-none" />
+        
+        <div className="container relative z-10">
+          {/* Series Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm mb-6">
+              <Flame className="h-4 w-4 text-[#d4af37]" />
+              <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+                New Series Coming Soon
+              </span>
+            </div>
+            <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6">
+              <span className="text-white">Hudson</span>
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f4e4b8] to-[#d4af37]">
+                Dynasty
+              </span>
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              Steamy, high-gloss corporate romance where Manhattan's most dangerous billionaires meet the women who refuse to play by their rules.
+            </p>
+          </motion.div>
+
+          {/* Audit of the Heart - Featured Coming Soon */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+              {/* Book Cover */}
+              <div className="relative">
+                <div className="absolute -inset-8 bg-gradient-to-r from-[#d4af37]/20 to-transparent blur-3xl rounded-full" />
+                <div className="relative group">
+                  <div className="absolute -top-5 -right-5 z-10 px-6 py-3 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-sm shadow-2xl flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    Coming Soon
+                  </div>
+                  <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl group-hover:border-[#d4af37]/30 transition-all duration-500">
+                    <img
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-gzFnDFV4qXq5hJL3hemQjQ.webp"
+                      alt="Audit of the Heart - Hudson Dynasty Book 1"
+                      className="w-full rounded-2xl shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Book Details */}
+              <div className="space-y-6">
+                <div>
+                  <p className="text-sm text-[#d4af37] font-semibold tracking-widest uppercase mb-3">
+                    Hudson Dynasty Book 1
+                  </p>
+                  <h3 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                    Audit of the Heart
+                  </h3>
+                  <p className="text-lg text-[#d4af37]/80 font-medium mb-6">
+                    A Corporate Billionaire Romance
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {["Forced Proximity", "Fake Engagement", "Office Romance", "Off-Limits", "Billionaire Romance"].map((trope) => (
+                    <Badge 
+                      key={trope} 
+                      variant="outline" 
+                      className="text-xs border-[#d4af37]/30 bg-[#d4af37]/5 text-[#d4af37] hover:bg-[#d4af37]/10"
+                    >
+                      {trope}
+                    </Badge>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 w-fit">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Flame key={i} className="h-4 w-4 text-[#d4af37] fill-[#d4af37]" />
+                    ))}
+                  </div>
+                  <span className="text-white font-medium text-sm">High Heat</span>
+                </div>
+
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  A brilliant compliance attorney is hired to stabilize Hudson Vale, the Manhattan investment empire run by ruthless billionaire Sebastian Hudson, just as rumors of financial misconduct threaten a major acquisition. When the board forces them into a fake engagement to calm investors, professional boundaries collapse under forced proximity, dangerous attraction, and the growing suspicion that Sebastian's empire is hiding something explosive.
+                </p>
+
+                <blockquote className="border-l-4 border-[#d4af37]/50 pl-6 py-2 italic text-gray-400 text-lg">
+                  "I'm hired to clean up Sebastian Hudson's image, not get tangled in his empire. He's Manhattan's most dangerous billionaire — cold, controlled, and one scandal away from losing everything."
+                </blockquote>
+
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold py-7 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  >
+                    <Link href="/books/audit-of-the-heart">
+                      <BookOpen className="mr-2 h-5 w-5" />
+                      Read More
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white py-7"
+                  >
+                    <Link href="/free-book">
+                      <Gift className="mr-2 h-5 w-5" />
+                      Get Notified at Launch
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Series Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto mt-20 p-10 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl"
+          >
+            <div className="text-center">
+              <h3 className="font-serif text-2xl md:text-3xl font-bold text-white mb-4">
+                About the Hudson Dynasty Series
+              </h3>
+              <p className="text-gray-300 text-lg leading-relaxed mb-4">
+                Manhattan high finance meets scorching romance. In the Hudson Dynasty world, reputation moves markets, power couples are public assets, and scandal is currency. Each book follows a new couple navigating the treacherous intersection of billion-dollar deals and irresistible desire.
+              </p>
+              <p className="text-gray-400 leading-relaxed">
+                The series begins with <em className="text-[#d4af37]">Audit of the Heart</em> and continues with <em className="text-[#d4af37]">Hostile Tender</em>. Standalone romances with guaranteed happily-ever-afters.
+              </p>
             </div>
           </motion.div>
         </div>

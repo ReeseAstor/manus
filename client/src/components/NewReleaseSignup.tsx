@@ -202,7 +202,7 @@ export default function NewReleaseSignup() {
                   className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                 >
                   <BookOpen className="mr-2 h-5 w-5" />
-                  Download Your Free Book
+                  Get Your Free Book
                 </Button>
               </motion.div>
             )}

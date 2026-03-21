@@ -1386,3 +1386,21 @@
 - [x] Set up blog auto-publisher cron endpoint (/api/cron/publish-blogs)
 - [x] Schedule hourly cron job to auto-publish posts when date arrives
 - [x] Run database migration for new columns
+
+## Remove Direct Download & Replace Big Sister
+- [x] Remove direct download option - only allow BookFunnel delivery
+- [x] Replace all "Big Sister" references with "The First Acquisition"
+
+## Hudson Dynasty Series - New Series Addition
+- [x] Generate book cover placeholder image for "Audit of the Heart" (Hudson Dynasty Book 1)
+- [x] Add Hudson Dynasty series section to Books page (below Manhattan Money Kings)
+- [x] Create "Audit of the Heart" coming soon card with premise, tropes, and heat level
+- [x] Add Hudson Dynasty coming soon teaser to Home page
+- [x] Create dedicated book detail page for "Audit of the Heart"
+- [x] Add Hudson Dynasty to database (series + book entries)
+- [x] Update SEO metadata to include Hudson Dynasty series
+- [x] Update NewsletterPopup to reference "The First Acquisition" instead of "The Manhattan Affair"
+- [x] Fix "Big Sister" references if any remain (none found)
+- [x] Update structured data to reflect two series
+- [x] Test all changes and verify site integrity
+- [x] Write vitest tests for Hudson Dynasty book data (7 tests passing)

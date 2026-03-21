@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
-import { BookOpen, ChevronRight, Star, Gift } from "lucide-react";
+import { BookOpen, ChevronRight, Star, Gift, Flame, Clock } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import NewReleaseSignup from "@/components/NewReleaseSignup";
@@ -429,6 +430,108 @@ export default function Home() {
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Hudson Dynasty - Coming Soon Teaser */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#12091e] to-[#0a0e1a]" />
+        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#d4af37]/5 blur-[180px] rounded-full pointer-events-none" />
+        
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto p-10 md:p-14 rounded-3xl bg-gradient-to-br from-[#d4af37]/8 via-[#1a1428]/80 to-[#d4af37]/3 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+              {/* Decorative corner accents */}
+              <div className="absolute top-0 left-0 w-24 h-24 border-t-2 border-l-2 border-[#d4af37]/30 rounded-tl-3xl pointer-events-none" />
+              <div className="absolute bottom-0 right-0 w-24 h-24 border-b-2 border-r-2 border-[#d4af37]/30 rounded-br-3xl pointer-events-none" />
+
+              {/* Book Cover */}
+              <motion.div
+                className="relative"
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="absolute -inset-6 bg-gradient-to-r from-[#d4af37]/20 to-transparent blur-3xl rounded-full" />
+                <div className="relative">
+                  <div className="absolute -top-4 -right-4 z-10 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-sm shadow-2xl flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    Coming Soon
+                  </div>
+                  <img
+                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-gzFnDFV4qXq5hJL3hemQjQ.webp"
+                    alt="Audit of the Heart - Hudson Dynasty Book 1"
+                    className="relative w-full max-w-sm mx-auto rounded-2xl shadow-2xl shadow-black/50"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Content */}
+              <div className="space-y-5 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5">
+                  <Flame className="h-4 w-4 text-[#d4af37]" />
+                  <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+                    New Series
+                  </span>
+                </div>
+                
+                <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight">
+                  Hudson Dynasty
+                </h2>
+                
+                <p className="text-2xl text-white font-semibold font-serif">
+                  Audit of the Heart
+                </p>
+                <p className="text-[#d4af37] font-medium">
+                  Book 1 &bull; Corporate Billionaire Romance
+                </p>
+                
+                <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+                  {["Forced Proximity", "Fake Engagement", "Office Romance"].map((trope) => (
+                    <Badge 
+                      key={trope} 
+                      variant="outline" 
+                      className="text-xs border-[#d4af37]/30 bg-[#d4af37]/5 text-[#d4af37]"
+                    >
+                      {trope}
+                    </Badge>
+                  ))}
+                </div>
+
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  She's hired to clean up Sebastian Hudson's image, not get tangled in his empire. He's Manhattan's most dangerous billionaire &mdash; cold, controlled, and one scandal away from losing everything. When the board forces a fake engagement, professional boundaries shatter.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  >
+                    <Link href="/books#hudson-dynasty">
+                      <BookOpen className="mr-2 h-5 w-5" />
+                      Learn More
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold px-8 py-7 rounded-full transition-all duration-300 hover:border-[#d4af37]/50"
+                  >
+                    <Link href="/free-book">
+                      <Gift className="mr-2 h-5 w-5" />
+                      Get Notified at Launch
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>

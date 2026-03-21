@@ -1,0 +1,256 @@
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { appRouter } from "./routers";
+import type { TrpcContext } from "./_core/context";
+import * as db from "./db";
+
+// Mock the database module
+vi.mock("./db", () => ({
+  getAllBooks: vi.fn(),
+  getBookBySlug: vi.fn(),
+  getBookById: vi.fn(),
+  getBookReviews: vi.fn(),
+  getRelatedBooks: vi.fn(),
+  createBook: vi.fn(),
+  updateBook: vi.fn(),
+  deleteBook: vi.fn(),
+  createBookReview: vi.fn(),
+  // Stub other exports that might be needed
+  getAllBlogPosts: vi.fn(),
+  getBlogPostBySlug: vi.fn(),
+  createBlogPost: vi.fn(),
+  updateBlogPost: vi.fn(),
+  deleteBlogPost: vi.fn(),
+  getContactSubmissions: vi.fn(),
+  createContactSubmission: vi.fn(),
+  updateContactSubmission: vi.fn(),
+  getUserPreferences: vi.fn(),
+  upsertUserPreferences: vi.fn(),
+  getBrowsingHistory: vi.fn(),
+  upsertBrowsingHistory: vi.fn(),
+  getPopularBooks: vi.fn(),
+  getReaderClubMembership: vi.fn(),
+  createReaderClubMembership: vi.fn(),
+  updateReaderClubMembership: vi.fn(),
+  getAllBonusContent: vi.fn(),
+  getBonusContentById: vi.fn(),
+  createBonusContent: vi.fn(),
+  updateBonusContent: vi.fn(),
+  deleteBonusContent: vi.fn(),
+  getBookCharacters: vi.fn(),
+  getCharacterRelationships: vi.fn(),
+  getBookStorylines: vi.fn(),
+  getBookPricingHistory: vi.fn(),
+  createBookCharacter: vi.fn(),
+  updateBookCharacter: vi.fn(),
+  deleteBookCharacter: vi.fn(),
+  createCharacterRelationship: vi.fn(),
+  updateCharacterRelationship: vi.fn(),
+  deleteCharacterRelationship: vi.fn(),
+  createBookStoryline: vi.fn(),
+  updateBookStoryline: vi.fn(),
+  deleteBookStoryline: vi.fn(),
+  createBookPricingHistory: vi.fn(),
+  getAdminDashboardStats: vi.fn(),
+  getAdminRecentActivity: vi.fn(),
+  getAllUsers: vi.fn(),
+  updateUserRole: vi.fn(),
+  getGoals: vi.fn(),
+  createGoal: vi.fn(),
+  updateGoal: vi.fn(),
+  deleteGoal: vi.fn(),
+  getGoalHistory: vi.fn(),
+  createGoalHistory: vi.fn(),
+  getCommandCenterMetrics: vi.fn(),
+  getCommandCenterAlerts: vi.fn(),
+  getCommandCenterTasks: vi.fn(),
+  createCommandCenterTask: vi.fn(),
+  updateCommandCenterTask: vi.fn(),
+  deleteCommandCenterTask: vi.fn(),
+  getCommandCenterNotes: vi.fn(),
+  createCommandCenterNote: vi.fn(),
+  updateCommandCenterNote: vi.fn(),
+  deleteCommandCenterNote: vi.fn(),
+  getSmsSubscribers: vi.fn(),
+  createSmsSubscriber: vi.fn(),
+  updateSmsSubscriber: vi.fn(),
+  getSmsMessages: vi.fn(),
+  createSmsMessage: vi.fn(),
+  getSmsAnalytics: vi.fn(),
+}));
+
+function createPublicContext(): TrpcContext {
+  return {
+    user: null,
+    req: {
+      protocol: "https",
+      headers: {},
+    } as TrpcContext["req"],
+    res: {} as TrpcContext["res"],
+  };
+}
+
+const mockAuditOfTheHeart = {
+  id: 5,
+  title: "Audit of the Heart",
+  slug: "audit-of-the-heart",
+  series: "Hudson Dynasty",
+  seriesOrder: 1,
+  coverImage: "https://example.com/audit-cover.webp",
+  description:
+    "A brilliant compliance attorney is hired to stabilize Hudson Vale, the Manhattan investment empire run by ruthless billionaire Sebastian Hudson.",
+  sampleChapter: null,
+  rating: 5,
+  reviewCount: 0,
+  tropes: JSON.stringify([
+    "Forced Proximity",
+    "Fake Engagement",
+    "Office Romance",
+    "Off-Limits",
+    "Billionaire Romance",
+    "Corporate Power Romance",
+  ]),
+  heatLevel: 5,
+  pageCount: 350,
+  publishDate: "Coming Soon",
+  amazonUrl: null,
+  appleUrl: null,
+  koboUrl: null,
+  barnesNobleUrl: null,
+  googlePlayUrl: null,
+  retailPrice: 499,
+  directPrice: 399,
+  memberPrice: 299,
+  directSaleUrl: null,
+  audioSampleUrl: null,
+  featured: true,
+  displayOrder: 0,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
+
+const mockMMKBook = {
+  id: 1,
+  title: "The Billionaire's Baby Secret",
+  slug: "the-billionaire-s-baby-secret",
+  series: "Manhattan Money Kings",
+  seriesOrder: 3,
+  coverImage: "https://example.com/baby-secret.webp",
+  description: "A secret baby billionaire romance.",
+  sampleChapter: null,
+  rating: 5,
+  reviewCount: 100,
+  tropes: JSON.stringify(["Secret Baby", "Second Chance", "Billionaire Romance"]),
+  heatLevel: 4,
+  pageCount: 340,
+  publishDate: "Available Now",
+  amazonUrl: "https://amazon.com/example",
+  appleUrl: null,
+  koboUrl: null,
+  barnesNobleUrl: null,
+  googlePlayUrl: null,
+  retailPrice: 499,
+  directPrice: 399,
+  memberPrice: 299,
+  directSaleUrl: null,
+  audioSampleUrl: null,
+  featured: true,
+  displayOrder: 1,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
+
+describe("Hudson Dynasty Series - Books API", () => {
+  const caller = appRouter.createCaller(createPublicContext());
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("should return Hudson Dynasty books alongside Manhattan Money Kings books", async () => {
+    vi.mocked(db.getAllBooks).mockResolvedValue([
+      mockMMKBook,
+      mockAuditOfTheHeart,
+    ]);
+
+    const books = await caller.books.list();
+
+    expect(books).toHaveLength(2);
+    expect(books.some((b: any) => b.series === "Hudson Dynasty")).toBe(true);
+    expect(books.some((b: any) => b.series === "Manhattan Money Kings")).toBe(true);
+  });
+
+  it("should return Audit of the Heart by slug", async () => {
+    vi.mocked(db.getBookBySlug).mockResolvedValue(mockAuditOfTheHeart);
+
+    const book = await caller.books.getBySlug({ slug: "audit-of-the-heart" });
+
+    expect(book.title).toBe("Audit of the Heart");
+    expect(book.series).toBe("Hudson Dynasty");
+    expect(book.seriesOrder).toBe(1);
+    expect(book.publishDate).toBe("Coming Soon");
+    expect(book.heatLevel).toBe(5);
+  });
+
+  it("should have correct tropes for Audit of the Heart", async () => {
+    vi.mocked(db.getBookBySlug).mockResolvedValue(mockAuditOfTheHeart);
+
+    const book = await caller.books.getBySlug({ slug: "audit-of-the-heart" });
+    const tropes = JSON.parse(book.tropes as string);
+
+    expect(tropes).toContain("Forced Proximity");
+    expect(tropes).toContain("Fake Engagement");
+    expect(tropes).toContain("Office Romance");
+    expect(tropes).toContain("Off-Limits");
+    expect(tropes).toContain("Billionaire Romance");
+    expect(tropes).toContain("Corporate Power Romance");
+    expect(tropes).toHaveLength(6);
+  });
+
+  it("should throw NOT_FOUND for non-existent book slug", async () => {
+    vi.mocked(db.getBookBySlug).mockResolvedValue(undefined as any);
+
+    await expect(
+      caller.books.getBySlug({ slug: "non-existent-book" })
+    ).rejects.toThrow("Book not found");
+  });
+
+  it("should filter featured books including Hudson Dynasty", async () => {
+    vi.mocked(db.getAllBooks).mockResolvedValue([
+      mockMMKBook,
+      mockAuditOfTheHeart,
+    ]);
+
+    const books = await caller.books.list({ featuredOnly: true });
+
+    expect(db.getAllBooks).toHaveBeenCalledWith(true);
+    expect(books).toHaveLength(2);
+  });
+
+  it("should have Coming Soon publish date for Audit of the Heart", async () => {
+    vi.mocked(db.getBookBySlug).mockResolvedValue(mockAuditOfTheHeart);
+
+    const book = await caller.books.getBySlug({ slug: "audit-of-the-heart" });
+
+    expect(book.publishDate).toBe("Coming Soon");
+    expect(book.amazonUrl).toBeNull();
+    expect(book.directSaleUrl).toBeNull();
+  });
+
+  it("should correctly distinguish between two series", async () => {
+    vi.mocked(db.getAllBooks).mockResolvedValue([
+      mockMMKBook,
+      { ...mockMMKBook, id: 2, title: "The Billionaire's Fake Wife", seriesOrder: 2 },
+      { ...mockMMKBook, id: 3, title: "The Billionaire's Executive Assistant", seriesOrder: 1 },
+      mockAuditOfTheHeart,
+    ]);
+
+    const books = await caller.books.list();
+
+    const mmkBooks = books.filter((b: any) => b.series === "Manhattan Money Kings");
+    const hdBooks = books.filter((b: any) => b.series === "Hudson Dynasty");
+
+    expect(mmkBooks).toHaveLength(3);
+    expect(hdBooks).toHaveLength(1);
+    expect(hdBooks[0].title).toBe("Audit of the Heart");
+  });
+});

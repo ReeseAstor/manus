@@ -109,7 +109,7 @@ export function NewsletterPopup({ isOpen, onClose }: NewsletterPopupProps) {
                   <p className="text-[#e5e5e5]/80 text-center mb-6 text-base leading-relaxed">
                     Join my exclusive community and receive{" "}
                     <span className="text-[#d4af37] font-semibold">
-                      "The Manhattan Affair"
+                      "The First Acquisition"
                     </span>{" "}
                     absolutely free, plus insider writing tips and early access
                     to new releases.
