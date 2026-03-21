@@ -68,6 +68,24 @@ async function startServer() {
       res.status(500).json({ error: String(error) });
     }
   });
+
+  // Blog auto-publisher cron endpoint (runs hourly to publish scheduled posts)
+  app.post("/api/cron/publish-scheduled", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.JWT_SECRET;
+    if (authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    try {
+      const { publishScheduledPosts } = await import("../cron/blogPublisher");
+      const result = await publishScheduledPosts();
+      res.json(result);
+    } catch (error) {
+      console.error("[Cron] Blog publisher error:", error);
+      res.status(500).json({ error: String(error) });
+    }
+  });
+
   // tRPC API
   app.use(
     "/api/trpc",

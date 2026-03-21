@@ -82,6 +82,9 @@ export const blogPosts = mysqlTable("blog_posts", {
   published: mysqlEnum("published", ["draft", "published"]).default("draft").notNull(),
   authorId: int("authorId").notNull().references(() => users.id),
   audioUrl: text("audioUrl"), // URL to generated audio narration
+  scheduledPublishAt: timestamp("scheduledPublishAt"), // When to auto-publish this draft
+  seoKeywords: text("seoKeywords"), // Comma-separated SEO keywords
+  metaDescription: varchar("metaDescription", { length: 320 }), // SEO meta description
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   publishedAt: timestamp("publishedAt"),

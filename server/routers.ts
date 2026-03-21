@@ -170,6 +170,31 @@ export const appRouter = router({
         return posts;
       }),
 
+    // Content calendar - get all posts with scheduled dates for admin view
+    contentCalendar: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== 'admin') {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'Admin access required' });
+      }
+      const { getScheduledPosts } = await import("./cron/blogPublisher");
+      const scheduled = await getScheduledPosts();
+      const allPosts = await getAllBlogPosts();
+      return {
+        scheduled,
+        published: allPosts.filter((p: any) => p.published === 'published'),
+        drafts: allPosts.filter((p: any) => p.published === 'draft' && !p.scheduledPublishAt),
+        total: allPosts.length,
+      };
+    }),
+
+    // Trigger scheduled post publishing manually
+    publishScheduled: protectedProcedure.mutation(async ({ ctx }) => {
+      if (ctx.user.role !== 'admin') {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'Admin access required' });
+      }
+      const { publishScheduledPosts } = await import("./cron/blogPublisher");
+      return await publishScheduledPosts();
+    }),
+
     getBySlug: publicProcedure
       .input(z.object({ slug: z.string() }))
       .query(async ({ input }) => {
@@ -193,6 +218,9 @@ export const appRouter = router({
           category: z.string().min(1),
           readTime: z.string().min(1),
           published: z.enum(["draft", "published"]).default("draft"),
+          scheduledPublishAt: z.string().nullable().optional(),
+          seoKeywords: z.string().nullable().optional(),
+          metaDescription: z.string().max(320).nullable().optional(),
         })
       )
       .mutation(async ({ ctx, input }) => {
@@ -204,11 +232,15 @@ export const appRouter = router({
         }
 
         const publishedAt = input.published === "published" ? new Date() : null;
+        const scheduledPublishAt = input.scheduledPublishAt ? new Date(input.scheduledPublishAt) : null;
         
         await createBlogPost({
           ...input,
           authorId: ctx.user.id,
           publishedAt,
+          scheduledPublishAt,
+          seoKeywords: input.seoKeywords || null,
+          metaDescription: input.metaDescription || null,
         });
 
         return { success: true };
@@ -225,6 +257,9 @@ export const appRouter = router({
           category: z.string().min(1).optional(),
           readTime: z.string().min(1).optional(),
           published: z.enum(["draft", "published"]).optional(),
+          scheduledPublishAt: z.string().nullable().optional(),
+          seoKeywords: z.string().nullable().optional(),
+          metaDescription: z.string().max(320).nullable().optional(),
         })
       )
       .mutation(async ({ ctx, input }) => {
@@ -235,7 +270,7 @@ export const appRouter = router({
           });
         }
 
-        const { id, ...updateData } = input;
+        const { id, scheduledPublishAt: scheduledStr, ...updateData } = input;
         
         // If publishing for the first time, set publishedAt
         if (updateData.published === "published") {
@@ -245,7 +280,12 @@ export const appRouter = router({
           }
         }
 
-        await updateBlogPost(id, updateData);
+        const finalUpdate: any = { ...updateData };
+        if (scheduledStr !== undefined) {
+          finalUpdate.scheduledPublishAt = scheduledStr ? new Date(scheduledStr) : null;
+        }
+
+        await updateBlogPost(id, finalUpdate);
         return { success: true };
       }),
 

@@ -1375,3 +1375,14 @@
 - [x] Add meta description to WhyBuyDirect page with Open Graph
 - [x] Add dynamic meta description to BookDetail page with structured data (JSON-LD)
 - [x] Add dynamic meta description to BlogPost page with Open Graph
+
+## Blog Post Schedule & Content Calendar
+- [x] Audit existing blog posts and identify content gaps (7 published across 4 categories)
+- [x] Research optimal blog topics for romance author SEO
+- [x] Create 3-month content calendar with weekly post topics (Mar 28 - Jun 20)
+- [x] Add scheduledPublishAt and seoKeywords fields to blog_posts schema
+- [x] Build content calendar tRPC endpoint
+- [x] Write 13 SEO-optimized blog post drafts with full content
+- [x] Set up blog auto-publisher cron endpoint (/api/cron/publish-blogs)
+- [x] Schedule hourly cron job to auto-publish posts when date arrives
+- [x] Run database migration for new columns
