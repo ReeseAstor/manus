@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE tool_inventory SET status = 'active' WHERE name = 'Bookclicker';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute UPDATE tool_inventory SET status = 'active' WHERE name = 'Bookclicker';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 62
+}
