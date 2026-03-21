@@ -465,14 +465,14 @@ export default function Home() {
                   </div>
                   <Link href="/books/audit-of-the-heart">
                     <img
-                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-gzFnDFV4qXq5hJL3hemQjQ.webp"
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-v2-CiyiXxZuMB4J9rT8axkMQv.webp"
                       alt="Audit of the Heart - Hudson Dynasty Book 1"
                       className="relative w-full max-w-[200px] rounded-xl shadow-2xl shadow-black/50 hover:scale-105 transition-transform duration-300"
                     />
                   </Link>
                   <Link href="/books/hostile-tender">
                     <img
-                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-iLqpNEdWTN6p5dnBYDuiJL.webp"
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-v2-iH5fGgkRQVjWbk2TchYPdH.webp"
                       alt="Hostile Tender - Hudson Dynasty Book 2"
                       className="relative w-full max-w-[200px] rounded-xl shadow-2xl shadow-black/50 hover:scale-105 transition-transform duration-300"
                     />

@@ -98,7 +98,7 @@ export default function HostileTender() {
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
                     <img
-                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-iLqpNEdWTN6p5dnBYDuiJL.webp"
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-v2-iH5fGgkRQVjWbk2TchYPdH.webp"
                       alt="Hostile Tender - Hudson Dynasty Book 2 by Reese Astor"
                       className="w-full rounded-2xl shadow-2xl"
                     />

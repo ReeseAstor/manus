@@ -98,7 +98,7 @@ export default function AuditOfTheHeart() {
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
                     <img
-                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-gzFnDFV4qXq5hJL3hemQjQ.webp"
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-v2-CiyiXxZuMB4J9rT8axkMQv.webp"
                       alt="Audit of the Heart - Hudson Dynasty Book 1 by Reese Astor"
                       className="w-full rounded-2xl shadow-2xl"
                     />

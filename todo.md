@@ -1420,3 +1420,10 @@
 ## Add Big Sister Bonus Epilogue as Exclusive VIP Content
 - [x] Add Big Sister epilogue entry to VIP/Reader Club exclusive content
 - [x] Include description: Lily's POV, meeting baby Mateo, "Love doesn't run out" quote
+
+## Professional Book Cover Redesign - Hudson Dynasty Series
+- [x] Design professional cover for "Audit of the Heart" (Book 1) - minimalist, modern serif, dark luxury aesthetic
+- [x] Design professional cover for "Hostile Tender" (Book 2) - matching series style
+- [x] Upload new covers to CDN via manus-upload-file
+- [x] Replace cover URLs across entire site (Books page, detail pages, Home page teaser)
+- [x] Verify all pages display new covers correctly

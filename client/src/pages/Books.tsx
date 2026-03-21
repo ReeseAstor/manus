@@ -560,7 +560,7 @@ export default function Books() {
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl group-hover:border-[#d4af37]/30 transition-all duration-500">
                     <img
-                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-gzFnDFV4qXq5hJL3hemQjQ.webp"
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-v2-CiyiXxZuMB4J9rT8axkMQv.webp"
                       alt="Audit of the Heart - Hudson Dynasty Book 1"
                       className="w-full rounded-2xl shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
                     />
@@ -725,7 +725,7 @@ export default function Books() {
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl group-hover:border-[#d4af37]/30 transition-all duration-500">
                     <img
-                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-iLqpNEdWTN6p5dnBYDuiJL.webp"
+                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-v2-iH5fGgkRQVjWbk2TchYPdH.webp"
                       alt="Hostile Tender - Hudson Dynasty Book 2"
                       className="w-full rounded-2xl shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
                     />
