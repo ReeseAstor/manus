@@ -1,0 +1,73 @@
+{
+  "query": "SELECT slug FROM blog_posts ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute SELECT slug FROM blog_posts ORDER BY id;",
+  "rows": [
+    {
+      "slug": "writing-steamy-romance-scenes"
+    },
+    {
+      "slug": "self-publishing-journey"
+    },
+    {
+      "slug": "author-brand-social-media"
+    },
+    {
+      "slug": "best-billionaire-romance-series-2024"
+    },
+    {
+      "slug": "secret-baby-romance-books-guide"
+    },
+    {
+      "slug": "nyc-romance-books-manhattan-guide"
+    },
+    {
+      "slug": "day-in-the-life-romance-author"
+    },
+    {
+      "slug": "enemies-to-lovers-romance-trope-guide"
+    },
+    {
+      "slug": "how-to-write-billionaire-romance-authentic"
+    },
+    {
+      "slug": "romance-book-tropes-ultimate-guide"
+    },
+    {
+      "slug": "self-publishing-romance-amazon-kdp-beginners-guide"
+    },
+    {
+      "slug": "manhattan-romance-nyc-love-stories"
+    },
+    {
+      "slug": "usa-today-bestselling-author-journey"
+    },
+    {
+      "slug": "steamy-vs-sweet-romance-heat-levels-guide"
+    },
+    {
+      "slug": "author-email-list-strategy-sell-books"
+    },
+    {
+      "slug": "secret-baby-trope-romance-readers-guide"
+    },
+    {
+      "slug": "romance-writing-prompts-novel-ideas"
+    },
+    {
+      "slug": "booktok-romance-viral-books-2026"
+    },
+    {
+      "slug": "creating-compelling-romance-characters-guide"
+    },
+    {
+      "slug": "forced-proximity-romance-best-books"
+    },
+    {
+      "slug": "the-art-of-world-building-in-fantasy-romance"
+    }
+  ],
+  "messages": [],
+  "stdout": "slug\nwriting-steamy-romance-scenes\nself-publishing-journey\nauthor-brand-social-media\nbest-billionaire-romance-series-2024\nsecret-baby-romance-books-guide\nnyc-romance-books-manhattan-guide\nday-in-the-life-romance-author\nenemies-to-lovers-romance-trope-guide\nhow-to-write-billionaire-romance-authentic\nromance-book-tropes-ultimate-guide\nself-publishing-romance-amazon-kdp-beginners-guide\nmanhattan-romance-nyc-love-stories\nusa-today-bestselling-author-journey\nsteamy-vs-sweet-romance-heat-levels-guide\nauthor-email-list-strategy-sell-books\nsecret-baby-trope-romance-readers-guide\nromance-writing-prompts-novel-ideas\nbooktok-romance-viral-books-2026\ncreating-compelling-romance-characters-guide\nforced-proximity-romance-best-books\nthe-art-of-world-building-in-fantasy-romance\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

@@ -1443,3 +1443,26 @@
 
 ## Remove Big Sister Bonus Epilogue
 - [x] Remove Big Sister bonus epilogue from VIP/Reader Club exclusive content database (id=30001 deleted)
+
+## Fix: Remove Big Sister Popup from Frontend
+- [x] Found: Big Sister popup was from MailerLite (not frontend code) — updated in MailerLite dashboard
+- [x] Replaced popup content with The First Acquisition free book offer in MailerLite
+
+## MailerLite Popup & Automation Updates
+- [x] Update popup heading from "Get Your Free Bonus Epilogue" to "Get Your Free Book"
+- [x] Replace popup HTML content: Big Sister → The First Acquisition prequel
+- [x] Save and verify popup changes in MailerLite
+- [x] Set up welcome email automation "Welcome to Reese Astor's World" (3 emails, warm personal tone)
+- [x] Email 1 (immediate): Your Free Book — delivers The First Acquisition with BookFunnel link
+- [x] Email 2 (2 days later): What to Expect — personal note about upcoming content
+- [x] Email 3 (5 days later): Your World Awaits — full series overview (MMK + Hudson Dynasty)
+- [x] Paused old "Advanced welcome email" automation
+- [x] Activated new automation — now live
+
+## Update Popup to Hudson Dynasty
+- [x] Change popup subtitle from "A Manhattan Money Kings Prequel" to "A Hudson Dynasty Novel"
+
+## XML Sitemap & Google Search Console
+- [x] Create dynamic sitemap.xml server endpoint with all pages (38 URLs: 17 static + 21 blog posts)
+- [x] Update robots.txt to reference sitemap URL (served at /robots.txt)
+- [ ] Submit sitemap to Google Search Console

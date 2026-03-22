@@ -1,0 +1,94 @@
+{
+  "query": "\nSELECT slug FROM blog_posts LIMIT 30;\nSELECT slug FROM books LIMIT 20;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute \nSELECT slug FROM blog_posts LIMIT 30;\nSELECT slug FROM books LIMIT 20;\n",
+  "rows": [
+    {
+      "slug": "author-brand-social-media"
+    },
+    {
+      "slug": "author-email-list-strategy-sell-books"
+    },
+    {
+      "slug": "best-billionaire-romance-series-2024"
+    },
+    {
+      "slug": "booktok-romance-viral-books-2026"
+    },
+    {
+      "slug": "creating-compelling-romance-characters-guide"
+    },
+    {
+      "slug": "day-in-the-life-romance-author"
+    },
+    {
+      "slug": "enemies-to-lovers-romance-trope-guide"
+    },
+    {
+      "slug": "forced-proximity-romance-best-books"
+    },
+    {
+      "slug": "how-to-write-billionaire-romance-authentic"
+    },
+    {
+      "slug": "manhattan-romance-nyc-love-stories"
+    },
+    {
+      "slug": "nyc-romance-books-manhattan-guide"
+    },
+    {
+      "slug": "romance-book-tropes-ultimate-guide"
+    },
+    {
+      "slug": "romance-writing-prompts-novel-ideas"
+    },
+    {
+      "slug": "secret-baby-romance-books-guide"
+    },
+    {
+      "slug": "secret-baby-trope-romance-readers-guide"
+    },
+    {
+      "slug": "self-publishing-journey"
+    },
+    {
+      "slug": "self-publishing-romance-amazon-kdp-beginners-guide"
+    },
+    {
+      "slug": "steamy-vs-sweet-romance-heat-levels-guide"
+    },
+    {
+      "slug": "the-art-of-world-building-in-fantasy-romance"
+    },
+    {
+      "slug": "usa-today-bestselling-author-journey"
+    },
+    {
+      "slug": "writing-steamy-romance-scenes"
+    },
+    {
+      "slug": "slug"
+    },
+    {
+      "slug": "audit-of-the-heart"
+    },
+    {
+      "slug": "hostile-tender"
+    },
+    {
+      "slug": "the-billionaire-s-baby-secret"
+    },
+    {
+      "slug": "the-billionaire-s-executive-assistant"
+    },
+    {
+      "slug": "the-billionaire-s-fake-wife"
+    },
+    {
+      "slug": "the-billionaires-forbidden-nanny"
+    }
+  ],
+  "messages": [],
+  "stdout": "slug\nauthor-brand-social-media\nauthor-email-list-strategy-sell-books\nbest-billionaire-romance-series-2024\nbooktok-romance-viral-books-2026\ncreating-compelling-romance-characters-guide\nday-in-the-life-romance-author\nenemies-to-lovers-romance-trope-guide\nforced-proximity-romance-best-books\nhow-to-write-billionaire-romance-authentic\nmanhattan-romance-nyc-love-stories\nnyc-romance-books-manhattan-guide\nromance-book-tropes-ultimate-guide\nromance-writing-prompts-novel-ideas\nsecret-baby-romance-books-guide\nsecret-baby-trope-romance-readers-guide\nself-publishing-journey\nself-publishing-romance-amazon-kdp-beginners-guide\nsteamy-vs-sweet-romance-heat-levels-guide\nthe-art-of-world-building-in-fantasy-romance\nusa-today-bestselling-author-journey\nwriting-steamy-romance-scenes\nslug\naudit-of-the-heart\nhostile-tender\nthe-billionaire-s-baby-secret\nthe-billionaire-s-executive-assistant\nthe-billionaire-s-fake-wife\nthe-billionaires-forbidden-nanny\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}
