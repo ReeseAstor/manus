@@ -135,7 +135,7 @@ export default function Home() {
                   size="lg"
                   className="group bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-semibold px-8 py-7 rounded-full text-lg shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
                 >
-                  <a href="https://get.reeseastor.com/kw1yge3479" target="_blank" rel="noopener noreferrer">
+                  <a href="https://swiy.co/05" target="_blank" rel="noopener noreferrer">
                     <Gift className="mr-2 h-5 w-5" />
                     Get Your Free Book
                   </a>
@@ -290,7 +290,7 @@ export default function Home() {
                     size="lg"
                     className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-lg px-10 py-7 rounded-full shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
                   >
-                    <a href="https://get.reeseastor.com/kw1yge3479" target="_blank" rel="noopener noreferrer">
+                    <a href="https://swiy.co/05" target="_blank" rel="noopener noreferrer">
                       <BookOpen className="mr-2 h-6 w-6" />
                       Get My Free Book
                     </a>

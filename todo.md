@@ -1465,4 +1465,17 @@
 ## XML Sitemap & Google Search Console
 - [x] Create dynamic sitemap.xml server endpoint with all pages (38 URLs: 17 static + 21 blog posts)
 - [x] Update robots.txt to reference sitemap URL (served at /robots.txt)
-- [ ] Submit sitemap to Google Search Console
+- [x] Submit sitemap to Google Search Console (submitted Mar 22, 2026 - awaiting crawl after publish)
+
+## Free Book Link Update - The First Acquisition
+- [ ] Update BookFunnel/free book link to https://swiy.co/05 across all site pages
+- [ ] Update MailerLite welcome Email 1 with correct free book delivery link
+- [ ] Update book subtitle to "A Manhattan Billionaire Romance (Hudson Dynasty)" everywhere
+
+## Amazon-Linked Blog Posts
+- [ ] Research Amazon products relevant to romance readers (books, candles, reading accessories, etc.)
+- [ ] Write Blog 1: "The Ultimate Cozy Reading Night Setup" with Amazon product links
+- [ ] Write Blog 2: "Best Billionaire Romance Books to Read After Manhattan Money Kings" with Amazon book links
+- [ ] Write Blog 3: "What I Burn While I Write: My Favorite Writing Candles" with Amazon candle links
+- [ ] Write Blog 4: "Romance Reader Gift Guide" with Amazon product links
+- [ ] Publish all blog posts via admin panel

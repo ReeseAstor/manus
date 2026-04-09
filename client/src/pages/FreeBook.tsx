@@ -19,14 +19,14 @@ export default function FreeBook() {
       setEmail("");
       // Redirect to BookFunnel after a short delay
       setTimeout(() => {
-        window.open("https://get.reeseastor.com/kw1yge3479", "_blank");
+        window.open("https://swiy.co/05", "_blank");
       }, 1500);
     },
     onError: (error) => {
       if (error.message?.includes("already subscribed")) {
         toast.info("You're already on the list! Redirecting to your free book...");
         setTimeout(() => {
-          window.open("https://get.reeseastor.com/kw1yge3479", "_blank");
+          window.open("https://swiy.co/05", "_blank");
         }, 1500);
       } else {
         toast.error(error.message || "Failed to subscribe. Please try again.");
@@ -100,7 +100,7 @@ export default function FreeBook() {
         description="Download The First Acquisition for free. A steamy Manhattan billionaire romance by USA Today Bestselling author Reese Astor. Join the newsletter and start reading today."
         canonical="/free-book"
         ogType="book"
-        keywords={["free romance book", "The First Acquisition", "free billionaire romance", "Reese Astor free book", "Manhattan Money Kings", "reader magnet"]}
+        keywords={["free romance book", "The First Acquisition", "free billionaire romance", "Reese Astor free book", "Hudson Dynasty", "Manhattan Money Kings", "reader magnet"]}
         structuredData={[freeBookSchema]}
       />
 
@@ -172,7 +172,7 @@ export default function FreeBook() {
                     The First Acquisition
                   </p>
                   <p className="text-xl text-[#d4af37]">
-                    A Manhattan Billionaire Romance
+                    A Manhattan Billionaire Romance (Hudson Dynasty)
                   </p>
                 </div>
 
@@ -384,7 +384,7 @@ export default function FreeBook() {
               size="lg"
               className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-xl px-12 py-8 rounded-full shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
             >
-              <a href="https://get.reeseastor.com/kw1yge3479" target="_blank" rel="noopener noreferrer">
+              <a href="https://swiy.co/05" target="_blank" rel="noopener noreferrer">
                 <BookOpen className="mr-3 h-7 w-7" />
                 Claim Your Free Copy Now
               </a>
