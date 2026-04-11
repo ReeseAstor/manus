@@ -81,6 +81,7 @@ export const blogPosts = mysqlTable("blog_posts", {
   readTime: varchar("readTime", { length: 50 }).notNull(),
   published: mysqlEnum("published", ["draft", "published"]).default("draft").notNull(),
   authorId: int("authorId").notNull().references(() => users.id),
+  featuredImage: text("featuredImage"), // URL to featured hero image for blog cards
   audioUrl: text("audioUrl"), // URL to generated audio narration
   scheduledPublishAt: timestamp("scheduledPublishAt"), // When to auto-publish this draft
   seoKeywords: text("seoKeywords"), // Comma-separated SEO keywords

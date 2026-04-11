@@ -218,8 +218,19 @@ export default function Blog() {
                   className="group"
                 >
                   <Link href={`/blog/${post.slug}`}>
-                    <div className="h-full p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/30 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-[#d4af37]/10">
-                      <div className="space-y-6">
+                    <div className="h-full rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/30 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-[#d4af37]/10 overflow-hidden">
+                      {/* Featured Image */}
+                      {"featuredImage" in post && post.featuredImage && (
+                        <div className="relative h-48 w-full overflow-hidden">
+                          <img
+                            src={post.featuredImage as string}
+                            alt={post.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                        </div>
+                      )}
+                      <div className="space-y-6 p-8">
                         {/* Category Badge */}
                         <div className="inline-flex">
                           <Badge className="bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 px-4 py-1 text-xs font-medium">
