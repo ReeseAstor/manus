@@ -1,0 +1,252 @@
+/* ============================================
+   REESE ASTOR - Premium Animation System
+   ============================================ */
+
+/* --- Scroll Reveal Animations --- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --- Gold Shimmer Effect --- */
+@keyframes goldShimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #C8A961 0%,
+    #E8D5A0 25%,
+    #C8A961 50%,
+    #A8893D 75%,
+    #C8A961 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s ease-in-out infinite;
+}
+
+/* --- Floating Glow Effect --- */
+@keyframes floatGlow {
+  0%, 100% { 
+    box-shadow: 0 4px 20px rgba(200, 169, 97, 0.15);
+    transform: translateY(0);
+  }
+  50% { 
+    box-shadow: 0 8px 40px rgba(200, 169, 97, 0.25);
+    transform: translateY(-4px);
+  }
+}
+
+.float-glow {
+  animation: floatGlow 3s ease-in-out infinite;
+}
+
+/* --- Premium Button Hover --- */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.btn-premium:hover::before {
+  left: 100%;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(200, 169, 97, 0.4);
+}
+
+/* --- Card Hover Effects --- */
+.card-premium {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-premium:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 
+              0 0 40px rgba(200, 169, 97, 0.1);
+}
+
+/* --- Gradient Border Glow --- */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(200, 169, 97, 0.3), transparent, rgba(200, 169, 97, 0.15));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.glow-border:hover::after {
+  opacity: 1;
+}
+
+/* --- Pulse Ring --- */
+@keyframes pulseRing {
+  0% { 
+    box-shadow: 0 0 0 0 rgba(200, 169, 97, 0.4);
+  }
+  70% { 
+    box-shadow: 0 0 0 15px rgba(200, 169, 97, 0);
+  }
+  100% { 
+    box-shadow: 0 0 0 0 rgba(200, 169, 97, 0);
+  }
+}
+
+.pulse-ring {
+  animation: pulseRing 2s ease-out infinite;
+}
+
+/* --- Typewriter Cursor --- */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor::after {
+  content: '|';
+  color: #C8A961;
+  animation: blink 1s ease-in-out infinite;
+  margin-left: 2px;
+}
+
+/* --- Section Divider --- */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 169, 97, 0.3), transparent);
+  margin: 0 auto;
+  max-width: 200px;
+}
+
+/* --- Stagger Delays --- */
+.stagger-1 { transition-delay: 0.1s !important; }
+.stagger-2 { transition-delay: 0.2s !important; }
+.stagger-3 { transition-delay: 0.3s !important; }
+.stagger-4 { transition-delay: 0.4s !important; }
+.stagger-5 { transition-delay: 0.5s !important; }
+.stagger-6 { transition-delay: 0.6s !important; }
+
+/* --- Smooth Image Zoom --- */
+.img-zoom-container {
+  overflow: hidden;
+}
+
+.img-zoom-container img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.img-zoom-container:hover img {
+  transform: scale(1.08);
+}
+
+/* --- Text Gradient --- */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #C8A961, #E8D5A0, #C8A961);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- Ambient Particles (via pseudo-elements) --- */
+@keyframes float-particle {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  25% { transform: translate(10px, -20px) scale(1.2); opacity: 0.6; }
+  50% { transform: translate(-5px, -40px) scale(0.8); opacity: 0.4; }
+  75% { transform: translate(15px, -60px) scale(1.1); opacity: 0.2; }
+}
+
+.ambient-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.ambient-section::before,
+.ambient-section::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(200, 169, 97, 0.3);
+  pointer-events: none;
+}
+
+.ambient-section::before {
+  top: 20%;
+  left: 10%;
+  animation: float-particle 8s ease-in-out infinite;
+}
+
+.ambient-section::after {
+  top: 60%;
+  right: 15%;
+  animation: float-particle 10s ease-in-out infinite 2s;
+}

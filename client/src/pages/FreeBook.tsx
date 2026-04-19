@@ -19,14 +19,14 @@ export default function FreeBook() {
       setEmail("");
       // Redirect to BookFunnel after a short delay
       setTimeout(() => {
-        window.open("https://swiy.co/05", "_blank");
+        window.open("https://BookHip.com/JHRBVXT", "_blank");
       }, 1500);
     },
     onError: (error) => {
       if (error.message?.includes("already subscribed")) {
         toast.info("You're already on the list! Redirecting to your free book...");
         setTimeout(() => {
-          window.open("https://swiy.co/05", "_blank");
+          window.open("https://BookHip.com/JHRBVXT", "_blank");
         }, 1500);
       } else {
         toast.error(error.message || "Failed to subscribe. Please try again.");
@@ -211,7 +211,7 @@ export default function FreeBook() {
                           type="submit"
                           size="lg"
                           disabled={subscribeMutation.isPending}
-                          className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                          className="btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                         >
                           <Mail className="mr-2 h-5 w-5" />
                           {subscribeMutation.isPending ? "Sending..." : "Get Free Book"}
@@ -382,9 +382,9 @@ export default function FreeBook() {
             <Button
               asChild
               size="lg"
-              className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-xl px-12 py-8 rounded-full shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
+              className="btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-xl px-12 py-8 rounded-full shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
             >
-              <a href="https://swiy.co/05" target="_blank" rel="noopener noreferrer">
+              <a href="https://BookHip.com/JHRBVXT" target="_blank" rel="noopener noreferrer">
                 <BookOpen className="mr-3 h-7 w-7" />
                 Claim Your Free Copy Now
               </a>

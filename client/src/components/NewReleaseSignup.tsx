@@ -17,7 +17,7 @@ export default function NewReleaseSignup() {
       toast.success("Welcome to the inner circle! Your free book is on its way.");
       // Open BookFunnel after signup
       setTimeout(() => {
-        window.open("https://swiy.co/05", "_blank");
+        window.open("https://BookHip.com/JHRBVXT", "_blank");
       }, 2000);
     },
     onError: (error) => {
@@ -134,7 +134,7 @@ export default function NewReleaseSignup() {
                   <Button
                     type="submit"
                     disabled={subscribeMutation.isPending}
-                    className="w-full sm:w-auto bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg disabled:opacity-60 disabled:hover:scale-100"
+                    className="w-full sm:w-auto btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg disabled:opacity-60 disabled:hover:scale-100"
                   >
                     {subscribeMutation.isPending ? (
                       <span className="flex items-center gap-2">
@@ -198,8 +198,8 @@ export default function NewReleaseSignup() {
                   You'll be the first to know about every new Manhattan Money Kings release.
                 </p>
                 <Button
-                  onClick={() => window.open("https://swiy.co/05", "_blank")}
-                  className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  onClick={() => window.open("https://BookHip.com/JHRBVXT", "_blank")}
+                  className="btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                 >
                   <BookOpen className="mr-2 h-5 w-5" />
                   Get Your Free Book

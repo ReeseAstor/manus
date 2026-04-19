@@ -158,7 +158,7 @@ export default function Blog() {
       </section>
 
       {/* Categories */}
-      <section className="py-8 relative">
+      <section className="py-8 relative ambient-section">
         <div 
           className="absolute inset-0 opacity-10"
           style={{
@@ -199,7 +199,7 @@ export default function Blog() {
       </section>
 
       {/* Blog Posts Grid */}
-      <section className="py-20 relative">
+      <section className="py-20 relative ambient-section">
         <div className="container">
           {isLoading ? (
             <div className="flex items-center justify-center py-12">
@@ -218,7 +218,7 @@ export default function Blog() {
                   className="group"
                 >
                   <Link href={`/blog/${post.slug}`}>
-                    <div className="h-full rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/30 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-[#d4af37]/10 overflow-hidden">
+                    <div className="h-full rounded-3xl card-premium bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/30 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-[#d4af37]/10 overflow-hidden">
                       {/* Featured Image */}
                       {"featuredImage" in post && post.featuredImage && (
                         <div className="relative h-48 w-full overflow-hidden">

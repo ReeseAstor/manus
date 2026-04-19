@@ -120,7 +120,7 @@ export default function Home() {
               <h1 className="font-serif text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight">
                 <span className="text-white">Manhattan</span>
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f4e4b8] to-[#d4af37]">
+                <span className="gold-shimmer text-7xl md:text-8xl lg:text-9xl">
                   Money Kings
                 </span>
               </h1>
@@ -133,9 +133,9 @@ export default function Home() {
                 <Button
                   asChild
                   size="lg"
-                  className="group bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-semibold px-8 py-7 rounded-full text-lg shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
+                  className="group btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-semibold px-8 py-7 rounded-full text-lg shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
                 >
-                  <a href="https://swiy.co/05" target="_blank" rel="noopener noreferrer">
+                  <a href="https://BookHip.com/JHRBVXT" target="_blank" rel="noopener noreferrer">
                     <Gift className="mr-2 h-5 w-5" />
                     Get Your Free Book
                   </a>
@@ -157,15 +157,15 @@ export default function Home() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-8 pt-8 border-t border-white/10">
                 <div>
-                  <div className="text-3xl font-bold text-[#d4af37]">4</div>
+                  <div className="text-3xl font-bold text-gradient-gold">4</div>
                   <div className="text-sm text-gray-400 mt-1">Books</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-[#d4af37]">10K+</div>
+                  <div className="text-3xl font-bold text-gradient-gold">10K+</div>
                   <div className="text-sm text-gray-400 mt-1">Readers</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-[#d4af37]">★ 4.8</div>
+                  <div className="text-3xl font-bold text-gradient-gold">★ 4.8</div>
                   <div className="text-sm text-gray-400 mt-1">Rating</div>
                 </div>
               </div>
@@ -180,7 +180,7 @@ export default function Home() {
             >
               <div className="absolute -inset-12 bg-gradient-to-r from-[#d4af37]/20 to-transparent blur-3xl rounded-full" />
               
-              <div className="relative p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
+              <div className="relative p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl float-glow glow-border">
                 <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-gradient-to-r from-[#e8c4c4] to-[#d4af37] text-black text-sm font-bold shadow-lg">
                   Final Book
                 </div>
@@ -224,8 +224,11 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Section Divider */}
+      <div className="section-divider" />
+
       {/* FREE BOOK OFFER - Prominent Lead Magnet Section */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden ambient-section">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#1a1020] to-[#0a0e1a]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#d4af37]/5 blur-[200px] rounded-full pointer-events-none" />
         
@@ -290,7 +293,7 @@ export default function Home() {
                     size="lg"
                     className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-lg px-10 py-7 rounded-full shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
                   >
-                    <a href="https://swiy.co/05" target="_blank" rel="noopener noreferrer">
+                    <a href="https://BookHip.com/JHRBVXT" target="_blank" rel="noopener noreferrer">
                       <BookOpen className="mr-2 h-6 w-6" />
                       Get My Free Book
                     </a>
@@ -324,8 +327,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="section-divider" />
+
       {/* Editorial Book Showcase - Magazine Style */}
-      <section className="py-32 relative">
+      <section className="py-32 relative ambient-section">
         <div 
           className="absolute inset-0 opacity-10"
           style={{
@@ -434,8 +440,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="section-divider" />
+
       {/* Hudson Dynasty - Coming Soon Teaser */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden ambient-section">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#12091e] to-[#0a0e1a]" />
         <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#d4af37]/5 blur-[180px] rounded-full pointer-events-none" />
         

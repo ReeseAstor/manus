@@ -182,7 +182,7 @@ export default function Books() {
       </section>
 
       {/* Free Prequel - Premium Offer Banner */}
-      <section className="py-16 relative">
+      <section className="py-16 relative ambient-section">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -244,9 +244,9 @@ export default function Books() {
                   <Button
                     asChild
                     size="lg"
-                    className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                    className="btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                   >
-                    <a href="https://swiy.co/05" target="_blank" rel="noopener noreferrer">
+                    <a href="https://BookHip.com/JHRBVXT" target="_blank" rel="noopener noreferrer">
                       <BookOpen className="mr-2 h-5 w-5" />
                       Get Free via BookFunnel
                     </a>
@@ -265,7 +265,7 @@ export default function Books() {
       </section>
 
       {/* Manhattan Money Kings Series */}
-      <section className="py-20 relative" id="manhattan-money-kings">
+      <section className="py-20 relative ambient-section" id="manhattan-money-kings">
         <div 
           className="absolute inset-0 opacity-10"
           style={{
@@ -430,7 +430,7 @@ export default function Books() {
                         <Button
                           asChild
                           size="lg"
-                          className="flex-1 bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold py-7 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                          className="flex-1 btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold py-7 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                         >
                           <a href={book.link} target="_blank" rel="noopener noreferrer">
                             <ShoppingCart className="mr-2 h-5 w-5" />
@@ -466,7 +466,7 @@ export default function Books() {
       </section>
 
       {/* Series Info - Luxury Card */}
-      <section className="py-20 relative">
+      <section className="py-20 relative ambient-section">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -615,7 +615,7 @@ export default function Books() {
                   <Button
                     asChild
                     size="lg"
-                    className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold py-7 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                    className="btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold py-7 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                   >
                     <Link href="/books/audit-of-the-heart">
                       <BookOpen className="mr-2 h-5 w-5" />
@@ -694,7 +694,7 @@ export default function Books() {
                   <Button
                     asChild
                     size="lg"
-                    className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold py-7 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                    className="btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold py-7 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                   >
                     <Link href="/books/hostile-tender">
                       <BookOpen className="mr-2 h-5 w-5" />

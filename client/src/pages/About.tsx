@@ -119,7 +119,7 @@ export default function About() {
       </section>
 
       {/* Story Section - Editorial Layout */}
-      <section className="py-32 relative">
+      <section className="py-32 relative ambient-section">
         <div 
           className="absolute inset-0 opacity-10"
           style={{
@@ -170,7 +170,7 @@ export default function About() {
       </section>
 
       {/* What I Do - Luxury Cards */}
-      <section className="py-20 relative">
+      <section className="py-20 relative ambient-section">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -239,7 +239,7 @@ export default function About() {
       </section>
 
       {/* Writing Philosophy - Feature Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden ambient-section">
         <div 
           className="absolute inset-0"
           style={{
@@ -279,7 +279,7 @@ export default function About() {
       </section>
 
       {/* Expertise - Grid Layout */}
-      <section className="py-20 relative">
+      <section className="py-20 relative ambient-section">
         <div 
           className="absolute inset-0 opacity-10"
           style={{
@@ -334,7 +334,7 @@ export default function About() {
       </section>
 
       {/* My Writing Desk - Gallery Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden ambient-section">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -475,7 +475,7 @@ export default function About() {
       </section>
 
       {/* CTA Section - Elegant */}
-      <section className="py-32 relative">
+      <section className="py-32 relative ambient-section">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -500,7 +500,7 @@ export default function About() {
               <Button
                 asChild
                 size="lg"
-                className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                className="btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
                 <Link href="/books">
                   <BookOpen className="mr-2 h-5 w-5" />
@@ -513,7 +513,7 @@ export default function About() {
                 variant="outline"
                 className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold px-10 py-7 rounded-full"
               >
-                <a href="https://swiy.co/05" target="_blank" rel="noopener noreferrer">
+                <a href="https://BookHip.com/JHRBVXT" target="_blank" rel="noopener noreferrer">
                   Get Your Free Book
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </a>
