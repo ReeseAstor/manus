@@ -1491,3 +1491,6 @@
 
 ## Blog Post Detail Hero Banner
 - [x] Display featured image as full-width hero banner on individual blog post detail page
+
+## Featured Images for Remaining 14 SEO Blog Posts
+- [x] Find and add featured images for all 14 remaining SEO blog posts without images
