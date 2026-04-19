@@ -260,6 +260,27 @@ export default function BlogPost() {
         </div>
       </section>
 
+      {/* Featured Image Hero Banner */}
+      {post.featuredImage && (
+        <section className="relative">
+          <div className="max-w-5xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 -mt-8"
+            >
+              <img
+                src={post.featuredImage}
+                alt={post.title}
+                className="w-full h-[300px] md:h-[450px] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a]/40 to-transparent" />
+            </motion.div>
+          </div>
+        </section>
+      )}
+
       {/* Content Section */}
       <section className="py-16 relative">
         <div 

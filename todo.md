@@ -1479,3 +1479,15 @@
 - [ ] Write Blog 3: "What I Burn While I Write: My Favorite Writing Candles" with Amazon candle links
 - [ ] Write Blog 4: "Romance Reader Gift Guide" with Amazon product links
 - [ ] Publish all blog posts via admin panel
+
+## Featured Images for Older Blog Posts
+- [x] Find and add featured image for "A Day in the Life of a Romance Author"
+- [x] Find and add featured image for "NYC Romance Books: Fall in Love with Manhattan"
+- [x] Find and add featured image for "Secret Baby Romance Books: The Ultimate Reading Guide"
+- [x] Find and add featured image for "Best Billionaire Romance Series to Binge-Read in 2024"
+- [x] Find and add featured image for "5 Essential Tips for Writing Steamy Romance Scenes"
+- [x] Find and add featured image for "From Zero to Published: My Self-Publishing Journey"
+- [x] Find and add featured image for "Building Your Author Brand on Social Media"
+
+## Blog Post Detail Hero Banner
+- [x] Display featured image as full-width hero banner on individual blog post detail page
