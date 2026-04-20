@@ -1499,3 +1499,10 @@
 - [x] Create stunning Welcome Email 1 template via MailerLite API with BookHip link
 - [ ] Audit and enhance website visual design for a more polished, professional look
 - [ ] Implement website design enhancements (animations, typography, layout refinements)
+
+## MailerLite Email Restoration & Blog Pagination
+- [x] Restore MailerLite Welcome Email 1 with stunning HTML template
+- [x] Restore MailerLite Welcome Email 2 with stunning HTML template
+- [x] Restore MailerLite Welcome Email 3 with stunning HTML template
+- [x] Re-activate MailerLite automation
+- [x] Add Load More pagination to blog page

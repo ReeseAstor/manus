@@ -4,11 +4,13 @@ import { Input } from "@/components/ui/input";
 import { Calendar, Clock, ArrowRight, Loader2, Sparkles, Mail } from "lucide-react";
 import { format } from "date-fns";
 import { Link } from "wouter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
+
+const POSTS_PER_PAGE = 9;
 
 export default function Blog() {
   useEffect(() => {
@@ -17,7 +19,13 @@ export default function Blog() {
 
   const [email, setEmail] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
+  const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
   
+  // Reset visible count when category changes
+  useEffect(() => {
+    setVisibleCount(POSTS_PER_PAGE);
+  }, [selectedCategory]);
+
   const { data: blogPosts, isLoading } = trpc.blog.list.useQuery({ 
     published: true,
     category: selectedCategory 
@@ -103,7 +111,19 @@ export default function Blog() {
   ];
 
   // Use placeholder posts if no real posts exist
-  const displayPosts = blogPosts && blogPosts.length > 0 ? blogPosts : (!selectedCategory ? placeholderPosts : []);
+  const allDisplayPosts = blogPosts && blogPosts.length > 0 ? blogPosts : (!selectedCategory ? placeholderPosts : []);
+  
+  // Paginated posts - show only visibleCount posts
+  const displayPosts = useMemo(() => {
+    return allDisplayPosts.slice(0, visibleCount);
+  }, [allDisplayPosts, visibleCount]);
+
+  const hasMore = allDisplayPosts.length > visibleCount;
+  const remainingCount = allDisplayPosts.length - visibleCount;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + POSTS_PER_PAGE);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
@@ -206,77 +226,116 @@ export default function Blog() {
               <Loader2 className="h-8 w-8 animate-spin text-[#d4af37]" />
             </div>
           ) : displayPosts.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {displayPosts.map((post, index) => (
-                <motion.div
-                  key={post.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -10 }}
-                  className="group"
-                >
-                  <Link href={`/blog/${post.slug}`}>
-                    <div className="h-full rounded-3xl card-premium bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/30 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-[#d4af37]/10 overflow-hidden">
-                      {/* Featured Image */}
-                      {"featuredImage" in post && post.featuredImage && (
-                        <div className="relative h-48 w-full overflow-hidden">
-                          <img
-                            src={post.featuredImage as string}
-                            alt={post.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                        </div>
-                      )}
-                      <div className="space-y-6 p-8">
-                        {/* Category Badge */}
-                        <div className="inline-flex">
-                          <Badge className="bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 px-4 py-1 text-xs font-medium">
-                            {post.category}
-                          </Badge>
-                        </div>
-
-                        {/* Title */}
-                        <h2 className="font-serif text-2xl font-bold text-white group-hover:text-[#d4af37] transition-colors leading-tight">
-                          {post.title}
-                        </h2>
-
-                        {/* Excerpt */}
-                        <p className="text-gray-400 leading-relaxed line-clamp-3">
-                          {post.excerpt}
-                        </p>
-
-                        {/* Meta Info */}
-                        <div className="flex items-center gap-4 text-sm text-gray-500 pt-4 border-t border-white/10">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4" />
-                            <span>
-                              {"publishedAt" in post && post.publishedAt
-                                ? format(new Date(post.publishedAt), "MMM d, yyyy")
-                                : "date" in post
-                                ? post.date
-                                : ""}
-                            </span>
+            <>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                {displayPosts.map((post, index) => (
+                  <motion.div
+                    key={post.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: (index % POSTS_PER_PAGE) * 0.1 }}
+                    whileHover={{ y: -10 }}
+                    className="group"
+                  >
+                    <Link href={`/blog/${post.slug}`}>
+                      <div className="h-full rounded-3xl card-premium bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/30 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-[#d4af37]/10 overflow-hidden">
+                        {/* Featured Image */}
+                        {"featuredImage" in post && post.featuredImage && (
+                          <div className="relative h-48 w-full overflow-hidden">
+                            <img
+                              src={post.featuredImage as string}
+                              alt={post.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                           </div>
-                          <div className="flex items-center gap-2">
-                            <Clock className="h-4 w-4" />
-                            <span>{post.readTime}</span>
+                        )}
+                        <div className="space-y-6 p-8">
+                          {/* Category Badge */}
+                          <div className="inline-flex">
+                            <Badge className="bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 px-4 py-1 text-xs font-medium">
+                              {post.category}
+                            </Badge>
                           </div>
-                        </div>
 
-                        {/* Read More */}
-                        <div className="flex items-center gap-2 text-[#d4af37] font-medium group-hover:gap-4 transition-all">
-                          <span>Read More</span>
-                          <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform" />
+                          {/* Title */}
+                          <h2 className="font-serif text-2xl font-bold text-white group-hover:text-[#d4af37] transition-colors leading-tight">
+                            {post.title}
+                          </h2>
+
+                          {/* Excerpt */}
+                          <p className="text-gray-400 leading-relaxed line-clamp-3">
+                            {post.excerpt}
+                          </p>
+
+                          {/* Meta Info */}
+                          <div className="flex items-center gap-4 text-sm text-gray-500 pt-4 border-t border-white/10">
+                            <div className="flex items-center gap-2">
+                              <Calendar className="h-4 w-4" />
+                              <span>
+                                {"publishedAt" in post && post.publishedAt
+                                  ? format(new Date(post.publishedAt), "MMM d, yyyy")
+                                  : "date" in post
+                                  ? post.date
+                                  : ""}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Clock className="h-4 w-4" />
+                              <span>{post.readTime}</span>
+                            </div>
+                          </div>
+
+                          {/* Read More */}
+                          <div className="flex items-center gap-2 text-[#d4af37] font-medium group-hover:gap-4 transition-all">
+                            <span>Read More</span>
+                            <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform" />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Load More Button */}
+              {hasMore && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="flex flex-col items-center mt-16 gap-4"
+                >
+                  <p className="text-gray-400 text-sm">
+                    Showing {displayPosts.length} of {allDisplayPosts.length} posts
+                  </p>
+                  <Button
+                    onClick={handleLoadMore}
+                    size="lg"
+                    className="bg-gradient-to-r from-[#d4af37]/20 to-[#c9a961]/20 hover:from-[#d4af37]/30 hover:to-[#c9a961]/30 text-[#d4af37] border-2 border-[#d4af37]/30 hover:border-[#d4af37]/60 font-semibold px-12 py-7 rounded-full shadow-lg hover:shadow-xl hover:shadow-[#d4af37]/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+                  >
+                    Load More Posts
+                    <span className="ml-2 text-sm opacity-70">({remainingCount} remaining)</span>
+                  </Button>
                 </motion.div>
-              ))}
-            </div>
+              )}
+
+              {/* All posts loaded message */}
+              {!hasMore && allDisplayPosts.length > POSTS_PER_PAGE && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="flex justify-center mt-16"
+                >
+                  <p className="text-gray-500 text-sm italic">
+                    You've reached the end — all {allDisplayPosts.length} posts loaded
+                  </p>
+                </motion.div>
+              )}
+            </>
           ) : (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
