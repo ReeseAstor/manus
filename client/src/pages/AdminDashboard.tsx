@@ -214,6 +214,17 @@ export default function AdminDashboard() {
       accentColor: "#06b6d4",
       modules: [
         {
+          title: "Stripe Analytics",
+          description: "Real-time payment metrics & revenue charts",
+          icon: TrendingUp,
+          href: "/admin/stripe-analytics",
+          color: "from-emerald-500/20 to-emerald-600/10",
+          borderColor: "border-emerald-500/30",
+          iconColor: "text-emerald-400",
+          badge: "New",
+          badgeColor: "bg-emerald-500/20 text-emerald-400",
+        },
+        {
           title: "Site Analytics",
           description: "Traffic, engagement & revenue",
           icon: BarChart3,

@@ -28,6 +28,7 @@ import AdminLinks from "./pages/AdminLinks";
 import AdminBooks from "./pages/AdminBooks";
 import AdminReports from "./pages/AdminReports";
 import AdminCommandCenter from "./pages/AdminCommandCenter";
+import AdminStripeAnalytics from "./pages/AdminStripeAnalytics";
 import { NewsletterManager } from "./pages/NewsletterManager";
 import { NewsletterEditor } from "./pages/NewsletterEditor";
 import Privacy from "./pages/Privacy";
@@ -89,6 +90,7 @@ function Router() {
       <Route path={"/admin/books"} component={AdminBooks} />
       <Route path={"/admin/reports"} component={AdminReports} />
       <Route path={"/admin/command-center"} component={AdminCommandCenter} />
+      <Route path={"/admin/stripe-analytics"} component={AdminStripeAnalytics} />
       <Route path={"/admin/audio"} component={AdminAudioGenerator} />
       <Route path={"/admin/webhooks"} component={AdminWebhooks} />
       <Route path={"/admin/twilio"} component={AdminTwilio} />

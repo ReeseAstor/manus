@@ -1506,3 +1506,14 @@
 - [x] Restore MailerLite Welcome Email 3 with stunning HTML template
 - [x] Re-activate MailerLite automation
 - [x] Add Load More pagination to blog page
+
+## Stripe Analytics Dashboard
+- [x] Create Stripe analytics backend API routes (revenue, payments, customers, subscriptions)
+- [x] Build real-time analytics dashboard page with charts
+- [x] Add revenue over time line chart
+- [x] Add payment status breakdown pie/donut chart
+- [x] Add key metric cards (total revenue, payment count, customer count, avg order value)
+- [x] Add recent transactions table
+- [x] Add navigation link to analytics dashboard
+- [x] Write tests for Stripe analytics API routes
+- [x] Verify dashboard displays live Stripe sandbox data
