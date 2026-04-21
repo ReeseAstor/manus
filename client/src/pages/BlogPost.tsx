@@ -10,6 +10,8 @@ import { Streamdown } from "streamdown";
 import { useEffect } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import { BlogToShopBridge } from "@/components/BlogToShopBridge";
+import { AffiliateProductSection, FTCDisclosure } from "@/components/AffiliateProductCard";
+import { affiliateProductsBySlug } from "@/data/affiliateProducts";
 
 export default function BlogPost() {
   const params = useParams();
@@ -25,6 +27,9 @@ export default function BlogPost() {
   const filteredRelatedPosts = relatedPosts
     ?.filter((p) => p.slug !== slug)
     .slice(0, 3) || [];
+
+  // Check if this article has affiliate product data
+  const affiliateData = slug ? affiliateProductsBySlug[slug] : undefined;
 
   // SEO Meta Tags - Update document head when post loads
   useEffect(() => {
@@ -334,12 +339,24 @@ export default function BlogPost() {
               </div>
             )}
 
+            {/* FTC Disclosure for affiliate articles */}
+            {affiliateData?.ftcDisclosure && <FTCDisclosure />}
+
             {/* Main Content */}
             <div className="prose prose-lg prose-invert max-w-none mb-16">
               <div className="text-gray-300 leading-relaxed space-y-6 text-lg">
                 <Streamdown>{post.content}</Streamdown>
               </div>
             </div>
+
+            {/* Affiliate Product Recommendations */}
+            {affiliateData?.topPicks && affiliateData.topPicks.length > 0 && (
+              <AffiliateProductSection
+                products={affiliateData.topPicks}
+                title="Top Picks"
+                subtitle="Recommended Products from This Article"
+              />
+            )}
 
             {/* Author Bio Section */}
             <div className="p-10 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl mb-16">

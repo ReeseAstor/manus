@@ -1544,3 +1544,12 @@
 - [x] Write 14 vitest tests for email template generation
 - [ ] User: Set up automations in MailerLite using the templates and guide
 - [ ] User: Activate both automations in MailerLite
+
+## Amazon Affiliate Product Recommendations
+- [x] Review course module on Amazon affiliate marketing
+- [x] Identify target blog article for affiliate product recommendations
+- [x] Research and select relevant Amazon products for romance readers
+- [x] Build reusable affiliate product card component
+- [x] Add FTC disclosure component to blog posts
+- [x] Update blog article with affiliate product cards and disclosure
+- [x] Test affiliate links and card display
