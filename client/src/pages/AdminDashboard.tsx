@@ -133,6 +133,17 @@ export default function AdminDashboard() {
           borderColor: "border-rose-500/30",
           iconColor: "text-rose-400",
         },
+        {
+          title: "Email Templates",
+          description: "Preview & copy automation email HTML",
+          icon: FileText,
+          href: "/admin/email-templates",
+          color: "from-violet-500/20 to-violet-600/10",
+          borderColor: "border-violet-500/30",
+          iconColor: "text-violet-400",
+          badge: "New",
+          badgeColor: "bg-violet-500",
+        },
       ],
     },
     {

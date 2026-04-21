@@ -16,6 +16,8 @@ import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers
 import { sendEmail } from "./email-service";
 import { generateWelcomeEmail } from "./email-templates/welcome";
 import { generateEmailTemplate, sanitizeEmailContent } from "./emailTemplate";
+import { postPurchaseSequence, generatePostPurchaseEmail1, generatePostPurchaseEmail2, generatePostPurchaseEmail3 } from "./email-templates/post-purchase";
+import { winBackSequence, generateWinBackEmail1, generateWinBackEmail2, generateWinBackEmail3 } from "./email-templates/win-back";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { storagePut } from "./storage";
@@ -993,6 +995,31 @@ Reply directly to: ${input.email}
       return { success: true };
     }),
   }),
+
+  // Email Template Preview Routes (admin only)
+  getEmailTemplatePreview: protectedProcedure
+    .input(z.object({
+      sequence: z.enum(["post-purchase", "win-back"]),
+      emailIndex: z.number().min(0).max(2),
+      buyerName: z.string().optional(),
+    }))
+    .query(({ input }) => {
+      const { sequence, emailIndex, buyerName } = input;
+      const generators = sequence === "post-purchase"
+        ? [generatePostPurchaseEmail1, generatePostPurchaseEmail2, generatePostPurchaseEmail3]
+        : [generateWinBackEmail1, generateWinBackEmail2, generateWinBackEmail3];
+      const sequenceData = sequence === "post-purchase" ? postPurchaseSequence : winBackSequence;
+      const html = generators[emailIndex](buyerName);
+      const meta = sequenceData[emailIndex];
+      return { html, meta };
+    }),
+
+  getEmailSequenceList: protectedProcedure
+    .input(z.object({ sequence: z.enum(["post-purchase", "win-back"]) }))
+    .query(({ input }) => {
+      const data = input.sequence === "post-purchase" ? postPurchaseSequence : winBackSequence;
+      return data.map(({ generate, ...rest }) => rest);
+    }),
 });
 
 export type AppRouter = typeof appRouter;

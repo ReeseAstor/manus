@@ -1522,8 +1522,8 @@
 - [x] Research current MailerLite setup, subscriber segments, and existing automations
 - [x] Research romance author email conversion best practices and industry benchmarks
 - [x] Create comprehensive email marketing conversion strategy document
-- [ ] Design and implement post-purchase nurture email sequence in MailerLite
-- [ ] Design and implement re-engagement/win-back email sequence
+- [x] Design and implement post-purchase nurture email sequence (HTML templates + admin preview page)
+- [x] Design and implement re-engagement/win-back email sequence (HTML templates + admin preview page)
 - [ ] Design and implement new release launch sequence
 - [ ] Design and implement series completion/upsell sequence
 - [x] Build on-site social proof elements (reader count, testimonials, purchase notifications)
@@ -1532,3 +1532,15 @@
 - [x] Implement subscriber segmentation strategy in MailerLite (via Stripe-MailerLite buyer tagging)
 - [x] Write tests for new conversion features
 - [x] Deliver complete strategy document + implementations
+
+## MailerLite Post-Purchase & Re-Engagement Sequences
+- [x] Review strategy document for email sequence content
+- [x] Create 3 post-purchase nurture email HTML templates (Thank You + Companion, Deleted Scene, What's Next)
+- [x] Create 3 re-engagement win-back email HTML templates (I Miss You, Stay or Go, Goodbye)
+- [x] Build admin email templates page with preview and one-click copy
+- [x] Add email templates API routes for preview and sequence listing
+- [x] Create step-by-step MailerLite setup guide document
+- [x] Add Email Templates card to admin dashboard
+- [x] Write 14 vitest tests for email template generation
+- [ ] User: Set up automations in MailerLite using the templates and guide
+- [ ] User: Activate both automations in MailerLite
