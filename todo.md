@@ -1517,3 +1517,18 @@
 - [x] Add navigation link to analytics dashboard
 - [x] Write tests for Stripe analytics API routes
 - [x] Verify dashboard displays live Stripe sandbox data
+
+## Email Marketing & Newsletter Conversion Deep Dive
+- [x] Research current MailerLite setup, subscriber segments, and existing automations
+- [x] Research romance author email conversion best practices and industry benchmarks
+- [x] Create comprehensive email marketing conversion strategy document
+- [ ] Design and implement post-purchase nurture email sequence in MailerLite
+- [ ] Design and implement re-engagement/win-back email sequence
+- [ ] Design and implement new release launch sequence
+- [ ] Design and implement series completion/upsell sequence
+- [x] Build on-site social proof elements (reader count, testimonials, purchase notifications)
+- [x] Build urgency/scarcity conversion triggers on book pages
+- [ ] Create dedicated email-exclusive landing pages for promotions
+- [x] Implement subscriber segmentation strategy in MailerLite (via Stripe-MailerLite buyer tagging)
+- [x] Write tests for new conversion features
+- [x] Deliver complete strategy document + implementations

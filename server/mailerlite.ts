@@ -183,6 +183,105 @@ export async function sendMailerLiteCampaign(
 }
 
 /**
+ * Update a subscriber's fields and groups in MailerLite
+ * Used to tag buyers, update purchase history, etc.
+ */
+export async function updateMailerLiteSubscriber(
+  email: string,
+  fields?: Record<string, string>,
+  groupsToAdd?: string[],
+  groupsToRemove?: string[]
+): Promise<MailerLiteResponse> {
+  if (!MAILERLITE_API_KEY) {
+    console.error("MailerLite API key is not configured");
+    return { success: false, message: "Newsletter service is not configured" };
+  }
+
+  try {
+    // Update subscriber fields and groups
+    const updateData: any = { email };
+    if (fields) updateData.fields = fields;
+    if (groupsToAdd) updateData.groups = groupsToAdd;
+
+    const response = await axios.put(
+      `${MAILERLITE_API_URL}/subscribers/${encodeURIComponent(email)}`,
+      updateData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${MAILERLITE_API_KEY}`,
+          Accept: "application/json",
+        },
+      }
+    );
+
+    // Remove from groups if specified
+    if (groupsToRemove && response.data?.data?.id) {
+      const subscriberId = response.data.data.id;
+      for (const groupId of groupsToRemove) {
+        try {
+          await axios.delete(
+            `${MAILERLITE_API_URL}/subscribers/${subscriberId}/groups/${groupId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${MAILERLITE_API_KEY}`,
+                Accept: "application/json",
+              },
+            }
+          );
+        } catch (e) {
+          // Group removal is best-effort
+          console.warn(`Failed to remove subscriber from group ${groupId}`);
+        }
+      }
+    }
+
+    return {
+      success: true,
+      message: "Subscriber updated successfully",
+      data: response.data,
+    };
+  } catch (error: any) {
+    console.error("MailerLite update error:", error.response?.data || error.message);
+    return {
+      success: false,
+      message: error.response?.data?.message || "Failed to update subscriber",
+    };
+  }
+}
+
+/**
+ * Create a group in MailerLite (if it doesn't exist)
+ */
+export async function createMailerLiteGroup(name: string): Promise<string | null> {
+  if (!MAILERLITE_API_KEY) return null;
+
+  try {
+    // First check if group exists
+    const groups = await getMailerLiteGroups();
+    const existing = groups?.data?.find((g: any) => g.name === name);
+    if (existing) return existing.id;
+
+    // Create new group
+    const response = await axios.post(
+      `${MAILERLITE_API_URL}/groups`,
+      { name },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${MAILERLITE_API_KEY}`,
+          Accept: "application/json",
+        },
+      }
+    );
+    return response.data?.data?.id || null;
+  } catch (error: any) {
+    console.error("Failed to create MailerLite group:", error.response?.data || error.message);
+    return null;
+  }
+}
+
+/**
  * Get all active subscribers from MailerLite
  */
 export async function getMailerLiteSubscribers(groupId?: string) {

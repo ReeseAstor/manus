@@ -13,6 +13,7 @@ import {
   generateDownloadLinks,
 } from "./email-service";
 import { upsertUserSmsPreferences, sendVipWelcomeSms } from "./sms";
+import { updateMailerLiteSubscriber } from "./mailerlite";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2025-11-17.clover",
@@ -115,6 +116,26 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     });
 
     console.log("Purchase recorded:", purchase);
+
+    // Tag buyer in MailerLite for conversion tracking
+    const customerEmail = session.customer_email || session.customer_details?.email;
+    if (customerEmail) {
+      try {
+        const purchaseDate = new Date().toISOString().split('T')[0];
+        await updateMailerLiteSubscriber(
+          customerEmail,
+          {
+            buyer_status: "purchased",
+            last_purchase_date: purchaseDate,
+            last_product_purchased: bookTitle || `Product ${productId}`,
+          }
+        );
+        console.log(`[Webhook] MailerLite buyer tag updated for ${customerEmail}`);
+      } catch (mlError) {
+        console.error("[Webhook] Failed to update MailerLite subscriber:", mlError);
+        // Non-blocking: don't fail the webhook if MailerLite update fails
+      }
+    }
 
     // Send confirmation email if we have customer email
     if (session.customer_email && bookId && bookTitle) {

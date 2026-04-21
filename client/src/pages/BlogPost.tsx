@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Streamdown } from "streamdown";
 import { useEffect } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
+import { BlogToShopBridge } from "@/components/BlogToShopBridge";
 
 export default function BlogPost() {
   const params = useParams();
@@ -374,6 +375,8 @@ export default function BlogPost() {
                   </div>
                 </div>
               </div>
+            {/* Blog to Shop Bridge */}
+            <BlogToShopBridge category={post.category?.toLowerCase().replace(/\s+/g, '-')} />
             </div>
           </motion.article>
         </div>

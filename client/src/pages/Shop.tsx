@@ -6,6 +6,9 @@ import { Link } from "wouter";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
+import { SocialProofBanner } from "@/components/SocialProofBanner";
+import { CountdownTimer } from "@/components/CountdownTimer";
+import { RecentPurchaseToast } from "@/components/RecentPurchaseToast";
 
 interface BundleOption {
   id: string;
@@ -147,6 +150,12 @@ export default function Shop() {
         structuredData={[shopStructuredData]}
       />
 
+      {/* Social Proof Banner */}
+      <SocialProofBanner />
+
+      {/* Recent Purchase Toast Notifications */}
+      <RecentPurchaseToast />
+
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
         <div
@@ -197,6 +206,11 @@ export default function Shop() {
               All purchases include instant delivery and multiple formats
             </p>
           </motion.div>
+
+          {/* Countdown Timer */}
+          <div className="mb-12">
+            <CountdownTimer label="Direct Purchase Pricing Ends In" />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {bundleOptions.map((bundle, index) => (

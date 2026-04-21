@@ -1,0 +1,76 @@
+import { motion } from "framer-motion";
+import { ArrowRight, BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+
+interface BlogToShopBridgeProps {
+  /** The category of the blog post to show relevant recommendation */
+  category?: string;
+}
+
+const recommendations: Record<string, { title: string; tagline: string; bookSlug: string; bookTitle: string }> = {
+  "writing-tips": {
+    title: "See These Techniques in Action",
+    tagline: "Discover how Reese Astor weaves tension, chemistry, and plot twists into the Manhattan Money Kings series.",
+    bookSlug: "the-billionaires-executive-assistant",
+    bookTitle: "The Billionaire's Executive Assistant",
+  },
+  "book-news": {
+    title: "Don't Miss the Latest Release",
+    tagline: "Stay ahead of the story. Grab the newest book in the Manhattan Money Kings series before everyone else.",
+    bookSlug: "the-billionaires-baby-secret",
+    bookTitle: "The Billionaire's Baby Secret",
+  },
+  "behind-the-scenes": {
+    title: "Experience the Full Story",
+    tagline: "You've seen behind the curtain — now experience the world of Manhattan's most powerful billionaires.",
+    bookSlug: "the-billionaires-executive-assistant",
+    bookTitle: "The Billionaire's Executive Assistant",
+  },
+  default: {
+    title: "Ready for Your Next Obsession?",
+    tagline: "Dive into the Manhattan Money Kings series — steamy billionaire romance that readers can't put down.",
+    bookSlug: "the-billionaires-executive-assistant",
+    bookTitle: "The Billionaire's Executive Assistant",
+  },
+};
+
+export function BlogToShopBridge({ category }: BlogToShopBridgeProps) {
+  const rec = recommendations[category || ""] || recommendations.default;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="mt-12 bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5 border border-[#d4af37]/30 rounded-2xl p-6 md:p-8"
+    >
+      <div className="flex items-start gap-4">
+        <div className="bg-[#d4af37]/20 rounded-lg p-3 flex-shrink-0 hidden md:block">
+          <BookOpen className="w-6 h-6 text-[#d4af37]" />
+        </div>
+        <div className="flex-1">
+          <h3 className="text-xl font-serif font-bold text-[#e5e5e5] mb-2">
+            {rec.title}
+          </h3>
+          <p className="text-[#e5e5e5]/70 mb-4">
+            {rec.tagline}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link href="/shop">
+              <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-semibold">
+                Browse the Shop
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+            <Link href={`/books/${rec.bookSlug}`}>
+              <Button variant="outline" className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10">
+                Start with {rec.bookTitle}
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
