@@ -355,6 +355,7 @@ export default function BlogPost() {
                 products={affiliateData.topPicks}
                 title="Top Picks"
                 subtitle="Recommended Products from This Article"
+                sourceSlug={post.slug}
               />
             )}
 

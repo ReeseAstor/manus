@@ -30,6 +30,7 @@ import AdminReports from "./pages/AdminReports";
 import AdminCommandCenter from "./pages/AdminCommandCenter";
 import AdminStripeAnalytics from "./pages/AdminStripeAnalytics";
 import AdminEmailTemplates from "./pages/AdminEmailTemplates";
+import AdminAffiliateAnalytics from "./pages/AdminAffiliateAnalytics";
 import { NewsletterManager } from "./pages/NewsletterManager";
 import { NewsletterEditor } from "./pages/NewsletterEditor";
 import Privacy from "./pages/Privacy";
@@ -50,6 +51,7 @@ import VipWelcome from "./pages/VipWelcome";
 import AuditOfTheHeart from "./pages/AuditOfTheHeart";
 import HostileTender from "./pages/HostileTender";
 import VipDashboard from "./pages/VipDashboard";
+import Favorites from "./pages/Favorites";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AIChatbot } from "./components/AIChatbot";
@@ -68,6 +70,7 @@ function Router() {
       <Route path={"/free-book"} component={FreeBook} />
       <Route path={"/quiz"} component={CharacterQuiz} />
       <Route path={"/shop"} component={Shop} />
+      <Route path={"/favorites"} component={Favorites} />
       <Route path={"/why-buy-direct"} component={WhyBuyDirectPage} />
       <Route path={"/purchase-success"} component={PurchaseSuccess} />
       <Route path={"/profile"} component={Profile} />
@@ -93,6 +96,7 @@ function Router() {
       <Route path={"/admin/command-center"} component={AdminCommandCenter} />
       <Route path={"/admin/stripe-analytics"} component={AdminStripeAnalytics} />
       <Route path={"/admin/email-templates"} component={AdminEmailTemplates} />
+      <Route path={"/admin/affiliate-analytics"} component={AdminAffiliateAnalytics} />
       <Route path={"/admin/audio"} component={AdminAudioGenerator} />
       <Route path={"/admin/webhooks"} component={AdminWebhooks} />
       <Route path={"/admin/twilio"} component={AdminTwilio} />

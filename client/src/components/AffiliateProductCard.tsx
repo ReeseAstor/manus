@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Star, ShoppingCart } from "lucide-react";
+import { trpc } from "../lib/trpc";
+import { useLocation } from "wouter";
 
 export interface AffiliateProduct {
   name: string;
@@ -14,9 +16,24 @@ export interface AffiliateProduct {
 interface AffiliateProductCardProps {
   product: AffiliateProduct;
   index: number;
+  sourceSlug?: string;
 }
 
-export function AffiliateProductCard({ product, index }: AffiliateProductCardProps) {
+export function AffiliateProductCard({ product, index, sourceSlug }: AffiliateProductCardProps) {
+  const [location] = useLocation();
+  const trackClick = trpc.affiliateTracking.trackClick.useMutation();
+
+  const slug = sourceSlug || location.replace(/^\/blog\//, "").replace(/\/$/, "") || "unknown";
+
+  const handleClick = () => {
+    trackClick.mutate({
+      productName: product.name,
+      affiliateUrl: product.affiliateUrl,
+      sourceSlug: slug,
+      clickType: "card",
+    });
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -76,6 +93,7 @@ export function AffiliateProductCard({ product, index }: AffiliateProductCardPro
           href={product.affiliateUrl}
           target="_blank"
           rel="noopener noreferrer nofollow"
+          onClick={handleClick}
           className="flex items-center justify-center gap-2 w-full py-3 px-6 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-[#d4af37]/20"
         >
           Check Price on Amazon
@@ -93,9 +111,10 @@ interface AffiliateProductSectionProps {
   products: AffiliateProduct[];
   title?: string;
   subtitle?: string;
+  sourceSlug?: string;
 }
 
-export function AffiliateProductSection({ products, title = "Top Picks", subtitle = "Recommended products from this article" }: AffiliateProductSectionProps) {
+export function AffiliateProductSection({ products, title = "Top Picks", subtitle = "Recommended products from this article", sourceSlug }: AffiliateProductSectionProps) {
   return (
     <div className="my-12">
       {/* Section Header */}
@@ -113,7 +132,7 @@ export function AffiliateProductSection({ products, title = "Top Picks", subtitl
       {/* Product Grid */}
       <div className="grid md:grid-cols-3 gap-6">
         {products.map((product, index) => (
-          <AffiliateProductCard key={index} product={product} index={index} />
+          <AffiliateProductCard key={index} product={product} index={index} sourceSlug={sourceSlug} />
         ))}
       </div>
     </div>

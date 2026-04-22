@@ -253,6 +253,17 @@ export default function AdminDashboard() {
           borderColor: "border-amber-500/30",
           iconColor: "text-amber-400",
         },
+        {
+          title: "Affiliate Analytics",
+          description: "Amazon Associates click tracking & earnings",
+          icon: Activity,
+          href: "/admin/affiliate-analytics",
+          color: "from-orange-500/20 to-orange-600/10",
+          borderColor: "border-orange-500/30",
+          iconColor: "text-orange-400",
+          badge: "New",
+          badgeColor: "bg-orange-500/20 text-orange-400",
+        },
       ],
     },
   ];

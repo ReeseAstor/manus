@@ -1049,3 +1049,59 @@ export const dailyBriefings = mysqlTable("daily_briefings", {
 
 export type DailyBriefing = typeof dailyBriefings.$inferSelect;
 export type InsertDailyBriefing = typeof dailyBriefings.$inferInsert;
+
+/**
+ * Affiliate click tracking for Amazon Associates and other affiliate programs.
+ * Tracks clicks on affiliate links to measure performance by product, article, and source.
+ */
+export const affiliateClicks = mysqlTable("affiliate_clicks", {
+  id: int("id").autoincrement().primaryKey(),
+  /** The product name or identifier that was clicked */
+  productName: varchar("productName", { length: 255 }).notNull(),
+  /** The Amazon ASIN or product identifier */
+  productId: varchar("productId", { length: 64 }),
+  /** The affiliate URL that was clicked */
+  affiliateUrl: text("affiliateUrl").notNull(),
+  /** The blog post slug or page where the click originated */
+  sourceSlug: varchar("sourceSlug", { length: 255 }).notNull(),
+  /** The type of click: 'inline' (text link), 'card' (product card CTA), 'favorites' (favorites page) */
+  clickType: mysqlEnum("clickType", ["inline", "card", "favorites"]).default("inline").notNull(),
+  /** Anonymous session identifier for deduplication (hashed) */
+  sessionHash: varchar("sessionHash", { length: 64 }),
+  /** User agent string for device analytics */
+  userAgent: text("userAgent"),
+  /** Referrer URL */
+  referrer: text("referrer"),
+  /** IP-based country code (2-letter) for geo analytics */
+  country: varchar("country", { length: 2 }),
+  /** Logged-in user ID (nullable for anonymous visitors) */
+  userId: int("userId"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type AffiliateClick = typeof affiliateClicks.$inferSelect;
+export type InsertAffiliateClick = typeof affiliateClicks.$inferInsert;
+
+/**
+ * Daily aggregated affiliate metrics for dashboard charts.
+ * Pre-computed daily rollups to avoid expensive queries on the raw clicks table.
+ */
+export const affiliateMetricsDaily = mysqlTable("affiliate_metrics_daily", {
+  id: int("id").autoincrement().primaryKey(),
+  /** The date for this metrics row */
+  metricDate: timestamp("metricDate").notNull(),
+  /** Total clicks across all products */
+  totalClicks: int("totalClicks").default(0).notNull(),
+  /** Unique sessions (deduplicated by sessionHash) */
+  uniqueClicks: int("uniqueClicks").default(0).notNull(),
+  /** Top product by clicks (JSON: {name, clicks, url}) */
+  topProduct: text("topProduct"),
+  /** Top source article by clicks (JSON: {slug, clicks}) */
+  topSource: text("topSource"),
+  /** Breakdown by click type (JSON: {inline, card, favorites}) */
+  clickTypeBreakdown: text("clickTypeBreakdown"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type AffiliateMetricsDaily = typeof affiliateMetricsDaily.$inferSelect;
+export type InsertAffiliateMetricsDaily = typeof affiliateMetricsDaily.$inferInsert;
