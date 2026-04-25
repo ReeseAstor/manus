@@ -174,6 +174,10 @@ export default function Quiz() {
       setIsComplete(true);
       setShowEmailGate(false);
       setShowResult(true);
+      // Save quiz result for personalized book recommendations
+      if (result) {
+        try { localStorage.setItem("romanceQuizResult", result.trope); } catch {}
+      }
       toast.success("Welcome! Your personalized results are ready.");
       setTimeout(() => {
         window.open("https://BookHip.com/JHRBVXT", "_blank");
@@ -184,6 +188,10 @@ export default function Quiz() {
         setIsComplete(true);
         setShowEmailGate(false);
         setShowResult(true);
+        // Save quiz result for personalized book recommendations
+        if (result) {
+          try { localStorage.setItem("romanceQuizResult", result.trope); } catch {}
+        }
         toast.info("Welcome back! Here are your results.");
       } else {
         toast.error(error.message || "Something went wrong. Please try again.");

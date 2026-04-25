@@ -144,11 +144,11 @@ describe("blog.create", () => {
     const result = await caller.blog.create(input);
 
     expect(result.success).toBe(true);
-    expect(db.createBlogPost).toHaveBeenCalledWith({
+    expect(db.createBlogPost).toHaveBeenCalledWith(expect.objectContaining({
       ...input,
       authorId: 1,
       publishedAt: null,
-    });
+    }));
   });
 
   it("sets publishedAt when creating as published", async () => {

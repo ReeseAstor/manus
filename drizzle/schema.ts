@@ -1105,3 +1105,42 @@ export const affiliateMetricsDaily = mysqlTable("affiliate_metrics_daily", {
 
 export type AffiliateMetricsDaily = typeof affiliateMetricsDaily.$inferSelect;
 export type InsertAffiliateMetricsDaily = typeof affiliateMetricsDaily.$inferInsert;
+
+
+/**
+ * Partner author applications for group promo events
+ */
+export const partnerApplications = mysqlTable("partner_applications", {
+  id: int("id").autoincrement().primaryKey(),
+  /** Author's full name */
+  authorName: varchar("authorName", { length: 255 }).notNull(),
+  /** Author's email address */
+  email: varchar("email", { length: 320 }).notNull(),
+  /** Author's website URL */
+  website: text("website"),
+  /** Book title being offered for the promo */
+  bookTitle: varchar("bookTitle", { length: 255 }).notNull(),
+  /** Book genre (e.g., Billionaire Romance, Dark Romance) */
+  genre: varchar("genre", { length: 100 }).notNull(),
+  /** Comma-separated tropes */
+  tropes: text("tropes"),
+  /** Short book description / blurb */
+  bookDescription: text("bookDescription").notNull(),
+  /** BookFunnel or StoryOrigin download link */
+  downloadLink: text("downloadLink"),
+  /** Book cover image URL */
+  coverImageUrl: text("coverImageUrl"),
+  /** Author's newsletter subscriber count (approximate) */
+  subscriberCount: varchar("subscriberCount", { length: 50 }),
+  /** Social media links (JSON) */
+  socialLinks: text("socialLinks"),
+  /** Application status */
+  status: mysqlEnum("status", ["pending", "approved", "rejected"]).default("pending").notNull(),
+  /** Admin notes */
+  adminNotes: text("adminNotes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type PartnerApplication = typeof partnerApplications.$inferSelect;
+export type InsertPartnerApplication = typeof partnerApplications.$inferInsert;

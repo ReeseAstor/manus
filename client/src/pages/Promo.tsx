@@ -526,32 +526,239 @@ export default function Promo() {
           </div>
         </motion.div>
 
-        {/* For Authors Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-20 text-center"
-        >
-          <div className="max-w-xl mx-auto p-6 rounded-2xl bg-white/[0.02] border border-white/10">
-            <h3 className="font-serif text-xl font-bold text-white mb-2">
-              Are You a Romance Author?
-            </h3>
-            <p className="text-sm text-gray-400 mb-4 leading-relaxed">
-              Want to participate in our next group promotion? We're always looking for romance authors
-              with quality books to join our cross-promotion events. Reach out to discuss partnership opportunities.
-            </p>
-            <Button
-              variant="outline"
-              className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 rounded-full"
-              onClick={() => window.location.href = "/contact"}
-            >
-              Contact Us About Partnerships
-            </Button>
-          </div>
-        </motion.div>
+        {/* For Authors Section - Application Form */}
+        <PartnerApplicationForm />
       </div>
     </div>
+  );
+}
+
+function PartnerApplicationForm() {
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    authorName: "",
+    email: "",
+    website: "",
+    bookTitle: "",
+    genre: "",
+    tropes: "",
+    bookDescription: "",
+    downloadLink: "",
+    coverImageUrl: "",
+    subscriberCount: "",
+    socialLinks: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const submitMutation = trpc.partnerApplications.submit.useMutation({
+    onSuccess: () => {
+      setSubmitted(true);
+      toast.success("Application submitted! We'll review it and get back to you within 48 hours.");
+    },
+    onError: (error) => {
+      toast.error(error.message || "Something went wrong. Please try again.");
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.authorName || !formData.email || !formData.bookTitle || !formData.genre || !formData.bookDescription) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+    submitMutation.mutate(formData);
+  };
+
+  const updateField = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.8 }}
+      className="mt-20"
+    >
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-8">
+          <h3 className="font-serif text-2xl font-bold text-white mb-2">
+            Are You a Romance <span className="text-[#d4af37]">Author</span>?
+          </h3>
+          <p className="text-gray-400 leading-relaxed">
+            Want to participate in our next group promotion? We're looking for romance authors
+            with quality books to join our cross-promotion events.
+          </p>
+        </div>
+
+        {!showForm && !submitted && (
+          <div className="text-center">
+            <Button
+              onClick={() => setShowForm(true)}
+              className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+            >
+              Apply to Partner With Us
+            </Button>
+          </div>
+        )}
+
+        {submitted && (
+          <div className="p-8 rounded-2xl bg-green-500/5 border border-green-500/20 text-center">
+            <CheckCircle className="h-12 w-12 text-green-400 mx-auto mb-4" />
+            <h4 className="font-serif text-xl font-bold text-white mb-2">Application Received!</h4>
+            <p className="text-gray-400">
+              Thank you for your interest. We'll review your application and get back to you within 48 hours.
+            </p>
+          </div>
+        )}
+
+        {showForm && !submitted && (
+          <form onSubmit={handleSubmit} className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Author Name *</label>
+                <Input
+                  value={formData.authorName}
+                  onChange={(e) => updateField("authorName", e.target.value)}
+                  placeholder="Your pen name"
+                  required
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Email *</label>
+                <Input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => updateField("email", e.target.value)}
+                  placeholder="author@example.com"
+                  required
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Website</label>
+                <Input
+                  value={formData.website}
+                  onChange={(e) => updateField("website", e.target.value)}
+                  placeholder="https://yoursite.com"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Newsletter Subscribers</label>
+                <Input
+                  value={formData.subscriberCount}
+                  onChange={(e) => updateField("subscriberCount", e.target.value)}
+                  placeholder="e.g. 2,500"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                />
+              </div>
+            </div>
+
+            <div className="border-t border-white/5 pt-5">
+              <h4 className="text-sm font-semibold text-white mb-4">Book Details</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Book Title *</label>
+                  <Input
+                    value={formData.bookTitle}
+                    onChange={(e) => updateField("bookTitle", e.target.value)}
+                    placeholder="Your book title"
+                    required
+                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Genre *</label>
+                  <Input
+                    value={formData.genre}
+                    onChange={(e) => updateField("genre", e.target.value)}
+                    placeholder="e.g. Billionaire Romance"
+                    required
+                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Tropes (comma-separated)</label>
+              <Input
+                value={formData.tropes}
+                onChange={(e) => updateField("tropes", e.target.value)}
+                placeholder="e.g. Enemies to Lovers, Office Romance, Second Chance"
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+              />
+            </div>
+
+            <div>
+              <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Book Description *</label>
+              <textarea
+                value={formData.bookDescription}
+                onChange={(e) => updateField("bookDescription", e.target.value)}
+                placeholder="A brief description of your book (2-3 sentences)..."
+                required
+                rows={3}
+                className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#d4af37]/30 resize-none"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">BookFunnel/StoryOrigin Link</label>
+                <Input
+                  value={formData.downloadLink}
+                  onChange={(e) => updateField("downloadLink", e.target.value)}
+                  placeholder="https://bookfunnel.com/..."
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Cover Image URL</label>
+                <Input
+                  value={formData.coverImageUrl}
+                  onChange={(e) => updateField("coverImageUrl", e.target.value)}
+                  placeholder="https://..."
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Social Media Links</label>
+              <Input
+                value={formData.socialLinks}
+                onChange={(e) => updateField("socialLinks", e.target.value)}
+                placeholder="Instagram, TikTok, Facebook URLs (comma-separated)"
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+              />
+            </div>
+
+            <div className="flex items-center gap-3 pt-2">
+              <Button
+                type="submit"
+                disabled={submitMutation.isPending}
+                className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
+              >
+                {submitMutation.isPending ? "Submitting..." : "Submit Application"}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowForm(false)}
+                className="border-white/10 text-gray-400 hover:text-white rounded-full"
+              >
+                Cancel
+              </Button>
+            </div>
+          </form>
+        )}
+      </div>
+    </motion.div>
   );
 }
 

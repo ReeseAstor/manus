@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Star, ChevronDown, ChevronUp, Heart, Share2 } from "lucide-react";
 import { BuyDirectSection } from "@/components/BuyDirectSection";
 import { WhyBuyDirectInline } from "@/components/WhyBuyDirect";
+import { ReadersAlsoLoved } from "@/components/ReadersAlsoLoved";
 import { motion } from "framer-motion";
 
 export default function BookDetail() {
@@ -401,54 +402,12 @@ export default function BookDetail() {
         </div>
       )}
 
-      {/* Related Books */}
-      {relatedBooks && relatedBooks.length > 0 && (
-        <div className="py-20 px-4 bg-gradient-to-b from-transparent to-[#0a0e27]">
-          <div className="container max-w-7xl mx-auto">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl font-serif font-bold text-[#e5e5e5] mb-12 text-center"
-            >
-              You Might Also Like
-            </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {relatedBooks.map((relatedBook, index) => (
-                <motion.div
-                  key={relatedBook.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link href={`/books/${relatedBook.slug}`}>
-                    <div className="group cursor-pointer">
-                      <div className="relative overflow-hidden rounded-2xl mb-4">
-                        <img
-                          src={relatedBook.coverImage}
-                          alt={relatedBook.title}
-                          className="w-full aspect-[2/3] object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e27] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </div>
-                      <h3 className="text-xl font-serif font-bold text-[#e5e5e5] mb-2 group-hover:text-[#d4af37] transition-colors">
-                        {relatedBook.title}
-                      </h3>
-                      <div className="flex items-center gap-2">
-                        <div className="flex">{renderStars(relatedBook.rating || 0)}</div>
-                        <span className="text-[#e5e5e5]/60 text-sm">
-                          {(relatedBook.rating || 0).toFixed(1)}
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Readers Also Loved - Personalized Recommendations */}
+      <ReadersAlsoLoved
+        currentBookId={book.id}
+        currentBookTropes={book.tropes || undefined}
+        currentBookSlug={slug}
+      />
     </div>
   );
 }

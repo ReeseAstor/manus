@@ -7,7 +7,7 @@ import {
   Users, TrendingUp, Bell, Settings, CheckCircle2, XCircle,
   Clock, BarChart3, Loader2, RefreshCw, ChevronRight,
   AlertCircle, BookMarked, MessageSquare, Mail, Smartphone, Sparkles,
-  Mic, Webhook, PenTool, Zap, ArrowRight, Activity
+  Mic, Webhook, PenTool, Zap, ArrowRight, Activity, Share2
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -143,6 +143,28 @@ export default function AdminDashboard() {
           iconColor: "text-violet-400",
           badge: "New",
           badgeColor: "bg-violet-500",
+        },
+        {
+          title: "Partner Applications",
+          description: "Review author partnership requests",
+          icon: Users,
+          href: "/admin/partner-applications",
+          color: "from-teal-500/20 to-teal-600/10",
+          borderColor: "border-teal-500/30",
+          iconColor: "text-teal-400",
+          badge: "New",
+          badgeColor: "bg-teal-500",
+        },
+        {
+          title: "Social Media Kit",
+          description: "Quiz promo graphics, captions & posting schedule",
+          icon: Share2,
+          href: "/admin/social-media-kit",
+          color: "from-orange-500/20 to-orange-600/10",
+          borderColor: "border-orange-500/30",
+          iconColor: "text-orange-400",
+          badge: "New",
+          badgeColor: "bg-orange-500",
         },
       ],
     },

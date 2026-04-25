@@ -31,6 +31,8 @@ import AdminCommandCenter from "./pages/AdminCommandCenter";
 import AdminStripeAnalytics from "./pages/AdminStripeAnalytics";
 import AdminEmailTemplates from "./pages/AdminEmailTemplates";
 import AdminAffiliateAnalytics from "./pages/AdminAffiliateAnalytics";
+import AdminPartnerApplications from "./pages/AdminPartnerApplications";
+import AdminSocialMediaKit from "./pages/AdminSocialMediaKit";
 import { NewsletterManager } from "./pages/NewsletterManager";
 import { NewsletterEditor } from "./pages/NewsletterEditor";
 import Privacy from "./pages/Privacy";
@@ -102,6 +104,8 @@ function Router() {
       <Route path={"/admin/stripe-analytics"} component={AdminStripeAnalytics} />
       <Route path={"/admin/email-templates"} component={AdminEmailTemplates} />
       <Route path={"/admin/affiliate-analytics"} component={AdminAffiliateAnalytics} />
+      <Route path={"/admin/partner-applications"} component={AdminPartnerApplications} />
+      <Route path={"/admin/social-media-kit"} component={AdminSocialMediaKit} />
       <Route path={"/admin/audio"} component={AdminAudioGenerator} />
       <Route path={"/admin/webhooks"} component={AdminWebhooks} />
       <Route path={"/admin/twilio"} component={AdminTwilio} />

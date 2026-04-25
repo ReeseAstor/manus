@@ -37,6 +37,7 @@ export default function Books() {
   const books = [
     {
       id: 4,
+      slug: "the-billionaires-forbidden-nanny",
       title: "The Billionaire's Forbidden Nanny: Forbidden and Forever",
       subtitle: "Manhattan Money Kings Book 4 (LAST BOOK)",
       cover: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/wyOruOlpqOcFfhnS.jpg",
@@ -56,6 +57,7 @@ export default function Books() {
     },
     {
       id: 3,
+      slug: "the-billionaire-s-baby-secret",
       title: "The Billionaire's Baby Secret",
       subtitle: "Manhattan Money Kings Book 3",
       cover: "/book3-cover.jpg",
@@ -75,6 +77,7 @@ export default function Books() {
     },
     {
       id: 2,
+      slug: "the-billionaire-s-fake-wife",
       title: "The Billionaire's Fake Wife",
       subtitle: "Manhattan Money Kings Book 2",
       cover: "/book2-cover.jpg",
@@ -92,6 +95,7 @@ export default function Books() {
     },
     {
       id: 1,
+      slug: "the-billionaire-s-executive-assistant",
       title: "The Billionaire's Executive Assistant",
       subtitle: "Manhattan Money Kings Book 1",
       cover: "/book1-cover.jpg",
@@ -443,7 +447,7 @@ export default function Books() {
                           variant="outline"
                           className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white py-7"
                         >
-                          <Link href={`/books/${book.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>
+                          <Link href={`/books/${book.slug}`}>
                             <ChevronRight className="mr-2 h-5 w-5" />
                             Learn More
                           </Link>
