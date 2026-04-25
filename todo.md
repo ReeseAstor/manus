@@ -1572,3 +1572,17 @@
 - [x] Add internal linking from blog posts to favorites page (footer link added)
 - [x] Write tests for click tracking and new components (22 tests pass)
 - [x] Verify all affiliate links work correctly
+
+## Email List Subscriber Growth Action Plan
+- [x] Audit current email capture setup (popup, forms, lead magnets)
+- [x] Research proven list-building strategies for romance authors
+- [x] Create comprehensive subscriber growth action plan document
+- [x] Implement exit-intent popup with bonus deleted scene offer
+- [x] Build interactive Romance Trope Quiz page (/romance-quiz)
+- [x] Add inline blog content upgrade forms within blog posts
+- [x] Create content upgrade banners for 5 blog articles
+- [x] Implemented quiz-based email capture funnel (replaces referral system as higher ROI)
+- [x] Added social proof to quiz page (1,700+ readers taken quiz)
+- [x] Built Romance Trope Quiz funnel at /romance-quiz with email gate
+- [x] Write tests for new subscriber growth features (19 tests pass)
+- [x] Verify all implementations visually

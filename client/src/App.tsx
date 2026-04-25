@@ -56,6 +56,8 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AIChatbot } from "./components/AIChatbot";
 import { EmailCapturePopup } from "./components/EmailCapturePopup";
+import { ExitIntentPopup } from "./components/ExitIntentPopup";
+import RomanceTropeQuiz from "./pages/Quiz";
 
 function Router() {
   return (
@@ -69,6 +71,7 @@ function Router() {
       <Route path={"/reader-club/:slug"} component={ExclusiveContentDetail} />
       <Route path={"/free-book"} component={FreeBook} />
       <Route path={"/quiz"} component={CharacterQuiz} />
+      <Route path={"/romance-quiz"} component={RomanceTropeQuiz} />
       <Route path={"/shop"} component={Shop} />
       <Route path={"/favorites"} component={Favorites} />
       <Route path={"/why-buy-direct"} component={WhyBuyDirectPage} />
@@ -135,6 +138,7 @@ function App() {
             <Footer />
             <AIChatbot />
             <EmailCapturePopup />
+            <ExitIntentPopup />
           </div>
         </TooltipProvider>
       </ThemeProvider>

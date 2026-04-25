@@ -10,6 +10,7 @@ import { Streamdown } from "streamdown";
 import { useEffect } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import { BlogToShopBridge } from "@/components/BlogToShopBridge";
+import { BlogContentUpgrade } from "@/components/BlogContentUpgrade";
 import { AffiliateProductSection, FTCDisclosure } from "@/components/AffiliateProductCard";
 import { affiliateProductsBySlug } from "@/data/affiliateProducts";
 
@@ -348,6 +349,9 @@ export default function BlogPost() {
                 <Streamdown>{post.content}</Streamdown>
               </div>
             </div>
+
+            {/* Content Upgrade - Contextual email capture */}
+            <BlogContentUpgrade blogSlug={slug} />
 
             {/* Affiliate Product Recommendations */}
             {affiliateData?.topPicks && affiliateData.topPicks.length > 0 && (
