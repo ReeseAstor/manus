@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Sparkles, BookOpen, ArrowRight, ArrowLeft, Mail, CheckCircle, Star } from "lucide-react";
+import { ShareableResultCard } from "@/components/ShareableResultCard";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
@@ -481,45 +482,17 @@ export default function Quiz() {
                     </div>
                   </div>
 
-                  {/* Share Section */}
-                  <div className="mt-10 text-center">
-                    <p className="text-gray-400 mb-4">Share your result with friends!</p>
-                    <div className="flex items-center justify-center gap-3">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-white/10 text-gray-300 hover:bg-white/5 rounded-full"
-                        onClick={() => {
-                          const text = `I'm a ${result.title} reader! 💕 Take the quiz to find your romance trope: ${window.location.origin}/quiz`;
-                          window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
-                        }}
-                      >
-                        Share on X
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-white/10 text-gray-300 hover:bg-white/5 rounded-full"
-                        onClick={() => {
-                          const url = `${window.location.origin}/quiz`;
-                          window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, "_blank");
-                        }}
-                      >
-                        Share on Facebook
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-white/10 text-gray-300 hover:bg-white/5 rounded-full"
-                        onClick={() => {
-                          navigator.clipboard.writeText(`${window.location.origin}/quiz`);
-                          toast.success("Quiz link copied to clipboard!");
-                        }}
-                      >
-                        Copy Link
-                      </Button>
-                    </div>
-                  </div>
+                  {/* Shareable Result Card + Social Sharing */}
+                  <ShareableResultCard
+                    trope={result.trope}
+                    title={result.title}
+                    subtitle={result.subtitle}
+                    icon={result.icon}
+                    color={result.color}
+                    bookTitle={result.bookTitle}
+                    bookCover={result.bookCover}
+                    siteUrl={window.location.origin}
+                  />
                 </div>
               </motion.div>
             )}

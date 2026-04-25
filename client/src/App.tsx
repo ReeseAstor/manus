@@ -52,6 +52,7 @@ import AuditOfTheHeart from "./pages/AuditOfTheHeart";
 import HostileTender from "./pages/HostileTender";
 import VipDashboard from "./pages/VipDashboard";
 import Favorites from "./pages/Favorites";
+import Promo from "./pages/Promo";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AIChatbot } from "./components/AIChatbot";
@@ -74,6 +75,7 @@ function Router() {
       <Route path={"/romance-quiz"} component={RomanceTropeQuiz} />
       <Route path={"/shop"} component={Shop} />
       <Route path={"/favorites"} component={Favorites} />
+      <Route path={"/promo"} component={Promo} />
       <Route path={"/why-buy-direct"} component={WhyBuyDirectPage} />
       <Route path={"/purchase-success"} component={PurchaseSuccess} />
       <Route path={"/profile"} component={Profile} />

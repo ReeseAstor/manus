@@ -1586,3 +1586,14 @@
 - [x] Built Romance Trope Quiz funnel at /romance-quiz with email gate
 - [x] Write tests for new subscriber growth features (19 tests pass)
 - [x] Verify all implementations visually
+
+## Shareable Quiz Results & Group Promo Features
+- [x] Build shareable quiz result cards with social media sharing buttons
+- [x] Generate OG-image-style result cards for each trope (enemies, forbidden, second-chance, boss)
+- [x] Add share buttons for Instagram, TikTok, Facebook, Twitter/X with pre-written captions
+- [x] Add copy-to-clipboard for sharing quiz link with result
+- [x] Build BookFunnel/StoryOrigin group promo landing page at /promo
+- [x] Design cross-promotion landing page with multi-author giveaway layout
+- [x] Add email capture form integrated with MailerLite
+- [x] Write tests for sharing features and promo page (16 tests pass)
+- [x] Verify all implementations visually
