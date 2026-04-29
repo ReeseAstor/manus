@@ -1629,3 +1629,15 @@
 - [x] Update Facebook profile link to canonical URL (eliminate 1 redirect)
 - [x] Update Twitter share URLs from twitter.com to x.com (eliminate 1 redirect)
 - [x] Update Pinterest share URLs from pinterest.com to www.pinterest.com (eliminate 1 redirect)
+
+## Switchy.io API Integration
+- [x] Store Switchy API key as project secret
+- [x] Verify API connectivity (test query)
+- [ ] Build server-side Switchy API integration (create, update, list links)
+- [ ] Integrate Switchy link management into admin dashboard
+- [ ] Test full integration
+
+## Stripe Webhook Fix
+- [x] Fix webhook endpoint to return 200 OK with {verified: true} for test events
+- [x] Ensure express.raw() is registered before express.json() for webhook route
+- [x] Test webhook endpoint responds correctly
