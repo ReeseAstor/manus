@@ -1618,3 +1618,14 @@
 - [x] Fix book detail URL slug mismatch (Books page was generating slugs from title instead of using DB slugs)
 - [x] Add slug property to hardcoded book data in Books.tsx to match database slugs
 - [x] Fix blog.create test assertion to use objectContaining for new fields
+
+## External Link Redirect Chain Audit
+- [x] Collect all external links from website codebase
+- [x] Test each link for redirect chains (measure hops, final destination, status codes)
+- [x] Identify problematic links with multiple redirects
+- [x] Deliver audit report with recommendations
+
+## Redirect Optimization Fixes
+- [x] Update Facebook profile link to canonical URL (eliminate 1 redirect)
+- [x] Update Twitter share URLs from twitter.com to x.com (eliminate 1 redirect)
+- [x] Update Pinterest share URLs from pinterest.com to www.pinterest.com (eliminate 1 redirect)

@@ -38,7 +38,7 @@ export function ShareableResultCard({
 
   const handleShareTwitter = () => {
     const text = `${shareText}\n${quizUrl}\n\n${hashtags}`;
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   const handleShareFacebook = () => {
@@ -47,7 +47,7 @@ export function ShareableResultCard({
 
   const handleSharePinterest = () => {
     const desc = `${shareText} ${hashtags}`;
-    window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(quizUrl)}&description=${encodeURIComponent(desc)}`, "_blank");
+    window.open(`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(quizUrl)}&description=${encodeURIComponent(desc)}`, "_blank");
   };
 
   const handleNativeShare = async () => {
