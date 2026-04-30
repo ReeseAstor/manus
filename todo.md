@@ -1641,3 +1641,11 @@
 - [x] Fix webhook endpoint to return 200 OK with {verified: true} for test events
 - [x] Ensure express.raw() is registered before express.json() for webhook route
 - [x] Test webhook endpoint responds correctly
+
+## Switchy Auto Link Shortening Feature
+- [x] Build server-side Switchy API service (create, update, list, delete links)
+- [x] Create tRPC router for Switchy link management (admin-only)
+- [x] Build admin Link Manager page with create/edit/list/search/quick-shorten UI
+- [x] Add auto-shorten capability (quick-shorten bar + full create form)
+- [x] Write tests for Switchy integration (10 tests passing)
+- [x] Add Link Shortener to admin dashboard navigation

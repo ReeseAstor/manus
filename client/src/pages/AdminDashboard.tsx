@@ -166,6 +166,17 @@ export default function AdminDashboard() {
           badge: "New",
           badgeColor: "bg-orange-500",
         },
+        {
+          title: "Link Shortener",
+          description: "Create & manage swiy.co short links",
+          icon: Link2,
+          href: "/admin/switchy",
+          color: "from-cyan-500/20 to-cyan-600/10",
+          borderColor: "border-cyan-500/30",
+          iconColor: "text-cyan-400",
+          badge: "New",
+          badgeColor: "bg-cyan-500",
+        },
       ],
     },
     {

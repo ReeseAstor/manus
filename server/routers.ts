@@ -13,6 +13,7 @@ import { kieRouter } from "./routers/kie";
 import { commandCenterRouter } from "./routers/commandCenter";
 import { affiliateTrackingRouter } from "./routers/affiliateTracking";
 import { partnerApplicationsRouter } from "./routers/partnerApplications";
+import { switchyRouter } from "./routers/switchy";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
 import { sendEmail } from "./email-service";
@@ -84,6 +85,7 @@ export const appRouter = router({
   commandCenter: commandCenterRouter,
   affiliateTracking: affiliateTrackingRouter,
   partnerApplications: partnerApplicationsRouter,
+  switchy: switchyRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
