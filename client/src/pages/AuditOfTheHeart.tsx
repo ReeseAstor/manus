@@ -185,6 +185,34 @@ export default function AuditOfTheHeart() {
         </div>
       </section>
 
+      {/* Video Trailer */}
+      <section className="py-16 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] to-[#12091e]" />
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-lg mx-auto text-center"
+          >
+            <h2 className="text-2xl font-serif font-bold text-white mb-6">Book Trailer</h2>
+            <div className="rounded-2xl overflow-hidden border-2 border-[#d4af37]/20 shadow-2xl">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full"
+                poster="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-v2-CiyiXxZuMB4J9rT8axkMQv.webp"
+              >
+                <source src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/HcjxEIpNhWvIRAIa.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Voicey Premise */}
       <section className="py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#12091e] to-[#0a0e1a]" />

@@ -407,6 +407,7 @@ export const appRouter = router({
           googlePlayUrl: z.string().optional(),
           featured: z.boolean().optional(),
           displayOrder: z.number().optional(),
+          trailerVideoUrl: z.string().optional(),
         })
       )
       .mutation(async ({ ctx, input }) => {
@@ -444,6 +445,7 @@ export const appRouter = router({
           googlePlayUrl: z.string().optional(),
           featured: z.boolean().optional(),
           displayOrder: z.number().optional(),
+          trailerVideoUrl: z.string().optional(),
         })
       )
       .mutation(async ({ ctx, input }) => {

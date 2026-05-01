@@ -123,6 +123,7 @@ export const books = mysqlTable("books", {
   memberPrice: int("memberPrice").default(299), // Reader's Club member price in cents
   directSaleUrl: text("directSaleUrl"), // URL for direct purchase
   audioSampleUrl: text("audioSampleUrl"), // URL to audio sample narration
+  trailerVideoUrl: text("trailerVideoUrl"), // URL to animated book trailer video
   featured: boolean("featured").default(false),
   displayOrder: int("displayOrder").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),

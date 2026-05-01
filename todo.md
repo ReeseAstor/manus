@@ -1649,3 +1649,13 @@
 - [x] Add auto-shorten capability (quick-shorten bar + full create form)
 - [x] Write tests for Switchy integration (10 tests passing)
 - [x] Add Link Shortener to admin dashboard navigation
+
+## Book Promotional Videos (VideoExpressAI)
+- [x] Generate animated cover videos for all 4 books (9:16 vertical, 1080x1920)
+- [x] Add text overlays (title, series, "Available Now" CTA) to social-ready versions
+- [x] Generate extended AI scenes for each book (cinematic 8s clips)
+- [x] Combine cover + extended scenes into 12s long-form promotional videos
+- [x] Upload all videos to CDN (social-ready + long-form + trailer versions)
+- [x] Add trailerVideoUrl field to books database schema
+- [x] Embed video trailers on BookDetail.tsx, HostileTender.tsx, AuditOfTheHeart.tsx
+- [x] Update book records in database with trailer video URLs

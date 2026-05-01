@@ -218,6 +218,27 @@ export default function BookDetail() {
                 </motion.div>
               )}
 
+              {/* Video Trailer */}
+              {book.trailerVideoUrl && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.85 }}
+                  className="rounded-2xl overflow-hidden border-2 border-[#d4af37]/20"
+                >
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full max-w-sm mx-auto rounded-2xl"
+                    poster={book.coverImage}
+                  >
+                    <source src={book.trailerVideoUrl} type="video/mp4" />
+                  </video>
+                </motion.div>
+              )}
+
               {/* Audio Sample */}
               {book.audioSampleUrl && (
                 <motion.div
