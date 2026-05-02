@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
-import { BookOpen, ChevronRight, Star, Gift, Flame, Clock } from "lucide-react";
+import { BookOpen, ChevronRight, Star, Gift, Flame, Clock, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -549,6 +549,74 @@ export default function Home() {
                   </Button>
                 </div>
               </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Section Divider */}
+      <div className="section-divider" />
+
+      {/* ARC Team Invitation Section */}
+      <section className="py-24 relative overflow-hidden ambient-section">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]" />
+        <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-[#d4af37]/5 blur-[180px] rounded-full pointer-events-none" />
+        
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="p-10 md:p-14 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-[#d4af37]/20 shadow-2xl shadow-[#d4af37]/5 relative overflow-hidden text-center">
+              {/* Decorative corner accents */}
+              <div className="absolute top-0 left-0 w-24 h-24 border-t-2 border-l-2 border-[#d4af37]/30 rounded-tl-3xl pointer-events-none" />
+              <div className="absolute bottom-0 right-0 w-24 h-24 border-b-2 border-r-2 border-[#d4af37]/30 rounded-br-3xl pointer-events-none" />
+              
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 mb-6">
+                <Users className="h-4 w-4 text-[#d4af37]" />
+                <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+                  Advance Reader Team
+                </span>
+              </div>
+
+              <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                Read It Before<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f4e4b8] to-[#d4af37]">Anyone Else</span>
+              </h2>
+
+              <p className="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto mb-6">
+                Join Reese Astor's ARC Team and get free advance copies of upcoming books before they hit Amazon. Read early, share your honest review, and help shape the series.
+              </p>
+
+              <div className="flex flex-wrap gap-4 justify-center mb-8">
+                {["Free Advance Copies", "Early Access", "Name in Acknowledgments", "No Strings Attached"].map((perk) => (
+                  <Badge 
+                    key={perk} 
+                    variant="outline" 
+                    className="text-sm px-4 py-2 border-[#d4af37]/30 bg-[#d4af37]/5 text-[#d4af37]"
+                  >
+                    {perk}
+                  </Badge>
+                ))}
+              </div>
+
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-lg px-10 py-7 rounded-full shadow-2xl shadow-[#d4af37]/30 transition-all duration-300 hover:scale-105 hover:shadow-[#d4af37]/50"
+              >
+                <a href="https://booksprout.co/reviewer/team/54354/reese-astor-arc-team" target="_blank" rel="noopener noreferrer">
+                  <Users className="mr-2 h-5 w-5" />
+                  Join the ARC Team
+                </a>
+              </Button>
+
+              <p className="text-sm text-gray-500 mt-6">
+                Honest reviews only. No purchase required. Unsubscribe anytime.
+              </p>
             </div>
           </motion.div>
         </div>

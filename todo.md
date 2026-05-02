@@ -1659,3 +1659,9 @@
 - [x] Add trailerVideoUrl field to books database schema
 - [x] Embed video trailers on BookDetail.tsx, HostileTender.tsx, AuditOfTheHeart.tsx
 - [x] Update book records in database with trailer video URLs
+
+## ARC Link on Homepage
+- [x] Add ARC (Advance Reader Copy) link/section to homepage
+- [x] Link to Booksprout ARC team: https://booksprout.co/reviewer/team/54354/reese-astor-arc-team
+- [x] Style to match Manhattan luxury aesthetic
+- [x] Test and save checkpoint
