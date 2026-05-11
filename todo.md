@@ -1665,3 +1665,15 @@
 - [x] Link to Booksprout ARC team: https://booksprout.co/reviewer/team/54354/reese-astor-arc-team
 - [x] Style to match Manhattan luxury aesthetic
 - [x] Test and save checkpoint
+
+## Blog Content & Amazon Affiliate Links
+- [x] Review existing blog structure and posts
+- [x] Research Amazon affiliate products for romance readers
+- [x] Update 3 existing blog posts with natural Amazon affiliate links (tag: 88away0d-20)
+- [x] Create 5 new blog posts with affiliate-friendly topics
+- [x] Add proper FTC affiliate disclosure to all posts
+- [x] Register all posts in affiliateProducts.ts for FTC disclosure display
+- [x] Seed new posts to database
+- [x] Verify all affiliate links work correctly
+- [x] Write and pass 44 vitest tests for affiliate blog posts
+- [x] Save checkpoint

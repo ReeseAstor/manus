@@ -74,6 +74,107 @@ export const affiliateProductsBySlug: Record<string, {
       },
     },
   },
+  "best-billionaire-romance-series-2024": {
+    ftcDisclosure: true,
+    topPicks: [
+      {
+        name: "Kindle Paperwhite (2024)",
+        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=88away0d-20",
+        description: "The perfect e-reader for binge-reading entire romance series. Warm adjustable light, weeks of battery life, and waterproof design for bath-time reading.",
+        whyRecommend: "If you're going to binge-read a 5-book series, you need a device that won't die on you. This one lasts weeks.",
+        priceRange: "Around $150",
+        rating: 4.7,
+      },
+    ],
+    inlineProducts: {},
+  },
+  "nyc-romance-books-manhattan-guide": {
+    ftcDisclosure: true,
+    topPicks: [],
+    inlineProducts: {},
+  },
+  "secret-baby-romance-books-guide": {
+    ftcDisclosure: true,
+    topPicks: [],
+    inlineProducts: {},
+  },
+  "dark-romance-books-beginners-guide": {
+    ftcDisclosure: true,
+    topPicks: [
+      {
+        name: "Kindle Paperwhite (2024)",
+        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=88away0d-20",
+        description: "Dark romance reads best late at night with the warm light on. No blue light, no notifications — just you and the story.",
+        whyRecommend: "The warm light setting creates the perfect moody atmosphere for dark romance. Plus no one can see what you're reading.",
+        priceRange: "Around $150",
+        rating: 4.7,
+      },
+    ],
+    inlineProducts: {},
+  },
+  "best-kindle-setup-romance-readers": {
+    ftcDisclosure: true,
+    topPicks: [
+      {
+        name: "Kindle Paperwhite (2024)",
+        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=88away0d-20",
+        description: "The workhorse e-reader for heavy romance readers. 6.8-inch screen, warm adjustable light, waterproof, and weeks of battery life.",
+        whyRecommend: "This is the one I use every single day. If you read 200+ books a year, this is your device.",
+        priceRange: "Around $150",
+        rating: 4.7,
+      },
+      {
+        name: "Glocusent LED Book Light",
+        affiliateUrl: "https://www.amazon.com/dp/B07WNRN9WQ?tag=88away0d-20",
+        description: "Rechargeable clip-on book light with 3 color temperatures and 6 brightness levels. For physical book nights.",
+        whyRecommend: "The best book light I've found after testing many. Clips on without being heavy, and the warm setting is perfect.",
+        priceRange: "Around $13",
+        rating: 4.6,
+      },
+    ],
+    inlineProducts: {},
+  },
+  "enemies-to-lovers-books-that-ruined-me": {
+    ftcDisclosure: true,
+    topPicks: [],
+    inlineProducts: {},
+  },
+  "booktok-made-me-buy-it-honest-reviews": {
+    ftcDisclosure: true,
+    topPicks: [
+      {
+        name: "Kindle Paperwhite (2024)",
+        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=88away0d-20",
+        description: "Most viral BookTok romances are in Kindle Unlimited. The Paperwhite is the best way to read them all without going broke.",
+        whyRecommend: "I go through BookTok picks fast — one every two days. KU on a Paperwhite is the most cost-effective way to keep up.",
+        priceRange: "Around $150",
+        rating: 4.7,
+      },
+    ],
+    inlineProducts: {},
+  },
+  "reading-self-care-routine-book-lovers": {
+    ftcDisclosure: true,
+    topPicks: [
+      {
+        name: "Kindle Paperwhite (2024)",
+        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=88away0d-20",
+        description: "The foundation of any reading self-care routine. Single-purpose device means no notifications pulling you out of the story.",
+        whyRecommend: "Removing my phone and reading on a dedicated device was the single biggest improvement to my reading life.",
+        priceRange: "Around $150",
+        rating: 4.7,
+      },
+      {
+        name: "Glocusent LED Book Light",
+        affiliateUrl: "https://www.amazon.com/dp/B07WNRN9WQ?tag=88away0d-20",
+        description: "For physical book nights — clips on, multiple brightness levels, rechargeable, and warm light that won't disturb anyone.",
+        whyRecommend: "I use it twice a week for physical ARCs and special editions. The warm light setting is perfect for nighttime reading.",
+        priceRange: "Around $13",
+        rating: 4.6,
+      },
+    ],
+    inlineProducts: {},
+  },
   "romance-reader-gift-guide": {
     ftcDisclosure: true,
     topPicks: [
