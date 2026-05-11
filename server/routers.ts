@@ -14,6 +14,7 @@ import { commandCenterRouter } from "./routers/commandCenter";
 import { affiliateTrackingRouter } from "./routers/affiliateTracking";
 import { partnerApplicationsRouter } from "./routers/partnerApplications";
 import { switchyRouter } from "./routers/switchy";
+import { workflowRouter } from "./routers/workflow";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
 import { sendEmail } from "./email-service";
@@ -86,6 +87,7 @@ export const appRouter = router({
   affiliateTracking: affiliateTrackingRouter,
   partnerApplications: partnerApplicationsRouter,
   switchy: switchyRouter,
+  workflow: workflowRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

@@ -62,6 +62,7 @@ import { AIChatbot } from "./components/AIChatbot";
 import { EmailCapturePopup } from "./components/EmailCapturePopup";
 import { ExitIntentPopup } from "./components/ExitIntentPopup";
 import RomanceTropeQuiz from "./pages/Quiz";
+import WritingStudio from "./pages/WritingStudio";
 
 function Router() {
   return (
@@ -113,6 +114,7 @@ function Router() {
       <Route path={"/admin/twilio"} component={AdminTwilio} />
       <Route path={"/admin/sms-analytics"} component={AdminSmsAnalytics} />
       <Route path={"/admin/ai-studio"} component={AdminAIStudio} />
+      <Route path={"/admin/writing-studio"} component={WritingStudio} />
       <Route path={"/admin/blog/new"} component={BlogEditor} />
       <Route path={"/admin/blog/edit/:id"} component={BlogEditor} />
       <Route path={"/admin/newsletters"} component={NewsletterManager} />

@@ -1677,3 +1677,21 @@
 - [x] Verify all affiliate links work correctly
 - [x] Write and pass 44 vitest tests for affiliate blog posts
 - [x] Save checkpoint
+
+## Interactive AI Workflow Tool
+- [ ] Create AI Workflow Tool page with all 10 Hudson Dynasty workflows
+- [ ] Build workflow selector UI with descriptions for each workflow
+- [ ] Add text input area for pasting content
+- [ ] Build server-side API endpoint to process workflows via AI
+- [ ] Implement streaming response display
+- [ ] Add copy-to-clipboard for results
+- [ ] Style with Manhattan luxury aesthetic
+- [ ] Add authentication requirement (premium feature)
+- [ ] Write vitest tests for the workflow API
+- [ ] Test all 10 workflows end-to-end
+
+## Blog Content - AI Writing Process
+- [ ] Create blog post about AI-assisted fiction writing process
+- [ ] Create blog post about quality control workflows for romance authors
+- [ ] Seed new blog posts to database
+- [ ] Verify blog posts render correctly
