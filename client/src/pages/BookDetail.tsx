@@ -163,17 +163,19 @@ export default function BookDetail() {
               </motion.h1>
 
               {/* Rating */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 }}
-                className="flex items-center gap-3"
-              >
-                <div className="flex">{renderStars(book.rating || 0)}</div>
-                <span className="text-[#e5e5e5]/60 text-lg">
-                  {(book.rating || 0).toFixed(1)} ({book.reviewCount || 0} reviews)
-                </span>
-              </motion.div>
+              {(book.rating ?? 0) > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="flex">{renderStars(book.rating!)}</div>
+                  <span className="text-[#e5e5e5]/60 text-lg">
+                    {book.rating!.toFixed(1)} ({book.reviewCount || 0} reviews)
+                  </span>
+                </motion.div>
+              )}
 
               {/* Metadata */}
               <motion.div

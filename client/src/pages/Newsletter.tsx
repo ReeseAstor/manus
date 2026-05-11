@@ -381,73 +381,7 @@ export default function Newsletter() {
         </div>
       </section>
 
-      {/* ─── Social Proof Section ──────────────────────────────────────── */}
-      <section className="relative z-10 py-16">
-        <div className="max-w-4xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-10"
-          >
-            <p className="text-[#d4af37] text-sm font-semibold font-['Montserrat'] uppercase tracking-widest mb-3">
-              Reader Love
-            </p>
-            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white">
-              What Subscribers Are Saying
-            </h2>
-          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                quote: "I love getting Reese's newsletters! The deleted scenes are my favorite — I get to spend more time with my favorite characters.",
-                name: "Sarah M.",
-                detail: "Subscriber since 2024",
-              },
-              {
-                quote: "The free prequel hooked me instantly. I ended up buying the entire series in one weekend. Absolutely addictive writing!",
-                name: "Jessica R.",
-                detail: "Verified Reader",
-              },
-              {
-                quote: "Being first to know about new releases is amazing. Plus the bonus content makes me feel like a true insider.",
-                name: "Amanda K.",
-                detail: "VIP Member",
-              },
-            ].map((testimonial, i) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 relative"
-              >
-                {/* Gold quote mark */}
-                <div className="absolute -top-3 left-6 text-[#d4af37] text-5xl font-serif leading-none">"</div>
-                <p className="text-gray-300 text-sm font-['Montserrat'] leading-relaxed mb-4 pt-4 italic">
-                  {testimonial.quote}
-                </p>
-                <div className="flex items-center gap-2 pt-4 border-t border-white/10">
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, j) => (
-                      <Star key={j} className="w-3 h-3 fill-[#d4af37] text-[#d4af37]" />
-                    ))}
-                  </div>
-                  <span className="text-white text-sm font-semibold font-['Montserrat']">
-                    {testimonial.name}
-                  </span>
-                  <span className="text-gray-500 text-xs font-['Montserrat']">
-                    — {testimonial.detail}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ─── Book Series Preview ───────────────────────────────────────── */}
       <section className="relative z-10 py-16 md:py-24">

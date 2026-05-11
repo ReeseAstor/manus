@@ -1695,3 +1695,20 @@
 - [ ] Create blog post about quality control workflows for romance authors
 - [ ] Seed new blog posts to database
 - [ ] Verify blog posts render correctly
+
+## Remove Fake/Demo Data
+- [x] Audit all client-side pages for fake testimonials, reviews, statistics
+- [x] Audit data files for placeholder/demo content
+- [x] Audit database seed scripts for fake data
+- [x] Check database for demo entries (7 fake book reviews found and deleted)
+- [x] Remove SocialProofBanner (8 fake reviews) from Shop page
+- [x] Remove RecentPurchaseToast (fake purchase notifications) from Shop page
+- [x] Remove 3 fake testimonials from FreeBook page + fake SEO rating schema
+- [x] Remove 3 fake testimonials from Newsletter page
+- [x] Remove fake review counts (523, 892, 1247) and ratings from Books page
+- [x] Replace fake stats on About page (100K+ Readers, 4.7 Rating) with real numbers (5 Books, 2 Series)
+- [x] Remove fake 5-star display and 1,700+ readers claim from Home page
+- [x] Hide ratings on BookDetail when no real reviews exist
+- [x] Delete 7 fake book reviews from database
+- [x] Verify SEO schema doesn't output fake rating data
+- [x] Test and save checkpoint

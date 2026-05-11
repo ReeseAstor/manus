@@ -311,16 +311,7 @@ export default function Home() {
                   </Button>
                 </div>
 
-                <div className="flex items-center gap-3 pt-2">
-                  <div className="flex -space-x-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-[#d4af37] text-[#d4af37]" />
-                    ))}
-                  </div>
-                  <span className="text-gray-300 text-sm">
-                    Loved by <span className="text-white font-semibold">1,700+</span> readers
-                  </span>
-                </div>
+
               </div>
             </div>
           </motion.div>

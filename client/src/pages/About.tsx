@@ -99,18 +99,13 @@ export default function About() {
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-4">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[#d4af37]">100K+</div>
-                  <div className="text-sm text-gray-400 mt-1">Readers</div>
-                </div>
-                <div className="h-12 w-px bg-white/20 hidden sm:block" />
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-[#d4af37]">4</div>
+                  <div className="text-3xl font-bold text-[#d4af37]">5</div>
                   <div className="text-sm text-gray-400 mt-1">Books Published</div>
                 </div>
                 <div className="h-12 w-px bg-white/20 hidden sm:block" />
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[#d4af37]">★ 4.7</div>
-                  <div className="text-sm text-gray-400 mt-1">Average Rating</div>
+                  <div className="text-3xl font-bold text-[#d4af37]">2</div>
+                  <div className="text-sm text-gray-400 mt-1">Series</div>
                 </div>
               </div>
             </motion.div>

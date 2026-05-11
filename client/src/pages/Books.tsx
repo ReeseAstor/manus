@@ -68,8 +68,8 @@ export default function Books() {
       link: "https://swiy.co/3rd",
       genre: ["Secret Baby", "Second Chance", "Billionaire Romance"],
       pages: 340,
-      rating: 4.9,
-      reviews: 523,
+      rating: 0,
+      reviews: 0,
       available: true,
       badge: "New Release",
       featured: true,
@@ -88,8 +88,8 @@ export default function Books() {
       link: "https://swiy.co/2rd",
       genre: ["Fake Marriage", "Suspense", "Billionaire Romance"],
       pages: 350,
-      rating: 4.7,
-      reviews: 892,
+      rating: 0,
+      reviews: 0,
       available: true,
       audioSampleUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book2-sample-1767436022553.mp3",
     },
@@ -106,8 +106,8 @@ export default function Books() {
       link: "https://swiy.co/b01",
       genre: ["Billionaire Romance", "Office Romance", "Steamy"],
       pages: 320,
-      rating: 4.5,
-      reviews: 1247,
+      rating: 0,
+      reviews: 0,
       available: true,
       audioSampleUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/book-samples/book1-sample-1767436000744.mp3",
     },
@@ -172,13 +172,8 @@ export default function Books() {
               </div>
               <div className="h-12 w-px bg-white/20" />
               <div className="text-center">
-                <div className="text-4xl font-bold text-[#d4af37]">★ 4.7</div>
-                <div className="text-sm text-gray-400 mt-1">Average Rating</div>
-              </div>
-              <div className="h-12 w-px bg-white/20" />
-              <div className="text-center">
-                <div className="text-4xl font-bold text-[#d4af37]">2.6K+</div>
-                <div className="text-sm text-gray-400 mt-1">Reviews</div>
+                <div className="text-4xl font-bold text-[#d4af37]">5</div>
+                <div className="text-sm text-gray-400 mt-1">Books Published</div>
               </div>
             </div>
           </motion.div>

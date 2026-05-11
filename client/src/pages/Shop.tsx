@@ -6,9 +6,7 @@ import { Link } from "wouter";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
-import { SocialProofBanner } from "@/components/SocialProofBanner";
 import { CountdownTimer } from "@/components/CountdownTimer";
-import { RecentPurchaseToast } from "@/components/RecentPurchaseToast";
 
 interface BundleOption {
   id: string;
@@ -151,10 +149,8 @@ export default function Shop() {
       />
 
       {/* Social Proof Banner */}
-      <SocialProofBanner />
 
       {/* Recent Purchase Toast Notifications */}
-      <RecentPurchaseToast />
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">

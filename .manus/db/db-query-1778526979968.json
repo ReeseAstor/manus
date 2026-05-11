@@ -1,0 +1,175 @@
+{
+  "query": "SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE() ORDER BY table_name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE() ORDER BY table_name;",
+  "rows": [
+    {
+      "table_name": "__drizzle_migrations"
+    },
+    {
+      "table_name": "admin_reminders"
+    },
+    {
+      "table_name": "affiliate_clicks"
+    },
+    {
+      "table_name": "affiliate_metrics_daily"
+    },
+    {
+      "table_name": "ai_chat_messages"
+    },
+    {
+      "table_name": "ai_generated_content"
+    },
+    {
+      "table_name": "ai_studio_conversations"
+    },
+    {
+      "table_name": "audio_usage"
+    },
+    {
+      "table_name": "blog_posts"
+    },
+    {
+      "table_name": "book_characters"
+    },
+    {
+      "table_name": "book_pricing_history"
+    },
+    {
+      "table_name": "book_reviews"
+    },
+    {
+      "table_name": "book_storylines"
+    },
+    {
+      "table_name": "books"
+    },
+    {
+      "table_name": "browsing_history"
+    },
+    {
+      "table_name": "business_goals"
+    },
+    {
+      "table_name": "business_metrics"
+    },
+    {
+      "table_name": "character_relationships"
+    },
+    {
+      "table_name": "character_voice_assignments"
+    },
+    {
+      "table_name": "content_access"
+    },
+    {
+      "table_name": "content_audit_log"
+    },
+    {
+      "table_name": "custom_story_requests"
+    },
+    {
+      "table_name": "daily_briefings"
+    },
+    {
+      "table_name": "daily_reports"
+    },
+    {
+      "table_name": "ebook_files"
+    },
+    {
+      "table_name": "exclusive_content"
+    },
+    {
+      "table_name": "external_links"
+    },
+    {
+      "table_name": "generated_audio"
+    },
+    {
+      "table_name": "mailerlite_webhook_events"
+    },
+    {
+      "table_name": "newsletter_subscribers"
+    },
+    {
+      "table_name": "newsletters"
+    },
+    {
+      "table_name": "orders"
+    },
+    {
+      "table_name": "partner_applications"
+    },
+    {
+      "table_name": "products"
+    },
+    {
+      "table_name": "qa_checks"
+    },
+    {
+      "table_name": "qa_issues"
+    },
+    {
+      "table_name": "quiz_results"
+    },
+    {
+      "table_name": "reader_club_members"
+    },
+    {
+      "table_name": "sms_analytics_daily"
+    },
+    {
+      "table_name": "sms_incoming_messages"
+    },
+    {
+      "table_name": "sms_message_log"
+    },
+    {
+      "table_name": "sms_opt_events"
+    },
+    {
+      "table_name": "sms_templates"
+    },
+    {
+      "table_name": "steamy_stories"
+    },
+    {
+      "table_name": "story_likes"
+    },
+    {
+      "table_name": "story_play_history"
+    },
+    {
+      "table_name": "subscriptions"
+    },
+    {
+      "table_name": "tool_inventory"
+    },
+    {
+      "table_name": "user_preferences"
+    },
+    {
+      "table_name": "user_purchases"
+    },
+    {
+      "table_name": "user_sms_preferences"
+    },
+    {
+      "table_name": "users"
+    },
+    {
+      "table_name": "vip_members"
+    },
+    {
+      "table_name": "vip_tiers"
+    },
+    {
+      "table_name": "voice_presets"
+    }
+  ],
+  "messages": [],
+  "stdout": "table_name\n__drizzle_migrations\nadmin_reminders\naffiliate_clicks\naffiliate_metrics_daily\nai_chat_messages\nai_generated_content\nai_studio_conversations\naudio_usage\nblog_posts\nbook_characters\nbook_pricing_history\nbook_reviews\nbook_storylines\nbooks\nbrowsing_history\nbusiness_goals\nbusiness_metrics\ncharacter_relationships\ncharacter_voice_assignments\ncontent_access\ncontent_audit_log\ncustom_story_requests\ndaily_briefings\ndaily_reports\nebook_files\nexclusive_content\nexternal_links\ngenerated_audio\nmailerlite_webhook_events\nnewsletter_subscribers\nnewsletters\norders\npartner_applications\nproducts\nqa_checks\nqa_issues\nquiz_results\nreader_club_members\nsms_analytics_daily\nsms_incoming_messages\nsms_message_log\nsms_opt_events\nsms_templates\nsteamy_stories\nstory_likes\nstory_play_history\nsubscriptions\ntool_inventory\nuser_preferences\nuser_purchases\nuser_sms_preferences\nusers\nvip_members\nvip_tiers\nvoice_presets\n",
+  "stderr": "",
+  "execution_time_ms": 322
+}

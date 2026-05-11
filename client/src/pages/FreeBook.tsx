@@ -56,24 +56,6 @@ export default function FreeBook() {
     }
   };
 
-  const testimonials = [
-    {
-      name: "Sarah M.",
-      rating: 5,
-      text: "This book hooked me from page one! The chemistry between the leads is off the charts. I immediately bought the entire series.",
-    },
-    {
-      name: "Jessica T.",
-      rating: 5,
-      text: "Steamy, sophisticated, and utterly addictive. Reese Astor knows how to write billionaire romance that feels real!",
-    },
-    {
-      name: "Amanda R.",
-      rating: 5,
-      text: "The perfect introduction to the Manhattan Money Kings world. I couldn't put it down and devoured all four books in a week.",
-    },
-  ];
-
   const benefits = [
     "Instant access to the complete full-length novel",
     "The perfect introduction to the Manhattan Money Kings series",
@@ -89,8 +71,6 @@ export default function FreeBook() {
     genre: "Billionaire Romance",
     price: "0",
     currency: "USD",
-    rating: 4.7,
-    reviewCount: 45,
   });
 
   return (
@@ -277,53 +257,7 @@ export default function FreeBook() {
         </div>
       </section>
 
-      {/* Reader Reviews */}
-      <section className="py-20 relative">
-        <div className="container relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-5xl mx-auto"
-          >
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 mb-6">
-                <Heart className="h-4 w-4 text-[#d4af37]" fill="#d4af37" />
-                <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
-                  Reader Reviews
-                </span>
-              </div>
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
-                What Readers Are Saying
-              </h2>
-            </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {testimonials.map((review, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/20 transition-all duration-300"
-                >
-                  <div className="flex mb-4">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-[#d4af37] text-[#d4af37]" />
-                    ))}
-                  </div>
-                  <p className="text-gray-300 leading-relaxed mb-6 italic">
-                    "{review.text}"
-                  </p>
-                  <p className="text-white font-semibold">— {review.name}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Share Section */}
       <section className="py-16 relative">
