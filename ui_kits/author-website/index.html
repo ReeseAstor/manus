@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Reese Astor — Author Website</title>
+  <meta name="viewport" content="width=1440">
+  <link rel="stylesheet" href="../../colors_and_type.css">
+  <link rel="icon" href="../../assets/reese-astor-monogram-gold.png">
+  <style>
+    html, body { margin: 0; padding: 0; background: #070D1C; color: #F2ECDF; font-family: 'Cormorant Garamond', serif; }
+    * { box-sizing: border-box; }
+    #root { min-height: 100vh; position: relative; }
+    /* film-grain overlay for luxury texture */
+    body::after {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 100;
+      opacity: 0.04; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="components.jsx"></script>
+  <script type="text/babel">
+    const { useState } = React;
+
+    function App() {
+      const [section, setSection] = useState("home");
+      return (
+        <div>
+          <TopNav current={section} onNav={setSection} />
+
+          <BookHero
+            kicker="Hudson Dynasty · Book I · New Release"
+            title={"Hostile|Tender"}
+            byline="A Hudson Dynasty Novel · Reese Astor · 2026"
+            tagline={"\u201CA record outlives the men who keep it. The discipline is in waiting.\u201D"}
+            blurb="Nia Carter has spent eight years building a case Hudson Vale Holdings cannot bury. Sebastian Hudson has spent twice that long ensuring no one ever could. The federal response file reaches her at 5:14 a.m. — and the most dangerous man in Manhattan has already lost control of his own building."
+            cover="../../assets/hudson-dynasty-1-hostile-tender.jpg"
+            primaryCta="Order the novel"
+            secondaryCta="Read chapter one"
+          />
+
+          <section style={{ padding: "160px 64px", background: "#0B1226" }}>
+            <div style={{ maxWidth: 1240, margin: "0 auto" }}>
+              <SectionHeading
+                kicker="The Series"
+                title={"Manhattan|Money Kings"}
+                lead="Six interlinked novels of dynastic obsession, set inside the boardrooms, penthouses, and private clubs of New York's most powerful family."
+              />
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", columnGap: 56, rowGap: 88 }}>
+                <BookCard
+                  index="I"
+                  kicker="Available"
+                  title="The Billionaire's Executive Assistant"
+                  blurb="The boardroom was never the most dangerous room."
+                  cover="../../assets/mmk-1-executive-assistant.jpg"
+                />
+                <BookCard
+                  index="II"
+                  kicker="Available"
+                  title="The Billionaire's Fake Wife"
+                  blurb="A ruthless engagement that turns devastatingly real."
+                  cover="../../assets/mmk-2-fake-wife.jpg"
+                />
+                <BookCard
+                  index="III"
+                  kicker="Available"
+                  title="The Billionaire's Baby Secret"
+                  blurb="Some secrets shatter empires. Others build a family."
+                  cover="../../assets/mmk-3-baby-secret.jpg"
+                />
+                <BookCard
+                  index="IV"
+                  kicker="New Release"
+                  title="The Forbidden Nanny"
+                  blurb="He hired her to protect his daughter. Not to ruin his life."
+                  cover="../../assets/mmk-4-forbidden-nanny.jpg"
+                />
+                <BookCard
+                  index="—"
+                  kicker="Standalone"
+                  title="The One Night Stand"
+                  blurb="One reckless night. One name they could not take back."
+                  cover="../../assets/book-one-night-stand-cover.jpg"
+                />
+                <BookCard
+                  index="—"
+                  kicker="Hudson Dynasty · New"
+                  title="Hostile Tender"
+                  blurb="A record outlives the men who keep it. The discipline is in waiting."
+                  cover="../../assets/hudson-dynasty-1-hostile-tender.jpg"
+                />
+              </div>
+            </div>
+          </section>
+
+          <Manifesto />
+
+          <ChapterOne />
+
+          <AuthorIntro />
+
+          <section style={{ padding: "160px 64px", background: "#0B1226" }}>
+            <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+              <SectionHeading kicker="Acclaim" title={"What readers|are saying"} />
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 56 }}>
+                <PraiseQuote
+                  quote="I devoured this in one night. Reese Astor writes the kind of billionaire I want to ruin my life — and then build me a new one."
+                  attribution="Goodreads · ★★★★★"
+                />
+                <PraiseQuote
+                  quote="Heart-wrenching, scandalous, and unputdownable. The Manhattan Money Kings are my new obsession."
+                  attribution="BookBub Reviewer"
+                />
+                <PraiseQuote
+                  quote="The slow burn alone is worth the cover price. Then she breaks your heart in chapter twelve."
+                  attribution="Amazon Top Reviewer"
+                />
+              </div>
+            </div>
+          </section>
+
+          <NewsletterBand onSubscribe={() => {}} />
+
+          <SiteFooter />
+        </div>
+      );
+    }
+
+    setTimeout(() => {
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    }, 100);
+  </script>
+</body>
+</html>
