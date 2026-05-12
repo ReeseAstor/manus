@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
+import { trpc } from "@/lib/trpc";
 import {
   AuthorIntro,
   BookCard,
@@ -36,6 +37,11 @@ export default function Home() {
   useEffect(() => {
     document.title = "Reese Astor | USA Today Bestselling Romance Author";
   }, []);
+
+  const subscribeMutation = trpc.newsletter.subscribe.useMutation();
+  const handleSubscribe = async (email: string) => {
+    await subscribeMutation.mutateAsync({ email: email.trim() });
+  };
 
   return (
     <div className="kit-grain min-h-screen font-cormorant" style={{ background: INK, color: "#F2ECDF" }}>
@@ -170,7 +176,7 @@ export default function Home() {
         </div>
       </section>
 
-      <NewsletterBand freeBookHref="/free-book" />
+      <NewsletterBand onSubscribe={handleSubscribe} freeBookHref="/free-book" />
     </div>
   );
 }
