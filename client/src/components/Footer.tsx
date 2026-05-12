@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Facebook, Instagram, Mail, BookOpen, Gift } from "lucide-react";
+import { Facebook, Instagram, Mail, BookOpen, Gift, Bell } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -37,6 +37,12 @@ export function Footer() {
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
                   <BookOpen className="h-3 w-3" />
                   Free Book
+                </a>
+              </Link>
+              <Link href="/newsletter">
+                <a className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+                  <Bell className="h-3 w-3" />
+                  Newsletter
                 </a>
               </Link>
               <Link href="/blog">
