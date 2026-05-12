@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
@@ -198,4 +199,36 @@
   .perspective-1000 {
     perspective: 1000px;
   }
+
+  /* ───────── Author-kit (editorial / luxury) utilities ───────── */
+  .font-cinzel    { font-family: 'Cinzel', 'Trajan Pro', 'Playfair Display', serif; letter-spacing: 0.18em; }
+  .font-display   { font-family: 'Playfair Display', 'Didot', Georgia, serif; }
+  .font-cormorant { font-family: 'Cormorant Garamond', 'EB Garamond', Georgia, 'Times New Roman', serif; }
+  .font-inter     { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+
+  /* Film grain — top-level body overlay for the kit homepage */
+  .kit-grain::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 60;
+    opacity: 0.04; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Gold rule draw-on (used by the SVG ornament + section headings) */
+  @keyframes kit-rule-draw {
+    from { stroke-dashoffset: 200; }
+    to   { stroke-dashoffset: 0;   }
+  }
+  .kit-rule-anim path,
+  .kit-rule-anim line { stroke-dasharray: 200; animation: kit-rule-draw 1.6s cubic-bezier(0.65,0.05,0.36,1) forwards; }
+
+  /* Drop-cap helper for ChapterOne */
+  .kit-dropcap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500; font-size: 4.5rem; line-height: 0.85;
+    float: left; margin-right: 0.5rem; margin-top: 0.35rem;
+    color: #C9A646;
+  }
+
+  /* Smooth scroll for hash links in the kit */
+  html { scroll-behavior: smooth; }
 }
