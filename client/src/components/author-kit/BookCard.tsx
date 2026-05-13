@@ -12,10 +12,19 @@ type Props = {
   cover: string;
   href: string;
   external?: boolean;
+  /** Direct affiliate buy URL (Amazon, etc). When present, surfaces a "Buy on Amazon" link in the card metadata for a shorter funnel. */
+  buyHref?: string;
+  /** Label for the buy link. */
+  buyLabel?: string;
+  /** Price string to show next to the buy link, e.g. "$3.99". */
+  price?: string;
   delay?: number;
 };
 
-export function BookCard({ index, kicker, title, blurb, cover, href, external, delay = 0 }: Props) {
+export function BookCard({
+  index, kicker, title, blurb, cover, href, external,
+  buyHref, buyLabel = "Buy on Amazon", price, delay = 0,
+}: Props) {
   const [hover, setHover] = useState(false);
   const reduce = useReducedMotion();
   const isExternal = external || /^https?:/i.test(href);
@@ -72,20 +81,53 @@ export function BookCard({ index, kicker, title, blurb, cover, href, external, d
       >
         {blurb}
       </p>
-      <span
-        className="font-inter text-[11px] font-semibold uppercase"
-        style={{ color: hover ? GOLD : TEXT_SOFT, letterSpacing: "0.32em", transition: "color 240ms" }}
-      >
-        Read more →
-      </span>
+      <div className="flex items-center justify-between gap-3 mt-auto">
+        <span
+          className="font-inter text-[11px] font-semibold uppercase"
+          style={{ color: hover ? GOLD : TEXT_SOFT, letterSpacing: "0.32em", transition: "color 240ms" }}
+        >
+          Read more →
+        </span>
+        {price && (
+          <span
+            className="font-display text-[18px] font-medium"
+            style={{ color: GOLD }}
+          >
+            {price}
+          </span>
+        )}
+      </div>
     </motion.div>
   );
 
-  return isExternal ? (
+  const cardLink = isExternal ? (
     <a href={href} target="_blank" rel="noopener noreferrer" className="no-underline">{inner}</a>
   ) : (
     <Link href={href}>
       <span className="no-underline block">{inner}</span>
     </Link>
+  );
+
+  if (!buyHref) return cardLink;
+
+  return (
+    <div className="flex flex-col">
+      {cardLink}
+      <a
+        href={buyHref}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        onClick={(e) => e.stopPropagation()}
+        className="font-inter mt-4 inline-flex items-center justify-center gap-2 text-[11px] font-semibold uppercase no-underline transition-all duration-200 hover:-translate-y-px"
+        style={{
+          color: "#070D1C",
+          background: GOLD,
+          padding: "12px 18px",
+          letterSpacing: "0.24em",
+        }}
+      >
+        {buyLabel} →
+      </a>
+    </div>
   );
 }

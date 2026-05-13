@@ -213,22 +213,6 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* Gold rule draw-on (used by the SVG ornament + section headings) */
-  @keyframes kit-rule-draw {
-    from { stroke-dashoffset: 200; }
-    to   { stroke-dashoffset: 0;   }
-  }
-  .kit-rule-anim path,
-  .kit-rule-anim line { stroke-dasharray: 200; animation: kit-rule-draw 1.6s cubic-bezier(0.65,0.05,0.36,1) forwards; }
-
-  /* Drop-cap helper for ChapterOne */
-  .kit-dropcap::first-letter {
-    font-family: 'Playfair Display', serif;
-    font-weight: 500; font-size: 4.5rem; line-height: 0.85;
-    float: left; margin-right: 0.5rem; margin-top: 0.35rem;
-    color: #C9A646;
-  }
-
   /* Smooth scroll for hash links in the kit */
   html { scroll-behavior: smooth; }
 }
