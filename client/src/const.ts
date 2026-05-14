@@ -1,9 +1,20 @@
 export { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
 
 // Generate login URL at runtime so redirect URI reflects the current origin.
+// Falls back to the in-app /auth/login route when the Manus OAuth portal isn't
+// configured (e.g. on Vercel prod where VITE_OAUTH_PORTAL_URL / VITE_APP_ID
+// are unset). Without this guard, `new URL("undefined/app-auth")` throws
+// synchronously when Header renders, blanking the whole page.
 export const getLoginUrl = () => {
   const oauthPortalUrl = import.meta.env.VITE_OAUTH_PORTAL_URL;
   const appId = import.meta.env.VITE_APP_ID;
+
+  if (!oauthPortalUrl || oauthPortalUrl === "undefined" || !appId) {
+    return typeof window !== "undefined"
+      ? `${window.location.origin}/auth/login`
+      : "/auth/login";
+  }
+
   const redirectUri = `${window.location.origin}/api/oauth/callback`;
   const state = btoa(redirectUri);
 
