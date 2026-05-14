@@ -24,8 +24,8 @@ export function BookHero({
   primaryCta = "Order the novel",
   primaryHref = "/books",
   primaryExternal = false,
-  secondaryCta = "Read chapter one",
-  secondaryHref = "#chapter-one",
+  secondaryCta = "Browse the series",
+  secondaryHref = "/books",
 }: Props) {
   const reduce = useReducedMotion();
   const parts = title.split("|");

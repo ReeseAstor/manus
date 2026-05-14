@@ -24,6 +24,24 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    chunkSizeWarningLimit: 800,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return undefined;
+          if (id.includes("react-dom") || id.match(/[\\/]react[\\/]/)) return "react";
+          if (id.includes("wouter")) return "react";
+          if (id.includes("@radix-ui")) return "radix";
+          if (id.includes("framer-motion")) return "motion";
+          if (id.includes("lucide-react")) return "icons";
+          if (id.includes("@tanstack/react-query") || id.includes("@trpc")) return "data";
+          if (id.includes("recharts") || id.includes("d3-")) return "charts";
+          if (id.includes("shiki") || id.includes("highlight.js")) return "syntax";
+          if (id.includes("mermaid") || id.includes("cytoscape")) return "diagrams";
+          return "vendor";
+        },
+      },
+    },
   },
   server: {
     host: true,
