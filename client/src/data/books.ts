@@ -233,7 +233,7 @@ export const BOOKS: Book[] = [
       "escalates. Secrets surface from the family archives. The line between investigation and intimacy " +
       "dissolves — and trusting each other could cost them everything.",
     pull_quote: "“A record outlives the men who keep it. The discipline is in waiting.”",
-    cover_image: "/author-kit/hudson-dynasty-1-hostile-tender.jpg",
+    cover_image: "https://m.media-amazon.com/images/I/81iGQzEnacL._SL1500_.jpg",
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
