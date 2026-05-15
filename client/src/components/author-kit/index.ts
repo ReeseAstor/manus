@@ -1,10 +1,13 @@
+export { AudioSamplePlayer } from "./AudioSamplePlayer";
 export { AuthorIntro } from "./AuthorIntro";
 export { BookCard } from "./BookCard";
 export { BookHero } from "./BookHero";
+export { CoverHalo } from "./CoverHalo";
 export { Eyebrow } from "./Eyebrow";
 export { NewsletterBand } from "./NewsletterBand";
 export { Ornament } from "./Ornament";
 export { PraiseQuote } from "./PraiseQuote";
 export { RAButton } from "./RAButton";
+export { RetailerButtons } from "./RetailerButtons";
 export { SectionHeading } from "./SectionHeading";
 export * from "./tokens";

@@ -36,8 +36,13 @@ export default defineConfig({
           if (id.includes("lucide-react")) return "icons";
           if (id.includes("@tanstack/react-query") || id.includes("@trpc")) return "data";
           if (id.includes("recharts") || id.includes("d3-")) return "charts";
-          if (id.includes("shiki") || id.includes("highlight.js")) return "syntax";
-          if (id.includes("mermaid") || id.includes("cytoscape")) return "diagrams";
+          // NOTE: shiki/highlight.js and mermaid/cytoscape are intentionally NOT
+          // split into their own chunks here. Both have internal circular
+          // dependencies that Rollup cannot preserve initialization order on
+          // across chunk boundaries — splitting them causes TDZ errors
+          // ("Cannot access 'X' before initialization") that blank the entire
+          // SPA. They are pulled in transitively via streamdown and will fall
+          // into the default `vendor` chunk where Rollup hoists correctly.
           return "vendor";
         },
       },
