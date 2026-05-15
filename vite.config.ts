@@ -24,29 +24,23 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
-    chunkSizeWarningLimit: 800,
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (!id.includes("node_modules")) return undefined;
-          if (id.includes("react-dom") || id.match(/[\\/]react[\\/]/)) return "react";
-          if (id.includes("wouter")) return "react";
-          if (id.includes("@radix-ui")) return "radix";
-          if (id.includes("framer-motion")) return "motion";
-          if (id.includes("lucide-react")) return "icons";
-          if (id.includes("@tanstack/react-query") || id.includes("@trpc")) return "data";
-          if (id.includes("recharts") || id.includes("d3-")) return "charts";
-          // NOTE: shiki/highlight.js and mermaid/cytoscape are intentionally NOT
-          // split into their own chunks here. Both have internal circular
-          // dependencies that Rollup cannot preserve initialization order on
-          // across chunk boundaries — splitting them causes TDZ errors
-          // ("Cannot access 'X' before initialization") that blank the entire
-          // SPA. They are pulled in transitively via streamdown and will fall
-          // into the default `vendor` chunk where Rollup hoists correctly.
-          return "vendor";
-        },
-      },
-    },
+    chunkSizeWarningLimit: 1200,
+    // NOTE: manualChunks was removed entirely after two production blank-page
+    // outages caused by Rollup's inability to preserve initialization order
+    // across chunk boundaries when transitive deps form cycles.
+    //
+    // First outage (PR #7): the `diagrams` chunk (mermaid/cytoscape) threw
+    //   "Cannot access 'ke' before initialization" on import.
+    // Second outage (this commit): the `icons` chunk (lucide-react) threw
+    //   "Cannot read properties of undefined (reading 'forwardRef')" because
+    //   the `react` chunk hadn't finished initializing when icons evaluated.
+    //
+    // Both crashes blanked the entire SPA. Manual chunking is fragile for
+    // this dep graph and the small first-paint improvement isn't worth
+    // shipping bricked production. Let Vite/Rollup chunk automatically.
+    //
+    // If we revisit this for perf, the safer route is route-level dynamic
+    // import() + lazy(), not output.manualChunks.
   },
   server: {
     host: true,
