@@ -215,4 +215,17 @@
 
   /* Smooth scroll for hash links in the kit */
   html { scroll-behavior: smooth; }
+
+  /* Cover halo pulse — used by <CoverHalo />. Disabled by reduced-motion in JS. */
+  @keyframes kit-halo-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 0.85; transform: scale(1.04); }
+  }
+  .kit-halo-pulse {
+    animation: kit-halo-pulse 6.5s cubic-bezier(0.65, 0.05, 0.36, 1) infinite;
+    will-change: opacity, transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .kit-halo-pulse { animation: none; opacity: 0.6; transform: none; }
+  }
 }

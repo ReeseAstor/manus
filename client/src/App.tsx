@@ -9,11 +9,13 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 
 // ───── Eager: customer-facing routes on the buy funnel (load fast) ─────
 import Home from "./pages/Home";
-import Books from "./pages/Books";
-import BookDetail from "./pages/BookDetail";
+import BooksCatalog from "./pages/BooksCatalog";
+import BookTitle from "./pages/BookTitle";
 import AuditOfTheHeart from "./pages/AuditOfTheHeart";
 import HostileTender from "./pages/HostileTender";
 import FreeBook from "./pages/FreeBook";
+import Permission from "./pages/Permission";
+import Press from "./pages/Press";
 import Shop from "./pages/Shop";
 import PurchaseSuccess from "./pages/PurchaseSuccess";
 import About from "./pages/About";
@@ -87,10 +89,12 @@ function Router() {
     <Suspense fallback={<RouteFallback />}>
       <Switch>
         <Route path={"/"} component={Home} />
-        <Route path={"/books"} component={Books} />
+        <Route path={"/books"} component={BooksCatalog} />
         <Route path={"/books/audit-of-the-heart"} component={AuditOfTheHeart} />
         <Route path={"/books/hostile-tender"} component={HostileTender} />
-        <Route path={"/books/:slug"} component={BookDetail} />
+        <Route path={"/books/:slug"} component={BookTitle} />
+        <Route path={"/permission"} component={Permission} />
+        <Route path={"/press"} component={Press} />
         <Route path={"/reader-club"} component={ReaderClub} />
         <Route path={"/reader-club/:slug"} component={ExclusiveContentDetail} />
         <Route path={"/free-book"} component={FreeBook} />

@@ -105,10 +105,18 @@ export const appRouter = router({
         z.object({
           email: z.string().email("Please enter a valid email address"),
           name: z.string().optional(),
+          /**
+           * Optional MailerLite group ID. When set, the subscriber is added
+           * to this group instead of (or in addition to, depending on the
+           * MailerLite SDK) the default Reader's Club group. Used by
+           * landing-specific forms (e.g. /permission) to drive launch
+           * segmentation.
+           */
+          groupId: z.string().optional(),
         })
       )
       .mutation(async ({ input }) => {
-        const groupId = process.env.MAILERLITE_GROUP_ID;
+        const groupId = input.groupId || process.env.MAILERLITE_GROUP_ID;
         const result = await subscribeToMailerLite(
           input.email,
           input.name,

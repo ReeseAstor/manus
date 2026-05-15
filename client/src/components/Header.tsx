@@ -22,13 +22,16 @@ export function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Primary nav follows the catalog brief — Books carries every title
+  // (lane separation is handled inside /books), so Audiobooks / Latest
+  // Release are intentionally absent. Secondary group is rendered smaller.
   const navLinks = [
-    { href: "/", label: "Home" },
     { href: "/books", label: "Books" },
-    { href: "/shop", label: "Shop", special: true },
-    { href: "/free-book", label: "Free Book" },
-    { href: "/blog", label: "Blog" },
     { href: "/about", label: "About" },
+    { href: "/newsletter", label: "Newsletter" },
+  ];
+  const secondaryNavLinks = [
+    { href: "/press", label: "Press" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -45,16 +48,22 @@ export function Header() {
         <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href}>
-              <span className={`text-sm font-medium transition-colors cursor-pointer ${
-                link.special 
-                  ? "text-primary font-bold hover:text-primary/80" 
-                  : "text-muted-foreground hover:text-primary"
-              }`}>
+              <span className="text-sm font-medium transition-colors cursor-pointer text-muted-foreground hover:text-primary">
                 {link.label}
               </span>
             </Link>
           ))}
-          
+
+          {/* Secondary nav — smaller, slightly muted */}
+          <span className="hidden lg:inline-block w-px h-4 bg-border/40 mx-1" aria-hidden />
+          {secondaryNavLinks.map((link) => (
+            <Link key={link.href} href={link.href}>
+              <span className="text-xs font-medium uppercase tracking-wider transition-colors cursor-pointer text-muted-foreground/70 hover:text-primary">
+                {link.label}
+              </span>
+            </Link>
+          ))}
+
           {/* User Menu */}
           {!loading && (
             user ? (
@@ -141,21 +150,17 @@ export function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-border/40 bg-background">
           <nav className="container flex flex-col space-y-4 py-4">
-            {navLinks.map((link) => (
+            {[...navLinks, ...secondaryNavLinks].map((link) => (
               <Link key={link.href} href={link.href}>
                 <span
-                  className={`text-sm font-medium transition-colors cursor-pointer ${
-                    link.special 
-                      ? "text-primary font-bold hover:text-primary/80" 
-                      : "text-muted-foreground hover:text-primary"
-                  }`}
+                  className="text-sm font-medium transition-colors cursor-pointer text-muted-foreground hover:text-primary"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
                 </span>
               </Link>
             ))}
-            
+
             {/* Mobile User Menu */}
             {!loading && (
               user ? (
