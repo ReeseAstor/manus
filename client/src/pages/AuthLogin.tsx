@@ -1,6 +1,18 @@
 import { useState } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Link } from 'wouter';
+import { getLoginUrl } from '../const';
+
+// If Manus OAuth env is set, getLoginUrl() returns the portal URL; otherwise
+// it falls back to /auth/login (which is THIS page). We use that distinction
+// to decide whether to offer "Continue with Manus" as a fallback when
+// Supabase isn't configured.
+const manusOAuthUrl = (() => {
+  const portal = import.meta.env.VITE_OAUTH_PORTAL_URL;
+  const appId = import.meta.env.VITE_APP_ID;
+  if (!portal || portal === 'undefined' || !appId) return null;
+  return getLoginUrl();
+})();
 
 /**
  * Supabase Auth Login Page
@@ -21,11 +33,47 @@ export default function AuthLogin() {
 
   if (!isSupabaseConfigured) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-        <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Configuration Error</h2>
-          <p className="text-gray-600">
-            Supabase authentication is not configured. Please contact the administrator.
+      <div
+        className="min-h-screen flex items-center justify-center px-4 font-cormorant"
+        style={{ background: '#070D1C', color: '#F2ECDF' }}
+      >
+        <div
+          className="max-w-[480px] w-full p-10 text-center"
+          style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(201,166,70,0.25)', borderRadius: 4 }}
+        >
+          <div
+            className="font-inter text-[11px] font-semibold uppercase mb-4"
+            style={{ color: '#C9A646', letterSpacing: '0.32em' }}
+          >
+            Sign in
+          </div>
+          <h2 className="font-display text-[28px] leading-[1.2] mb-4" style={{ color: '#F2ECDF' }}>
+            Email sign-in is not yet enabled.
+          </h2>
+          <p className="font-cormorant italic text-[17px] mb-8" style={{ color: '#B9B0A2' }}>
+            {manusOAuthUrl
+              ? 'You can continue with the Manus OAuth portal, or come back later once email sign-in is configured.'
+              : 'Reader sign-in is being set up. Please come back soon.'}
+          </p>
+          {manusOAuthUrl && (
+            <a
+              href={manusOAuthUrl}
+              className="font-inter inline-flex items-center justify-center gap-2 text-[12px] font-semibold uppercase no-underline transition-all duration-200 hover:-translate-y-px"
+              style={{
+                color: '#070D1C',
+                background: '#C9A646',
+                padding: '14px 28px',
+                letterSpacing: '0.22em',
+                borderRadius: 4,
+              }}
+            >
+              Continue with Manus
+            </a>
+          )}
+          <p className="font-cormorant italic text-[14px] mt-8" style={{ color: '#7B7464' }}>
+            <Link href="/">
+              <a style={{ color: '#C9A646', textDecoration: 'none' }}>&larr; Back to reeseastor.com</a>
+            </Link>
           </p>
         </div>
       </div>
