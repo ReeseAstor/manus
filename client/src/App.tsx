@@ -75,6 +75,7 @@ import { Footer } from "./components/Footer";
 import { AIChatbot } from "./components/AIChatbot";
 import { EmailCapturePopup } from "./components/EmailCapturePopup";
 import { ExitIntentPopup } from "./components/ExitIntentPopup";
+import { AdminRoute } from "./components/AdminRoute";
 
 function RouteFallback() {
   return (
@@ -119,29 +120,29 @@ function Router() {
         <Route path={"/contact"} component={Contact} />
         <Route path={"/blog"} component={Blog} />
         <Route path={"/blog/:slug"} component={BlogPost} />
-        <Route path={"/admin"} component={Admin} />
-        <Route path={"/admin/dashboard"} component={AdminDashboard} />
-        <Route path={"/admin/qa"} component={AdminQA} />
-        <Route path={"/admin/links"} component={AdminLinks} />
-        <Route path={"/admin/books"} component={AdminBooks} />
-        <Route path={"/admin/reports"} component={AdminReports} />
-        <Route path={"/admin/command-center"} component={AdminCommandCenter} />
-        <Route path={"/admin/stripe-analytics"} component={AdminStripeAnalytics} />
-        <Route path={"/admin/email-templates"} component={AdminEmailTemplates} />
-        <Route path={"/admin/affiliate-analytics"} component={AdminAffiliateAnalytics} />
-        <Route path={"/admin/partner-applications"} component={AdminPartnerApplications} />
-        <Route path={"/admin/social-media-kit"} component={AdminSocialMediaKit} />
-        <Route path={"/admin/switchy"} component={AdminSwitchy} />
-        <Route path={"/admin/audio"} component={AdminAudioGenerator} />
-        <Route path={"/admin/webhooks"} component={AdminWebhooks} />
-        <Route path={"/admin/twilio"} component={AdminTwilio} />
-        <Route path={"/admin/sms-analytics"} component={AdminSmsAnalytics} />
-        <Route path={"/admin/ai-studio"} component={AdminAIStudio} />
-        <Route path={"/admin/writing-studio"} component={WritingStudio} />
-        <Route path={"/admin/blog/new"} component={BlogEditor} />
-        <Route path={"/admin/blog/edit/:id"} component={BlogEditor} />
-        <Route path={"/admin/newsletters"} component={NewsletterManager} />
-        <Route path={"/admin/newsletter/:id"} component={NewsletterEditor} />
+        <Route path={"/admin"}><AdminRoute><Admin /></AdminRoute></Route>
+        <Route path={"/admin/dashboard"}><AdminRoute><AdminDashboard /></AdminRoute></Route>
+        <Route path={"/admin/qa"}><AdminRoute><AdminQA /></AdminRoute></Route>
+        <Route path={"/admin/links"}><AdminRoute><AdminLinks /></AdminRoute></Route>
+        <Route path={"/admin/books"}><AdminRoute><AdminBooks /></AdminRoute></Route>
+        <Route path={"/admin/reports"}><AdminRoute><AdminReports /></AdminRoute></Route>
+        <Route path={"/admin/command-center"}><AdminRoute><AdminCommandCenter /></AdminRoute></Route>
+        <Route path={"/admin/stripe-analytics"}><AdminRoute><AdminStripeAnalytics /></AdminRoute></Route>
+        <Route path={"/admin/email-templates"}><AdminRoute><AdminEmailTemplates /></AdminRoute></Route>
+        <Route path={"/admin/affiliate-analytics"}><AdminRoute><AdminAffiliateAnalytics /></AdminRoute></Route>
+        <Route path={"/admin/partner-applications"}><AdminRoute><AdminPartnerApplications /></AdminRoute></Route>
+        <Route path={"/admin/social-media-kit"}><AdminRoute><AdminSocialMediaKit /></AdminRoute></Route>
+        <Route path={"/admin/switchy"}><AdminRoute><AdminSwitchy /></AdminRoute></Route>
+        <Route path={"/admin/audio"}><AdminRoute><AdminAudioGenerator /></AdminRoute></Route>
+        <Route path={"/admin/webhooks"}><AdminRoute><AdminWebhooks /></AdminRoute></Route>
+        <Route path={"/admin/twilio"}><AdminRoute><AdminTwilio /></AdminRoute></Route>
+        <Route path={"/admin/sms-analytics"}><AdminRoute><AdminSmsAnalytics /></AdminRoute></Route>
+        <Route path={"/admin/ai-studio"}><AdminRoute><AdminAIStudio /></AdminRoute></Route>
+        <Route path={"/admin/writing-studio"}><AdminRoute><WritingStudio /></AdminRoute></Route>
+        <Route path={"/admin/blog/new"}><AdminRoute><BlogEditor /></AdminRoute></Route>
+        <Route path={"/admin/blog/edit/:id"}><AdminRoute><BlogEditor /></AdminRoute></Route>
+        <Route path={"/admin/newsletters"}><AdminRoute><NewsletterManager /></AdminRoute></Route>
+        <Route path={"/admin/newsletter/:id"}><AdminRoute><NewsletterEditor /></AdminRoute></Route>
         <Route path={"/privacy"} component={Privacy} />
         <Route path={"/terms"} component={Terms} />
         <Route path={"/404"} component={NotFound} />
