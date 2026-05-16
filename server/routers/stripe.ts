@@ -162,4 +162,53 @@ export const stripeRouter = router({
 
       return { url: session.url };
     }),
+
+  /**
+   * Embedded checkout session for The Need for Permission ($4.99 audiobook).
+   * Returns a client_secret the SPA mounts via <EmbeddedCheckoutProvider>
+   * — no redirect off-domain. Fulfillment is handled by the existing Stripe
+   * webhook (server/stripe-webhook.ts) on checkout.session.completed.
+   */
+  createPermissionCheckout: publicProcedure
+    .input(
+      z.object({
+        customerEmail: z.string().email().optional(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const session = await stripe.checkout.sessions.create({
+        ui_mode: "embedded",
+        redirect_on_completion: "never",
+        mode: "payment",
+        line_items: [
+          {
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: "The Need for Permission",
+                description:
+                  "On the Quiet Recovery of Self-Trust — a ten-chapter audiobook by Reese Astor.",
+              },
+              unit_amount: 499,
+            },
+            quantity: 1,
+          },
+        ],
+        customer_email: input.customerEmail,
+        metadata: {
+          product_slug: "the-need-for-permission",
+          source: "/permission",
+          userId: ctx.user?.id?.toString() ?? "",
+        },
+      });
+
+      if (!session.client_secret) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Stripe did not return a client_secret",
+        });
+      }
+
+      return { clientSecret: session.client_secret };
+    }),
 });
