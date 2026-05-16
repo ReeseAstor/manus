@@ -935,12 +935,7 @@ export default function VipClub() {
           setVipCheckoutOpen(false);
           setVipClientSecret(null);
         }}
-        fetchClientSecret={async () => {
-          if (!vipClientSecret) {
-            throw new Error("Checkout session not initialised. Please try again.");
-          }
-          return vipClientSecret;
-        }}
+        clientSecret={vipClientSecret}
         title="Join the VIP Club"
       />
     </div>

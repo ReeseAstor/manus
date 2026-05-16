@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "wouter";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
@@ -61,12 +61,33 @@ export default function Permission() {
 
   // Embedded Stripe checkout for direct purchase ($4.99 audiobook). Keeps
   // the user on reeseastor.com rather than handing off to Gumroad.
+  // The mutation runs on button click; once it resolves we open the modal
+  // with the secret already in hand — no thunk, no stale closure.
   const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const permissionCheckout = trpc.stripe.createPermissionCheckout.useMutation();
-  const fetchCheckoutSecret = useCallback(async () => {
-    const result = await permissionCheckout.mutateAsync({});
-    return result.clientSecret;
-  }, [permissionCheckout]);
+  const [checkoutSecret, setCheckoutSecret] = useState<string | null>(null);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+  const permissionCheckout = trpc.stripe.createPermissionCheckout.useMutation({
+    onSuccess: (data) => {
+      setCheckoutSecret(data.clientSecret);
+      setCheckoutError(null);
+      setCheckoutOpen(true);
+    },
+    onError: (err) => {
+      setCheckoutError(err.message || "Unable to start checkout.");
+      setCheckoutOpen(true);
+    },
+  });
+  const startPermissionCheckout = () => {
+    if (permissionCheckout.isPending) return;
+    setCheckoutSecret(null);
+    setCheckoutError(null);
+    permissionCheckout.mutate({});
+  };
+  const closePermissionCheckout = () => {
+    setCheckoutOpen(false);
+    setCheckoutSecret(null);
+    setCheckoutError(null);
+  };
 
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => setSubmitted(true),
@@ -145,7 +166,7 @@ export default function Permission() {
             <div className="mt-10 max-w-[560px] space-y-4">
               <button
                 type="button"
-                onClick={() => setCheckoutOpen(true)}
+                onClick={startPermissionCheckout}
                 disabled={permissionCheckout.isPending}
                 className="font-inter w-full inline-flex items-center justify-center gap-2 text-[12px] font-semibold uppercase no-underline transition-all duration-200 hover:-translate-y-px disabled:opacity-60 disabled:cursor-wait"
                 style={{
@@ -342,8 +363,9 @@ export default function Permission() {
 
       <EmbeddedCheckoutModal
         open={checkoutOpen}
-        onClose={() => setCheckoutOpen(false)}
-        fetchClientSecret={fetchCheckoutSecret}
+        onClose={closePermissionCheckout}
+        clientSecret={checkoutSecret}
+        error={checkoutError}
         title="Order The Need for Permission"
       />
     </div>

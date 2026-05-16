@@ -168,6 +168,10 @@ export const stripeRouter = router({
    * Returns a client_secret the SPA mounts via <EmbeddedCheckoutProvider>
    * — no redirect off-domain. Fulfillment is handled by the existing Stripe
    * webhook (server/stripe-webhook.ts) on checkout.session.completed.
+   *
+   * Get-or-creates a `products` row for this audiobook so the webhook has
+   * a real numeric productId to record the purchase against (orders.productId
+   * is NOT NULL with an FK to products.id).
    */
   createPermissionCheckout: publicProcedure
     .input(
@@ -176,6 +180,47 @@ export const stripeRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
+
+      const PRODUCT_NAME = "The Need for Permission";
+      const PRODUCT_DESCRIPTION =
+        "On the Quiet Recovery of Self-Trust — a ten-chapter audiobook by Reese Astor.";
+      const BOOK_COVER = "/covers/permission-cover.jpg";
+
+      const existing = await db
+        .select()
+        .from(products)
+        .where(eq(products.name, PRODUCT_NAME))
+        .limit(1);
+
+      let productRow = existing[0];
+      if (!productRow) {
+        const insertResult: any = await db.insert(products).values({
+          name: PRODUCT_NAME,
+          description: PRODUCT_DESCRIPTION,
+          price: 499,
+          currency: "usd",
+          type: "one_time",
+          active: true,
+        });
+        const insertedId = Number(
+          insertResult?.insertId ?? insertResult?.[0]?.insertId ?? 0
+        );
+        if (!insertedId) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Failed to seed product row for permission audiobook",
+          });
+        }
+        const [created] = await db
+          .select()
+          .from(products)
+          .where(eq(products.id, insertedId))
+          .limit(1);
+        productRow = created;
+      }
+
       const session = await stripe.checkout.sessions.create({
         ui_mode: "embedded",
         redirect_on_completion: "never",
@@ -185,9 +230,8 @@ export const stripeRouter = router({
             price_data: {
               currency: "usd",
               product_data: {
-                name: "The Need for Permission",
-                description:
-                  "On the Quiet Recovery of Self-Trust — a ten-chapter audiobook by Reese Astor.",
+                name: PRODUCT_NAME,
+                description: PRODUCT_DESCRIPTION,
               },
               unit_amount: 499,
             },
@@ -196,9 +240,12 @@ export const stripeRouter = router({
         ],
         customer_email: input.customerEmail,
         metadata: {
+          userId: ctx.user?.id?.toString() ?? "",
+          productId: productRow.id.toString(),
+          bookTitle: PRODUCT_NAME,
+          bookCover: BOOK_COVER,
           product_slug: "the-need-for-permission",
           source: "/permission",
-          userId: ctx.user?.id?.toString() ?? "",
         },
       });
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from "@stripe/react-stripe-js";
 import { loadStripe, type Stripe } from "@stripe/stripe-js";
 import { X } from "lucide-react";
@@ -10,11 +10,18 @@ type Props = {
   /** Called when the user dismisses (X button, backdrop, or successful completion). */
   onClose: () => void;
   /**
-   * Async function that creates a Stripe checkout session and returns the
-   * client_secret. Re-invoked each time the modal is opened, so callers can
-   * pass parameters captured at open time (e.g. tier slug, customer email).
+   * Pre-resolved Stripe checkout `client_secret` for an embedded session.
+   * Pass `null` to render a loading state (useful when the parent kicks
+   * off the mutation and opens the modal in the same batch). Pass an
+   * error string via `error` if fetching failed.
+   *
+   * The caller owns the lifecycle — this component does not fetch.
+   * That keeps the state graph simple and avoids the stale-closure
+   * footgun of passing a thunk that captures parent state.
    */
-  fetchClientSecret: () => Promise<string>;
+  clientSecret: string | null;
+  /** Optional error message — shown in place of the iframe. */
+  error?: string | null;
   /** Label shown above the embedded iframe — e.g. "Order The Need for Permission". */
   title?: string;
 };
@@ -47,39 +54,7 @@ function getStripe() {
  * (server/stripe-webhook.ts) processes `checkout.session.completed` events
  * for both this embedded flow and the legacy hosted-redirect flow.
  */
-export function EmbeddedCheckoutModal({ open, onClose, fetchClientSecret, title }: Props) {
-  const [clientSecret, setClientSecret] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-
-  // Re-fetch on each open. Reset on close so a re-open creates a fresh session.
-  useEffect(() => {
-    if (!open) {
-      setClientSecret(null);
-      setError(null);
-      return;
-    }
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-    fetchClientSecret()
-      .then((secret) => {
-        if (cancelled) return;
-        setClientSecret(secret);
-      })
-      .catch((err: unknown) => {
-        if (cancelled) return;
-        const message = err instanceof Error ? err.message : "Unable to start checkout.";
-        setError(message);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [open, fetchClientSecret]);
-
+export function EmbeddedCheckoutModal({ open, onClose, clientSecret, error, title }: Props) {
   // Lock body scroll while open.
   useEffect(() => {
     if (!open) return;
@@ -145,7 +120,7 @@ export function EmbeddedCheckoutModal({ open, onClose, fetchClientSecret, title 
         </div>
 
         <div className="px-6 pb-6">
-          {loading && !clientSecret && (
+          {!clientSecret && !error && (
             <div
               className="font-cormorant italic py-12 text-center"
               style={{ color: TEXT_SOFT }}
