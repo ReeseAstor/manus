@@ -85,7 +85,7 @@ export default function Home() {
         byline="A Hudson Dynasty Novel · Reese Astor"
         tagline={"She’s the federal auditor sent to dismantle his empire. He’s Manhattan’s most dangerous billionaire fighting to save it."}
         blurb="When the RIVIERA Ledger exposes three generations of Hudson secrets, SDNY forensic auditor Nia Carter and CEO Sebastian Hudson are forced into dangerous proximity. The hostile takeover escalates. Secrets surface from the family archives. The line between investigation and intimacy dissolves — and trusting each other could cost them everything."
-        cover="/author-kit/hudson-dynasty-1-hostile-tender.jpg"
+        cover="https://m.media-amazon.com/images/I/81iGQzEnacL._SL1500_.jpg"
         primaryCta="See the full pitch"
         primaryHref="/books/hostile-tender"
         secondaryCta="Browse the series"

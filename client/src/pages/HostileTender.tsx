@@ -98,7 +98,7 @@ export default function HostileTender() {
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
                     <img
-                      src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-v2-iH5fGgkRQVjWbk2TchYPdH.webp"
+                      src="https://m.media-amazon.com/images/I/81iGQzEnacL._SL1500_.jpg"
                       alt="Hostile Tender - Hudson Dynasty Book 2 by Reese Astor"
                       className="w-full rounded-2xl shadow-2xl"
                     />
@@ -204,7 +204,7 @@ export default function HostileTender() {
                 muted
                 playsInline
                 className="w-full"
-                poster="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-v2-iH5fGgkRQVjWbk2TchYPdH.webp"
+                poster="https://m.media-amazon.com/images/I/81iGQzEnacL._SL1500_.jpg"
               >
                 <source src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/phaQMrxPrFvyOLKM.mp4" type="video/mp4" />
               </video>
