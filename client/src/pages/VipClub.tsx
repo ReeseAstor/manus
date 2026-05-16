@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { EmbeddedCheckoutModal } from "@/components/EmbeddedCheckoutModal";
 
 export default function VipClub() {
   const { user, isAuthenticated } = useAuth();
@@ -73,9 +74,19 @@ export default function VipClub() {
     setAudioProgress(prev => ({ ...prev, [storyId]: 0 }));
   };
   
+  // VIP checkout now uses Stripe embedded mode — the modal opens in-page
+  // instead of redirecting to checkout.stripe.com. The mutation returns a
+  // client_secret that the EmbeddedCheckoutModal consumes via its
+  // fetchClientSecret thunk.
+  const [vipCheckoutOpen, setVipCheckoutOpen] = useState(false);
+  const [vipClientSecret, setVipClientSecret] = useState<string | null>(null);
   const subscribeMutation = trpc.vip.subscribe.useMutation({
-    onSuccess: (data: { checkoutUrl: string | null }) => {
-      if (data.checkoutUrl) {
+    onSuccess: (data) => {
+      if (data.mode === "embedded" && data.clientSecret) {
+        setVipClientSecret(data.clientSecret);
+        setVipCheckoutOpen(true);
+      } else if (data.mode === "redirect" && data.checkoutUrl) {
+        // Fallback for any caller that still requests redirect mode.
         window.location.href = data.checkoutUrl;
       }
     },
@@ -95,10 +106,11 @@ export default function VipClub() {
   const proceedToCheckout = () => {
     if (!pendingTierSlug) return;
     setShowSmsModal(false);
-    subscribeMutation.mutate({ 
+    subscribeMutation.mutate({
       tierSlug: pendingTierSlug,
       smsOptIn: smsOptIn,
       phoneNumber: smsOptIn ? phoneNumber : undefined,
+      mode: "embedded",
     });
   };
 
@@ -874,7 +886,7 @@ export default function VipClub() {
                 setSmsOptIn(false);
                 setPhoneNumber("");
                 if (pendingTierSlug) {
-                  subscribeMutation.mutate({ tierSlug: pendingTierSlug });
+                  subscribeMutation.mutate({ tierSlug: pendingTierSlug, mode: "embedded" });
                 }
               }}
               className="flex-1 border-gray-700 text-gray-300 hover:bg-gray-800"
@@ -916,6 +928,16 @@ export default function VipClub() {
           </div>
         </div>
       </section>
+
+      <EmbeddedCheckoutModal
+        open={vipCheckoutOpen}
+        onClose={() => {
+          setVipCheckoutOpen(false);
+          setVipClientSecret(null);
+        }}
+        clientSecret={vipClientSecret}
+        title="Join the VIP Club"
+      />
     </div>
   );
 }

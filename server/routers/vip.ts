@@ -198,10 +198,17 @@ export const vipRouter = router({
 
   // Subscribe to VIP tier
   subscribe: protectedProcedure
-    .input(z.object({ 
+    .input(z.object({
       tierSlug: z.string(),
       smsOptIn: z.boolean().optional(),
       phoneNumber: z.string().optional(),
+      /**
+       * Checkout UI mode. "redirect" returns a hosted-Stripe checkoutUrl
+       * (legacy default). "embedded" returns a client_secret the SPA
+       * mounts inline via <EmbeddedCheckoutProvider>, keeping the user
+       * on reeseastor.com.
+       */
+      mode: z.enum(["redirect", "embedded"]).default("redirect"),
     }))
     .mutation(async ({ ctx, input }) => {
       const db = await getDb();
@@ -270,9 +277,9 @@ export const vipRouter = router({
           .where(eq(vipTiers.id, tier[0].id));
       }
 
-      const session = await stripe.checkout.sessions.create({
-        mode: "subscription",
-        payment_method_types: ["card"],
+      const baseSession = {
+        mode: "subscription" as const,
+        payment_method_types: ["card"] as const,
         customer_email: user[0]?.email || undefined,
         line_items: [
           {
@@ -280,8 +287,6 @@ export const vipRouter = router({
             quantity: 1,
           },
         ],
-        success_url: `https://reeseastor.com/vip-club/welcome?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `https://reeseastor.com/vip-club`,
         metadata: {
           userId: ctx.user.id.toString(),
           tierId: tier[0].id.toString(),
@@ -289,9 +294,32 @@ export const vipRouter = router({
           smsOptIn: input.smsOptIn ? "true" : "false",
           phoneNumber: input.phoneNumber || "",
         },
+      };
+
+      if (input.mode === "embedded") {
+        const session = await stripe.checkout.sessions.create({
+          ...baseSession,
+          ui_mode: "embedded",
+          redirect_on_completion: "never",
+        });
+
+        if (!session.client_secret) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Stripe did not return a client_secret",
+          });
+        }
+
+        return { mode: "embedded" as const, clientSecret: session.client_secret };
+      }
+
+      const session = await stripe.checkout.sessions.create({
+        ...baseSession,
+        success_url: `https://reeseastor.com/vip-club/welcome?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `https://reeseastor.com/vip-club`,
       });
 
-      return { checkoutUrl: session.url };
+      return { mode: "redirect" as const, checkoutUrl: session.url };
     }),
 
   // Like/unlike a story
