@@ -62,6 +62,7 @@ const VipDashboard = lazy(() => import("./pages/VipDashboard"));
 const VipAudioHub = lazy(() => import("./pages/VipAudioHub"));
 const VipAudioLibrary = lazy(() => import("./pages/VipAudioLibrary"));
 const AuthLogin = lazy(() => import("./pages/AuthLogin"));
+const AuthCallback = lazy(() => import("./pages/AuthCallback"));
 const Newsletter = lazy(() => import("./pages/Newsletter"));
 const NewsletterArchive = lazy(() => import("./pages/NewsletterArchive"));
 const NewsletterDetail = lazy(() => import("./pages/NewsletterDetail"));
@@ -111,6 +112,7 @@ function Router() {
         <Route path={"/vip-club/welcome"} component={VipWelcome} />
         <Route path={"/vip-club/dashboard"} component={VipDashboard} />
         <Route path={"/auth/login"} component={AuthLogin} />
+        <Route path={"/auth/callback"} component={AuthCallback} />
         <Route path={"/newsletter"} component={Newsletter} />
         <Route path={"/newsletter-archive"} component={NewsletterArchive} />
         <Route path={"/newsletter-archive/:id"} component={NewsletterDetail} />
