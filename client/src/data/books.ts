@@ -237,8 +237,8 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://www.amazon.com/dp/PLACEHOLDER", // TODO
-      audible: null, // TODO
+      amazon_kindle: "https://swiy.co/HD1",
+      audible: null,
     },
     audiobook_available: true,
     isbn: null,

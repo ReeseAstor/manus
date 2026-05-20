@@ -78,18 +78,22 @@ export default function Home() {
         structuredData={[homeStructuredData]}
       />
 
-      {/* Hero — Hostile Tender (Hudson Dynasty Book 2). Copy verbatim from HostileTender.tsx schema. */}
+      {/* Hero — Hostile Tender. Primary CTA goes direct to Amazon
+          (swiy.co/HD1) so the highest-intent click converts in-page
+          rather than bouncing through the book detail. Secondary
+          routes to the sample chapter / full pitch on /books/hostile-tender. */}
       <BookHero
-        kicker="Hudson Dynasty · Book 2 · New Release"
+        kicker="USA Today Bestseller · Hudson Dynasty · New Release"
         title="Hostile|Tender"
-        byline="A Hudson Dynasty Novel · Reese Astor"
+        byline="A Hudson Dynasty Novel · Reese Astor · Available on Kindle Unlimited"
         tagline={"She’s the federal auditor sent to dismantle his empire. He’s Manhattan’s most dangerous billionaire fighting to save it."}
         blurb="When the RIVIERA Ledger exposes three generations of Hudson secrets, SDNY forensic auditor Nia Carter and CEO Sebastian Hudson are forced into dangerous proximity. The hostile takeover escalates. Secrets surface from the family archives. The line between investigation and intimacy dissolves — and trusting each other could cost them everything."
         cover="https://m.media-amazon.com/images/I/81iGQzEnacL._SL1500_.jpg"
-        primaryCta="See the full pitch"
-        primaryHref="/books/hostile-tender"
-        secondaryCta="Browse the series"
-        secondaryHref="/books"
+        primaryCta="Buy on Amazon"
+        primaryHref="https://swiy.co/HD1"
+        primaryExternal
+        secondaryCta="Read the first chapter"
+        secondaryHref="/books/hostile-tender"
       />
 
       {/* Manhattan Money Kings — official descriptions verbatim from Books.tsx */}
