@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { supabase } from './supabase';
+import { supabase, isSupabaseConfigured } from './supabase';
 import * as db from './db';
 import { sdk } from './_core/sdk';
 import { getSessionCookieOptions } from './_core/cookies';
@@ -26,6 +26,15 @@ import { COOKIE_NAME, ONE_YEAR_MS } from '@shared/const';
  */
 export async function authCallback(req: Request, res: Response) {
   const { code, error, error_description, redirect, access_token } = req.query;
+
+  if (!isSupabaseConfigured) {
+    console.error('[Auth] Callback hit but server Supabase client is not configured.');
+    return res.redirect(
+      `/auth/login?error=${encodeURIComponent(
+        'Authentication is temporarily unavailable. Please try again later.',
+      )}`,
+    );
+  }
 
   if (error) {
     console.error('[Auth] Supabase returned error:', error, error_description);
