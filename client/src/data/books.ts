@@ -79,7 +79,7 @@ export const BOOKS: Book[] = [
       "When the city's most ruthless dealmaker insists one night was never going to be enough, the woman " +
       "who came to him as a stranger has to decide whether to disappear — or stay and be wholly seen.",
     pull_quote: "“You were supposed to be a stranger. You decided otherwise.”",
-    cover_image: "/covers/mmk-1-one-night-stand.jpg",
+    cover_image: "https://m.media-amazon.com/images/I/815-iFRAlpL._SL1500_.jpg",
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
