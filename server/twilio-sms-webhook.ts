@@ -8,7 +8,7 @@ const router = Router();
 
 // Keywords for unsubscribe/resubscribe
 const STOP_KEYWORDS = ['STOP', 'UNSUBSCRIBE', 'CANCEL', 'END', 'QUIT'];
-const START_KEYWORDS = ['START', 'SUBSCRIBE', 'YES', 'UNSTOP'];
+const START_KEYWORDS = ['START', 'SUBSCRIBE', 'YES', 'UNSTOP', 'JOIN', 'CLUB'];
 const HELP_KEYWORDS = ['HELP', 'INFO'];
 
 // Twilio signature validation middleware

@@ -82,6 +82,21 @@ export default function Terms() {
           </section>
 
           <section className="space-y-4">
+            <h2 className="font-playfair text-2xl font-bold text-foreground">SMS / Text Message Program</h2>
+            <p>
+              By opting in to the Reese Astor text message program, you agree to receive recurring automated marketing text messages at the mobile number you provide. Consent is not a condition of any purchase. Message frequency varies. Message and data rates may apply.
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Reply STOP to unsubscribe at any time. After you send STOP, we will send one confirmation message and then stop sending messages.</li>
+              <li>Reply HELP for help, or contact us at contact@reeseastor.com.</li>
+              <li>Carriers are not liable for delayed or undelivered messages.</li>
+            </ul>
+            <p>
+              Your mobile opt-in information is handled as described in our Privacy Policy and is not sold or shared with third parties or affiliates for their own marketing purposes.
+            </p>
+          </section>
+
+          <section className="space-y-4">
             <h2 className="font-playfair text-2xl font-bold text-foreground">Disclaimer</h2>
             <p>
               The materials on this website are provided on an 'as is' basis. Reese Astor makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.

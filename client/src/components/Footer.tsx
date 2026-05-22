@@ -70,6 +70,9 @@ export function Footer() {
               <Link href="/terms">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
               </Link>
+              <Link href="/sms">
+                <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Text Alerts</a>
+              </Link>
               <Link href="/contact">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</a>
               </Link>
