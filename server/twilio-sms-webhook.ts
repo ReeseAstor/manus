@@ -46,7 +46,7 @@ const validateTwilioSignature = (req: Request, res: Response, next: Function) =>
 };
 
 // Main incoming SMS handler
-router.post('/incoming', validateTwilioSignature, async (req: Request, res: Response) => {
+const handleIncomingSms = async (req: Request, res: Response) => {
   try {
     const {
       From: fromNumber,
@@ -63,10 +63,10 @@ router.post('/incoming', validateTwilioSignature, async (req: Request, res: Resp
 
     // Normalize the message body
     const normalizedMessage = messageBody.trim().toUpperCase();
-    
+
     // Determine the action based on keywords
     let action: 'stop' | 'start' | 'help' | 'unknown' = 'unknown';
-    
+
     if (STOP_KEYWORDS.some(keyword => normalizedMessage === keyword || normalizedMessage.startsWith(keyword + ' '))) {
       action = 'stop';
     } else if (START_KEYWORDS.some(keyword => normalizedMessage === keyword || normalizedMessage.startsWith(keyword + ' '))) {
@@ -117,15 +117,20 @@ router.post('/incoming', validateTwilioSignature, async (req: Request, res: Resp
 
   } catch (error) {
     console.error('[SMS Webhook] Error processing incoming SMS:', error);
-    
+
     // Send a generic error response
     const twiml = new twilio.twiml.MessagingResponse();
     twiml.message('Sorry, we encountered an error. Please try again later or contact support.');
-    
+
     res.type('text/xml');
     res.send(twiml.toString());
   }
-});
+};
+
+router.post('/incoming', validateTwilioSignature, handleIncomingSms);
+// Alias so Twilio's configured webhook URL (https://.../webhooks/twilio) hits
+// the same handler when this router is mounted at /webhooks/twilio.
+router.post('/', validateTwilioSignature, handleIncomingSms);
 
 // Handle STOP/unsubscribe request
 async function handleStop(db: any, phoneNumber: string, existingPrefs: any): Promise<string> {

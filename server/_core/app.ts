@@ -7,6 +7,10 @@ import { createContext } from "./context";
 import { handleStripeWebhook } from "../stripe-webhook";
 import mailerLiteWebhookRouter from "../mailerlite.webhook";
 import twilioSmsWebhookRouter from "../twilio-sms-webhook";
+import twilioVoiceWebhookRouter, {
+  handleIncomingVoice,
+  validateTwilioSignature as validateTwilioVoiceSignature,
+} from "../twilio-voice-webhook";
 import { authCallback } from "../api.auth.callback";
 import { getDb } from "../db";
 import { blogPosts } from "../../drizzle/schema";
@@ -26,6 +30,17 @@ export function createApp(): Express {
 
   app.use("/api/mailerlite", mailerLiteWebhookRouter);
   app.use("/api/sms", twilioSmsWebhookRouter);
+
+  // Twilio Console has both Voice "A call comes in" and Messaging "A message
+  // comes in" pointed at https://reeseastor.com/webhooks/twilio. Dispatch by
+  // payload: voice POSTs carry CallSid, SMS POSTs carry MessageSid.
+  app.post("/webhooks/twilio", (req, res, next) => {
+    const isVoice = req.body?.CallSid && !req.body?.MessageSid;
+    if (!isVoice) return next();
+    validateTwilioVoiceSignature(req, res, () => handleIncomingVoice(req, res));
+  });
+  app.use("/webhooks/twilio", twilioVoiceWebhookRouter);
+  app.use("/webhooks/twilio", twilioSmsWebhookRouter);
 
   registerOAuthRoutes(app);
   app.get("/api/auth/callback", authCallback);
