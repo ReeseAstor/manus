@@ -26,6 +26,8 @@ export function createApp(): Express {
 
   app.use("/api/mailerlite", mailerLiteWebhookRouter);
   app.use("/api/sms", twilioSmsWebhookRouter);
+  // Alias mount for the Twilio Console webhook URL.
+  app.use("/webhooks/twilio", twilioSmsWebhookRouter);
 
   registerOAuthRoutes(app);
   app.get("/api/auth/callback", authCallback);
