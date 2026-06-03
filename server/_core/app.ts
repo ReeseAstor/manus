@@ -22,6 +22,13 @@ import { blogPosts } from "../../drizzle/schema";
 export function createApp(): Express {
   const app = express();
 
+  // Trust Vercel's reverse proxy so req.protocol / req.get('host') reflect the
+  // original public URL (https + reeseastor.com). Without this, Twilio's signature
+  // validation fails (the reconstructed URL doesn't match the signed URL), and
+  // every inbound webhook returns 403 -- which is exactly what was happening on
+  // both SMS (/webhooks/twilio) and Voice. See Twilio error code 11200.
+  app.set("trust proxy", true);
+
   // Stripe webhook MUST be registered BEFORE any body parser middleware
   app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), handleStripeWebhook);
 

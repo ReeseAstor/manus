@@ -62,6 +62,16 @@ export default function Privacy() {
           </section>
 
           <section className="space-y-4">
+            <h2 className="font-playfair text-2xl font-bold text-foreground">SMS / Text Messaging</h2>
+            <p>
+              If you opt in to our SMS program, we collect your mobile phone number and your consent to receive recurring automated marketing text messages (such as new release announcements and exclusive offers) from Reese Astor. Consent is not a condition of any purchase. Message frequency varies, and message and data rates may apply. You can opt out at any time by replying STOP, or reply HELP for help.
+            </p>
+            <p>
+              <strong className="text-foreground">No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.</strong> Sharing with subcontractors who provide support services (for example, SMS delivery via our messaging provider, Twilio) is permitted solely to operate the program. All other categories of data sharing described in this policy exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.
+            </p>
+          </section>
+
+          <section className="space-y-4">
             <h2 className="font-playfair text-2xl font-bold text-foreground">Cookies</h2>
             <p>
               Our website uses cookies to distinguish you from other users of our website. This helps us to provide you with a good experience when you browse our website and also allows us to improve our site.
