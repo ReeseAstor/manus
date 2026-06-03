@@ -15,15 +15,6 @@ import { authCallback } from "../api.auth.callback";
 import { getDb } from "../db";
 import { blogPosts } from "../../drizzle/schema";
 
-if (!process.env.JWT_SECRET) {
-  console.error(
-    "[Boot] JWT_SECRET is not set. Session signing will fail with " +
-      '"Zero-length key is not supported" on every sign-in. Set JWT_SECRET ' +
-      "in the deployment environment (any high-entropy string, e.g. " +
-      "`openssl rand -hex 64`).",
-  );
-}
-
 /**
  * Build the configured Express app. Does NOT call listen — that's the caller's
  * job (local dev does it in index.ts; Vercel Functions wraps the app directly).
