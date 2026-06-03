@@ -101,6 +101,13 @@ export async function authCallback(req: Request, res: Response) {
       );
     }
 
+    if (!process.env.JWT_SECRET) {
+      return fail(
+        'Server session signing key (JWT_SECRET) is not configured. Please contact support.',
+        'jwt-secret-missing',
+      );
+    }
+
     let sessionToken: string;
     try {
       sessionToken = await sdk.createSessionToken(openId, {
