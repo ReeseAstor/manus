@@ -24,6 +24,7 @@ import ReaderClub from "./pages/ReaderClub";
 import ExclusiveContentDetail from "./pages/ExclusiveContentDetail";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import CodeOfConduct from "./pages/CodeOfConduct";
 
 // ───── Lazy: admin, editors, and rarely-hit gated routes ─────
 const Admin = lazy(() => import("./pages/Admin"));
@@ -147,6 +148,7 @@ function Router() {
         <Route path={"/admin/newsletter/:id"}><AdminRoute><NewsletterEditor /></AdminRoute></Route>
         <Route path={"/privacy"} component={Privacy} />
         <Route path={"/terms"} component={Terms} />
+        <Route path={"/code-of-conduct"} component={CodeOfConduct} />
         <Route path={"/404"} component={NotFound} />
         <Route component={NotFound} />
       </Switch>
