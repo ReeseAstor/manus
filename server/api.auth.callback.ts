@@ -27,21 +27,23 @@ import { COOKIE_NAME, ONE_YEAR_MS } from '@shared/const';
 export async function authCallback(req: Request, res: Response) {
   const { code, error, error_description, redirect, access_token } = req.query;
 
+  const fail = (reason: string, step: string, cause?: unknown) => {
+    const safeReason = String(reason).slice(0, 240);
+    console.error(`[Auth][callback] ${step} failed:`, safeReason, cause ?? '');
+    return res.redirect(`/auth/login?error=${encodeURIComponent(safeReason)}`);
+  };
+
   if (!isSupabaseConfigured) {
-    console.error('[Auth] Callback hit but server Supabase client is not configured.');
-    return res.redirect(
-      `/auth/login?error=${encodeURIComponent(
-        'Authentication is temporarily unavailable. Please try again later.',
-      )}`,
+    return fail(
+      'Authentication is temporarily unavailable. Please try again later.',
+      'config-check',
     );
   }
 
   if (error) {
-    console.error('[Auth] Supabase returned error:', error, error_description);
-    return res.redirect(
-      `/auth/login?error=${encodeURIComponent(
-        (error_description as string) || (error as string) || 'Authentication failed',
-      )}`,
+    return fail(
+      (error_description as string) || (error as string) || 'Authentication failed',
+      'provider-error',
     );
   }
 
@@ -51,27 +53,29 @@ export async function authCallback(req: Request, res: Response) {
     if (typeof code === 'string' && code.length > 0) {
       const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
       if (exchangeError || !data.user) {
-        console.error('[Auth] exchangeCodeForSession failed:', exchangeError);
-        return res.redirect(
-          `/auth/login?error=${encodeURIComponent(exchangeError?.message ?? 'Could not exchange code')}`,
+        return fail(
+          exchangeError?.message ?? 'Could not exchange code',
+          'exchange-code',
+          exchangeError,
         );
       }
       supabaseUser = data.user as any;
     } else if (typeof access_token === 'string' && access_token.length > 0) {
       const { data, error: getUserError } = await supabase.auth.getUser(access_token);
       if (getUserError || !data.user) {
-        console.error('[Auth] getUser(access_token) failed:', getUserError);
-        return res.redirect(
-          `/auth/login?error=${encodeURIComponent(getUserError?.message ?? 'Invalid session')}`,
+        return fail(
+          getUserError?.message ?? 'Invalid session',
+          'get-user',
+          getUserError,
         );
       }
       supabaseUser = data.user as any;
     } else {
-      return res.redirect('/auth/login?error=Missing+authentication+code');
+      return fail('Missing authentication code', 'missing-params');
     }
 
     if (!supabaseUser?.id) {
-      return res.redirect('/auth/login?error=Supabase+user+missing+id');
+      return fail('Supabase user missing id', 'user-shape');
     }
 
     const openId = `supabase:${supabaseUser.id}`;
@@ -81,18 +85,35 @@ export async function authCallback(req: Request, res: Response) {
       supabaseUser.user_metadata?.name ||
       (email ? email.split('@')[0] : null);
 
-    await db.upsertUser({
-      openId,
-      email,
-      name,
-      loginMethod: 'supabase',
-      lastSignedIn: new Date(),
-    });
+    try {
+      await db.upsertUser({
+        openId,
+        email,
+        name,
+        loginMethod: 'supabase',
+        lastSignedIn: new Date(),
+      });
+    } catch (dbErr) {
+      return fail(
+        dbErr instanceof Error ? dbErr.message : 'Database write failed',
+        'upsert-user',
+        dbErr,
+      );
+    }
 
-    const sessionToken = await sdk.createSessionToken(openId, {
-      name: name ?? '',
-      expiresInMs: ONE_YEAR_MS,
-    });
+    let sessionToken: string;
+    try {
+      sessionToken = await sdk.createSessionToken(openId, {
+        name: name ?? '',
+        expiresInMs: ONE_YEAR_MS,
+      });
+    } catch (tokenErr) {
+      return fail(
+        tokenErr instanceof Error ? tokenErr.message : 'Could not issue session',
+        'create-session-token',
+        tokenErr,
+      );
+    }
 
     const cookieOptions = getSessionCookieOptions(req);
     res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
@@ -101,7 +122,10 @@ export async function authCallback(req: Request, res: Response) {
       typeof redirect === 'string' && redirect.startsWith('/') ? redirect : '/';
     return res.redirect(302, redirectUrl);
   } catch (err) {
-    console.error('[Auth] Unexpected error in callback:', err);
-    return res.redirect('/auth/login?error=Authentication+failed');
+    return fail(
+      err instanceof Error ? err.message : 'Authentication failed',
+      'unexpected',
+      err,
+    );
   }
 }
