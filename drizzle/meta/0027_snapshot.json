@@ -6085,20 +6085,14 @@
           "columns": [
             "callSid"
           ],
-          "isUnique": false,
-          "using": "btree",
-          "algorithm": "default",
-          "lock": "default"
+          "isUnique": false
         },
         "voicemail_recordings_recordingSid_idx": {
           "name": "voicemail_recordings_recordingSid_idx",
           "columns": [
             "recordingSid"
           ],
-          "isUnique": false,
-          "using": "btree",
-          "algorithm": "default",
-          "lock": "default"
+          "isUnique": false
         }
       },
       "foreignKeys": {},
@@ -6180,10 +6174,7 @@
           "columns": [
             "callSid"
           ],
-          "isUnique": false,
-          "using": "btree",
-          "algorithm": "default",
-          "lock": "default"
+          "isUnique": false
         }
       },
       "foreignKeys": {},
