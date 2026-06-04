@@ -1468,7 +1468,7 @@
 - [x] Submit sitemap to Google Search Console (submitted Mar 22, 2026 - awaiting crawl after publish)
 
 ## Free Book Link Update - The First Acquisition
-- [ ] Update BookFunnel/free book link to https://swiy.co/05 across all site pages
+- [x] Update BookFunnel/free book link to https://swiy.co/05 across all site pages
 - [ ] Update MailerLite welcome Email 1 with correct free book delivery link
 - [ ] Update book subtitle to "A Manhattan Billionaire Romance (Hudson Dynasty)" everywhere
 
