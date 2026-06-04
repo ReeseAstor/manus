@@ -64,7 +64,7 @@ describe("Stripe Checkout Integration", () => {
     // Single book: $4.99 -> $3.99 = 20% off
     expect(calculateSavings(499, 399)).toBe(20);
     
-    // Trilogy: $14.97 -> $9.99 = 33% off
+    // Complete Series: $14.97 -> $9.99 = 33% off
     expect(calculateSavings(1497, 999)).toBe(33);
     
     // Ultimate: $17.96 -> $12.99 = 28% off
@@ -84,7 +84,7 @@ describe("Stripe Checkout Integration", () => {
       },
       {
         id: "trilogy",
-        name: "Complete Trilogy",
+        name: "Complete Series",
         books: 3,
         originalPrice: 1497,
         bundlePrice: 999,
@@ -132,13 +132,13 @@ describe("Stripe Checkout Integration", () => {
 
   it("should construct valid success and cancel URLs", () => {
     const origin = "https://reeseastor.us";
-    const productName = "Complete Trilogy";
+    const productName = "Complete Series";
     
     const successUrl = `${origin}/purchase-success?product=${encodeURIComponent(productName)}`;
     const cancelUrl = `${origin}/shop`;
     
     expect(successUrl).toContain("/purchase-success");
-    expect(successUrl).toContain("product=Complete%20Trilogy");
+    expect(successUrl).toContain("product=Complete%20Series");
     expect(cancelUrl).toBe("https://reeseastor.us/shop");
   });
 });

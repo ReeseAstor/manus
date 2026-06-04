@@ -11,7 +11,7 @@ const premiumProducts = [
     currency: "usd",
     type: "one_time",
     features: JSON.stringify([
-      "All 3 Manhattan Money Kings books + prequel",
+      "All 4 Manhattan Money Kings books",
       "50+ pages of exclusive bonus epilogues",
       "Character interviews and deleted scenes",
       "Behind-the-scenes author commentary",

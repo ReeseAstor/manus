@@ -136,7 +136,7 @@ describe("Recent Purchase Notifications", () => {
     {
       name: "Sarah",
       location: "New York",
-      product: "Complete Trilogy",
+      product: "Complete Series",
       timeAgo: "2 minutes ago",
     },
     {

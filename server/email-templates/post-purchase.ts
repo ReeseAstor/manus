@@ -347,8 +347,8 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
                       <tr>
                         <td style="width: 70%;">
-                          <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">The Complete Trilogy Bundle</p>
-                          <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">All 3 books + bonus content</p>
+                          <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">The Complete Series Bundle</p>
+                          <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">All 4 books + bonus content</p>
                         </td>
                         <td style="text-align: right; vertical-align: middle;">
                           <span style="color: rgba(200,200,200,0.4); font-size: 13px; text-decoration: line-through;">$44.97</span>
@@ -370,7 +370,7 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
                       <tr>
                         <td style="width: 70%;">
                           <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">The Ultimate Collection</p>
-                          <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">Trilogy + prequel + exclusive extras</p>
+                          <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">Full series + exclusive extras</p>
                         </td>
                         <td style="text-align: right; vertical-align: middle;">
                           <span style="color: rgba(200,200,200,0.4); font-size: 13px; text-decoration: line-through;">$59.96</span>
