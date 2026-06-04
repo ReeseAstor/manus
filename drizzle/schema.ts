@@ -1,4 +1,4 @@
-import { int, mysqlTable, text, timestamp, varchar, mysqlEnum, boolean, json, decimal } from "drizzle-orm/mysql-core";
+import { int, mysqlTable, text, timestamp, varchar, mysqlEnum, boolean, json, decimal, index } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -1145,3 +1145,43 @@ export const partnerApplications = mysqlTable("partner_applications", {
 
 export type PartnerApplication = typeof partnerApplications.$inferSelect;
 export type InsertPartnerApplication = typeof partnerApplications.$inferInsert;
+
+/**
+ * Voicemail recordings captured by the Twilio voice webhook.
+ */
+export const voicemailRecordings = mysqlTable("voicemail_recordings", {
+  id: int("id").autoincrement().primaryKey(),
+  callSid: varchar("callSid", { length: 64 }).notNull(),
+  recordingSid: varchar("recordingSid", { length: 64 }).notNull(),
+  recordingUrl: text("recordingUrl"),
+  durationSeconds: int("durationSeconds"),
+  fromPhoneNumber: varchar("fromPhoneNumber", { length: 20 }),
+  toPhoneNumber: varchar("toPhoneNumber", { length: 20 }),
+  status: varchar("status", { length: 32 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+}, (table) => ({
+  callSidIdx: index("voicemail_recordings_callSid_idx").on(table.callSid),
+  recordingSidIdx: index("voicemail_recordings_recordingSid_idx").on(table.recordingSid),
+}));
+
+export type VoicemailRecording = typeof voicemailRecordings.$inferSelect;
+export type InsertVoicemailRecording = typeof voicemailRecordings.$inferInsert;
+
+/**
+ * Twilio call lifecycle events (ringing, in-progress, completed, etc.).
+ */
+export const twilioCallLog = mysqlTable("twilio_call_log", {
+  id: int("id").autoincrement().primaryKey(),
+  callSid: varchar("callSid", { length: 64 }).notNull(),
+  fromPhoneNumber: varchar("fromPhoneNumber", { length: 20 }),
+  toPhoneNumber: varchar("toPhoneNumber", { length: 20 }),
+  callStatus: varchar("callStatus", { length: 32 }),
+  direction: varchar("direction", { length: 32 }),
+  durationSeconds: int("durationSeconds"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+}, (table) => ({
+  callSidIdx: index("twilio_call_log_callSid_idx").on(table.callSid),
+}));
+
+export type TwilioCallLog = typeof twilioCallLog.$inferSelect;
+export type InsertTwilioCallLog = typeof twilioCallLog.$inferInsert;
