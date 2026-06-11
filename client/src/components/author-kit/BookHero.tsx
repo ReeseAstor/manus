@@ -55,13 +55,13 @@ export function BookHero({
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden px-16 pt-[120px] pb-[160px]"
+      className="relative overflow-hidden px-6 pt-[96px] pb-[120px] sm:px-10 lg:px-16 lg:pt-[120px] lg:pb-[160px]"
       style={{ background: `radial-gradient(ellipse at 70% 30%, ${RAISED} 0%, ${INK} 65%)` }}
     >
-      <div className="absolute inset-y-0 left-16 w-px" style={{ background: `linear-gradient(180deg, transparent, ${RULE} 30%, ${RULE} 70%, transparent)` }} />
-      <div className="absolute inset-y-0 right-16 w-px" style={{ background: `linear-gradient(180deg, transparent, ${RULE} 30%, ${RULE} 70%, transparent)` }} />
+      <div className="absolute inset-y-0 left-16 hidden w-px lg:block" style={{ background: `linear-gradient(180deg, transparent, ${RULE} 30%, ${RULE} 70%, transparent)` }} />
+      <div className="absolute inset-y-0 right-16 hidden w-px lg:block" style={{ background: `linear-gradient(180deg, transparent, ${RULE} 30%, ${RULE} 70%, transparent)` }} />
 
-      <div className="max-w-[1240px] mx-auto grid items-center gap-28 lg:grid-cols-[0.85fr_1.15fr]">
+      <div className="max-w-[1240px] mx-auto grid items-center gap-16 lg:gap-28 lg:grid-cols-[0.85fr_1.15fr]">
         {/* Cover (parallax + tilt) */}
         <motion.div
           className="relative flex justify-center [transform-style:preserve-3d]"
@@ -69,6 +69,14 @@ export function BookHero({
           onPointerMove={onPointerMove}
           onPointerLeave={onPointerLeave}
         >
+          <div
+            aria-hidden
+            className="kit-halo-pulse pointer-events-none absolute -inset-16"
+            style={{
+              background: "radial-gradient(circle, rgba(201,166,70,0.16) 0%, transparent 62%)",
+              filter: "blur(36px)",
+            }}
+          />
           <div className="pointer-events-none absolute -inset-[22px] border" style={{ borderColor: RULE }} />
           <div className="pointer-events-none absolute -inset-[34px] border" style={{ borderColor: RULE_SOFT }} />
           <motion.img
@@ -83,7 +91,7 @@ export function BookHero({
             }}
             initial={reduce ? undefined : { opacity: 0, y: 24 }}
             animate={reduce ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: KIT_EASE as unknown as number[] }}
+            transition={{ duration: 1.2, ease: KIT_EASE }}
             draggable={false}
           />
         </motion.div>
@@ -92,15 +100,28 @@ export function BookHero({
         <motion.div
           initial={reduce ? undefined : { opacity: 0, y: 16 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: KIT_EASE as unknown as number[], delay: 0.15 }}
+          transition={{ duration: 1, ease: KIT_EASE, delay: 0.15 }}
         >
           <Eyebrow>{kicker}</Eyebrow>
           <h1
-            className="font-display font-normal text-[64px] sm:text-[80px] lg:text-[88px] leading-[0.94] mt-8"
+            className="font-display font-normal text-[52px] sm:text-[68px] md:text-[80px] lg:text-[88px] leading-[0.94] mt-8"
             style={{ color: TEXT, letterSpacing: "-0.028em", textWrap: "balance" }}
           >
-            <span className="block">{parts[0]}</span>
-            {parts[1] && <span className="block italic" style={{ color: TEXT }}>{parts[1]}</span>}
+            {/* Masked line reveal — each line rises out of an overflow clip.
+                pb/-mb keep descenders (g, y) from being clipped by the mask. */}
+            {parts.map((part, i) => (
+              <span key={i} className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
+                <motion.span
+                  className={`block ${i === 1 ? "italic" : ""}`}
+                  style={{ color: TEXT }}
+                  initial={reduce ? undefined : { y: "112%" }}
+                  animate={reduce ? undefined : { y: 0 }}
+                  transition={{ duration: 1.1, ease: KIT_EASE, delay: 0.25 + i * 0.14 }}
+                >
+                  {part}
+                </motion.span>
+              </span>
+            ))}
           </h1>
           <div className="flex items-center gap-[18px] my-[40px_28px] mt-10 mb-7">
             <span className="h-px w-14" style={{ background: GOLD }} />
@@ -120,6 +141,22 @@ export function BookHero({
           </div>
         </motion.div>
       </div>
+
+      {/* Scroll cue */}
+      <motion.div
+        aria-hidden
+        className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex"
+        initial={reduce ? undefined : { opacity: 0 }}
+        animate={reduce ? undefined : { opacity: 1 }}
+        transition={{ duration: 1, delay: 1.4 }}
+      >
+        <span className="font-inter text-[10px] uppercase" style={{ color: TEXT_SOFT, letterSpacing: "0.42em" }}>
+          Scroll
+        </span>
+        <span className="relative block h-12 w-px overflow-hidden" style={{ background: RULE_SOFT }}>
+          <span className="kit-scroll-cue-dot absolute left-0 top-0 h-4 w-px" style={{ background: GOLD }} />
+        </span>
+      </motion.div>
     </section>
   );
 }
