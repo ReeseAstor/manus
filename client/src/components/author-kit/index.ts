@@ -5,6 +5,7 @@ export { BookHero } from "./BookHero";
 export { CoverHalo } from "./CoverHalo";
 export { ExcerptTeaser } from "./ExcerptTeaser";
 export { Eyebrow } from "./Eyebrow";
+export { JournalCard } from "./JournalCard";
 export { NewsletterBand } from "./NewsletterBand";
 export { Ornament } from "./Ornament";
 export { PraiseQuote } from "./PraiseQuote";
