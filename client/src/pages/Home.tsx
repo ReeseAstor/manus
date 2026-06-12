@@ -8,8 +8,12 @@ import {
   AuthorIntro,
   BookCard,
   BookHero,
+  ExcerptTeaser,
   NewsletterBand,
+  ScrollProgress,
   SectionHeading,
+  StatsBand,
+  TropeMarquee,
   GOLD,
   GOLD_SOFT,
   INK,
@@ -18,6 +22,20 @@ import {
   TEXT,
   TEXT_SOFT,
 } from "@/components/author-kit";
+
+// Trope tags surfaced from the published catalog (see ACCURATE_BOOK_INFO.md)
+const TROPES = [
+  "Enemies to Lovers",
+  "Billionaire Heroes",
+  "Forced Proximity",
+  "Fake Marriage",
+  "Boss & Assistant",
+  "Secret Baby",
+  "Forbidden Nanny",
+  "Corporate Intrigue",
+  "Second Chances",
+  "Guaranteed HEA",
+];
 
 const homeStructuredData = {
   "@context": "https://schema.org",
@@ -61,6 +79,7 @@ export default function Home() {
 
   return (
     <div className="kit-grain min-h-screen font-cormorant" style={{ background: INK, color: TEXT }}>
+      <ScrollProgress />
       <EnhancedSEOHead
         title="Reese Astor | USA Today Bestselling Romance Author"
         description="Discover Hudson Dynasty and the Manhattan Money Kings series by USA Today Bestselling author Reese Astor. Steamy billionaire romances set in Manhattan."
@@ -96,8 +115,11 @@ export default function Home() {
         secondaryHref="/books/hostile-tender"
       />
 
+      {/* Trope marquee — the catalog's hooks in one endless gold ribbon */}
+      <TropeMarquee items={TROPES} />
+
       {/* Manhattan Money Kings — official descriptions verbatim from Books.tsx */}
-      <section className="px-16 py-[160px]" style={{ background: SURFACE }}>
+      <section className="px-6 py-28 md:px-16 md:py-[160px]" style={{ background: SURFACE }}>
         <div className="max-w-[1240px] mx-auto">
           <SectionHeading
             kicker="The Series"
@@ -188,6 +210,16 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Catalog at a glance — counts verifiable against Books.tsx */}
+      <StatsBand
+        stats={[
+          { value: 6, label: "Published novels", sub: "Across two series" },
+          { value: 2, label: "Interlinked series", sub: "One shared Manhattan" },
+          { value: 1, label: "Free starter novel", sub: "For new readers" },
+          { value: 100, suffix: "%", label: "Guaranteed HEA", sub: "Always. No exceptions." },
+        ]}
+      />
+
       {/* Free prequel inline lead-magnet — points at the real BookHip funnel */}
       <section
         className="px-6 py-24"
@@ -198,7 +230,7 @@ export default function Home() {
           initial={reduce ? undefined : { opacity: 0, y: 24 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease: KIT_EASE as unknown as number[] }}
+          transition={{ duration: 0.8, ease: KIT_EASE }}
         >
           <div
             className="font-inter text-[11px] font-semibold uppercase"
@@ -210,7 +242,7 @@ export default function Home() {
             className="font-display text-[40px] md:text-[48px] leading-[1.05] mt-5"
             style={{ color: TEXT, letterSpacing: "-0.02em", textWrap: "balance" }}
           >
-            The First Acquisition <em className="font-normal">— on the house.</em>
+            The First Acquisition <em className="kit-shimmer font-normal">— on the house.</em>
           </h2>
           <p
             className="font-cormorant italic mt-6 text-[19px] mx-auto max-w-[560px]"
@@ -250,6 +282,17 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      {/* In her words — Nia Carter line sourced from HostileTender.tsx */}
+      <ExcerptTeaser
+        kicker="From the pages of Hostile Tender"
+        quote="Every foundation develops fault lines, Mr. Hudson. I am merely the specialist tasked with mapping them."
+        attribution="Nia Carter · SDNY Forensic Auditor"
+        ctaLabel="Read the first chapter"
+        ctaHref="/books/hostile-tender"
+        secondaryLabel="Browse the series"
+        secondaryHref="/books"
+      />
 
       {/* About — Reese's own quote + bio, verbatim from About.tsx */}
       <AuthorIntro />

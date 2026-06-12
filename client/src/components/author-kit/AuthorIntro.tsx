@@ -7,13 +7,13 @@ import { GOLD, GOLD_SOFT, INK, KIT_EASE, TEXT, TEXT_SOFT } from "./tokens";
 export function AuthorIntro() {
   const reduce = useReducedMotion();
   return (
-    <section className="px-16 py-[140px]" style={{ background: INK }}>
+    <section className="px-6 py-24 md:px-16 md:py-[140px]" style={{ background: INK }}>
       <motion.div
         className="max-w-[980px] mx-auto text-center"
         initial={reduce ? undefined : { opacity: 0, y: 24 }}
         whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 1, ease: KIT_EASE as unknown as number[] }}
+        transition={{ duration: 1, ease: KIT_EASE }}
       >
         <Eyebrow align="center">About the Author</Eyebrow>
         <h2
