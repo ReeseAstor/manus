@@ -33,7 +33,7 @@ describe("Post-Purchase Email Templates", () => {
   it("should generate Email 3 with upsell content", () => {
     const html = generatePostPurchaseEmail3();
     expect(html).toContain("Hudson Dynasty");
-    expect(html).toContain("Complete Series Bundle");
+    expect(html).toContain("Complete Trilogy Bundle");
     expect(html).toContain("Ultimate Collection");
     expect(html).toContain("VIP Club Membership");
     expect(html).toContain("$29.99");

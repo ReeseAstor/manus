@@ -126,7 +126,7 @@ function CardGrid({ books, flagAudiobook }: { books: Book[]; flagAudiobook?: boo
           initial={reduce ? undefined : { opacity: 0, y: 24 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7, delay: i * 0.06, ease: KIT_EASE }}
+          transition={{ duration: 0.7, delay: i * 0.06, ease: KIT_EASE as unknown as number[] }}
         >
           <Link href={`/books/${book.slug}`}>
             <a className="block no-underline group" style={{ color: TEXT }}>
@@ -188,7 +188,7 @@ function HeroCard({ book }: { book: Book }) {
       initial={reduce ? undefined : { opacity: 0, y: 24 }}
       whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.9, ease: KIT_EASE }}
+      transition={{ duration: 0.9, ease: KIT_EASE as unknown as number[] }}
     >
       <div className="flex justify-center lg:justify-start">
         <CoverHalo

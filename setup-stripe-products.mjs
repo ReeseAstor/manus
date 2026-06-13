@@ -15,10 +15,10 @@ const bookProducts = [
     metadata: { type: 'single_book', books: '1' }
   },
   {
-    name: "Complete Series - Manhattan Money Kings",
-    description: "All 4 Manhattan Money Kings books plus bonus character interviews and deleted scenes. Instant digital delivery.",
+    name: "Complete Trilogy - Manhattan Money Kings",
+    description: "All 3 Manhattan Money Kings books plus bonus character interviews and deleted scenes. Instant digital delivery.",
     price: 999, // $9.99
-    metadata: { type: 'series', books: '4' }
+    metadata: { type: 'trilogy', books: '3' }
   },
   {
     name: "Ultimate Collection - Manhattan Money Kings",

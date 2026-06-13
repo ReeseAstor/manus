@@ -22,7 +22,7 @@ export function Ornament({ width = 200, color = GOLD_SOFT }: Props) {
         initial={reduce ? undefined : { opacity: 0, scale: 0.6 }}
         whileInView={reduce ? undefined : { opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: lineDuration, ease: KIT_EASE }}
+        transition={{ duration: lineDuration, ease: KIT_EASE as unknown as number[] }}
       >
         <path d="M14 1 L20 7 L14 13 L8 7 Z" stroke={GOLD} strokeWidth="0.8" fill="none" />
         <circle cx="14" cy="7" r="1.2" fill={GOLD} />

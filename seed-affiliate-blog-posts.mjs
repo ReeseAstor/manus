@@ -6,7 +6,7 @@ const DATABASE_URL = process.env.DATABASE_URL;
 
 async function seedAffiliateBlogPosts() {
   const connection = await mysql.createConnection(DATABASE_URL);
-
+  
   // Helper to read markdown file and convert to HTML-like content for Streamdown
   function readPost(filename) {
     const content = readFileSync(join(process.cwd(), 'blog-posts', filename), 'utf-8');
@@ -99,24 +99,14 @@ async function seedAffiliateBlogPosts() {
       published: 'published',
       publishedAt: '2025-05-19 10:00:00',
     },
-    {
-      slug: 'storyorigin-email-list-building-guide',
-      title: 'How I Grew My Romance Reader Email List to 1,000+ Subscribers (and Why StoryOrigin Was the Game-Changer)',
-      excerpt: "If you're a romance author trying to build a mailing list from scratch, this is the honest guide I wish I'd had when I started. Here's how StoryOrigin changed everything.",
-      content: readPost('storyorigin-email-list-building-guide.md'),
-      category: 'Author Resources',
-      readTime: '10 min read',
-      published: 'published',
-      publishedAt: '2025-06-05 10:00:00',
-    },
   ];
 
   console.log('Updating existing posts with affiliate links...\n');
-
+  
   for (const post of updatedPosts) {
     try {
       const [result] = await connection.execute(
-        `UPDATE blog_posts SET
+        `UPDATE blog_posts SET 
           title = ?,
           excerpt = ?,
           content = ?,
@@ -132,7 +122,7 @@ async function seedAffiliateBlogPosts() {
   }
 
   console.log('\nCreating new affiliate blog posts...\n');
-
+  
   for (const post of newPosts) {
     try {
       // Check if already exists
@@ -140,10 +130,10 @@ async function seedAffiliateBlogPosts() {
         'SELECT id FROM blog_posts WHERE slug = ?',
         [post.slug]
       );
-
+      
       if (existing.length > 0) {
         await connection.execute(
-          `UPDATE blog_posts SET
+          `UPDATE blog_posts SET 
             title = ?,
             excerpt = ?,
             content = ?,
@@ -159,7 +149,7 @@ async function seedAffiliateBlogPosts() {
       } else {
         await connection.execute(
           `INSERT INTO blog_posts (title, slug, excerpt, content, category, readTime, published, authorId, createdAt, updatedAt, publishedAt)
-          VALUES (?, ?, ?, ?, ?, ?, ?, 1, NOW(), NOW(), ?)`,
+           VALUES (?, ?, ?, ?, ?, ?, ?, 1, NOW(), NOW(), ?)`,
           [post.title, post.slug, post.excerpt, post.content, post.category, post.readTime, post.published, post.publishedAt]
         );
         console.log(`✓ Created: ${post.title}`);

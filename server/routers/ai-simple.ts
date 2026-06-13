@@ -43,10 +43,12 @@ The Manhattan Money Kings is a steamy billionaire romance series set in Manhatta
    - Price: $3.99 (Kindle), $19.99 (Print)
    - Amazon: https://swiy.co/4rd
 
-**FREE Prequel:** The First Acquisition
-- A Hudson Dynasty prequel novella
-- Plot: Before the Hudson Dynasty rose to power, one deal started it all — an empire built on cold logic and a forbidden first meeting
-- Available free at: https://swiy.co/05
+**FREE Prequel:** The Billionaire's One Night Stand
+- Hero: James Chen (billionaire tech mogul)
+- Heroine: Victoria (corporate lawyer)
+- Plot: One night stand between a lawyer passed over for partnership and a powerful tech billionaire
+- Available free at: https://dl.bookfunnel.com/xrodg0t77p
+- Also on Amazon: https://www.amazon.com/dp/B0DSG7NKGP
 
 **Important:** The heroes are NOT brothers - they are separate Manhattan billionaires.
 

@@ -82,10 +82,10 @@ export default function Newsletter() {
               You're In the Inner Circle
             </h1>
             <p className="text-xl text-gray-300 mb-4 font-['Montserrat']">
-              Check your inbox for your free copy of <em className="text-[#d4af37]">The First Acquisition</em>
+              Check your inbox for your free copy of <em className="text-[#d4af37]">The Billionaire's One Night Stand</em>
             </p>
             <p className="text-gray-400 mb-10 font-['Montserrat']">
-              Welcome to the Hudson Dynasty. Your journey starts now.
+              Welcome to the Manhattan Money Kings world. Your journey starts now.
             </p>
 
             {/* What's Coming Card */}
@@ -194,8 +194,8 @@ export default function Newsletter() {
               </h1>
 
               <p className="text-lg text-gray-300 mb-8 font-['Montserrat'] leading-relaxed max-w-lg">
-                Join the inner circle. Get your free copy of 
-                <em className="text-[#d4af37]"> The First Acquisition</em>, 
+                Join the Manhattan Money Kings inner circle. Get your free copy of 
+                <em className="text-[#d4af37]"> The Billionaire's One Night Stand</em>, 
                 plus new release alerts, deleted scenes, and exclusive bonus content delivered 
                 straight to your inbox.
               </p>
@@ -235,7 +235,7 @@ export default function Newsletter() {
                     <div className="absolute -inset-1 bg-gradient-to-br from-[#d4af37]/40 to-transparent rounded-lg blur-sm" />
                     <img 
                       src="/prequel-cover.jpg" 
-                      alt="The First Acquisition" 
+                      alt="The Billionaire's One Night Stand" 
                       className="relative w-20 h-28 object-cover rounded-lg shadow-xl"
                     />
                     <div className="absolute -top-2 -right-2 bg-[#d4af37] text-[#0a0e1a] text-[10px] font-bold px-2 py-0.5 rounded-full font-['Montserrat']">
@@ -247,10 +247,10 @@ export default function Newsletter() {
                       Your Free Gift
                     </p>
                     <h3 className="font-['Cormorant_Garamond'] text-lg font-bold text-white leading-tight">
-                      The First Acquisition
+                      The Billionaire's One Night Stand
                     </h3>
                     <p className="text-gray-400 text-xs font-['Montserrat'] mt-1">
-                      A Hudson Dynasty Novel
+                      Manhattan Money Kings Prequel
                     </p>
                   </div>
                 </div>
