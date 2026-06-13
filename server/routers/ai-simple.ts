@@ -47,7 +47,7 @@ The Manhattan Money Kings is a steamy billionaire romance series set in Manhatta
 - Hero: James Chen (billionaire tech mogul)
 - Heroine: Victoria (corporate lawyer)
 - Plot: One night stand between a lawyer passed over for partnership and a powerful tech billionaire
-- Available free at: https://dl.bookfunnel.com/xrodg0t77p
+- Available free at: https://BookHip.com/JHRBVXT
 - Also on Amazon: https://www.amazon.com/dp/B0DSG7NKGP
 
 **Important:** The heroes are NOT brothers - they are separate Manhattan billionaires.

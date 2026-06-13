@@ -25,12 +25,17 @@ export default function Newsletter() {
   const [name, setName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [bookUrl, setBookUrl] = useState<string>('https://BookHip.com/JHRBVXT');
 
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
-    onSuccess: () => {
+    onSuccess: (data: any) => {
+      const url = data?.bookDownloadUrl || 'https://BookHip.com/JHRBVXT';
+      setBookUrl(url);
       setIsSubmitted(true);
       setError(null);
       toast.success("Welcome to the inner circle!");
+      // Deliver the free book immediately by opening the BookFunnel page.
+      window.open(url, '_blank', 'noopener,noreferrer');
     },
     onError: (err: any) => {
       setError(err.message || 'Failed to subscribe. Please try again.');
@@ -82,10 +87,10 @@ export default function Newsletter() {
               You're In the Inner Circle
             </h1>
             <p className="text-xl text-gray-300 mb-4 font-['Montserrat']">
-              Check your inbox for your free copy of <em className="text-[#d4af37]">The Billionaire's One Night Stand</em>
+              Your free copy of <em className="text-[#d4af37]">The Billionaire's One Night Stand</em> is ready to download
             </p>
             <p className="text-gray-400 mb-10 font-['Montserrat']">
-              Welcome to the Manhattan Money Kings world. Your journey starts now.
+              Welcome to the Manhattan Money Kings world. If your download didn&apos;t open automatically, use the button below.
             </p>
 
             {/* What's Coming Card */}
@@ -139,16 +144,16 @@ export default function Newsletter() {
                   Explore the Series
                 </motion.span>
               </Link>
-              <Link href="/free-book">
+              <a href={bookUrl} target="_blank" rel="noopener noreferrer">
                 <motion.span
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#d4af37]/40 text-[#d4af37] rounded-lg font-bold font-['Montserrat'] hover:bg-[#d4af37]/10 transition-all cursor-pointer"
                 >
-                  <Gift className="w-5 h-5" />
-                  Get Your Free Book
+                  <Download className="w-5 h-5" />
+                  Download Your Free Book
                 </motion.span>
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>
