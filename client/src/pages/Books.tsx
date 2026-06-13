@@ -706,10 +706,10 @@ export default function Books() {
                     variant="outline"
                     className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white py-7"
                   >
-                    <Link href="/free-book">
-                      <Gift className="mr-2 h-5 w-5" />
-                      Get Notified at Launch
-                    </Link>
+                    <a href="https://amzn.to/4e8y3CC" target="_blank" rel="noopener noreferrer">
+                      <BookOpen className="mr-2 h-5 w-5" />
+                      Pre-Order on Amazon
+                    </a>
                   </Button>
                 </div>
               </div>
@@ -720,7 +720,7 @@ export default function Books() {
                 <div className="relative group">
                   <div className="absolute -top-5 -left-5 z-10 px-6 py-3 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-sm shadow-2xl flex items-center gap-2">
                     <Clock className="h-4 w-4" />
-                    Coming Soon
+                    Pre-Order Now
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl group-hover:border-[#d4af37]/30 transition-all duration-500">
                     <img
