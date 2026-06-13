@@ -125,8 +125,22 @@ export default function Newsletter() {
                 {/* Signup — MailerLite embedded form (k0kQw5) */}
                 <MailerLiteForm formId="k0kQw5" />
 
-                <p className="text-[11px] text-gray-500 text-center font-['Montserrat'] mt-4">
-                  By subscribing, you agree to receive emails from Reese Astor. Unsubscribe anytime.
+                {/* Expectation setting — improves open rates & reduces spam complaints */}
+                <p className="text-xs text-gray-400 text-center font-['Montserrat'] mt-4 leading-relaxed">
+                  Expect about <span className="text-[#d4af37]">2 emails a month</span>. Your free
+                  book link arrives instantly — check your inbox (and promotions tab).
+                </p>
+
+                {/* Explicit consent — GDPR / CAN-SPAM compliant */}
+                <p className="text-[11px] text-gray-500 text-center font-['Montserrat'] mt-3 leading-relaxed">
+                  By subscribing, you agree to receive marketing emails from Reese Astor and accept
+                  our{' '}
+                  <Link href="/privacy">
+                    <span className="text-gray-400 underline underline-offset-2 hover:text-[#d4af37] cursor-pointer">
+                      Privacy Policy
+                    </span>
+                  </Link>
+                  . No spam — unsubscribe in one click anytime.
                 </p>
               </div>
             </motion.div>
@@ -294,14 +308,26 @@ export default function Newsletter() {
                 Don't Miss Out
               </h2>
               <p className="text-gray-300 font-['Montserrat'] mb-8 max-w-lg mx-auto">
-                Join thousands of readers who get exclusive content, early access to new releases, 
-                and a free book — all delivered to their inbox.
+                Join thousands of readers who get exclusive content, early access to new releases,
+                and a free book — all delivered to their inbox. About two emails a month, no spam.
               </p>
 
               {/* MailerLite embedded form (k0kQw5) */}
               <div className="max-w-md mx-auto">
                 <MailerLiteForm formId="k0kQw5" />
               </div>
+
+              {/* Deliverability tip — boosts inbox placement & engagement */}
+              <p className="text-[11px] text-gray-500 text-center font-['Montserrat'] mt-4 leading-relaxed max-w-md mx-auto">
+                Tip: add <span className="text-[#d4af37]">hello@reeseastor.com</span> to your
+                contacts so your free book never lands in spam. Unsubscribe anytime — see our{' '}
+                <Link href="/privacy">
+                  <span className="text-gray-400 underline underline-offset-2 hover:text-[#d4af37] cursor-pointer">
+                    Privacy Policy
+                  </span>
+                </Link>
+                .
+              </p>
             </div>
           </motion.div>
         </div>
