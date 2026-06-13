@@ -162,7 +162,7 @@ export default function HostileTender() {
                     size="lg"
                     className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                   >
-                    <a href="https://amzn.to/4e8y3CC" target="_blank" rel="noopener noreferrer">
+                    <a href="https://swiy.co/HD1" target="_blank" rel="noopener noreferrer">
                       <BookOpen className="mr-2 h-5 w-5" />
                       Pre-Order on Amazon
                     </a>

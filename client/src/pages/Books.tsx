@@ -706,7 +706,7 @@ export default function Books() {
                     variant="outline"
                     className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white py-7"
                   >
-                    <a href="https://amzn.to/4e8y3CC" target="_blank" rel="noopener noreferrer">
+                    <a href="https://swiy.co/HD2" target="_blank" rel="noopener noreferrer">
                       <BookOpen className="mr-2 h-5 w-5" />
                       Pre-Order on Amazon
                     </a>

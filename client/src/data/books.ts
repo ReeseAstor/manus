@@ -261,11 +261,11 @@ export const BOOKS: Book[] = [
       "toxic and the people closest to them choose sides, the line between protecting the dynasty and " +
       "destroying it disappears.",
     pull_quote: "“Every defense is a slow poison. The art is choosing who swallows it.”",
-    cover_image: "/covers/hudson-2-poison-pills.jpg",
+    cover_image: "https://storage.mlcdn.com/account_image/1246760/sbcZf9GwBaCWBcC5QKmu8oWakuKfIhojGzbnYNMb.png",
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://amzn.to/4e8y3CC",
+      amazon_kindle: "https://swiy.co/HD2",
       audible: null,
     },
     audiobook_available: true,

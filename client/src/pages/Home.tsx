@@ -79,7 +79,7 @@ export default function Home() {
       />
 
       {/* Hero — Poison Pills (Hudson Dynasty Book 2). Primary CTA goes direct
-          to the Amazon pre-order (amzn.to/4e8y3CC) so the highest-intent click
+          to the Amazon pre-order (swiy.co/HD2) so the highest-intent click
           converts in-page rather than bouncing through the book detail.
           Secondary routes to the full pitch on /books/poison-pills. */}
       <BookHero
@@ -88,9 +88,9 @@ export default function Home() {
         byline="A Hudson Dynasty Novel · Reese Astor · Coming to Kindle Unlimited"
         tagline={"The takeover failed. The war didn’t end — it went underground, into the bloodstream of the family itself."}
         blurb="With the hostile bid beaten back, Sebastian Hudson thought he’d secured the empire. But a poison-pill defense buried in the family trust is metabolizing into something lethal, and Nia Carter’s audit has only scratched the surface. As old loyalties turn toxic and the people closest to them choose sides, the line between protecting the dynasty and destroying it disappears."
-        cover="/covers/hudson-2-poison-pills.jpg"
+        cover="https://storage.mlcdn.com/account_image/1246760/sbcZf9GwBaCWBcC5QKmu8oWakuKfIhojGzbnYNMb.png"
         primaryCta="Pre-Order on Amazon"
-        primaryHref="https://amzn.to/4e8y3CC"
+        primaryHref="https://swiy.co/HD2"
         primaryExternal
         secondaryCta="Read the description"
         secondaryHref="/books/poison-pills"
