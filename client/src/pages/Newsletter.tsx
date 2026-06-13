@@ -1,160 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { trpc } from '@/lib/trpc';
 import { 
   BookOpen, Mail, Sparkles, CheckCircle, Calendar, ArrowRight, 
-  Heart, Gift, Star, Bell, Shield, Download
+  Heart, Gift, Star, Shield
 } from 'lucide-react';
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
-import { toast } from 'sonner';
 import { EnhancedSEOHead } from '@/components/ui/enhanced-seo-head';
+import { MailerLiteForm } from '@/components/MailerLiteForm';
 
 /**
  * Newsletter Signup Page — Manhattan Luxury Redesign
  * 
  * Premium landing page optimized for converting book readers into newsletter subscribers.
  * Features the free prequel as lead magnet, social proof, and Manhattan luxury aesthetic.
+ * Signups are handled by the embedded MailerLite form (k0kQw5), which manages its own
+ * submission, validation, success state, and the free-book delivery automation.
  * URL: /newsletter
  */
 export default function Newsletter() {
   useEffect(() => {
     document.title = "Join Reese Astor's Newsletter | Free Book & Exclusive Content";
   }, []);
-
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const subscribeMutation = trpc.newsletter.subscribe.useMutation({
-    onSuccess: () => {
-      setIsSubmitted(true);
-      setError(null);
-      toast.success("Welcome to the inner circle!");
-    },
-    onError: (err: any) => {
-      setError(err.message || 'Failed to subscribe. Please try again.');
-    },
-  });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-
-    if (!email) {
-      setError('Please enter your email address');
-      return;
-    }
-
-    subscribeMutation.mutate({ email, name: name || undefined });
-  };
-
-  // ─── Success State ──────────────────────────────────────────────────────
-  if (isSubmitted) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a] relative overflow-hidden">
-        {/* Ambient glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#d4af37]/5 rounded-full blur-[120px]" />
-        
-        <div className="relative z-10 flex items-center justify-center min-h-screen px-4 py-16">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl w-full text-center"
-          >
-            {/* Success Icon */}
-            <motion.div 
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="mb-8 flex justify-center"
-            >
-              <div className="relative">
-                <div className="absolute inset-0 bg-[#d4af37] rounded-full animate-ping opacity-20" />
-                <div className="relative bg-gradient-to-br from-[#d4af37] to-[#b8962e] text-[#0a0e1a] rounded-full p-6">
-                  <CheckCircle className="w-16 h-16" />
-                </div>
-              </div>
-            </motion.div>
-
-            <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl font-bold text-white mb-4">
-              You're In the Inner Circle
-            </h1>
-            <p className="text-xl text-gray-300 mb-4 font-['Montserrat']">
-              Check your inbox for your free copy of <em className="text-[#d4af37]">The First Acquisition</em>
-            </p>
-            <p className="text-gray-400 mb-10 font-['Montserrat']">
-              Welcome to the Hudson Dynasty. Your journey starts now.
-            </p>
-
-            {/* What's Coming Card */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="bg-white/5 backdrop-blur-sm border border-[#d4af37]/20 rounded-2xl p-8 mb-10"
-            >
-              <h2 className="font-['Cormorant_Garamond'] text-2xl font-bold text-[#d4af37] mb-6">What's Coming Your Way</h2>
-              <div className="grid md:grid-cols-3 gap-6 text-left">
-                <div className="flex items-start gap-3">
-                  <div className="bg-[#d4af37]/10 rounded-lg p-2 flex-shrink-0">
-                    <Download className="w-5 h-5 text-[#d4af37]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white text-sm mb-1">Free Prequel</h3>
-                    <p className="text-xs text-gray-400">Download link in your welcome email</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="bg-[#d4af37]/10 rounded-lg p-2 flex-shrink-0">
-                    <Bell className="w-5 h-5 text-[#d4af37]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white text-sm mb-1">New Releases</h3>
-                    <p className="text-xs text-gray-400">First to know about every new book</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="bg-[#d4af37]/10 rounded-lg p-2 flex-shrink-0">
-                    <Sparkles className="w-5 h-5 text-[#d4af37]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white text-sm mb-1">Bonus Content</h3>
-                    <p className="text-xs text-gray-400">Deleted scenes and extended epilogues</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/books">
-                <motion.span
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#d4af37] to-[#b8962e] text-[#0a0e1a] rounded-lg font-bold font-['Montserrat'] hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all cursor-pointer"
-                >
-                  <BookOpen className="w-5 h-5" />
-                  Explore the Series
-                </motion.span>
-              </Link>
-              <Link href="/free-book">
-                <motion.span
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#d4af37]/40 text-[#d4af37] rounded-lg font-bold font-['Montserrat'] hover:bg-[#d4af37]/10 transition-all cursor-pointer"
-                >
-                  <Gift className="w-5 h-5" />
-                  Get Your Free Book
-                </motion.span>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    );
-  }
 
   // ─── Main Page ──────────────────────────────────────────────────────────
   return (
@@ -194,8 +61,8 @@ export default function Newsletter() {
               </h1>
 
               <p className="text-lg text-gray-300 mb-8 font-['Montserrat'] leading-relaxed max-w-lg">
-                Join the inner circle. Get your free copy of 
-                <em className="text-[#d4af37]"> The First Acquisition</em>, 
+                Join the Manhattan Money Kings inner circle. Get your free copy of 
+                <em className="text-[#d4af37]"> The Billionaire's One Night Stand</em>, 
                 plus new release alerts, deleted scenes, and exclusive bonus content delivered 
                 straight to your inbox.
               </p>
@@ -235,7 +102,7 @@ export default function Newsletter() {
                     <div className="absolute -inset-1 bg-gradient-to-br from-[#d4af37]/40 to-transparent rounded-lg blur-sm" />
                     <img 
                       src="/prequel-cover.jpg" 
-                      alt="The First Acquisition" 
+                      alt="The Billionaire's One Night Stand" 
                       className="relative w-20 h-28 object-cover rounded-lg shadow-xl"
                     />
                     <div className="absolute -top-2 -right-2 bg-[#d4af37] text-[#0a0e1a] text-[10px] font-bold px-2 py-0.5 rounded-full font-['Montserrat']">
@@ -247,70 +114,34 @@ export default function Newsletter() {
                       Your Free Gift
                     </p>
                     <h3 className="font-['Cormorant_Garamond'] text-lg font-bold text-white leading-tight">
-                      The First Acquisition
+                      The Billionaire's One Night Stand
                     </h3>
                     <p className="text-gray-400 text-xs font-['Montserrat'] mt-1">
-                      A Hudson Dynasty Novel
+                      Manhattan Money Kings Prequel
                     </p>
                   </div>
                 </div>
 
-                {/* Form */}
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  {error && (
-                    <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
-                      <p className="text-red-400 text-sm font-['Montserrat']">{error}</p>
-                    </div>
-                  )}
+                {/* Signup — MailerLite embedded form (k0kQw5) */}
+                <MailerLiteForm formId="k0kQw5" />
 
-                  <div>
-                    <input
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="First name (optional)"
-                      className="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#d4af37]/50 focus:ring-1 focus:ring-[#d4af37]/30 transition font-['Montserrat'] text-sm"
-                    />
-                  </div>
+                {/* Expectation setting — improves open rates & reduces spam complaints */}
+                <p className="text-xs text-gray-400 text-center font-['Montserrat'] mt-4 leading-relaxed">
+                  Expect about <span className="text-[#d4af37]">2 emails a month</span>. Your free
+                  book link arrives instantly — check your inbox (and promotions tab).
+                </p>
 
-                  <div>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      placeholder="Your email address"
-                      className="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#d4af37]/50 focus:ring-1 focus:ring-[#d4af37]/30 transition font-['Montserrat'] text-sm"
-                    />
-                  </div>
-
-                  <motion.button
-                    type="submit"
-                    disabled={subscribeMutation.isPending}
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    className="w-full bg-gradient-to-r from-[#d4af37] to-[#b8962e] text-[#0a0e1a] py-4 rounded-lg font-bold text-base font-['Montserrat'] hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-                  >
-                    {subscribeMutation.isPending ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                        </svg>
-                        Subscribing...
-                      </span>
-                    ) : (
-                      <span className="flex items-center justify-center gap-2">
-                        <Download className="w-5 h-5" />
-                        Get My Free Book
-                      </span>
-                    )}
-                  </motion.button>
-
-                  <p className="text-[11px] text-gray-500 text-center font-['Montserrat']">
-                    By subscribing, you agree to receive emails from Reese Astor. Unsubscribe anytime.
-                  </p>
-                </form>
+                {/* Explicit consent — GDPR / CAN-SPAM compliant */}
+                <p className="text-[11px] text-gray-500 text-center font-['Montserrat'] mt-3 leading-relaxed">
+                  By subscribing, you agree to receive marketing emails from Reese Astor and accept
+                  our{' '}
+                  <Link href="/privacy">
+                    <span className="text-gray-400 underline underline-offset-2 hover:text-[#d4af37] cursor-pointer">
+                      Privacy Policy
+                    </span>
+                  </Link>
+                  . No spam — unsubscribe in one click anytime.
+                </p>
               </div>
             </motion.div>
           </div>
@@ -380,8 +211,6 @@ export default function Newsletter() {
           </div>
         </div>
       </section>
-
-
 
       {/* ─── Book Series Preview ───────────────────────────────────────── */}
       <section className="relative z-10 py-16 md:py-24">
@@ -479,36 +308,26 @@ export default function Newsletter() {
                 Don't Miss Out
               </h2>
               <p className="text-gray-300 font-['Montserrat'] mb-8 max-w-lg mx-auto">
-                Join thousands of readers who get exclusive content, early access to new releases, 
-                and a free book — all delivered to their inbox.
+                Join thousands of readers who get exclusive content, early access to new releases,
+                and a free book — all delivered to their inbox. About two emails a month, no spam.
               </p>
 
-              {/* Inline mini form */}
-              <form 
-                onSubmit={handleSubmit}
-                className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-              >
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  placeholder="Your email address"
-                  className="flex-1 px-4 py-3.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#d4af37]/50 focus:ring-1 focus:ring-[#d4af37]/30 transition font-['Montserrat'] text-sm"
-                />
-                <motion.button
-                  type="submit"
-                  disabled={subscribeMutation.isPending}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="px-6 py-3.5 bg-gradient-to-r from-[#d4af37] to-[#b8962e] text-[#0a0e1a] rounded-lg font-bold text-sm font-['Montserrat'] hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] disabled:opacity-50 transition-all whitespace-nowrap"
-                >
-                  {subscribeMutation.isPending ? 'Joining...' : 'Get Free Book'}
-                </motion.button>
-              </form>
-              {error && (
-                <p className="text-red-400 text-sm mt-3 font-['Montserrat']">{error}</p>
-              )}
+              {/* MailerLite embedded form (k0kQw5) */}
+              <div className="max-w-md mx-auto">
+                <MailerLiteForm formId="k0kQw5" />
+              </div>
+
+              {/* Deliverability tip — boosts inbox placement & engagement */}
+              <p className="text-[11px] text-gray-500 text-center font-['Montserrat'] mt-4 leading-relaxed max-w-md mx-auto">
+                Tip: add <span className="text-[#d4af37]">hello@reeseastor.com</span> to your
+                contacts so your free book never lands in spam. Unsubscribe anytime — see our{' '}
+                <Link href="/privacy">
+                  <span className="text-gray-400 underline underline-offset-2 hover:text-[#d4af37] cursor-pointer">
+                    Privacy Policy
+                  </span>
+                </Link>
+                .
+              </p>
             </div>
           </motion.div>
         </div>

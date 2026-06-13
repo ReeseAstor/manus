@@ -83,7 +83,7 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/0l",
+      amazon_kindle: "https://www.amazon.com/dp/PLACEHOLDER", // TODO: real ASIN
     },
     audiobook_available: false,
     isbn: null,
@@ -209,7 +209,7 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/05",
+      amazon_kindle: "https://www.amazon.com/dp/PLACEHOLDER", // TODO
       bookfunnel: "https://BookHip.com/JHRBVXT",
       audible: null, // TODO: ACX live URL
     },
@@ -238,6 +238,34 @@ export const BOOKS: Book[] = [
     kindle_unlimited: true,
     retailers: {
       amazon_kindle: "https://swiy.co/HD1",
+      audible: null,
+    },
+    audiobook_available: true,
+    isbn: null,
+    asin: null,
+    price_usd: 4.99,
+  },
+  {
+    slug: "poison-pills",
+    title: "Poison Pills",
+    lane: "hudson_dynasty",
+    series_position: 2,
+    format: "ebook_and_audiobook",
+    position_label: "Book 2",
+    tagline:
+      "The takeover failed. The war didn't end — it went underground, into the bloodstream of the family itself.",
+    blurb:
+      "Book 2 of the Hudson Dynasty. With the hostile bid beaten back, Sebastian Hudson thought he'd " +
+      "secured the empire. But a poison-pill defense buried in the family trust is metabolizing into " +
+      "something lethal, and Nia Carter's audit has only scratched the surface. As old loyalties turn " +
+      "toxic and the people closest to them choose sides, the line between protecting the dynasty and " +
+      "destroying it disappears.",
+    pull_quote: "“Every defense is a slow poison. The art is choosing who swallows it.”",
+    cover_image: "https://storage.mlcdn.com/account_image/1246760/sbcZf9GwBaCWBcC5QKmu8oWakuKfIhojGzbnYNMb.png",
+    publication_date: null,
+    kindle_unlimited: true,
+    retailers: {
+      amazon_kindle: "https://swiy.co/HD2",
       audible: null,
     },
     audiobook_available: true,

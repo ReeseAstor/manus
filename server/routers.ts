@@ -116,7 +116,14 @@ export const appRouter = router({
         })
       )
       .mutation(async ({ input }) => {
-        const groupId = input.groupId || process.env.MAILERLITE_GROUP_ID;
+        // MailerLite group IDs must be numeric. Sanitize any configured value
+        // so a malformed/non-numeric env var can't cause the whole signup to
+        // fail with a 422. An empty/invalid value is treated as "no group".
+        const rawGroupId = input.groupId || process.env.MAILERLITE_GROUP_ID;
+        const groupId =
+          rawGroupId && /^\d+$/.test(rawGroupId.trim())
+            ? rawGroupId.trim()
+            : undefined;
         const result = await subscribeToMailerLite(
           input.email,
           input.name,
@@ -127,7 +134,14 @@ export const appRouter = router({
           throw new Error(result.message);
         }
 
-        // Send welcome email with free prequel link (fire-and-forget)
+        // The free book is delivered via BookFunnel/BookHip. MailerLite does
+        // not expose a transactional /emails endpoint, so we surface the
+        // download link to the client (shown + auto-opened on the success
+        // screen) and rely on a MailerLite automation for the welcome email.
+        // We still attempt the welcome email for environments where a custom
+        // transactional sender is wired up, but never fail the signup on it.
+        const bookDownloadUrl = "https://BookHip.com/JHRBVXT";
+
         try {
           const welcomeHtml = generateWelcomeEmail({
             subscriberName: input.name,
@@ -137,13 +151,13 @@ export const appRouter = router({
             subject: "Welcome! Your Free Book Is Waiting \u{1F4D6}",
             html: welcomeHtml,
           });
-          console.log(`[Newsletter] Welcome email sent to ${input.email}`);
+          console.log(`[Newsletter] Welcome email attempted for ${input.email}`);
         } catch (emailError) {
           // Log but don't fail the subscription if the welcome email fails
           console.error("[Newsletter] Failed to send welcome email:", emailError);
         }
-        
-        return result;
+
+        return { ...result, bookDownloadUrl };
       }),
   }),
 

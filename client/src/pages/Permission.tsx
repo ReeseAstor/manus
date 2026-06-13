@@ -140,7 +140,7 @@ export default function Permission() {
           <motion.div
             initial={reduce ? undefined : { opacity: 0, y: 24 }}
             animate={reduce ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: KIT_EASE }}
+            transition={{ duration: 0.9, ease: KIT_EASE as unknown as number[] }}
           >
             <Eyebrow>{book.position_label ?? "A New Line"}</Eyebrow>
             <h1
@@ -194,7 +194,7 @@ export default function Permission() {
             className="flex justify-center lg:justify-end"
             initial={reduce ? undefined : { opacity: 0, y: 24 }}
             animate={reduce ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: KIT_EASE }}
+            transition={{ duration: 1, delay: 0.1, ease: KIT_EASE as unknown as number[] }}
           >
             <CoverHalo
               src={book.cover_image_square ?? book.cover_image}
@@ -230,7 +230,7 @@ export default function Permission() {
             initial={reduce ? undefined : { opacity: 0, y: 16 }}
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 1, ease: KIT_EASE }}
+            transition={{ duration: 1, ease: KIT_EASE as unknown as number[] }}
           >
             {book.pull_quote}
           </motion.blockquote>

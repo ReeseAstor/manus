@@ -228,48 +228,4 @@
   @media (prefers-reduced-motion: reduce) {
     .kit-halo-pulse { animation: none; opacity: 0.6; transform: none; }
   }
-
-  /* Infinite trope/praise marquee — track holds two identical groups and
-     slides one group-width for a seamless loop. Pauses on hover. */
-  .kit-marquee-track {
-    display: flex;
-    width: max-content;
-    animation: kit-marquee 46s linear infinite;
-    will-change: transform;
-  }
-  .kit-marquee:hover .kit-marquee-track { animation-play-state: paused; }
-  @keyframes kit-marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .kit-marquee-track { animation: none; }
-  }
-
-  /* Champagne shimmer — gradient sweep clipped to display text */
-  .kit-shimmer {
-    background: linear-gradient(100deg, #C9A646 0%, #F4E5B2 28%, #C9A646 52%, #8F742F 78%, #C9A646 100%);
-    background-size: 250% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    animation: kit-shimmer 7s linear infinite;
-  }
-  @keyframes kit-shimmer { to { background-position: -250% center; } }
-  @media (prefers-reduced-motion: reduce) { .kit-shimmer { animation: none; } }
-
-  /* Gold text selection on kit pages */
-  .kit-grain ::selection { background: rgba(201, 166, 70, 0.32); color: #F2ECDF; }
-
-  /* Hero scroll cue — falling gold spark inside a hairline */
-  @keyframes kit-scroll-cue {
-    0%   { transform: translateY(-100%); opacity: 0; }
-    25%  { opacity: 1; }
-    100% { transform: translateY(340%); opacity: 0; }
-  }
-  .kit-scroll-cue-dot {
-    animation: kit-scroll-cue 2.4s cubic-bezier(0.65, 0.05, 0.36, 1) infinite;
-  }
-  @media (prefers-reduced-motion: reduce) { .kit-scroll-cue-dot { animation: none; opacity: 0; } }
 }

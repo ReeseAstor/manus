@@ -12,8 +12,6 @@ import twilioVoiceWebhookRouter, {
   validateTwilioSignature as validateTwilioVoiceSignature,
 } from "../twilio-voice-webhook";
 import { authCallback } from "../api.auth.callback";
-import { toNodeHandler } from "better-auth/node";
-import { auth } from "../auth";
 import { getDb } from "../db";
 import { blogPosts } from "../../drizzle/schema";
 
@@ -34,14 +32,6 @@ export function createApp(): Express {
   // Stripe webhook MUST be registered BEFORE any body parser middleware
   app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), handleStripeWebhook);
 
-  // Better Auth must also be mounted BEFORE express.json(): toNodeHandler reads
-  // and parses the raw request body itself. The legacy Supabase callback
-  // (GET /api/auth/callback) is registered first so it keeps handling that exact
-  // path; Better Auth's own routes (e.g. /api/auth/callback/github,
-  // /api/auth/sign-in/email) fall through to the catch-all below.
-  app.get("/api/auth/callback", authCallback);
-  app.all("/api/auth/*", toNodeHandler(auth));
-
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
@@ -60,6 +50,7 @@ export function createApp(): Express {
   app.use("/webhooks/twilio", twilioSmsWebhookRouter);
 
   registerOAuthRoutes(app);
+  app.get("/api/auth/callback", authCallback);
 
   app.post("/api/cron/daily-briefing", async (req, res) => {
     const authHeader = req.headers.authorization;

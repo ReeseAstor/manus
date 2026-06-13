@@ -10,5 +10,4 @@ export const GOLD_SOFT   = "rgba(201,166,70,0.6)";
 export const TEXT        = "#F2ECDF";
 export const TEXT_SOFT   = "#B9B0A2";
 export const MUTED       = "#7B7464";
-// Typed as framer-motion's BezierDefinition so it can be passed to `ease` directly.
-export const KIT_EASE: [number, number, number, number] = [0.65, 0.05, 0.36, 1];
+export const KIT_EASE    = [0.65, 0.05, 0.36, 1] as const;

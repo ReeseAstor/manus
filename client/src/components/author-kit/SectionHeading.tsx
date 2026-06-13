@@ -21,11 +21,11 @@ export function SectionHeading({ kicker, title, lead }: Props) {
       initial={motionFrom}
       whileInView={motionTo}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.9, ease: KIT_EASE }}
+      transition={{ duration: 0.9, ease: KIT_EASE as unknown as number[] }}
     >
       <Eyebrow align="center">{kicker}</Eyebrow>
       <h2
-        className="font-display font-normal text-[40px] md:text-[60px] leading-[1.05] mt-6"
+        className="font-display font-normal text-[60px] leading-[1.05] mt-6"
         style={{ color: TEXT, letterSpacing: "-0.022em", textWrap: "balance" }}
       >
         <span>{parts[0]}</span>

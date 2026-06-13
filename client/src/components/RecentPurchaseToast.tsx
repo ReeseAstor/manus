@@ -10,13 +10,13 @@ interface PurchaseNotification {
 }
 
 const recentPurchases: PurchaseNotification[] = [
-  { name: "Sarah", location: "New York", product: "Complete Series", timeAgo: "2 minutes ago" },
+  { name: "Sarah", location: "New York", product: "Complete Trilogy", timeAgo: "2 minutes ago" },
   { name: "Jessica", location: "Los Angeles", product: "Ultimate Collection", timeAgo: "5 minutes ago" },
   { name: "Amanda", location: "Chicago", product: "The Billionaire's Executive Assistant", timeAgo: "8 minutes ago" },
-  { name: "Emily", location: "Houston", product: "Complete Series", timeAgo: "12 minutes ago" },
+  { name: "Emily", location: "Houston", product: "Complete Trilogy", timeAgo: "12 minutes ago" },
   { name: "Rachel", location: "Miami", product: "The Billionaire's Fake Wife", timeAgo: "15 minutes ago" },
   { name: "Lauren", location: "Seattle", product: "Ultimate Collection", timeAgo: "18 minutes ago" },
-  { name: "Megan", location: "Denver", product: "Complete Series", timeAgo: "22 minutes ago" },
+  { name: "Megan", location: "Denver", product: "Complete Trilogy", timeAgo: "22 minutes ago" },
   { name: "Christina", location: "Atlanta", product: "The Billionaire's Baby Secret", timeAgo: "25 minutes ago" },
 ];
 

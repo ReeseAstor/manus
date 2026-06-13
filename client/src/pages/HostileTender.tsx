@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Gift, ChevronRight, Flame, Clock, Heart, Users, Building2, Shield, Scale } from "lucide-react";
+  import { BookOpen, ChevronRight, Flame, Clock, Heart, Users, Building2, Shield, Scale } from "lucide-react";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -94,7 +94,7 @@ export default function HostileTender() {
                 <div className="relative">
                   <div className="absolute -top-6 -right-6 z-10 px-8 py-4 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-lg shadow-2xl flex items-center gap-2">
                     <Clock className="h-5 w-5" />
-                    Coming Soon
+                    Pre-Order Now
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
                     <img
@@ -162,10 +162,10 @@ export default function HostileTender() {
                     size="lg"
                     className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                   >
-                    <Link href="/free-book">
-                      <Gift className="mr-2 h-5 w-5" />
-                      Get Notified at Launch
-                    </Link>
+                    <a href="https://swiy.co/HD1" target="_blank" rel="noopener noreferrer">
+                      <BookOpen className="mr-2 h-5 w-5" />
+                      Pre-Order on Amazon
+                    </a>
                   </Button>
                   <Button
                     asChild

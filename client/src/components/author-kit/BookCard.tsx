@@ -38,7 +38,7 @@ export function BookCard({
       initial={reduce ? undefined : { opacity: 0, y: 30 }}
       whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.7, ease: KIT_EASE, delay }}
+      transition={{ duration: 0.7, ease: KIT_EASE as unknown as number[], delay }}
       whileHover={reduce ? undefined : { y: -6 }}
     >
       <div
@@ -51,7 +51,7 @@ export function BookCard({
           className="absolute inset-0 h-full w-full object-cover select-none"
           draggable={false}
           animate={reduce ? undefined : { scale: hover ? 1.04 : 1 }}
-          transition={{ duration: 0.7, ease: KIT_EASE }}
+          transition={{ duration: 0.7, ease: KIT_EASE as unknown as number[] }}
         />
         {/* gold halo on hover */}
         <motion.div

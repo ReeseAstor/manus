@@ -1,10 +1,10 @@
-# MailerLite Welcome Automation — The First Acquisition
+# Manhattan Money Kings Email Automation Sequence
 
-**Purpose:** Convert new subscribers into engaged readers through a 3-email welcome series delivering The First Acquisition as the free reader magnet.
+**Purpose:** Convert new subscribers into engaged readers and book buyers through a strategic 5-email welcome series.
 
-**Target Audience:** Romance readers who signed up for the free book "The First Acquisition" (Hudson Dynasty prequel)
+**Target Audience:** Romance readers who downloaded the free prequel "The Billionaire's One Night Stand"
 
-**Goal:** Deliver the free book immediately, introduce the Hudson Dynasty world, and guide readers toward the full series.
+**Goal:** Build relationship, deliver value, and convert subscribers into paying customers for the Manhattan Money Kings series.
 
 ---
 
@@ -21,17 +21,17 @@
 
 ---
 
-**Subject:** Your Free Book is Ready! Welcome to the Hudson Dynasty
+**Subject:** Your Free Book is Ready! Welcome to the Manhattan Money Kings World
 
 Hi [First Name],
 
-Welcome to the inner circle! I'm thrilled to have you here.
+Welcome to the Manhattan Money Kings family! I'm thrilled to have you here.
 
-Your free prequel novella, **The First Acquisition**, is ready for you. This is the story that started the Hudson Dynasty — an empire built on cold logic, a forbidden first meeting, and a deal that changed everything.
+Your free prequel novella, **The Billionaire's One Night Stand**, should already be in your inbox (check your spam folder if you don't see it). If you haven't downloaded it yet, here's your direct link:
 
-👉 **[Download Your Free Book Now](https://swiy.co/05)**
+👉 **[Download Your Free Book Now](https://dl.bookfunnel.com/xrodg0t77p)**
 
-This steamy prequel introduces you to the glittering, cutthroat world of Manhattan's elite — where power is the ultimate currency and some acquisitions are worth more than money.
+This steamy standalone introduces you to the glittering, cutthroat world of Manhattan's elite—where one impulsive decision at a charity gala sets off a chain of events that ripples through the entire series.
 
 **What to Expect from This Newsletter:**
 
@@ -48,7 +48,7 @@ I don't spam—I only email when I have something valuable to share. You can uns
 Happy reading!
 
 Reese Astor  
-Author of the Hudson Dynasty & Manhattan Money Kings Series
+Author of the Manhattan Money Kings Series
 
 P.S. After you finish the prequel, I'd love to hear what you think! Reply to this email or leave a review on Amazon. Your feedback means the world to me.
 
@@ -57,8 +57,7 @@ P.S. After you finish the prequel, I'd love to hear what you think! Reply to thi
 **MailerLite Setup:**
 - Trigger: New subscriber added to list
 - Delay: Send immediately
-- Tag: "Downloaded The First Acquisition"
-- Book delivery link: https://swiy.co/05
+- Tag: "Downloaded Free Book"
 
 ---
 
@@ -79,7 +78,7 @@ P.S. After you finish the prequel, I'd love to hear what you think! Reply to thi
 
 Hi [First Name],
 
-I hope you've had a chance to dive into **The First Acquisition**! Today, I want to introduce you to the two powerful dynasties that will consume your reading life.
+I hope you've had a chance to dive into **The Billionaire's One Night Stand**! Today, I want to introduce you to the three powerful men at the heart of the Manhattan Money Kings series.
 
 **Michael Hastings** – The Ruthless CEO  
 *Book 1: The Billionaire's Executive Assistant*

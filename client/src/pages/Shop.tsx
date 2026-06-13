@@ -40,15 +40,15 @@ const bundleOptions: BundleOption[] = [
   },
   {
     id: "trilogy",
-    name: "Complete Series",
+    name: "Complete Trilogy",
     description: "The full Manhattan Money Kings series",
-    books: 4,
+    books: 3,
     originalPrice: 1497,
     bundlePrice: 999,
     memberPrice: 799,
-    productId: 30002, // Complete Series product
+    productId: 30002, // Complete Trilogy product
     features: [
-      "All 4 Manhattan Money Kings books",
+      "All 3 Manhattan Money Kings books",
       "Instant digital delivery",
       "ePub, Mobi & PDF formats",
       "Bonus: Character interviews",

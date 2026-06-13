@@ -39,7 +39,7 @@ export function NewsletterBand({ onSubscribe, freeBookHref = "/free-book" }: Pro
 
   return (
     <section
-      className="px-6 py-28 md:px-16 md:py-[160px]"
+      className="px-16 py-[160px]"
       style={{ background: SURFACE, borderTop: `1px solid ${RULE_SOFT}`, borderBottom: `1px solid ${RULE_SOFT}` }}
     >
       <motion.div
@@ -47,11 +47,11 @@ export function NewsletterBand({ onSubscribe, freeBookHref = "/free-book" }: Pro
         initial={reduce ? undefined : { opacity: 0, y: 24 }}
         whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 1, ease: KIT_EASE }}
+        transition={{ duration: 1, ease: KIT_EASE as unknown as number[] }}
       >
         <Eyebrow align="center">The Inner Circle</Eyebrow>
         <h2
-          className="font-display font-normal text-[38px] md:text-[54px] leading-[1.05] mt-[22px]"
+          className="font-display font-normal text-[54px] leading-[1.05] mt-[22px]"
           style={{ color: TEXT, letterSpacing: "-0.02em", textWrap: "balance" }}
         >
           Bonus scenes,<br />
