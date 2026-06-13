@@ -78,22 +78,22 @@ export default function Home() {
         structuredData={[homeStructuredData]}
       />
 
-      {/* Hero — Hostile Tender. Primary CTA goes direct to Amazon
-          (swiy.co/HD1) so the highest-intent click converts in-page
-          rather than bouncing through the book detail. Secondary
-          routes to the sample chapter / full pitch on /books/hostile-tender. */}
+      {/* Hero — Poison Pills (Hudson Dynasty Book 2). Primary CTA goes direct
+          to the Amazon pre-order (amzn.to/4e8y3CC) so the highest-intent click
+          converts in-page rather than bouncing through the book detail.
+          Secondary routes to the full pitch on /books/poison-pills. */}
       <BookHero
-        kicker="USA Today Bestseller · Hudson Dynasty · New Release"
-        title="Hostile|Tender"
-        byline="A Hudson Dynasty Novel · Reese Astor · Available on Kindle Unlimited"
-        tagline={"She’s the federal auditor sent to dismantle his empire. He’s Manhattan’s most dangerous billionaire fighting to save it."}
-        blurb="When the RIVIERA Ledger exposes three generations of Hudson secrets, SDNY forensic auditor Nia Carter and CEO Sebastian Hudson are forced into dangerous proximity. The hostile takeover escalates. Secrets surface from the family archives. The line between investigation and intimacy dissolves — and trusting each other could cost them everything."
-        cover="https://m.media-amazon.com/images/I/81iGQzEnacL._SL1500_.jpg"
-        primaryCta="Buy on Amazon"
-        primaryHref="https://swiy.co/HD1"
+        kicker="Hudson Dynasty · Book 2 · Pre-Order Now"
+        title="Poison|Pills"
+        byline="A Hudson Dynasty Novel · Reese Astor · Coming to Kindle Unlimited"
+        tagline={"The takeover failed. The war didn’t end — it went underground, into the bloodstream of the family itself."}
+        blurb="With the hostile bid beaten back, Sebastian Hudson thought he’d secured the empire. But a poison-pill defense buried in the family trust is metabolizing into something lethal, and Nia Carter’s audit has only scratched the surface. As old loyalties turn toxic and the people closest to them choose sides, the line between protecting the dynasty and destroying it disappears."
+        cover="/covers/hudson-2-poison-pills.jpg"
+        primaryCta="Pre-Order on Amazon"
+        primaryHref="https://amzn.to/4e8y3CC"
         primaryExternal
-        secondaryCta="Read the first chapter"
-        secondaryHref="/books/hostile-tender"
+        secondaryCta="Read the description"
+        secondaryHref="/books/poison-pills"
       />
 
       {/* Manhattan Money Kings — official descriptions verbatim from Books.tsx */}

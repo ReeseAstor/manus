@@ -245,6 +245,34 @@ export const BOOKS: Book[] = [
     asin: null,
     price_usd: 4.99,
   },
+  {
+    slug: "poison-pills",
+    title: "Poison Pills",
+    lane: "hudson_dynasty",
+    series_position: 2,
+    format: "ebook_and_audiobook",
+    position_label: "Book 2",
+    tagline:
+      "The takeover failed. The war didn't end — it went underground, into the bloodstream of the family itself.",
+    blurb:
+      "Book 2 of the Hudson Dynasty. With the hostile bid beaten back, Sebastian Hudson thought he'd " +
+      "secured the empire. But a poison-pill defense buried in the family trust is metabolizing into " +
+      "something lethal, and Nia Carter's audit has only scratched the surface. As old loyalties turn " +
+      "toxic and the people closest to them choose sides, the line between protecting the dynasty and " +
+      "destroying it disappears.",
+    pull_quote: "“Every defense is a slow poison. The art is choosing who swallows it.”",
+    cover_image: "/covers/hudson-2-poison-pills.jpg",
+    publication_date: null,
+    kindle_unlimited: true,
+    retailers: {
+      amazon_kindle: "https://amzn.to/4e8y3CC",
+      audible: null,
+    },
+    audiobook_available: true,
+    isbn: null,
+    asin: null,
+    price_usd: 4.99,
+  },
 
   // ─── Intimate Psychological Narratives ────────────────────────────────
   {
