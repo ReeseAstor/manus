@@ -57,6 +57,14 @@ export function Footer() {
               <Link href="/about">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">About</a>
               </Link>
+              <a
+                href="https://www.amazon.com/Reese-Astor/e/B0DVGQY6TX"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                Amazon Author Page
+              </a>
             </nav>
           </div>
 
