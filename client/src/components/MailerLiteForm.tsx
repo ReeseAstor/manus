@@ -2,12 +2,12 @@ import { useEffect, useRef } from "react";
 
 declare global {
   interface Window {
-    ml?: (...args: any[]) => void;
+    ml?: ((...args: any[]) => void) & { q?: any[] };
   }
 }
 
-const MAILERLITE_UNIVERSAL_SRC =
-  "https://assets.mailerlite.com/js/universal.js";
+const MAILERLITE_UNIVERSAL_SRC = "https://assets.mailerlite.com/js/universal.js";
+const MAILERLITE_ACCOUNT_ID = "1246760";
 
 interface MailerLiteFormProps {
   /** The MailerLite embedded form ID (the data-form value). */
@@ -18,14 +18,13 @@ interface MailerLiteFormProps {
 /**
  * Renders a MailerLite embedded form (`<div class="ml-embedded" data-form="...">`).
  *
- * The MailerLite Universal snippet lives in index.html and scans the DOM for
- * `.ml-embedded` divs a single time on initial page load. In a client-side
- * routed SPA, this component frequently mounts *after* that scan has already
- * run, so the form would otherwise render as an empty div.
- *
- * To make embeds reliable on every route, we re-inject the universal script on
- * mount. Re-executing universal.js re-scans the DOM and hydrates any
- * `.ml-embedded` divs that are now present, including this one.
+ * The global MailerLite Universal snippet was removed from index.html because
+ * the account-level auto-popup it loaded rendered the account owner's real name
+ * ("Yung-Lung Chen"), which clashes with the Reese Astor pen-name brand on every
+ * page. Embedded forms now opt in explicitly: this component bootstraps the
+ * universal loader + account on mount, then re-scans the DOM so the
+ * `.ml-embedded` div hydrates on any client-side route. Loading MailerLite only
+ * where a form is actually rendered keeps the auto-popup off the rest of the site.
  */
 export function MailerLiteForm({ formId, className }: MailerLiteFormProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -38,13 +37,25 @@ export function MailerLiteForm({ formId, className }: MailerLiteFormProps) {
       // If MailerLite already populated this form, do nothing.
       if (container.querySelector("form, iframe")) return;
 
-      // Re-inject the universal script so the library re-scans the DOM and
+      // Define the universal command stub if the library hasn't loaded yet,
+      // mirroring the snippet that previously lived in index.html.
+      if (typeof window.ml !== "function") {
+        window.ml = function (...args: any[]) {
+          (window.ml!.q = window.ml!.q || []).push(args);
+        };
+      }
+
+      // (Re-)inject the universal script so the library scans the DOM and
       // hydrates the now-mounted embed div. A fresh element is appended each
       // mount so the script's IIFE re-runs (browsers dedupe cached fetches).
       const script = document.createElement("script");
       script.src = `${MAILERLITE_UNIVERSAL_SRC}?v=${Date.now()}`;
       script.async = true;
       document.body.appendChild(script);
+
+      // Register the account so the embedded form can hydrate. Queued until
+      // universal.js finishes loading, then processed.
+      window.ml("account", MAILERLITE_ACCOUNT_ID);
     };
 
     // Defer one tick so the embed div is in the DOM before the scan runs.
