@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/node-postgres";
 import * as authSchema from "../drizzle/auth-schema";
 import { ENV } from "./_core/env";
 
@@ -34,7 +34,7 @@ const githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
-    provider: "mysql",
+    provider: "pg",
     schema: authSchema,
   }),
   secret: ENV.betterAuthSecret,

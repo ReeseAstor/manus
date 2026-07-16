@@ -1,24 +1,50 @@
-import { int, mysqlTable, text, timestamp, varchar, mysqlEnum, boolean, json, decimal } from "drizzle-orm/mysql-core";
+import { pgEnum, int, pgTable, text, timestamp, varchar, boolean, json, serial, numeric } from "drizzle-orm/pg-core";
+
+
+
+export const roleEnum = pgEnum("role", ["user", "admin"]);
+export const preferredFormatEnum = pgEnum("preferredFormat", ["epub", "mobi", "pdf"]);
+export const purchaseTypeEnum = pgEnum("purchaseType", ["single", "bundle", "subscription"]);
+export const publishedEnum = pgEnum("published", ["draft", "published"]);
+export const statusEnum = pgEnum("status", ["draft", "scheduled", "sent"]);
+export const typeEnum = pgEnum("type", ["bonus_chapter", "interview", "behind_scenes"]);
+export const categoryEnum = pgEnum("category", ["romance", "passion", "fantasy", "reunion", "forbidden", "first_time"]);
+export const genderEnum = pgEnum("gender", ["male", "female", "neutral"]);
+export const eventTypeEnum = pgEnum("eventType", ["opt_in", "opt_out", "resubscribe"]);
+export const responseStatusEnum = pgEnum("responseStatus", ["success", "failed", "pending"]);
+export const checkTypeEnum = pgEnum("checkType", ["pricing", "links", "content", "characters", "full_audit"]);
+export const issueTypeEnum = pgEnum("issueType", ["pricing_mismatch", "broken_link", "content_error", "character_inconsistency", "missing_data"]);
+export const severityEnum = pgEnum("severity", ["critical", "warning", "info"]);
+export const linkTypeEnum = pgEnum("linkType", ["amazon", "social", "affiliate", "resource", "other"]);
+export const lastStatusEnum = pgEnum("lastStatus", ["active", "broken", "redirected", "unknown"]);
+export const relationshipTypeEnum = pgEnum("relationshipType", ["romantic", "family", "friend", "rival", "colleague", "enemy"]);
+export const storylineTypeEnum = pgEnum("storylineType", ["main_plot", "subplot", "romance_arc", "character_arc", "mystery"]);
+export const platformEnum = pgEnum("platform", ["amazon", "apple", "kobo", "barnes_noble", "google_play", "direct"]);
+export const reportTypeEnum = pgEnum("reportType", ["daily_overview", "weekly_summary", "monthly_summary"]);
+export const reminderTypeEnum = pgEnum("reminderType", ["broken_link", "pricing_check", "content_review", "qa_issue", "custom"]);
+export const priorityEnum = pgEnum("priority", ["low", "medium", "high", "urgent"]);
+export const actionEnum = pgEnum("action", ["create", "update", "delete", "publish", "unpublish"]);
+export const clickTypeEnum = pgEnum("clickType", ["inline", "card", "favorites"]);
 
 /**
  * Core user table backing auth flow.
  * Extend this file with additional tables as your product grows.
  * Columns use camelCase to match both database fields and generated types.
  */
-export const users = mysqlTable("users", {
+export const users = pgTable("users", {
   /**
    * Surrogate primary key. Auto-incremented numeric value managed by the database.
    * Use this for relations between tables.
    */
-  id: int("id").autoincrement().primaryKey(),
+  id: serial("id").primaryKey(),
   /** Manus OAuth identifier (openId) returned from the OAuth callback. Unique per user. */
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
-  role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
+  role: roleEnum.default("user").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
 });
 
@@ -28,8 +54,8 @@ export type InsertUser = typeof users.$inferInsert;
 /**
  * User preferences for email and notification settings
  */
-export const userPreferences = mysqlTable("user_preferences", {
-  id: int("id").autoincrement().primaryKey(),
+export const userPreferences = pgTable("user_preferences", {
+  id: serial("id").primaryKey(),
   userId: int("userId").notNull().references(() => users.id).unique(),
   // Email preferences
   emailNewReleases: boolean("emailNewReleases").default(true).notNull(),
@@ -37,13 +63,13 @@ export const userPreferences = mysqlTable("user_preferences", {
   emailPromotions: boolean("emailPromotions").default(true).notNull(),
   emailBlogPosts: boolean("emailBlogPosts").default(false).notNull(),
   // Reading preferences
-  preferredFormat: mysqlEnum("preferredFormat", ["epub", "mobi", "pdf"]).default("epub").notNull(),
+  preferredFormat: preferredFormatEnum.default("epub").notNull(),
   // Profile info
   displayName: varchar("displayName", { length: 100 }),
   bio: text("bio"),
   favoriteGenres: text("favoriteGenres"), // JSON array
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type UserPreferences = typeof userPreferences.$inferSelect;
@@ -52,12 +78,12 @@ export type InsertUserPreferences = typeof userPreferences.$inferInsert;
 /**
  * User purchases for tracking book ownership
  */
-export const userPurchases = mysqlTable("user_purchases", {
-  id: int("id").autoincrement().primaryKey(),
+export const userPurchases = pgTable("user_purchases", {
+  id: serial("id").primaryKey(),
   userId: int("userId").notNull().references(() => users.id),
   bookId: int("bookId").notNull(),
   orderId: int("orderId"),
-  purchaseType: mysqlEnum("purchaseType", ["single", "bundle", "subscription"]).default("single").notNull(),
+  purchaseType: purchaseTypeEnum.default("single").notNull(),
   purchasePrice: int("purchasePrice"), // in cents
   bonusContentUnlocked: boolean("bonusContentUnlocked").default(false).notNull(),
   downloadCount: int("downloadCount").default(0).notNull(),
@@ -71,15 +97,15 @@ export type InsertUserPurchase = typeof userPurchases.$inferInsert;
 /**
  * Blog posts table for content management
  */
-export const blogPosts = mysqlTable("blog_posts", {
-  id: int("id").autoincrement().primaryKey(),
+export const blogPosts = pgTable("blog_posts", {
+  id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   slug: varchar("slug", { length: 255 }).notNull().unique(),
   excerpt: text("excerpt").notNull(),
   content: text("content").notNull(),
   category: varchar("category", { length: 100 }).notNull(),
   readTime: varchar("readTime", { length: 50 }).notNull(),
-  published: mysqlEnum("published", ["draft", "published"]).default("draft").notNull(),
+  published: publishedEnum.default("draft").notNull(),
   authorId: int("authorId").notNull().references(() => users.id),
   featuredImage: text("featuredImage"), // URL to featured hero image for blog cards
   audioUrl: text("audioUrl"), // URL to generated audio narration
@@ -87,7 +113,7 @@ export const blogPosts = mysqlTable("blog_posts", {
   seoKeywords: text("seoKeywords"), // Comma-separated SEO keywords
   metaDescription: varchar("metaDescription", { length: 320 }), // SEO meta description
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   publishedAt: timestamp("publishedAt"),
 });
 
@@ -97,8 +123,8 @@ export type InsertBlogPost = typeof blogPosts.$inferInsert;
 /**
  * Books table for book catalog and details
  */
-export const books = mysqlTable("books", {
-  id: int("id").autoincrement().primaryKey(),
+export const books = pgTable("books", {
+  id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   slug: varchar("slug", { length: 255 }).notNull().unique(),
   series: varchar("series", { length: 255 }),
@@ -127,7 +153,7 @@ export const books = mysqlTable("books", {
   featured: boolean("featured").default(false),
   displayOrder: int("displayOrder").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type Book = typeof books.$inferSelect;
@@ -136,8 +162,8 @@ export type InsertBook = typeof books.$inferInsert;
 /**
  * Book reviews table for reader testimonials
  */
-export const bookReviews = mysqlTable("book_reviews", {
-  id: int("id").autoincrement().primaryKey(),
+export const bookReviews = pgTable("book_reviews", {
+  id: serial("id").primaryKey(),
   bookId: int("bookId").notNull().references(() => books.id),
   reviewerName: varchar("reviewerName", { length: 255 }).notNull(),
   reviewerPhoto: text("reviewerPhoto"),
@@ -154,13 +180,13 @@ export type InsertBookReview = typeof bookReviews.$inferInsert;
 /**
  * Newsletters table for managing email campaigns
  */
-export const newsletters = mysqlTable("newsletters", {
-  id: int("id").autoincrement().primaryKey(),
+export const newsletters = pgTable("newsletters", {
+  id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   subject: varchar("subject", { length: 255 }).notNull(),
   preheader: varchar("preheader", { length: 255 }),
   content: text("content").notNull(), // HTML content
-  status: mysqlEnum("status", ["draft", "scheduled", "sent"]).default("draft").notNull(),
+  status: statusEnum.default("draft").notNull(),
   scheduledAt: timestamp("scheduledAt"),
   sentAt: timestamp("sentAt"),
   recipientCount: int("recipientCount").default(0),
@@ -168,7 +194,7 @@ export const newsletters = mysqlTable("newsletters", {
   clickCount: int("clickCount").default(0),
   createdBy: int("createdBy").notNull().references(() => users.id),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type Newsletter = typeof newsletters.$inferSelect;
@@ -177,11 +203,11 @@ export type InsertNewsletter = typeof newsletters.$inferInsert;
 /**
  * Reader's Club exclusive content
  */
-export const exclusiveContent = mysqlTable("exclusive_content", {
-  id: int("id").autoincrement().primaryKey(),
+export const exclusiveContent = pgTable("exclusive_content", {
+  id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   slug: varchar("slug", { length: 255 }).notNull().unique(),
-  type: mysqlEnum("type", ["bonus_chapter", "interview", "behind_scenes"]).notNull(),
+  type: typeEnum.notNull(),
   category: varchar("category", { length: 100 }),
   description: text("description"),
   content: text("content").notNull(),
@@ -191,7 +217,7 @@ export const exclusiveContent = mysqlTable("exclusive_content", {
   displayOrder: int("displayOrder").default(0),
   publishDate: timestamp("publishDate").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type ExclusiveContent = typeof exclusiveContent.$inferSelect;
@@ -200,8 +226,8 @@ export type InsertExclusiveContent = typeof exclusiveContent.$inferInsert;
 /**
  * Reader's Club members tracking
  */
-export const readerClubMembers = mysqlTable("reader_club_members", {
-  id: int("id").autoincrement().primaryKey(),
+export const readerClubMembers = pgTable("reader_club_members", {
+  id: serial("id").primaryKey(),
   userId: int("userId").references(() => users.id),
   email: varchar("email", { length: 320 }).notNull().unique(),
   name: varchar("name", { length: 255 }),
@@ -216,8 +242,8 @@ export type InsertReaderClubMember = typeof readerClubMembers.$inferInsert;
 /**
  * Content access tracking
  */
-export const contentAccess = mysqlTable("content_access", {
-  id: int("id").autoincrement().primaryKey(),
+export const contentAccess = pgTable("content_access", {
+  id: serial("id").primaryKey(),
   memberId: int("memberId").notNull().references(() => readerClubMembers.id),
   contentId: int("contentId").notNull().references(() => exclusiveContent.id),
   accessedAt: timestamp("accessedAt").defaultNow().notNull(),
@@ -230,11 +256,11 @@ export type InsertContentAccess = typeof contentAccess.$inferInsert;
 /**
  * Newsletter subscribers table
  */
-export const newsletterSubscribers = mysqlTable("newsletter_subscribers", {
-  id: int("id").autoincrement().primaryKey(),
+export const newsletterSubscribers = pgTable("newsletter_subscribers", {
+  id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   name: varchar("name", { length: 255 }),
-  status: mysqlEnum("status", ["active", "unsubscribed"]).default("active").notNull(),
+  status: statusEnum.default("active").notNull(),
   source: varchar("source", { length: 100 }), // e.g., "website", "free_book", "quiz"
   mailerLiteId: varchar("mailerLiteId", { length: 100 }), // MailerLite subscriber ID
   subscribedAt: timestamp("subscribedAt").defaultNow().notNull(),
@@ -246,7 +272,7 @@ export type InsertNewsletterSubscriber = typeof newsletterSubscribers.$inferInse
 /**
  * AI Chat Messages - stores conversation history
  */
-export const aiChatMessages = mysqlTable('ai_chat_messages', {
+export const aiChatMessages = pgTable('ai_chat_messages', {
   id: int('id').autoincrement().primaryKey(),
   sessionId: varchar('session_id', { length: 255 }).notNull(),
   role: mysqlEnum('role', ['user', 'assistant']).notNull(),
@@ -260,7 +286,7 @@ export type InsertAiChatMessage = typeof aiChatMessages.$inferInsert;
 /**
  * Character Quiz Results - stores quiz completions
  */
-export const quizResults = mysqlTable('quiz_results', {
+export const quizResults = pgTable('quiz_results', {
   id: int('id').autoincrement().primaryKey(),
   email: varchar('email', { length: 320 }),
   result: varchar('result', { length: 255 }).notNull(),
@@ -275,7 +301,7 @@ export type InsertQuizResult = typeof quizResults.$inferInsert;
 /**
  * AI Generated Content - tracks AI usage
  */
-export const aiGeneratedContent = mysqlTable('ai_generated_content', {
+export const aiGeneratedContent = pgTable('ai_generated_content', {
   id: int('id').autoincrement().primaryKey(),
   userId: int('user_id').references(() => users.id),
   contentType: mysqlEnum('content_type', [
@@ -296,7 +322,7 @@ export type InsertAiGeneratedContent = typeof aiGeneratedContent.$inferInsert;
 /**
  * AI Studio Conversations - stores admin AI chat history
  */
-export const aiStudioConversations = mysqlTable('ai_studio_conversations', {
+export const aiStudioConversations = pgTable('ai_studio_conversations', {
   id: int('id').autoincrement().primaryKey(),
   userId: int('user_id').notNull().references(() => users.id),
   title: varchar('title', { length: 255 }).notNull(),
@@ -304,7 +330,7 @@ export const aiStudioConversations = mysqlTable('ai_studio_conversations', {
   systemPrompt: text('system_prompt'),
   messages: text('messages').notNull(), // JSON array of {role, content}
   createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
 export type AiStudioConversation = typeof aiStudioConversations.$inferSelect;
@@ -313,20 +339,20 @@ export type InsertAiStudioConversation = typeof aiStudioConversations.$inferInse
 /**
  * Digital Products table for Stripe integration
  */
-export const products = mysqlTable("products", {
-  id: int("id").autoincrement().primaryKey(),
+export const products = pgTable("products", {
+  id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   description: text("description").notNull(),
   price: int("price").notNull(), // Price in cents
   currency: varchar("currency", { length: 3 }).default("usd").notNull(),
-  type: mysqlEnum("type", ["one_time", "subscription"]).notNull(),
+  type: typeEnum.notNull(),
   stripeProductId: varchar("stripeProductId", { length: 255 }),
   stripePriceId: varchar("stripePriceId", { length: 255 }),
   features: text("features"), // JSON array of features
   downloadUrl: text("downloadUrl"), // For digital products
   active: boolean("active").default(true).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type Product = typeof products.$inferSelect;
@@ -335,19 +361,19 @@ export type InsertProduct = typeof products.$inferInsert;
 /**
  * Orders table for tracking purchases
  */
-export const orders = mysqlTable("orders", {
-  id: int("id").autoincrement().primaryKey(),
+export const orders = pgTable("orders", {
+  id: serial("id").primaryKey(),
   userId: int("userId").references(() => users.id),
   productId: int("productId").notNull().references(() => products.id),
   stripeSessionId: varchar("stripeSessionId", { length: 255 }),
   stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 255 }),
   amount: int("amount").notNull(), // Amount in cents
   currency: varchar("currency", { length: 3 }).default("usd").notNull(),
-  status: mysqlEnum("status", ["pending", "completed", "failed", "refunded"]).default("pending").notNull(),
+  status: statusEnum.default("pending").notNull(),
   customerEmail: varchar("customerEmail", { length: 320 }),
   customerName: varchar("customerName", { length: 255 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type Order = typeof orders.$inferSelect;
@@ -356,18 +382,18 @@ export type InsertOrder = typeof orders.$inferInsert;
 /**
  * Subscriptions table for recurring payments
  */
-export const subscriptions = mysqlTable("subscriptions", {
-  id: int("id").autoincrement().primaryKey(),
+export const subscriptions = pgTable("subscriptions", {
+  id: serial("id").primaryKey(),
   userId: int("userId").notNull().references(() => users.id),
   productId: int("productId").notNull().references(() => products.id),
   stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }).notNull(),
   stripeCustomerId: varchar("stripeCustomerId", { length: 255 }).notNull(),
-  status: mysqlEnum("status", ["active", "canceled", "past_due", "unpaid"]).default("active").notNull(),
+  status: statusEnum.default("active").notNull(),
   currentPeriodStart: timestamp("currentPeriodStart").notNull(),
   currentPeriodEnd: timestamp("currentPeriodEnd").notNull(),
   cancelAtPeriodEnd: boolean("cancelAtPeriodEnd").default(false).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type Subscription = typeof subscriptions.$inferSelect;
@@ -377,8 +403,8 @@ export type InsertSubscription = typeof subscriptions.$inferInsert;
 /**
  * Browsing history table for tracking user book views
  */
-export const browsingHistory = mysqlTable("browsing_history", {
-  id: int("id").autoincrement().primaryKey(),
+export const browsingHistory = pgTable("browsing_history", {
+  id: serial("id").primaryKey(),
   userId: int("userId").notNull().references(() => users.id),
   bookId: int("bookId").notNull().references(() => books.id),
   viewCount: int("viewCount").default(1).notNull(),
@@ -393,8 +419,8 @@ export type InsertBrowsingHistory = typeof browsingHistory.$inferInsert;
 /**
  * VIP Membership Tiers
  */
-export const vipTiers = mysqlTable("vip_tiers", {
-  id: int("id").autoincrement().primaryKey(),
+export const vipTiers = pgTable("vip_tiers", {
+  id: serial("id").primaryKey(),
   name: varchar("name", { length: 100 }).notNull(), // Bronze, Silver, Gold
   slug: varchar("slug", { length: 100 }).notNull().unique(),
   description: text("description").notNull(),
@@ -408,7 +434,7 @@ export const vipTiers = mysqlTable("vip_tiers", {
   displayOrder: int("displayOrder").default(0),
   active: boolean("active").default(true).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type VipTier = typeof vipTiers.$inferSelect;
@@ -417,19 +443,19 @@ export type InsertVipTier = typeof vipTiers.$inferInsert;
 /**
  * VIP Members - tracks VIP subscription status
  */
-export const vipMembers = mysqlTable("vip_members", {
-  id: int("id").autoincrement().primaryKey(),
+export const vipMembers = pgTable("vip_members", {
+  id: serial("id").primaryKey(),
   userId: int("userId").notNull().references(() => users.id).unique(),
   tierId: int("tierId").notNull().references(() => vipTiers.id),
   stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }),
   stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
-  status: mysqlEnum("status", ["active", "canceled", "past_due", "trial"]).default("active").notNull(),
+  status: statusEnum.default("active").notNull(),
   currentPeriodStart: timestamp("currentPeriodStart").notNull(),
   currentPeriodEnd: timestamp("currentPeriodEnd").notNull(),
   cancelAtPeriodEnd: boolean("cancelAtPeriodEnd").default(false).notNull(),
   customStoriesUsed: int("customStoriesUsed").default(0), // Track custom story requests this month
   joinedAt: timestamp("joinedAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type VipMember = typeof vipMembers.$inferSelect;
@@ -438,8 +464,8 @@ export type InsertVipMember = typeof vipMembers.$inferInsert;
 /**
  * Steamy Audio Stories - exclusive VIP content
  */
-export const steamyStories = mysqlTable("steamy_stories", {
-  id: int("id").autoincrement().primaryKey(),
+export const steamyStories = pgTable("steamy_stories", {
+  id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   slug: varchar("slug", { length: 255 }).notNull().unique(),
   description: text("description").notNull(),
@@ -449,7 +475,7 @@ export const steamyStories = mysqlTable("steamy_stories", {
   previewAudioUrl: text("previewAudioUrl"), // Short preview clip for non-members (10-15 seconds)
   audioDuration: int("audioDuration"), // Duration in seconds
   coverImage: text("coverImage"),
-  category: mysqlEnum("category", ["romance", "passion", "fantasy", "reunion", "forbidden", "first_time"]).default("romance").notNull(),
+  category: categoryEnum.default("romance").notNull(),
   heatLevel: int("heatLevel").default(4), // 1-5 heat level
   characters: text("characters"), // JSON array of character names
   bookId: int("bookId").references(() => books.id), // Optional link to a book
@@ -460,7 +486,7 @@ export const steamyStories = mysqlTable("steamy_stories", {
   playCount: int("playCount").default(0),
   likeCount: int("likeCount").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type SteamyStory = typeof steamyStories.$inferSelect;
@@ -469,14 +495,14 @@ export type InsertSteamyStory = typeof steamyStories.$inferInsert;
 /**
  * Custom Story Requests - Gold tier feature
  */
-export const customStoryRequests = mysqlTable("custom_story_requests", {
-  id: int("id").autoincrement().primaryKey(),
+export const customStoryRequests = pgTable("custom_story_requests", {
+  id: serial("id").primaryKey(),
   userId: int("userId").notNull().references(() => users.id),
   prompt: text("prompt").notNull(), // User's story request/fantasy
   characters: text("characters"), // Preferred characters
   setting: varchar("setting", { length: 255 }), // Story setting
   heatLevel: int("heatLevel").default(4), // Requested heat level
-  status: mysqlEnum("status", ["pending", "generating", "completed", "failed"]).default("pending").notNull(),
+  status: statusEnum.default("pending").notNull(),
   generatedStoryId: int("generatedStoryId").references(() => steamyStories.id),
   audioUrl: text("audioUrl"), // Generated audio URL
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -489,8 +515,8 @@ export type InsertCustomStoryRequest = typeof customStoryRequests.$inferInsert;
 /**
  * Story Likes - track user favorites
  */
-export const storyLikes = mysqlTable("story_likes", {
-  id: int("id").autoincrement().primaryKey(),
+export const storyLikes = pgTable("story_likes", {
+  id: serial("id").primaryKey(),
   userId: int("userId").notNull().references(() => users.id),
   storyId: int("storyId").notNull().references(() => steamyStories.id),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -502,8 +528,8 @@ export type InsertStoryLike = typeof storyLikes.$inferInsert;
 /**
  * Story Play History - track listening history
  */
-export const storyPlayHistory = mysqlTable("story_play_history", {
-  id: int("id").autoincrement().primaryKey(),
+export const storyPlayHistory = pgTable("story_play_history", {
+  id: serial("id").primaryKey(),
   userId: int("userId").notNull().references(() => users.id),
   storyId: int("storyId").notNull().references(() => steamyStories.id),
   progress: int("progress").default(0), // Playback progress in seconds
@@ -518,8 +544,8 @@ export type InsertStoryPlayHistory = typeof storyPlayHistory.$inferInsert;
 /**
  * Audio Usage Tracking - tracks ElevenLabs usage per user
  */
-export const audioUsage = mysqlTable("audio_usage", {
-  id: int("id").autoincrement().primaryKey(),
+export const audioUsage = pgTable("audio_usage", {
+  id: serial("id").primaryKey(),
   userId: int("userId").notNull().references(() => users.id),
   minutesUsed: int("minutesUsed").notNull(), // Minutes of audio generated
   characterCount: int("characterCount").notNull(), // Characters processed
@@ -534,7 +560,7 @@ export type InsertAudioUsage = typeof audioUsage.$inferInsert;
 /**
  * Generated Audio Library - stores user's generated audio files
  */
-export const generatedAudio = mysqlTable("generated_audio", {
+export const generatedAudio = pgTable("generated_audio", {
   id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
   userId: int("userId").notNull().references(() => users.id),
   storyId: varchar("storyId", { length: 255 }), // Optional story reference
@@ -552,14 +578,14 @@ export type InsertGeneratedAudio = typeof generatedAudio.$inferInsert;
 /**
  * Voice Library - custom voices and presets
  */
-export const voicePresets = mysqlTable("voice_presets", {
-  id: int("id").autoincrement().primaryKey(),
+export const voicePresets = pgTable("voice_presets", {
+  id: serial("id").primaryKey(),
   userId: int("userId").references(() => users.id), // null = system preset
   name: varchar("name", { length: 100 }).notNull(),
   elevenLabsVoiceId: varchar("elevenLabsVoiceId", { length: 100 }).notNull(),
   description: text("description"),
   style: varchar("style", { length: 50 }), // warm, commanding, sensual, etc.
-  gender: mysqlEnum("gender", ["male", "female", "neutral"]).notNull(),
+  gender: genderEnum.notNull(),
   isPremium: boolean("isPremium").default(false).notNull(),
   stability: int("stability").default(50), // 0-100
   similarityBoost: int("similarityBoost").default(75), // 0-100
@@ -574,15 +600,15 @@ export type InsertVoicePreset = typeof voicePresets.$inferInsert;
 /**
  * Character Voice Assignments - map characters to voices
  */
-export const characterVoiceAssignments = mysqlTable("character_voice_assignments", {
-  id: int("id").autoincrement().primaryKey(),
+export const characterVoiceAssignments = pgTable("character_voice_assignments", {
+  id: serial("id").primaryKey(),
   userId: int("userId").references(() => users.id), // null = default assignment
   characterName: varchar("characterName", { length: 100 }).notNull(),
   bookTitle: varchar("bookTitle", { length: 255 }),
   voicePresetId: int("voicePresetId").references(() => voicePresets.id),
   elevenLabsVoiceId: varchar("elevenLabsVoiceId", { length: 100 }).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type CharacterVoiceAssignment = typeof characterVoiceAssignments.$inferSelect;
@@ -591,8 +617,8 @@ export type InsertCharacterVoiceAssignment = typeof characterVoiceAssignments.$i
 /**
  * MailerLite Webhook Events Log - tracks all webhook events received
  */
-export const mailerLiteWebhookEvents = mysqlTable("mailerlite_webhook_events", {
-  id: int("id").autoincrement().primaryKey(),
+export const mailerLiteWebhookEvents = pgTable("mailerlite_webhook_events", {
+  id: serial("id").primaryKey(),
   eventType: varchar("eventType", { length: 100 }).notNull(), // e.g., "subscriber.created"
   subscriberId: varchar("subscriberId", { length: 100 }), // MailerLite subscriber ID
   subscriberEmail: varchar("subscriberEmail", { length: 320 }),
@@ -612,16 +638,16 @@ export type InsertMailerLiteWebhookEvent = typeof mailerLiteWebhookEvents.$infer
 /**
  * SMS notification templates for automated messaging
  */
-export const smsTemplates = mysqlTable("sms_templates", {
-  id: int("id").autoincrement().primaryKey(),
+export const smsTemplates = pgTable("sms_templates", {
+  id: serial("id").primaryKey(),
   slug: varchar("slug", { length: 100 }).notNull().unique(),
   name: varchar("name", { length: 200 }).notNull(),
   description: text("description"),
   messageTemplate: text("messageTemplate").notNull(),
-  category: mysqlEnum("category", ["vip", "order", "marketing", "system"]).default("system").notNull(),
+  category: categoryEnum.default("system").notNull(),
   isActive: boolean("isActive").default(true).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type SmsTemplate = typeof smsTemplates.$inferSelect;
@@ -630,8 +656,8 @@ export type InsertSmsTemplate = typeof smsTemplates.$inferInsert;
 /**
  * User SMS preferences and phone number storage
  */
-export const userSmsPreferences = mysqlTable("user_sms_preferences", {
-  id: int("id").autoincrement().primaryKey(),
+export const userSmsPreferences = pgTable("user_sms_preferences", {
+  id: serial("id").primaryKey(),
   userId: int("userId").notNull().references(() => users.id).unique(),
   phoneNumber: varchar("phoneNumber", { length: 20 }),
   phoneVerified: boolean("phoneVerified").default(false).notNull(),
@@ -641,7 +667,7 @@ export const userSmsPreferences = mysqlTable("user_sms_preferences", {
   smsOrderUpdates: boolean("smsOrderUpdates").default(true).notNull(),
   smsMarketing: boolean("smsMarketing").default(false).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type UserSmsPreferences = typeof userSmsPreferences.$inferSelect;
@@ -650,14 +676,14 @@ export type InsertUserSmsPreferences = typeof userSmsPreferences.$inferInsert;
 /**
  * SMS message log for tracking sent messages
  */
-export const smsMessageLog = mysqlTable("sms_message_log", {
-  id: int("id").autoincrement().primaryKey(),
+export const smsMessageLog = pgTable("sms_message_log", {
+  id: serial("id").primaryKey(),
   userId: int("userId").references(() => users.id),
   templateId: int("templateId").references(() => smsTemplates.id),
   toPhoneNumber: varchar("toPhoneNumber", { length: 20 }).notNull(),
   messageBody: text("messageBody").notNull(),
   twilioSid: varchar("twilioSid", { length: 64 }),
-  status: mysqlEnum("status", ["queued", "sent", "delivered", "failed", "undelivered"]).default("queued").notNull(),
+  status: statusEnum.default("queued").notNull(),
   errorMessage: text("errorMessage"),
   sentAt: timestamp("sentAt").defaultNow().notNull(),
   deliveredAt: timestamp("deliveredAt"),
@@ -670,8 +696,8 @@ export type InsertSmsMessageLog = typeof smsMessageLog.$inferInsert;
 /**
  * SMS analytics daily aggregation for dashboard metrics
  */
-export const smsAnalyticsDaily = mysqlTable("sms_analytics_daily", {
-  id: int("id").autoincrement().primaryKey(),
+export const smsAnalyticsDaily = pgTable("sms_analytics_daily", {
+  id: serial("id").primaryKey(),
   date: timestamp("date").notNull(),
   totalSent: int("totalSent").default(0).notNull(),
   totalDelivered: int("totalDelivered").default(0).notNull(),
@@ -679,10 +705,10 @@ export const smsAnalyticsDaily = mysqlTable("sms_analytics_daily", {
   totalOptIns: int("totalOptIns").default(0).notNull(),
   totalOptOuts: int("totalOptOuts").default(0).notNull(),
   totalResponses: int("totalResponses").default(0).notNull(),
-  deliveryRate: decimal("deliveryRate", { precision: 5, scale: 2 }),
-  responseRate: decimal("responseRate", { precision: 5, scale: 2 }),
+  deliveryRate: numeric("deliveryRate", { precision: 5, scale: 2 }),
+  responseRate: numeric("responseRate", { precision: 5, scale: 2 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type SmsAnalyticsDaily = typeof smsAnalyticsDaily.$inferSelect;
@@ -691,11 +717,11 @@ export type InsertSmsAnalyticsDaily = typeof smsAnalyticsDaily.$inferInsert;
 /**
  * SMS opt-in/opt-out events for tracking trends
  */
-export const smsOptEvents = mysqlTable("sms_opt_events", {
-  id: int("id").autoincrement().primaryKey(),
+export const smsOptEvents = pgTable("sms_opt_events", {
+  id: serial("id").primaryKey(),
   phoneNumber: varchar("phoneNumber", { length: 20 }).notNull(),
   userId: int("userId").references(() => users.id),
-  eventType: mysqlEnum("eventType", ["opt_in", "opt_out", "resubscribe"]).notNull(),
+  eventType: eventTypeEnum.notNull(),
   source: varchar("source", { length: 50 }), // e.g., "vip_signup", "sms_reply", "admin", "webhook"
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
@@ -706,14 +732,14 @@ export type InsertSmsOptEvent = typeof smsOptEvents.$inferInsert;
 /**
  * SMS incoming messages for response tracking
  */
-export const smsIncomingMessages = mysqlTable("sms_incoming_messages", {
-  id: int("id").autoincrement().primaryKey(),
+export const smsIncomingMessages = pgTable("sms_incoming_messages", {
+  id: serial("id").primaryKey(),
   fromPhoneNumber: varchar("fromPhoneNumber", { length: 20 }).notNull(),
   messageBody: text("messageBody").notNull(),
   twilioSid: varchar("twilioSid", { length: 64 }),
   keyword: varchar("keyword", { length: 20 }), // STOP, START, HELP, etc.
   processed: boolean("processed").default(false).notNull(),
-  responseStatus: mysqlEnum("responseStatus", ["success", "failed", "pending"]).default("pending").notNull(),
+  responseStatus: responseStatusEnum.default("pending").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -724,11 +750,11 @@ export type InsertSmsIncomingMessage = typeof smsIncomingMessages.$inferInsert;
 /**
  * QA Checks - tracks daily consistency checks across the website
  */
-export const qaChecks = mysqlTable("qa_checks", {
-  id: int("id").autoincrement().primaryKey(),
+export const qaChecks = pgTable("qa_checks", {
+  id: serial("id").primaryKey(),
   checkDate: timestamp("checkDate").notNull(),
-  checkType: mysqlEnum("checkType", ["pricing", "links", "content", "characters", "full_audit"]).notNull(),
-  status: mysqlEnum("status", ["passed", "failed", "warning"]).default("passed").notNull(),
+  checkType: checkTypeEnum.notNull(),
+  status: statusEnum.default("passed").notNull(),
   itemsChecked: int("itemsChecked").default(0).notNull(),
   issuesFound: int("issuesFound").default(0).notNull(),
   details: text("details"), // JSON with detailed check results
@@ -742,16 +768,16 @@ export type InsertQaCheck = typeof qaChecks.$inferInsert;
 /**
  * QA Issues - individual issues found during QA checks
  */
-export const qaIssues = mysqlTable("qa_issues", {
-  id: int("id").autoincrement().primaryKey(),
+export const qaIssues = pgTable("qa_issues", {
+  id: serial("id").primaryKey(),
   checkId: int("checkId").references(() => qaChecks.id),
-  issueType: mysqlEnum("issueType", ["pricing_mismatch", "broken_link", "content_error", "character_inconsistency", "missing_data"]).notNull(),
-  severity: mysqlEnum("severity", ["critical", "warning", "info"]).default("warning").notNull(),
+  issueType: issueTypeEnum.notNull(),
+  severity: severityEnum.default("warning").notNull(),
   location: varchar("location", { length: 255 }).notNull(), // Page/component where issue was found
   description: text("description").notNull(),
   expectedValue: text("expectedValue"),
   actualValue: text("actualValue"),
-  status: mysqlEnum("status", ["open", "resolved", "ignored"]).default("open").notNull(),
+  status: statusEnum.default("open").notNull(),
   resolvedAt: timestamp("resolvedAt"),
   resolvedBy: int("resolvedBy").references(() => users.id),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -763,22 +789,22 @@ export type InsertQaIssue = typeof qaIssues.$inferInsert;
 /**
  * External Links - tracks all external links used across the website
  */
-export const externalLinks = mysqlTable("external_links", {
-  id: int("id").autoincrement().primaryKey(),
+export const externalLinks = pgTable("external_links", {
+  id: serial("id").primaryKey(),
   url: text("url").notNull(),
   displayText: varchar("displayText", { length: 255 }),
-  linkType: mysqlEnum("linkType", ["amazon", "social", "affiliate", "resource", "other"]).default("other").notNull(),
+  linkType: linkTypeEnum.default("other").notNull(),
   location: varchar("location", { length: 255 }).notNull(), // Page where link appears
   componentPath: varchar("componentPath", { length: 255 }), // Component file path
   lastChecked: timestamp("lastChecked"),
-  lastStatus: mysqlEnum("lastStatus", ["active", "broken", "redirected", "unknown"]).default("unknown").notNull(),
+  lastStatus: lastStatusEnum.default("unknown").notNull(),
   httpStatus: int("httpStatus"),
   responseTime: int("responseTime"), // in milliseconds
   checkCount: int("checkCount").default(0).notNull(),
   failCount: int("failCount").default(0).notNull(),
   isActive: boolean("isActive").default(true).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type ExternalLink = typeof externalLinks.$inferSelect;
@@ -787,12 +813,12 @@ export type InsertExternalLink = typeof externalLinks.$inferInsert;
 /**
  * Book Characters - detailed character information for each book
  */
-export const bookCharacters = mysqlTable("book_characters", {
-  id: int("id").autoincrement().primaryKey(),
+export const bookCharacters = pgTable("book_characters", {
+  id: serial("id").primaryKey(),
   bookId: int("bookId").notNull().references(() => books.id),
   fullName: varchar("fullName", { length: 255 }).notNull(),
   nickname: varchar("nickname", { length: 100 }),
-  role: mysqlEnum("role", ["protagonist", "love_interest", "antagonist", "supporting", "minor"]).notNull(),
+  role: roleEnum.notNull(),
   description: text("description"),
   physicalDescription: text("physicalDescription"),
   personality: text("personality"),
@@ -801,7 +827,7 @@ export const bookCharacters = mysqlTable("book_characters", {
   age: varchar("age", { length: 50 }),
   displayOrder: int("displayOrder").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type BookCharacter = typeof bookCharacters.$inferSelect;
@@ -810,11 +836,11 @@ export type InsertBookCharacter = typeof bookCharacters.$inferInsert;
 /**
  * Character Relationships - tracks relationships between characters
  */
-export const characterRelationships = mysqlTable("character_relationships", {
-  id: int("id").autoincrement().primaryKey(),
+export const characterRelationships = pgTable("character_relationships", {
+  id: serial("id").primaryKey(),
   character1Id: int("character1Id").notNull().references(() => bookCharacters.id),
   character2Id: int("character2Id").notNull().references(() => bookCharacters.id),
-  relationshipType: mysqlEnum("relationshipType", ["romantic", "family", "friend", "rival", "colleague", "enemy"]).notNull(),
+  relationshipType: relationshipTypeEnum.notNull(),
   description: text("description"),
   bookId: int("bookId").references(() => books.id),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -826,17 +852,17 @@ export type InsertCharacterRelationship = typeof characterRelationships.$inferIn
 /**
  * Book Storylines - tracks main plot points and storylines
  */
-export const bookStorylines = mysqlTable("book_storylines", {
-  id: int("id").autoincrement().primaryKey(),
+export const bookStorylines = pgTable("book_storylines", {
+  id: serial("id").primaryKey(),
   bookId: int("bookId").notNull().references(() => books.id),
   title: varchar("title", { length: 255 }).notNull(),
-  storylineType: mysqlEnum("storylineType", ["main_plot", "subplot", "romance_arc", "character_arc", "mystery"]).notNull(),
+  storylineType: storylineTypeEnum.notNull(),
   description: text("description").notNull(),
   keyEvents: text("keyEvents"), // JSON array of key plot points
   resolution: text("resolution"),
   displayOrder: int("displayOrder").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type BookStoryline = typeof bookStorylines.$inferSelect;
@@ -845,10 +871,10 @@ export type InsertBookStoryline = typeof bookStorylines.$inferInsert;
 /**
  * Book Pricing History - tracks pricing changes over time
  */
-export const bookPricingHistory = mysqlTable("book_pricing_history", {
-  id: int("id").autoincrement().primaryKey(),
+export const bookPricingHistory = pgTable("book_pricing_history", {
+  id: serial("id").primaryKey(),
   bookId: int("bookId").notNull().references(() => books.id),
-  platform: mysqlEnum("platform", ["amazon", "apple", "kobo", "barnes_noble", "google_play", "direct"]).notNull(),
+  platform: platformEnum.notNull(),
   price: varchar("price", { length: 50 }).notNull(), // e.g., "$2.99"
   priceInCents: int("priceInCents"),
   currency: varchar("currency", { length: 3 }).default("USD"),
@@ -864,14 +890,14 @@ export type InsertBookPricingHistory = typeof bookPricingHistory.$inferInsert;
 /**
  * Daily Reports - automated daily website health reports
  */
-export const dailyReports = mysqlTable("daily_reports", {
-  id: int("id").autoincrement().primaryKey(),
+export const dailyReports = pgTable("daily_reports", {
+  id: serial("id").primaryKey(),
   reportDate: timestamp("reportDate").notNull(),
-  reportType: mysqlEnum("reportType", ["daily_overview", "weekly_summary", "monthly_summary"]).default("daily_overview").notNull(),
+  reportType: reportTypeEnum.default("daily_overview").notNull(),
   // Traffic metrics
   pageViews: int("pageViews").default(0),
   uniqueVisitors: int("uniqueVisitors").default(0),
-  bounceRate: decimal("bounceRate", { precision: 5, scale: 2 }),
+  bounceRate: numeric("bounceRate", { precision: 5, scale: 2 }),
   avgSessionDuration: int("avgSessionDuration"), // in seconds
   // Content metrics
   newSubscribers: int("newSubscribers").default(0),
@@ -899,21 +925,21 @@ export type InsertDailyReport = typeof dailyReports.$inferInsert;
 /**
  * Admin Reminders - scheduled reminders for admin tasks
  */
-export const adminReminders = mysqlTable("admin_reminders", {
-  id: int("id").autoincrement().primaryKey(),
+export const adminReminders = pgTable("admin_reminders", {
+  id: serial("id").primaryKey(),
   userId: int("userId").references(() => users.id),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
-  reminderType: mysqlEnum("reminderType", ["broken_link", "pricing_check", "content_review", "qa_issue", "custom"]).notNull(),
-  priority: mysqlEnum("priority", ["low", "medium", "high", "urgent"]).default("medium").notNull(),
+  reminderType: reminderTypeEnum.notNull(),
+  priority: priorityEnum.default("medium").notNull(),
   relatedEntityType: varchar("relatedEntityType", { length: 50 }), // "book", "link", "blog", etc.
   relatedEntityId: int("relatedEntityId"),
   dueDate: timestamp("dueDate"),
-  status: mysqlEnum("status", ["pending", "completed", "dismissed", "snoozed"]).default("pending").notNull(),
+  status: statusEnum.default("pending").notNull(),
   snoozedUntil: timestamp("snoozedUntil"),
   completedAt: timestamp("completedAt"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type AdminReminder = typeof adminReminders.$inferSelect;
@@ -922,11 +948,11 @@ export type InsertAdminReminder = typeof adminReminders.$inferInsert;
 /**
  * Content Audit Log - tracks all content changes for QA
  */
-export const contentAuditLog = mysqlTable("content_audit_log", {
-  id: int("id").autoincrement().primaryKey(),
+export const contentAuditLog = pgTable("content_audit_log", {
+  id: serial("id").primaryKey(),
   entityType: varchar("entityType", { length: 50 }).notNull(), // "book", "blog", "character", etc.
   entityId: int("entityId").notNull(),
-  action: mysqlEnum("action", ["create", "update", "delete", "publish", "unpublish"]).notNull(),
+  action: actionEnum.notNull(),
   fieldChanged: varchar("fieldChanged", { length: 100 }),
   oldValue: text("oldValue"),
   newValue: text("newValue"),
@@ -942,15 +968,15 @@ export type InsertContentAuditLog = typeof contentAuditLog.$inferInsert;
 /**
  * Business Metrics - daily tracking of KDP business KPIs
  */
-export const businessMetrics = mysqlTable("business_metrics", {
-  id: int("id").autoincrement().primaryKey(),
+export const businessMetrics = pgTable("business_metrics", {
+  id: serial("id").primaryKey(),
   date: timestamp("date").notNull(),
   // MailerLite metrics
   totalSubscribers: int("totalSubscribers").default(0),
   newSubscribers: int("newSubscribers").default(0),
   unsubscribes: int("unsubscribes").default(0),
-  emailOpenRate: decimal("emailOpenRate", { precision: 5, scale: 2 }),
-  emailClickRate: decimal("emailClickRate", { precision: 5, scale: 2 }),
+  emailOpenRate: numeric("emailOpenRate", { precision: 5, scale: 2 }),
+  emailClickRate: numeric("emailClickRate", { precision: 5, scale: 2 }),
   // Website metrics
   pageViews: int("pageViews").default(0),
   uniqueVisitors: int("uniqueVisitors").default(0),
@@ -964,7 +990,7 @@ export const businessMetrics = mysqlTable("business_metrics", {
   // Book metrics
   amazonRanking: int("amazonRanking"),
   reviewCount: int("reviewCount"),
-  averageRating: decimal("averageRating", { precision: 3, scale: 2 }),
+  averageRating: numeric("averageRating", { precision: 3, scale: 2 }),
   // KDP-specific
   kdpRoyalties: int("kdpRoyalties"), // in cents
   pagesRead: int("pagesRead"), // Kindle Unlimited
@@ -977,22 +1003,20 @@ export type InsertBusinessMetric = typeof businessMetrics.$inferInsert;
 /**
  * Business Goals - monthly/quarterly goal tracking
  */
-export const businessGoals = mysqlTable("business_goals", {
-  id: int("id").autoincrement().primaryKey(),
+export const businessGoals = pgTable("business_goals", {
+  id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
-  category: mysqlEnum("category", [
-    "subscribers", "revenue", "books", "content", "social", "launches", "other"
-  ]).notNull(),
+  category: categoryEnum.notNull(),
   targetValue: int("targetValue").notNull(),
   currentValue: int("currentValue").default(0).notNull(),
   unit: varchar("unit", { length: 50 }).notNull(), // e.g., "subscribers", "dollars", "posts"
   startDate: timestamp("startDate").notNull(),
   endDate: timestamp("endDate").notNull(),
-  status: mysqlEnum("status", ["active", "completed", "missed", "paused"]).default("active").notNull(),
+  status: statusEnum.default("active").notNull(),
   notes: text("notes"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type BusinessGoal = typeof businessGoals.$inferSelect;
@@ -1001,17 +1025,15 @@ export type InsertBusinessGoal = typeof businessGoals.$inferInsert;
 /**
  * Tool Inventory - catalog of all AppSumo and business tools
  */
-export const toolInventory = mysqlTable("tool_inventory", {
-  id: int("id").autoincrement().primaryKey(),
+export const toolInventory = pgTable("tool_inventory", {
+  id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   url: text("url").notNull(),
-  category: mysqlEnum("category", [
-    "video", "audio", "design", "writing", "marketing", "analytics", "kdp", "social", "email", "other"
-  ]).notNull(),
+  category: categoryEnum.notNull(),
   plan: varchar("plan", { length: 100 }), // e.g., "AppSumo Single", "All Access", "Premium"
   loginEmail: varchar("loginEmail", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 50 }), // "email", "google", "manual"
-  status: mysqlEnum("status", ["active", "needs_login", "expired", "pending"]).default("active").notNull(),
+  status: statusEnum.default("active").notNull(),
   description: text("description"),
   kdpUseCases: text("kdpUseCases"), // JSON array of use cases
   features: text("features"), // JSON array of features
@@ -1020,7 +1042,7 @@ export const toolInventory = mysqlTable("tool_inventory", {
   iconEmoji: varchar("iconEmoji", { length: 10 }),
   displayOrder: int("displayOrder").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type ToolInventoryItem = typeof toolInventory.$inferSelect;
@@ -1029,8 +1051,8 @@ export type InsertToolInventoryItem = typeof toolInventory.$inferInsert;
 /**
  * Daily Briefings - AI-generated executive summaries
  */
-export const dailyBriefings = mysqlTable("daily_briefings", {
-  id: int("id").autoincrement().primaryKey(),
+export const dailyBriefings = pgTable("daily_briefings", {
+  id: serial("id").primaryKey(),
   briefingDate: timestamp("briefingDate").notNull(),
   // Sections
   executiveSummary: text("executiveSummary").notNull(),
@@ -1055,8 +1077,8 @@ export type InsertDailyBriefing = typeof dailyBriefings.$inferInsert;
  * Affiliate click tracking for Amazon Associates and other affiliate programs.
  * Tracks clicks on affiliate links to measure performance by product, article, and source.
  */
-export const affiliateClicks = mysqlTable("affiliate_clicks", {
-  id: int("id").autoincrement().primaryKey(),
+export const affiliateClicks = pgTable("affiliate_clicks", {
+  id: serial("id").primaryKey(),
   /** The product name or identifier that was clicked */
   productName: varchar("productName", { length: 255 }).notNull(),
   /** The Amazon ASIN or product identifier */
@@ -1066,7 +1088,7 @@ export const affiliateClicks = mysqlTable("affiliate_clicks", {
   /** The blog post slug or page where the click originated */
   sourceSlug: varchar("sourceSlug", { length: 255 }).notNull(),
   /** The type of click: 'inline' (text link), 'card' (product card CTA), 'favorites' (favorites page) */
-  clickType: mysqlEnum("clickType", ["inline", "card", "favorites"]).default("inline").notNull(),
+  clickType: clickTypeEnum.default("inline").notNull(),
   /** Anonymous session identifier for deduplication (hashed) */
   sessionHash: varchar("sessionHash", { length: 64 }),
   /** User agent string for device analytics */
@@ -1087,8 +1109,8 @@ export type InsertAffiliateClick = typeof affiliateClicks.$inferInsert;
  * Daily aggregated affiliate metrics for dashboard charts.
  * Pre-computed daily rollups to avoid expensive queries on the raw clicks table.
  */
-export const affiliateMetricsDaily = mysqlTable("affiliate_metrics_daily", {
-  id: int("id").autoincrement().primaryKey(),
+export const affiliateMetricsDaily = pgTable("affiliate_metrics_daily", {
+  id: serial("id").primaryKey(),
   /** The date for this metrics row */
   metricDate: timestamp("metricDate").notNull(),
   /** Total clicks across all products */
@@ -1111,8 +1133,8 @@ export type InsertAffiliateMetricsDaily = typeof affiliateMetricsDaily.$inferIns
 /**
  * Partner author applications for group promo events
  */
-export const partnerApplications = mysqlTable("partner_applications", {
-  id: int("id").autoincrement().primaryKey(),
+export const partnerApplications = pgTable("partner_applications", {
+  id: serial("id").primaryKey(),
   /** Author's full name */
   authorName: varchar("authorName", { length: 255 }).notNull(),
   /** Author's email address */
@@ -1136,11 +1158,11 @@ export const partnerApplications = mysqlTable("partner_applications", {
   /** Social media links (JSON) */
   socialLinks: text("socialLinks"),
   /** Application status */
-  status: mysqlEnum("status", ["pending", "approved", "rejected"]).default("pending").notNull(),
+  status: statusEnum.default("pending").notNull(),
   /** Admin notes */
   adminNotes: text("adminNotes"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type PartnerApplication = typeof partnerApplications.$inferSelect;
