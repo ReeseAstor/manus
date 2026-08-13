@@ -83,7 +83,7 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://www.amazon.com/dp/PLACEHOLDER", // TODO: real ASIN
+      amazon_kindle: "https://swiy.co/05",
     },
     audiobook_available: false,
     isbn: null,
@@ -209,9 +209,9 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://www.amazon.com/dp/PLACEHOLDER", // TODO
-      bookfunnel: "https://BookHip.com/JHRBVXT",
-      audible: null, // TODO: ACX live URL
+      amazon_kindle: "https://swiy.co/05",
+      bookfunnel: "https://swiy.co/05",
+      audible: null,
     },
     audiobook_available: true,
     isbn: null,

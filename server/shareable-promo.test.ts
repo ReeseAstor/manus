@@ -218,7 +218,7 @@ describe("Promo Page - Email Capture", () => {
   });
 
   it("should have correct BookHip redirect URL", () => {
-    const bookHipUrl = "https://BookHip.com/JHRBVXT";
+    const bookHipUrl = "https://swiy.co/05";
     expect(bookHipUrl).toContain("BookHip.com");
     expect(bookHipUrl).toContain("JHRBVXT");
   });

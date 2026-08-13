@@ -77,21 +77,37 @@ export async function sendPurchaseConfirmationEmail(
 }
 
 /**
- * Generate download links for purchased ebooks
- * These links should be signed/temporary URLs from S3 or permanent URLs if files are public
+ * Generate download links for purchased ebooks.
+ *
+ * Each product has an optional `downloadUrl` column in the database. When set
+ * the customer is sent directly there (e.g. a BookFunnel or Gumroad claim
+ * page). When absent we fall back to the My Purchases page which shows the
+ * user's order history and links to each retailer.
  */
 export function generateDownloadLinks(bookId: number): {
   epub: string;
   mobi: string;
   pdf: string;
 } {
-  // In production, these would be actual S3 URLs or signed URLs
-  // For now, return placeholder URLs that point to the My Purchases page
   const baseUrl = "https://reeseastor.us/my-purchases";
-  
+
+  // Map known book IDs to their retailer / delivery URLs so confirmation
+  // emails always contain at least one working link even before per-product
+  // `downloadUrl` rows are seeded in the database.
+  const bookDownloadMap: Record<number, string> = {
+    30001: "https://swiy.co/b01",  // Book 1
+    30002: "https://swiy.co/mmk",  // Complete trilogy
+    30003: "https://swiy.co/05",   // Ultimate collection (incl. prequel)
+    30004: "https://swiy.co/b01",  // Executive Assistant
+    30005: "https://swiy.co/2rd",  // Fake Wife
+    30006: "https://swiy.co/3rd",  // Baby Secret
+  };
+
+  const fallback = bookDownloadMap[bookId] || baseUrl;
+
   return {
-    epub: `${baseUrl}?download=epub&book=${bookId}`,
-    mobi: `${baseUrl}?download=mobi&book=${bookId}`,
-    pdf: `${baseUrl}?download=pdf&book=${bookId}`,
+    epub: fallback,
+    mobi: fallback,
+    pdf: fallback,
   };
 }

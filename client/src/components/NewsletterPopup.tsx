@@ -4,6 +4,7 @@ import { X, Mail, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 
 interface NewsletterPopupProps {
@@ -18,7 +19,7 @@ export function NewsletterPopup({ isOpen, onClose }: NewsletterPopupProps) {
 
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
-      alert("Success! Check your email for your free book download link.");
+      toast.success("Success! Check your email for your free book download link.");
       setEmail("");
       setName("");
       onClose();
@@ -26,14 +27,14 @@ export function NewsletterPopup({ isOpen, onClose }: NewsletterPopupProps) {
       localStorage.setItem("newsletter_subscribed", "true");
     },
     onError: (error) => {
-      alert(error.message || "Failed to subscribe. Please try again.");
+      toast.error(error.message || "Failed to subscribe. Please try again.");
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
-      alert("Please enter your email address.");
+      toast.error("Please enter your email address.");
       return;
     }
     subscribeMutation.mutate({ email, name });

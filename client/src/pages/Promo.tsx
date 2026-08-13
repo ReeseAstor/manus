@@ -87,7 +87,7 @@ export default function Promo() {
       setIsSubmitted(true);
       toast.success("You're in! Check your email for download links.");
       setTimeout(() => {
-        window.open("https://BookHip.com/JHRBVXT", "_blank");
+        window.open("https://swiy.co/05", "_blank");
       }, 2000);
     },
     onError: (error) => {
@@ -95,7 +95,7 @@ export default function Promo() {
         setIsSubmitted(true);
         toast.info("Welcome back! Your download link is on its way.");
         setTimeout(() => {
-          window.open("https://BookHip.com/JHRBVXT", "_blank");
+          window.open("https://swiy.co/05", "_blank");
         }, 2000);
       } else {
         toast.error(error.message || "Something went wrong. Please try again.");

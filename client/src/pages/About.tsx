@@ -508,7 +508,7 @@ export default function About() {
                 variant="outline"
                 className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold px-10 py-7 rounded-full"
               >
-                <a href="https://BookHip.com/JHRBVXT" target="_blank" rel="noopener noreferrer">
+                <a href="https://swiy.co/05" target="_blank" rel="noopener noreferrer">
                   Get Your Free Book
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </a>

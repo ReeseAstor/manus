@@ -97,6 +97,29 @@ export const stripeRouter = router({
       .where(eq(orders.userId, ctx.user.id));
   }),
 
+  // Get user orders with product details and download URLs
+  getMyOrdersWithProducts: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
+    const rows = await db
+      .select({
+        orderId: orders.id,
+        amount: orders.amount,
+        currency: orders.currency,
+        status: orders.status,
+        createdAt: orders.createdAt,
+        customerEmail: orders.customerEmail,
+        productName: products.name,
+        productDescription: products.description,
+        downloadUrl: products.downloadUrl,
+        productId: products.id,
+      })
+      .from(orders)
+      .innerJoin(products, eq(orders.productId, products.id))
+      .where(eq(orders.userId, ctx.user.id));
+    return rows;
+  }),
+
   // Get user subscriptions
   getMySubscriptions: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();

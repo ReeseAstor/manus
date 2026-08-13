@@ -4,7 +4,7 @@
  * Design: Dark luxury gold Manhattan aesthetic matching welcome series
  */
 
-const SITE_URL = "https://reeseastor.manus.space";
+const SITE_URL = "https://reeseastor.com";
 
 function wrapInTemplate(options: {
   subject: string;

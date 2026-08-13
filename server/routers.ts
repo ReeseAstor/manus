@@ -140,7 +140,7 @@ export const appRouter = router({
         // screen) and rely on a MailerLite automation for the welcome email.
         // We still attempt the welcome email for environments where a custom
         // transactional sender is wired up, but never fail the signup on it.
-        const bookDownloadUrl = "https://BookHip.com/JHRBVXT";
+        const bookDownloadUrl = "https://swiy.co/05";
 
         try {
           const welcomeHtml = generateWelcomeEmail({

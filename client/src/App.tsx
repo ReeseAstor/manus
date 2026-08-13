@@ -69,6 +69,7 @@ const NewsletterArchive = lazy(() => import("./pages/NewsletterArchive"));
 const NewsletterDetail = lazy(() => import("./pages/NewsletterDetail"));
 const AINewsletterSignup = lazy(() => import("./pages/AINewsletterSignup"));
 const Favorites = lazy(() => import("./pages/Favorites"));
+const MyPurchases = lazy(() => import("./pages/MyPurchases"));
 const Promo = lazy(() => import("./pages/Promo"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -109,6 +110,7 @@ function Router() {
         <Route path={"/promo"} component={Promo} />
         <Route path={"/why-buy-direct"} component={WhyBuyDirectPage} />
         <Route path={"/purchase-success"} component={PurchaseSuccess} />
+        <Route path={"/my-purchases"} component={MyPurchases} />
         <Route path={"/profile"} component={Profile} />
         <Route path={"/vip-club"} component={VipClub} />
         <Route path={"/vip-club/welcome"} component={VipWelcome} />

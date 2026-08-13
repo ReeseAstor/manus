@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Upload, X, Image as ImageIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 interface ImageUploadProps {
   onImageUploaded: (url: string) => void;
@@ -19,17 +20,17 @@ export function ImageUpload({ onImageUploaded, className = "" }: ImageUploadProp
       onImageUploaded(data.url);
       setPreview(null);
       setIsUploading(false);
-      alert("Image uploaded successfully!");
+      toast.success("Image uploaded successfully!");
     },
     onError: (error) => {
       setIsUploading(false);
-      alert(error.message || "Failed to upload image");
+      toast.error(error.message || "Failed to upload image");
     },
   });
 
   const handleFileSelect = async (file: File) => {
     if (!file.type.startsWith("image/")) {
-      alert("Please select an image file");
+      toast.error("Please select an image file");
       return;
     }
 

@@ -251,7 +251,7 @@ export async function generateMusic(input: MusicGenerateInput): Promise<SunoTask
     customMode: input.customMode ?? false,
     instrumental: input.instrumental ?? false,
     model: input.model || "V4_5",
-    callBackUrl: "https://example.com/kie-suno-callback",
+    callBackUrl: "https://reeseastor.com/api/kie/suno-callback",
   };
   if (input.style) payload.style = input.style;
   if (input.title) payload.title = input.title;

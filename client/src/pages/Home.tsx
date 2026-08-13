@@ -217,6 +217,15 @@ function FreeBookButton({
   );
 }
 
+// Verified affiliate URLs (canonical source: client/src/pages/Books.tsx)
+const MMK_AMAZON = {
+  executiveAssistant: "https://swiy.co/b01",
+  fakeWife: "https://swiy.co/2rd",
+  babySecret: "https://swiy.co/3rd",
+  forbiddenNanny: "https://swiy.co/4rd",
+};
+const FREE_BOOK_URL = "https://swiy.co/05";
+
 export default function Home() {
   const reduce = useReducedMotion();
   const [showStickyCta, setShowStickyCta] = useState(false);
