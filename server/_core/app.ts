@@ -14,6 +14,9 @@ import twilioVoiceWebhookRouter, {
 import { authCallback } from "../api.auth.callback";
 import { getDb } from "../db";
 import { blogPosts } from "../../drizzle/schema";
+import { sdk } from "./sdk";
+import { geminiChatStream, type GeminiMessage } from "../kie-service";
+import { checkRateLimit, getClientKey, trackAiUsage } from "../ai-usage";
 
 /**
  * Build the configured Express app. Does NOT call listen — that's the caller's
@@ -163,6 +166,82 @@ Sitemap: ${baseUrl}/sitemap.xml
       createContext,
     }),
   );
+
+  // AI Workflow Tool — streaming responses (admin only)
+  // Streams Gemini output as plain text chunks; the client renders incrementally.
+  app.post("/api/ai/workflow-stream", async (req, res) => {
+    const user = await sdk.authenticateRequest(req).catch(() => null);
+    if (!user || user.role !== "admin") {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const { workflowId, systemPrompt, userPrompt } = (req.body ?? {}) as {
+      workflowId?: string;
+      systemPrompt?: string;
+      userPrompt?: string;
+    };
+    if (!workflowId || typeof systemPrompt !== "string" || systemPrompt.length < 1 ||
+        typeof userPrompt !== "string" || userPrompt.length < 1) {
+      return res.status(400).json({ error: "workflowId, systemPrompt, and userPrompt are required" });
+    }
+
+    const clientKey = getClientKey(req);
+    if (!checkRateLimit(clientKey, "workflow")) {
+      trackAiUsage({
+        feature: "workflow",
+        model: "gemini-2.5-flash",
+        inputChars: systemPrompt.length + userPrompt.length,
+        outputChars: 0,
+        status: "rate-limited",
+        key: clientKey,
+      });
+      return res.status(429).json({ error: "Too many workflow requests. Please wait and try again." });
+    }
+
+    res.writeHead(200, {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache, no-transform",
+      "X-Accel-Buffering": "no",
+    });
+
+    const messages: GeminiMessage[] = [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userPrompt },
+    ];
+
+    let fullOutput = "";
+    try {
+      for await (const chunk of geminiChatStream({
+        model: "gemini-2.5-flash",
+        messages,
+        temperature: 0.4,
+        maxTokens: 8000,
+      })) {
+        fullOutput += chunk;
+        res.write(chunk);
+      }
+      trackAiUsage({
+        feature: "workflow",
+        model: "gemini-2.5-flash",
+        inputChars: systemPrompt.length + userPrompt.length,
+        outputChars: fullOutput.length,
+        key: clientKey,
+      });
+      res.end();
+    } catch (err: any) {
+      console.error(`[Workflow Stream] Error running ${workflowId}:`, err);
+      trackAiUsage({
+        feature: "workflow",
+        model: "gemini-2.5-flash",
+        inputChars: systemPrompt.length + userPrompt.length,
+        outputChars: fullOutput.length,
+        status: "error",
+        key: clientKey,
+      });
+      res.write(`\n\n[Error] ${err.message || "Failed to run workflow"}`);
+      res.end();
+    }
+  });
 
   return app;
 }

@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from "react";
 import { trpc } from "../lib/trpc";
 import { Link } from "wouter";
 
-type SequenceType = "post-purchase" | "win-back";
+type SequenceType = "post-purchase" | "win-back" | "launch" | "series-upsell";
 
 const sequenceInfo: Record<SequenceType, { title: string; description: string; icon: string }> = {
   "post-purchase": {
@@ -14,6 +14,16 @@ const sequenceInfo: Record<SequenceType, { title: string; description: string; i
     title: "Re-Engagement Win-Back",
     description: "3 emails triggered at 60 days inactive — re-engages or gracefully removes inactive subscribers.",
     icon: "💌",
+  },
+  "launch": {
+    title: "New Release Launch",
+    description: "3 emails triggered on release day — announces the new Hudson Dynasty book, shows early reader social proof, and closes the release week with a next-book tease.",
+    icon: "🚀",
+  },
+  "series-upsell": {
+    title: "Series Completion / Upsell",
+    description: "3 emails triggered when a reader finishes a book — converts the binge momentum to the next title, then to the complete collection + Reader's Club.",
+    icon: "📚",
   },
 };
 

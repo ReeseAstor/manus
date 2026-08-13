@@ -29,6 +29,7 @@ import { createNewsletter } from "../db";
 import { sendEmail } from "../email-service";
 import { aiStudioConversations } from "../../drizzle/schema";
 import { eq, desc } from "drizzle-orm";
+import { checkRateLimit, getClientKey, trackAiUsage } from "../ai-usage";
 
 function requireAdmin(role: string | undefined) {
   if (role !== "admin") {
@@ -93,6 +94,21 @@ export const kieRouter = router({
     .mutation(async ({ ctx, input }) => {
       requireAdmin(ctx.user.role);
       try {
+        const clientKey = getClientKey(ctx.req);
+        if (!checkRateLimit(clientKey, "image")) {
+          trackAiUsage({
+            feature: "image",
+            model: input.model,
+            inputChars: input.prompt.length,
+            outputChars: 0,
+            status: "rate-limited",
+            key: clientKey,
+          });
+          throw new TRPCError({
+            code: "TOO_MANY_REQUESTS",
+            message: "Too many image generation requests. Please wait and try again.",
+          });
+        }
         const genInput = {
           prompt: input.prompt,
           aspectRatio: input.aspectRatio as any,
@@ -103,8 +119,16 @@ export const kieRouter = router({
         const result = input.model === "nano-banana-2"
           ? await generateImageV2({ ...genInput, webSearch: input.webSearch })
           : await generateImage(genInput);
+        trackAiUsage({
+          feature: "image",
+          model: input.model,
+          inputChars: input.prompt.length,
+          outputChars: 0,
+          key: clientKey,
+        });
         return result;
       } catch (err: any) {
+        if (err.code === "TOO_MANY_REQUESTS") throw err;
         throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: err.message });
       }
     }),
@@ -236,14 +260,38 @@ export const kieRouter = router({
           }
         }
         
+        const clientKey = getClientKey(ctx.req);
+        if (!checkRateLimit(clientKey, "chat")) {
+          trackAiUsage({
+            feature: "chat",
+            model: input.model,
+            inputChars: messages.reduce((n, m) => n + m.content.length, 0),
+            outputChars: 0,
+            status: "rate-limited",
+            key: clientKey,
+          });
+          throw new TRPCError({
+            code: "TOO_MANY_REQUESTS",
+            message: "Too many AI requests. Please wait a moment and try again.",
+          });
+        }
+
         const content = await geminiChat({
           model: input.model as any,
           messages,
           temperature: input.temperature,
           maxTokens: input.maxTokens,
         });
+        trackAiUsage({
+          feature: "chat",
+          model: input.model,
+          inputChars: messages.reduce((n, m) => n + m.content.length, 0),
+          outputChars: content.length,
+          key: clientKey,
+        });
         return { content };
       } catch (err: any) {
+        if (err.code === "TOO_MANY_REQUESTS") throw err;
         throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: err.message });
       }
     }),

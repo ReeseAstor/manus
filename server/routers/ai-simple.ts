@@ -2,6 +2,8 @@ import { z } from 'zod';
 import { publicProcedure, router } from '../_core/trpc';
 import { generateText } from '../_core/gemini';
 import { generateImage } from '../_core/imageGeneration';
+import { checkRateLimit, getClientKey, trackAiUsage } from '../ai-usage';
+import { TRPCError } from '@trpc/server';
 
 const CHATBOT_SYSTEM_INSTRUCTION = `You are a helpful assistant for Reese Astor's author website. You help readers learn about her Manhattan Money Kings romance series.
 
@@ -67,14 +69,45 @@ export const aiRouter = router({
         message: z.string().min(1).max(1000),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { message } = input;
+      const clientKey = getClientKey(ctx.req);
+
+      if (!checkRateLimit(clientKey, "chat")) {
+        trackAiUsage({
+          feature: "chat",
+          model: "gemini-1.5-flash",
+          inputChars: message.length,
+          outputChars: 0,
+          status: "rate-limited",
+          key: clientKey,
+        });
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "You're sending messages too quickly. Please wait a moment and try again.",
+        });
+      }
 
       try {
         const response = await generateText(message, CHATBOT_SYSTEM_INSTRUCTION);
+        trackAiUsage({
+          feature: "chat",
+          model: "gemini-1.5-flash",
+          inputChars: message.length + CHATBOT_SYSTEM_INSTRUCTION.length,
+          outputChars: response.length,
+          key: clientKey,
+        });
         return { response };
       } catch (error) {
         console.error('[AI Chat] Error:', error);
+        trackAiUsage({
+          feature: "chat",
+          model: "gemini-1.5-flash",
+          inputChars: message.length,
+          outputChars: 0,
+          status: "error",
+          key: clientKey,
+        });
         throw new Error('Failed to generate response. Please try again.');
       }
     }),

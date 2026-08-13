@@ -102,19 +102,54 @@ export default function WritingStudio() {
 
     try {
       const userPrompt = selectedWorkflow.userPromptTemplate.replace("{{INPUT}}", inputText);
-
-      const result = await runWorkflow.mutateAsync({
+      const payload = {
         workflowId: selectedWorkflow.id,
         systemPrompt: selectedWorkflow.systemPrompt,
         userPrompt,
-      });
+      };
 
-      setOutputText(result.output);
+      let output: string;
+      let streamed = false;
+
+      try {
+        const res = await fetch("/api/ai/workflow-stream", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok || !res.body) throw new Error(`stream failed (${res.status})`);
+        streamed = true;
+
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let accumulated = "";
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          accumulated += decoder.decode(value, { stream: true });
+          setOutputText(accumulated);
+        }
+        const trailing = decoder.decode();
+        if (trailing) {
+          accumulated += trailing;
+          setOutputText(accumulated);
+        }
+        output = accumulated;
+        if (output.includes("[Error]")) {
+          throw new Error(output.split("[Error]")[1]?.trim() || "Stream failed");
+        }
+      } catch {
+        if (streamed) throw new Error("Stream interrupted. Please try again.");
+        const result = await runWorkflow.mutateAsync(payload);
+        output = result.output;
+      }
+
+      setOutputText(output);
       setHistory(prev => [{
         workflow: selectedWorkflow.title,
         input: inputText.slice(0, 200) + (inputText.length > 200 ? "..." : ""),
-        output: result.output.slice(0, 300) + (result.output.length > 300 ? "..." : ""),
-        timestamp: result.timestamp,
+        output: output.slice(0, 300) + (output.length > 300 ? "..." : ""),
+        timestamp: new Date().toISOString(),
       }, ...prev].slice(0, 20));
 
       toast.success(`${selectedWorkflow.shortTitle} workflow complete`);

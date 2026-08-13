@@ -1,0 +1,144 @@
+import { useState, useEffect } from "react";
+import { trpc } from "../lib/trpc";
+import { Link } from "wouter";
+
+/**
+ * Email-exclusive landing page — the "Claim Your Bonus Chapter" destination
+ * from the win-back sequence. Newsletter-gated: subscribing unlocks the
+ * bonus chapter teaser + Reader's Club link.
+ */
+export default function WelcomeBack() {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const subscribeMutation = trpc.newsletter.subscribe.useMutation({
+    onSuccess: () => setSubmitted(true),
+    onError: (e) => setError(e.message || "Something went wrong. Please try again."),
+  });
+
+  useEffect(() => {
+    document.title = "Welcome Back — Your Bonus Chapter Awaits | Reese Astor";
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    if (!email.trim()) {
+      setError("Please enter your email address.");
+      return;
+    }
+    subscribeMutation.mutate({ email: email.trim() });
+  };
+
+  return (
+    <div style={{ minHeight: "100vh", backgroundColor: "#0a0e27", color: "#e5e5e5" }}>
+      <div style={{
+        height: 4,
+        background: "linear-gradient(90deg, #d4af37 0%, #f5d76e 50%, #d4af37 100%)",
+      }} />
+      <div style={{ maxWidth: 680, margin: "0 auto", padding: "64px 24px", textAlign: "center" }}>
+        <p style={{ margin: "0 0 8px", color: "#d4af37", fontSize: 11, letterSpacing: 3, textTransform: "uppercase", fontFamily: "Arial, sans-serif" }}>
+          USA Today Bestselling Author
+        </p>
+        <h1 style={{ margin: "0 0 8px", color: "#d4af37", fontSize: 32, fontWeight: "bold", letterSpacing: 2, fontFamily: "Georgia, serif" }}>
+          REESE ASTOR
+        </h1>
+        <div style={{ width: 56, height: 1, margin: "24px auto", background: "rgba(212, 175, 55, 0.4)" }} />
+
+        {!submitted ? (
+          <>
+            <h2 style={{ margin: "0 0 12px", color: "#f5d76e", fontSize: 28, fontFamily: "Georgia, serif" }}>
+              Welcome back. Your bonus chapter is waiting.
+            </h2>
+            <p style={{ margin: "0 0 8px", color: "#c8c8c8", fontSize: 16, lineHeight: 1.8 }}>
+              I wrote a brand-new bonus chapter that takes place after the events of the
+              Manhattan Money Kings trilogy. It's never been published anywhere — and it's yours,
+              just for coming back.
+            </p>
+            <p style={{ margin: "0 0 32px", color: "rgba(200,200,200,0.6)", fontSize: 14, lineHeight: 1.7 }}>
+              Confirm your email below and I'll take you straight to it.
+            </p>
+
+            <form onSubmit={handleSubmit} style={{ maxWidth: 440, margin: "0 auto" }}>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email address"
+                style={{
+                  width: "100%",
+                  padding: "14px 18px",
+                  marginBottom: 12,
+                  backgroundColor: "#111633",
+                  border: "1px solid rgba(212, 175, 55, 0.25)",
+                  borderRadius: 8,
+                  color: "#e5e5e5",
+                  fontSize: 15,
+                  fontFamily: "Arial, sans-serif",
+                  boxSizing: "border-box",
+                }}
+              />
+              {error && (
+                <p style={{ margin: "0 0 12px", color: "#e74c3c", fontSize: 13, fontFamily: "Arial, sans-serif" }}>
+                  {error}
+                </p>
+              )}
+              <button
+                type="submit"
+                disabled={subscribeMutation.isPending}
+                style={{
+                  width: "100%",
+                  padding: "14px 18px",
+                  backgroundColor: "#d4af37",
+                  border: "none",
+                  borderRadius: 8,
+                  color: "#0a0e27",
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  fontFamily: "Arial, sans-serif",
+                  cursor: "pointer",
+                }}
+              >
+                {subscribeMutation.isPending ? "Confirming…" : "Confirm & Unlock My Bonus Chapter"}
+              </button>
+              <p style={{ margin: "12px 0 0", color: "rgba(200,200,200,0.4)", fontSize: 11, fontFamily: "Arial, sans-serif" }}>
+                No spam. Unsubscribe anytime.
+              </p>
+            </form>
+          </>
+        ) : (
+          <>
+            <h2 style={{ margin: "0 0 12px", color: "#f5d76e", fontSize: 28, fontFamily: "Georgia, serif" }}>
+              You're in. Here's your gift.
+            </h2>
+            <p style={{ margin: "0 0 24px", color: "#c8c8c8", fontSize: 16, lineHeight: 1.8 }}>
+              The bonus chapter (plus every other exclusive scene, deleted chapter, and
+              behind-the-scenes look) lives in the Reader's Club — your private corner of the penthouse.
+            </p>
+            <Link href="/reader-club">
+              <span style={{
+                display: "inline-block",
+                padding: "14px 40px",
+                backgroundColor: "#d4af37",
+                borderRadius: 8,
+                color: "#0a0e27",
+                fontSize: 15,
+                fontWeight: "bold",
+                fontFamily: "Arial, sans-serif",
+                textDecoration: "none",
+                cursor: "pointer",
+              }}>
+                Enter the Reader's Club
+              </span>
+            </Link>
+            <p style={{ margin: "24px 0 0", color: "rgba(200,200,200,0.6)", fontSize: 14, fontFamily: "Arial, sans-serif" }}>
+              Or browse the books on Amazon:{" "}
+              <a href="https://swiy.co/05" style={{ color: "#d4af37" }}>The First Acquisition</a>
+            </p>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}

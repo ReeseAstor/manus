@@ -46,6 +46,10 @@ const AdminAudioGenerator = lazy(() => import("./pages/AdminAudioGenerator"));
 const AdminWebhooks = lazy(() => import("./pages/AdminWebhooks"));
 const AdminTwilio = lazy(() => import("./pages/AdminTwilio"));
 const AdminSmsAnalytics = lazy(() => import("./pages/AdminSmsAnalytics"));
+const AdminAIUsage = lazy(() => import("./pages/AdminAIUsage"));
+const ExclusiveContentManager = lazy(() => import("./pages/ExclusiveContentManager"));
+const WelcomeBack = lazy(() => import("./pages/WelcomeBack"));
+const StaySubscribed = lazy(() => import("./pages/StaySubscribed"));
 const AdminAIStudio = lazy(() => import("./pages/AdminAIStudio"));
 const WritingStudio = lazy(() => import("./pages/WritingStudio"));
 const BlogEditor = lazy(() => import("./pages/BlogEditor"));
@@ -104,6 +108,8 @@ function Router() {
         <Route path={"/press"} component={Press} />
         <Route path={"/reader-club"} component={ReaderClub} />
         <Route path={"/reader-club/:slug"} component={ExclusiveContentDetail} />
+        <Route path={"/welcome-back"} component={WelcomeBack} />
+        <Route path={"/stay-subscribed"} component={StaySubscribed} />
         <Route path={"/free-book"} component={FreeBook} />
         <Route path={"/quiz"} component={CharacterQuiz} />
         <Route path={"/romance-quiz"} component={RomanceTropeQuiz} />
@@ -138,6 +144,8 @@ function Router() {
         <Route path={"/admin/command-center"}><AdminRoute><AdminCommandCenter /></AdminRoute></Route>
         <Route path={"/admin/stripe-analytics"}><AdminRoute><AdminStripeAnalytics /></AdminRoute></Route>
         <Route path={"/admin/email-templates"}><AdminRoute><AdminEmailTemplates /></AdminRoute></Route>
+        <Route path={"/admin/ai-usage"}><AdminRoute><AdminAIUsage /></AdminRoute></Route>
+        <Route path={"/admin/exclusive-content"}><AdminRoute><ExclusiveContentManager /></AdminRoute></Route>
         <Route path={"/admin/affiliate-analytics"}><AdminRoute><AdminAffiliateAnalytics /></AdminRoute></Route>
         <Route path={"/admin/partner-applications"}><AdminRoute><AdminPartnerApplications /></AdminRoute></Route>
         <Route path={"/admin/social-media-kit"}><AdminRoute><AdminSocialMediaKit /></AdminRoute></Route>

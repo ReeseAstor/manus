@@ -303,6 +303,63 @@ export async function geminiChat(input: GeminiChatInput): Promise<string> {
   return content;
 }
 
+/**
+ * Streaming variant of geminiChat (OpenAI-compatible SSE).
+ * Yields text chunks as they arrive from the KIE Gemini endpoint.
+ */
+export async function* geminiChatStream(input: GeminiChatInput): AsyncGenerator<string> {
+  const model = input.model || "gemini-3-flash";
+  const url = GEMINI_URLS[model];
+  if (!url) throw new Error(`Unknown Gemini model: ${model}`);
+
+  const body: any = {
+    model,
+    messages: input.messages,
+    stream: true,
+  };
+  if (input.temperature !== undefined) body.temperature = input.temperature;
+  if (input.maxTokens !== undefined) body.max_tokens = input.maxTokens;
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify(body),
+  });
+
+  if (res.status === 429) throw new Error("KIE Gemini rate limited (429).");
+  if (res.status >= 500) throw new Error(`KIE Gemini server error (${res.status})`);
+  if (!res.body) throw new Error("No stream in Gemini response");
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+
+    // SSE lines: "data: {...}\n\n", final "data: [DONE]"
+    let newlineIndex: number;
+    while ((newlineIndex = buffer.indexOf("\n")) !== -1) {
+      const line = buffer.slice(0, newlineIndex).trim();
+      buffer = buffer.slice(newlineIndex + 1);
+      if (!line.startsWith("data:")) continue;
+      const payload = line.slice(5).trim();
+      if (payload === "[DONE]") continue;
+      try {
+        const json = JSON.parse(payload) as any;
+        const delta = json.choices?.[0]?.delta?.content;
+        if (typeof delta === "string" && delta.length > 0) {
+          yield delta;
+        }
+      } catch {
+        // Malformed chunk — skip and keep streaming.
+      }
+    }
+  }
+}
+
 // ─── Model Constants (for UI dropdowns) ───────────────────────────────────
 
 export const IMAGE_MODELS = [

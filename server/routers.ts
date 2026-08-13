@@ -15,6 +15,7 @@ import { affiliateTrackingRouter } from "./routers/affiliateTracking";
 import { partnerApplicationsRouter } from "./routers/partnerApplications";
 import { switchyRouter } from "./routers/switchy";
 import { workflowRouter } from "./routers/workflow";
+import { aiUsageRouter } from "./routers/ai-usage";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
 import { sendEmail } from "./email-service";
@@ -22,6 +23,8 @@ import { generateWelcomeEmail } from "./email-templates/welcome";
 import { generateEmailTemplate, sanitizeEmailContent } from "./emailTemplate";
 import { postPurchaseSequence, generatePostPurchaseEmail1, generatePostPurchaseEmail2, generatePostPurchaseEmail3 } from "./email-templates/post-purchase";
 import { winBackSequence, generateWinBackEmail1, generateWinBackEmail2, generateWinBackEmail3 } from "./email-templates/win-back";
+import { launchSequence, generateLaunchEmail1, generateLaunchEmail2, generateLaunchEmail3 } from "./email-templates/launch-sequence";
+import { seriesUpsellSequence, generateSeriesUpsellEmail1, generateSeriesUpsellEmail2, generateSeriesUpsellEmail3 } from "./email-templates/series-upsell";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { storagePut } from "./storage";
@@ -88,6 +91,7 @@ export const appRouter = router({
   partnerApplications: partnerApplicationsRouter,
   switchy: switchyRouter,
   workflow: workflowRouter,
+  aiUsage: aiUsageRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
@@ -1031,25 +1035,49 @@ Reply directly to: ${input.email}
   // Email Template Preview Routes (admin only)
   getEmailTemplatePreview: protectedProcedure
     .input(z.object({
-      sequence: z.enum(["post-purchase", "win-back"]),
+      sequence: z.enum(["post-purchase", "win-back", "launch", "series-upsell"]),
       emailIndex: z.number().min(0).max(2),
       buyerName: z.string().optional(),
     }))
     .query(({ input }) => {
       const { sequence, emailIndex, buyerName } = input;
-      const generators = sequence === "post-purchase"
-        ? [generatePostPurchaseEmail1, generatePostPurchaseEmail2, generatePostPurchaseEmail3]
-        : [generateWinBackEmail1, generateWinBackEmail2, generateWinBackEmail3];
-      const sequenceData = sequence === "post-purchase" ? postPurchaseSequence : winBackSequence;
-      const html = generators[emailIndex](buyerName);
-      const meta = sequenceData[emailIndex];
+      const sequenceMap = {
+        "post-purchase": {
+          generators: [generatePostPurchaseEmail1, generatePostPurchaseEmail2, generatePostPurchaseEmail3],
+          data: postPurchaseSequence,
+        },
+        "win-back": {
+          generators: [generateWinBackEmail1, generateWinBackEmail2, generateWinBackEmail3],
+          data: winBackSequence,
+        },
+        "launch": {
+          generators: [generateLaunchEmail1, generateLaunchEmail2, generateLaunchEmail3],
+          data: launchSequence,
+        },
+        "series-upsell": {
+          generators: [generateSeriesUpsellEmail1, generateSeriesUpsellEmail2, generateSeriesUpsellEmail3],
+          data: seriesUpsellSequence,
+        },
+      } as const;
+      const { generators, data } = sequenceMap[sequence];
+      const generator = generators[emailIndex] as (arg: unknown) => string;
+      const html = (sequence === "launch" || sequence === "series-upsell")
+        ? generator({ subscriberName: buyerName })
+        : generator(buyerName);
+      const meta = data[emailIndex];
       return { html, meta };
     }),
 
   getEmailSequenceList: protectedProcedure
-    .input(z.object({ sequence: z.enum(["post-purchase", "win-back"]) }))
+    .input(z.object({ sequence: z.enum(["post-purchase", "win-back", "launch", "series-upsell"]) }))
     .query(({ input }) => {
-      const data = input.sequence === "post-purchase" ? postPurchaseSequence : winBackSequence;
+      const sequenceMap = {
+        "post-purchase": postPurchaseSequence,
+        "win-back": winBackSequence,
+        "launch": launchSequence,
+        "series-upsell": seriesUpsellSequence,
+      } as const;
+      const data = sequenceMap[input.sequence];
       return data.map(({ generate, ...rest }) => rest);
     }),
 });
