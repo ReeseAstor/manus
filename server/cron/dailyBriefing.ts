@@ -123,7 +123,7 @@ export async function runDailyBriefing(): Promise<{ success: boolean; briefingId
       actionItems,
       alerts,
       dataSnapshot,
-    }).$returningId();
+    }).returning();
 
     console.log(`[DailyBriefing] Briefing #${result.id} generated successfully.`);
 

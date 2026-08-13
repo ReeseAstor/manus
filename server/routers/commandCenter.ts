@@ -624,7 +624,7 @@ export const commandCenterRouter = router({
       actionItems,
       alerts,
       dataSnapshot: JSON.stringify(dataSnapshot),
-    }).$returningId();
+    }).returning();
 
     return {
       success: true,

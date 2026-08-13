@@ -11,20 +11,22 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import BooksCatalog from "./pages/BooksCatalog";
 import BookTitle from "./pages/BookTitle";
-import AuditOfTheHeart from "./pages/AuditOfTheHeart";
-import HostileTender from "./pages/HostileTender";
 import FreeBook from "./pages/FreeBook";
-import Permission from "./pages/Permission";
-import Press from "./pages/Press";
 import Shop from "./pages/Shop";
-import PurchaseSuccess from "./pages/PurchaseSuccess";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ReaderClub from "./pages/ReaderClub";
-import ExclusiveContentDetail from "./pages/ExclusiveContentDetail";
-import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import SmsAlerts from "./pages/SmsAlerts";
+
+// ───── Lazy: secondary pages (code-split, load on demand) ─────
+const AuditOfTheHeart = lazy(() => import("./pages/AuditOfTheHeart"));
+const HostileTender = lazy(() => import("./pages/HostileTender"));
+const Permission = lazy(() => import("./pages/Permission"));
+const Press = lazy(() => import("./pages/Press"));
+const PurchaseSuccess = lazy(() => import("./pages/PurchaseSuccess"));
+const ExclusiveContentDetail = lazy(() => import("./pages/ExclusiveContentDetail"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+const SmsAlerts = lazy(() => import("./pages/SmsAlerts"));
 
 // ───── Lazy: admin, editors, and rarely-hit gated routes ─────
 const Admin = lazy(() => import("./pages/Admin"));

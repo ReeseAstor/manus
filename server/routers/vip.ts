@@ -279,7 +279,7 @@ export const vipRouter = router({
 
       const baseSession = {
         mode: "subscription" as const,
-        payment_method_types: ["card"] as const,
+        payment_method_types: ["card"] as Stripe.Checkout.SessionCreateParams["payment_method_types"],
         customer_email: user[0]?.email || undefined,
         line_items: [
           {

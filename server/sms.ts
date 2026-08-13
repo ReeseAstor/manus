@@ -277,7 +277,7 @@ export async function upsertSmsTemplate(template: {
       .where(eq(smsTemplates.slug, template.slug));
     return { ...existing, ...template };
   } else {
-    const [result] = await db.insert(smsTemplates).values(template);
-    return { id: result.insertId, ...template };
+    const [result] = await db.insert(smsTemplates).values(template).returning();
+    return { id: result.id, ...template };
   }
 }

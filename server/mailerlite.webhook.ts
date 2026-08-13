@@ -106,28 +106,28 @@ router.post('/webhook', express.json(), async (req, res) => {
       groupName: payload.data?.group?.name,
       payload: JSON.stringify(payload),
       processed: false,
-    });
+    }).returning();
 
     // Process the event based on type
     switch (payload.type) {
       case 'subscriber.created':
-        await handleSubscriberCreated(payload, webhookEvent.insertId);
+        await handleSubscriberCreated(payload, webhookEvent.id);
         break;
       
       case 'subscriber.updated':
-        await handleSubscriberUpdated(payload, webhookEvent.insertId);
+        await handleSubscriberUpdated(payload, webhookEvent.id);
         break;
       
       case 'subscriber.unsubscribed':
-        await handleSubscriberUnsubscribed(payload, webhookEvent.insertId);
+        await handleSubscriberUnsubscribed(payload, webhookEvent.id);
         break;
       
       case 'subscriber.added_to_group':
-        await handleSubscriberAddedToGroup(payload, webhookEvent.insertId);
+        await handleSubscriberAddedToGroup(payload, webhookEvent.id);
         break;
       
       case 'subscriber.removed_from_group':
-        await handleSubscriberRemovedFromGroup(payload, webhookEvent.insertId);
+        await handleSubscriberRemovedFromGroup(payload, webhookEvent.id);
         break;
       
       default:

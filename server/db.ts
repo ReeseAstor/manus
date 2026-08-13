@@ -1,6 +1,5 @@
 import { eq, desc, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
-import pg from "pg";
 import { InsertUser, users, blogPosts, InsertBlogPost, books, bookReviews, type Book, type InsertBook, type BookReview, type InsertBookReview, newsletters, newsletterSubscribers, type Newsletter, type InsertNewsletter, type NewsletterSubscriber, type InsertNewsletterSubscriber, exclusiveContent, readerClubMembers, contentAccess, type ExclusiveContent, type InsertExclusiveContent, type ReaderClubMember, type InsertReaderClubMember, type ContentAccess, type InsertContentAccess } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -571,8 +570,8 @@ export async function getExclusiveContentByType(type: "bonus_chapter" | "intervi
 export async function createExclusiveContent(content: InsertExclusiveContent): Promise<number> {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
-  const result = await db.insert(exclusiveContent).values(content);
-  return result[0].insertId;
+  const [result] = await db.insert(exclusiveContent).values(content).returning();
+  return result.id;
 }
 
 export async function updateExclusiveContent(id: number, content: Partial<InsertExclusiveContent>): Promise<void> {
@@ -599,8 +598,8 @@ export async function getReaderClubMemberByEmail(email: string): Promise<ReaderC
 export async function createReaderClubMember(member: InsertReaderClubMember): Promise<number> {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
-  const result = await db.insert(readerClubMembers).values(member);
-  return result[0].insertId;
+  const [result] = await db.insert(readerClubMembers).values(member).returning();
+  return result.id;
 }
 
 export async function updateReaderClubMemberAccess(memberId: number): Promise<void> {

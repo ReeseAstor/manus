@@ -341,8 +341,8 @@ export const kieRouter = router({
           model: input.model,
           systemPrompt: input.systemPrompt || null,
           messages: messagesJson,
-        });
-        return { id: Number(result.insertId) };
+        }).returning();
+        return { id: result.id };
       }
     }),
 
