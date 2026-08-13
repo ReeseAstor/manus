@@ -1,4 +1,4 @@
-import { pgEnum, int, pgTable, text, timestamp, varchar, boolean, json, serial, numeric } from "drizzle-orm/pg-core";
+﻿import { pgEnum, integer, pgTable, text, timestamp, varchar, boolean, json, serial, numeric } from "drizzle-orm/pg-core";
 
 
 
@@ -6,9 +6,11 @@ export const roleEnum = pgEnum("role", ["user", "admin"]);
 export const preferredFormatEnum = pgEnum("preferredFormat", ["epub", "mobi", "pdf"]);
 export const purchaseTypeEnum = pgEnum("purchaseType", ["single", "bundle", "subscription"]);
 export const publishedEnum = pgEnum("published", ["draft", "published"]);
-export const statusEnum = pgEnum("status", ["draft", "scheduled", "sent"]);
+export const statusEnum = pgEnum("status", ["draft", "scheduled", "sent", "active", "pending", "queued", "passed", "open"]);
 export const typeEnum = pgEnum("type", ["bonus_chapter", "interview", "behind_scenes"]);
-export const categoryEnum = pgEnum("category", ["romance", "passion", "fantasy", "reunion", "forbidden", "first_time"]);
+export const aiRoleEnum = pgEnum("aiRole", ["user", "assistant"]);
+export const aiContentTypeEnum = pgEnum("aiContentType", ["blog_post", "story_idea", "book_cover", "character_portrait", "social_graphic"]);
+export const categoryEnum = pgEnum("category", ["romance", "passion", "fantasy", "reunion", "forbidden", "first_time", "system"]);
 export const genderEnum = pgEnum("gender", ["male", "female", "neutral"]);
 export const eventTypeEnum = pgEnum("eventType", ["opt_in", "opt_out", "resubscribe"]);
 export const responseStatusEnum = pgEnum("responseStatus", ["success", "failed", "pending"]);
@@ -42,7 +44,7 @@ export const users = pgTable("users", {
   name: text("name"),
   email: varchar("email", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
-  role: roleEnum.default("user").notNull(),
+  role: roleEnum("role").default("user").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
@@ -56,14 +58,14 @@ export type InsertUser = typeof users.$inferInsert;
  */
 export const userPreferences = pgTable("user_preferences", {
   id: serial("id").primaryKey(),
-  userId: int("userId").notNull().references(() => users.id).unique(),
+  userId: integer("userId").notNull().references(() => users.id).unique(),
   // Email preferences
   emailNewReleases: boolean("emailNewReleases").default(true).notNull(),
   emailNewsletter: boolean("emailNewsletter").default(true).notNull(),
   emailPromotions: boolean("emailPromotions").default(true).notNull(),
   emailBlogPosts: boolean("emailBlogPosts").default(false).notNull(),
   // Reading preferences
-  preferredFormat: preferredFormatEnum.default("epub").notNull(),
+  preferredFormat: preferredFormatEnum("preferredFormat").default("epub").notNull(),
   // Profile info
   displayName: varchar("displayName", { length: 100 }),
   bio: text("bio"),
@@ -80,13 +82,13 @@ export type InsertUserPreferences = typeof userPreferences.$inferInsert;
  */
 export const userPurchases = pgTable("user_purchases", {
   id: serial("id").primaryKey(),
-  userId: int("userId").notNull().references(() => users.id),
-  bookId: int("bookId").notNull(),
-  orderId: int("orderId"),
-  purchaseType: purchaseTypeEnum.default("single").notNull(),
-  purchasePrice: int("purchasePrice"), // in cents
+  userId: integer("userId").notNull().references(() => users.id),
+  bookId: integer("bookId").notNull(),
+  orderId: integer("orderId"),
+  purchaseType: purchaseTypeEnum("purchaseType").default("single").notNull(),
+  purchasePrice: integer("purchasePrice"), // in cents
   bonusContentUnlocked: boolean("bonusContentUnlocked").default(false).notNull(),
-  downloadCount: int("downloadCount").default(0).notNull(),
+  downloadCount: integer("downloadCount").default(0).notNull(),
   lastDownloadAt: timestamp("lastDownloadAt"),
   purchasedAt: timestamp("purchasedAt").defaultNow().notNull(),
 });
@@ -105,8 +107,8 @@ export const blogPosts = pgTable("blog_posts", {
   content: text("content").notNull(),
   category: varchar("category", { length: 100 }).notNull(),
   readTime: varchar("readTime", { length: 50 }).notNull(),
-  published: publishedEnum.default("draft").notNull(),
-  authorId: int("authorId").notNull().references(() => users.id),
+  published: publishedEnum("published").default("draft").notNull(),
+  authorId: integer("authorId").notNull().references(() => users.id),
   featuredImage: text("featuredImage"), // URL to featured hero image for blog cards
   audioUrl: text("audioUrl"), // URL to generated audio narration
   scheduledPublishAt: timestamp("scheduledPublishAt"), // When to auto-publish this draft
@@ -128,15 +130,15 @@ export const books = pgTable("books", {
   title: varchar("title", { length: 255 }).notNull(),
   slug: varchar("slug", { length: 255 }).notNull().unique(),
   series: varchar("series", { length: 255 }),
-  seriesOrder: int("seriesOrder"),
+  seriesOrder: integer("seriesOrder"),
   coverImage: text("coverImage").notNull(),
   description: text("description").notNull(),
   sampleChapter: text("sampleChapter"),
-  rating: int("rating").default(5), // 1-5 stars
-  reviewCount: int("reviewCount").default(0),
+  rating: integer("rating").default(5), // 1-5 stars
+  reviewCount: integer("reviewCount").default(0),
   tropes: text("tropes"), // JSON array of tropes
-  heatLevel: int("heatLevel").default(3), // 1-5 heat level
-  pageCount: int("pageCount"),
+  heatLevel: integer("heatLevel").default(3), // 1-5 heat level
+  pageCount: integer("pageCount"),
   publishDate: varchar("publishDate", { length: 100 }),
   amazonUrl: text("amazonUrl"),
   appleUrl: text("appleUrl"),
@@ -144,14 +146,14 @@ export const books = pgTable("books", {
   barnesNobleUrl: text("barnesNobleUrl"),
   googlePlayUrl: text("googlePlayUrl"),
   // Pricing fields for direct sales
-  retailPrice: int("retailPrice").default(499), // Price in cents (e.g., 499 = $4.99)
-  directPrice: int("directPrice").default(399), // Direct sales price in cents
-  memberPrice: int("memberPrice").default(299), // Reader's Club member price in cents
+  retailPrice: integer("retailPrice").default(499), // Price in cents (e.g., 499 = $4.99)
+  directPrice: integer("directPrice").default(399), // Direct sales price in cents
+  memberPrice: integer("memberPrice").default(299), // Reader's Club member price in cents
   directSaleUrl: text("directSaleUrl"), // URL for direct purchase
   audioSampleUrl: text("audioSampleUrl"), // URL to audio sample narration
   trailerVideoUrl: text("trailerVideoUrl"), // URL to animated book trailer video
   featured: boolean("featured").default(false),
-  displayOrder: int("displayOrder").default(0),
+  displayOrder: integer("displayOrder").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
@@ -164,10 +166,10 @@ export type InsertBook = typeof books.$inferInsert;
  */
 export const bookReviews = pgTable("book_reviews", {
   id: serial("id").primaryKey(),
-  bookId: int("bookId").notNull().references(() => books.id),
+  bookId: integer("bookId").notNull().references(() => books.id),
   reviewerName: varchar("reviewerName", { length: 255 }).notNull(),
   reviewerPhoto: text("reviewerPhoto"),
-  rating: int("rating").notNull(), // 1-5 stars
+  rating: integer("rating").notNull(), // 1-5 stars
   review: text("review").notNull(),
   source: varchar("source", { length: 100 }), // e.g., "Amazon", "Goodreads"
   featured: boolean("featured").default(false),
@@ -186,13 +188,13 @@ export const newsletters = pgTable("newsletters", {
   subject: varchar("subject", { length: 255 }).notNull(),
   preheader: varchar("preheader", { length: 255 }),
   content: text("content").notNull(), // HTML content
-  status: statusEnum.default("draft").notNull(),
+  status: statusEnum("status").default("draft").notNull(),
   scheduledAt: timestamp("scheduledAt"),
   sentAt: timestamp("sentAt"),
-  recipientCount: int("recipientCount").default(0),
-  openCount: int("openCount").default(0),
-  clickCount: int("clickCount").default(0),
-  createdBy: int("createdBy").notNull().references(() => users.id),
+  recipientCount: integer("recipientCount").default(0),
+  openCount: integer("openCount").default(0),
+  clickCount: integer("clickCount").default(0),
+  createdBy: integer("createdBy").notNull().references(() => users.id),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
@@ -207,14 +209,14 @@ export const exclusiveContent = pgTable("exclusive_content", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   slug: varchar("slug", { length: 255 }).notNull().unique(),
-  type: typeEnum.notNull(),
+  type: typeEnum("type").notNull(),
   category: varchar("category", { length: 100 }),
   description: text("description"),
   content: text("content").notNull(),
   coverImage: text("coverImage"),
-  bookId: int("bookId").references(() => books.id),
+  bookId: integer("bookId").references(() => books.id),
   featured: boolean("featured").default(false),
-  displayOrder: int("displayOrder").default(0),
+  displayOrder: integer("displayOrder").default(0),
   publishDate: timestamp("publishDate").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
@@ -228,7 +230,7 @@ export type InsertExclusiveContent = typeof exclusiveContent.$inferInsert;
  */
 export const readerClubMembers = pgTable("reader_club_members", {
   id: serial("id").primaryKey(),
-  userId: int("userId").references(() => users.id),
+  userId: integer("userId").references(() => users.id),
   email: varchar("email", { length: 320 }).notNull().unique(),
   name: varchar("name", { length: 255 }),
   joinedAt: timestamp("joinedAt").defaultNow().notNull(),
@@ -244,10 +246,10 @@ export type InsertReaderClubMember = typeof readerClubMembers.$inferInsert;
  */
 export const contentAccess = pgTable("content_access", {
   id: serial("id").primaryKey(),
-  memberId: int("memberId").notNull().references(() => readerClubMembers.id),
-  contentId: int("contentId").notNull().references(() => exclusiveContent.id),
+  memberId: integer("memberId").notNull().references(() => readerClubMembers.id),
+  contentId: integer("contentId").notNull().references(() => exclusiveContent.id),
   accessedAt: timestamp("accessedAt").defaultNow().notNull(),
-  viewCount: int("viewCount").default(1),
+  viewCount: integer("viewCount").default(1),
 });
 
 export type ContentAccess = typeof contentAccess.$inferSelect;
@@ -260,7 +262,7 @@ export const newsletterSubscribers = pgTable("newsletter_subscribers", {
   id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   name: varchar("name", { length: 255 }),
-  status: statusEnum.default("active").notNull(),
+  status: statusEnum("status").default("active").notNull(),
   source: varchar("source", { length: 100 }), // e.g., "website", "free_book", "quiz"
   mailerLiteId: varchar("mailerLiteId", { length: 100 }), // MailerLite subscriber ID
   subscribedAt: timestamp("subscribedAt").defaultNow().notNull(),
@@ -273,9 +275,9 @@ export type InsertNewsletterSubscriber = typeof newsletterSubscribers.$inferInse
  * AI Chat Messages - stores conversation history
  */
 export const aiChatMessages = pgTable('ai_chat_messages', {
-  id: int('id').autoincrement().primaryKey(),
+  id: serial('id').primaryKey(),
   sessionId: varchar('session_id', { length: 255 }).notNull(),
-  role: mysqlEnum('role', ['user', 'assistant']).notNull(),
+  role: aiRoleEnum("role").notNull(),
   content: text('content').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
@@ -287,7 +289,7 @@ export type InsertAiChatMessage = typeof aiChatMessages.$inferInsert;
  * Character Quiz Results - stores quiz completions
  */
 export const quizResults = pgTable('quiz_results', {
-  id: int('id').autoincrement().primaryKey(),
+  id: serial('id').primaryKey(),
   email: varchar('email', { length: 320 }),
   result: varchar('result', { length: 255 }).notNull(),
   personality: text('personality').notNull(),
@@ -302,15 +304,9 @@ export type InsertQuizResult = typeof quizResults.$inferInsert;
  * AI Generated Content - tracks AI usage
  */
 export const aiGeneratedContent = pgTable('ai_generated_content', {
-  id: int('id').autoincrement().primaryKey(),
-  userId: int('user_id').references(() => users.id),
-  contentType: mysqlEnum('content_type', [
-    'blog_post',
-    'story_idea',
-    'book_cover',
-    'character_portrait',
-    'social_graphic',
-  ]).notNull(),
+  id: serial('id').primaryKey(),
+  userId: integer('user_id').references(() => users.id),
+  contentType: aiContentTypeEnum("content_type").notNull(),
   prompt: text('prompt').notNull(),
   result: text('result').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
@@ -323,8 +319,8 @@ export type InsertAiGeneratedContent = typeof aiGeneratedContent.$inferInsert;
  * AI Studio Conversations - stores admin AI chat history
  */
 export const aiStudioConversations = pgTable('ai_studio_conversations', {
-  id: int('id').autoincrement().primaryKey(),
-  userId: int('user_id').notNull().references(() => users.id),
+  id: serial('id').primaryKey(),
+  userId: integer('user_id').notNull().references(() => users.id),
   title: varchar('title', { length: 255 }).notNull(),
   model: varchar('model', { length: 100 }).notNull(),
   systemPrompt: text('system_prompt'),
@@ -343,9 +339,9 @@ export const products = pgTable("products", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   description: text("description").notNull(),
-  price: int("price").notNull(), // Price in cents
+  price: integer("price").notNull(), // Price in cents
   currency: varchar("currency", { length: 3 }).default("usd").notNull(),
-  type: typeEnum.notNull(),
+  type: typeEnum("type").notNull(),
   stripeProductId: varchar("stripeProductId", { length: 255 }),
   stripePriceId: varchar("stripePriceId", { length: 255 }),
   features: text("features"), // JSON array of features
@@ -363,13 +359,13 @@ export type InsertProduct = typeof products.$inferInsert;
  */
 export const orders = pgTable("orders", {
   id: serial("id").primaryKey(),
-  userId: int("userId").references(() => users.id),
-  productId: int("productId").notNull().references(() => products.id),
+  userId: integer("userId").references(() => users.id),
+  productId: integer("productId").notNull().references(() => products.id),
   stripeSessionId: varchar("stripeSessionId", { length: 255 }),
   stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 255 }),
-  amount: int("amount").notNull(), // Amount in cents
+  amount: integer("amount").notNull(), // Amount in cents
   currency: varchar("currency", { length: 3 }).default("usd").notNull(),
-  status: statusEnum.default("pending").notNull(),
+  status: statusEnum("status").default("pending").notNull(),
   customerEmail: varchar("customerEmail", { length: 320 }),
   customerName: varchar("customerName", { length: 255 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -384,11 +380,11 @@ export type InsertOrder = typeof orders.$inferInsert;
  */
 export const subscriptions = pgTable("subscriptions", {
   id: serial("id").primaryKey(),
-  userId: int("userId").notNull().references(() => users.id),
-  productId: int("productId").notNull().references(() => products.id),
+  userId: integer("userId").notNull().references(() => users.id),
+  productId: integer("productId").notNull().references(() => products.id),
   stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }).notNull(),
   stripeCustomerId: varchar("stripeCustomerId", { length: 255 }).notNull(),
-  status: statusEnum.default("active").notNull(),
+  status: statusEnum("status").default("active").notNull(),
   currentPeriodStart: timestamp("currentPeriodStart").notNull(),
   currentPeriodEnd: timestamp("currentPeriodEnd").notNull(),
   cancelAtPeriodEnd: boolean("cancelAtPeriodEnd").default(false).notNull(),
@@ -405,9 +401,9 @@ export type InsertSubscription = typeof subscriptions.$inferInsert;
  */
 export const browsingHistory = pgTable("browsing_history", {
   id: serial("id").primaryKey(),
-  userId: int("userId").notNull().references(() => users.id),
-  bookId: int("bookId").notNull().references(() => books.id),
-  viewCount: int("viewCount").default(1).notNull(),
+  userId: integer("userId").notNull().references(() => users.id),
+  bookId: integer("bookId").notNull().references(() => books.id),
+  viewCount: integer("viewCount").default(1).notNull(),
   lastViewedAt: timestamp("lastViewedAt").defaultNow().notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
@@ -424,14 +420,14 @@ export const vipTiers = pgTable("vip_tiers", {
   name: varchar("name", { length: 100 }).notNull(), // Bronze, Silver, Gold
   slug: varchar("slug", { length: 100 }).notNull().unique(),
   description: text("description").notNull(),
-  price: int("price").notNull(), // Monthly price in cents
+  price: integer("price").notNull(), // Monthly price in cents
   features: text("features").notNull(), // JSON array of features
   stripePriceId: varchar("stripePriceId", { length: 255 }),
   stripeProductId: varchar("stripeProductId", { length: 255 }),
-  storiesPerMonth: int("storiesPerMonth").default(0), // Number of new stories per month
+  storiesPerMonth: integer("storiesPerMonth").default(0), // Number of new stories per month
   customStoriesAllowed: boolean("customStoriesAllowed").default(false),
   personalizedMessages: boolean("personalizedMessages").default(false),
-  displayOrder: int("displayOrder").default(0),
+  displayOrder: integer("displayOrder").default(0),
   active: boolean("active").default(true).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
@@ -445,15 +441,15 @@ export type InsertVipTier = typeof vipTiers.$inferInsert;
  */
 export const vipMembers = pgTable("vip_members", {
   id: serial("id").primaryKey(),
-  userId: int("userId").notNull().references(() => users.id).unique(),
-  tierId: int("tierId").notNull().references(() => vipTiers.id),
+  userId: integer("userId").notNull().references(() => users.id).unique(),
+  tierId: integer("tierId").notNull().references(() => vipTiers.id),
   stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }),
   stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
-  status: statusEnum.default("active").notNull(),
+  status: statusEnum("status").default("active").notNull(),
   currentPeriodStart: timestamp("currentPeriodStart").notNull(),
   currentPeriodEnd: timestamp("currentPeriodEnd").notNull(),
   cancelAtPeriodEnd: boolean("cancelAtPeriodEnd").default(false).notNull(),
-  customStoriesUsed: int("customStoriesUsed").default(0), // Track custom story requests this month
+  customStoriesUsed: integer("customStoriesUsed").default(0), // Track custom story requests this month
   joinedAt: timestamp("joinedAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
@@ -473,18 +469,18 @@ export const steamyStories = pgTable("steamy_stories", {
   excerpt: text("excerpt"), // Preview text for non-VIP
   audioUrl: text("audioUrl"), // ElevenLabs generated audio URL (full story)
   previewAudioUrl: text("previewAudioUrl"), // Short preview clip for non-members (10-15 seconds)
-  audioDuration: int("audioDuration"), // Duration in seconds
+  audioDuration: integer("audioDuration"), // Duration in seconds
   coverImage: text("coverImage"),
-  category: categoryEnum.default("romance").notNull(),
-  heatLevel: int("heatLevel").default(4), // 1-5 heat level
+  category: categoryEnum("category").default("romance").notNull(),
+  heatLevel: integer("heatLevel").default(4), // 1-5 heat level
   characters: text("characters"), // JSON array of character names
-  bookId: int("bookId").references(() => books.id), // Optional link to a book
-  minTier: int("minTier").default(1), // Minimum tier required (1=Bronze, 2=Silver, 3=Gold)
+  bookId: integer("bookId").references(() => books.id), // Optional link to a book
+  minTier: integer("minTier").default(1), // Minimum tier required (1=Bronze, 2=Silver, 3=Gold)
   featured: boolean("featured").default(false),
   published: boolean("published").default(false),
   publishedAt: timestamp("publishedAt"),
-  playCount: int("playCount").default(0),
-  likeCount: int("likeCount").default(0),
+  playCount: integer("playCount").default(0),
+  likeCount: integer("likeCount").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
@@ -497,13 +493,13 @@ export type InsertSteamyStory = typeof steamyStories.$inferInsert;
  */
 export const customStoryRequests = pgTable("custom_story_requests", {
   id: serial("id").primaryKey(),
-  userId: int("userId").notNull().references(() => users.id),
+  userId: integer("userId").notNull().references(() => users.id),
   prompt: text("prompt").notNull(), // User's story request/fantasy
   characters: text("characters"), // Preferred characters
   setting: varchar("setting", { length: 255 }), // Story setting
-  heatLevel: int("heatLevel").default(4), // Requested heat level
-  status: statusEnum.default("pending").notNull(),
-  generatedStoryId: int("generatedStoryId").references(() => steamyStories.id),
+  heatLevel: integer("heatLevel").default(4), // Requested heat level
+  status: statusEnum("status").default("pending").notNull(),
+  generatedStoryId: integer("generatedStoryId").references(() => steamyStories.id),
   audioUrl: text("audioUrl"), // Generated audio URL
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   completedAt: timestamp("completedAt"),
@@ -517,8 +513,8 @@ export type InsertCustomStoryRequest = typeof customStoryRequests.$inferInsert;
  */
 export const storyLikes = pgTable("story_likes", {
   id: serial("id").primaryKey(),
-  userId: int("userId").notNull().references(() => users.id),
-  storyId: int("storyId").notNull().references(() => steamyStories.id),
+  userId: integer("userId").notNull().references(() => users.id),
+  storyId: integer("storyId").notNull().references(() => steamyStories.id),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -530,9 +526,9 @@ export type InsertStoryLike = typeof storyLikes.$inferInsert;
  */
 export const storyPlayHistory = pgTable("story_play_history", {
   id: serial("id").primaryKey(),
-  userId: int("userId").notNull().references(() => users.id),
-  storyId: int("storyId").notNull().references(() => steamyStories.id),
-  progress: int("progress").default(0), // Playback progress in seconds
+  userId: integer("userId").notNull().references(() => users.id),
+  storyId: integer("storyId").notNull().references(() => steamyStories.id),
+  progress: integer("progress").default(0), // Playback progress in seconds
   completed: boolean("completed").default(false),
   playedAt: timestamp("playedAt").defaultNow().notNull(),
 });
@@ -546,9 +542,9 @@ export type InsertStoryPlayHistory = typeof storyPlayHistory.$inferInsert;
  */
 export const audioUsage = pgTable("audio_usage", {
   id: serial("id").primaryKey(),
-  userId: int("userId").notNull().references(() => users.id),
-  minutesUsed: int("minutesUsed").notNull(), // Minutes of audio generated
-  characterCount: int("characterCount").notNull(), // Characters processed
+  userId: integer("userId").notNull().references(() => users.id),
+  minutesUsed: integer("minutesUsed").notNull(), // Minutes of audio generated
+  characterCount: integer("characterCount").notNull(), // Characters processed
   voiceId: varchar("voiceId", { length: 100 }).notNull(), // Voice used
   storyId: varchar("storyId", { length: 255 }), // Optional story reference
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -562,13 +558,13 @@ export type InsertAudioUsage = typeof audioUsage.$inferInsert;
  */
 export const generatedAudio = pgTable("generated_audio", {
   id: varchar("id", { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
-  userId: int("userId").notNull().references(() => users.id),
+  userId: integer("userId").notNull().references(() => users.id),
   storyId: varchar("storyId", { length: 255 }), // Optional story reference
   title: varchar("title", { length: 255 }).notNull(),
   audioUrl: text("audioUrl").notNull(),
-  durationSeconds: int("durationSeconds").notNull(),
+  durationSeconds: integer("durationSeconds").notNull(),
   voiceId: varchar("voiceId", { length: 100 }).notNull(),
-  characterCount: int("characterCount").notNull(),
+  characterCount: integer("characterCount").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -580,16 +576,16 @@ export type InsertGeneratedAudio = typeof generatedAudio.$inferInsert;
  */
 export const voicePresets = pgTable("voice_presets", {
   id: serial("id").primaryKey(),
-  userId: int("userId").references(() => users.id), // null = system preset
+  userId: integer("userId").references(() => users.id), // null = system preset
   name: varchar("name", { length: 100 }).notNull(),
   elevenLabsVoiceId: varchar("elevenLabsVoiceId", { length: 100 }).notNull(),
   description: text("description"),
   style: varchar("style", { length: 50 }), // warm, commanding, sensual, etc.
-  gender: genderEnum.notNull(),
+  gender: genderEnum("gender").notNull(),
   isPremium: boolean("isPremium").default(false).notNull(),
-  stability: int("stability").default(50), // 0-100
-  similarityBoost: int("similarityBoost").default(75), // 0-100
-  styleIntensity: int("styleIntensity").default(50), // 0-100
+  stability: integer("stability").default(50), // 0-100
+  similarityBoost: integer("similarityBoost").default(75), // 0-100
+  styleIntensity: integer("styleIntensity").default(50), // 0-100
   isActive: boolean("isActive").default(true).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
@@ -602,10 +598,10 @@ export type InsertVoicePreset = typeof voicePresets.$inferInsert;
  */
 export const characterVoiceAssignments = pgTable("character_voice_assignments", {
   id: serial("id").primaryKey(),
-  userId: int("userId").references(() => users.id), // null = default assignment
+  userId: integer("userId").references(() => users.id), // null = default assignment
   characterName: varchar("characterName", { length: 100 }).notNull(),
   bookTitle: varchar("bookTitle", { length: 255 }),
-  voicePresetId: int("voicePresetId").references(() => voicePresets.id),
+  voicePresetId: integer("voicePresetId").references(() => voicePresets.id),
   elevenLabsVoiceId: varchar("elevenLabsVoiceId", { length: 100 }).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
@@ -644,7 +640,7 @@ export const smsTemplates = pgTable("sms_templates", {
   name: varchar("name", { length: 200 }).notNull(),
   description: text("description"),
   messageTemplate: text("messageTemplate").notNull(),
-  category: categoryEnum.default("system").notNull(),
+  category: categoryEnum("category").default("system").notNull(),
   isActive: boolean("isActive").default(true).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
@@ -658,7 +654,7 @@ export type InsertSmsTemplate = typeof smsTemplates.$inferInsert;
  */
 export const userSmsPreferences = pgTable("user_sms_preferences", {
   id: serial("id").primaryKey(),
-  userId: int("userId").notNull().references(() => users.id).unique(),
+  userId: integer("userId").notNull().references(() => users.id).unique(),
   phoneNumber: varchar("phoneNumber", { length: 20 }),
   phoneVerified: boolean("phoneVerified").default(false).notNull(),
   smsOptIn: boolean("smsOptIn").default(false).notNull(),
@@ -678,12 +674,12 @@ export type InsertUserSmsPreferences = typeof userSmsPreferences.$inferInsert;
  */
 export const smsMessageLog = pgTable("sms_message_log", {
   id: serial("id").primaryKey(),
-  userId: int("userId").references(() => users.id),
-  templateId: int("templateId").references(() => smsTemplates.id),
+  userId: integer("userId").references(() => users.id),
+  templateId: integer("templateId").references(() => smsTemplates.id),
   toPhoneNumber: varchar("toPhoneNumber", { length: 20 }).notNull(),
   messageBody: text("messageBody").notNull(),
   twilioSid: varchar("twilioSid", { length: 64 }),
-  status: statusEnum.default("queued").notNull(),
+  status: statusEnum("status").default("queued").notNull(),
   errorMessage: text("errorMessage"),
   sentAt: timestamp("sentAt").defaultNow().notNull(),
   deliveredAt: timestamp("deliveredAt"),
@@ -699,12 +695,12 @@ export type InsertSmsMessageLog = typeof smsMessageLog.$inferInsert;
 export const smsAnalyticsDaily = pgTable("sms_analytics_daily", {
   id: serial("id").primaryKey(),
   date: timestamp("date").notNull(),
-  totalSent: int("totalSent").default(0).notNull(),
-  totalDelivered: int("totalDelivered").default(0).notNull(),
-  totalFailed: int("totalFailed").default(0).notNull(),
-  totalOptIns: int("totalOptIns").default(0).notNull(),
-  totalOptOuts: int("totalOptOuts").default(0).notNull(),
-  totalResponses: int("totalResponses").default(0).notNull(),
+  totalSent: integer("totalSent").default(0).notNull(),
+  totalDelivered: integer("totalDelivered").default(0).notNull(),
+  totalFailed: integer("totalFailed").default(0).notNull(),
+  totalOptIns: integer("totalOptIns").default(0).notNull(),
+  totalOptOuts: integer("totalOptOuts").default(0).notNull(),
+  totalResponses: integer("totalResponses").default(0).notNull(),
   deliveryRate: numeric("deliveryRate", { precision: 5, scale: 2 }),
   responseRate: numeric("responseRate", { precision: 5, scale: 2 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -720,8 +716,8 @@ export type InsertSmsAnalyticsDaily = typeof smsAnalyticsDaily.$inferInsert;
 export const smsOptEvents = pgTable("sms_opt_events", {
   id: serial("id").primaryKey(),
   phoneNumber: varchar("phoneNumber", { length: 20 }).notNull(),
-  userId: int("userId").references(() => users.id),
-  eventType: eventTypeEnum.notNull(),
+  userId: integer("userId").references(() => users.id),
+  eventType: eventTypeEnum("eventType").notNull(),
   source: varchar("source", { length: 50 }), // e.g., "vip_signup", "sms_reply", "admin", "webhook"
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
@@ -739,7 +735,7 @@ export const smsIncomingMessages = pgTable("sms_incoming_messages", {
   twilioSid: varchar("twilioSid", { length: 64 }),
   keyword: varchar("keyword", { length: 20 }), // STOP, START, HELP, etc.
   processed: boolean("processed").default(false).notNull(),
-  responseStatus: responseStatusEnum.default("pending").notNull(),
+  responseStatus: responseStatusEnum("responseStatus").default("pending").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -753,12 +749,12 @@ export type InsertSmsIncomingMessage = typeof smsIncomingMessages.$inferInsert;
 export const qaChecks = pgTable("qa_checks", {
   id: serial("id").primaryKey(),
   checkDate: timestamp("checkDate").notNull(),
-  checkType: checkTypeEnum.notNull(),
-  status: statusEnum.default("passed").notNull(),
-  itemsChecked: int("itemsChecked").default(0).notNull(),
-  issuesFound: int("issuesFound").default(0).notNull(),
+  checkType: checkTypeEnum("checkType").notNull(),
+  status: statusEnum("status").default("passed").notNull(),
+  itemsChecked: integer("itemsChecked").default(0).notNull(),
+  issuesFound: integer("issuesFound").default(0).notNull(),
   details: text("details"), // JSON with detailed check results
-  autoResolved: int("autoResolved").default(0), // Issues auto-fixed
+  autoResolved: integer("autoResolved").default(0), // Issues auto-fixed
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -770,16 +766,16 @@ export type InsertQaCheck = typeof qaChecks.$inferInsert;
  */
 export const qaIssues = pgTable("qa_issues", {
   id: serial("id").primaryKey(),
-  checkId: int("checkId").references(() => qaChecks.id),
-  issueType: issueTypeEnum.notNull(),
-  severity: severityEnum.default("warning").notNull(),
+  checkId: integer("checkId").references(() => qaChecks.id),
+  issueType: issueTypeEnum("issueType").notNull(),
+  severity: severityEnum("severity").default("warning").notNull(),
   location: varchar("location", { length: 255 }).notNull(), // Page/component where issue was found
   description: text("description").notNull(),
   expectedValue: text("expectedValue"),
   actualValue: text("actualValue"),
-  status: statusEnum.default("open").notNull(),
+  status: statusEnum("status").default("open").notNull(),
   resolvedAt: timestamp("resolvedAt"),
-  resolvedBy: int("resolvedBy").references(() => users.id),
+  resolvedBy: integer("resolvedBy").references(() => users.id),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -793,15 +789,15 @@ export const externalLinks = pgTable("external_links", {
   id: serial("id").primaryKey(),
   url: text("url").notNull(),
   displayText: varchar("displayText", { length: 255 }),
-  linkType: linkTypeEnum.default("other").notNull(),
+  linkType: linkTypeEnum("linkType").default("other").notNull(),
   location: varchar("location", { length: 255 }).notNull(), // Page where link appears
   componentPath: varchar("componentPath", { length: 255 }), // Component file path
   lastChecked: timestamp("lastChecked"),
-  lastStatus: lastStatusEnum.default("unknown").notNull(),
-  httpStatus: int("httpStatus"),
-  responseTime: int("responseTime"), // in milliseconds
-  checkCount: int("checkCount").default(0).notNull(),
-  failCount: int("failCount").default(0).notNull(),
+  lastStatus: lastStatusEnum("lastStatus").default("unknown").notNull(),
+  httpStatus: integer("httpStatus"),
+  responseTime: integer("responseTime"), // in milliseconds
+  checkCount: integer("checkCount").default(0).notNull(),
+  failCount: integer("failCount").default(0).notNull(),
   isActive: boolean("isActive").default(true).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
@@ -815,17 +811,17 @@ export type InsertExternalLink = typeof externalLinks.$inferInsert;
  */
 export const bookCharacters = pgTable("book_characters", {
   id: serial("id").primaryKey(),
-  bookId: int("bookId").notNull().references(() => books.id),
+  bookId: integer("bookId").notNull().references(() => books.id),
   fullName: varchar("fullName", { length: 255 }).notNull(),
   nickname: varchar("nickname", { length: 100 }),
-  role: roleEnum.notNull(),
+  role: roleEnum("role").notNull(),
   description: text("description"),
   physicalDescription: text("physicalDescription"),
   personality: text("personality"),
   backstory: text("backstory"),
   occupation: varchar("occupation", { length: 255 }),
   age: varchar("age", { length: 50 }),
-  displayOrder: int("displayOrder").default(0),
+  displayOrder: integer("displayOrder").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
@@ -838,11 +834,11 @@ export type InsertBookCharacter = typeof bookCharacters.$inferInsert;
  */
 export const characterRelationships = pgTable("character_relationships", {
   id: serial("id").primaryKey(),
-  character1Id: int("character1Id").notNull().references(() => bookCharacters.id),
-  character2Id: int("character2Id").notNull().references(() => bookCharacters.id),
-  relationshipType: relationshipTypeEnum.notNull(),
+  character1Id: integer("character1Id").notNull().references(() => bookCharacters.id),
+  character2Id: integer("character2Id").notNull().references(() => bookCharacters.id),
+  relationshipType: relationshipTypeEnum("relationshipType").notNull(),
   description: text("description"),
-  bookId: int("bookId").references(() => books.id),
+  bookId: integer("bookId").references(() => books.id),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -854,13 +850,13 @@ export type InsertCharacterRelationship = typeof characterRelationships.$inferIn
  */
 export const bookStorylines = pgTable("book_storylines", {
   id: serial("id").primaryKey(),
-  bookId: int("bookId").notNull().references(() => books.id),
+  bookId: integer("bookId").notNull().references(() => books.id),
   title: varchar("title", { length: 255 }).notNull(),
-  storylineType: storylineTypeEnum.notNull(),
+  storylineType: storylineTypeEnum("storylineType").notNull(),
   description: text("description").notNull(),
   keyEvents: text("keyEvents"), // JSON array of key plot points
   resolution: text("resolution"),
-  displayOrder: int("displayOrder").default(0),
+  displayOrder: integer("displayOrder").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
@@ -873,10 +869,10 @@ export type InsertBookStoryline = typeof bookStorylines.$inferInsert;
  */
 export const bookPricingHistory = pgTable("book_pricing_history", {
   id: serial("id").primaryKey(),
-  bookId: int("bookId").notNull().references(() => books.id),
-  platform: platformEnum.notNull(),
+  bookId: integer("bookId").notNull().references(() => books.id),
+  platform: platformEnum("platform").notNull(),
   price: varchar("price", { length: 50 }).notNull(), // e.g., "$2.99"
-  priceInCents: int("priceInCents"),
+  priceInCents: integer("priceInCents"),
   currency: varchar("currency", { length: 3 }).default("USD"),
   verifiedAt: timestamp("verifiedAt").notNull(),
   verificationSource: varchar("verificationSource", { length: 100 }), // "manual", "api", "scrape"
@@ -893,26 +889,26 @@ export type InsertBookPricingHistory = typeof bookPricingHistory.$inferInsert;
 export const dailyReports = pgTable("daily_reports", {
   id: serial("id").primaryKey(),
   reportDate: timestamp("reportDate").notNull(),
-  reportType: reportTypeEnum.default("daily_overview").notNull(),
+  reportType: reportTypeEnum("reportType").default("daily_overview").notNull(),
   // Traffic metrics
-  pageViews: int("pageViews").default(0),
-  uniqueVisitors: int("uniqueVisitors").default(0),
+  pageViews: integer("pageViews").default(0),
+  uniqueVisitors: integer("uniqueVisitors").default(0),
   bounceRate: numeric("bounceRate", { precision: 5, scale: 2 }),
-  avgSessionDuration: int("avgSessionDuration"), // in seconds
+  avgSessionDuration: integer("avgSessionDuration"), // in seconds
   // Content metrics
-  newSubscribers: int("newSubscribers").default(0),
-  unsubscribes: int("unsubscribes").default(0),
-  blogPostViews: int("blogPostViews").default(0),
-  bookPageViews: int("bookPageViews").default(0),
+  newSubscribers: integer("newSubscribers").default(0),
+  unsubscribes: integer("unsubscribes").default(0),
+  blogPostViews: integer("blogPostViews").default(0),
+  bookPageViews: integer("bookPageViews").default(0),
   // QA metrics
-  qaChecksPassed: int("qaChecksPassed").default(0),
-  qaChecksFailed: int("qaChecksFailed").default(0),
-  openIssues: int("openIssues").default(0),
-  resolvedIssues: int("resolvedIssues").default(0),
-  brokenLinksFound: int("brokenLinksFound").default(0),
+  qaChecksPassed: integer("qaChecksPassed").default(0),
+  qaChecksFailed: integer("qaChecksFailed").default(0),
+  openIssues: integer("openIssues").default(0),
+  resolvedIssues: integer("resolvedIssues").default(0),
+  brokenLinksFound: integer("brokenLinksFound").default(0),
   // Revenue metrics
-  totalOrders: int("totalOrders").default(0),
-  totalRevenue: int("totalRevenue").default(0), // in cents
+  totalOrders: integer("totalOrders").default(0),
+  totalRevenue: integer("totalRevenue").default(0), // in cents
   // Summary
   summary: text("summary"), // AI-generated or manual summary
   alerts: text("alerts"), // JSON array of important alerts
@@ -927,15 +923,15 @@ export type InsertDailyReport = typeof dailyReports.$inferInsert;
  */
 export const adminReminders = pgTable("admin_reminders", {
   id: serial("id").primaryKey(),
-  userId: int("userId").references(() => users.id),
+  userId: integer("userId").references(() => users.id),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
-  reminderType: reminderTypeEnum.notNull(),
-  priority: priorityEnum.default("medium").notNull(),
+  reminderType: reminderTypeEnum("reminderType").notNull(),
+  priority: priorityEnum("priority").default("medium").notNull(),
   relatedEntityType: varchar("relatedEntityType", { length: 50 }), // "book", "link", "blog", etc.
-  relatedEntityId: int("relatedEntityId"),
+  relatedEntityId: integer("relatedEntityId"),
   dueDate: timestamp("dueDate"),
-  status: statusEnum.default("pending").notNull(),
+  status: statusEnum("status").default("pending").notNull(),
   snoozedUntil: timestamp("snoozedUntil"),
   completedAt: timestamp("completedAt"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -951,12 +947,12 @@ export type InsertAdminReminder = typeof adminReminders.$inferInsert;
 export const contentAuditLog = pgTable("content_audit_log", {
   id: serial("id").primaryKey(),
   entityType: varchar("entityType", { length: 50 }).notNull(), // "book", "blog", "character", etc.
-  entityId: int("entityId").notNull(),
-  action: actionEnum.notNull(),
+  entityId: integer("entityId").notNull(),
+  action: actionEnum("action").notNull(),
   fieldChanged: varchar("fieldChanged", { length: 100 }),
   oldValue: text("oldValue"),
   newValue: text("newValue"),
-  changedBy: int("changedBy").references(() => users.id),
+  changedBy: integer("changedBy").references(() => users.id),
   changeReason: text("changeReason"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
@@ -972,28 +968,28 @@ export const businessMetrics = pgTable("business_metrics", {
   id: serial("id").primaryKey(),
   date: timestamp("date").notNull(),
   // MailerLite metrics
-  totalSubscribers: int("totalSubscribers").default(0),
-  newSubscribers: int("newSubscribers").default(0),
-  unsubscribes: int("unsubscribes").default(0),
+  totalSubscribers: integer("totalSubscribers").default(0),
+  newSubscribers: integer("newSubscribers").default(0),
+  unsubscribes: integer("unsubscribes").default(0),
   emailOpenRate: numeric("emailOpenRate", { precision: 5, scale: 2 }),
   emailClickRate: numeric("emailClickRate", { precision: 5, scale: 2 }),
   // Website metrics
-  pageViews: int("pageViews").default(0),
-  uniqueVisitors: int("uniqueVisitors").default(0),
+  pageViews: integer("pageViews").default(0),
+  uniqueVisitors: integer("uniqueVisitors").default(0),
   // Revenue metrics
-  dailyRevenue: int("dailyRevenue").default(0), // in cents
-  ordersCount: int("ordersCount").default(0),
+  dailyRevenue: integer("dailyRevenue").default(0), // in cents
+  ordersCount: integer("ordersCount").default(0),
   // Social metrics
-  instagramFollowers: int("instagramFollowers"),
-  tiktokFollowers: int("tiktokFollowers"),
-  goodreadsFollowers: int("goodreadsFollowers"),
+  instagramFollowers: integer("instagramFollowers"),
+  tiktokFollowers: integer("tiktokFollowers"),
+  goodreadsFollowers: integer("goodreadsFollowers"),
   // Book metrics
-  amazonRanking: int("amazonRanking"),
-  reviewCount: int("reviewCount"),
+  amazonRanking: integer("amazonRanking"),
+  reviewCount: integer("reviewCount"),
   averageRating: numeric("averageRating", { precision: 3, scale: 2 }),
   // KDP-specific
-  kdpRoyalties: int("kdpRoyalties"), // in cents
-  pagesRead: int("pagesRead"), // Kindle Unlimited
+  kdpRoyalties: integer("kdpRoyalties"), // in cents
+  pagesRead: integer("pagesRead"), // Kindle Unlimited
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -1007,13 +1003,13 @@ export const businessGoals = pgTable("business_goals", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
-  category: categoryEnum.notNull(),
-  targetValue: int("targetValue").notNull(),
-  currentValue: int("currentValue").default(0).notNull(),
+  category: categoryEnum("category").notNull(),
+  targetValue: integer("targetValue").notNull(),
+  currentValue: integer("currentValue").default(0).notNull(),
   unit: varchar("unit", { length: 50 }).notNull(), // e.g., "subscribers", "dollars", "posts"
   startDate: timestamp("startDate").notNull(),
   endDate: timestamp("endDate").notNull(),
-  status: statusEnum.default("active").notNull(),
+  status: statusEnum("status").default("active").notNull(),
   notes: text("notes"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
@@ -1029,18 +1025,18 @@ export const toolInventory = pgTable("tool_inventory", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   url: text("url").notNull(),
-  category: categoryEnum.notNull(),
+  category: categoryEnum("category").notNull(),
   plan: varchar("plan", { length: 100 }), // e.g., "AppSumo Single", "All Access", "Premium"
   loginEmail: varchar("loginEmail", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 50 }), // "email", "google", "manual"
-  status: statusEnum.default("active").notNull(),
+  status: statusEnum("status").default("active").notNull(),
   description: text("description"),
   kdpUseCases: text("kdpUseCases"), // JSON array of use cases
   features: text("features"), // JSON array of features
   usageLimits: text("usageLimits"), // JSON object with usage/limits info
   lastChecked: timestamp("lastChecked"),
   iconEmoji: varchar("iconEmoji", { length: 10 }),
-  displayOrder: int("displayOrder").default(0),
+  displayOrder: integer("displayOrder").default(0),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
@@ -1088,7 +1084,7 @@ export const affiliateClicks = pgTable("affiliate_clicks", {
   /** The blog post slug or page where the click originated */
   sourceSlug: varchar("sourceSlug", { length: 255 }).notNull(),
   /** The type of click: 'inline' (text link), 'card' (product card CTA), 'favorites' (favorites page) */
-  clickType: clickTypeEnum.default("inline").notNull(),
+  clickType: clickTypeEnum("clickType").default("inline").notNull(),
   /** Anonymous session identifier for deduplication (hashed) */
   sessionHash: varchar("sessionHash", { length: 64 }),
   /** User agent string for device analytics */
@@ -1098,7 +1094,7 @@ export const affiliateClicks = pgTable("affiliate_clicks", {
   /** IP-based country code (2-letter) for geo analytics */
   country: varchar("country", { length: 2 }),
   /** Logged-in user ID (nullable for anonymous visitors) */
-  userId: int("userId"),
+  userId: integer("userId"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -1114,9 +1110,9 @@ export const affiliateMetricsDaily = pgTable("affiliate_metrics_daily", {
   /** The date for this metrics row */
   metricDate: timestamp("metricDate").notNull(),
   /** Total clicks across all products */
-  totalClicks: int("totalClicks").default(0).notNull(),
+  totalClicks: integer("totalClicks").default(0).notNull(),
   /** Unique sessions (deduplicated by sessionHash) */
-  uniqueClicks: int("uniqueClicks").default(0).notNull(),
+  uniqueClicks: integer("uniqueClicks").default(0).notNull(),
   /** Top product by clicks (JSON: {name, clicks, url}) */
   topProduct: text("topProduct"),
   /** Top source article by clicks (JSON: {slug, clicks}) */
@@ -1158,7 +1154,7 @@ export const partnerApplications = pgTable("partner_applications", {
   /** Social media links (JSON) */
   socialLinks: text("socialLinks"),
   /** Application status */
-  status: statusEnum.default("pending").notNull(),
+  status: statusEnum("status").default("pending").notNull(),
   /** Admin notes */
   adminNotes: text("adminNotes"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
