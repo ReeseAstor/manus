@@ -58,19 +58,19 @@ export const canonRouter = router({
       if (!terms.length) return { excerpts: [], refusal: "Please ask a more specific question about the books." };
 
       const textCondition = or(...terms.map((term) => ilike(canonChunks.content, `%${term}%`)))!;
-      const conditions = [eq(canonChunks.approved, true), eq(canonChunks.readerVisible, true), textCondition];
-      if (input.seriesSlug) {
-        const matchingSeries = await db.select({ id: series.id }).from(series).where(and(eq(series.slug, input.seriesSlug), eq(series.status, "published"))).limit(1);
-        if (!matchingSeries[0]) return { excerpts: [], refusal: "I do not have a published archive for that series." };
-        const docs = await db.select({ id: canonDocuments.id }).from(canonDocuments).where(eq(canonDocuments.seriesId, matchingSeries[0].id));
-        if (!docs.length) return { excerpts: [], refusal: "I do not have approved excerpts for that series yet." };
-        conditions.push(inArray(canonChunks.documentId, docs.map((document) => document.id)));
-      }
+      const conditions = [
+        eq(canonChunks.approved, true),
+        eq(canonChunks.readerVisible, true),
+        eq(series.status, "published"),
+        textCondition,
+      ];
+      if (input.seriesSlug) conditions.push(eq(series.slug, input.seriesSlug));
 
       const excerpts = await db
         .select({ content: canonChunks.content, citation: canonChunks.citation, documentTitle: canonDocuments.title })
         .from(canonChunks)
         .innerJoin(canonDocuments, eq(canonChunks.documentId, canonDocuments.id))
+        .innerJoin(series, eq(canonDocuments.seriesId, series.id))
         .where(and(...conditions))
         .orderBy(asc(canonChunks.sequence))
         .limit(5);
@@ -119,17 +119,20 @@ export const canonRouter = router({
         const document = await db.select().from(canonDocuments).where(eq(canonDocuments.id, input.documentId)).limit(1);
         if (!document[0]) throw new TRPCError({ code: "NOT_FOUND", message: "Canon document not found" });
         const chunks = chunkText(input.text);
-        await db.delete(canonChunks).where(eq(canonChunks.documentId, input.documentId));
-        if (chunks.length) {
-          await db.insert(canonChunks).values(chunks.map((content, index) => ({
-            documentId: input.documentId,
-            chapter: input.chapter,
-            sequence: index,
-            content,
-            citation: `${document[0].title}${input.chapter ? ` — ${input.chapter}` : ""}`,
-          })));
-        }
-        await db.update(canonDocuments).set({ status: "indexed", updatedAt: new Date() }).where(eq(canonDocuments.id, input.documentId));
+        const citation = `${document[0].title}${input.chapter ? ` — ${input.chapter}` : ""}`.slice(0, 512);
+        await db.transaction(async (tx) => {
+          await tx.delete(canonChunks).where(eq(canonChunks.documentId, input.documentId));
+          if (chunks.length) {
+            await tx.insert(canonChunks).values(chunks.map((content, index) => ({
+              documentId: input.documentId,
+              chapter: input.chapter,
+              sequence: index,
+              content,
+              citation,
+            })));
+          }
+          await tx.update(canonDocuments).set({ status: "indexed", updatedAt: new Date() }).where(eq(canonDocuments.id, input.documentId));
+        });
         return { documentId: input.documentId, chunksCreated: chunks.length, status: "indexed" };
       }),
 
@@ -144,8 +147,10 @@ export const canonRouter = router({
       .input(z.object({ chunkIds: z.array(z.number().int().positive()).min(1).max(100), readerVisible: z.boolean(), notes: z.string().max(2_000).optional() }))
       .mutation(async ({ ctx, input }) => {
         const db = await database();
-        await db.update(canonChunks).set({ approved: true, readerVisible: input.readerVisible }).where(inArray(canonChunks.id, input.chunkIds));
-        await db.insert(editorialApprovals).values(input.chunkIds.map((resourceId) => ({ resourceType: "canon_chunk", resourceId, status: "approved", approvedBy: ctx.user.id, approvedAt: new Date(), notes: input.notes })));
+        await db.transaction(async (tx) => {
+          await tx.update(canonChunks).set({ approved: true, readerVisible: input.readerVisible }).where(inArray(canonChunks.id, input.chunkIds));
+          await tx.insert(editorialApprovals).values(input.chunkIds.map((resourceId) => ({ resourceType: "canon_chunk", resourceId, status: "approved", approvedBy: ctx.user.id, approvedAt: new Date(), notes: input.notes })));
+        });
         return { approved: input.chunkIds.length };
       }),
 
