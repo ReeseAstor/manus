@@ -230,6 +230,37 @@ export const affiliateProductsBySlug: Record<string, {
       },
     },
   },
+  "what-i-burn-while-i-write": {
+    ftcDisclosure: true,
+    topPicks: [
+      {
+        name: "Classical Library Candle",
+        affiliateUrl: "https://www.amazon.com/dp/B0F1FY6XT7?tag=88away0d-20",
+        description: "A soy wax candle with notes of aged leather, mahogany, and old paper. Designed to evoke the feeling of a grand library.",
+        whyRecommend: "The candle that lives on my writing desk — light it and you're in the library of a Manhattan penthouse. Pure magic.",
+        priceRange: "Around $20",
+        rating: 4.6,
+      },
+      {
+        name: "\"Smells Like She's Writing a Bestseller\" Soy Candle",
+        affiliateUrl: "https://www.amazon.com/dp/B0CMTXKBWW?tag=88away0d-20",
+        description: "A hand-poured soy candle with a witty label and a warm, sweet scent. Perfect for deadline nights and gifting to authors.",
+        whyRecommend: "Every writer deserves to smell like the thing they're chasing. It's also my favorite gift for other authors.",
+        priceRange: "Around $22",
+        rating: 4.7,
+      },
+    ],
+    inlineProducts: {
+      "Classical Library Candle": {
+        url: "https://www.amazon.com/dp/B0F1FY6XT7?tag=88away0d-20",
+        rel: "noopener noreferrer nofollow",
+      },
+      "\"Smells Like She's Writing a Bestseller\" Soy Candle": {
+        url: "https://www.amazon.com/dp/B0CMTXKBWW?tag=88away0d-20",
+        rel: "noopener noreferrer nofollow",
+      },
+    },
+  },
   "romance-author-writing-tools-setup": {
     ftcDisclosure: true,
     topPicks: [
