@@ -25,7 +25,7 @@ const EASE = cubicBezier(KIT_EASE[0], KIT_EASE[1], KIT_EASE[2], KIT_EASE[3]);
 // BookFunnel lead magnets are the primary conversion path on this page.
 // ─────────────────────────────────────────────────────────────────────────
 const LINKS = {
-  firstAcquisition: "https://dl.bookfunnel.com/kw1yge3479",
+  firstAcquisition: "https://swiy.co/05",
   oneNightStand: "https://dl.bookfunnel.com/xrodg0t77p",
   amazonAuthor: "https://www.amazon.com/Reese-Astor/e/B0DVGQY6TX",
 };
@@ -171,51 +171,54 @@ function Reveal({
   );
 }
 
-/** Primary free-book CTA. `tone="dark"` is gold-on-ink for dark sections;
- *  `tone="ivory"` is ink-on-ivory for the cards. Hover gives a small lift +
- *  sheen (real Tailwind hover utilities, not inert inline styles). */
-function FreeBookButton({
-  href,
-  children,
-  tone,
-  className = "",
-}: {
-  href: string;
-  children: React.ReactNode;
-  tone: "dark" | "ivory";
-  className?: string;
-}) {
-  const ivory = tone === "ivory";
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`font-inter hover:-translate-y-px hover:brightness-110 ${className}`}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 10,
-        minHeight: 56,
-        padding: "16px 26px",
-        fontSize: 13,
-        fontWeight: 700,
-        letterSpacing: "0.16em",
-        textTransform: "uppercase",
-        textDecoration: "none",
-        border: ivory ? `1px solid ${CARD_INK}` : `1px solid ${GOLD}`,
-        background: ivory ? CARD_INK : GOLD,
-        color: ivory ? GOLD : INK,
-        textWrap: "balance",
-        transition: "all 240ms cubic-bezier(0.65,0.05,0.36,1)",
-      }}
-    >
-      <Gift className="h-[18px] w-[18px] shrink-0" aria-hidden="true" />
-      <span>{children}</span>
-    </a>
-  );
-}
+  /** Primary free-book CTA. `tone="dark"` is gold-on-ink for dark sections;
+   *  `tone="ivory"` is ink-on-ivory for the cards. Hover gives a lift + sheen + micro-interaction. */
+  function FreeBookButton({
+    href,
+    children,
+    tone,
+    className = "",
+  }: {
+    href: string;
+    children: React.ReactNode;
+    tone: "dark" | "ivory";
+    className?: string;
+  }) {
+    const ivory = tone === "ivory";
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`font-inter group relative overflow-hidden hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${className}`}
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 10,
+          minHeight: 56,
+          padding: "16px 26px",
+          fontSize: 13,
+          fontWeight: 700,
+          letterSpacing: "0.16em",
+          textTransform: "uppercase",
+          textDecoration: "none",
+          border: ivory ? `1px solid ${CARD_INK}` : `1px solid ${GOLD}`,
+          background: ivory ? CARD_INK : GOLD,
+          color: ivory ? GOLD : INK,
+          textWrap: "balance",
+          transition: "all 280ms cubic-bezier(0.65,0.05,0.36,1)",
+          outlineColor: ivory ? CARD_INK : GOLD,
+        }}
+      >
+        <Gift
+          className="h-[18px] w-[18px] shrink-0 transition-transform duration-300 group-hover:scale-110"
+          aria-hidden="true"
+        />
+        <span>{children}</span>
+      </a>
+    );
+  }
 
 // Verified affiliate URLs (canonical source: client/src/pages/Books.tsx)
 const MMK_AMAZON = {
@@ -327,17 +330,21 @@ export default function Home() {
             {LEAD_MAGNETS.map((book, i) => (
               <li key={book.id} className="flex">
                 <Reveal delay={i * 0.08} className="flex w-full">
-                  <article
-                    className="flex w-full flex-col overflow-hidden hover:-translate-y-1"
+                    <article
+                    className="group flex w-full flex-col overflow-hidden hover:-translate-y-1.5 hover:shadow-2xl"
                     style={{
                       background: IVORY,
                       border: `1px solid ${IVORY_RULE}`,
                       boxShadow: "0 30px 70px -30px rgba(0,0,0,0.75)",
-                      transition: "transform 280ms cubic-bezier(0.65,0.05,0.36,1), box-shadow 280ms",
+                      transition: "transform 300ms cubic-bezier(0.65,0.05,0.36,1), box-shadow 300ms",
                     }}
                   >
-                    {/* accent rule distinguishes the series */}
-                    <div style={{ height: 4, background: book.accent }} aria-hidden="true" />
+                    {/* animated accent rule distinguishes the series */}
+                    <div
+                      className="h-1 origin-left scale-x-95 transition-transform duration-300 group-hover:scale-x-100"
+                      style={{ background: book.accent }}
+                      aria-hidden="true"
+                    />
 
                     {/* Cover display shelf — dark stage so the cover art pops. */}
                     <div
@@ -364,7 +371,7 @@ export default function Home() {
                         loading={book.eager ? "eager" : "lazy"}
                         decoding="async"
                         fetchPriority={book.eager ? "high" : "auto"}
-                        className="block h-auto w-auto max-h-[260px] select-none"
+                        className="block h-auto w-auto max-h-[260px] select-none transition-transform duration-700 ease-[cubic-bezier(0.65,0.05,0.36,1)] group-hover:scale-[1.04] group-hover:-translate-y-1"
                         draggable={false}
                         style={{
                           boxShadow: "0 22px 48px -16px rgba(0,0,0,0.85)",
@@ -425,12 +432,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───────────────── 3. SERIES ──────────────────────────────────────── */}
+      {/* ── 3. SERIES ─────────────────────────────────────────────────────── */}
       <section
         aria-labelledby="series-heading"
-        className="px-5 py-20 sm:px-8 sm:py-28"
-        style={{ background: SURFACE, borderTop: `1px solid ${RULE_SOFT}` }}
+        className="relative overflow-hidden px-5 py-20 sm:px-8 sm:py-28"
+        style={{
+          background: SURFACE,
+          borderTop: `1px solid ${RULE_SOFT}`,
+        }}
       >
+        {/* ambient gold/wine glow orbs for depth */}
+        <div
+          className="pointer-events-none absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full blur-[140px] opacity-20"
+          style={{ background: `radial-gradient(circle, ${GOLD} 0%, transparent 70%)` }}
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -right-40 bottom-1/4 h-[360px] w-[360px] rounded-full blur-[140px] opacity-15"
+          style={{ background: `radial-gradient(circle, ${WINE} 0%, transparent 70%)` }}
+          aria-hidden="true"
+        />
         <div className="mx-auto max-w-[1080px]">
           <Reveal className="mx-auto max-w-[680px] text-center">
             <div
@@ -451,11 +472,25 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden md:grid-cols-2"
-            style={{ border: `1px solid ${RULE}`, background: RULE }}>
-            {SERIES.map((series, i) => (
-              <Reveal key={series.name} delay={i * 0.08} style={{ background: SURFACE }}>
-                <div className="flex h-full flex-col p-7 sm:p-10" style={{ background: SURFACE }}>
+          <div
+            className="relative mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl md:grid-cols-2"
+            style={{ border: `1px solid ${RULE}`, background: RULE }}
+          >
+            {/* subtle glass highlight overlay for the grid */}
+            <div
+              className="pointer-events-none absolute inset-0 rounded-2xl"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 45%, transparent 55%, rgba(201,166,70,0.04) 100%)",
+              }}
+              aria-hidden="true"
+            />
+              {SERIES.map((series, i) => (
+                <Reveal key={series.name} delay={i * 0.08} style={{ background: SURFACE }}>
+                  <div
+                    className="group relative flex h-full flex-col p-7 transition-colors duration-300 hover:bg-white/[0.02] sm:p-10"
+                    style={{ background: SURFACE }}
+                  >
                   <h3
                     className="font-display font-normal text-[24px] leading-[1.15] sm:text-[28px]"
                     style={{ color: TEXT, letterSpacing: "-0.01em" }}
@@ -482,22 +517,22 @@ export default function Home() {
                             style={{ background: GOLD }}
                             aria-hidden="true"
                           />
-                          <span className="font-cormorant text-[18px] leading-[1.4]">
+                          <span className="font-cormorant text-[18px] leading-[1.4] transition-colors duration-300 group-hover:text-white">
                             {bookTitle}
                             {isFree && (
-                              <a
-                                href={series.freeStarter.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="font-inter ml-2 inline-flex items-center gap-1 align-middle text-[10px] font-bold uppercase no-underline"
-                                style={{
-                                  color: INK,
-                                  background: GOLD,
-                                  letterSpacing: "0.12em",
-                                  padding: "2px 8px",
-                                  borderRadius: 999,
-                                }}
-                              >
+                                <a
+                                  href={series.freeStarter.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="font-inter ml-2 inline-flex items-center gap-1 align-middle text-[10px] font-bold uppercase no-underline transition-transform duration-300 hover:scale-105"
+                                  style={{
+                                    color: INK,
+                                    background: GOLD,
+                                    letterSpacing: "0.12em",
+                                    padding: "2px 8px",
+                                    borderRadius: 999,
+                                  }}
+                                >
                                 Free <ArrowRight className="h-3 w-3" aria-hidden="true" />
                               </a>
                             )}
@@ -513,48 +548,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───────────────── 4. ABOUT ───────────────────────────────────────── */}
+      {/* ── 4. ABOUT ──────────────────────────────────────────────────────── */}
       <section
         aria-labelledby="about-heading"
-        className="px-5 py-20 sm:px-8 sm:py-28"
+        className="relative overflow-hidden px-5 py-20 sm:px-8 sm:py-28"
         style={{ background: INK }}
       >
-        <Reveal className="mx-auto max-w-[760px] text-center">
-          <div
-            className="font-inter text-[11px] font-semibold uppercase"
-            style={{ color: GOLD, letterSpacing: "0.34em" }}
-          >
-            About the Author
-          </div>
-          <h2
-            id="about-heading"
-            className="font-display font-normal text-[34px] leading-[1.1] mt-5 sm:text-[44px]"
-            style={{ color: TEXT, letterSpacing: "-0.02em", textWrap: "balance" }}
-          >
-            Meet Reese Astor
-          </h2>
-          <div className="mx-auto my-8 h-px w-14" style={{ background: GOLD_SOFT }} />
-          <p
-            className="font-cormorant text-[19px] leading-[1.75] sm:text-[21px]"
-            style={{ color: TEXT_SOFT, textWrap: "pretty" }}
-          >
-            Reese Astor writes high-heat billionaire romance, corporate power games, forbidden
-            attraction, and ambitious characters who do not fall in love quietly. Her stories are
-            built for readers who like desire with consequences, wealth with teeth, and
-            happily-ever-afters that have to be fought for.
-          </p>
-        </Reveal>
+        {/* warm ink glow behind the text */}
+        <div
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[160px] opacity-10"
+          style={{ background: `radial-gradient(circle, ${GOLD} 0%, transparent 70%)` }}
+          aria-hidden="true"
+        />
+        <div className="relative">
+          <Reveal className="relative mx-auto max-w-[760px] text-center">
+            <div
+              className="font-inter text-[11px] font-semibold uppercase"
+              style={{ color: GOLD, letterSpacing: "0.34em" }}
+            >
+              About the Author
+            </div>
+            <h2
+              id="about-heading"
+              className="font-display font-normal text-[34px] leading-[1.1] mt-5 sm:text-[44px]"
+              style={{ color: TEXT, letterSpacing: "-0.02em", textWrap: "balance" }}
+            >
+              Meet Reese Astor
+            </h2>
+            <div className="mx-auto my-8 h-px w-14" style={{ background: GOLD_SOFT }} />
+            <p
+              className="font-cormorant text-[19px] leading-[1.75] sm:text-[21px]"
+              style={{ color: TEXT_SOFT, textWrap: "pretty" }}
+            >
+              Reese Astor writes high-heat billionaire romance, corporate power games, forbidden
+              attraction, and ambitious characters who do not fall in love quietly. Her stories are
+              built for readers who like desire with consequences, wealth with teeth, and
+              happily-ever-afters that have to be fought for.
+            </p>
+          </Reveal>
+        </div>
       </section>
 
-      {/* ───────────────── 5. FINAL CTA ───────────────────────────────────── */}
+      {/* ── 5. FINAL CTA ──────────────────────────────────────────────────── */}
       <section
         aria-labelledby="final-cta-heading"
-        className="px-5 py-20 sm:px-8 sm:py-28"
+        className="relative overflow-hidden px-5 py-20 sm:px-8 sm:py-28"
         style={{
           background: `radial-gradient(110% 90% at 50% 0%, ${RAISED} 0%, ${INK} 60%)`,
           borderTop: `1px solid ${RULE_SOFT}`,
         }}
       >
+        <div
+          className="pointer-events-none absolute right-0 top-0 h-[300px] w-[300px] rounded-full blur-[120px] opacity-12"
+          style={{ background: `radial-gradient(circle, ${GOLD} 0%, transparent 70%)` }}
+          aria-hidden="true"
+        />
         <Reveal className="mx-auto max-w-[760px] text-center">
           <h2
             id="final-cta-heading"
@@ -605,7 +653,7 @@ export default function Home() {
       >
         <a
           href="#free-books"
-          className="font-inter flex items-center justify-center gap-2"
+          className="font-inter group flex items-center justify-center gap-2"
           style={{
             minHeight: 54,
             background: GOLD,
@@ -617,9 +665,13 @@ export default function Home() {
             textDecoration: "none",
             border: `1px solid ${GOLD}`,
             boxShadow: "0 12px 30px rgba(0,0,0,0.5)",
+            transition: "all 280ms cubic-bezier(0.65,0.05,0.36,1)",
           }}
         >
-          <Gift className="h-[18px] w-[18px]" aria-hidden="true" />
+          <Gift
+            className="h-[18px] w-[18px] transition-transform duration-300 group-hover:scale-110"
+            aria-hidden="true"
+          />
           Choose your free book
         </a>
       </div>

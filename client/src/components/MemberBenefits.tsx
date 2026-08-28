@@ -34,7 +34,7 @@ const benefits: Benefit[] = [
   {
     icon: Gift,
     title: "Free Book",
-    description: "Get 'The First Acquisition' absolutely free when you join. Start the Manhattan Money Kings series from the beginning!",
+    description: "Get 'The First Acquisition' absolutely free when you join. Start the Hudson Dynasty series from the beginning!",
     highlight: "FREE BOOK",
   },
   {
