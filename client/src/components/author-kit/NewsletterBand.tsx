@@ -47,7 +47,7 @@ export function NewsletterBand({ onSubscribe, freeBookHref = "/free-book" }: Pro
         initial={reduce ? undefined : { opacity: 0, y: 24 }}
         whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 1, ease: KIT_EASE as unknown as number[] }}
+        transition={{ duration: 1, ease: KIT_EASE }}
       >
         <Eyebrow align="center">The Inner Circle</Eyebrow>
         <h2

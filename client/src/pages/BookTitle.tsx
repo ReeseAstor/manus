@@ -88,7 +88,7 @@ function BookLayout({ book }: { book: Book }) {
           <motion.div
             initial={reduce ? undefined : { opacity: 0, y: 24 }}
             animate={reduce ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: KIT_EASE as unknown as number[] }}
+            transition={{ duration: 0.9, ease: KIT_EASE }}
           >
             <Eyebrow align="center">
               {lane.title}
@@ -113,7 +113,7 @@ function BookLayout({ book }: { book: Book }) {
             className="flex justify-center mt-12"
             initial={reduce ? undefined : { opacity: 0, y: 24 }}
             animate={reduce ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: KIT_EASE as unknown as number[] }}
+            transition={{ duration: 1, delay: 0.1, ease: KIT_EASE }}
           >
             <CoverHalo
               src={book.cover_image_square ?? book.cover_image}

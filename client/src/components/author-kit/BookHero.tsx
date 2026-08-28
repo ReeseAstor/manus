@@ -83,7 +83,7 @@ export function BookHero({
             }}
             initial={reduce ? undefined : { opacity: 0, y: 24 }}
             animate={reduce ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: KIT_EASE as unknown as number[] }}
+            transition={{ duration: 1.2, ease: KIT_EASE }}
             draggable={false}
           />
         </motion.div>
@@ -92,7 +92,7 @@ export function BookHero({
         <motion.div
           initial={reduce ? undefined : { opacity: 0, y: 16 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: KIT_EASE as unknown as number[], delay: 0.15 }}
+          transition={{ duration: 1, ease: KIT_EASE, delay: 0.15 }}
         >
           <Eyebrow>{kicker}</Eyebrow>
           <h1

@@ -2,15 +2,15 @@
 
 
 
-export const roleEnum = pgEnum("role", ["user", "admin"]);
+export const roleEnum = pgEnum("role", ["user", "admin", "protagonist", "love_interest", "antagonist", "supporting", "side_character", "minor"]);
 export const preferredFormatEnum = pgEnum("preferredFormat", ["epub", "mobi", "pdf"]);
-export const purchaseTypeEnum = pgEnum("purchaseType", ["single", "bundle", "subscription"]);
+export const purchaseTypeEnum = pgEnum("purchaseType", ["single", "bundle", "subscription", "one_time"]);
 export const publishedEnum = pgEnum("published", ["draft", "published"]);
-export const statusEnum = pgEnum("status", ["draft", "scheduled", "sent", "active", "pending", "queued", "passed", "open"]);
+export const statusEnum = pgEnum("status", ["draft", "scheduled", "sent", "active", "pending", "queued", "passed", "open", "failed", "delivered", "undelivered", "approved", "rejected", "warning", "resolved", "ignored", "unsubscribed", "subscribed", "bounced", "complained", "completed", "cancelled", "refunded", "processing", "shipped", "paused", "missed", "archived", "dismissed", "needs_login", "expired", "snoozed"]);
 export const typeEnum = pgEnum("type", ["bonus_chapter", "interview", "behind_scenes"]);
 export const aiRoleEnum = pgEnum("aiRole", ["user", "assistant"]);
 export const aiContentTypeEnum = pgEnum("aiContentType", ["blog_post", "story_idea", "book_cover", "character_portrait", "social_graphic"]);
-export const categoryEnum = pgEnum("category", ["romance", "passion", "fantasy", "reunion", "forbidden", "first_time", "system"]);
+export const categoryEnum = pgEnum("category", ["romance", "passion", "fantasy", "reunion", "forbidden", "first_time", "system", "vip", "order", "marketing", "social", "email", "other", "business", "tool", "audio", "video", "design", "writing", "analytics", "kdp"]);
 export const genderEnum = pgEnum("gender", ["male", "female", "neutral"]);
 export const eventTypeEnum = pgEnum("eventType", ["opt_in", "opt_out", "resubscribe"]);
 export const responseStatusEnum = pgEnum("responseStatus", ["success", "failed", "pending"]);
@@ -341,7 +341,7 @@ export const products = pgTable("products", {
   description: text("description").notNull(),
   price: integer("price").notNull(), // Price in cents
   currency: varchar("currency", { length: 3 }).default("usd").notNull(),
-  type: typeEnum("type").notNull(),
+  type: purchaseTypeEnum("type").notNull(),
   stripeProductId: varchar("stripeProductId", { length: 255 }),
   stripePriceId: varchar("stripePriceId", { length: 255 }),
   features: text("features"), // JSON array of features

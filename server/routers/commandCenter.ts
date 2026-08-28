@@ -233,10 +233,10 @@ export const commandCenterRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
       await db.insert(businessGoals).values({
-        ...input,
-        startDate: new Date(input.startDate),
-        endDate: new Date(input.endDate),
-      });
+        ...(input as any),
+        startDate: new Date((input as any).startDate),
+        endDate: new Date((input as any).endDate),
+      } as any);
 
       return { success: true };
     }),
