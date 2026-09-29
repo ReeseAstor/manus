@@ -4,6 +4,7 @@ import { Heart, Star, ShoppingCart, BookOpen, Gift, ChevronRight, Sparkles, Bell
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import { Reveal, StaggerReveal, StaggerItem, GlowOrb, GlassCard } from "@/components/author-kit/Reveal";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
@@ -139,11 +140,12 @@ export default function Books() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a]/95 via-[#0a0e1a]/90 to-[#0a0e1a]" />
         </div>
 
+        <GlowOrb className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" size={600} color="rgba(201,166,70,0.12)" />
+
         <div className="container relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+          <Reveal
+            direction="up"
+            duration={1}
             className="text-center max-w-4xl mx-auto space-y-8"
           >
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm">
@@ -165,31 +167,34 @@ export default function Books() {
               Manhattan Money Kings &bull; Hudson Dynasty
             </p>
 
-            <div className="flex items-center justify-center gap-12 pt-8">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-[#d4af37]">2</div>
-                <div className="text-sm text-gray-400 mt-1">Series</div>
-              </div>
-              <div className="h-12 w-px bg-white/20" />
-              <div className="text-center">
-                <div className="text-4xl font-bold text-[#d4af37]">5</div>
-                <div className="text-sm text-gray-400 mt-1">Books Published</div>
-              </div>
-            </div>
-          </motion.div>
+            <StaggerReveal className="flex items-center justify-center gap-12 pt-8" stagger={0.15}>
+              <StaggerItem>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-[#d4af37]">2</div>
+                  <div className="text-sm text-gray-400 mt-1">Series</div>
+                </div>
+              </StaggerItem>
+              <StaggerItem>
+                <div className="h-12 w-px bg-white/20" />
+              </StaggerItem>
+              <StaggerItem>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-[#d4af37]">5</div>
+                  <div className="text-sm text-gray-400 mt-1">Books Published</div>
+                </div>
+              </StaggerItem>
+            </StaggerReveal>
+          </Reveal>
         </div>
       </section>
 
       {/* Free Prequel - Premium Offer Banner */}
       <section className="py-16 relative ambient-section">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="grid md:grid-cols-3 gap-8 items-center p-10 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl">
+        <GlowOrb className="top-1/2 left-1/4 -translate-y-1/2" size={500} color="rgba(201,166,70,0.12)" />
+
+        <div className="container relative z-10">
+          <Reveal>
+            <GlassCard className="grid md:grid-cols-3 gap-8 items-center p-10 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 overflow-visible">
               <div className="relative">
                 <div className="absolute -inset-6 bg-gradient-to-r from-[#d4af37]/30 to-transparent blur-3xl rounded-full" />
                 <img
@@ -208,9 +213,12 @@ export default function Books() {
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-white">
                   The First Acquisition
                 </h2>
+                <p className="text-[#d4af37] text-sm uppercase tracking-widest font-medium">
+                  A Manhattan Billionaire Romance (Hudson Dynasty)
+                </p>
                 
                 <p className="text-lg text-gray-300">
-                  Power. Passion. Manhattan. When a ruthless billionaire sets his sights on what he wants, nothing stands in his way — not even the woman who was never part of the deal. Get this steamy full-length romance free when you join Reese Astor's VIP reader list.
+                  Before the empire. Before the auditor. The night a Hudson decided. Get this steamy Hudson Dynasty prequel novella free when you join Reese Astor's VIP reader list.
                 </p>
                 
                 {/* Audio Sample for Prequel */}
@@ -258,8 +266,8 @@ export default function Books() {
                   <p className="text-xs text-gray-400">Scan QR code for instant access</p>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </GlassCard>
+          </Reveal>
         </div>
       </section>
 
@@ -273,15 +281,11 @@ export default function Books() {
           }}
         />
 
+        <GlowOrb className="top-0 right-1/4" size={500} color="rgba(201,166,70,0.10)" />
+
         <div className="container relative z-10">
           {/* Series Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-20"
-          >
+          <Reveal className="text-center mb-20">
             <div className="inline-block px-6 py-2 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 mb-6">
               <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
                 Complete 4-Book Series
@@ -293,17 +297,11 @@ export default function Books() {
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               Where power, passion, and billion-dollar secrets collide in the heart of Manhattan's elite.
             </p>
-          </motion.div>
+          </Reveal>
 
           <div className="space-y-24">
             {books.map((book, index) => (
-              <motion.div
-                key={book.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-              >
+              <Reveal key={book.id} delay={index * 0.2}>
                 <div className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
                   {/* Book Cover */}
                   <div className={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
@@ -316,13 +314,13 @@ export default function Books() {
                       
                       <div className="absolute -inset-8 bg-gradient-to-r from-[#d4af37]/20 to-transparent blur-3xl rounded-full" />
                       
-                      <div className="relative p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl group-hover:border-[#d4af37]/30 transition-all duration-500">
+                      <GlassCard className="relative p-8 rounded-3xl group-hover:border-[#d4af37]/30 transition-all duration-500">
                         <img
                           src={book.cover}
                           alt={book.title}
                           className="w-full rounded-2xl shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
                         />
-                      </div>
+                      </GlassCard>
                     </div>
                   </div>
 
@@ -458,7 +456,7 @@ export default function Books() {
                     <div className="h-px w-32 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent" />
                   </div>
                 )}
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -467,45 +465,41 @@ export default function Books() {
       {/* Series Info - Luxury Card */}
       <section className="py-20 relative ambient-section">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto p-12 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl"
-          >
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 mb-6">
-                <BookOpen className="h-8 w-8 text-[#d4af37]" />
+          <Reveal className="max-w-4xl mx-auto">
+            <GlassCard className="p-12 rounded-3xl">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 mb-6">
+                  <BookOpen className="h-8 w-8 text-[#d4af37]" />
+                </div>
+                <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+                  About the Series
+                </h3>
               </div>
-              <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
-                About the Series
-              </h3>
-            </div>
-            
-            <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
-              <p>
-                Welcome to Manhattan, where billion-dollar deals are made in boardrooms and hearts are won in bedrooms. The Manhattan Money Kings series follows powerful billionaires who rule the business world but find themselves powerless against the women who capture their hearts.
-              </p>
-              <p>
-                Each book is a standalone romance with a guaranteed happily-ever-after, but they're best enjoyed in order to catch all the interconnected storylines and cameos from your favorite characters.
-              </p>
-            </div>
+              
+              <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
+                <p>
+                  Welcome to Manhattan, where billion-dollar deals are made in boardrooms and hearts are won in bedrooms. The Manhattan Money Kings series follows powerful billionaires who rule the business world but find themselves powerless against the women who capture their hearts.
+                </p>
+                <p>
+                  Each book is a standalone romance with a guaranteed happily-ever-after, but they're best enjoyed in order to catch all the interconnected storylines and cameos from your favorite characters.
+                </p>
+              </div>
 
-            <div className="mt-10 text-center">
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-2 border-[#d4af37]/30 bg-[#d4af37]/5 hover:bg-[#d4af37]/10 text-white font-semibold px-10 py-7 rounded-full"
-              >
-                <Link href="/free-book">
-                  Start with the Free Prequel
-                  <ChevronRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
-          </motion.div>
+              <div className="mt-10 text-center">
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-[#d4af37]/30 bg-[#d4af37]/5 hover:bg-[#d4af37]/10 text-white font-semibold px-10 py-7 rounded-full"
+                >
+                  <Link href="/free-book">
+                    Get Your Free Book
+                    <ChevronRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+              </div>
+            </GlassCard>
+          </Reveal>
         </div>
       </section>
 
@@ -513,16 +507,11 @@ export default function Books() {
       <section className="py-24 relative overflow-hidden" id="hudson-dynasty">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#12091e] to-[#0a0e1a]" />
         <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-[#d4af37]/5 blur-[200px] rounded-full pointer-events-none" />
+        <GlowOrb className="top-1/4 left-1/2 -translate-x-1/2" size={600} color="rgba(201,166,70,0.12)" />
         
         <div className="container relative z-10">
           {/* Series Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
+          <Reveal className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm mb-6">
               <Flame className="h-4 w-4 text-[#d4af37]" />
               <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
@@ -539,15 +528,10 @@ export default function Books() {
             <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Steamy, high-gloss corporate romance where Manhattan's most dangerous billionaires meet the women who refuse to play by their rules.
             </p>
-          </motion.div>
+          </Reveal>
 
           {/* Audit of the Heart - Featured Coming Soon */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <Reveal className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
               {/* Book Cover */}
               <div className="relative">
@@ -557,13 +541,13 @@ export default function Books() {
                     <Clock className="h-4 w-4" />
                     Coming Soon
                   </div>
-                  <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl group-hover:border-[#d4af37]/30 transition-all duration-500">
+                  <GlassCard className="relative p-8 rounded-3xl group-hover:border-[#d4af37]/30 transition-all duration-500">
                     <img
                       src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/audit-of-the-heart-cover-v2-CiyiXxZuMB4J9rT8axkMQv.webp"
                       alt="Audit of the Heart - Hudson Dynasty Book 1"
                       className="w-full rounded-2xl shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
                     />
-                  </div>
+                  </GlassCard>
                 </div>
               </div>
 
@@ -635,16 +619,10 @@ export default function Books() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </Reveal>
 
           {/* Hostile Tender - Coming Soon Book 2 */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-20"
-          >
+          <Reveal delay={0.2} className="mt-20 max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
               {/* Book Details - Left side for alternating layout */}
               <div className="space-y-6 order-2 lg:order-1">
@@ -722,41 +700,37 @@ export default function Books() {
                     <Clock className="h-4 w-4" />
                     Pre-Order Now
                   </div>
-                  <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl group-hover:border-[#d4af37]/30 transition-all duration-500">
+                  <GlassCard className="relative p-8 rounded-3xl group-hover:border-[#d4af37]/30 transition-all duration-500">
                     <img
                       src="https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-v2-iH5fGgkRQVjWbk2TchYPdH.webp"
                       alt="Hostile Tender - Hudson Dynasty Book 2"
                       className="w-full rounded-2xl shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
                     />
-                  </div>
+                  </GlassCard>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </Reveal>
 
           {/* Behind the Scenes Gallery */}
           <BehindTheScenes />
 
           {/* Series Description */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto mt-20 p-10 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl"
-          >
-            <div className="text-center">
-              <h3 className="font-serif text-2xl md:text-3xl font-bold text-white mb-4">
-                About the Hudson Dynasty Series
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed mb-4">
-                Manhattan high finance meets scorching romance. In the Hudson Dynasty world, reputation moves markets, power couples are public assets, and scandal is currency. Each book follows a new couple navigating the treacherous intersection of billion-dollar deals and irresistible desire.
-              </p>
-              <p className="text-gray-400 leading-relaxed">
-                The series begins with <em className="text-[#d4af37]">Audit of the Heart</em> and continues with <em className="text-[#d4af37]">Hostile Tender</em>. Standalone romances with guaranteed happily-ever-afters.
-              </p>
-            </div>
-          </motion.div>
+          <Reveal className="max-w-4xl mx-auto mt-20">
+            <GlassCard className="p-10 rounded-3xl">
+              <div className="text-center">
+                <h3 className="font-serif text-2xl md:text-3xl font-bold text-white mb-4">
+                  About the Hudson Dynasty Series
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed mb-4">
+                  Manhattan high finance meets scorching romance. In the Hudson Dynasty world, reputation moves markets, power couples are public assets, and scandal is currency. Each book follows a new couple navigating the treacherous intersection of billion-dollar deals and irresistible desire.
+                </p>
+                <p className="text-gray-400 leading-relaxed">
+                  The series begins with <em className="text-[#d4af37]">Audit of the Heart</em> and continues with <em className="text-[#d4af37]">Hostile Tender</em>. Standalone romances with guaranteed happily-ever-afters.
+                </p>
+              </div>
+            </GlassCard>
+          </Reveal>
         </div>
       </section>
 
@@ -820,88 +794,84 @@ function BooksNewsletterSignup() {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
-      className="max-w-4xl mx-auto rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden"
-    >
-      <div className="grid md:grid-cols-2 gap-0">
-        {/* Left — value proposition */}
-        <div className="p-10 md:p-12 flex flex-col justify-center">
-          <div className="inline-flex items-center gap-2 text-[#d4af37] text-xs font-semibold tracking-widest uppercase mb-4">
-            <Sparkles className="h-3.5 w-3.5" />
-            Reader's Inner Circle
-          </div>
-          <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-            Never Miss a New
-            <span className="text-[#d4af37]"> Release</span>
-          </h3>
-          <p className="text-gray-400 text-sm leading-relaxed mb-6">
-            Join 1,700+ readers who get first access to new books, bonus chapters, and exclusive content — plus a free copy of The First Acquisition.
-          </p>
-          <ul className="space-y-3">
-            {[
-              { icon: Bell, text: "New release alerts before anyone else" },
-              { icon: Gift, text: "Exclusive bonus chapters & epilogues" },
-              { icon: BookOpen, text: "Free copy of The First Acquisition" },
-            ].map(({ icon: Icon, text }) => (
-              <li key={text} className="flex items-center gap-3 text-gray-300 text-sm">
-                <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[#d4af37]/15 flex items-center justify-center">
-                  <Icon className="h-3.5 w-3.5 text-[#d4af37]" />
-                </div>
-                {text}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Right — form */}
-        <div className="p-10 md:p-12 bg-white/[0.03] border-l border-white/5 flex flex-col justify-center">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-8 h-8 rounded-full bg-[#d4af37]/20 flex items-center justify-center">
-              <Mail className="h-4 w-4 text-[#d4af37]" />
+    <Reveal className="max-w-4xl mx-auto">
+      <GlassCard className="rounded-3xl overflow-hidden">
+        <div className="grid md:grid-cols-2 gap-0">
+          {/* Left — value proposition */}
+          <div className="p-10 md:p-12 flex flex-col justify-center">
+            <div className="inline-flex items-center gap-2 text-[#d4af37] text-xs font-semibold tracking-widest uppercase mb-4">
+              <Sparkles className="h-3.5 w-3.5" />
+              Reader's Inner Circle
             </div>
-            <span className="text-white font-semibold text-sm">Get New Release Alerts</span>
-          </div>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              type="text"
-              placeholder="First name (optional)"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/50 h-12 rounded-xl"
-            />
-            <Input
-              type="email"
-              placeholder="Your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/50 h-12 rounded-xl"
-            />
-            <Button
-              type="submit"
-              disabled={subscribeMutation.isPending}
-              className="w-full h-12 bg-gradient-to-r from-[#d4af37] to-[#b8960c] hover:from-[#e5c84a] hover:to-[#d4af37] text-black font-bold rounded-xl text-sm tracking-wide transition-all duration-300"
-            >
-              {subscribeMutation.isPending ? (
-                <span className="flex items-center gap-2">
-                  <span className="h-4 w-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                  Subscribing...
-                </span>
-              ) : (
-                "Get New Release Alerts →"
-              )}
-            </Button>
-            <p className="text-gray-600 text-xs text-center">
-              No spam, ever. Unsubscribe anytime.
+            <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+              Never Miss a New
+              <span className="text-[#d4af37]"> Release</span>
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+              Join 1,700+ readers who get first access to new books, bonus chapters, and exclusive content — plus a free copy of The First Acquisition.
             </p>
-          </form>
+            <ul className="space-y-3">
+              {[
+                { icon: Bell, text: "New release alerts before anyone else" },
+                { icon: Gift, text: "Exclusive bonus chapters & epilogues" },
+                { icon: BookOpen, text: "Free copy of The First Acquisition" },
+              ].map(({ icon: Icon, text }) => (
+                <li key={text} className="flex items-center gap-3 text-gray-300 text-sm">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[#d4af37]/15 flex items-center justify-center">
+                    <Icon className="h-3.5 w-3.5 text-[#d4af37]" />
+                  </div>
+                  {text}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Right — form */}
+          <div className="p-10 md:p-12 bg-white/[0.03] border-l border-white/5 flex flex-col justify-center">
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-8 h-8 rounded-full bg-[#d4af37]/20 flex items-center justify-center">
+                <Mail className="h-4 w-4 text-[#d4af37]" />
+              </div>
+              <span className="text-white font-semibold text-sm">Get New Release Alerts</span>
+            </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <Input
+                type="text"
+                placeholder="First name (optional)"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/50 h-12 rounded-xl"
+              />
+              <Input
+                type="email"
+                placeholder="Your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/50 h-12 rounded-xl"
+              />
+              <Button
+                type="submit"
+                disabled={subscribeMutation.isPending}
+                className="w-full h-12 bg-gradient-to-r from-[#d4af37] to-[#b8960c] hover:from-[#e5c84a] hover:to-[#d4af37] text-black font-bold rounded-xl text-sm tracking-wide transition-all duration-300"
+              >
+                {subscribeMutation.isPending ? (
+                  <span className="flex items-center gap-2">
+                    <span className="h-4 w-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                    Subscribing...
+                  </span>
+                ) : (
+                  "Get New Release Alerts →"
+                )}
+              </Button>
+              <p className="text-gray-600 text-xs text-center">
+                No spam, ever. Unsubscribe anytime.
+              </p>
+            </form>
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </GlassCard>
+    </Reveal>
   );
 }
 
@@ -962,13 +932,7 @@ function BehindTheScenes() {
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
-      className="mt-24"
-    >
+    <Reveal className="mt-24">
       {/* Section Header */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm mb-6">
@@ -986,54 +950,48 @@ function BehindTheScenes() {
       </div>
 
       {/* Gallery Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+      <StaggerReveal className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto" stagger={0.1}>
         {btsItems.map((item, index) => (
-          <motion.div
-            key={item.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group cursor-pointer"
-            onClick={() => setSelectedImage(index)}
-          >
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 aspect-[3/4] shadow-lg hover:shadow-2xl hover:shadow-[#d4af37]/10 transition-all duration-500">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
-              />
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
-              
-              {/* Type badge */}
-              <div className="absolute top-3 left-3">
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/10">
-                  {item.type === "character" ? (
-                    <User className="h-3 w-3 text-[#d4af37]" />
-                  ) : (
-                    <MapPin className="h-3 w-3 text-[#d4af37]" />
-                  )}
-                  <span className="text-[10px] font-medium text-gray-300 uppercase tracking-wider">
-                    {item.type === "character" ? "Character" : "Location"}
-                  </span>
+          <StaggerItem key={item.id} className="group">
+            <div className="cursor-pointer" onClick={() => setSelectedImage(index)}>
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 aspect-[3/4] shadow-lg hover:shadow-2xl hover:shadow-[#d4af37]/10 transition-all duration-500">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+                
+                {/* Type badge */}
+                <div className="absolute top-3 left-3">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/10">
+                    {item.type === "character" ? (
+                      <User className="h-3 w-3 text-[#d4af37]" />
+                    ) : (
+                      <MapPin className="h-3 w-3 text-[#d4af37]" />
+                    )}
+                    <span className="text-[10px] font-medium text-gray-300 uppercase tracking-wider">
+                      {item.type === "character" ? "Character" : "Location"}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Bottom info */}
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <h4 className="font-serif text-base font-bold text-white leading-tight mb-0.5">
+                    {item.title}
+                  </h4>
+                  <p className="text-[#d4af37] text-xs font-medium">
+                    {item.subtitle}
+                  </p>
                 </div>
               </div>
-
-              {/* Bottom info */}
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <h4 className="font-serif text-base font-bold text-white leading-tight mb-0.5">
-                  {item.title}
-                </h4>
-                <p className="text-[#d4af37] text-xs font-medium">
-                  {item.subtitle}
-                </p>
-              </div>
             </div>
-          </motion.div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerReveal>
 
       {/* Lightbox Modal */}
       {selectedImage !== null && (
@@ -1052,91 +1010,94 @@ function BehindTheScenes() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="relative z-10 max-w-5xl w-full grid md:grid-cols-2 gap-0 rounded-3xl overflow-hidden bg-gradient-to-br from-[#1a1a2e] to-[#0d0d1a] border border-white/10 shadow-2xl max-h-[90vh]"
-            onClick={(e) => e.stopPropagation()}
+            className="relative z-10 max-w-5xl w-full"
           >
-            {/* Close button */}
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 text-white hover:text-[#d4af37] hover:border-[#d4af37]/30 transition-all duration-300"
-            >
-              <X className="h-5 w-5" />
-            </button>
+            <GlassCard className="grid md:grid-cols-2 gap-0 rounded-3xl overflow-hidden max-h-[90vh] bg-gradient-to-br from-[#1a1a2e] to-[#0d0d1a]">
+              <div onClick={(e) => e.stopPropagation()}>
+                {/* Close button */}
+                <button
+                  onClick={() => setSelectedImage(null)}
+                  className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 text-white hover:text-[#d4af37] hover:border-[#d4af37]/30 transition-all duration-300"
+                >
+                  <X className="h-5 w-5" />
+                </button>
 
-            {/* Image */}
-            <div className="relative aspect-[3/4] md:aspect-auto overflow-hidden">
-              <img
-                src={btsItems[selectedImage].image}
-                alt={btsItems[selectedImage].title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#1a1a2e]/30 hidden md:block" />
-            </div>
-
-            {/* Details */}
-            <div className="p-8 md:p-10 flex flex-col justify-center overflow-y-auto">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20">
-                  {btsItems[selectedImage].type === "character" ? (
-                    <User className="h-3.5 w-3.5 text-[#d4af37]" />
-                  ) : (
-                    <Building2 className="h-3.5 w-3.5 text-[#d4af37]" />
-                  )}
-                  <span className="text-xs font-medium text-[#d4af37] uppercase tracking-wider">
-                    {btsItems[selectedImage].type}
-                  </span>
+                {/* Image */}
+                <div className="relative aspect-[3/4] md:aspect-auto overflow-hidden">
+                  <img
+                    src={btsItems[selectedImage].image}
+                    alt={btsItems[selectedImage].title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#1a1a2e]/30 hidden md:block" />
                 </div>
-                <span className="text-xs text-gray-500">•</span>
-                <span className="text-xs text-gray-400">{btsItems[selectedImage].book}</span>
-              </div>
 
-              <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-1">
-                {btsItems[selectedImage].title}
-              </h3>
-              <p className="text-[#d4af37] font-medium mb-6">
-                {btsItems[selectedImage].subtitle}
-              </p>
+                {/* Details */}
+                <div className="p-8 md:p-10 flex flex-col justify-center overflow-y-auto">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20">
+                      {btsItems[selectedImage].type === "character" ? (
+                        <User className="h-3.5 w-3.5 text-[#d4af37]" />
+                      ) : (
+                        <Building2 className="h-3.5 w-3.5 text-[#d4af37]" />
+                      )}
+                      <span className="text-xs font-medium text-[#d4af37] uppercase tracking-wider">
+                        {btsItems[selectedImage].type}
+                      </span>
+                    </div>
+                    <span className="text-xs text-gray-500">•</span>
+                    <span className="text-xs text-gray-400">{btsItems[selectedImage].book}</span>
+                  </div>
 
-              <p className="text-gray-300 leading-relaxed mb-6">
-                {btsItems[selectedImage].description}
-              </p>
-
-              {btsItems[selectedImage].quote && (
-                <blockquote className="border-l-2 border-[#d4af37]/50 pl-4 py-2">
-                  <p className="text-gray-400 italic text-sm leading-relaxed">
-                    {btsItems[selectedImage].quote}
+                  <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-1">
+                    {btsItems[selectedImage].title}
+                  </h3>
+                  <p className="text-[#d4af37] font-medium mb-6">
+                    {btsItems[selectedImage].subtitle}
                   </p>
-                </blockquote>
-              )}
 
-              {/* Navigation */}
-              <div className="flex items-center gap-3 mt-8 pt-6 border-t border-white/10">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedImage(selectedImage > 0 ? selectedImage - 1 : btsItems.length - 1);
-                  }}
-                  className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-gray-300 hover:text-white hover:border-[#d4af37]/30 transition-all duration-300"
-                >
-                  ← Previous
-                </button>
-                <span className="text-gray-600 text-sm">
-                  {selectedImage + 1} / {btsItems.length}
-                </span>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedImage(selectedImage < btsItems.length - 1 ? selectedImage + 1 : 0);
-                  }}
-                  className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-gray-300 hover:text-white hover:border-[#d4af37]/30 transition-all duration-300"
-                >
-                  Next →
-                </button>
+                  <p className="text-gray-300 leading-relaxed mb-6">
+                    {btsItems[selectedImage].description}
+                  </p>
+
+                  {btsItems[selectedImage].quote && (
+                    <blockquote className="border-l-2 border-[#d4af37]/50 pl-4 py-2">
+                      <p className="text-gray-400 italic text-sm leading-relaxed">
+                        {btsItems[selectedImage].quote}
+                      </p>
+                    </blockquote>
+                  )}
+
+                  {/* Navigation */}
+                  <div className="flex items-center gap-3 mt-8 pt-6 border-t border-white/10">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedImage(selectedImage > 0 ? selectedImage - 1 : btsItems.length - 1);
+                      }}
+                      className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-gray-300 hover:text-white hover:border-[#d4af37]/30 transition-all duration-300"
+                    >
+                      ← Previous
+                    </button>
+                    <span className="text-gray-600 text-sm">
+                      {selectedImage + 1} / {btsItems.length}
+                    </span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedImage(selectedImage < btsItems.length - 1 ? selectedImage + 1 : 0);
+                      }}
+                      className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-gray-300 hover:text-white hover:border-[#d4af37]/30 transition-all duration-300"
+                    >
+                      Next →
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
+            </GlassCard>
           </motion.div>
         </motion.div>
       )}
-    </motion.div>
+    </Reveal>
   );
 }

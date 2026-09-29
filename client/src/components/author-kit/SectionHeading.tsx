@@ -21,7 +21,7 @@ export function SectionHeading({ kicker, title, lead }: Props) {
       initial={motionFrom}
       whileInView={motionTo}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.9, ease: KIT_EASE as unknown as number[] }}
+      transition={{ duration: 0.9, ease: KIT_EASE }}
     >
       <Eyebrow align="center">{kicker}</Eyebrow>
       <h2

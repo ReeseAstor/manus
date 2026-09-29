@@ -224,9 +224,9 @@ export const stripeRouter = router({
           description: PRODUCT_DESCRIPTION,
           price: 499,
           currency: "usd",
-          type: "one_time",
+          type: "one_time" as any,
           active: true,
-        });
+        } as any);
         const insertedId = Number(
           insertResult?.insertId ?? insertResult?.[0]?.insertId ?? 0
         );

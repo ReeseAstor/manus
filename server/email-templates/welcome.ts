@@ -37,7 +37,7 @@ export function generateWelcomeEmail(data: WelcomeEmailData): string {
   <![endif]-->
 </head>
 <body style="margin: 0; padding: 0; background-color: #0a0e27; font-family: Georgia, 'Times New Roman', serif;">
-  <span class="preheader">Your free book is waiting! Download The Billionaire's One Night Stand now.</span>
+  <span class="preheader">Your free book is waiting! Download The First Acquisition now.</span>
 
   <!-- Email Container -->
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #0a0e27;">
@@ -71,7 +71,7 @@ export function generateWelcomeEmail(data: WelcomeEmailData): string {
           <tr>
             <td style="padding: 0 40px 30px;">
               <p style="margin: 0 0 16px; color: #e5e5e5; font-size: 16px; line-height: 1.8;">
-                Welcome to the inner circle! I'm so thrilled you're here. As a thank-you for joining, I have a special gift for you&mdash;a <strong style="color: #d4af37;">free copy</strong> of my steamy enemies-to-lovers novella.
+                Welcome to the inner circle! I'm so thrilled you're here. As a thank-you for joining, I have a special gift for you&mdash;a <strong style="color: #d4af37;">free copy</strong> of my steamy billionaire romance novella.
               </p>
             </td>
           </tr>
@@ -86,13 +86,13 @@ export function generateWelcomeEmail(data: WelcomeEmailData): string {
                       YOUR FREE BOOK
                     </p>
                     <h2 style="margin: 0 0 8px; color: #d4af37; font-size: 24px; font-weight: bold; line-height: 1.3;">
-                      The Billionaire's One Night Stand
+                      The First Acquisition
                     </h2>
                     <p style="margin: 0 0 6px; color: rgba(229, 229, 229, 0.6); font-size: 14px;">
-                      Manhattan Money Kings &mdash; Prequel Novella
+                      A Manhattan Billionaire Romance (Hudson Dynasty)
                     </p>
                     <p style="margin: 0 0 24px; color: #e5e5e5; font-size: 15px; line-height: 1.7;">
-                      Victoria Cruz was just passed over for partnership. James Chen is the billionaire who offers her one night to forget. But when he acquires her firm without warning, their passionate encounter becomes a corporate battlefield.
+                      Before the empire. Before the auditor. The night a Hudson decided. A darker corporate romance prequel with fake engagement tension, forensic scandal, and a morally gray billionaire hero.
                     </p>
 
                     <!-- Download Button -->

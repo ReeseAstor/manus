@@ -1468,9 +1468,12 @@
 - [x] Submit sitemap to Google Search Console (submitted Mar 22, 2026 - awaiting crawl after publish)
 
 ## Free Book Link Update - The First Acquisition
-- [ ] Update BookFunnel/free book link to https://swiy.co/05 across all site pages
-- [ ] Update MailerLite welcome Email 1 with correct free book delivery link
-- [ ] Update book subtitle to "A Manhattan Billionaire Romance (Hudson Dynasty)" everywhere
+- [x] Update BookFunnel/free book link to https://swiy.co/05 across all site pages
+- [x] Update MailerLite welcome Email 1 with correct free book delivery link
+- [x] Update book subtitle to "A Manhattan Billionaire Romance (Hudson Dynasty)" everywhere
+- [x] Update Newsletter page to feature The First Acquisition (Hudson Dynasty)
+- [x] Update FreeBook page copy to reflect Hudson Dynasty prequel
+- [x] Update Books page free book banner to Hudson Dynasty subtitle
 
 ## Amazon-Linked Blog Posts
 - [ ] Research Amazon products relevant to romance readers (books, candles, reading accessories, etc.)
@@ -1497,8 +1500,14 @@
 
 ## Stunning Email Template & Website Enhancements
 - [x] Create stunning Welcome Email 1 template via MailerLite API with BookHip link
-- [ ] Audit and enhance website visual design for a more polished, professional look
-- [ ] Implement website design enhancements (animations, typography, layout refinements)
+- [x] Audit and enhance website visual design for a more polished, professional look
+- [x] Implement website design enhancements (animations, typography, layout refinements)
+- [x] Create reusable animation kit (Reveal, StaggerReveal, StaggerItem, GlowOrb, GlassCard) in author-kit/Reveal.tsx
+- [x] Apply reveal/glow/glass polish to Home page
+- [x] Apply reveal/glow/glass polish to About page
+- [x] Apply reveal/glow/glass polish to Newsletter page
+- [x] Apply reveal/glow/glass polish to Books page
+- [x] Fix production Vite build dependency-resolution failures (node_modules exports/stubs)
 
 ## MailerLite Email Restoration & Blog Pagination
 - [x] Restore MailerLite Welcome Email 1 with stunning HTML template
@@ -1679,22 +1688,22 @@
 - [x] Save checkpoint
 
 ## Interactive AI Workflow Tool
-- [ ] Create AI Workflow Tool page with all 10 Hudson Dynasty workflows
-- [ ] Build workflow selector UI with descriptions for each workflow
-- [ ] Add text input area for pasting content
-- [ ] Build server-side API endpoint to process workflows via AI
-- [ ] Implement streaming response display
-- [ ] Add copy-to-clipboard for results
-- [ ] Style with Manhattan luxury aesthetic
-- [ ] Add authentication requirement (premium feature)
-- [ ] Write vitest tests for the workflow API
-- [ ] Test all 10 workflows end-to-end
+- [x] Create AI Workflow Tool page with all 10 Hudson Dynasty workflows
+- [x] Build workflow selector UI with descriptions for each workflow
+- [x] Add text input area for pasting content
+- [x] Build server-side API endpoint to process workflows via AI
+- [x] Implement streaming response display
+- [x] Add copy-to-clipboard for results
+- [x] Style with Manhattan luxury aesthetic
+- [x] Add authentication requirement (premium feature)
+- [x] Write vitest tests for the workflow API (11 tests passing in workflow-api.test.ts)
+- [ ] Test all 10 workflows end-to-end (API-level coverage done via mocks; live run needs GEMINI_API_KEY/KIE endpoint in env)
 
 ## Blog Content - AI Writing Process
-- [ ] Create blog post about AI-assisted fiction writing process
-- [ ] Create blog post about quality control workflows for romance authors
-- [ ] Seed new blog posts to database
-- [ ] Verify blog posts render correctly
+- [x] Create blog post about AI-assisted fiction writing process
+- [x] Create blog post about quality control workflows for romance authors
+- [x] Seed new blog posts to database
+- [x] Verify blog posts render correctly
 
 ## Remove Fake/Demo Data
 - [x] Audit all client-side pages for fake testimonials, reviews, statistics

@@ -7,7 +7,7 @@ import {
   Users, TrendingUp, Bell, Settings, CheckCircle2, XCircle,
   Clock, BarChart3, Loader2, RefreshCw, ChevronRight,
   AlertCircle, BookMarked, MessageSquare, Mail, Smartphone, Sparkles,
-  Mic, Webhook, PenTool, Zap, ArrowRight, Activity, Share2
+  Mic, Webhook, PenTool, Zap, ArrowRight, Activity, Share2, BookCopy
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -205,6 +205,17 @@ export default function AdminDashboard() {
           borderColor: "border-violet-500/30",
           iconColor: "text-violet-400",
         },
+        {
+          title: "Writing Studio",
+          description: "Hudson Dynasty AI workflows: draft to QC to KDP",
+          icon: BookCopy,
+          href: "/admin/writing-studio",
+          color: "from-emerald-500/20 to-emerald-600/10",
+          borderColor: "border-emerald-500/30",
+          iconColor: "text-emerald-400",
+          badge: "New",
+          badgeColor: "bg-emerald-500/20 text-emerald-400",
+        },
       ],
     },
     {
@@ -309,6 +320,7 @@ export default function AdminDashboard() {
     { label: "Scan Links", icon: Link2, href: "/admin/links", color: "text-purple-400" },
     { label: "Generate Report", icon: FileText, href: "/admin/reports", color: "text-indigo-400" },
     { label: "Command Center", icon: Zap, href: "/admin/command-center", color: "text-amber-400" },
+    { label: "Writing Studio", icon: BookCopy, href: "/admin/writing-studio", color: "text-emerald-400" },
   ];
 
   return (

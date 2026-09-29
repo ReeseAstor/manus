@@ -38,6 +38,16 @@ async function seedWritingBlogPosts() {
       published: "published",
       publishedAt: "2025-05-08 09:00:00",
     },
+    {
+      title: "My Romance Novel Quality Control System: How I Catch Every Plot Hole Before Readers Do",
+      slug: "quality-control-workflows-romance-authors",
+      excerpt: "A repeatable pre-publish audit stack for romance novels: continuity checks, romance/heat scoring, full manuscript QC, and the anti-AI pass that keeps prose human.",
+      content: readPost("quality-control-workflows-romance-authors.md"),
+      category: "Writing Craft",
+      readTime: "7 min read",
+      published: "published",
+      publishedAt: "2025-05-12 09:00:00",
+    },
   ];
 
   for (const post of posts) {

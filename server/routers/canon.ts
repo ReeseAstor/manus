@@ -35,7 +35,7 @@ function chunkText(text: string): string[] {
 }
 
 function questionTerms(question: string): string[] {
-  return [...new Set(question.toLowerCase().match(/[a-z0-9]{4,}/g) ?? [])].slice(0, 8);
+  return Array.from(new Set(question.toLowerCase().match(/[a-z0-9]{4,}/g) ?? [])).slice(0, 8);
 }
 
 async function database() {

@@ -57,16 +57,16 @@ export default function FreeBook() {
   };
 
   const benefits = [
-    "Instant access to the complete full-length novel",
-    "The perfect introduction to the Manhattan Money Kings series",
+    "Instant access to the complete full-length novella",
+    "The perfect introduction to the Hudson Dynasty series",
     "Early notifications for new releases",
     "Exclusive bonus content and character insights",
     "Behind-the-scenes author updates",
   ];
 
   const freeBookSchema = generateBookSchema({
-    name: "The First Acquisition: A Manhattan Billionaire Romance",
-    description: "A steamy billionaire romance where power, passion, and Manhattan collide. The first book in the Manhattan Money Kings series by Reese Astor.",
+    name: "The First Acquisition: A Manhattan Billionaire Romance (Hudson Dynasty)",
+    description: "A steamy billionaire romance where power, passion, and Manhattan collide. The prequel novella to the Hudson Dynasty series by Reese Astor.",
     url: "https://reeseastor.com/free-book",
     genre: "Billionaire Romance",
     price: "0",
@@ -77,7 +77,7 @@ export default function FreeBook() {
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       <EnhancedSEOHead
         title="Free Book: The First Acquisition | Reese Astor Romance"
-        description="Download The First Acquisition for free. A steamy Manhattan billionaire romance by USA Today Bestselling author Reese Astor. Join the newsletter and start reading today."
+        description="Download The First Acquisition for free. A steamy Manhattan billionaire romance and Hudson Dynasty prequel novella by USA Today Bestselling author Reese Astor. Join the newsletter and start reading today."
         canonical="/free-book"
         ogType="book"
         keywords={["free romance book", "The First Acquisition", "free billionaire romance", "Reese Astor free book", "Hudson Dynasty", "Manhattan Money Kings", "reader magnet"]}
@@ -168,7 +168,7 @@ export default function FreeBook() {
                 </div>
 
                 <p className="text-gray-300 text-xl leading-relaxed">
-                  Power. Passion. Manhattan. When a ruthless billionaire sets his sights on what he wants, nothing stands in his way — not even the woman who was never part of the deal. This steamy full-length romance is the perfect introduction to the Manhattan Money Kings world.
+                  Power. Passion. Manhattan. Before the empire, before the auditor, a young Hudson made the first deal that would define every one that followed. This steamy prequel novella is the perfect introduction to the Hudson Dynasty world.
                 </p>
 
                 {/* Email Signup Form */}
@@ -234,7 +234,7 @@ export default function FreeBook() {
                 What You'll Get
               </h2>
               <p className="text-xl text-gray-400">
-                More than just a free book — your VIP pass to the Manhattan Money Kings world
+                More than just a free book — your VIP pass to the Hudson Dynasty world
               </p>
             </div>
 
@@ -308,10 +308,10 @@ export default function FreeBook() {
             <Sparkles className="h-12 w-12 text-[#d4af37] mx-auto mb-6" />
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
               Ready to Enter the World of<br />
-              <span className="text-[#d4af37]">Manhattan's Most Powerful Men?</span>
+              <span className="text-[#d4af37]">Manhattan's Most Dangerous Family?</span>
             </h2>
             <p className="text-xl text-gray-300 mb-10 leading-relaxed">
-              Join 1,700+ readers who've already fallen for the Manhattan Money Kings. Your free copy of The First Acquisition is waiting.
+              Join readers who've already fallen for the Hudson Dynasty. Your free copy of The First Acquisition is waiting.
             </p>
             <Button
               asChild

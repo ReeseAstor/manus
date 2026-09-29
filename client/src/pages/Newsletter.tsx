@@ -1,19 +1,20 @@
 import { useEffect } from 'react';
 import { trpc } from '@/lib/trpc';
+import type { BlogPost } from '@/../../drizzle/schema';
 import { 
   BookOpen, Mail, Sparkles, CheckCircle, Calendar, ArrowRight, 
   Heart, Gift, Star, Shield
 } from 'lucide-react';
 import { Link } from 'wouter';
-import { motion } from 'framer-motion';
 import { EnhancedSEOHead } from '@/components/ui/enhanced-seo-head';
 import { MailerLiteForm } from '@/components/MailerLiteForm';
+import { Reveal, StaggerReveal, StaggerItem, GlowOrb, GlassCard } from '@/components/author-kit';
 
 /**
  * Newsletter Signup Page — Manhattan Luxury Redesign
- * 
+ *
  * Premium landing page optimized for converting book readers into newsletter subscribers.
- * Features the free prequel as lead magnet, social proof, and Manhattan luxury aesthetic.
+ * Features The First Acquisition (Hudson Dynasty) as lead magnet, social proof, and Manhattan luxury aesthetic.
  * Signups are handled by the embedded MailerLite form (k0kQw5), which manages its own
  * submission, validation, success state, and the free-book delivery automation.
  * URL: /newsletter
@@ -34,19 +35,15 @@ export default function Newsletter() {
       />
 
       {/* Ambient lighting effects */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-[#d4af37]/5 rounded-full blur-[150px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[300px] bg-[#d4af37]/3 rounded-full blur-[120px]" />
+      <GlowOrb color="rgba(212,175,55,0.15)" size={520} className="top-[-80px] left-[10%]" />
+      <GlowOrb color="rgba(110,31,46,0.12)" size={360} className="top-[180px] right-[-60px]" />
 
       {/* ─── Hero Section ──────────────────────────────────────────────── */}
       <section className="relative z-10 pt-12 md:pt-20 pb-8">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Copy */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <Reveal direction="left" duration={0.6}>
               {/* Badge */}
               <div className="inline-flex items-center gap-2 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-4 py-2 rounded-full text-sm font-semibold font-['Montserrat'] mb-6">
                 <Mail className="w-4 h-4" />
@@ -61,8 +58,8 @@ export default function Newsletter() {
               </h1>
 
               <p className="text-lg text-gray-300 mb-8 font-['Montserrat'] leading-relaxed max-w-lg">
-                Join the Manhattan Money Kings inner circle. Get your free copy of 
-                <em className="text-[#d4af37]"> The Billionaire's One Night Stand</em>, 
+                Join the Hudson Dynasty inner circle. Get your free copy of 
+                <em className="text-[#d4af37]"> The First Acquisition</em>, 
                 plus new release alerts, deleted scenes, and exclusive bonus content delivered 
                 straight to your inbox.
               </p>
@@ -82,15 +79,11 @@ export default function Newsletter() {
                   Instant free book
                 </span>
               </div>
-            </motion.div>
+            </Reveal>
 
             {/* Right: Book Cover + Form Card */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="bg-white/5 backdrop-blur-sm border border-[#d4af37]/20 rounded-2xl p-6 md:p-8 relative">
+            <Reveal direction="right" delay={0.2} duration={0.6}>
+              <GlassCard className="border-[#d4af37]/20 p-6 md:p-8">
                 {/* Gold corner accent */}
                 <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden rounded-tr-2xl">
                   <div className="absolute top-0 right-0 w-[140%] h-[2px] bg-gradient-to-l from-[#d4af37] to-transparent origin-top-right rotate-[-45deg] translate-y-[14px] translate-x-[14px]" />
@@ -101,8 +94,8 @@ export default function Newsletter() {
                   <div className="relative flex-shrink-0">
                     <div className="absolute -inset-1 bg-gradient-to-br from-[#d4af37]/40 to-transparent rounded-lg blur-sm" />
                     <img 
-                      src="/prequel-cover.jpg" 
-                      alt="The Billionaire's One Night Stand" 
+                      src="/covers/hudson-0-first-acquisition.jpg" 
+                      alt="The First Acquisition" 
                       className="relative w-20 h-28 object-cover rounded-lg shadow-xl"
                     />
                     <div className="absolute -top-2 -right-2 bg-[#d4af37] text-[#0a0e1a] text-[10px] font-bold px-2 py-0.5 rounded-full font-['Montserrat']">
@@ -114,10 +107,10 @@ export default function Newsletter() {
                       Your Free Gift
                     </p>
                     <h3 className="font-['Cormorant_Garamond'] text-lg font-bold text-white leading-tight">
-                      The Billionaire's One Night Stand
+                      The First Acquisition
                     </h3>
                     <p className="text-gray-400 text-xs font-['Montserrat'] mt-1">
-                      Manhattan Money Kings Prequel
+                      A Manhattan Billionaire Romance (Hudson Dynasty)
                     </p>
                   </div>
                 </div>
@@ -142,36 +135,33 @@ export default function Newsletter() {
                   </Link>
                   . No spam — unsubscribe in one click anytime.
                 </p>
-              </div>
-            </motion.div>
+              </GlassCard>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* ─── Benefits Section ──────────────────────────────────────────── */}
       <section className="relative z-10 py-16 md:py-24">
+        <GlowOrb color="rgba(212,175,55,0.18)" size={460} className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <GlowOrb color="rgba(110,31,46,0.12)" size={320} className="top-[20%] right-[5%]" />
+
         <div className="max-w-6xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
+          <Reveal className="text-center mb-12">
             <p className="text-[#d4af37] text-sm font-semibold font-['Montserrat'] uppercase tracking-widest mb-3">
               What You'll Get
             </p>
             <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white">
               More Than Just a Newsletter
             </h2>
-          </motion.div>
+          </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StaggerReveal className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" stagger={0.1}>
             {[
               {
                 icon: BookOpen,
                 title: "New Release Alerts",
-                description: "Be the first to know when a new Manhattan Money Kings book drops, with exclusive early access deals",
+                description: "Be the first to know when a new Hudson Dynasty book drops, with exclusive early access deals",
               },
               {
                 icon: Sparkles,
@@ -181,60 +171,49 @@ export default function Newsletter() {
               {
                 icon: Heart,
                 title: "Behind the Scenes",
-                description: "Character inspiration, writing process updates, and sneak peeks at upcoming storylines",
+                description: "Character inspiration, writing process updates, and sneak peeks at upcoming Hudson Dynasty storylines",
               },
               {
                 icon: Star,
                 title: "Exclusive Giveaways",
                 description: "Subscriber-only contests for signed books, merchandise, and special reader experiences",
               },
-            ].map((benefit, i) => (
-              <motion.div
-                key={benefit.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-[#d4af37]/30 transition-all duration-300"
-              >
-                <div className="bg-[#d4af37]/10 rounded-lg w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-[#d4af37]/20 transition-colors">
-                  <benefit.icon className="w-6 h-6 text-[#d4af37]" />
-                </div>
-                <h3 className="font-['Cormorant_Garamond'] text-xl font-bold text-white mb-2">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-400 text-sm font-['Montserrat'] leading-relaxed">
-                  {benefit.description}
-                </p>
-              </motion.div>
+            ].map((benefit) => (
+              <StaggerItem key={benefit.title}>
+                <GlassCard className="group p-6 border-white/10 hover:border-[#d4af37]/30 h-full">
+                  <div className="bg-[#d4af37]/10 rounded-lg w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-[#d4af37]/20 transition-colors">
+                    <benefit.icon className="w-6 h-6 text-[#d4af37]" />
+                  </div>
+                  <h3 className="font-['Cormorant_Garamond'] text-xl font-bold text-white mb-2">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm font-['Montserrat'] leading-relaxed">
+                    {benefit.description}
+                  </p>
+                </GlassCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerReveal>
         </div>
       </section>
 
       {/* ─── Book Series Preview ───────────────────────────────────────── */}
       <section className="relative z-10 py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
+          <Reveal className="text-center mb-12">
             <p className="text-[#d4af37] text-sm font-semibold font-['Montserrat'] uppercase tracking-widest mb-3">
-              The Manhattan Money Kings
+              The Hudson Dynasty
             </p>
             <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white mb-4">
-              Four Billionaires. Four Love Stories.
+              A Family Built on Acquisitions. A Ledger That Remembers Everything.
             </h2>
             <p className="text-gray-400 font-['Montserrat'] max-w-2xl mx-auto">
-              Start with the free prequel and discover why readers can't put this series down.
+              Start with the free Hudson Dynasty prequel and discover why readers can't put this series down.
             </p>
-          </motion.div>
+          </Reveal>
 
           {/* Book covers row */}
-          <div className="flex justify-center items-end gap-3 md:gap-6 mb-12">
+          <StaggerReveal className="flex justify-center items-end gap-3 md:gap-6 mb-12" stagger={0.1}>
             {[
               { src: "/prequel-cover.jpg", label: "FREE", alt: "Prequel" },
               { src: "/book1-cover.jpg", label: "Book 1", alt: "Book 1" },
@@ -242,14 +221,7 @@ export default function Newsletter() {
               { src: "/book3-cover.jpg", label: "Book 3", alt: "Book 3" },
               { src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/wyOruOlpqOcFfhnS.jpg", label: "Book 4", alt: "Book 4" },
             ].map((book, i) => (
-              <motion.div
-                key={book.alt}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className={`relative group ${i === 0 ? 'z-10' : ''}`}
-              >
+              <StaggerItem key={book.alt} className={`relative group ${i === 0 ? 'z-10' : ''}`}>
                 <div className={`relative ${i === 0 ? 'ring-2 ring-[#d4af37]/50 rounded-lg' : ''}`}>
                   <img
                     src={book.src}
@@ -266,21 +238,17 @@ export default function Newsletter() {
                     {book.label}
                   </div>
                 </div>
-              </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerReveal>
 
           {/* CTA */}
           <div className="text-center">
             <Link href="/books">
-              <motion.span
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 text-[#d4af37] font-semibold font-['Montserrat'] hover:underline underline-offset-4 cursor-pointer transition-all"
-              >
+              <span className="inline-flex items-center gap-2 text-[#d4af37] font-semibold font-['Montserrat'] hover:underline underline-offset-4 cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98]">
                 View the Complete Series
                 <ArrowRight className="w-4 h-4" />
-              </motion.span>
+              </span>
             </Link>
           </div>
         </div>
@@ -296,13 +264,8 @@ export default function Newsletter() {
       {/* ─── Final CTA Section ─────────────────────────────────────────── */}
       <section className="relative z-10 py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="bg-gradient-to-br from-[#d4af37]/10 to-transparent border border-[#d4af37]/20 rounded-2xl p-8 md:p-12">
+          <Reveal>
+            <GlassCard className="border-[#d4af37]/20 p-8 md:p-12">
               <Gift className="w-10 h-10 text-[#d4af37] mx-auto mb-4" />
               <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white mb-4">
                 Don't Miss Out
@@ -317,19 +280,19 @@ export default function Newsletter() {
                 <MailerLiteForm formId="k0kQw5" />
               </div>
 
-              {/* Deliverability tip — boosts inbox placement & engagement */}
-              <p className="text-[11px] text-gray-500 text-center font-['Montserrat'] mt-4 leading-relaxed max-w-md mx-auto">
-                Tip: add <span className="text-[#d4af37]">hello@reeseastor.com</span> to your
-                contacts so your free book never lands in spam. Unsubscribe anytime — see our{' '}
-                <Link href="/privacy">
-                  <span className="text-gray-400 underline underline-offset-2 hover:text-[#d4af37] cursor-pointer">
-                    Privacy Policy
-                  </span>
-                </Link>
-                .
-              </p>
-            </div>
-          </motion.div>
+                {/* Deliverability tip — boosts inbox placement & engagement */}
+                <p className="text-[11px] text-gray-500 text-center font-['Montserrat'] mt-4 leading-relaxed max-w-md mx-auto">
+                  Tip: add <span className="text-[#d4af37]">hello@reeseastor.com</span> to your
+                  contacts so your free book never lands in spam. Unsubscribe anytime — see our{' '}
+                  <Link href="/privacy">
+                    <span className="text-gray-400 underline underline-offset-2 hover:text-[#d4af37] cursor-pointer">
+                      Privacy Policy
+                    </span>
+                  </Link>
+                  .
+                </p>
+            </GlassCard>
+          </Reveal>
         </div>
       </section>
     </div>
@@ -340,7 +303,7 @@ export default function Newsletter() {
  * Recent News Section — Manhattan Luxury Theme
  */
 function RecentNewsSection() {
-  const { data: posts, isLoading } = trpc.blog.list.useQuery({ published: true });
+  const { data: posts, isLoading } = trpc.blog.list.useQuery<BlogPost[]>({ published: true });
   const recentPosts = posts?.slice(0, 3) || [];
 
   if (isLoading) {
@@ -355,13 +318,7 @@ function RecentNewsSection() {
 
   return (
     <div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-10"
-      >
+      <Reveal className="text-center mb-10">
         <p className="text-[#d4af37] text-sm font-semibold font-['Montserrat'] uppercase tracking-widest mb-3">
           Latest from Reese
         </p>
@@ -371,19 +328,13 @@ function RecentNewsSection() {
         <p className="text-gray-400 font-['Montserrat']">
           Here's the kind of content subscribers get first
         </p>
-      </motion.div>
+      </Reveal>
 
-      <div className="grid md:grid-cols-3 gap-6 mb-8">
-        {recentPosts.map((post, i) => (
-          <motion.div
-            key={post.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.1 }}
-          >
+      <StaggerReveal className="grid md:grid-cols-3 gap-6 mb-8" stagger={0.1}>
+        {recentPosts.map((post) => (
+          <StaggerItem key={post.id}>
             <Link href={`/blog/${post.slug}`}>
-              <div className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-[#d4af37]/30 transition-all duration-300 cursor-pointer h-full flex flex-col">
+              <GlassCard className="group border-white/10 overflow-hidden hover:border-[#d4af37]/30 h-full flex flex-col">
                 <div className="p-5 pb-0">
                   <span className="inline-block bg-[#d4af37]/10 text-[#d4af37] text-xs font-semibold font-['Montserrat'] px-3 py-1 rounded-full">
                     {post.category}
@@ -411,11 +362,11 @@ function RecentNewsSection() {
                     </span>
                   </div>
                 </div>
-              </div>
+              </GlassCard>
             </Link>
-          </motion.div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerReveal>
 
       <div className="text-center">
         <Link href="/blog">

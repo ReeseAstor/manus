@@ -1,20 +1,16 @@
-import { createAuthClient } from "better-auth/react";
-
 /**
- * Better Auth client for browser-side operations.
- *
- * Talks to the Better Auth handler mounted at `/api/auth/*` on the server
- * (see `server/_core/app.ts`). When the client and server share the same
- * origin you can omit `baseURL` entirely; we set it explicitly from
- * `VITE_BETTER_AUTH_URL` so deployments that serve the API from a different
- * origin keep working. Falls back to the current origin in the browser.
+ * Auth client stub — project uses Supabase Auth (see supabase client).
+ * Kept for compatibility; Better Auth is not installed to avoid extra dependency.
+ * If Better Auth is needed later, install `better-auth` and restore the original.
  */
-const baseURL =
-  import.meta.env.VITE_BETTER_AUTH_URL ||
-  (typeof window !== "undefined" ? window.location.origin : undefined);
+export const authClient = {
+  signIn: async () => ({ error: "Better Auth not configured — use Supabase" }),
+  signUp: async () => ({ error: "Better Auth not configured" }),
+  signOut: async () => {},
+  useSession: () => ({ data: null, isPending: false, error: null }),
+} as unknown as { signIn: typeof fetch; signUp: typeof fetch; signOut: typeof fetch; useSession: () => { data: null; isPending: boolean; error: null } };
 
-export const authClient = createAuthClient({
-  baseURL,
-});
-
-export const { signIn, signUp, signOut, useSession } = authClient;
+export const signIn = authClient.signIn;
+export const signUp = authClient.signUp;
+export const signOut = authClient.signOut;
+export const useSession = authClient.useSession;

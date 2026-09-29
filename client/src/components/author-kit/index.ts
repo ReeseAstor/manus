@@ -8,6 +8,7 @@ export { NewsletterBand } from "./NewsletterBand";
 export { Ornament } from "./Ornament";
 export { PraiseQuote } from "./PraiseQuote";
 export { RAButton } from "./RAButton";
+export { Reveal, StaggerReveal, StaggerItem, GlowOrb, GlassCard } from "./Reveal";
 export { RetailerButtons } from "./RetailerButtons";
 export { SectionHeading } from "./SectionHeading";
 export * from "./tokens";
