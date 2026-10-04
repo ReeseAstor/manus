@@ -25,7 +25,7 @@ const EASE = cubicBezier(KIT_EASE[0], KIT_EASE[1], KIT_EASE[2], KIT_EASE[3]);
 // BookFunnel lead magnets are the primary conversion path on this page.
 // ─────────────────────────────────────────────────────────────────────────
 const LINKS = {
-  firstAcquisition: "https://swiy.co/05",
+  firstAcquisition: "https://dl.bookfunnel.com/kw1yge3479",
   oneNightStand: "https://dl.bookfunnel.com/xrodg0t77p",
   amazonAuthor: "https://www.amazon.com/Reese-Astor/e/B0DVGQY6TX",
 };
@@ -227,7 +227,7 @@ const MMK_AMAZON = {
   babySecret: "https://swiy.co/3rd",
   forbiddenNanny: "https://swiy.co/4rd",
 };
-const FREE_BOOK_URL = "https://swiy.co/05";
+const FREE_BOOK_URL = "https://dl.bookfunnel.com/kw1yge3479";
 
 export default function Home() {
   const reduce = useReducedMotion();

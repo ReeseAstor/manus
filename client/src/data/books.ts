@@ -210,7 +210,7 @@ export const BOOKS: Book[] = [
     kindle_unlimited: true,
     retailers: {
       amazon_kindle: "https://swiy.co/05",
-      bookfunnel: "https://swiy.co/05",
+      bookfunnel: "https://dl.bookfunnel.com/kw1yge3479",
       audible: null,
     },
     audiobook_available: true,
@@ -247,7 +247,7 @@ export const BOOKS: Book[] = [
   },
   {
     slug: "poison-pills",
-    title: "Poison Pills",
+    title: "Poison Pill",
     lane: "hudson_dynasty",
     series_position: 2,
     format: "ebook_and_audiobook",
