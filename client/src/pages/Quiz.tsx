@@ -180,7 +180,7 @@ export default function Quiz() {
       }
       toast.success("Welcome! Your personalized results are ready.");
       setTimeout(() => {
-        window.open("https://dl.bookfunnel.com/kw1yge3479", "_blank");
+        window.open("https://dl.bookfunnel.com/hj09ggitwi", "_blank");
       }, 3000);
     },
     onError: (error) => {
