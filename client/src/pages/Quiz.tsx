@@ -180,7 +180,7 @@ export default function Quiz() {
       }
       toast.success("Welcome! Your personalized results are ready.");
       setTimeout(() => {
-        window.open("https://swiy.co/05", "_blank");
+        window.open("https://dl.bookfunnel.com/kw1yge3479", "_blank");
       }, 3000);
     },
     onError: (error) => {
@@ -472,7 +472,7 @@ export default function Quiz() {
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
                           <Button
-                            onClick={() => window.open("https://swiy.co/05", "_blank")}
+                            onClick={() => window.open("https://dl.bookfunnel.com/kw1yge3479", "_blank")}
                             className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-6 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                           >
                             <BookOpen className="mr-2 h-5 w-5" />
