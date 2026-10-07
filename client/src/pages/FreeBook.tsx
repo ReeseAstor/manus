@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
+import { HoneypotField } from "@/components/HoneypotField";
 import { motion } from "framer-motion";
 import { EnhancedSEOHead, generateBookSchema } from "@/components/ui/enhanced-seo-head";
 
@@ -13,6 +14,8 @@ export default function FreeBook() {
   }, []);
 
   const [email, setEmail] = useState("");
+  const [companyWebsite, setCompanyWebsite] = useState("");
+  const [formRenderedAt] = useState(() => Date.now());
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
       toast.success("Success! Redirecting you to download your free book...");
@@ -37,7 +40,12 @@ export default function FreeBook() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      subscribeMutation.mutate({ email });
+      subscribeMutation.mutate({
+        email,
+        company_website: companyWebsite || undefined,
+        formRenderedAt,
+        formSubmittedAt: Date.now(),
+      });
     }
   };
 
@@ -174,6 +182,7 @@ export default function FreeBook() {
                 {/* Email Signup Form */}
                 <div className="p-8 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl">
                   <form onSubmit={handleSubmit} className="space-y-4">
+                    <HoneypotField value={companyWebsite} onChange={setCompanyWebsite} />
                     <div>
                       <label className="text-sm font-medium text-white mb-3 block tracking-wide uppercase">
                         Enter your email for instant access:
