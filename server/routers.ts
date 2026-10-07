@@ -18,6 +18,7 @@ import { workflowRouter } from "./routers/workflow";
 import { aiUsageRouter } from "./routers/ai-usage";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
+import { detectBotSignup } from "./signupBotGuard";
 import { sendEmail } from "./email-service";
 import { generateWelcomeEmail } from "./email-templates/welcome";
 import { generateEmailTemplate, sanitizeEmailContent } from "./emailTemplate";
@@ -117,9 +118,28 @@ export const appRouter = router({
            * segmentation.
            */
           groupId: z.string().optional(),
+          /** Hidden honeypot field; real readers leave it empty. */
+          company_website: z.string().optional(),
+          /** Browser timestamps (ms) for when the form rendered / was submitted. */
+          formRenderedAt: z.number().optional(),
+          formSubmittedAt: z.number().optional(),
         })
       )
       .mutation(async ({ input }) => {
+        // Silently drop suspected bot signups: no MailerLite call, no welcome
+        // email, but the same success shape a real signup gets so bots can't
+        // tell they were blocked.
+        const botReason = detectBotSignup(input);
+        if (botReason) {
+          console.warn(`[Newsletter] Blocked suspected bot signup (reason=${botReason})`);
+          return {
+            success: true,
+            message: "Successfully subscribed to newsletter",
+            data: undefined,
+            bookDownloadUrl: "https://swiy.co/05",
+          };
+        }
+
         // MailerLite group IDs must be numeric. Sanitize any configured value
         // so a malformed/non-numeric env var can't cause the whole signup to
         // fail with a 422. An empty/invalid value is treated as "no group".

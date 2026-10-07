@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { BookOpen, Gift, Heart, Users, Star, ArrowRight, CheckCircle, Sparkles, Clock } from "lucide-react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
+import { HoneypotField } from "@/components/HoneypotField";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 
 interface PromoBook {
@@ -81,6 +82,8 @@ export default function Promo() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [companyWebsite, setCompanyWebsite] = useState("");
+  const [formRenderedAt] = useState(() => Date.now());
 
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
@@ -109,7 +112,13 @@ export default function Promo() {
       toast.error("Please enter your email address.");
       return;
     }
-    subscribeMutation.mutate({ email: email.trim(), name: name.trim() || undefined });
+    subscribeMutation.mutate({
+      email: email.trim(),
+      name: name.trim() || undefined,
+      company_website: companyWebsite || undefined,
+      formRenderedAt,
+      formSubmittedAt: Date.now(),
+    });
   };
 
   const promoStructuredData = [{
@@ -201,6 +210,7 @@ export default function Promo() {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-3">
+                <HoneypotField value={companyWebsite} onChange={setCompanyWebsite} />
                 <Input
                   type="text"
                   placeholder="Your first name"

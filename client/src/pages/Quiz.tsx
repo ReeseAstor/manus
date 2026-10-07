@@ -6,6 +6,7 @@ import { Heart, Sparkles, BookOpen, ArrowRight, ArrowLeft, Mail, CheckCircle, St
 import { ShareableResultCard } from "@/components/ShareableResultCard";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
+import { HoneypotField } from "@/components/HoneypotField";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 
 interface QuizQuestion {
@@ -164,6 +165,8 @@ export default function Quiz() {
   const [name, setName] = useState("");
   const [isComplete, setIsComplete] = useState(false);
   const [result, setResult] = useState<TropeResult | null>(null);
+  const [companyWebsite, setCompanyWebsite] = useState("");
+  const [formRenderedAt] = useState(() => Date.now());
 
   useEffect(() => {
     document.title = "What's Your Romance Trope? | Reese Astor Quiz";
@@ -234,7 +237,13 @@ export default function Quiz() {
       toast.error("Please enter your email to see your results.");
       return;
     }
-    subscribeMutation.mutate({ email: email.trim(), name: name.trim() || undefined });
+    subscribeMutation.mutate({
+      email: email.trim(),
+      name: name.trim() || undefined,
+      company_website: companyWebsite || undefined,
+      formRenderedAt,
+      formSubmittedAt: Date.now(),
+    });
   };
 
   const progress = ((currentQuestion + (showEmailGate || showResult ? 1 : 0)) / quizQuestions.length) * 100;
@@ -371,6 +380,7 @@ export default function Quiz() {
                   </p>
 
                   <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
+                    <HoneypotField value={companyWebsite} onChange={setCompanyWebsite} />
                     <div className="space-y-3 mb-4">
                       <Input
                         type="text"
