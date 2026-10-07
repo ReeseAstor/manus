@@ -19,14 +19,14 @@ export default function FreeBook() {
       setEmail("");
       // Redirect to BookFunnel after a short delay
       setTimeout(() => {
-        window.open("https://dl.bookfunnel.com/kw1yge3479", "_blank");
+        window.open("https://dl.bookfunnel.com/hj09ggitwi", "_blank");
       }, 1500);
     },
     onError: (error) => {
       if (error.message?.includes("already subscribed")) {
         toast.info("You're already on the list! Redirecting to your free book...");
         setTimeout(() => {
-          window.open("https://dl.bookfunnel.com/kw1yge3479", "_blank");
+          window.open("https://dl.bookfunnel.com/hj09ggitwi", "_blank");
         }, 1500);
       } else {
         toast.error(error.message || "Failed to subscribe. Please try again.");
