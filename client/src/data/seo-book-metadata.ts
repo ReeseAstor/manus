@@ -25,22 +25,22 @@ export const bookSeoMeta: Record<string, BookSeoEntry> = {
 
   // ─── HOMEPAGE ────────────────────────────────────────────────────────────────
   '_home': {
-    title: 'Reese Astor | USA Today Bestselling Billionaire Romance',
+    title: 'Reese Astor | Billionaire Romance',
     description:
-      'Steamy billionaire romance set in Manhattan. Read the Manhattan Money Kings series and Hudson Dynasty novels by USA Today bestseller Reese Astor, on Kindle Unlimited.',
+      'Steamy billionaire romance set in Manhattan. Read the Manhattan Money Kings series and Hudson Dynasty novels by Reese Astor, on Kindle Unlimited.',
     keywords: [
       'billionaire romance',
       'steamy billionaire romance',
       'contemporary romance Kindle Unlimited',
       'Manhattan romance novels',
-      'USA Today bestselling romance author',
+      'romance author',
       'Reese Astor books',
       'Manhattan Money Kings',
       'Hudson Dynasty romance',
     ],
     ogTitle: 'Reese Astor | Steamy Billionaire Romance',
     ogDescription:
-      "Power, passion, and Manhattan's elite. Dive into the Manhattan Money Kings series by USA Today Bestselling romance author Reese Astor. Available on Kindle Unlimited.",
+      "Power, passion, and Manhattan's elite. Dive into the Manhattan Money Kings series by romance author Reese Astor. Available on Kindle Unlimited.",
     ogType: 'website',
   },
 
@@ -189,9 +189,9 @@ export const bookSeoMeta: Record<string, BookSeoEntry> = {
 
   // ─── FALLBACK DEFAULT ─────────────────────────────────────────────────────────
   '_default': {
-    title: 'Reese Astor | USA Today Bestselling Billionaire Romance',
+    title: 'Reese Astor | Billionaire Romance',
     description:
-      'Steamy billionaire contemporary romance by USA Today Bestseller Reese Astor. Read the Manhattan Money Kings series and Hudson Dynasty novels on Kindle Unlimited.',
+      'Steamy billionaire contemporary romance by Reese Astor. Read the Manhattan Money Kings series and Hudson Dynasty novels on Kindle Unlimited.',
     keywords: [
       'billionaire romance',
       'steamy billionaire romance',

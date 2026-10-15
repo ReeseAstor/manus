@@ -229,7 +229,7 @@ The best romances combine multiple tropes in unexpected ways. A billionaire enem
 
 When I published my first romance novel, I made every mistake in the book—pun intended. Wrong keywords, a cover that screamed "amateur," and a launch strategy that consisted of telling my mom and hoping for the best.
 
-Now, four books and a USA Today bestseller list later, I want to save you from those same mistakes. Here's everything I wish someone had told me about self-publishing romance on Amazon KDP.
+Now, several books later, I want to save you from those same mistakes. Here's everything I wish someone had told me about self-publishing romance on Amazon KDP.
 
 ## Step 1: Write a Market-Ready Manuscript
 
@@ -380,76 +380,6 @@ When I set my Manhattan Money Kings series in NYC, I wanted readers to feel the 
 **What's your favorite NYC romance?** Tell me—I'm always looking for my next Manhattan love story.
 
 *Reese*`
-  },
-  {
-    title: "How I Became a USA Today Bestselling Author: My Honest Journey",
-    slug: "usa-today-bestselling-author-journey",
-    excerpt: "The real story behind hitting the USA Today bestseller list—including the failures, the doubts, and the strategies that actually worked. No sugarcoating.",
-    category: "Writing Life",
-    readTime: "11 min read",
-    seoKeywords: "USA Today bestselling author, how to become bestselling author, indie author success story, self-publishing success, romance author journey",
-    metaDescription: "The honest story of becoming a USA Today bestselling romance author. Learn the strategies, failures, and mindset shifts behind indie publishing success.",
-    scheduledPublishAt: "2026-05-02 09:00:00",
-    content: `# How I Became a USA Today Bestselling Author: My Honest Journey
-
-I'm going to tell you the truth about becoming a USA Today bestselling author, because I think the romance community deserves honesty more than it deserves another highlight reel.
-
-## The Beginning Nobody Talks About
-
-I didn't wake up one morning with a bestseller. I woke up with a manuscript I'd been working on for two years, a savings account I'd drained on editing and cover design, and a terrifying certainty that I was about to put my heart on the internet for strangers to judge.
-
-My first month's royalties? Let's just say they wouldn't have covered a nice dinner in Manhattan—which is ironic, given that my books are set there.
-
-## What Actually Worked
-
-**Writing in series.** This was the single most impactful decision I made. When readers finish a book they love, they want more of those characters, that world, that feeling. The Manhattan Money Kings series gave readers a reason to come back four times, and each new release boosted sales of all the previous books.
-
-**Building an email list early.** I started collecting email addresses before my first book launched, using a free prequel novella as a reader magnet. By the time book four released, I had a list of engaged readers who were ready to buy on day one. That concentrated burst of sales in the first week is what pushes you onto bestseller lists.
-
-**Investing in covers.** I can't overstate this. My first cover was... fine. My redesigned covers were stunning. Sales doubled after the rebrand. Romance readers are visual, and your cover is a promise about the reading experience inside.
-
-**Cross-promotion with other authors.** Newsletter swaps, group promotions, and genuine friendships with other romance authors expanded my reach far beyond what I could have achieved alone. The romance community is remarkably generous—if you show up authentically.
-
-**Writing the next book.** Every marketing strategy I tried paled in comparison to the simple act of publishing another book. More books means more entry points for new readers, more visibility in Amazon's algorithm, and more reasons for existing fans to recommend you.
-
-## What Didn't Work
-
-**Paid social media ads (at first).** I burned through money on Facebook and Amazon ads before I understood targeting. Ads work, but only when you have enough data and enough books to make the math profitable.
-
-**Trying to please everyone.** Early on, I softened my writing voice to avoid negative reviews. The result was books that were fine but not memorable. When I leaned into my authentic voice—steamy, emotional, unapologetically romantic—the right readers found me and became devoted fans.
-
-**Comparing myself to other authors.** This nearly broke me. Someone always has more reviews, higher rankings, bigger launches. The only comparison that matters is you versus your last book.
-
-## The USA Today List
-
-The week I hit the USA Today bestseller list, I was sitting in my apartment in pajamas eating leftover Thai food. There was no champagne moment, no confetti. Just a notification on my phone and a quiet, overwhelming sense of "I actually did this."
-
-The strategy was straightforward: coordinate a multi-author box set promotion, price it at $0.99, promote heavily to combined email lists, and hope the concentrated sales in a single week would be enough.
-
-It was enough. Barely. But enough counts.
-
-## What I'd Tell My Past Self
-
-**Start your email list on day one.** Not day two. Day one.
-
-**Write faster.** Not sloppier—faster. The romance market rewards consistent output. Readers forget you if you disappear for a year.
-
-**Invest in your craft.** Take courses, read widely in your genre, hire editors who challenge you. The better your books are, the easier everything else becomes.
-
-**Build genuine relationships.** With readers, with other authors, with your editor and cover designer. Publishing is a team sport disguised as a solitary pursuit.
-
-**Enjoy the process.** I spent so much time anxious about sales numbers that I forgot to enjoy the miraculous fact that I get to make up love stories for a living.
-
-## What's Next
-
-I'm working on a new series (more on that soon), continuing to grow my reader community, and exploring new ways to connect with the people who make this career possible—you.
-
-If you're on your own author journey, know that I'm cheering for you. And if you're a reader who's been with me since the beginning, thank you. None of this happens without you.
-
-*With gratitude,*
-*Reese*
-
-*P.S. If you haven't started my series yet, The First Acquisition is free at reeseastor.com/free-book. It's where everything began.*`
   },
   {
     title: "Steamy Romance vs. Sweet Romance: Finding Your Heat Level",

@@ -314,7 +314,7 @@ The best part of writing this series has been the reader response. I've gotten e
 - Couples who said the books helped them communicate better
 - Readers who just needed an escape and found it in Manhattan
 
-That's why I write. Not for the bestseller lists (though those are nice), but for the connection with readers who see themselves in these characters.
+That's why I write. Not for the lists, but for the connection with readers who see themselves in these characters.
 
 ## What's Next
 

@@ -125,7 +125,7 @@ export default function Promo() {
     "@context": "https://schema.org",
     "@type": "Event",
     name: "Romance Book Giveaway - Free Books from Top Romance Authors",
-    description: "Grab free romance books from bestselling authors. Limited-time multi-author giveaway featuring billionaire romance, dark romance, and contemporary love stories.",
+    description: "Grab free romance books from a multi-author giveaway. Limited-time multi-author giveaway featuring billionaire romance, dark romance, and contemporary love stories.",
     organizer: { "@type": "Person", name: "Reese Astor" },
     eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
     isAccessibleForFree: true,
@@ -135,7 +135,7 @@ export default function Promo() {
     <div className="min-h-screen bg-[#0a0a0a] relative overflow-hidden">
       <EnhancedSEOHead
         title="Free Romance Books Giveaway | Multi-Author Promo | Reese Astor"
-        description="Grab free romance books from bestselling authors! Limited-time multi-author giveaway featuring billionaire romance, dark romance, and contemporary love stories."
+        description="Grab free romance books from a multi-author giveaway! Limited-time multi-author giveaway featuring billionaire romance, dark romance, and contemporary love stories."
         canonical="https://reeseastor.com/promo"
         structuredData={promoStructuredData}
       />
@@ -181,7 +181,7 @@ export default function Promo() {
             </div>
             <div className="flex items-center gap-2">
               <Users className="h-5 w-5 text-[#d4af37]" />
-              <span className="text-white font-semibold">6 Bestselling Authors</span>
+              <span className="text-white font-semibold">6 Authors</span>
             </div>
             <div className="flex items-center gap-2">
               <Gift className="h-5 w-5 text-[#d4af37]" />
@@ -311,7 +311,7 @@ export default function Promo() {
               <div className="flex-1 text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <span className="text-xs text-[#d4af37] font-semibold tracking-wider uppercase bg-[#d4af37]/10 px-3 py-1 rounded-full">
-                    USA Today Bestseller
+                    Free with signup
                   </span>
                 </div>
                 <h3 className="font-serif text-3xl font-bold text-white mb-1">
@@ -354,7 +354,7 @@ export default function Promo() {
               All Books in This <span className="text-[#d4af37]">Giveaway</span>
             </h2>
             <p className="text-gray-400 max-w-lg mx-auto">
-              Each book is a full-length novel from a bestselling romance author. Claim them all with a single email.
+              Each book is a full-length romance novel. Claim them all with a single email.
             </p>
           </div>
 

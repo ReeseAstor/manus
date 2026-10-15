@@ -86,7 +86,7 @@ export default function Books() {
       fullBlurb: "Elena never expected her latest heist to go wrong. Breaking into billionaire David Kim's penthouse was supposed to be her ticket to freedom. Instead, she finds herself caught by a man who's more dangerous—and more compelling—than any mark she's ever targeted. David Kim built his empire on control, precision, and never letting anyone get close. But this beautiful thief has shattered every rule he lives by. He offers a deal: marry him for 12 months in exchange for protection from her violent father. As they work together, their forced alliance ignites into something neither expected. With her father's threats escalating and David's empire at risk, Elena must decide: betray the man she's falling for, or risk everything for a chance at redemption and love.",
       price: "$3.99",
       regularPrice: "$3.99",
-      link: "https://swiy.co/2rd",
+      link: "https://www.amazon.com/dp/B0FCCBNF8X?tag=reeseastor-20",
       genre: ["Fake Marriage", "Suspense", "Billionaire Romance"],
       pages: 350,
       rating: 0,
@@ -808,7 +808,7 @@ function BooksNewsletterSignup() {
               <span className="text-[#d4af37]"> Release</span>
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Join 1,700+ readers who get first access to new books, bonus chapters, and exclusive content — plus a free copy of The First Acquisition.
+              Join the readers who get first access to new books, bonus chapters, and exclusive content — plus a free copy of The First Acquisition.
             </p>
             <ul className="space-y-3">
               {[

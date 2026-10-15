@@ -14,7 +14,6 @@ const imageMap = {
   'romance-book-tropes-ultimate-guide': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/IKwhmIFDXetgwSCz.jpg',
   'self-publishing-romance-amazon-kdp-beginners-guide': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/KGeWoByqzbiBHoDI.webp',
   'manhattan-romance-nyc-love-stories': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/CmSEAYgznmQIyQgI.jpg',
-  'usa-today-bestselling-author-journey': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/RcvUYZhofZSXlsJw.jpg',
   'steamy-vs-sweet-romance-heat-levels-guide': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/OVcSHLPVEoCqpREq.jpg',
   'author-email-list-strategy-sell-books': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/FFJeybjcPyPVQjKe.jpg',
   'secret-baby-trope-romance-readers-guide': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/xWJAQlIPQxPjrzUo.jpg',

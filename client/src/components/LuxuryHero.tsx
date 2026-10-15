@@ -65,7 +65,7 @@ export default function LuxuryHero() {
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/30 backdrop-blur-sm">
               <Sparkles className="h-5 w-5 text-primary animate-pulse" />
               <span className="text-sm font-semibold text-primary tracking-wide">
-                BESTSELLING ROMANCE AUTHOR
+                ROMANCE AUTHOR
               </span>
             </div>
           </motion.div>

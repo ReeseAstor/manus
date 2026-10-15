@@ -141,7 +141,7 @@ export default function Shop() {
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27]">
       <EnhancedSEOHead
         title="Shop Signed Books & Bundles | Reese Astor Romance Store"
-        description="Shop signed paperbacks, exclusive bundles, and digital editions of the Manhattan Money Kings series. Direct from USA Today Bestselling author Reese Astor."
+        description="Shop signed paperbacks, exclusive bundles, and digital editions of the Manhattan Money Kings series. Direct from author Reese Astor."
         canonical="/shop"
         ogType="product"
         keywords={["signed romance books", "Reese Astor shop", "Manhattan Money Kings paperback", "romance book bundles", "signed author copies", "buy direct from author"]}

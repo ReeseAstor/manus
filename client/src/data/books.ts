@@ -84,15 +84,13 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: false,
     retailers: {
-      // NOTE: swiy.co/05 is shared with The First Acquisition (see below). Needs its own
-      // short link or a direct amazon.com/dp/B0DSG7NKGP link; the sales-blockers branch
-      // already switches this to the direct link.
-      amazon_kindle: "https://swiy.co/05",
+      // Direct link: swiy.co/05 resolves to The First Acquisition (B0D82GWFD9), not this book.
+      amazon_kindle: "https://www.amazon.com/dp/B0DSG7NKGP?tag=reeseastor-20",
     },
     audiobook_available: false,
     isbn: null,
-    asin: null,
-    price_usd: 3.99,
+    asin: "B0DSG7NKGP",
+    price_usd: 0.99,
   },
   {
     slug: "the-billionaire-s-executive-assistant",
@@ -213,8 +211,7 @@ export const BOOKS: Book[] = [
     pull_quote: "“He did not yet know what an empire cost. He was about to learn.”",
     cover_image: "/covers/hudson-0-first-acquisition.jpg",
     publication_date: null,
-    // Catalog says not enrolled in KU. price_usd 0 vs catalog $0.99 is unresolved (open decision);
-    // swiy.co/05 is shared with One Night Stand above and resolves to this book.
+    // Catalog: not enrolled in KU, Kindle $0.99 (free via the BookFunnel signup below).
     kindle_unlimited: false,
     retailers: {
       amazon_kindle: "https://swiy.co/05",
@@ -224,7 +221,7 @@ export const BOOKS: Book[] = [
     audiobook_available: true,
     isbn: null,
     asin: null,
-    price_usd: 0,
+    price_usd: 0.99,
   },
   {
     slug: "hostile-tender",

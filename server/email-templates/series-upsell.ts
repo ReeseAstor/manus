@@ -51,7 +51,7 @@ function wrapInTemplate(options: {
           </tr>
           <tr>
             <td class="header-cell" style="padding: 40px 40px 24px; text-align: center;">
-              <p style="margin: 0 0 6px; color: #d4af37; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-family: Arial, sans-serif;">USA Today Bestselling Author</p>
+              <p style="margin: 0 0 6px; color: #d4af37; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-family: Arial, sans-serif;">Romance Author</p>
               <h1 style="margin: 0; color: #d4af37; font-size: 30px; font-weight: bold; letter-spacing: 2px; font-family: Georgia, serif;">REESE ASTOR</h1>
             </td>
           </tr>

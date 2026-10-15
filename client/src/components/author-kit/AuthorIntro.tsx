@@ -26,7 +26,7 @@ export function AuthorIntro() {
           className="font-cormorant italic mt-4 text-[20px]"
           style={{ color: TEXT_SOFT }}
         >
-          From Corporate Finance VP to USA TODAY Bestselling Romance Author
+          From Corporate Finance VP to Romance Author
         </div>
         <div className="mx-auto my-8 h-px w-14" style={{ background: GOLD_SOFT }} />
         <blockquote

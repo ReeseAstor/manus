@@ -11,10 +11,10 @@ INSERT INTO blog_posts (
 ) VALUES (
   'A Day in the Life of a Romance Author',
   'day-in-the-life-romance-author',
-  'Ever wondered what a typical writing day looks like? From morning coffee rituals to late-night plot breakthroughs, here''s an honest peek into my daily routine as a USA TODAY bestselling romance author.',
+  'Ever wondered what a typical writing day looks like? From morning coffee rituals to late-night plot breakthroughs, here''s an honest peek into my daily routine as a romance author.',
   '# A Day in the Life of a Romance Author
 
-Ever wondered what a typical writing day looks like for a romance author? Spoiler alert: it''s equal parts glamorous and chaotic, with a lot of coffee in between. Here''s an honest peek into my daily routine as a USA TODAY bestselling romance author and writing coach.
+Ever wondered what a typical writing day looks like for a romance author? Spoiler alert: it''s equal parts glamorous and chaotic, with a lot of coffee in between. Here''s an honest peek into my daily routine as a romance author and writing coach.
 
 ## 5:30 AM - The Early Bird Gets the Words
 
@@ -48,7 +48,7 @@ I treat my writing career like the business it is. My corporate finance backgrou
 
 Twice a week, I have coaching calls with aspiring authors. Today I''m meeting with three clients who are learning to navigate Amazon KDP and build their author platforms. This is deeply fulfilling work—I get to help other women turn their creative dreams into profitable businesses.
 
-I share the exact strategies that took me from corporate VP to USA TODAY bestselling author: how to write to market without losing your voice, how to build a launch team, how to price your books strategically, and how to create a sustainable writing schedule.
+I share the exact strategies that took me from corporate VP to full-time author: how to write to market without losing your voice, how to build a launch team, how to price your books strategically, and how to create a sustainable writing schedule.
 
 ## 12:30 PM - Lunch and Reading
 
