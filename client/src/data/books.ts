@@ -129,7 +129,7 @@ export const BOOKS: Book[] = [
     tagline: "A ruthless engagement that turns devastatingly real.",
     blurb:
       "When thief Elena breaks into his penthouse, billionaire David Kim catches her red-handed. But " +
-      "instead of calling the police, he makes her an offer she can't refuse: marry him for twelve months " +
+      "he makes her an offer she can't refuse: marry him for twelve months " +
       "in exchange for protection from her violent father. As they work together, their forced alliance " +
       "ignites into something neither expected.",
     pull_quote: null,
@@ -137,9 +137,9 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://www.amazon.com/dp/B0FCCBNF8X?tag=88away0d-20",
+      amazon_kindle: "https://www.amazon.com/dp/B0FCCBNF8X?tag=reeseastor-20",
       // Paperback edition (kept as its own button; the Kindle/KU button above is the Kindle edition).
-      amazon_paperback: "https://www.amazon.com/dp/B0FD33W6H6?tag=88away0d-20",
+      amazon_paperback: "https://www.amazon.com/dp/B0FD33W6H6?tag=reeseastor-20",
     },
     audiobook_available: false,
     isbn: null,

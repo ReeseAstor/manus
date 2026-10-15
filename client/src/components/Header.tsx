@@ -58,7 +58,7 @@ export function Header() {
           <span className="hidden lg:inline-block w-px h-4 bg-border/40 mx-1" aria-hidden />
           {secondaryNavLinks.map((link) => (
             <Link key={link.href} href={link.href}>
-              <span className="text-xs font-medium uppercase tracking-wider transition-colors cursor-pointer text-muted-foreground/70 hover:text-primary">
+              <span className="text-xs font-medium uppercase tracking-wider transition-colors cursor-pointer text-muted-foreground hover:text-primary">
                 {link.label}
               </span>
             </Link>

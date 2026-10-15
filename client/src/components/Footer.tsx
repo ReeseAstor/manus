@@ -95,6 +95,7 @@ export function Footer() {
                 href="https://www.instagram.com/reeseastor/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Reese Astor on Instagram"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Instagram className="h-5 w-5" />
@@ -103,12 +104,14 @@ export function Footer() {
                 href="https://www.facebook.com/people/Reese-Astor/61571178214136/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Reese Astor on Facebook"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a
                 href="mailto:contact@reeseastor.com"
+                aria-label="Email Reese Astor"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="h-5 w-5" />
