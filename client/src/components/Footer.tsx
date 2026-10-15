@@ -12,7 +12,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-playfair text-xl font-bold text-primary">Reese Astor</h3>
             <p className="text-sm text-muted-foreground">
-              USA Today Bestselling romance author. Power, passion, and Manhattan collide in the Manhattan Money Kings series.
+              Romance author. Power, passion, and Manhattan collide in the Manhattan Money Kings series.
             </p>
             {/* Free Book CTA in Footer */}
             <a
@@ -115,7 +115,7 @@ export function Footer() {
               </a>
             </div>
             <p className="text-xs text-muted-foreground mt-4">
-              Join 1,700+ readers on the VIP list for exclusive content and new release alerts.
+              Join the VIP list for exclusive content and new release alerts.
             </p>
           </div>
         </div>

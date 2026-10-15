@@ -14,6 +14,7 @@ export type BookFormat = "ebook" | "audiobook" | "ebook_and_audiobook";
 
 export type RetailerKey =
   | "amazon_kindle"
+  | "amazon_paperback"
   | "audible"
   | "apple_books"
   | "spotify"
@@ -70,9 +71,9 @@ export const BOOKS: Book[] = [
     slug: "the-billionaires-one-night-stand",
     title: "The Billionaire's One Night Stand",
     lane: "manhattan_money_kings",
-    series_position: 1,
+    series_position: 0,
     format: "ebook",
-    position_label: "Book 1",
+    position_label: "Prequel",
     tagline: "One night was supposed to mean nothing. He decided it would mean everything.",
     blurb:
       "She walked into the bar to forget her name. He spent the next morning learning every syllable of it. " +
@@ -81,8 +82,11 @@ export const BOOKS: Book[] = [
     pull_quote: "“You were supposed to be a stranger. You decided otherwise.”",
     cover_image: "https://m.media-amazon.com/images/I/815-iFRAlpL._SL1500_.jpg",
     publication_date: null,
-    kindle_unlimited: true,
+    kindle_unlimited: false,
     retailers: {
+      // NOTE: swiy.co/05 is shared with The First Acquisition (see below). Needs its own
+      // short link or a direct amazon.com/dp/B0DSG7NKGP link; the sales-blockers branch
+      // already switches this to the direct link.
       amazon_kindle: "https://swiy.co/05",
     },
     audiobook_available: false,
@@ -94,9 +98,9 @@ export const BOOKS: Book[] = [
     slug: "the-billionaire-s-executive-assistant",
     title: "The Billionaire's Executive Assistant",
     lane: "manhattan_money_kings",
-    series_position: 2,
+    series_position: 1,
     format: "ebook",
-    position_label: "Book 2",
+    position_label: "Book 1",
     tagline: "The boardroom was never the most dangerous room.",
     blurb:
       "Sarah Shah needs this job to pay her mother's mounting medical bills. Michael Hastings needs a " +
@@ -119,34 +123,36 @@ export const BOOKS: Book[] = [
     slug: "the-billionaire-s-fake-wife",
     title: "The Billionaire's Fake Wife",
     lane: "manhattan_money_kings",
-    series_position: 3,
+    series_position: 2,
     format: "ebook",
-    position_label: "Book 3",
+    position_label: "Book 2",
     tagline: "A ruthless engagement that turns devastatingly real.",
     blurb:
-      "When thief Elena Kim breaks into his penthouse, billionaire David Kim catches her red-handed. But " +
+      "When thief Elena breaks into his penthouse, billionaire David Kim catches her red-handed. But " +
       "instead of calling the police, he makes her an offer she can't refuse: marry him for twelve months " +
       "in exchange for protection from her violent father. As they work together, their forced alliance " +
       "ignites into something neither expected.",
-    pull_quote: "“Twelve months. He intended every one of them.”",
+    pull_quote: null,
     cover_image: "/author-kit/mmk-2-fake-wife.jpg",
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/2rd",
+      amazon_kindle: "https://www.amazon.com/dp/B0FCCBNF8X?tag=88away0d-20",
+      // Paperback edition (kept as its own button; the Kindle/KU button above is the Kindle edition).
+      amazon_paperback: "https://www.amazon.com/dp/B0FD33W6H6?tag=88away0d-20",
     },
     audiobook_available: false,
     isbn: null,
-    asin: null,
+    asin: "B0FCCBNF8X",
     price_usd: 3.99,
   },
   {
     slug: "the-billionaire-s-baby-secret",
     title: "The Billionaire's Baby Secret",
     lane: "manhattan_money_kings",
-    series_position: 4,
+    series_position: 3,
     format: "ebook",
-    position_label: "Book 4",
+    position_label: "Book 3",
     tagline: "One night. One secret. One second chance he refuses to lose.",
     blurb:
       "Three years ago, Sophia Reed walked away from a hotel room and a man she should've never trusted — " +
@@ -169,9 +175,9 @@ export const BOOKS: Book[] = [
     slug: "the-billionaires-forbidden-nanny",
     title: "The Billionaire's Forbidden Nanny",
     lane: "manhattan_money_kings",
-    series_position: 5,
+    series_position: 4,
     format: "ebook",
-    position_label: "Book 5",
+    position_label: "Book 4",
     tagline: "She's the nanny. He's her boss. His mother wants her gone.",
     blurb:
       "When Camille Torres takes a job caring for billionaire Ethan Calloway's silent daughter, she never " +
@@ -207,7 +213,9 @@ export const BOOKS: Book[] = [
     pull_quote: "“He did not yet know what an empire cost. He was about to learn.”",
     cover_image: "/covers/hudson-0-first-acquisition.jpg",
     publication_date: null,
-    kindle_unlimited: true,
+    // Catalog says not enrolled in KU. price_usd 0 vs catalog $0.99 is unresolved (open decision);
+    // swiy.co/05 is shared with One Night Stand above and resolves to this book.
+    kindle_unlimited: false,
     retailers: {
       amazon_kindle: "https://swiy.co/05",
       bookfunnel: "https://dl.bookfunnel.com/kw1yge3479",

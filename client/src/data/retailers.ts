@@ -29,6 +29,12 @@ export const RETAILERS: Record<RetailerKey, RetailerMeta> = {
     order: 10,
     envVar: "VITE_PERMISSION_AMAZON_URL",
   },
+  amazon_paperback: {
+    key: "amazon_paperback",
+    label: "Paperback on Amazon",
+    order: 12,
+    envVar: "VITE_PERMISSION_AMAZON_PAPERBACK_URL",
+  },
   audible: {
     key: "audible",
     label: "Listen on Audible",
