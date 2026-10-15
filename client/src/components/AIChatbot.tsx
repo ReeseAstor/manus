@@ -69,7 +69,7 @@ export function AIChatbot() {
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-96 h-[600px] shadow-2xl z-50 flex flex-col">
+    <Card className="fixed bottom-6 right-4 w-[calc(100vw-2rem)] max-w-96 h-[600px] max-h-[calc(100vh-3rem)] shadow-2xl z-50 flex flex-col">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b">
         <CardTitle className="text-lg font-semibold">
           Ask About the Books
@@ -78,6 +78,7 @@ export function AIChatbot() {
           variant="ghost"
           size="icon"
           onClick={() => setIsOpen(false)}
+          aria-label="Close chat"
           className="h-8 w-8"
         >
           <X className="h-4 w-4" />
@@ -119,11 +120,13 @@ export function AIChatbot() {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Ask about the books..."
+              aria-label="Your question"
               disabled={chatMutation.isPending}
               className="flex-1"
             />
             <Button
               onClick={handleSend}
+              aria-label="Send message"
               disabled={!input.trim() || chatMutation.isPending}
               size="icon"
             >
