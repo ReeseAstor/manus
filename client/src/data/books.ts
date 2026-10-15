@@ -79,7 +79,7 @@ export const BOOKS: Book[] = [
       "She walked into the bar to forget her name. He spent the next morning learning every syllable of it. " +
       "When the city's most ruthless dealmaker insists one night was never going to be enough, the woman " +
       "who came to him as a stranger has to decide whether to disappear — or stay and be wholly seen.",
-    pull_quote: "“You were supposed to be a stranger. You decided otherwise.”",
+    pull_quote: null, // not found in the live EPUB; BookTitle hides "Inside this book" when null
     cover_image: "https://m.media-amazon.com/images/I/815-iFRAlpL._SL1500_.jpg",
     publication_date: null,
     kindle_unlimited: false,
@@ -105,7 +105,7 @@ export const BOOKS: Book[] = [
       "competent assistant to save his billion-dollar Redwood project. Neither can afford distractions or " +
       "workplace scandal. When Sarah uncovers financial sabotage orchestrated by Michael's ruthless " +
       "competitor, they're forced into a dangerous alliance that crosses every professional boundary.",
-    pull_quote: "“He didn't hire her to ruin him. She didn't apply expecting to.”",
+    pull_quote: null, // not found in the live EPUB; BookTitle hides "Inside this book" when null
     cover_image: "/author-kit/mmk-1-executive-assistant.jpg",
     publication_date: null,
     kindle_unlimited: true,
@@ -157,7 +157,7 @@ export const BOOKS: Book[] = [
       "rising mogul Dominic Kane. Now the CEO who controls outcomes for a living is back, and the daughter " +
       "Sophia has protected has the storm-gray eyes he can't deny. When Dominic returns to reclaim his " +
       "empire, he discovers the truth he was never meant to miss.",
-    pull_quote: "“He could buy silence. He could not buy back the years.”",
+    pull_quote: null, // not found in the live EPUB; BookTitle hides "Inside this book" when null
     cover_image: "/author-kit/mmk-3-baby-secret.jpg",
     publication_date: null,
     kindle_unlimited: true,
@@ -182,7 +182,7 @@ export const BOOKS: Book[] = [
       "expected to become the family they both desperately need. Ethan hasn't smiled since his wife died. " +
       "His five-year-old daughter hasn't spoken. Seven nannies have quit. He doesn't need another " +
       "complication — especially not one with quick wit, warm hands, and a mouth that talks back.",
-    pull_quote: "“She also had something Gloria would never understand: a little girl who finally called her Mama.”",
+    pull_quote: null, // not found in the live EPUB; BookTitle hides "Inside this book" when null
     cover_image: "/author-kit/mmk-4-forbidden-nanny.jpg",
     publication_date: null,
     kindle_unlimited: true,
