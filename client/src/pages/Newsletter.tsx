@@ -8,6 +8,7 @@ import {
 import { Link } from 'wouter';
 import { EnhancedSEOHead } from '@/components/ui/enhanced-seo-head';
 import { MailerLiteForm } from '@/components/MailerLiteForm';
+import { BOOKS } from '@/data/books';
 import { Reveal, StaggerReveal, StaggerItem, GlowOrb, GlassCard } from '@/components/author-kit';
 
 /**
@@ -208,19 +209,20 @@ export default function Newsletter() {
               A Family Built on Acquisitions. A Ledger That Remembers Everything.
             </h2>
             <p className="text-gray-400 font-['Montserrat'] max-w-2xl mx-auto">
-              Start with the free Hudson Dynasty prequel and discover why readers can't put this series down.
+              Start with the free Hudson Dynasty prequel, then read on with Hostile Tender, Poison Pill and Golden Parachute.
             </p>
           </Reveal>
 
           {/* Book covers row */}
           <StaggerReveal className="flex justify-center items-end gap-3 md:gap-6 mb-12" stagger={0.1}>
-            {[
-              { src: "/prequel-cover.jpg", label: "FREE", alt: "Prequel" },
-              { src: "/book1-cover.jpg", label: "Book 1", alt: "Book 1" },
-              { src: "/book2-cover.jpg", label: "Book 2", alt: "Book 2" },
-              { src: "/book3-cover.jpg", label: "Book 3", alt: "Book 3" },
-              { src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/wyOruOlpqOcFfhnS.jpg", label: "Book 4", alt: "Book 4" },
-            ].map((book, i) => (
+            {BOOKS.filter((b) => b.lane === "hudson_dynasty" && b.cover_image)
+              .sort((x, y) => (x.series_position ?? 0) - (y.series_position ?? 0))
+              .map((b) => ({
+                src: b.cover_image as string,
+                label: b.series_position === 0 ? "FREE prequel" : b.position_label,
+                alt: b.title,
+              }))
+              .map((book, i) => (
               <StaggerItem key={book.alt} className={`relative group ${i === 0 ? 'z-10' : ''}`}>
                 <div className={`relative ${i === 0 ? 'ring-2 ring-[#d4af37]/50 rounded-lg' : ''}`}>
                   <img
@@ -246,7 +248,7 @@ export default function Newsletter() {
           <div className="text-center">
             <Link href="/books">
               <span className="inline-flex items-center gap-2 text-[#d4af37] font-semibold font-['Montserrat'] hover:underline underline-offset-4 cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98]">
-                View the Complete Series
+                See all the books
                 <ArrowRight className="w-4 h-4" />
               </span>
             </Link>
