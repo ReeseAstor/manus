@@ -203,12 +203,14 @@ export const BOOKS: Book[] = [
     series_position: 0,
     format: "ebook_and_audiobook",
     position_label: "Prequel novella",
-    tagline: "Before the empire. Before the auditor. The night a Hudson decided.",
+    tagline: "She was hired to audit his empire. Falling for him could destroy them both.",
     blurb:
-      "A Hudson Dynasty prequel novella. Twenty years before the RIVIERA Ledger leaks, a young Sebastian " +
-      "Hudson makes the first deal that will define every one that follows — and the first promise he " +
-      "will fail to keep. A self-contained origin story for the family, the firm, and the silence.",
-    pull_quote: "“He did not yet know what an empire cost. He was about to learn.”",
+      "Forensic compliance attorney Arden Shaw walks into Hudson Vale to investigate a failed acquisition " +
+      "and finds a company bleeding secrets from the inside out. Every trail leads back to billionaire CEO " +
+      "Sebastian Hudson, who is controlled, dangerous, and impossible to read. When her investigation triggers " +
+      "threats, leaks, and a media firestorm, the board pushes them into a public engagement to calm investors. " +
+      "A high-heat corporate billionaire romance novella.",
+    pull_quote: null, // not found verbatim in the LIVE/PROOF EPUBs or source scripts; BookTitle/Permission hide the quote when null
     cover_image: "/covers/hudson-0-first-acquisition.jpg",
     publication_date: null,
     // Catalog: not enrolled in KU, Kindle $0.99 (free via the BookFunnel signup below).
@@ -231,13 +233,14 @@ export const BOOKS: Book[] = [
     format: "ebook_and_audiobook",
     position_label: "Book 1",
     tagline:
-      "She's the federal auditor sent to dismantle his empire. He's Manhattan's most dangerous billionaire fighting to save it.",
+      "One anonymous night. One ruthless billionaire. One building neither of them can afford to lose.",
     blurb:
-      "When the RIVIERA Ledger exposes three generations of Hudson secrets, SDNY forensic auditor Nia " +
-      "Carter and CEO Sebastian Hudson are forced into dangerous proximity. The hostile takeover " +
-      "escalates. Secrets surface from the family archives. The line between investigation and intimacy " +
-      "dissolves — and trusting each other could cost them everything.",
-    pull_quote: "“A record outlives the men who keep it. The discipline is in waiting.”",
+      "Nia Carter is a tenants' lawyer fighting for her grandmother's Bronx apartment building. Dante Hudson was " +
+      "raised to win and to never let emotion touch the deal. After one anonymous night in a luxury hotel, each " +
+      "learns the other is the opponent in the fight over that building. They should be enemies. They are " +
+      "enemies, until every mediation session and stolen touch pulls them deeper. A steamy billionaire romantic " +
+      "suspense novel.",
+    pull_quote: null, // not found verbatim in the LIVE/PROOF EPUBs or source scripts; BookTitle/Permission hide the quote when null
     cover_image: "https://m.media-amazon.com/images/I/81iGQzEnacL._SL1500_.jpg",
     publication_date: null,
     kindle_unlimited: true,
@@ -258,14 +261,14 @@ export const BOOKS: Book[] = [
     format: "ebook_and_audiobook",
     position_label: "Book 2",
     tagline:
-      "The takeover failed. The war didn't end — it went underground, into the bloodstream of the family itself.",
+      "He came to take everything she'd built. She built a trap with his name on it.",
     blurb:
-      "Book 2 of the Hudson Dynasty. With the hostile bid beaten back, Sebastian Hudson thought he'd " +
-      "secured the empire. But a poison-pill defense buried in the family trust is metabolizing into " +
-      "something lethal, and Nia Carter's audit has only scratched the surface. As old loyalties turn " +
-      "toxic and the people closest to them choose sides, the line between protecting the dynasty and " +
-      "destroying it disappears.",
-    pull_quote: "“Every defense is a slow poison. The art is choosing who swallows it.”",
+      "Xia Zhao doesn't lose. As the architect of Apex Dynamics' defenses, she spent two years loading the one " +
+      "weapon that stops a hostile takeover cold. Corporate raider Damien Vale has taken eleven companies apart in " +
+      "nine years, and he has never met a defense he couldn't dismantle until hers. Forced into the same rooms " +
+      "and late nights, they find the leak that started this war came from inside her own walls. " +
+      "Enemies to lovers, very steamy.",
+    pull_quote: null, // not found verbatim in the LIVE/PROOF EPUBs or source scripts; BookTitle/Permission hide the quote when null
     cover_image: "https://storage.mlcdn.com/account_image/1246760/sbcZf9GwBaCWBcC5QKmu8oWakuKfIhojGzbnYNMb.png",
     publication_date: null,
     kindle_unlimited: true,
@@ -292,8 +295,7 @@ export const BOOKS: Book[] = [
       "Sixty quiet minutes for the late hours. Across ten chapters, The Need for Permission examines what " +
       "it means to live waiting for someone else to say yes — and what changes the moment you stop. " +
       "Made for listening alone, in the dark, when the house is finally still.",
-    pull_quote:
-      "“You do not need anyone's permission to be the person you already are. You only need to stop waiting for it.”",
+    pull_quote: null, // not found verbatim in the LIVE/PROOF EPUBs or source scripts; BookTitle/Permission hide the quote when null
     cover_image: "/covers/permission-cover.jpg",
     cover_image_square: "/covers/permission-square-1200.jpg",
     publication_date: null,

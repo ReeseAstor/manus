@@ -27,11 +27,11 @@ export const bookSeoMeta: Record<string, BookSeoEntry> = {
   '_home': {
     title: 'Reese Astor | Billionaire Romance',
     description:
-      'Steamy billionaire romance set in Manhattan. Read the Manhattan Money Kings series and Hudson Dynasty novels by Reese Astor, on Kindle Unlimited.',
+      'Steamy billionaire romance set in Manhattan. Read the Manhattan Money Kings series and Hudson Dynasty novels by Reese Astor, on Kindle.',
     keywords: [
       'billionaire romance',
       'steamy billionaire romance',
-      'contemporary romance Kindle Unlimited',
+      'contemporary romance Kindle',
       'Manhattan romance novels',
       'romance author',
       'Reese Astor books',
@@ -40,7 +40,7 @@ export const bookSeoMeta: Record<string, BookSeoEntry> = {
     ],
     ogTitle: 'Reese Astor | Steamy Billionaire Romance',
     ogDescription:
-      "Power, passion, and Manhattan's elite. Dive into the Manhattan Money Kings series by romance author Reese Astor. Available on Kindle Unlimited.",
+      "Power, passion, and Manhattan's elite. Dive into the Manhattan Money Kings series by romance author Reese Astor. Available on Kindle.",
     ogType: 'website',
   },
 
@@ -133,11 +133,11 @@ export const bookSeoMeta: Record<string, BookSeoEntry> = {
   'hostile-tender': {
     title: "Enemies to Lovers Billionaire Romance | Hostile Tender",
     description:
-      "She was sent to dismantle his empire. He's Manhattan's most dangerous billionaire. A steamy enemies-to-lovers romance from the Hudson Dynasty series by Reese Astor.",
+      "She is the tenants' lawyer fighting for her grandmother's Bronx building. He is the billionaire behind the company trying to demolish it. A steamy enemies-to-lovers romance from the Hudson Dynasty series by Reese Astor.",
     keywords: [
       'enemies to lovers billionaire romance',
-      'corporate investigation romance',
-      'auditor billionaire romance',
+      'tenants lawyer billionaire romance',
+      'Bronx billionaire romance',
       'Hudson Dynasty romance',
       'dark billionaire romance series',
       'enemies to lovers forced proximity',
@@ -145,7 +145,7 @@ export const bookSeoMeta: Record<string, BookSeoEntry> = {
     ],
     ogTitle: "Hostile Tender | Enemies to Lovers Corporate Billionaire Romance",
     ogDescription:
-      "When a forensic auditor and a billionaire CEO are forced into dangerous proximity, investigation becomes intimacy. Hudson Dynasty Book 1 by Reese Astor.",
+      "One anonymous night, one ruthless billionaire, one building neither of them can afford to lose. Hudson Dynasty Book 1 by Reese Astor.",
     ogType: 'book',
   },
 
@@ -157,7 +157,7 @@ export const bookSeoMeta: Record<string, BookSeoEntry> = {
       "Get a full-length Manhattan billionaire romance free. The First Acquisition is Reese Astor's Inner Circle welcome gift — no strings, just steamy romance.",
     keywords: [
       'free billionaire romance book',
-      'free contemporary romance Kindle Unlimited',
+      'free contemporary romance',
       'Manhattan billionaire romance free',
       'Reese Astor free book',
       'romance author newsletter free book',
@@ -173,17 +173,17 @@ export const bookSeoMeta: Record<string, BookSeoEntry> = {
   'the-billionaires-one-night-stand': {
     title: "Billionaire One Night Stand Romance | Reese Astor",
     description:
-      "One unforgettable night with Manhattan's most powerful billionaire. A steamy, fast-paced one night stand romance on Kindle Unlimited by Reese Astor.",
+      "One unforgettable night with Manhattan's most powerful billionaire. A steamy, fast-paced one night stand romance on Kindle by Reese Astor.",
     keywords: [
       'billionaire one night stand romance',
-      'one night stand romance Kindle Unlimited',
+      'one night stand romance Kindle',
       'accidental pregnancy romance',
       'steamy contemporary romance standalone',
       'fast burn billionaire romance',
     ],
     ogTitle: "The Billionaire's One Night Stand | Steamy Contemporary Romance",
     ogDescription:
-      "No strings. No expectations. Until one night changes everything. A standalone steamy billionaire romance by Reese Astor on Kindle Unlimited.",
+      "No strings. No expectations. Until one night changes everything. A steamy billionaire prequel romance by Reese Astor, on Kindle.",
     ogType: 'book',
   },
 
@@ -191,12 +191,12 @@ export const bookSeoMeta: Record<string, BookSeoEntry> = {
   '_default': {
     title: 'Reese Astor | Billionaire Romance',
     description:
-      'Steamy billionaire contemporary romance by Reese Astor. Read the Manhattan Money Kings series and Hudson Dynasty novels on Kindle Unlimited.',
+      'Steamy billionaire contemporary romance by Reese Astor. Read the Manhattan Money Kings series and Hudson Dynasty novels on Kindle.',
     keywords: [
       'billionaire romance',
       'steamy billionaire romance',
       'contemporary romance',
-      'Kindle Unlimited romance',
+      'Kindle romance',
       'Reese Astor',
     ],
     ogTitle: 'Reese Astor | Steamy Billionaire Romance',
