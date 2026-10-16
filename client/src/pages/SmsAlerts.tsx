@@ -16,7 +16,7 @@ export default function SmsAlerts() {
     <div className="min-h-screen py-12">
       <EnhancedSEOHead
         title="Join Reese Astor Text Alerts"
-        description="Subscribe to Reese Astor SMS text alerts for new release announcements and exclusive offers. Recurring automated marketing messages. Msg & data rates may apply. Reply STOP to opt out."
+        description="Subscribe to Reese Astor SMS text alerts for new release and sale announcements. Recurring automated marketing messages. Msg & data rates may apply. Reply STOP to opt out."
         canonical="/sms"
       />
       <div className="container max-w-3xl">
@@ -29,7 +29,7 @@ export default function SmsAlerts() {
             Be first to know. By text.
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Get new release alerts and exclusive offers from author Reese Astor &mdash; sent straight to your phone, never anywhere else.
+            Get new release alerts and sale news from author Reese Astor &mdash; sent straight to your phone, never anywhere else.
           </p>
         </div>
 

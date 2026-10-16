@@ -24,7 +24,7 @@ export default function StaySubscribed() {
           You're staying. Thank you.
         </h2>
         <p style={{ margin: "0 0 8px", color: "#c8c8c8", fontSize: 16, lineHeight: 1.8 }}>
-          Noted — I'll keep the emails coming: new releases first, exclusive scenes, and the
+          Noted — I'll keep the emails coming: new releases first, bonus scenes, and the
           occasional peek behind the Manhattan skyline.
         </p>
         <p style={{ margin: "0 0 32px", color: "rgba(200,200,200,0.6)", fontSize: 14, lineHeight: 1.7 }}>

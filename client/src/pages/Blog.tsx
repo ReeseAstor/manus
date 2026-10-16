@@ -371,7 +371,7 @@ export default function Blog() {
             </h2>
             
             <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Subscribe to get writing tips, publishing strategies, and exclusive content delivered to your inbox every week.
+              Subscribe to get writing tips, publishing strategies, and news from Reese, a couple of emails a month.
             </p>
 
             <form onSubmit={handleNewsletterSubmit} className="max-w-xl mx-auto">

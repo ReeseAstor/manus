@@ -47,7 +47,7 @@ export default function NewsletterArchive() {
             <h1 className="text-4xl md:text-5xl font-bold">Newsletter Archive</h1>
           </div>
           <p className="text-xl text-pink-100 max-w-2xl">
-            Browse past newsletters and catch up on exclusive content, writing updates, and romance book recommendations
+            Browse past newsletters and catch up on writing updates, and romance book recommendations
           </p>
         </div>
       </div>
@@ -130,7 +130,7 @@ export default function NewsletterArchive() {
             Don't Miss Future Newsletters!
           </h2>
           <p className="text-xl text-pink-100 mb-8">
-            Subscribe now to get exclusive content, writing updates, and romance recommendations delivered to your inbox
+            Subscribe now to get writing updates, and romance recommendations delivered to your inbox
           </p>
           <Link href="/newsletter">
             <a className="inline-flex items-center gap-2 bg-white text-pink-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-pink-50 transition shadow-lg">
