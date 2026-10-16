@@ -33,6 +33,16 @@
   ],
   "redirects": [
     {
+      "source": "/romance-quiz",
+      "destination": "/books",
+      "permanent": false
+    },
+    {
+      "source": "/romance-quiz/",
+      "destination": "/books",
+      "permanent": false
+    },
+    {
       "source": "/reader-club",
       "destination": "/newsletter",
       "permanent": false

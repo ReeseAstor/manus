@@ -57,7 +57,6 @@ const NewsletterEditor = lazy(() =>
   import("./pages/NewsletterEditor").then(m => ({ default: m.NewsletterEditor })),
 );
 const CharacterQuiz = lazy(() => import("./pages/CharacterQuiz"));
-const RomanceTropeQuiz = lazy(() => import("./pages/Quiz"));
 const WhyBuyDirectPage = lazy(() => import("./pages/WhyBuyDirectPage"));
 const Profile = lazy(() => import("./pages/Profile"));
 const VipWelcome = lazy(() => import("./pages/VipWelcome"));
@@ -101,6 +100,8 @@ function withSEO(Page: ComponentType, seo: { title: string; description: string;
 // /reader-club, /vip-club and /welcome-back are retired for now (the vercel.json 307s cover direct
 // loads; this keeps in-app navigation consistent). The page components stay in the repo, unrouted.
 const ToNewsletter = () => <Redirect to="/newsletter" />;
+// /romance-quiz is retired (its result page named a book that does not exist); the page file stays unrouted.
+const ToBooks = () => <Redirect to="/books" />;
 
 const FavoritesPage = withSEO(Favorites, {
   title: "Reese's Favorites | Reese Astor",
@@ -154,7 +155,7 @@ function Router() {
         <Route path={"/stay-subscribed"} component={StaySubscribedPage} />
         <Route path={"/free-book"} component={FreeBook} />
         <Route path={"/quiz"} component={CharacterQuiz} />
-        <Route path={"/romance-quiz"} component={RomanceTropeQuiz} />
+        <Route path={"/romance-quiz"} component={ToBooks} />
         <Route path={"/shop"} component={Shop} />
         <Route path={"/favorites"} component={FavoritesPage} />
         <Route path={"/why-buy-direct"} component={WhyBuyDirectPage} />
