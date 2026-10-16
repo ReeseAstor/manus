@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
+import { toAbsoluteUrl } from "@/lib/seo-url";
 import { trpc } from "@/lib/trpc";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import {
@@ -48,11 +49,7 @@ function BookLayout({ book }: { book: Book }) {
 
   // Absolute cover URL for og:image / JSON-LD. Hotlinked covers are already absolute.
   const rawCover = book.cover_image_square ?? book.cover_image;
-  const coverUrl = rawCover
-    ? rawCover.startsWith("http")
-      ? rawCover
-      : `https://reeseastor.com${rawCover}`
-    : null;
+  const coverUrl = rawCover ? toAbsoluteUrl(rawCover) : null;
 
   // Per-title structured data: Book or Audiobook depending on format.
   const isAudiobook = book.format !== "ebook";

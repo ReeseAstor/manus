@@ -51,7 +51,7 @@ describe("Launch Sequence Email Templates", () => {
     const html = generateLaunchEmail3({ bookTitle: "The First Acquisition", nextBookTitle: "Hostile Tender" });
     expect(html).toContain("release week");
     expect(html).toContain("Hostile Tender");
-    expect(html).toContain("Coming Next in the Hudson Dynasty");
+    expect(html).toContain("Next in the Hudson Dynasty");
     expect(html).toContain("VIP list");
   });
 

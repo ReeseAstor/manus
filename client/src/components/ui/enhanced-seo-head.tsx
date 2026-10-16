@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { SITE_URL, toAbsoluteUrl } from '@/lib/seo-url';
 
 interface SEOProps {
   title: string;
@@ -31,9 +32,8 @@ export function EnhancedSEOHead({
   publishDate,
   modifiedDate,
 }: SEOProps) {
-  const siteUrl = 'https://reeseastor.com';
-  const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
-  const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+  const fullCanonical = toAbsoluteUrl(canonical, SITE_URL);
+  const fullOgImage = toAbsoluteUrl(ogImage, SITE_URL);
   
   // Optimize title for SEO (55-60 characters ideal)
   const optimizedTitle = title.length > 60 ? title.substring(0, 57) + '...' : title;
@@ -210,7 +210,7 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
       "@type": "ListItem",
       "position": index + 1,
       "name": item.name,
-      "item": `https://reeseastor.com${item.url}`
+      "item": toAbsoluteUrl(item.url)
     }))
   };
 }

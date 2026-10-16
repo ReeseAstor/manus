@@ -317,11 +317,11 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px;">
                 <tr>
                   <td style="padding: 24px 28px;">
-                    <p style="margin: 0 0 4px; color: #d4af37; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif;">Coming Soon</p>
+                    <p style="margin: 0 0 4px; color: #d4af37; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif;">Also by Reese Astor</p>
                     <h2 style="margin: 0 0 6px; color: #f5d76e; font-size: 22px; font-weight: bold;">The Hudson Dynasty Series</h2>
-                    <p style="margin: 0 0 16px; color: rgba(200,200,200,0.6); font-size: 13px; font-family: Arial, sans-serif;">A new generation of Manhattan power players</p>
+                    <p style="margin: 0 0 16px; color: rgba(200,200,200,0.6); font-size: 13px; font-family: Arial, sans-serif;">Manhattan billionaire romance</p>
                     <p style="margin: 0; color: #c8c8c8; font-size: 15px; line-height: 1.8;">
-                      When the daughter of a Manhattan Money King crosses paths with the one man her family forbids, old alliances shatter and new empires rise. If you loved the intensity of the MMK series, the Hudson Dynasty will take your breath away.
+                      The Hudson Dynasty starts with The First Acquisition, a prequel novella, and continues with Hostile Tender and Poison Pill. If you enjoyed the Manhattan Money Kings books, it is the next place to go.
                     </p>
                   </td>
                 </tr>

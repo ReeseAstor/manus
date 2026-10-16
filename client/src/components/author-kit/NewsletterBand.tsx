@@ -54,20 +54,20 @@ export function NewsletterBand({ onSubscribe, freeBookHref = "/free-book" }: Pro
           className="font-display font-normal text-[54px] leading-[1.05] mt-[22px]"
           style={{ color: TEXT, letterSpacing: "-0.02em", textWrap: "balance" }}
         >
-          Bonus scenes,<br />
-          <em className="font-normal">delivered like a secret.</em>
+          News and new releases,<br />
+          <em className="font-normal">straight from Reese.</em>
         </h2>
         <div className="mx-auto my-8 h-px w-14" style={{ background: GOLD_SOFT }} />
         <p
           className="font-cormorant italic text-[21px] leading-[1.55] mb-11"
           style={{ color: TEXT_SOFT, textWrap: "pretty" }}
         >
-          Exclusive chapters, early covers, and a free prequel novella — straight from Reese, never anywhere else.
+          News, new releases, and a free prequel novella, straight from Reese.
         </p>
 
         {subscribed ? (
           <div className="font-cormorant italic text-[22px]" style={{ color: GOLD }}>
-            Welcome. Your bonus chapter is on its way.
+            Welcome. Your free prequel novella is on its way.
           </div>
         ) : (
           <>

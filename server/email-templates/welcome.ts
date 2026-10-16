@@ -92,7 +92,7 @@ export function generateWelcomeEmail(data: WelcomeEmailData): string {
                       A Manhattan Billionaire Romance (Hudson Dynasty)
                     </p>
                     <p style="margin: 0 0 24px; color: #e5e5e5; font-size: 15px; line-height: 1.7;">
-                      Before the empire. Before the auditor. The night a Hudson decided. A darker corporate romance prequel with fake engagement tension, forensic scandal, and a morally gray billionaire hero.
+                      She was hired to audit his empire. Falling for him could destroy them both. A high-heat corporate billionaire romance novella.
                     </p>
 
                     <!-- Download Button -->

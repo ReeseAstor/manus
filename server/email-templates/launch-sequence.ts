@@ -332,10 +332,10 @@ export function generateLaunchEmail3(options?: {
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 10px;">
                 <tr>
                   <td style="padding: 24px 28px; text-align: center;">
-                    <p style="margin: 0 0 6px; color: #d4af37; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif;">Coming Next in the Hudson Dynasty</p>
+                    <p style="margin: 0 0 6px; color: #d4af37; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif;">Next in the Hudson Dynasty</p>
                     <h2 style="margin: 0 0 10px; color: #f5d76e; font-size: 22px; font-weight: bold; font-family: Georgia, serif;">${nextBookTitle}</h2>
                     <p style="margin: 0 0 14px; color: #c8c8c8; font-size: 15px; line-height: 1.7;">
-                      The acquisition no one saw coming. Pre-order announcements land first in this inbox — stay close.
+                      The next book in the Hudson Dynasty. New release announcements land first in this inbox — stay close.
                     </p>
                     <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px; font-family: Arial, sans-serif;">
                       You're on the VIP list. You'll hear it here first.

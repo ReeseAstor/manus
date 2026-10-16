@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { BookOpen, Gift, Star, CheckCircle, Share2, Mail, ChevronRight, Heart, Sparkles } from "lucide-react";
+import { BookOpen, Gift, CheckCircle, Share2, Mail, ChevronRight, Heart, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -65,7 +65,7 @@ export default function FreeBook() {
   };
 
   const benefits = [
-    "Instant access to the complete full-length novella",
+    "Instant access to the complete novella",
     "The perfect introduction to the Hudson Dynasty series",
     "Early notifications for new releases",
     "Exclusive bonus content and character insights",
@@ -162,17 +162,6 @@ export default function FreeBook() {
                   <p className="text-xl text-[#d4af37]">
                     A Manhattan Billionaire Romance (Hudson Dynasty)
                   </p>
-                </div>
-
-                <div className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 w-fit">
-                  <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-[#d4af37] text-[#d4af37]" />
-                    ))}
-                  </div>
-                  <span className="text-white font-semibold">
-                    Loved by romance readers
-                  </span>
                 </div>
 
                 <p className="text-gray-300 text-xl leading-relaxed">
