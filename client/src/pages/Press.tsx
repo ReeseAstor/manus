@@ -71,14 +71,13 @@ export default function Press() {
             className="font-cormorant text-[19px] leading-[1.75]"
             style={{ color: TEXT, textWrap: "pretty" }}
           >
-            Reese Astor is a romance author. A former finance VP, she writes
+            Reese Astor is a romance author. She writes
             contemporary billionaire romance set among New York&rsquo;s most dangerous heirs &mdash;
             the Manhattan Money Kings (five novels, ongoing) and the Hudson Dynasty (a prequel
-            novella plus the audiobook-first novel <em>Hostile Tender</em>). In 2026 she launches
+            novella plus the novels <em>Hostile Tender</em> and <em>Poison Pill</em>). In 2026 she launches
             Intimate Psychological Narratives, a quieter line of audiobooks for late-night listening.
             The first title, <em>The Need for Permission: On the Quiet Recovery of Self-Trust</em>,
-            is a ten-chapter, hour-long meditation on rebuilding self-trust. Reese lives in New York
-            and reads her own audiobooks. She believes romance novels are more than entertainment
+            is a ten-chapter, hour-long meditation on rebuilding self-trust. She believes romance novels are more than entertainment
             &mdash; they&rsquo;re empowerment.
           </p>
         </div>

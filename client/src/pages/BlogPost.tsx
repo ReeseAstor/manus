@@ -376,7 +376,7 @@ export default function BlogPost() {
                     About Reese Astor
                   </h3>
                   <p className="text-gray-300 leading-relaxed mb-4">
-                    Author of steamy billionaire romance. Former corporate VP turned full-time author, helping aspiring writers build profitable author businesses through coaching and mentorship.
+                    Author of steamy billionaire romance, sharing what she has learned about writing and publishing with aspiring authors.
                   </p>
                   <div className="flex gap-3">
                     <Button

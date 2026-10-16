@@ -27,7 +27,7 @@ export default function About() {
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       <EnhancedSEOHead
         title="About Reese Astor | Romance Author"
-        description="Meet Reese Astor, author of steamy billionaire romances. From the Bronx to the page, discover the story behind the Manhattan Money Kings series."
+        description="Meet Reese Astor, author of steamy billionaire romances. Discover the story behind the Manhattan Money Kings and Hudson Dynasty series."
         canonical="/about"
         keywords={["Reese Astor biography", "romance author", "writing coach", "Manhattan Money Kings author", "about Reese Astor"]}
         structuredData={[authorStructuredData]}
@@ -87,7 +87,7 @@ export default function About() {
               </h1>
 
               <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
-                From Corporate Finance VP to Romance Author
+                Author of the Manhattan Money Kings and Hudson Dynasty Series
               </p>
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-4">
@@ -137,13 +137,13 @@ export default function About() {
                   </h2>
                   <div className="space-y-6">
                     <p>
-                      I spent years climbing the corporate ladder as a VP in finance, mastering spreadsheets and boardroom negotiations. But at night, I was writing steamy romance novels, creating worlds where passion and power collide.
+                      I write steamy romance novels, creating worlds where passion and power collide.
                     </p>
                     <p>
-                      The turning point came when I realized I could help other women do the same—turn their creative dreams into profitable businesses. I left corporate America to write full-time and teach aspiring authors the business strategies that actually work.
+                      I also share what I have learned about writing and publishing with aspiring authors.
                     </p>
                     <p>
-                      Today, I'm a romance author with the Manhattan Money Kings series and a business strategist helping women build sustainable author careers. I bring my corporate expertise to the creative world, showing writers how to treat their passion like the business it deserves to be.
+                      Today, I'm a romance author with the Manhattan Money Kings and Hudson Dynasty series, and I write about the business of being an author for writers building their own careers.
                     </p>
                   </div>
                 </div>

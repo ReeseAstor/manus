@@ -71,41 +71,6 @@ Writing compelling intimate scenes takes practice, but these fundamentals will s
       publishedAt: new Date('2024-11-15'),
     },
     {
-      title: "From Zero to Published: My Self-Publishing Journey",
-      slug: "self-publishing-journey",
-      excerpt: "How I went from corporate VP to full-time romance author, and the lessons I learned along the way about KDP publishing.",
-      content: `Five years ago, I was a Vice President at a Fortune 500 company, working 60-hour weeks and dreaming of a different life. Today, I'm a romance author with multiple series and a thriving author business. This is the story of how I made that transformation—and what I learned along the way.
-
-## The Beginning: Writing in Secret
-
-I started writing romance novels in secret during my lunch breaks and on weekends. For two years, I didn't tell anyone except my closest friends. I was terrified of judgment, of failure, of being seen as unprofessional. But the stories kept coming, and eventually, I had three completed manuscripts sitting on my hard drive.
-
-The turning point came when I realized I was more afraid of never trying than of failing. I decided to publish my first book on Amazon KDP, using a pen name to protect my corporate identity. I gave myself one year to see what would happen.
-
-## The Learning Curve: Mistakes and Breakthroughs
-
-My first book sold 12 copies in its first month—mostly to friends and family. I was devastated. But instead of giving up, I dove into learning everything I could about self-publishing, marketing, and the romance genre.
-
-I made every mistake in the book: terrible covers, weak blurbs, no email list, inconsistent publishing schedule. But each mistake taught me something valuable. I invested in professional covers, hired an editor, studied successful authors' strategies, and most importantly, I kept writing.
-
-The breakthrough came with my third book. I'd learned enough about Amazon's algorithms, reader expectations, and marketing to position it correctly. It hit the top 100 in its category within the first week. Suddenly, all three of my books started selling. I'd found my audience.
-
-## The Transition: Leaving Corporate America
-
-By the end of my first year, I was making enough from my books to cover my mortgage. By year two, I was earning half my corporate salary from writing. The decision to leave my VP position wasn't easy—I was walking away from security, prestige, and a clear career path.
-
-But I was also walking toward creative freedom, flexible hours, and the ability to build something entirely my own. I gave my notice, and for the first time in my adult life, I felt like I was living authentically.
-
-## Final Thoughts
-
-Today, I have 15 published books, a six-figure author income, and the freedom to work from anywhere. If you're dreaming of becoming a published author, know that it's possible. It won't be easy, but it will be worth it.`,
-      category: "Author Journey",
-      readTime: "12 min read",
-      published: "published" as const,
-      authorId: adminUser.id,
-      publishedAt: new Date('2024-11-10'),
-    },
-    {
       title: "Building Your Author Brand on Social Media",
       slug: "author-brand-social-media",
       excerpt: "Practical strategies for growing your author platform on Instagram and Facebook without spending hours online every day.",

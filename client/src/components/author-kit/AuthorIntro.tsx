@@ -26,7 +26,7 @@ export function AuthorIntro() {
           className="font-cormorant italic mt-4 text-[20px]"
           style={{ color: TEXT_SOFT }}
         >
-          From Corporate Finance VP to Romance Author
+          Author of the Manhattan Money Kings and Hudson Dynasty Series
         </div>
         <div className="mx-auto my-8 h-px w-14" style={{ background: GOLD_SOFT }} />
         <blockquote
@@ -39,7 +39,7 @@ export function AuthorIntro() {
           className="font-cormorant text-[19px] leading-[1.75] max-w-[720px] mx-auto"
           style={{ color: TEXT_SOFT, textWrap: "pretty" }}
         >
-          A former finance VP turned full-time novelist, Reese Astor is the author of the Manhattan Money Kings series and the Hudson Dynasty novels. She writes contemporary romance set among New York&rsquo;s most dangerous heirs &mdash; men who own skylines, board rooms, and the women who finally bring them to their knees.
+          Reese Astor is the author of the Manhattan Money Kings series and the Hudson Dynasty novels. She writes contemporary romance set among New York&rsquo;s most dangerous heirs &mdash; men who own skylines, board rooms, and the women who finally bring them to their knees.
         </p>
         <div className="mt-10">
           <Link href="/about">

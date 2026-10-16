@@ -64,15 +64,6 @@ export default function Blog() {
       slug: "writing-steamy-romance-scenes",
     },
     {
-      id: 2,
-      title: "From Zero to Published: My Self-Publishing Journey",
-      excerpt: "How I went from corporate VP to full-time romance author, and the lessons I learned along the way about KDP publishing.",
-      category: "Author Journey",
-      date: "November 10, 2025",
-      readTime: "12 min read",
-      slug: "self-publishing-journey",
-    },
-    {
       id: 3,
       title: "Building Your Author Brand on Social Media",
       excerpt: "Practical strategies for growing your author platform on Instagram and Facebook without spending hours online every day.",
