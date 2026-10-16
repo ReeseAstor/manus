@@ -63,8 +63,8 @@ export default function SmsAlerts() {
           </div>
           <div className="rounded-xl border border-border/60 bg-card p-5 space-y-2">
             <MessageCircle className="h-5 w-5 text-primary" />
-            <h3 className="font-semibold text-foreground">Exclusive offers</h3>
-            <p className="text-sm text-muted-foreground">Subscriber-only deals and early access.</p>
+            <h3 className="font-semibold text-foreground">Sale news</h3>
+            <p className="text-sm text-muted-foreground">Hear when a book goes on sale.</p>
           </div>
           <div className="rounded-xl border border-border/60 bg-card p-5 space-y-2">
             <ShieldCheck className="h-5 w-5 text-primary" />
