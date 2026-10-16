@@ -21,7 +21,7 @@ export function EnhancedSEOHead({
   description,
   keywords = [],
   canonical,
-  ogImage = '/images/default-og-image.jpg',
+  ogImage = '/reese-astor-author.jpg',
   ogType = 'website',
   twitterCard = 'summary_large_image',
   structuredData = [],

@@ -21,7 +21,6 @@ import {
 import { getBook, getBooksInLane } from "@/data/books";
 
 const SAMPLE_AUDIO_SRC = "/permission/sample.mp3";
-const COVER_SQUARE_SRC = "/covers/permission-square-1200.jpg";
 const CANONICAL_URL = "https://reeseastor.com/permission";
 
 const PERMISSION_GROUP_ID =
@@ -37,7 +36,6 @@ const audiobookSchema = {
   "numberOfChapters": 10,
   "inLanguage": "en",
   "url": CANONICAL_URL,
-  "image": `https://reeseastor.com${COVER_SQUARE_SRC}`,
   "publisher": { "@type": "Organization", "name": "Reese Astor" },
   "offers": {
     "@type": "AggregateOffer",
@@ -123,7 +121,6 @@ export default function Permission() {
         description="A ten-chapter audiobook on rebuilding self-trust, in your own voice and your own hours. By Reese Astor."
         canonical={CANONICAL_URL}
         ogType="book"
-        ogImage={`https://reeseastor.com${COVER_SQUARE_SRC}`}
         keywords={[
           "Reese Astor",
           "The Need for Permission",
@@ -198,6 +195,7 @@ export default function Permission() {
           >
             <CoverHalo
               src={book.cover_image_square ?? book.cover_image}
+              title={book.title}
               alt="The Need for Permission — audiobook cover"
               width={400}
             />

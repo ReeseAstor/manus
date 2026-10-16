@@ -133,6 +133,7 @@ function CardGrid({ books, flagAudiobook }: { books: Book[]; flagAudiobook?: boo
               <div className="flex justify-center mb-6">
                 <CoverHalo
                   src={book.cover_image}
+                  title={book.title}
                   alt={`${book.title} — cover`}
                   width={240}
                 />
@@ -193,6 +194,7 @@ function HeroCard({ book }: { book: Book }) {
       <div className="flex justify-center lg:justify-start">
         <CoverHalo
           src={book.cover_image_square ?? book.cover_image}
+          title={book.title}
           alt={`${book.title} — cover`}
           width={320}
         />

@@ -34,9 +34,10 @@ export type Book = {
   tagline: string;
   blurb: string;
   pull_quote: string | null;
-  cover_image: string;
+  /** null renders a typographic placeholder until a real cover exists. */
+  cover_image: string | null;
   /** 1200x1200 social-share variant. Falls back to cover_image when absent. */
-  cover_image_square?: string;
+  cover_image_square?: string | null;
   publication_date: string | null;
   kindle_unlimited: boolean;
   retailers: Partial<Record<RetailerKey, string | null>>;
@@ -74,11 +75,13 @@ export const BOOKS: Book[] = [
     series_position: 0,
     format: "ebook",
     position_label: "Prequel",
-    tagline: "One night was supposed to mean nothing. He decided it would mean everything.",
+    tagline: "One night with Manhattan's most ruthless CEO.",
     blurb:
-      "She walked into the bar to forget her name. He spent the next morning learning every syllable of it. " +
-      "When the city's most ruthless dealmaker insists one night was never going to be enough, the woman " +
-      "who came to him as a stranger has to decide whether to disappear — or stay and be wholly seen.",
+      "Victoria Cruz never shows weakness, especially after they deny her law firm partnership. James Chen " +
+      "doesn't do emotions or touch. His billions buy him control of everything. Except her. One savage night " +
+      "shatters all limits. Monday destroys them both: he owns her firm now. Her new boss. Every moment alone " +
+      "tests their control. He could break her career. She could expose his empire. Neither will surrender " +
+      "first. A steamy billionaire romance. No cliffhanger. Guaranteed HEA.",
     pull_quote: null, // not found in the live EPUB; BookTitle hides "Inside this book" when null
     cover_image: "https://m.media-amazon.com/images/I/815-iFRAlpL._SL1500_.jpg",
     publication_date: null,
@@ -211,7 +214,7 @@ export const BOOKS: Book[] = [
       "threats, leaks, and a media firestorm, the board pushes them into a public engagement to calm investors. " +
       "A high-heat corporate billionaire romance novella.",
     pull_quote: null, // not found verbatim in the LIVE/PROOF EPUBs or source scripts; BookTitle/Permission hide the quote when null
-    cover_image: "/covers/hudson-0-first-acquisition.jpg",
+    cover_image: "/prequel-cover.jpg",
     publication_date: null,
     // Catalog: not enrolled in KU, Kindle $0.99 (free via the BookFunnel signup below).
     kindle_unlimited: false,
@@ -235,11 +238,15 @@ export const BOOKS: Book[] = [
     tagline:
       "One anonymous night. One ruthless billionaire. One building neither of them can afford to lose.",
     blurb:
-      "Nia Carter is a tenants' lawyer fighting for her grandmother's Bronx apartment building. Dante Hudson was " +
-      "raised to win and to never let emotion touch the deal. After one anonymous night in a luxury hotel, each " +
-      "learns the other is the opponent in the fight over that building. They should be enemies. They are " +
-      "enemies, until every mediation session and stolen touch pulls them deeper. A steamy billionaire romantic " +
-      "suspense novel.",
+      "Nia Carter has spent her life fighting for people like her grandmother, Pearl, whose Bronx apartment " +
+      "building is being targeted by one of Manhattan's most powerful development families. Dante Hudson was " +
+      "raised to win. To acquire. To never let emotion touch the deal. Then one no-names night in a luxury hotel " +
+      "changes everything. By morning, Nia learns the stranger she can't stop thinking about is the man behind " +
+      "the company trying to demolish the building that raised her. Dante learns the woman who walked out " +
+      "before dawn is the tenants' lawyer standing between him and the most important project of his career. " +
+      "They should be enemies. They are enemies. But every mediation session, every secret meeting, and every " +
+      "stolen touch pulls them deeper into a fight neither one expected. A steamy billionaire romantic suspense " +
+      "novel.",
     pull_quote: null, // not found verbatim in the LIVE/PROOF EPUBs or source scripts; BookTitle/Permission hide the quote when null
     cover_image: "https://m.media-amazon.com/images/I/81iGQzEnacL._SL1500_.jpg",
     publication_date: null,
@@ -296,8 +303,9 @@ export const BOOKS: Book[] = [
       "it means to live waiting for someone else to say yes — and what changes the moment you stop. " +
       "Made for listening alone, in the dark, when the house is finally still.",
     pull_quote: null, // not found verbatim in the LIVE/PROOF EPUBs or source scripts; BookTitle/Permission hide the quote when null
-    cover_image: "/covers/permission-cover.jpg",
-    cover_image_square: "/covers/permission-square-1200.jpg",
+    // No cover asset exists yet (needs one from Artistly/Canva). The UI shows a typographic placeholder.
+    cover_image: null,
+    cover_image_square: null,
     publication_date: null,
     kindle_unlimited: false,
     retailers: {

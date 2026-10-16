@@ -46,6 +46,14 @@ function BookLayout({ book }: { book: Book }) {
     await subscribeMutation.mutateAsync({ email: email.trim() });
   };
 
+  // Absolute cover URL for og:image / JSON-LD. Hotlinked covers are already absolute.
+  const rawCover = book.cover_image_square ?? book.cover_image;
+  const coverUrl = rawCover
+    ? rawCover.startsWith("http")
+      ? rawCover
+      : `https://reeseastor.com${rawCover}`
+    : null;
+
   // Per-title structured data: Book or Audiobook depending on format.
   const isAudiobook = book.format !== "ebook";
   const schemaType = isAudiobook ? "Audiobook" : "Book";
@@ -56,7 +64,7 @@ function BookLayout({ book }: { book: Book }) {
     author: { "@type": "Person", name: "Reese Astor" },
     inLanguage: "en",
     url: `https://reeseastor.com/books/${book.slug}`,
-    image: `https://reeseastor.com${book.cover_image_square ?? book.cover_image}`,
+    ...(coverUrl && { image: coverUrl }),
     publisher: { "@type": "Organization", name: "Reese Astor" },
     ...(book.price_usd != null && {
       offers: {
@@ -78,7 +86,7 @@ function BookLayout({ book }: { book: Book }) {
         description={book.tagline}
         canonical={`https://reeseastor.com/books/${book.slug}`}
         ogType="book"
-        ogImage={`https://reeseastor.com${book.cover_image_square ?? book.cover_image}`}
+        ogImage={coverUrl ?? undefined}
         structuredData={[structured]}
       />
 
@@ -117,6 +125,7 @@ function BookLayout({ book }: { book: Book }) {
           >
             <CoverHalo
               src={book.cover_image_square ?? book.cover_image}
+              title={book.title}
               alt={`${book.title} — cover`}
               width={320}
             />
@@ -176,6 +185,7 @@ function BookLayout({ book }: { book: Book }) {
                     <div className="flex justify-center">
                       <CoverHalo
                         src={other.cover_image}
+                        title={other.title}
                         alt={`${other.title} — cover`}
                         width={180}
                       />

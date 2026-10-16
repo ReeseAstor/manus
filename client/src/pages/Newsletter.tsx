@@ -94,7 +94,7 @@ export default function Newsletter() {
                   <div className="relative flex-shrink-0">
                     <div className="absolute -inset-1 bg-gradient-to-br from-[#d4af37]/40 to-transparent rounded-lg blur-sm" />
                     <img 
-                      src="/covers/hudson-0-first-acquisition.jpg" 
+                      src="/prequel-cover.jpg" 
                       alt="The First Acquisition" 
                       className="relative w-20 h-28 object-cover rounded-lg shadow-xl"
                     />
