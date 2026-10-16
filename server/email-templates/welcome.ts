@@ -129,17 +129,17 @@ export function generateWelcomeEmail(data: WelcomeEmailData): string {
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #e5e5e5; font-size: 15px; line-height: 1.6;">
-                    &#127873;&nbsp;&nbsp;Exclusive bonus chapters &amp; epilogues
+                    &#127873;&nbsp;&nbsp;Bonus scenes from the series
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #e5e5e5; font-size: 15px; line-height: 1.6;">
-                    &#128064;&nbsp;&nbsp;Behind-the-scenes sneak peeks
+                    &#128064;&nbsp;&nbsp;Early cover reveals and ARC team invitations
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #e5e5e5; font-size: 15px; line-height: 1.6;">
-                    &#128150;&nbsp;&nbsp;Special deals &amp; giveaways
+                    &#128150;&nbsp;&nbsp;Sales and release-day news
                   </td>
                 </tr>
               </table>

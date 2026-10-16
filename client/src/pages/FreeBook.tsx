@@ -67,9 +67,9 @@ export default function FreeBook() {
   const benefits = [
     "Instant access to the complete novella",
     "The perfect introduction to the Hudson Dynasty series",
-    "Early notifications for new releases",
-    "Exclusive bonus content and character insights",
-    "Behind-the-scenes author updates",
+    "New release alerts",
+    "Bonus scenes and early cover reveals",
+    "Invitations to join the ARC team",
   ];
 
   const freeBookSchema = generateBookSchema({

@@ -21,17 +21,17 @@ import { Reveal, StaggerReveal, StaggerItem, GlowOrb, GlassCard } from '@/compon
  */
 export default function Newsletter() {
   useEffect(() => {
-    document.title = "Join Reese Astor's Newsletter | Free Book & Exclusive Content";
+    document.title = "Join Reese Astor's Newsletter | Free Book & New Release Alerts";
   }, []);
 
   // ─── Main Page ──────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a] relative overflow-hidden">
       <EnhancedSEOHead
-        title="Join Reese Astor's Newsletter | Free Book & Exclusive Content"
-        description="Subscribe to Reese Astor's newsletter and get The First Acquisition free. Receive exclusive bonus scenes, early cover reveals, and new release alerts."
+        title="Join Reese Astor's Newsletter | Free Book & New Release Alerts"
+        description="Subscribe to Reese Astor's newsletter and get The First Acquisition free. Receive bonus scenes, early cover reveals, ARC invitations, and new release alerts."
         canonical="/newsletter"
-        keywords={["romance newsletter", "Reese Astor newsletter", "free romance book", "book release alerts", "exclusive bonus content", "reader newsletter"]}
+        keywords={["romance newsletter", "Reese Astor newsletter", "free romance book", "book release alerts", "bonus scenes", "reader newsletter"]}
       />
 
       {/* Ambient lighting effects */}
@@ -60,7 +60,7 @@ export default function Newsletter() {
               <p className="text-lg text-gray-300 mb-8 font-['Montserrat'] leading-relaxed max-w-lg">
                 Join the Hudson Dynasty inner circle. Get your free copy of 
                 <em className="text-[#d4af37]"> The First Acquisition</em>, 
-                plus new release alerts, deleted scenes, and exclusive bonus content delivered 
+                plus new release alerts, bonus scenes, and early cover reveals delivered 
                 straight to your inbox.
               </p>
 
@@ -120,7 +120,7 @@ export default function Newsletter() {
 
                 {/* Expectation setting — improves open rates & reduces spam complaints */}
                 <p className="text-xs text-gray-400 text-center font-['Montserrat'] mt-4 leading-relaxed">
-                  Expect about <span className="text-[#d4af37]">2 emails a month</span>. Your free
+                  Expect about <span className="text-[#d4af37]">a couple of emails a month</span>. Your free
                   book link arrives instantly — check your inbox (and promotions tab).
                 </p>
 
@@ -161,22 +161,22 @@ export default function Newsletter() {
               {
                 icon: BookOpen,
                 title: "New Release Alerts",
-                description: "Be the first to know when a new Hudson Dynasty book drops, with exclusive early access deals",
+                description: "Be the first to know when a new book drops.",
               },
               {
                 icon: Sparkles,
-                title: "Bonus Chapters",
-                description: "Deleted scenes, extended epilogues, and character POV chapters you won't find anywhere else",
+                title: "Bonus Scenes",
+                description: "Bonus scenes from the Hudson Dynasty books, sent to subscribers.",
               },
               {
                 icon: Heart,
-                title: "Behind the Scenes",
-                description: "Character inspiration, writing process updates, and sneak peeks at upcoming Hudson Dynasty storylines",
+                title: "First Looks",
+                description: "Early cover reveals, release dates, and the occasional behind-the-scenes note.",
               },
               {
                 icon: Star,
-                title: "Exclusive Giveaways",
-                description: "Subscriber-only contests for signed books, merchandise, and special reader experiences",
+                title: "ARC Invitations",
+                description: "A chance to join the ARC team and read new releases early, in exchange for an honest review.",
               },
             ].map((benefit) => (
               <StaggerItem key={benefit.title}>
@@ -271,8 +271,8 @@ export default function Newsletter() {
                 Don't Miss Out
               </h2>
               <p className="text-gray-300 font-['Montserrat'] mb-8 max-w-lg mx-auto">
-                Join the list for exclusive content, early access to new releases,
-                and a free book — all delivered to their inbox. About two emails a month, no spam.
+                Join the list for new release alerts, bonus scenes,
+                and a free book, all delivered to your inbox. A couple of emails a month, no spam.
               </p>
 
               {/* MailerLite embedded form (k0kQw5) */}

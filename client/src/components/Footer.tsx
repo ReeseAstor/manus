@@ -118,7 +118,7 @@ export function Footer() {
               </a>
             </div>
             <p className="text-xs text-muted-foreground mt-4">
-              Join the VIP list for exclusive content and new release alerts.
+              Join the newsletter for new release alerts and bonus scenes.
             </p>
           </div>
         </div>

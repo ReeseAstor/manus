@@ -116,7 +116,7 @@ export function NewsletterBand({ onSubscribe, freeBookHref = "/free-book" }: Pro
           className="font-inter text-[11px] uppercase mt-[18px]"
           style={{ color: MUTED, letterSpacing: "0.22em" }}
         >
-          One letter a month · Unsubscribe anytime
+          A couple of emails a month · Unsubscribe anytime
         </p>
 
         <a

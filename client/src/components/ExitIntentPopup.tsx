@@ -13,7 +13,7 @@ export function ExitIntentPopup() {
 
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
-      toast.success("Check your inbox for the exclusive deleted scene!");
+      toast.success("Check your inbox for your free book!");
       setIsVisible(false);
       localStorage.setItem("reese_exit_popup_converted", "true");
     },
@@ -98,6 +98,7 @@ export function ExitIntentPopup() {
               {/* Close button */}
               <button
                 onClick={handleDismiss}
+                aria-label="Close"
                 className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors z-10"
               >
                 <X className="h-5 w-5" />
@@ -118,11 +119,11 @@ export function ExitIntentPopup() {
                 </h2>
 
                 <p className="text-gray-300 text-lg mb-2">
-                  Get an <span className="text-[#d4af37] font-semibold">exclusive deleted scene</span> from the Manhattan Money Kings series.
+                  Get <span className="text-[#d4af37] font-semibold">The First Acquisition</span>, a free Hudson Dynasty prequel novella.
                 </p>
 
                 <p className="text-gray-500 text-sm mb-6">
-                  This scene reveals what happened <em>after</em> the final chapter. Only available to VIP readers.
+                  Join the newsletter for new release alerts and bonus scenes.
                 </p>
 
                 {/* Form */}
@@ -151,21 +152,21 @@ export function ExitIntentPopup() {
                     ) : (
                       <span className="flex items-center gap-2 justify-center">
                         <Sparkles className="h-5 w-5" />
-                        Send Me the Scene
+                        Send Me the Free Book
                       </span>
                     )}
                   </Button>
                 </form>
 
                 <p className="text-xs text-gray-600 mt-4">
-                  Plus a free copy of Book 1. No spam, ever. Unsubscribe anytime.
+                  No spam, ever. Unsubscribe anytime.
                 </p>
 
                 <button
                   onClick={handleDismiss}
                   className="mt-4 text-sm text-gray-500 hover:text-gray-400 transition-colors underline"
                 >
-                  No thanks, I'll pass on the free scene
+                  No thanks, I'll pass on the free book
                 </button>
               </div>
             </div>

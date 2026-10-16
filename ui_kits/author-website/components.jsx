@@ -296,7 +296,7 @@ function NewsletterBand({ onSubscribe }) {
           </form>
         )}
         <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: MUTED, marginTop: 18, letterSpacing: "0.22em", textTransform: "uppercase" }}>
-          One letter a month · Unsubscribe anytime
+          A couple of emails a month · Unsubscribe anytime
         </p>
         <a href="https://swiy.co/bf0" target="_blank" rel="noopener" style={{ display: "inline-block", marginTop: 26, fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontSize: 17, color: GOLD, textDecoration: "none", borderBottom: "1px solid " + GOLD_SOFT, paddingBottom: 2 }}>
           Or claim your free prequel novella instantly →
