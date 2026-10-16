@@ -232,7 +232,7 @@ export default function FreeBook() {
                 What You'll Get
               </h2>
               <p className="text-xl text-gray-400">
-                More than just a free book — your VIP pass to the Hudson Dynasty world
+                What you&rsquo;ll get when you join
               </p>
             </div>
 
