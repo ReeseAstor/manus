@@ -99,15 +99,16 @@ describe('SMS Unsubscribe Webhook', () => {
     });
 
     it('should have appropriate resubscribe confirmation message', () => {
-      const resubscribeMessage = `Welcome back! 🎉 You're now subscribed to Reese Astor's SMS notifications. You'll receive updates about new steamy stories, exclusive offers, and VIP perks. Reply STOP to unsubscribe anytime.`;
+      const resubscribeMessage = `Welcome back! 🎉 You're subscribed again to Reese Astor text alerts for new releases and sales. Reply STOP to opt out, HELP for help.`;
       
       expect(resubscribeMessage).toContain('subscribed');
       expect(resubscribeMessage).toContain('STOP');
-      expect(resubscribeMessage).toContain('unsubscribe');
+      expect(resubscribeMessage).toContain('HELP');
+      expect(resubscribeMessage).not.toMatch(/vip|exclusive/i);
     });
 
     it('should have helpful help message', () => {
-      const helpMessage = `Reese Astor SMS Help 📚\n\nReply STOP to unsubscribe\nReply START to resubscribe\n\nVisit reeseastor.com for more info or email support@reeseastor.com`;
+      const helpMessage = `Reese Astor SMS Help 📚\n\nReply STOP to unsubscribe\nReply START to resubscribe\n\nVisit reeseastor.com for more info or email info@reeseastor.com`;
       
       expect(helpMessage).toContain('STOP');
       expect(helpMessage).toContain('START');

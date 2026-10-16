@@ -186,7 +186,7 @@ async function handleStart(db: any, phoneNumber: string, existingPrefs: any): Pr
 
       console.log(`[SMS Webhook] User ${phoneNumber} resubscribed to SMS`);
       
-      return `Welcome back! 🎉 You're now subscribed to Reese Astor's SMS notifications. You'll receive updates about new steamy stories, exclusive offers, and VIP perks. Reply STOP to unsubscribe anytime.`;
+      return `Welcome back! 🎉 You're subscribed again to Reese Astor text alerts for new releases and sales. Reply STOP to opt out, HELP for help.`;
     } else {
       // Create new preferences with opt-in
       await db.insert(userSmsPreferences).values({
@@ -201,7 +201,7 @@ async function handleStart(db: any, phoneNumber: string, existingPrefs: any): Pr
 
       console.log(`[SMS Webhook] Created opt-in record for ${phoneNumber}`);
       
-      return `Welcome! 🎉 You're now subscribed to Reese Astor's SMS notifications. Get ready for updates about new steamy stories and exclusive VIP content. Reply STOP to unsubscribe anytime.`;
+      return `Welcome! 🎉 You're subscribed to Reese Astor text alerts for new releases and sales. Reply STOP to opt out, HELP for help.`;
     }
   } catch (error) {
     console.error('[SMS Webhook] Error handling START:', error);
@@ -211,7 +211,7 @@ async function handleStart(db: any, phoneNumber: string, existingPrefs: any): Pr
 
 // Help message
 function getHelpMessage(): string {
-  return `Reese Astor SMS Help 📚\n\nReply STOP to unsubscribe\nReply START to resubscribe\n\nVisit reeseastor.com for more info or email support@reeseastor.com`;
+  return `Reese Astor SMS Help 📚\n\nReply STOP to unsubscribe\nReply START to resubscribe\n\nVisit reeseastor.com for more info or email info@reeseastor.com`;
 }
 
 // Default message for unrecognized commands
