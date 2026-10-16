@@ -31,7 +31,7 @@ export default function BooksCatalog() {
   return (
     <div
       className="kit-grain min-h-screen font-cormorant"
-      style={{ background: INK, color: TEXT }}
+      style={{ background: INK, color: TEXT, overflowX: "clip" }}
     >
       <EnhancedSEOHead
         title="Books · Reese Astor"

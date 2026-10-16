@@ -82,7 +82,7 @@ export default function FreeBook() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]" style={{ overflowX: "clip" }}>
       <EnhancedSEOHead
         title="Free Book: The First Acquisition | Reese Astor Romance"
         description="Download The First Acquisition for free. A steamy Manhattan billionaire romance and Hudson Dynasty prequel novella by Reese Astor. Join the newsletter and start reading today."

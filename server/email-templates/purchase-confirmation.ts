@@ -11,7 +11,7 @@ export interface PurchaseConfirmationData {
   orderNumber: string;
   purchaseDate: string;
   bookTitle: string;
-  bookCover: string;
+  bookCover?: string;
   purchasePrice: string;
   downloadLinks: {
     epub: string;
@@ -207,7 +207,7 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
 
       <!-- Book Details -->
       <div class="book-details">
-        <img src="${data.bookCover}" alt="${data.bookTitle}" class="book-cover">
+        ${data.bookCover ? `<img src="${data.bookCover}" alt="${data.bookTitle}" class="book-cover">` : ""}
         <div class="book-info">
           <h3 class="book-title">${data.bookTitle}</h3>
           <p class="order-info"><strong>Order Number:</strong> ${data.orderNumber}</p>

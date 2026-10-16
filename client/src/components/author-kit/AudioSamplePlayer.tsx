@@ -80,6 +80,7 @@ export function AudioSamplePlayer({ src, caption, durationLabel, downloadHref }:
             className="relative h-[3px] w-full overflow-hidden"
             style={{ background: "rgba(255,255,255,0.08)" }}
             role="progressbar"
+            aria-label="Audio sample playback progress"
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={Math.round(progress * 100)}
