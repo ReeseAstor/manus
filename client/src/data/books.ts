@@ -320,6 +320,9 @@ export const BOOKS: Book[] = [
       amazon_kindle: "https://www.amazon.com/dp/B0HDKNP9F6?tag=reeseastor-20",
       audible: null,
     },
+    // No standalone audiobook is confirmed: the catalog sheet lists the audiobook as VERIFY, and the
+    // Amazon page (checked 2026-10-15) shows only an "Audiobook with virtual voice" add-on on the Kindle
+    // edition ($0.99 with membership / $1.99). Kept false until a produced audiobook ASIN exists.
     audiobook_available: false,
     isbn: null,
     asin: "B0HDKNP9F6",
