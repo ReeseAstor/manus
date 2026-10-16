@@ -191,7 +191,7 @@ export default function VipAudioHub() {
                 <Progress value={usagePercent} className="h-2" />
                 {usagePercent > 80 && usage.tier !== "gold" && (
                   <p className="text-xs text-amber-400 mt-2">
-                    ⚠️ Running low on minutes! <Link href="/vip-club" className="underline">Upgrade your plan</Link> for more.
+                    ⚠️ Running low on minutes! <Link href="/newsletter" className="underline">Upgrade your plan</Link> for more.
                   </p>
                 )}
               </CardContent>
@@ -364,7 +364,7 @@ export default function VipAudioHub() {
                 <p className="text-slate-400 mb-6">
                   Start generating narrations from your favorite stories!
                 </p>
-                <Link href="/vip-club">
+                <Link href="/newsletter">
                   <Button className="bg-gradient-to-r from-amber-500 to-amber-600">
                     Browse Stories
                     <ArrowRight className="h-4 w-4 ml-2" />
@@ -387,7 +387,7 @@ export default function VipAudioHub() {
                 <p className="text-slate-300 mb-6 max-w-md mx-auto">
                   Upgrade to Gold for unlimited audio generation, premium voices, and exclusive content.
                 </p>
-                <Link href="/vip-club">
+                <Link href="/newsletter">
                   <Button className="bg-gradient-to-r from-amber-500 to-pink-500 hover:from-amber-600 hover:to-pink-600">
                     Upgrade to Gold
                     <Sparkles className="h-4 w-4 ml-2" />

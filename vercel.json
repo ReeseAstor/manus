@@ -33,6 +33,36 @@
   ],
   "redirects": [
     {
+      "source": "/reader-club",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
+      "source": "/reader-club/",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
+      "source": "/vip-club",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
+      "source": "/vip-club/",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
+      "source": "/welcome-back",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
+      "source": "/welcome-back/",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
       "source": "/book2/countdown",
       "destination": "/books/the-billionaire-s-fake-wife",
       "permanent": false

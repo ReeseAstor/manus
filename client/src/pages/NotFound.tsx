@@ -56,12 +56,12 @@ export default function NotFound() {
               <p className="text-sm text-gray-600">Browse all books</p>
             </button>
             <button
-              onClick={() => setLocation('/vip-club')}
+              onClick={() => setLocation('/newsletter')}
               className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl hover:shadow-md transition-all text-left"
             >
               <Search className="w-8 h-8 text-purple-600 mb-2" />
-              <h4 className="font-semibold text-gray-900 mb-1">VIP Club</h4>
-              <p className="text-sm text-gray-600">Exclusive content</p>
+              <h4 className="font-semibold text-gray-900 mb-1">Newsletter</h4>
+              <p className="text-sm text-gray-600">Free book &amp; release news</p>
             </button>
             <button
               onClick={() => setLocation('/blog')}

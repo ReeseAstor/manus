@@ -4,7 +4,7 @@ import "./styles/animations.css";
 import { lazy, Suspense, type ComponentType } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, Redirect } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
@@ -16,7 +16,6 @@ import FreeBook from "./pages/FreeBook";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import ReaderClub from "./pages/ReaderClub";
 
 // ───── Lazy: secondary pages (code-split, load on demand) ─────
 const Permission = lazy(() => import("./pages/Permission"));
@@ -47,7 +46,6 @@ const AdminTwilio = lazy(() => import("./pages/AdminTwilio"));
 const AdminSmsAnalytics = lazy(() => import("./pages/AdminSmsAnalytics"));
 const AdminAIUsage = lazy(() => import("./pages/AdminAIUsage"));
 const ExclusiveContentManager = lazy(() => import("./pages/ExclusiveContentManager"));
-const WelcomeBack = lazy(() => import("./pages/WelcomeBack"));
 const StaySubscribed = lazy(() => import("./pages/StaySubscribed"));
 const AdminAIStudio = lazy(() => import("./pages/AdminAIStudio"));
 const WritingStudio = lazy(() => import("./pages/WritingStudio"));
@@ -62,7 +60,6 @@ const CharacterQuiz = lazy(() => import("./pages/CharacterQuiz"));
 const RomanceTropeQuiz = lazy(() => import("./pages/Quiz"));
 const WhyBuyDirectPage = lazy(() => import("./pages/WhyBuyDirectPage"));
 const Profile = lazy(() => import("./pages/Profile"));
-const VipClub = lazy(() => import("./pages/VipClub"));
 const VipWelcome = lazy(() => import("./pages/VipWelcome"));
 const VipDashboard = lazy(() => import("./pages/VipDashboard"));
 const VipAudioHub = lazy(() => import("./pages/VipAudioHub"));
@@ -101,6 +98,10 @@ function withSEO(Page: ComponentType, seo: { title: string; description: string;
   };
 }
 
+// /reader-club, /vip-club and /welcome-back are retired for now (the vercel.json 307s cover direct
+// loads; this keeps in-app navigation consistent). The page components stay in the repo, unrouted.
+const ToNewsletter = () => <Redirect to="/newsletter" />;
+
 const FavoritesPage = withSEO(Favorites, {
   title: "Reese's Favorites | Reese Astor",
   description: "Products recommended by Reese Astor for reading and writing. Some links are affiliate links.",
@@ -110,24 +111,6 @@ const NewsletterArchivePage = withSEO(NewsletterArchive, {
   title: "Newsletter Archive | Reese Astor",
   description: "Browse past newsletters from Reese Astor.",
   canonical: "/newsletter-archive",
-});
-const VipClubPage = withSEO(VipClub, {
-  title: "VIP Club | Reese Astor",
-  description: "Membership information for Reese Astor's VIP Club.",
-  canonical: "/vip-club",
-  noindex: true,
-});
-const ReaderClubPage = withSEO(ReaderClub, {
-  title: "Reader Club | Reese Astor",
-  description: "Sign in or join Reese Astor's Reader Club.",
-  canonical: "/reader-club",
-  noindex: true,
-});
-const WelcomeBackPage = withSEO(WelcomeBack, {
-  title: "Welcome Back | Reese Astor",
-  description: "Rejoin Reese Astor's email list.",
-  canonical: "/welcome-back",
-  noindex: true,
 });
 const StaySubscribedPage = withSEO(StaySubscribed, {
   title: "Thank You | Reese Astor",
@@ -165,9 +148,9 @@ function Router() {
         <Route path={"/books/:slug"} component={BookTitle} />
         <Route path={"/permission"} component={Permission} />
         <Route path={"/press"} component={Press} />
-        <Route path={"/reader-club"} component={ReaderClubPage} />
+        <Route path={"/reader-club"} component={ToNewsletter} />
         <Route path={"/reader-club/:slug"} component={ExclusiveContentDetail} />
-        <Route path={"/welcome-back"} component={WelcomeBackPage} />
+        <Route path={"/welcome-back"} component={ToNewsletter} />
         <Route path={"/stay-subscribed"} component={StaySubscribedPage} />
         <Route path={"/free-book"} component={FreeBook} />
         <Route path={"/quiz"} component={CharacterQuiz} />
@@ -178,7 +161,7 @@ function Router() {
         <Route path={"/purchase-success"} component={PurchaseSuccess} />
         <Route path={"/my-purchases"} component={MyPurchases} />
         <Route path={"/profile"} component={Profile} />
-        <Route path={"/vip-club"} component={VipClubPage} />
+        <Route path={"/vip-club"} component={ToNewsletter} />
         <Route path={"/vip-club/welcome"} component={VipWelcome} />
         <Route path={"/vip-club/dashboard"} component={VipDashboard} />
         <Route path={"/auth/login"} component={AuthLogin} />

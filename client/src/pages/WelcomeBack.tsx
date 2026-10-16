@@ -112,7 +112,7 @@ export default function WelcomeBack() {
               The bonus chapter (plus every other exclusive scene, deleted chapter, and
               behind-the-scenes look) lives in the Reader's Club — your private corner of the penthouse.
             </p>
-            <Link href="/reader-club">
+            <Link href="/newsletter">
               <span style={{
                 display: "inline-block",
                 padding: "14px 40px",
@@ -125,7 +125,7 @@ export default function WelcomeBack() {
                 textDecoration: "none",
                 cursor: "pointer",
               }}>
-                Enter the Reader's Club
+                Join the Newsletter
               </span>
             </Link>
             <p style={{ margin: "24px 0 0", color: "rgba(200,200,200,0.6)", fontSize: 14, fontFamily: "Arial, sans-serif" }}>

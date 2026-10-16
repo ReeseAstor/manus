@@ -97,12 +97,13 @@ describe("Series Upsell Sequence Email Templates", () => {
     expect(html).toContain("Uncover the Truth");
   });
 
-  it("should generate Full Collection email with Reader's Club upsell", () => {
+  it("should generate Full Collection email with a newsletter link", () => {
     const html = generateSeriesUpsellEmail3({ subscriberName: "Alex" });
     expect(html).toContain("Dear Alex");
     expect(html).toContain("Complete Collection");
     expect(html).toContain("Browse the Full Collection");
-    expect(html).toContain("Reader's Club");
+    expect(html).toContain("/newsletter");
+    expect(html).not.toContain("reader-club");
     expect(html).toContain("/books");
   });
 
