@@ -268,14 +268,14 @@ function NewsletterBand({ onSubscribe }) {
           fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 54,
           color: TEXT, lineHeight: 1.05, letterSpacing: "-0.02em",
           margin: "22px 0 0", textWrap: "balance",
-        }}>Bonus scenes,<br/><em style={{ fontWeight: 400 }}>delivered like a secret.</em></h2>
+        }}>News and new releases,<br/><em style={{ fontWeight: 400 }}>straight from Reese.</em></h2>
         <div style={{ margin: "32px auto", height: 1, width: 56, background: GOLD_SOFT }} />
         <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontSize: 21, color: TEXT_SOFT, margin: "0 0 44px", lineHeight: 1.55, textWrap: "pretty" }}>
-          Exclusive chapters, early covers, and a free prequel novella — straight from Reese, never anywhere else.
+          News, new releases, and a free prequel novella, straight from Reese.
         </p>
         {subscribed ? (
           <div style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontSize: 22, color: GOLD }}>
-            Welcome. Your bonus chapter is on its way.
+            Welcome. Your free prequel novella is on its way.
           </div>
         ) : (
           <form onSubmit={submit} style={{ display: "flex", gap: 0, justifyContent: "center", maxWidth: 540, margin: "0 auto", borderBottom: "1px solid " + GOLD_SOFT }}>
