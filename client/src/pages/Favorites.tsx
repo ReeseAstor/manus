@@ -262,10 +262,10 @@ export default function Favorites() {
           </h2>
           <p className="text-gray-400 mb-6 leading-relaxed">
             I'm always looking for new products to try. If you've found something amazing that belongs on this page, let me know! Send me a message through the{" "}
-            <a href="/contact" className="text-[#d4af37] hover:underline">contact page</a>{" "}
+            <a href="/contact" className="text-[#d4af37] underline underline-offset-2 hover:no-underline">contact page</a>{" "}
             or reply to any of my newsletters.
           </p>
-          <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
+          <div className="flex items-center justify-center gap-4 text-sm text-gray-400">
             <span>{allFavoritesProducts.length} products curated</span>
             <span className="w-1 h-1 rounded-full bg-gray-600" />
             <span>{favoritesCategories.length} categories</span>

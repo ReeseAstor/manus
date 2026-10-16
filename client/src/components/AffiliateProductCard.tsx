@@ -142,7 +142,7 @@ export function AffiliateProductSection({ products, title = "Top Picks", subtitl
 export function FTCDisclosure() {
   return (
     <div className="mb-8 p-4 rounded-xl bg-white/[0.03] border border-white/10">
-      <p className="text-gray-500 text-xs leading-relaxed italic">
+      <p className="text-gray-400 text-xs leading-relaxed italic">
         <span className="font-semibold text-gray-400">Disclosure:</span>{" "}
         As an Amazon Associate I earn from qualifying purchases. This means I may earn a small commission at no extra cost to you if you click a link and make a purchase.
       </p>
