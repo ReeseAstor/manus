@@ -233,7 +233,7 @@ export default function FreeBook() {
               </h2>
               <p className="text-xl text-gray-400">
                 What you&rsquo;ll get when you join
-              </p>
+                Your free prequel, plus news from Reese by email.
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
