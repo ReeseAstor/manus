@@ -186,7 +186,7 @@ export async function handleStart(db: any, phoneNumber: string, existingPrefs: a
 
       console.log(`[SMS Webhook] User ${phoneNumber} resubscribed to SMS`);
       
-      return `Welcome back! 🎉 You're subscribed again to Reese Astor text alerts for new releases and sales. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help.`;
+      return "Reese Astor: You're resubscribed to texts about new releases and sales. Msg frequency varies. Msg&data rates may apply. Reply HELP for help, STOP to opt out.";
     } else {
       // Create new preferences with opt-in
       await db.insert(userSmsPreferences).values({
@@ -201,7 +201,7 @@ export async function handleStart(db: any, phoneNumber: string, existingPrefs: a
 
       console.log(`[SMS Webhook] Created opt-in record for ${phoneNumber}`);
       
-      return `Welcome! 🎉 You're subscribed to Reese Astor text alerts for new releases and sales. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help.`;
+      return "Reese Astor: You're subscribed to texts about new releases and sales. Msg frequency varies. Msg&data rates may apply. Reply HELP for help, STOP to opt out.";
     }
   } catch (error) {
     console.error('[SMS Webhook] Error handling START:', error);

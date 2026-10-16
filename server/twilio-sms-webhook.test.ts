@@ -82,25 +82,34 @@ describe('SMS Unsubscribe Webhook', () => {
       const { db, calls } = makeDb();
       const reply = await handleStart(db, '+19546778888', undefined);
       expect(calls.insert).toHaveLength(1);
-      expect(reply).toContain("You're subscribed to Reese Astor text alerts for new releases and sales.");
+      expect(reply).toBe(
+        "Reese Astor: You're subscribed to texts about new releases and sales. Msg frequency varies. Msg&data rates may apply. Reply HELP for help, STOP to opt out.",
+      );
       expect(reply).toContain('Msg frequency varies.');
-      expect(reply).toContain('Msg & data rates may apply.');
+      expect(reply).toContain('Msg&data rates may apply.');
       expect(reply).toContain('STOP');
       expect(reply).toContain('HELP');
       expect(reply).not.toMatch(banned);
       expect(reply.split('\n')).toHaveLength(1);
+      // one SMS segment: <= 160 characters, plain ASCII (no emoji, so GSM-7 not UCS-2)
+      expect(reply.length).toBeLessThanOrEqual(160);
+      expect(reply).toMatch(/^[\x20-\x7E]+$/);
     });
 
     it('resubscribe reply carries the same disclosures', async () => {
       const { db, calls } = makeDb();
       const reply = await handleStart(db, '+19546778888', { phoneNumber: '+19546778888' });
       expect(calls.update).toHaveLength(1);
-      expect(reply).toContain('subscribed again');
+      expect(reply).toBe(
+        "Reese Astor: You're resubscribed to texts about new releases and sales. Msg frequency varies. Msg&data rates may apply. Reply HELP for help, STOP to opt out.",
+      );
       expect(reply).toContain('Msg frequency varies.');
-      expect(reply).toContain('Msg & data rates may apply.');
+      expect(reply).toContain('Msg&data rates may apply.');
       expect(reply).toContain('STOP');
       expect(reply).toContain('HELP');
       expect(reply).not.toMatch(banned);
+      expect(reply.length).toBeLessThanOrEqual(160);
+      expect(reply).toMatch(/^[\x20-\x7E]+$/);
     });
 
     it('stop reply confirms the unsubscribe and explains START', async () => {
@@ -129,7 +138,9 @@ describe('SMS Unsubscribe Webhook', () => {
     it('the handler turns START into a TwiML message with the real opt-in text', async () => {
       const { text, xml } = await runHandler('START');
       expect(xml).toContain('<Response>');
-      expect(text).toContain('Msg frequency varies. Msg & data rates may apply.');
+      expect(text).toContain('Msg frequency varies. Msg&data rates may apply.');
+      const body = text.replace(/^[\s\S]*<Message>/, '').replace(/<\/Message>[\s\S]*$/, '');
+      expect(body.length).toBeLessThanOrEqual(160);
       expect(text).not.toMatch(banned);
     });
 
