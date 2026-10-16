@@ -28,7 +28,7 @@ const promoBooks: PromoBook[] = [
     cover: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/nkhgPTPhVEhCBAIZ.jpg",
     genre: "Billionaire Romance",
     tropes: ["Boss Romance", "Power Dynamic", "Manhattan"],
-    description: "When a ruthless billionaire acquires more than a company — he acquires her heart. A sizzling Manhattan romance where boardroom battles become bedroom wars.",
+    description: "She was hired to audit his empire. Falling for him could destroy them both. A high-heat corporate billionaire romance novella.",
     featured: true,
   },
   {
@@ -310,12 +310,6 @@ export default function Promo() {
                   {promoBooks[0].title}
                 </h3>
                 <p className="text-[#d4af37] font-medium mb-3">by {promoBooks[0].author}</p>
-                <div className="flex items-center gap-1 mb-3 justify-center md:justify-start">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-[#d4af37] text-[#d4af37]" />
-                  ))}
-                  <span className="text-sm text-gray-400 ml-2">4.8 average rating</span>
-                </div>
                 <p className="text-gray-300 leading-relaxed mb-4">
                   {promoBooks[0].description}
                 </p>
