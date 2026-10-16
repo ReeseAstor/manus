@@ -136,7 +136,7 @@ export const appRouter = router({
             success: true,
             message: "Successfully subscribed to newsletter",
             data: undefined,
-            bookDownloadUrl: "https://dl.bookfunnel.com/kw1yge3479",
+            bookDownloadUrl: "https://dl.bookfunnel.com/hj09ggitwi",
           };
         }
 
@@ -164,7 +164,7 @@ export const appRouter = router({
         // screen) and rely on a MailerLite automation for the welcome email.
         // We still attempt the welcome email for environments where a custom
         // transactional sender is wired up, but never fail the signup on it.
-        const bookDownloadUrl = "https://dl.bookfunnel.com/kw1yge3479";
+        const bookDownloadUrl = "https://dl.bookfunnel.com/hj09ggitwi";
 
         try {
           const welcomeHtml = generateWelcomeEmail({

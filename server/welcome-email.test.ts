@@ -28,7 +28,7 @@ describe("Welcome Email Template", () => {
   it("should generate valid HTML with prequel download link", () => {
     const html = generateWelcomeEmail({});
     expect(html).toContain("<!DOCTYPE html>");
-    expect(html).toContain('href="https://dl.bookfunnel.com/kw1yge3479"');
+    expect(html).toContain('href="https://dl.bookfunnel.com/hj09ggitwi"');
     expect(html).not.toContain("swiy.co/05");
     expect(html).toContain("Download Your Free Book");
     expect(html).toContain("The First Acquisition");

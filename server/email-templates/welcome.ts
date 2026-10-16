@@ -9,9 +9,9 @@ export interface WelcomeEmailData {
   subscriberName?: string;
 }
 
-// BookFunnel "Get The First Acquisition Free" page (verified 2026-10-15: title and body name
-// The First Acquisition by Reese Astor). Also used on /free-book, the footer and the catalog.
-const PREQUEL_BOOKFUNNEL_URL = "https://dl.bookfunnel.com/kw1yge3479";
+// BookFunnel direct download page ("Download The First Acquisition", "Get My Book"; verified 2026-10-15).
+// This is the page /free-book opens after signup. The signup form page is kw1yge3479.
+const PREQUEL_BOOKFUNNEL_URL = "https://dl.bookfunnel.com/hj09ggitwi";
 // Direct Amazon page for The First Acquisition (ASIN B0D82GWFD9 per the catalog sheet), Reese tag.
 const PREQUEL_AMAZON_URL = "https://www.amazon.com/dp/B0D82GWFD9?tag=reeseastor-20";
 
