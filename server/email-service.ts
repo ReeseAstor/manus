@@ -58,7 +58,7 @@ export async function sendEmail(params: SendEmailParams): Promise<boolean> {
 }
 
 /**
- * Send purchase confirmation email with download links
+ * Send purchase confirmation email with the link to the purchased book
  */
 export async function sendPurchaseConfirmationEmail(
   data: PurchaseConfirmationData
@@ -67,7 +67,7 @@ export async function sendPurchaseConfirmationEmail(
 
   return sendEmail({
     to: data.customerEmail,
-    subject: `Your ${data.bookTitle} is Ready to Download!`,
+    subject: `Your order: ${data.bookTitle}`,
     html,
     from: {
       email: "noreply@reeseastor.us",

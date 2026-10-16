@@ -38,8 +38,6 @@ describe("Purchase Confirmation Email System", () => {
 
       // Verify download links
       expect(html).toContain("https://example.com/download/epub");
-      expect(html).toContain("https://example.com/download/mobi");
-      expect(html).toContain("https://example.com/download/pdf");
 
       // Verify branding
       expect(html).toContain("Reese Astor");
@@ -64,14 +62,13 @@ describe("Purchase Confirmation Email System", () => {
       const html = generatePurchaseConfirmationEmail(testData);
 
       // Check for download buttons
-      expect(html).toContain("Download ePub");
-      expect(html).toContain("Download Mobi");
-      expect(html).toContain("Download PDF");
+      expect(html).toContain("Read on Amazon");
+      expect(html).toContain("https://example.com/epub");
+      expect(html).toContain("Kindle page on Amazon");
 
-      // Check for format descriptions
-      expect(html).toContain("For most e-readers");
-      expect(html).toContain("For Kindle devices");
-      expect(html).toContain("Universal format");
+      // No delivery promises the site cannot keep
+      expect(html).not.toMatch(/download (epub|mobi|pdf)|all three formats|ready to download/i);
+      expect(html).not.toContain("reader-club");
     });
 
     it("should include help section and support contact", () => {

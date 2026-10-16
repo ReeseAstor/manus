@@ -2,7 +2,7 @@
  * Purchase Confirmation Email Template
  * 
  * Generates a luxury Manhattan-themed HTML email for purchase confirmations
- * with personalized download links for purchased ebooks.
+ * with a link to the purchased book.
  */
 
 export interface PurchaseConfirmationData {
@@ -202,7 +202,7 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
       <h2 class="greeting">Thank You for Your Purchase, ${data.customerName}!</h2>
       
       <p class="message">
-        Your order has been confirmed and your ebook is ready to download. Thank you for supporting my work and choosing to read the Manhattan Money Kings series!
+        Your order has been confirmed and thank you for supporting my work and choosing to read the Manhattan Money Kings series!
       </p>
 
       <!-- Book Details -->
@@ -216,25 +216,15 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
         </div>
       </div>
 
-      <!-- Download Section -->
+      <!-- Book link -->
       <div class="download-section">
-        <h3 class="download-title">Download Your Ebook</h3>
-        <p class="message">Choose your preferred format below. All three formats are included with your purchase:</p>
-        
+        <h3 class="download-title">Your Book Link</h3>
+        <p class="message">Your order is confirmed. The link below opens your book&rsquo;s Kindle page on Amazon, where you can read it:</p>
+
         <div class="download-buttons">
           <a href="${data.downloadLinks.epub}" class="download-btn">
-            Download ePub
-            <div class="format-label">For most e-readers (Kobo, Nook, Apple Books)</div>
-          </a>
-          
-          <a href="${data.downloadLinks.mobi}" class="download-btn">
-            Download Mobi
-            <div class="format-label">For Kindle devices and apps</div>
-          </a>
-          
-          <a href="${data.downloadLinks.pdf}" class="download-btn">
-            Download PDF
-            <div class="format-label">Universal format for any device</div>
+            Read on Amazon
+            <div class="format-label">Opens the Kindle edition of ${data.bookTitle}</div>
           </a>
         </div>
       </div>
@@ -243,14 +233,14 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
       <div class="help-section">
         <h4 class="help-title">Need Help?</h4>
         <p class="help-text">
-          If you have any trouble downloading your ebook or need assistance transferring it to your device, 
+          If you have any trouble opening your book link, 
           please don't hesitate to contact me at <a href="mailto:support@reeseastor.com" style="color: #d4af37;">support@reeseastor.com</a>. 
           I'm here to help!
         </p>
       </div>
 
       <p class="message">
-        You can also access your purchased ebooks anytime by logging into your account on my website 
+        You can find your book link again by logging into your account on my website 
         and visiting the <a href="https://reeseastor.us/my-purchases" style="color: #d4af37;">My Purchases</a> page.
       </p>
 
@@ -270,7 +260,7 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
       <div class="social-links">
         <a href="https://reeseastor.us" class="social-link">Website</a>
         <a href="https://reeseastor.us/blog" class="social-link">Blog</a>
-        <a href="https://reeseastor.us/reader-club" class="social-link">Reader's Club</a>
+        <a href="https://reeseastor.us/newsletter" class="social-link">Newsletter</a>
       </div>
       
       <p class="footer-text">

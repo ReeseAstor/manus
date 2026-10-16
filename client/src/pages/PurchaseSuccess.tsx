@@ -42,7 +42,7 @@ export default function PurchaseSuccess() {
               Your order for <span className="text-[#d4af37] font-semibold">{productName}</span> is confirmed.
             </p>
             <p className="text-[#e5e5e5]/60 text-sm mb-8">
-              A confirmation email with your download links has been sent to your email address.
+              A confirmation email with a link to your book has been sent to your email address.
             </p>
           </motion.div>
 
@@ -64,7 +64,7 @@ export default function PurchaseSuccess() {
                 <div>
                   <h3 className="text-[#e5e5e5] font-semibold">Check Your Email</h3>
                   <p className="text-[#e5e5e5]/60 text-sm">
-                    Your download links are waiting in your inbox. Check spam if you don't see it.
+                    Your book link is waiting in your inbox. Check spam if you don't see it.
                   </p>
                 </div>
               </div>
@@ -73,9 +73,9 @@ export default function PurchaseSuccess() {
                   <Download className="w-5 h-5 text-[#d4af37]" />
                 </div>
                 <div>
-                  <h3 className="text-[#e5e5e5] font-semibold">Download Your Books</h3>
+                  <h3 className="text-[#e5e5e5] font-semibold">Open Your Book</h3>
                   <p className="text-[#e5e5e5]/60 text-sm">
-                    Available in ePub, Mobi, and PDF formats. Download as many times as you need.
+                    The link opens your book&apos;s Kindle page on Amazon, where you can read it.
                   </p>
                 </div>
               </div>
@@ -100,9 +100,9 @@ export default function PurchaseSuccess() {
             transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Link href="/reader-club">
+            <Link href="/newsletter">
               <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-bold px-8 py-6 rounded-xl">
-                Join Reader's Club
+                Get the Free Book &amp; Updates
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
