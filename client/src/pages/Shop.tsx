@@ -1,83 +1,11 @@
 import { motion } from "framer-motion";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Check, Star, Gift, Sparkles, ArrowRight, Crown, Loader2 } from "lucide-react";
+import { ShoppingCart, Gift, ArrowRight, Loader2 } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
-import { CountdownTimer } from "@/components/CountdownTimer";
-
-interface BundleOption {
-  id: string;
-  name: string;
-  description: string;
-  books: number;
-  originalPrice: number;
-  bundlePrice: number;
-  memberPrice: number;
-  features: string[];
-  popular?: boolean;
-  bestValue?: boolean;
-  productId: number; // Database product ID for Stripe checkout
-}
-
-const bundleOptions: BundleOption[] = [
-  {
-    id: "single",
-    name: "Single Book",
-    description: "Start your Manhattan journey",
-    books: 1,
-    originalPrice: 499,
-    bundlePrice: 399,
-    memberPrice: 299,
-    productId: 30001, // Single Book product
-    features: [
-      "Choose any book in the series",
-      "Instant digital delivery",
-      "ePub, Mobi & PDF formats",
-    ],
-  },
-  {
-    id: "trilogy",
-    name: "Complete Trilogy",
-    description: "The full Manhattan Money Kings series",
-    books: 3,
-    originalPrice: 1497,
-    bundlePrice: 999,
-    memberPrice: 799,
-    productId: 30002, // Complete Trilogy product
-    features: [
-      "All 3 Manhattan Money Kings books",
-      "Instant digital delivery",
-      "ePub, Mobi & PDF formats",
-      "Bonus: Character interviews",
-      "Bonus: Deleted scenes",
-    ],
-    popular: true,
-  },
-  {
-    id: "ultimate",
-    name: "Ultimate Collection",
-    description: "Everything + exclusive content",
-    books: 4,
-    originalPrice: 1796,
-    bundlePrice: 1299,
-    memberPrice: 999,
-    productId: 30003, // Ultimate Collection product
-    features: [
-      "Complete trilogy + prequel",
-      "Instant digital delivery",
-      "All formats included",
-      "Exclusive bonus chapters",
-      "Behind-the-scenes content",
-      "Character mood boards",
-      "Author's playlist",
-      "Early access to Book 4",
-    ],
-    bestValue: true,
-  },
-];
 
 // Map book slugs to product IDs
 const bookProductMap: Record<string, number> = {
@@ -88,7 +16,7 @@ const bookProductMap: Record<string, number> = {
 
 export default function Shop() {
   useEffect(() => {
-    document.title = "Shop Signed Books & Bundles | Reese Astor Romance Store";
+    document.title = "Shop | Reese Astor Romance Books";
   }, []);
 
   const shopStructuredData = {
@@ -96,7 +24,7 @@ export default function Shop() {
     "@type": "Store",
     "name": "Reese Astor Book Shop",
     "url": "https://reeseastor.com/shop",
-    "description": "Official store for signed books and exclusive bundles from Reese Astor.",
+    "description": "Buy Reese Astor's ebooks directly from the author.",
     "brand": { "@type": "Brand", "name": "Reese Astor" }
   };
 
@@ -105,8 +33,6 @@ export default function Shop() {
   const [loadingProductId, setLoadingProductId] = useState<number | null>(null);
 
   const formatPrice = (cents: number) => `$${(cents / 100).toFixed(2)}`;
-  const calculateSavings = (original: number, sale: number) =>
-    Math.round(((original - sale) / original) * 100);
 
   const handlePurchase = async (productId: number, productName: string) => {
     setLoadingProductId(productId);
@@ -140,11 +66,11 @@ export default function Shop() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27]">
       <EnhancedSEOHead
-        title="Shop Signed Books & Bundles | Reese Astor Romance Store"
-        description="Shop signed paperbacks, exclusive bundles, and digital editions of the Manhattan Money Kings series. Direct from author Reese Astor."
+        title="Shop | Reese Astor Romance Books"
+        description="Buy Reese Astor's Manhattan Money Kings ebooks directly from the author."
         canonical="/shop"
         ogType="product"
-        keywords={["signed romance books", "Reese Astor shop", "Manhattan Money Kings paperback", "romance book bundles", "signed author copies", "buy direct from author"]}
+        keywords={["Reese Astor shop", "Manhattan Money Kings ebooks", "buy direct from author"]}
         structuredData={[shopStructuredData]}
       />
 
@@ -169,145 +95,16 @@ export default function Shop() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <span className="inline-flex items-center gap-2 bg-[#d4af37]/10 border border-[#d4af37]/30 rounded-full px-4 py-2 text-[#d4af37] text-sm font-semibold mb-6">
-              <Sparkles className="w-4 h-4" />
-              Buy Direct & Save Up to 40%
-            </span>
             <h1 className="text-5xl md:text-6xl font-serif font-bold text-[#e5e5e5] mb-6">
               Manhattan Money Kings
               <br />
               <span className="text-[#d4af37]">Book Shop</span>
             </h1>
             <p className="text-xl text-[#e5e5e5]/70 max-w-2xl mx-auto mb-8">
-              Get the complete billionaire romance series at exclusive direct prices. 
-              Save money, support the author, and receive bonus content with every purchase.
+              Buy the ebooks directly from the author. After checkout, a confirmation
+              email with a link to your book is sent to the address you provide.
             </p>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Bundle Options */}
-      <section className="py-20 px-4">
-        <div className="container max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-serif font-bold text-[#e5e5e5] mb-4">
-              Choose Your Package
-            </h2>
-            <p className="text-[#e5e5e5]/70 text-lg">
-              All purchases include instant delivery and multiple formats
-            </p>
-          </motion.div>
-
-          {/* Countdown Timer */}
-          <div className="mb-12">
-            <CountdownTimer label="Direct Purchase Pricing Ends In" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {bundleOptions.map((bundle, index) => (
-              <motion.div
-                key={bundle.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`relative bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden ${
-                  bundle.popular || bundle.bestValue
-                    ? "border-2 border-[#d4af37]"
-                    : "border border-[#d4af37]/20"
-                }`}
-              >
-                {/* Badge */}
-                {(bundle.popular || bundle.bestValue) && (
-                  <div className="absolute top-0 left-0 right-0 bg-[#d4af37] text-[#0a0e27] text-center py-2 font-bold text-sm">
-                    {bundle.bestValue ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <Crown className="w-4 h-4" /> BEST VALUE
-                      </span>
-                    ) : (
-                      <span className="flex items-center justify-center gap-2">
-                        <Star className="w-4 h-4" /> MOST POPULAR
-                      </span>
-                    )}
-                  </div>
-                )}
-
-                <div className={`p-8 ${bundle.popular || bundle.bestValue ? "pt-14" : ""}`}>
-                  {/* Header */}
-                  <h3 className="text-2xl font-serif font-bold text-[#e5e5e5] mb-2">
-                    {bundle.name}
-                  </h3>
-                  <p className="text-[#e5e5e5]/60 text-sm mb-6">{bundle.description}</p>
-
-                  {/* Pricing */}
-                  <div className="mb-6">
-                    <div className="flex items-baseline gap-2 mb-1">
-                      <span className="text-4xl font-bold text-[#d4af37]">
-                        {formatPrice(bundle.bundlePrice)}
-                      </span>
-                      <span className="text-lg text-[#e5e5e5]/40 line-through">
-                        {formatPrice(bundle.originalPrice)}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-xs font-semibold">
-                        Save {calculateSavings(bundle.originalPrice, bundle.bundlePrice)}%
-                      </span>
-                      <span className="text-[#e5e5e5]/50 text-xs">
-                        {bundle.books} book{bundle.books > 1 ? "s" : ""}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Member Price */}
-                  <div className="bg-[#d4af37]/10 border border-[#d4af37]/20 rounded-lg p-3 mb-6">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[#e5e5e5]/70 text-sm">Reader's Club Price:</span>
-                      <span className="text-[#d4af37] font-bold">
-                        {formatPrice(bundle.memberPrice)}
-                      </span>
-                    </div>
-                    <p className="text-[#e5e5e5]/50 text-xs mt-1">
-                      Save {calculateSavings(bundle.originalPrice, bundle.memberPrice)}% as a member
-                    </p>
-                  </div>
-
-                  {/* Features */}
-                  <ul className="space-y-3 mb-8">
-                    {bundle.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-[#d4af37] flex-shrink-0 mt-0.5" />
-                        <span className="text-[#e5e5e5]/80 text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* CTA Button */}
-                  <Button
-                    onClick={() => handlePurchase(bundle.productId, bundle.name)}
-                    disabled={loadingProductId === bundle.productId}
-                    className={`w-full py-6 font-bold text-lg rounded-xl transition-all hover:scale-[1.02] ${
-                      bundle.popular || bundle.bestValue
-                        ? "bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27]"
-                        : "bg-white/10 hover:bg-white/20 text-[#e5e5e5] border border-[#d4af37]/30"
-                    }`}
-                  >
-                    {loadingProductId === bundle.productId ? (
-                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                    ) : (
-                      <ShoppingCart className="w-5 h-5 mr-2" />
-                    )}
-                    {loadingProductId === bundle.productId ? "Processing..." : `Get ${bundle.name}`}
-                  </Button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -321,10 +118,10 @@ export default function Shop() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-serif font-bold text-[#e5e5e5] mb-4">
-              Or Buy Individual Books
+              Books
             </h2>
             <p className="text-[#e5e5e5]/70 text-lg">
-              Start with any book in the series
+              The ebooks are also available on Amazon; see the book pages for links.
             </p>
           </motion.div>
 
@@ -339,15 +136,6 @@ export default function Shop() {
                 className="group"
               >
                 <div className="relative bg-white/5 backdrop-blur-xl border border-[#d4af37]/20 rounded-2xl overflow-hidden hover:border-[#d4af37]/40 transition-all">
-                  {/* Savings Badge */}
-                  {book.retailPrice && book.directPrice && book.retailPrice > book.directPrice && (
-                    <div className="absolute top-3 left-3 z-10">
-                      <span className="bg-[#d4af37] text-[#0a0e27] px-2 py-1 rounded-full text-xs font-bold">
-                        Save {calculateSavings(book.retailPrice, book.directPrice)}%
-                      </span>
-                    </div>
-                  )}
-
                   {/* Book Cover */}
                   <Link href={`/books/${book.slug}`}>
                     <div className="relative overflow-hidden cursor-pointer">
@@ -377,11 +165,6 @@ export default function Shop() {
                       <span className="text-xl font-bold text-[#d4af37]">
                         {formatPrice(book.directPrice || 399)}
                       </span>
-                      {book.retailPrice && book.directPrice && book.retailPrice > book.directPrice && (
-                        <span className="text-sm text-[#e5e5e5]/40 line-through">
-                          {formatPrice(book.retailPrice)}
-                        </span>
-                      )}
                     </div>
 
                     {/* Buy Button */}
@@ -416,15 +199,15 @@ export default function Shop() {
           >
             <Gift className="w-16 h-16 text-[#d4af37] mx-auto mb-6" />
             <h2 className="text-3xl font-serif font-bold text-[#e5e5e5] mb-4">
-              Join the Reader's Club for Even More Savings
+              Start With the Free Prequel
             </h2>
             <p className="text-[#e5e5e5]/70 text-lg mb-8 max-w-2xl mx-auto">
-              Get 40% off all books, early access to new releases, exclusive bonus content, 
-              and a FREE prequel when you join. It's completely free to sign up!
+              The First Acquisition is a free prequel novella to the Hudson Dynasty
+              series. Join the newsletter to get it, along with new release alerts.
             </p>
-            <Link href="/reader-club">
+            <Link href="/free-book">
               <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-bold text-lg px-8 py-6 rounded-xl">
-                Join Reader's Club Free
+                Get the Free Book
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
