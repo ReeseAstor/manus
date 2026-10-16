@@ -93,7 +93,7 @@ describe("Purchase Confirmation Email System", () => {
       const html = generatePurchaseConfirmationEmail(testData);
 
       expect(html).toContain("Need Help?");
-      expect(html).toContain("info@reeseastor.com");
+      expect(html).toContain("contact@reeseastor.com");
       expect(html).not.toContain("support@reeseastor");
     });
 

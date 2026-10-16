@@ -128,8 +128,8 @@ export default function PurchaseSuccess() {
             className="text-[#e5e5e5]/50 text-sm mt-8"
           >
             Need help? Contact us at{" "}
-            <a href="mailto:info@reeseastor.com" className="text-[#d4af37] hover:underline">
-              info@reeseastor.com
+            <a href="mailto:contact@reeseastor.com" className="text-[#d4af37] hover:underline">
+              contact@reeseastor.com
             </a>
           </motion.p>
         </div>

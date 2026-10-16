@@ -234,7 +234,7 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
         <h4 class="help-title">Need Help?</h4>
         <p class="help-text">
           If you have any trouble opening your book link, 
-          please don't hesitate to contact me at <a href="mailto:info@reeseastor.com" style="color: #d4af37;">info@reeseastor.com</a>. 
+          please don't hesitate to contact me at <a href="mailto:contact@reeseastor.com" style="color: #d4af37;">contact@reeseastor.com</a>. 
           I'm here to help!
         </p>
       </div>

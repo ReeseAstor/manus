@@ -1,118 +1,141 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-// Keywords for unsubscribe/resubscribe
-const STOP_KEYWORDS = ['STOP', 'UNSUBSCRIBE', 'CANCEL', 'END', 'QUIT'];
-const START_KEYWORDS = ['START', 'SUBSCRIBE', 'YES', 'UNSTOP'];
-const HELP_KEYWORDS = ['HELP', 'INFO'];
+// The webhook's database module is mocked; everything else (keyword lists, reply builders,
+// handler) is the real code from ./twilio-sms-webhook.
+const mockDb: any = {};
+vi.mock('./db', () => ({ getDb: vi.fn(async () => mockDb) }));
+
+import {
+  STOP_KEYWORDS,
+  START_KEYWORDS,
+  HELP_KEYWORDS,
+  getHelpMessage,
+  getDefaultMessage,
+  handleStart,
+  handleStop,
+  handleIncomingSms,
+} from './twilio-sms-webhook';
+
+function makeDb(existing: any[] = []) {
+  const calls: { insert: any[]; update: any[] } = { insert: [], update: [] };
+  const db = {
+    select: () => ({ from: () => ({ where: () => ({ limit: async () => existing }) }) }),
+    insert: () => ({ values: async (v: any) => { calls.insert.push(v); } }),
+    update: () => ({ set: (v: any) => ({ where: async () => { calls.update.push(v); } }) }),
+  };
+  return { db, calls };
+}
+
+async function runHandler(body: string, existing: any[] = []) {
+  const { db, calls } = makeDb(existing);
+  Object.assign(mockDb, db);
+  let sent = '';
+  const res: any = {
+    type: vi.fn(),
+    send: vi.fn((x: string) => { sent = x; }),
+    status: vi.fn(() => res),
+  };
+  await handleIncomingSms({ body: { From: '+19546778888', Body: body, MessageSid: 'SM1' } } as any, res);
+  const decoded = sent
+    .replace(/&apos;|&#39;|&#x27;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&');
+  return { xml: sent, text: decoded, calls };
+}
+
+const isKeyword = (list: string[], msg: string) => {
+  const n = msg.trim().toUpperCase();
+  return list.some((k) => n === k || n.startsWith(k + ' '));
+};
 
 describe('SMS Unsubscribe Webhook', () => {
-  describe('Keyword Detection', () => {
-    it('should detect STOP keywords', () => {
-      const testMessages = ['STOP', 'stop', 'Stop', 'UNSUBSCRIBE', 'CANCEL', 'END', 'QUIT'];
-      
-      testMessages.forEach(message => {
-        const normalized = message.trim().toUpperCase();
-        const isStop = STOP_KEYWORDS.some(keyword => 
-          normalized === keyword || normalized.startsWith(keyword + ' ')
-        );
-        expect(isStop).toBe(true);
+  describe('Keyword Detection (real keyword lists)', () => {
+    it('detects STOP keywords', () => {
+      ['STOP', 'stop', 'Stop', 'UNSUBSCRIBE', 'CANCEL', 'END', 'QUIT'].forEach((m) =>
+        expect(isKeyword(STOP_KEYWORDS, m)).toBe(true));
+    });
+    it('detects START keywords', () => {
+      ['START', 'start', 'SUBSCRIBE', 'YES', 'UNSTOP'].forEach((m) =>
+        expect(isKeyword(START_KEYWORDS, m)).toBe(true));
+    });
+    it('detects HELP keywords', () => {
+      ['HELP', 'help', 'INFO', 'info'].forEach((m) => expect(isKeyword(HELP_KEYWORDS, m)).toBe(true));
+    });
+    it('does not treat random messages as keywords', () => {
+      ['Hello', 'What is this?', 'I love your books', 'Random text'].forEach((m) => {
+        expect(isKeyword(STOP_KEYWORDS, m)).toBe(false);
+        expect(isKeyword(START_KEYWORDS, m)).toBe(false);
+        expect(isKeyword(HELP_KEYWORDS, m)).toBe(false);
       });
     });
-
-    it('should detect START keywords', () => {
-      const testMessages = ['START', 'start', 'SUBSCRIBE', 'YES', 'UNSTOP'];
-      
-      testMessages.forEach(message => {
-        const normalized = message.trim().toUpperCase();
-        const isStart = START_KEYWORDS.some(keyword => 
-          normalized === keyword || normalized.startsWith(keyword + ' ')
-        );
-        expect(isStart).toBe(true);
-      });
-    });
-
-    it('should detect HELP keywords', () => {
-      const testMessages = ['HELP', 'help', 'INFO', 'info'];
-      
-      testMessages.forEach(message => {
-        const normalized = message.trim().toUpperCase();
-        const isHelp = HELP_KEYWORDS.some(keyword => 
-          normalized === keyword || normalized.startsWith(keyword + ' ')
-        );
-        expect(isHelp).toBe(true);
-      });
-    });
-
-    it('should not detect random messages as keywords', () => {
-      const testMessages = ['Hello', 'What is this?', 'I love your books', 'Random text'];
-      
-      testMessages.forEach(message => {
-        const normalized = message.trim().toUpperCase();
-        const isStop = STOP_KEYWORDS.some(keyword => 
-          normalized === keyword || normalized.startsWith(keyword + ' ')
-        );
-        const isStart = START_KEYWORDS.some(keyword => 
-          normalized === keyword || normalized.startsWith(keyword + ' ')
-        );
-        const isHelp = HELP_KEYWORDS.some(keyword => 
-          normalized === keyword || normalized.startsWith(keyword + ' ')
-        );
-        
-        expect(isStop).toBe(false);
-        expect(isStart).toBe(false);
-        expect(isHelp).toBe(false);
-      });
-    });
-
-    it('should handle keywords with trailing text', () => {
-      const stopWithText = 'STOP please';
-      const startWithText = 'START now';
-      const helpWithText = 'HELP me';
-      
-      const normalizedStop = stopWithText.trim().toUpperCase();
-      const normalizedStart = startWithText.trim().toUpperCase();
-      const normalizedHelp = helpWithText.trim().toUpperCase();
-      
-      const isStop = STOP_KEYWORDS.some(keyword => 
-        normalizedStop === keyword || normalizedStop.startsWith(keyword + ' ')
-      );
-      const isStart = START_KEYWORDS.some(keyword => 
-        normalizedStart === keyword || normalizedStart.startsWith(keyword + ' ')
-      );
-      const isHelp = HELP_KEYWORDS.some(keyword => 
-        normalizedHelp === keyword || normalizedHelp.startsWith(keyword + ' ')
-      );
-      
-      expect(isStop).toBe(true);
-      expect(isStart).toBe(true);
-      expect(isHelp).toBe(true);
+    it('handles keywords with trailing text', () => {
+      expect(isKeyword(STOP_KEYWORDS, 'STOP please')).toBe(true);
+      expect(isKeyword(START_KEYWORDS, 'START now')).toBe(true);
+      expect(isKeyword(HELP_KEYWORDS, 'HELP me')).toBe(true);
     });
   });
 
-  describe('Response Messages', () => {
-    it('should have appropriate unsubscribe confirmation message', () => {
-      const unsubscribeMessage = `You've been unsubscribed from Reese Astor's SMS notifications. You won't receive any more messages. Reply START to resubscribe anytime. 💕`;
-      
-      expect(unsubscribeMessage).toContain('unsubscribed');
-      expect(unsubscribeMessage).toContain('START');
-      expect(unsubscribeMessage).toContain('resubscribe');
+  describe('Response Messages (real reply builders and handler)', () => {
+    const banned = /vip|exclusive|perks|steamy|before anyone/i;
+
+    it('opt-in reply for a new number is one clean message with frequency, rates, STOP and HELP', async () => {
+      const { db, calls } = makeDb();
+      const reply = await handleStart(db, '+19546778888', undefined);
+      expect(calls.insert).toHaveLength(1);
+      expect(reply).toContain("You're subscribed to Reese Astor text alerts for new releases and sales.");
+      expect(reply).toContain('Msg frequency varies.');
+      expect(reply).toContain('Msg & data rates may apply.');
+      expect(reply).toContain('STOP');
+      expect(reply).toContain('HELP');
+      expect(reply).not.toMatch(banned);
+      expect(reply.split('\n')).toHaveLength(1);
     });
 
-    it('should have appropriate resubscribe confirmation message', () => {
-      const resubscribeMessage = `Welcome back! 🎉 You're subscribed again to Reese Astor text alerts for new releases and sales. Reply STOP to opt out, HELP for help.`;
-      
-      expect(resubscribeMessage).toContain('subscribed');
-      expect(resubscribeMessage).toContain('STOP');
-      expect(resubscribeMessage).toContain('HELP');
-      expect(resubscribeMessage).not.toMatch(/vip|exclusive/i);
+    it('resubscribe reply carries the same disclosures', async () => {
+      const { db, calls } = makeDb();
+      const reply = await handleStart(db, '+19546778888', { phoneNumber: '+19546778888' });
+      expect(calls.update).toHaveLength(1);
+      expect(reply).toContain('subscribed again');
+      expect(reply).toContain('Msg frequency varies.');
+      expect(reply).toContain('Msg & data rates may apply.');
+      expect(reply).toContain('STOP');
+      expect(reply).toContain('HELP');
+      expect(reply).not.toMatch(banned);
     });
 
-    it('should have helpful help message', () => {
-      const helpMessage = `Reese Astor SMS Help 📚\n\nReply STOP to unsubscribe\nReply START to resubscribe\n\nVisit reeseastor.com for more info or email info@reeseastor.com`;
-      
-      expect(helpMessage).toContain('STOP');
-      expect(helpMessage).toContain('START');
-      expect(helpMessage).toContain('reeseastor.com');
+    it('stop reply confirms the unsubscribe and explains START', async () => {
+      const { db } = makeDb();
+      const reply = await handleStop(db, '+19546778888', { phoneNumber: '+19546778888' });
+      expect(reply).toContain('unsubscribed');
+      expect(reply).toContain('START');
+    });
+
+    it('help message lists STOP/START and the contact address used on the site', () => {
+      const help = getHelpMessage();
+      expect(help).toContain('STOP');
+      expect(help).toContain('START');
+      expect(help).toContain('reeseastor.com');
+      expect(help).toContain('contact@reeseastor.com');
+      expect(help).not.toContain('reeseastor.us');
+    });
+
+    it('default reply keeps STOP and HELP language and no club promises', () => {
+      const d = getDefaultMessage();
+      expect(d).toContain('STOP');
+      expect(d).toContain('HELP');
+      expect(d).not.toMatch(/vip|exclusive/i);
+    });
+
+    it('the handler turns START into a TwiML message with the real opt-in text', async () => {
+      const { text, xml } = await runHandler('START');
+      expect(xml).toContain('<Response>');
+      expect(text).toContain('Msg frequency varies. Msg & data rates may apply.');
+      expect(text).not.toMatch(banned);
+    });
+
+    it('the handler answers HELP with the help text and STOP with the unsubscribe text', async () => {
+      expect((await runHandler('HELP')).text).toContain('contact@reeseastor.com');
+      expect((await runHandler('STOP', [{ phoneNumber: '+19546778888' }])).text).toContain('unsubscribed');
     });
   });
 
