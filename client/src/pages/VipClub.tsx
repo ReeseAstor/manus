@@ -808,7 +808,7 @@ export default function VipClub() {
               Unlock All Exclusive Content
             </Button>
             <p className="text-gray-400 text-sm mt-4">
-              Join thousands of readers enjoying exclusive steamy content
+              Join the VIP list for exclusive steamy content
             </p>
           </div>
         </div>

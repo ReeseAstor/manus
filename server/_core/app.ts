@@ -95,7 +95,6 @@ export function createApp(): Express {
       const staticPages = [
         { url: "/", priority: "1.0", changefreq: "weekly" },
         { url: "/books", priority: "0.9", changefreq: "weekly" },
-        { url: "/books/audit-of-the-heart", priority: "0.9", changefreq: "monthly" },
         { url: "/books/hostile-tender", priority: "0.9", changefreq: "monthly" },
         { url: "/books/the-billionaire-s-executive-assistant", priority: "0.8", changefreq: "monthly" },
         { url: "/books/the-billionaire-s-fake-wife", priority: "0.8", changefreq: "monthly" },

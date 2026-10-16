@@ -10,11 +10,26 @@
     }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" },
-    { "source": "/webhooks/(.*)", "destination": "/api" },
-    { "source": "/sitemap.xml", "destination": "/api" },
-    { "source": "/robots.txt", "destination": "/api" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    },
+    {
+      "source": "/webhooks/(.*)",
+      "destination": "/api"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/api"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ],
   "redirects": [
     {
@@ -30,6 +45,16 @@
     {
       "source": "/book2/countdown/:path*",
       "destination": "/books/the-billionaire-s-fake-wife",
+      "permanent": false
+    },
+    {
+      "source": "/books/audit-of-the-heart",
+      "destination": "/books",
+      "permanent": false
+    },
+    {
+      "source": "/books/audit-of-the-heart/",
+      "destination": "/books",
       "permanent": false
     }
   ]

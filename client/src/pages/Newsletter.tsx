@@ -271,7 +271,7 @@ export default function Newsletter() {
                 Don't Miss Out
               </h2>
               <p className="text-gray-300 font-['Montserrat'] mb-8 max-w-lg mx-auto">
-                Join thousands of readers who get exclusive content, early access to new releases,
+                Join the list for exclusive content, early access to new releases,
                 and a free book — all delivered to their inbox. About two emails a month, no spam.
               </p>
 

@@ -92,12 +92,12 @@ export default function About() {
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-4">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[#d4af37]">5</div>
-                  <div className="text-sm text-gray-400 mt-1">Books Published</div>
+                  <div className="text-2xl font-bold text-[#d4af37]">Manhattan Money Kings</div>
+                  <div className="text-sm text-gray-400 mt-1">Series</div>
                 </div>
                 <div className="h-12 w-px bg-white/20 hidden sm:block" />
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[#d4af37]">2</div>
+                  <div className="text-2xl font-bold text-[#d4af37]">Hudson Dynasty</div>
                   <div className="text-sm text-gray-400 mt-1">Series</div>
                 </div>
               </div>

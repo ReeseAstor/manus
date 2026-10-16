@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
-import { BookOpen, Gift, Heart, Users, Star, ArrowRight, CheckCircle, Sparkles, Clock } from "lucide-react";
+import { BookOpen, Gift, Heart, Users, Star, ArrowRight, CheckCircle, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { HoneypotField } from "@/components/HoneypotField";
@@ -124,8 +124,8 @@ export default function Promo() {
   const promoStructuredData = [{
     "@context": "https://schema.org",
     "@type": "Event",
-    name: "Romance Book Giveaway - Free Books from Top Romance Authors",
-    description: "Grab free romance books from a multi-author giveaway. Limited-time multi-author giveaway featuring billionaire romance, dark romance, and contemporary love stories.",
+    name: "Romance Book Giveaway - Free Books from Multiple Romance Authors",
+    description: "Grab free romance books from a multi-author giveaway featuring billionaire romance, dark romance, and contemporary love stories.",
     organizer: { "@type": "Person", name: "Reese Astor" },
     eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
     isAccessibleForFree: true,
@@ -135,7 +135,7 @@ export default function Promo() {
     <div className="min-h-screen bg-[#0a0a0a] relative overflow-hidden">
       <EnhancedSEOHead
         title="Free Romance Books Giveaway | Multi-Author Promo | Reese Astor"
-        description="Grab free romance books from a multi-author giveaway! Limited-time multi-author giveaway featuring billionaire romance, dark romance, and contemporary love stories."
+        description="Grab free romance books from a multi-author giveaway featuring billionaire romance, dark romance, and contemporary love stories."
         canonical="https://reeseastor.com/promo"
         structuredData={promoStructuredData}
       />
@@ -155,17 +155,9 @@ export default function Promo() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          {/* Urgency Badge */}
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-500/10 border border-red-500/20 mb-6">
-            <Clock className="h-4 w-4 text-red-400" />
-            <span className="text-sm text-red-400 font-medium tracking-wider uppercase">
-              Limited Time — Ends Soon
-            </span>
-          </div>
-
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             Grab <span className="text-[#d4af37]">Free Books</span> from
-            <br />Top Romance Authors
+            <br />Romance Authors
           </h1>
 
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
@@ -515,10 +507,6 @@ export default function Promo() {
               {
                 q: "Will I be signed up for newsletters?",
                 a: "You'll be added to each participating author's newsletter so you can stay updated on new releases and exclusive content. You can unsubscribe from any author at any time.",
-              },
-              {
-                q: "How long is this promotion available?",
-                a: "This is a limited-time promotion. We recommend claiming your books as soon as possible to ensure you don't miss out.",
               },
               {
                 q: "What genres are included?",

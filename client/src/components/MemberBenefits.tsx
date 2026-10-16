@@ -73,7 +73,7 @@ export function MemberBenefits() {
             Member Benefits
           </h2>
           <p className="text-[#e5e5e5]/70 text-lg max-w-2xl mx-auto">
-            Join thousands of romance readers who enjoy exclusive perks, early access, 
+            Members get exclusive perks, early access, 
             and special member-only content.
           </p>
         </motion.div>

@@ -170,7 +170,7 @@ export default function Books() {
             <StaggerReveal className="flex items-center justify-center gap-12 pt-8" stagger={0.15}>
               <StaggerItem>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-[#d4af37]">2</div>
+                  <div className="text-2xl font-bold text-[#d4af37]">Manhattan Money Kings</div>
                   <div className="text-sm text-gray-400 mt-1">Series</div>
                 </div>
               </StaggerItem>
@@ -179,8 +179,8 @@ export default function Books() {
               </StaggerItem>
               <StaggerItem>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-[#d4af37]">5</div>
-                  <div className="text-sm text-gray-400 mt-1">Books Published</div>
+                  <div className="text-2xl font-bold text-[#d4af37]">Hudson Dynasty</div>
+                  <div className="text-sm text-gray-400 mt-1">Series</div>
                 </div>
               </StaggerItem>
             </StaggerReveal>
