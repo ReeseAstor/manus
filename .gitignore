@@ -105,3 +105,6 @@ temp/
 *.db
 *.sqlite
 *.sqlite3
+
+# Local tool query logs (contain prod DB connection details)
+.manus/

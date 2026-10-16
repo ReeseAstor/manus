@@ -1,8 +1,0 @@
-{
-  "query": "INSERT INTO books (title, slug, description, coverImage, price, series, seriesOrder, genre, pages, publishDate, featured) VALUES ('Hostile Tender', 'hostile-tender', 'She''s the federal auditor sent to dismantle his empire. He''s Manhattan''s most dangerous billionaire fighting to save it. When the RIVIERA Ledger exposes three generations of Hudson secrets, SDNY forensic auditor Nia Carter is dispatched to untangle the truth — and she''s the one woman Sebastian Hudson can''t control.', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-iLqpNEdWTN6p5dnBYDuiJL.webp', '0', 'Hudson Dynasty', 2, 'Corporate Billionaire Romance', 320, 'Coming Soon', 1);",
-  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute INSERT INTO books (title, slug, description, coverImage, price, series, seriesOrder, genre, pages, publishDate, featured) VALUES ('Hostile Tender', 'hostile-tender', 'She''s the federal auditor sent to dismantle his empire. He''s Manhattan''s most dangerous billionaire fighting to save it. When the RIVIERA Ledger exposes three generations of Hudson secrets, SDNY forensic auditor Nia Carter is dispatched to untangle the truth — and she''s the one woman Sebastian Hudson can''t control.', 'https://d2xsxph8kpxj0f.cloudfront.net/310519663125551617/RvRnCdwCjDUcBqafgeNQQ4/hostile-tender-cover-iLqpNEdWTN6p5dnBYDuiJL.webp', '0', 'Hudson Dynasty', 2, 'Corporate Billionaire Romance', 320, 'Coming Soon', 1);",
-  "returncode": 1,
-  "logs": [
-    "ERROR 1054 (42S22) at line 1: Unknown column 'price' in 'field list'"
-  ]
-}

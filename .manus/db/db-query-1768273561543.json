@@ -1,9 +1,0 @@
-{
-  "query": "\nUPDATE vip_tiers SET stripePriceId = 'price_1SoxraKiQaEeeJopaigc8GAX' WHERE slug = 'bronze';\nUPDATE vip_tiers SET stripePriceId = 'price_1SoxsEkiQaEeeJopRtehIuaL' WHERE slug = 'silver';\nUPDATE vip_tiers SET stripePriceId = 'price_1SoxsoKiQaEeeJopovyT8VUh' WHERE slug = 'gold';\n",
-  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute \nUPDATE vip_tiers SET stripePriceId = 'price_1SoxraKiQaEeeJopaigc8GAX' WHERE slug = 'bronze';\nUPDATE vip_tiers SET stripePriceId = 'price_1SoxsEkiQaEeeJopRtehIuaL' WHERE slug = 'silver';\nUPDATE vip_tiers SET stripePriceId = 'price_1SoxsoKiQaEeeJopovyT8VUh' WHERE slug = 'gold';\n",
-  "rows": [],
-  "messages": [],
-  "stdout": "",
-  "stderr": "",
-  "execution_time_ms": 743
-}

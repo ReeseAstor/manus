@@ -1,9 +1,0 @@
-{
-  "query": "UPDATE books SET amazonUrl = 'https://swiy.co/b01' WHERE seriesOrder = 1;\nUPDATE books SET amazonUrl = 'https://swiy.co/2rd' WHERE seriesOrder = 2;\nUPDATE books SET amazonUrl = 'https://swiy.co/3rd' WHERE seriesOrder = 3;\nUPDATE books SET amazonUrl = 'https://swiy.co/4rd' WHERE seriesOrder = 4;",
-  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43ZfdASTePZdn3i.7b10d8d53781 --database RvRnCdwCjDUcBqafgeNQQ4 --execute UPDATE books SET amazonUrl = 'https://swiy.co/b01' WHERE seriesOrder = 1;\nUPDATE books SET amazonUrl = 'https://swiy.co/2rd' WHERE seriesOrder = 2;\nUPDATE books SET amazonUrl = 'https://swiy.co/3rd' WHERE seriesOrder = 3;\nUPDATE books SET amazonUrl = 'https://swiy.co/4rd' WHERE seriesOrder = 4;",
-  "rows": [],
-  "messages": [],
-  "stdout": "",
-  "stderr": "",
-  "execution_time_ms": 90
-}
