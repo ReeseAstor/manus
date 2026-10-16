@@ -232,8 +232,8 @@ export default function FreeBook() {
                 What You'll Get
               </h2>
               <p className="text-xl text-gray-400">
-                What you&rsquo;ll get when you join
                 Your free prequel, plus news from Reese by email.
+              </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">

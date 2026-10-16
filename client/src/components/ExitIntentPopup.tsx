@@ -19,7 +19,7 @@ export function ExitIntentPopup() {
     },
     onError: (error) => {
       if (error.message?.includes("already subscribed")) {
-        toast.info("You're already a VIP reader! Check your inbox.");
+        toast.info("You're already on the list! Check your inbox.");
         setIsVisible(false);
       } else {
         toast.error("Something went wrong. Please try again.");

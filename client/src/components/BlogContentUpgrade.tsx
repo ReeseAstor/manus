@@ -75,7 +75,7 @@ export function BlogContentUpgrade({ blogSlug }: BlogContentUpgradeProps) {
     onError: (error) => {
       if (error.message?.includes("already subscribed")) {
         setIsSubscribed(true);
-        toast.info("You're already a VIP reader! We'll send it to your inbox.");
+        toast.info("You're already on the list! We'll send it to your inbox.");
       } else {
         toast.error("Something went wrong. Please try again.");
       }
