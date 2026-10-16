@@ -503,7 +503,7 @@ export const kieRouter = router({
         subject,
         html,
         from: {
-          email: "noreply@reeseastor.us",
+          email: "hello@reeseastor.com",
           name: "Reese Astor (Test)",
         },
       });

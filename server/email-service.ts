@@ -36,7 +36,7 @@ export async function sendEmail(params: SendEmailParams): Promise<boolean> {
       body: JSON.stringify({
         to: [{ email: params.to }],
         from: params.from || {
-          email: "noreply@reeseastor.us",
+          email: "hello@reeseastor.com",
           name: "Reese Astor",
         },
         subject: params.subject,
@@ -70,7 +70,7 @@ export async function sendPurchaseConfirmationEmail(
     subject: `Your order: ${data.bookTitle}`,
     html,
     from: {
-      email: "noreply@reeseastor.us",
+      email: "hello@reeseastor.com",
       name: "Reese Astor",
     },
   });
