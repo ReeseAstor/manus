@@ -36,9 +36,9 @@ export function WhyBuyDirect() {
           <span className="text-[#d4af37] text-sm font-semibold tracking-wider uppercase mb-4 block">
             Buying Direct
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#e5e5e5] mb-6">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-[#e5e5e5] mb-6">
             Buy the Books From the Author
-          </h2>
+          </h1>
           <p className="text-[#e5e5e5]/70 text-lg max-w-2xl mx-auto">
             You can buy my ebooks straight from this site, or from Amazon. Here is how buying direct works.
           </p>
