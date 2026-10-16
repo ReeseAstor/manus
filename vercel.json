@@ -56,6 +56,16 @@
       "source": "/books/audit-of-the-heart/",
       "destination": "/books",
       "permanent": false
+    },
+    {
+      "source": "/promo",
+      "destination": "/free-book",
+      "permanent": false
+    },
+    {
+      "source": "/promo/",
+      "destination": "/free-book",
+      "permanent": false
     }
   ]
 }

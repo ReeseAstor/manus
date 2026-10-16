@@ -176,7 +176,7 @@ export default function FreeBook() {
                 </div>
 
                 <p className="text-gray-300 text-xl leading-relaxed">
-                  Power. Passion. Manhattan. Before the empire, before the auditor, a young Hudson made the first deal that would define every one that followed. This steamy prequel novella is the perfect introduction to the Hudson Dynasty world.
+                  Power. Passion. Manhattan. She was hired to audit his empire. Falling for him could destroy them both. This high-heat corporate billionaire prequel novella is the perfect introduction to the Hudson Dynasty world.
                 </p>
 
                 {/* Email Signup Form */}
@@ -317,10 +317,10 @@ export default function FreeBook() {
             <Sparkles className="h-12 w-12 text-[#d4af37] mx-auto mb-6" />
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
               Ready to Enter the World of<br />
-              <span className="text-[#d4af37]">Manhattan's Most Dangerous Family?</span>
+              <span className="text-[#d4af37]">the Hudson Dynasty?</span>
             </h2>
             <p className="text-xl text-gray-300 mb-10 leading-relaxed">
-              Join readers who've already fallen for the Hudson Dynasty. Your free copy of The First Acquisition is waiting.
+              Your free copy of The First Acquisition is waiting.
             </p>
             <Button
               asChild
