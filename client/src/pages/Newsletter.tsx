@@ -47,7 +47,7 @@ export default function Newsletter() {
               {/* Badge */}
               <div className="inline-flex items-center gap-2 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-4 py-2 rounded-full text-sm font-semibold font-['Montserrat'] mb-6">
                 <Mail className="w-4 h-4" />
-                Join 10,000+ Romance Readers
+                Free prequel &middot; New release alerts
               </div>
 
               <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.1]">

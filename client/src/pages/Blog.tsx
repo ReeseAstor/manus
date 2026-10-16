@@ -93,7 +93,7 @@ export default function Blog() {
     {
       id: 6,
       title: "Email List Building for Authors: A Complete Guide",
-      excerpt: "How to grow your email list from zero to thousands of engaged readers who can't wait for your next release.",
+      excerpt: "How to grow your email list from zero and keep readers engaged between releases.",
       category: "Marketing",
       date: "October 12, 2025",
       readTime: "11 min read",

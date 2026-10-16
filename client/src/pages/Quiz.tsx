@@ -526,7 +526,7 @@ export default function Quiz() {
             className="text-center mt-12"
           >
             <p className="text-sm text-gray-500">
-              Join the growing community of <span className="text-[#d4af37]">romance readers</span> who have taken this quiz
+              Find your next <span className="text-[#d4af37]">romance read</span> in a few questions
             </p>
           </motion.div>
         )}
