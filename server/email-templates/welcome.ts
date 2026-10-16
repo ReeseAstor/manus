@@ -9,8 +9,11 @@ export interface WelcomeEmailData {
   subscriberName?: string;
 }
 
-const PREQUEL_BOOKFUNNEL_URL = "https://swiy.co/05";
-const PREQUEL_AMAZON_URL = "https://swiy.co/3rd";
+// BookFunnel "Get The First Acquisition Free" page (verified 2026-10-15: title and body name
+// The First Acquisition by Reese Astor). Also used on /free-book, the footer and the catalog.
+const PREQUEL_BOOKFUNNEL_URL = "https://dl.bookfunnel.com/kw1yge3479";
+// Direct Amazon page for The First Acquisition (ASIN B0D82GWFD9 per the catalog sheet), Reese tag.
+const PREQUEL_AMAZON_URL = "https://www.amazon.com/dp/B0D82GWFD9?tag=reeseastor-20";
 
 export function generateWelcomeEmail(data: WelcomeEmailData): string {
   const greeting = data.subscriberName
@@ -124,7 +127,7 @@ export function generateWelcomeEmail(data: WelcomeEmailData): string {
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tr>
                   <td style="padding: 8px 0; color: #e5e5e5; font-size: 15px; line-height: 1.6;">
-                    &#128276;&nbsp;&nbsp;New release alerts before anyone else
+                    &#128276;&nbsp;&nbsp;New release alerts
                   </td>
                 </tr>
                 <tr>

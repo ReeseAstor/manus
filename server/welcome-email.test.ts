@@ -28,7 +28,8 @@ describe("Welcome Email Template", () => {
   it("should generate valid HTML with prequel download link", () => {
     const html = generateWelcomeEmail({});
     expect(html).toContain("<!DOCTYPE html>");
-    expect(html).toContain("https://swiy.co/05");
+    expect(html).toContain('href="https://dl.bookfunnel.com/kw1yge3479"');
+    expect(html).not.toContain("swiy.co/05");
     expect(html).toContain("Download Your Free Book");
     expect(html).toContain("The First Acquisition");
   });
@@ -46,13 +47,15 @@ describe("Welcome Email Template", () => {
 
   it("should include Amazon link as alternative", () => {
     const html = generateWelcomeEmail({});
-    expect(html).toContain("https://swiy.co/3rd");
+    expect(html).toContain("https://www.amazon.com/dp/B0D82GWFD9?tag=reeseastor-20");
+    expect(html).not.toContain("swiy.co/3rd");
     expect(html).toContain("Amazon");
   });
 
   it("should include benefit list", () => {
     const html = generateWelcomeEmail({});
-    expect(html).toContain("New release alerts before anyone else");
+    expect(html).toContain("New release alerts");
+    expect(html).not.toContain("before anyone else");
     expect(html).toContain("Bonus scenes from the series");
     expect(html).toContain("Early cover reveals and ARC team invitations");
     expect(html).toContain("Sales and release-day news");
