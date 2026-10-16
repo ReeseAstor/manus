@@ -57,9 +57,9 @@ export function BlogToShopBridge({ category }: BlogToShopBridgeProps) {
             {rec.tagline}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link href="/shop">
+            <Link href="/books">
               <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-semibold">
-                Browse the Shop
+                Browse the Books
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>

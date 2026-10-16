@@ -350,9 +350,9 @@ export default function Profile() {
                   <div className="text-center py-8">
                     <ShoppingBag className="w-12 h-12 text-[#d4af37]/40 mx-auto mb-4" />
                     <p className="text-[#e5e5e5]/60 mb-4">You haven't purchased any books yet.</p>
-                    <Link href="/shop">
+                    <Link href="/books">
                       <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27]">
-                        Browse Shop
+                        Browse Books
                       </Button>
                     </Link>
                   </div>

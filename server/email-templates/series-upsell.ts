@@ -85,7 +85,7 @@ ${bodyContent}
                   <td style="color: rgba(200,200,200,0.25); font-size: 13px;">|</td>
                   <td style="padding: 0 12px;"><a href="${SITE_URL}/books" style="color: #d4af37; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Books</a></td>
                   <td style="color: rgba(200,200,200,0.25); font-size: 13px;">|</td>
-                  <td style="padding: 0 12px;"><a href="${SITE_URL}/shop" style="color: #d4af37; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Shop</a></td>
+                  <td style="padding: 0 12px;"><a href="${SITE_URL}/newsletter" style="color: #d4af37; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Newsletter</a></td>
                 </tr>
               </table>
               <p style="margin: 0 0 8px; color: rgba(200,200,200,0.35); font-size: 11px; line-height: 1.5; font-family: Arial, sans-serif;">

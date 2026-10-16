@@ -22,13 +22,13 @@ export default function WhyBuyDirectPage() {
 
       {/* Back Navigation */}
       <div className="container max-w-6xl mx-auto px-4 pt-8">
-        <Link href="/shop">
+        <Link href="/books">
           <Button
             variant="ghost"
             className="text-[#e5e5e5]/70 hover:text-[#d4af37] hover:bg-transparent"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Shop
+            Back to Books
           </Button>
         </Link>
       </div>
@@ -52,7 +52,7 @@ export default function WhyBuyDirectPage() {
             {[
               {
                 q: "How do I get my book after purchase?",
-                a: "After checkout, a confirmation email with a link to your book is sent to the address you provide. If it does not arrive, check your spam folder.",
+                a: "After checkout, a confirmation email with a link to your book on Amazon is sent to the address you provide. If it does not arrive, check your spam folder.",
               },
               {
                 q: "Where else can I buy the books?",

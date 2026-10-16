@@ -48,9 +48,6 @@ export function Footer() {
               <Link href="/blog">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Blog</a>
               </Link>
-              <Link href="/shop">
-                <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Shop</a>
-              </Link>
               <Link href="/favorites">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Reese's Favorites</a>
               </Link>

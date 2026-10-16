@@ -106,7 +106,6 @@ export function createApp(): Express {
         { url: "/blog", priority: "0.8", changefreq: "daily" },
         { url: "/contact", priority: "0.6", changefreq: "yearly" },
         { url: "/quiz", priority: "0.7", changefreq: "monthly" },
-        { url: "/shop", priority: "0.7", changefreq: "weekly" },
         { url: "/newsletter", priority: "0.6", changefreq: "monthly" },
         { url: "/privacy", priority: "0.3", changefreq: "yearly" },
         { url: "/terms", priority: "0.3", changefreq: "yearly" },

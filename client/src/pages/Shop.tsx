@@ -69,6 +69,7 @@ export default function Shop() {
         title="Shop | Reese Astor Romance Books"
         description="Buy Reese Astor's Manhattan Money Kings ebooks directly from the author."
         canonical="/shop"
+        noindex
         ogType="product"
         keywords={["Reese Astor shop", "Manhattan Money Kings ebooks", "buy direct from author"]}
         structuredData={[shopStructuredData]}
@@ -102,7 +103,7 @@ export default function Shop() {
             </h1>
             <p className="text-xl text-[#e5e5e5]/70 max-w-2xl mx-auto mb-8">
               Buy the ebooks directly from the author. After checkout, a confirmation
-              email with a link to your book is sent to the address you provide.
+              email with a link to your book on Amazon is sent to the address you provide.
             </p>
           </motion.div>
         </div>

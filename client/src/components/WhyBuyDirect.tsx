@@ -14,7 +14,7 @@ const points = [
   {
     icon: Mail,
     title: "Delivery by Email",
-    description: "After checkout, a confirmation email with a link to your book is sent to the address you provide.",
+    description: "After checkout, a confirmation email with a link to your book on Amazon is sent to the address you provide.",
   },
   {
     icon: BookOpen,
@@ -64,9 +64,9 @@ export function WhyBuyDirect() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/shop">
+          <a href="/books">
             <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-semibold px-6 py-3">
-              Go to the Shop
+              Browse the Books
               <ChevronRight className="w-4 h-4 ml-2" />
             </Button>
           </a>
