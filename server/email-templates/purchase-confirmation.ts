@@ -202,7 +202,7 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
       <h2 class="greeting">Thank You for Your Purchase, ${data.customerName}!</h2>
       
       <p class="message">
-        Your order has been confirmed and thank you for supporting my work and choosing to read the Manhattan Money Kings series!
+        Thank you for your order. It is confirmed, and I hope you love the story.
       </p>
 
       <!-- Book Details -->
@@ -219,7 +219,7 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
       <!-- Book link -->
       <div class="download-section">
         <h3 class="download-title">Your Book Link</h3>
-        <p class="message">Your order is confirmed. The link below opens your book&rsquo;s Kindle page on Amazon, where you can read it:</p>
+        <p class="message">Your book is delivered through its Amazon Kindle page. The button below opens it:</p>
 
         <div class="download-buttons">
           <a href="${data.downloadLinks.epub}" class="download-btn">
@@ -234,14 +234,14 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
         <h4 class="help-title">Need Help?</h4>
         <p class="help-text">
           If you have any trouble opening your book link, 
-          please don't hesitate to contact me at <a href="mailto:support@reeseastor.com" style="color: #d4af37;">support@reeseastor.com</a>. 
+          please don't hesitate to contact me at <a href="mailto:info@reeseastor.com" style="color: #d4af37;">info@reeseastor.com</a>. 
           I'm here to help!
         </p>
       </div>
 
       <p class="message">
         You can find your book link again by logging into your account on my website 
-        and visiting the <a href="https://reeseastor.us/my-purchases" style="color: #d4af37;">My Purchases</a> page.
+        and visiting the <a href="https://reeseastor.com/my-purchases" style="color: #d4af37;">My Purchases</a> page.
       </p>
 
       <p class="message">
@@ -258,9 +258,9 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
     <!-- Footer -->
     <div class="footer">
       <div class="social-links">
-        <a href="https://reeseastor.us" class="social-link">Website</a>
-        <a href="https://reeseastor.us/blog" class="social-link">Blog</a>
-        <a href="https://reeseastor.us/newsletter" class="social-link">Newsletter</a>
+        <a href="https://reeseastor.com" class="social-link">Website</a>
+        <a href="https://reeseastor.com/blog" class="social-link">Blog</a>
+        <a href="https://reeseastor.com/newsletter" class="social-link">Newsletter</a>
       </div>
       
       <p class="footer-text">

@@ -64,7 +64,10 @@ describe("Purchase Confirmation Email System", () => {
       // Check for download buttons
       expect(html).toContain("Read on Amazon");
       expect(html).toContain("https://example.com/epub");
-      expect(html).toContain("Kindle page on Amazon");
+      expect(html).toContain("delivered through its Amazon Kindle page");
+      expect(html).not.toContain("where you can read it");
+      expect(html).not.toContain("Manhattan Money Kings");
+      expect(html).not.toContain("and thank you");
 
       // No delivery promises the site cannot keep
       expect(html).not.toMatch(/download (epub|mobi|pdf)|all three formats|ready to download/i);
@@ -90,7 +93,8 @@ describe("Purchase Confirmation Email System", () => {
       const html = generatePurchaseConfirmationEmail(testData);
 
       expect(html).toContain("Need Help?");
-      expect(html).toContain("support@reeseastor.com");
+      expect(html).toContain("info@reeseastor.com");
+      expect(html).not.toContain("support@reeseastor");
     });
 
     it("should include link to My Purchases page", () => {
@@ -112,7 +116,8 @@ describe("Purchase Confirmation Email System", () => {
       const html = generatePurchaseConfirmationEmail(testData);
 
       expect(html).toContain("my-purchases");
-      expect(html).toContain("reeseastor.us");
+      expect(html).toContain("reeseastor.com");
+      expect(html).not.toContain("reeseastor.us");
     });
   });
 

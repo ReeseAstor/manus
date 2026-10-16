@@ -6,7 +6,7 @@ import { Link, useSearch } from "wouter";
 export default function PurchaseSuccess() {
   const searchString = useSearch();
   const params = new URLSearchParams(searchString);
-  const productName = params.get("product") || "your purchase";
+  const productName = params.get("product");
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27] flex items-center justify-center px-4">
@@ -39,7 +39,11 @@ export default function PurchaseSuccess() {
               Thank You for Your Purchase!
             </h1>
             <p className="text-[#e5e5e5]/70 text-lg mb-2">
-              Your order for <span className="text-[#d4af37] font-semibold">{productName}</span> is confirmed.
+              {productName ? (
+                <>Your order for <span className="text-[#d4af37] font-semibold">{productName}</span> is confirmed.</>
+              ) : (
+                <>Your order is confirmed.</>
+              )}
             </p>
             <p className="text-[#e5e5e5]/60 text-sm mb-8">
               A confirmation email with a link to your book has been sent to your email address.
@@ -75,7 +79,7 @@ export default function PurchaseSuccess() {
                 <div>
                   <h3 className="text-[#e5e5e5] font-semibold">Open Your Book</h3>
                   <p className="text-[#e5e5e5]/60 text-sm">
-                    The link opens your book&apos;s Kindle page on Amazon, where you can read it.
+                    Your book is delivered through its Amazon Kindle page. The link in the email opens it.
                   </p>
                 </div>
               </div>
@@ -124,8 +128,8 @@ export default function PurchaseSuccess() {
             className="text-[#e5e5e5]/50 text-sm mt-8"
           >
             Need help? Contact us at{" "}
-            <a href="mailto:support@reeseastor.us" className="text-[#d4af37] hover:underline">
-              support@reeseastor.us
+            <a href="mailto:info@reeseastor.com" className="text-[#d4af37] hover:underline">
+              info@reeseastor.com
             </a>
           </motion.p>
         </div>

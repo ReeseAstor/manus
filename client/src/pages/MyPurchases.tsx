@@ -129,10 +129,10 @@ export default function MyPurchases() {
             <p className="text-[#e5e5e5]/40 text-sm">
               Need help with your purchase? Contact us at{" "}
               <a
-                href="mailto:support@reeseastor.us"
+                href="mailto:info@reeseastor.com"
                 className="text-[#d4af37] hover:underline"
               >
-                support@reeseastor.us
+                info@reeseastor.com
               </a>
             </p>
           </motion.div>

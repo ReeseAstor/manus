@@ -89,7 +89,7 @@ export function generateDownloadLinks(bookId: number): {
   mobi: string;
   pdf: string;
 } {
-  const baseUrl = "https://reeseastor.us/my-purchases";
+  const baseUrl = "https://reeseastor.com/my-purchases";
 
   // Map known book IDs to their retailer / delivery URLs so confirmation
   // emails always contain at least one working link even before per-product

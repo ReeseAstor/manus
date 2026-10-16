@@ -239,25 +239,6 @@ export default function Profile() {
                   />
                 </div>
                 
-                <div className="space-y-2">
-                  <Label className="text-[#e5e5e5]">Preferred Ebook Format</Label>
-                  <Select
-                    value={formData.preferredFormat}
-                    onValueChange={(value: "epub" | "mobi" | "pdf") => 
-                      setFormData({ ...formData, preferredFormat: value })
-                    }
-                  >
-                    <SelectTrigger className="bg-[#0a0e27]/50 border-[#d4af37]/20 text-[#e5e5e5]">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#1a1f3a] border-[#d4af37]/20">
-                      <SelectItem value="epub">ePub (Most Readers)</SelectItem>
-                      <SelectItem value="mobi">Mobi (Kindle)</SelectItem>
-                      <SelectItem value="pdf">PDF (Universal)</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
                 <Button 
                   onClick={handleSavePreferences}
                   disabled={updatePrefs.isPending}
