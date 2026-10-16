@@ -6,10 +6,13 @@ describe("Post-Purchase Email Templates", () => {
   it("should generate Email 1 with correct structure", () => {
     const html = generatePostPurchaseEmail1("Sarah");
     expect(html).toContain("Dear Sarah");
-    expect(html).toContain("Your books are on their way");
-    expect(html).toContain("Reading Companion");
-    expect(html).toContain("Character relationship map");
-    expect(html).toContain("Spotify playlist");
+    expect(html).toContain("Thank you");
+    expect(html).toContain("in reading order");
+    expect(html).toContain("Book 4: The Billionaire&rsquo;s Forbidden Nanny");
+    // No invented bonus assets
+    expect(html).not.toContain("Spotify");
+    expect(html).not.toContain("relationship map");
+    expect(html).not.toContain("/reading-companion");
     expect(html).toContain("Reese Astor");
     expect(html).toContain("Romance Author");
     expect(html).toContain("{$unsubscribe}");
@@ -21,31 +24,32 @@ describe("Post-Purchase Email Templates", () => {
     expect(html).not.toContain("Dear undefined");
   });
 
-  it("should generate Email 2 with deleted scene content", () => {
+  it("should generate Email 2 as a check-in with no invented content", () => {
     const html = generatePostPurchaseEmail2("Emily");
     expect(html).toContain("Dear Emily");
-    expect(html).toContain("deleted scene");
-    expect(html).toContain("The Night Before Everything Changed");
-    expect(html).toContain("penthouse was dark");
-    expect(html).toContain("Read the Full Deleted Scene");
+    expect(html).toContain("honest review");
+    expect(html).not.toContain("deleted scene");
+    expect(html).not.toContain("/deleted-scene");
+    expect(html).not.toContain("The Night Before Everything Changed");
   });
 
   it("should generate Email 3 with upsell content", () => {
     const html = generatePostPurchaseEmail3();
     expect(html).toContain("Hudson Dynasty");
-    expect(html).toContain("Complete Trilogy Bundle");
-    expect(html).toContain("Ultimate Collection");
-    expect(html).toContain("VIP Club Membership");
-    expect(html).toContain("$29.99");
-    expect(html).toContain("$39.99");
-    expect(html).toContain("Explore the Full Collection");
+    expect(html).toContain("Golden Parachute");
+    expect(html).toContain("Manhattan Money Kings, Book 4");
+    expect(html).toContain("Browse All the Books");
+    // The series has five titles, not a trilogy, and no bundles are offered here
+    expect(html).not.toMatch(/trilogy/i);
+    expect(html).not.toContain("Ultimate Collection");
+    expect(html).not.toContain("VIP Club Membership");
   });
 
   it("should have correct sequence metadata", () => {
     expect(postPurchaseSequence).toHaveLength(3);
-    expect(postPurchaseSequence[0].subject).toBe("Your books are on their way — plus a surprise inside");
-    expect(postPurchaseSequence[1].subject).toBe("The deleted scene I almost kept in Book 1");
-    expect(postPurchaseSequence[2].subject).toBe("Finished the series? Here's what's coming next");
+    expect(postPurchaseSequence[0].subject).toBe("Thank you for your order");
+    expect(postPurchaseSequence[1].subject).toBe("How is the reading going?");
+    expect(postPurchaseSequence[2].subject).toBe("Finished the series? Here's where to read next");
     expect(postPurchaseSequence[0].delay).toContain("1 day");
     expect(postPurchaseSequence[1].delay).toContain("5 day");
     expect(postPurchaseSequence[2].delay).toContain("14 day");
