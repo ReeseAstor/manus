@@ -52,7 +52,7 @@ export default function Press() {
         style={{ background: "#0B1226", borderTop: `1px solid ${GOLD_SOFT}` }}
       >
         <div className="max-w-[820px] mx-auto">
-          <SectionHeading kicker="Bio · Short" title="50 words" />
+          <SectionHeading kicker="Bio · Short" title="Short version" />
           <p
             className="font-cormorant text-[19px] leading-[1.75]"
             style={{ color: TEXT, textWrap: "pretty" }}
@@ -66,15 +66,15 @@ export default function Press() {
 
       <section className="px-6 md:px-16 py-[100px]">
         <div className="max-w-[820px] mx-auto">
-          <SectionHeading kicker="Bio · Long" title="120 words" />
+          <SectionHeading kicker="Bio · Long" title="Long version" />
           <p
             className="font-cormorant text-[19px] leading-[1.75]"
             style={{ color: TEXT, textWrap: "pretty" }}
           >
             Reese Astor is a romance author. She writes
             contemporary billionaire romance set among New York&rsquo;s most dangerous heirs &mdash;
-            the Manhattan Money Kings (five novels, ongoing) and the Hudson Dynasty (a prequel
-            novella plus the novels <em>Hostile Tender</em> and <em>Poison Pill</em>). In 2026 she launches
+            the Manhattan Money Kings (five books) and the Hudson Dynasty (a prequel
+            novella plus the novels <em>Hostile Tender</em>, <em>Poison Pill</em> and <em>Golden Parachute</em>). In 2026 she launches
             Intimate Psychological Narratives, a quieter line of audiobooks for late-night listening.
             The first title, <em>The Need for Permission: On the Quiet Recovery of Self-Trust</em>,
             is a ten-chapter, hour-long meditation on rebuilding self-trust. She believes romance novels are more than entertainment

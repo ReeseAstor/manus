@@ -1,7 +1,8 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "./styles/animations.css";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ComponentType } from "react";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -84,6 +85,69 @@ import { EmailCapturePopup } from "./components/EmailCapturePopup";
 import { ExitIntentPopup } from "./components/ExitIntentPopup";
 import { AdminRoute } from "./components/AdminRoute";
 
+/**
+ * Wraps a page that has no SEO head of its own (or only renders one after data loads) so every
+ * route gets an accurate title, description and canonical. A page's own head, when present,
+ * is deeper in the tree and takes precedence.
+ */
+function withSEO(Page: ComponentType, seo: { title: string; description: string; canonical: string; noindex?: boolean }) {
+  return function PageWithSEO() {
+    return (
+      <>
+        <EnhancedSEOHead {...seo} />
+        <Page />
+      </>
+    );
+  };
+}
+
+const FavoritesPage = withSEO(Favorites, {
+  title: "Reese's Favorites | Reese Astor",
+  description: "Products recommended by Reese Astor for reading and writing. Some links are affiliate links.",
+  canonical: "/favorites",
+});
+const NewsletterArchivePage = withSEO(NewsletterArchive, {
+  title: "Newsletter Archive | Reese Astor",
+  description: "Browse past newsletters from Reese Astor.",
+  canonical: "/newsletter-archive",
+});
+const VipClubPage = withSEO(VipClub, {
+  title: "VIP Club | Reese Astor",
+  description: "Membership information for Reese Astor's VIP Club.",
+  canonical: "/vip-club",
+  noindex: true,
+});
+const ReaderClubPage = withSEO(ReaderClub, {
+  title: "Reader Club | Reese Astor",
+  description: "Sign in or join Reese Astor's Reader Club.",
+  canonical: "/reader-club",
+  noindex: true,
+});
+const WelcomeBackPage = withSEO(WelcomeBack, {
+  title: "Welcome Back | Reese Astor",
+  description: "Rejoin Reese Astor's email list.",
+  canonical: "/welcome-back",
+  noindex: true,
+});
+const StaySubscribedPage = withSEO(StaySubscribed, {
+  title: "Thank You | Reese Astor",
+  description: "Thank you for staying on Reese Astor's email list.",
+  canonical: "/stay-subscribed",
+  noindex: true,
+});
+const VipAudioHubPage = withSEO(VipAudioHub, {
+  title: "VIP Audio Hub | Reese Astor",
+  description: "Member audio area for Reese Astor's VIP Club.",
+  canonical: "/vip-audio",
+  noindex: true,
+});
+const VipAudioLibraryPage = withSEO(VipAudioLibrary, {
+  title: "VIP Audio Library | Reese Astor",
+  description: "Member audio library for Reese Astor's VIP Club.",
+  canonical: "/vip-audio-library",
+  noindex: true,
+});
+
 function RouteFallback() {
   return (
     <div className="flex items-center justify-center min-h-[60vh]">
@@ -101,30 +165,30 @@ function Router() {
         <Route path={"/books/:slug"} component={BookTitle} />
         <Route path={"/permission"} component={Permission} />
         <Route path={"/press"} component={Press} />
-        <Route path={"/reader-club"} component={ReaderClub} />
+        <Route path={"/reader-club"} component={ReaderClubPage} />
         <Route path={"/reader-club/:slug"} component={ExclusiveContentDetail} />
-        <Route path={"/welcome-back"} component={WelcomeBack} />
-        <Route path={"/stay-subscribed"} component={StaySubscribed} />
+        <Route path={"/welcome-back"} component={WelcomeBackPage} />
+        <Route path={"/stay-subscribed"} component={StaySubscribedPage} />
         <Route path={"/free-book"} component={FreeBook} />
         <Route path={"/quiz"} component={CharacterQuiz} />
         <Route path={"/romance-quiz"} component={RomanceTropeQuiz} />
         <Route path={"/shop"} component={Shop} />
-        <Route path={"/favorites"} component={Favorites} />
+        <Route path={"/favorites"} component={FavoritesPage} />
         <Route path={"/why-buy-direct"} component={WhyBuyDirectPage} />
         <Route path={"/purchase-success"} component={PurchaseSuccess} />
         <Route path={"/my-purchases"} component={MyPurchases} />
         <Route path={"/profile"} component={Profile} />
-        <Route path={"/vip-club"} component={VipClub} />
+        <Route path={"/vip-club"} component={VipClubPage} />
         <Route path={"/vip-club/welcome"} component={VipWelcome} />
         <Route path={"/vip-club/dashboard"} component={VipDashboard} />
         <Route path={"/auth/login"} component={AuthLogin} />
         <Route path={"/auth/callback"} component={AuthCallback} />
         <Route path={"/newsletter"} component={Newsletter} />
         <Route path={"/ai-newsletter"} component={AINewsletterSignup} />
-        <Route path={"/newsletter-archive"} component={NewsletterArchive} />
+        <Route path={"/newsletter-archive"} component={NewsletterArchivePage} />
         <Route path={"/newsletter-archive/:id"} component={NewsletterDetail} />
-        <Route path={"/vip-audio"} component={VipAudioHub} />
-        <Route path={"/vip-audio-library"} component={VipAudioLibrary} />
+        <Route path={"/vip-audio"} component={VipAudioHubPage} />
+        <Route path={"/vip-audio-library"} component={VipAudioLibraryPage} />
         <Route path={"/about"} component={About} />
         <Route path={"/contact"} component={Contact} />
         <Route path={"/blog"} component={Blog} />

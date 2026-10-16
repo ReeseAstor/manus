@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { trpc } from "../lib/trpc";
 import { Link } from "wouter";
 
@@ -16,10 +16,6 @@ export default function WelcomeBack() {
     onSuccess: () => setSubmitted(true),
     onError: (e) => setError(e.message || "Something went wrong. Please try again."),
   });
-
-  useEffect(() => {
-    document.title = "Welcome Back — Your Bonus Chapter Awaits | Reese Astor";
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

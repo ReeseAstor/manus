@@ -289,6 +289,43 @@ export const BOOKS: Book[] = [
     price_usd: 4.99,
   },
 
+  {
+    // Source: live amazon.com listing for B0HDKNP9F6 (title, blurb, price, Kindle Unlimited, cover)
+    // checked 2026-10-15; cover URL and KU status also match the catalog sheet.
+    slug: "golden-parachute",
+    title: "Golden Parachute",
+    lane: "hudson_dynasty",
+    series_position: 3,
+    format: "ebook",
+    position_label: "Book 3",
+    tagline:
+      "He can restructure a billion dollars of bad debt. He cannot buy his way around the one woman who refuses to be managed.",
+    blurb:
+      "Miri Doyle-Levine has spent eight years keeping other people on their feet. A home health aide fighting " +
+      "her way into nursing school, she has no time for a man who treats every problem like a number he can make " +
+      "disappear. Kai Hsu built his life the same way he handles distressed credit: control the risk, close the " +
+      "exits, never need anything. Then Miri sees through him in one glance. The chemistry is immediate. The " +
+      "terms are not. She refuses his money. He keeps trying to turn care into logistics. And when the body Kai " +
+      "has ignored for years finally forces him to stop, both of them have to decide what love looks like when " +
+      "rescue is off the table. Miri will not become his cure. Kai will have to become a man who can stay. " +
+      "Golden Parachute is a high-heat contemporary romance about class difference, emotional recovery, " +
+      "boundaries, and choosing love without surrendering yourself. It can be read as a standalone and ends " +
+      "with a complete happily ever after. Content note: explicit consensual sexual content, compulsive sexual " +
+      "behavior recovery, and a serious medical emergency.",
+    pull_quote: null,
+    cover_image: "https://m.media-amazon.com/images/I/81sk9fx+I6L._SL1500_.jpg",
+    publication_date: null,
+    kindle_unlimited: true,
+    retailers: {
+      amazon_kindle: "https://www.amazon.com/dp/B0HDKNP9F6?tag=reeseastor-20",
+      audible: null,
+    },
+    audiobook_available: false,
+    isbn: null,
+    asin: "B0HDKNP9F6",
+    price_usd: 4.99,
+  },
+
   // ─── Intimate Psychological Narratives ────────────────────────────────
   {
     slug: "the-need-for-permission",

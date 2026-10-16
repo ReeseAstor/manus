@@ -121,7 +121,7 @@ export default function FreeBook() {
               >
                 <div className="absolute -inset-12 bg-gradient-to-r from-[#d4af37]/30 to-transparent blur-3xl rounded-full" />
                 <div className="relative">
-                  <div className="absolute -top-6 -right-6 z-10 px-8 py-4 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-xl shadow-2xl animate-pulse">
+                  <div className="absolute -top-4 -right-2 md:-top-6 md:-right-6 z-10 px-6 py-3 md:px-8 md:py-4 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-xl shadow-2xl animate-pulse">
                     100% FREE
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
