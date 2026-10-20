@@ -25,13 +25,13 @@ const stories = [
     content: extractContent(boardroomStory),
     category: 'passion',
     heatLevel: 4,
-    characters: JSON.stringify(['Elena Martinez', 'David Chen']),
+    characters: JSON.stringify(['Elena Volkov', 'David Kim']),
     requiredTier: 'bronze',
     wordCount: 2400
   },
   {
-    title: 'Midnight at Chen Technologies',
-    slug: 'midnight-at-chen-technologies',
+    title: 'Late Night on the Executive Floor',
+    slug: 'late-night-executive-floor',
     excerpt: 'The office was silent except for the hum of my computer and the pounding of my heart. I didn\'t hear Michael approach until his shadow fell across my desk. "You\'re still here," he said, his voice rough with exhaustion—or something else entirely.',
     content: extractContent(midnightStory),
     category: 'romance',
