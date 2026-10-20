@@ -1,318 +1,55 @@
 import { motion } from "framer-motion";
-import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Check, Star, Gift, Sparkles, ArrowRight, Crown, Loader2 } from "lucide-react";
+import { Gift, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
-import { toast } from "sonner";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
-import { CountdownTimer } from "@/components/CountdownTimer";
 import { RetailerButtons } from "@/components/author-kit";
 import { BOOKS, LANE_META } from "@/data/books";
 
-interface BundleOption {
-  id: string;
-  name: string;
-  description: string;
-  books: number;
-  originalPrice: number;
-  bundlePrice: number;
-  memberPrice: number;
-  features: string[];
-  popular?: boolean;
-  bestValue?: boolean;
-  productId: number; // Database product ID for Stripe checkout
-}
-
-const bundleOptions: BundleOption[] = [
-  {
-    id: "single",
-    name: "Single Book",
-    description: "Start your Manhattan journey",
-    books: 1,
-    originalPrice: 499,
-    bundlePrice: 399,
-    memberPrice: 299,
-    productId: 30001, // Single Book product
-    features: [
-      "Choose any book in the series",
-      "Instant digital delivery",
-      "ePub, Mobi & PDF formats",
-    ],
-  },
-  {
-    id: "trilogy",
-    name: "Complete Trilogy",
-    description: "The full Manhattan Money Kings series",
-    books: 3,
-    originalPrice: 1497,
-    bundlePrice: 999,
-    memberPrice: 799,
-    productId: 30002, // Complete Trilogy product
-    features: [
-      "All 3 Manhattan Money Kings books",
-      "Instant digital delivery",
-      "ePub, Mobi & PDF formats",
-      "Bonus: Character interviews",
-      "Bonus: Deleted scenes",
-    ],
-    popular: true,
-  },
-  {
-    id: "ultimate",
-    name: "Ultimate Collection",
-    description: "Everything + exclusive content",
-    books: 4,
-    originalPrice: 1796,
-    bundlePrice: 1299,
-    memberPrice: 999,
-    productId: 30003, // Ultimate Collection product
-    features: [
-      "Complete trilogy + prequel",
-      "Instant digital delivery",
-      "All formats included",
-      "Exclusive bonus chapters",
-      "Behind-the-scenes content",
-      "Character mood boards",
-      "Author's playlist",
-      "Early access to Book 4",
-    ],
-    bestValue: true,
-  },
-];
-
 export default function Shop() {
   useEffect(() => {
-    document.title = "Shop Signed Books & Bundles | Reese Astor Romance Store";
+    document.title = "Books | Reese Astor";
   }, []);
 
   const shopStructuredData = {
     "@context": "https://schema.org",
-    "@type": "Store",
-    "name": "Reese Astor Book Shop",
-    "url": "https://reeseastor.com/shop",
-    "description": "Official store for signed books and exclusive bundles from Reese Astor.",
-    "brand": { "@type": "Brand", "name": "Reese Astor" }
-  };
-
-  const createCheckout = trpc.stripe.createCheckoutSession.useMutation();
-  const [loadingProductId, setLoadingProductId] = useState<number | null>(null);
-
-  const formatPrice = (cents: number) => `$${(cents / 100).toFixed(2)}`;
-  const calculateSavings = (original: number, sale: number) =>
-    Math.round(((original - sale) / original) * 100);
-
-  const handlePurchase = async (productId: number, productName: string) => {
-    setLoadingProductId(productId);
-    try {
-      const result = await createCheckout.mutateAsync({
-        productId,
-        successUrl: `${window.location.origin}/purchase-success?product=${encodeURIComponent(productName)}`,
-        cancelUrl: `${window.location.origin}/shop`,
-      });
-
-      if (result.url) {
-        window.location.href = result.url;
-      }
-    } catch (error) {
-      console.error("Checkout error:", error);
-      toast.error("Unable to start checkout. Please try again.");
-    } finally {
-      setLoadingProductId(null);
-    }
+    "@type": "WebPage",
+    name: "Reese Astor Books",
+    url: "https://www.reeseastor.com/shop",
+    description: "Reese Astor titles, with links to the stores that carry them.",
+    brand: { "@type": "Brand", name: "Reese Astor" },
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27]">
       <EnhancedSEOHead
-        title="Shop Signed Books & Bundles | Reese Astor Romance Store"
-        description="Shop signed paperbacks, exclusive bundles, and digital editions of the Manhattan Money Kings series. Direct from USA Today Bestselling author Reese Astor."
-        canonical="/shop"
-        ogType="product"
-        keywords={["signed romance books", "Reese Astor shop", "Manhattan Money Kings paperback", "romance book bundles", "signed author copies", "buy direct from author"]}
+        title="Books | Reese Astor"
+        description="Every Reese Astor title, with links to the stores that carry it."
+        canonical="https://www.reeseastor.com/shop"
+        ogType="website"
+        keywords={["Reese Astor books", "Manhattan Money Kings", "Hudson Dynasty"]}
         structuredData={[shopStructuredData]}
       />
 
-      {/* Social Proof Banner */}
-
-      {/* Recent Purchase Toast Notifications */}
-
-      {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: "url('/manhattan-night.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0e27]/80 to-[#0a0e27]" />
-
         <div className="container max-w-6xl mx-auto relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <span className="inline-flex items-center gap-2 bg-[#d4af37]/10 border border-[#d4af37]/30 rounded-full px-4 py-2 text-[#d4af37] text-sm font-semibold mb-6">
-              <Sparkles className="w-4 h-4" />
-              Buy Direct & Save Up to 40%
-            </span>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <h1 className="text-5xl md:text-6xl font-serif font-bold text-[#e5e5e5] mb-6">
-              Manhattan Money Kings
+              Books by
               <br />
-              <span className="text-[#d4af37]">Book Shop</span>
+              <span className="text-[#d4af37]">Reese Astor</span>
             </h1>
             <p className="text-xl text-[#e5e5e5]/70 max-w-2xl mx-auto mb-8">
-              Get the complete billionaire romance series at exclusive direct prices. 
-              Save money, support the author, and receive bonus content with every purchase.
+              Every Reese Astor title, with links to your favorite store.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Bundle Options */}
-      <section className="py-20 px-4">
-        <div className="container max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-serif font-bold text-[#e5e5e5] mb-4">
-              Choose Your Package
-            </h2>
-            <p className="text-[#e5e5e5]/70 text-lg">
-              All purchases include instant delivery and multiple formats
-            </p>
-          </motion.div>
-
-          {/* Countdown Timer */}
-          <div className="mb-12">
-            <CountdownTimer label="Direct Purchase Pricing Ends In" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {bundleOptions.map((bundle, index) => (
-              <motion.div
-                key={bundle.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`relative bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden ${
-                  bundle.popular || bundle.bestValue
-                    ? "border-2 border-[#d4af37]"
-                    : "border border-[#d4af37]/20"
-                }`}
-              >
-                {/* Badge */}
-                {(bundle.popular || bundle.bestValue) && (
-                  <div className="absolute top-0 left-0 right-0 bg-[#d4af37] text-[#0a0e27] text-center py-2 font-bold text-sm">
-                    {bundle.bestValue ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <Crown className="w-4 h-4" /> BEST VALUE
-                      </span>
-                    ) : (
-                      <span className="flex items-center justify-center gap-2">
-                        <Star className="w-4 h-4" /> MOST POPULAR
-                      </span>
-                    )}
-                  </div>
-                )}
-
-                <div className={`p-8 ${bundle.popular || bundle.bestValue ? "pt-14" : ""}`}>
-                  {/* Header */}
-                  <h3 className="text-2xl font-serif font-bold text-[#e5e5e5] mb-2">
-                    {bundle.name}
-                  </h3>
-                  <p className="text-[#e5e5e5]/60 text-sm mb-6">{bundle.description}</p>
-
-                  {/* Pricing */}
-                  <div className="mb-6">
-                    <div className="flex items-baseline gap-2 mb-1">
-                      <span className="text-4xl font-bold text-[#d4af37]">
-                        {formatPrice(bundle.bundlePrice)}
-                      </span>
-                      <span className="text-lg text-[#e5e5e5]/40 line-through">
-                        {formatPrice(bundle.originalPrice)}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-xs font-semibold">
-                        Save {calculateSavings(bundle.originalPrice, bundle.bundlePrice)}%
-                      </span>
-                      <span className="text-[#e5e5e5]/50 text-xs">
-                        {bundle.books} book{bundle.books > 1 ? "s" : ""}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Member Price */}
-                  <div className="bg-[#d4af37]/10 border border-[#d4af37]/20 rounded-lg p-3 mb-6">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[#e5e5e5]/70 text-sm">Reader's Club Price:</span>
-                      <span className="text-[#d4af37] font-bold">
-                        {formatPrice(bundle.memberPrice)}
-                      </span>
-                    </div>
-                    <p className="text-[#e5e5e5]/50 text-xs mt-1">
-                      Save {calculateSavings(bundle.originalPrice, bundle.memberPrice)}% as a member
-                    </p>
-                  </div>
-
-                  {/* Features */}
-                  <ul className="space-y-3 mb-8">
-                    {bundle.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-[#d4af37] flex-shrink-0 mt-0.5" />
-                        <span className="text-[#e5e5e5]/80 text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* CTA Button */}
-                  <Button
-                    onClick={() => handlePurchase(bundle.productId, bundle.name)}
-                    disabled={loadingProductId === bundle.productId}
-                    className={`w-full py-6 font-bold text-lg rounded-xl transition-all hover:scale-[1.02] ${
-                      bundle.popular || bundle.bestValue
-                        ? "bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27]"
-                        : "bg-white/10 hover:bg-white/20 text-[#e5e5e5] border border-[#d4af37]/30"
-                    }`}
-                  >
-                    {loadingProductId === bundle.productId ? (
-                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                    ) : (
-                      <ShoppingCart className="w-5 h-5 mr-2" />
-                    )}
-                    {loadingProductId === bundle.productId ? "Processing..." : `Get ${bundle.name}`}
-                  </Button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Individual Books */}
       <section className="py-20 px-4 bg-gradient-to-b from-transparent to-[#0a0e27]/50">
         <div className="container max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-serif font-bold text-[#e5e5e5] mb-4">
-              Or start with a single title
-            </h2>
-            <p className="text-[#e5e5e5]/70 text-lg">
-              The same catalog as the books page. Each card links to its page and the stores that carry it.
-            </p>
-          </motion.div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {BOOKS.map((book, index) => (
               <motion.div
@@ -320,7 +57,7 @@ export default function Shop() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.05 }}
                 className="group"
               >
                 <div className="relative bg-white/5 backdrop-blur-xl border border-[#d4af37]/20 rounded-2xl overflow-hidden hover:border-[#d4af37]/40 transition-all h-full">
@@ -336,18 +73,16 @@ export default function Shop() {
 
                   <div className="p-4">
                     <Link href={`/books/${book.slug}`}>
-                      <h3 className="text-lg font-serif font-bold text-[#e5e5e5] mb-1 line-clamp-2 group-hover:text-[#d4af37] transition-colors cursor-pointer">
+                      <h2 className="text-lg font-serif font-bold text-[#e5e5e5] mb-1 line-clamp-2 group-hover:text-[#d4af37] transition-colors cursor-pointer">
                         {book.title}
-                      </h3>
+                      </h2>
                     </Link>
                     <p className="text-[#e5e5e5]/50 text-xs mb-3">
                       {LANE_META[book.lane].title}
                       {book.position_label ? ` • ${book.position_label}` : ""}
                     </p>
-                    {book.price_usd !== null && (
-                      <p className="text-xl font-bold text-[#d4af37] mb-4">
-                        {book.price_usd === 0 ? "Free" : `$${book.price_usd.toFixed(2)}`}
-                      </p>
+                    {book.price_usd === 0 && (
+                      <p className="text-xl font-bold text-[#d4af37] mb-4">Free</p>
                     )}
                     <RetailerButtons book={book} layout="grid" />
                   </div>
@@ -358,7 +93,6 @@ export default function Shop() {
         </div>
       </section>
 
-      {/* Why Buy Direct CTA */}
       <section className="py-20 px-4">
         <div className="container max-w-4xl mx-auto">
           <motion.div
@@ -369,15 +103,14 @@ export default function Shop() {
           >
             <Gift className="w-16 h-16 text-[#d4af37] mx-auto mb-6" />
             <h2 className="text-3xl font-serif font-bold text-[#e5e5e5] mb-4">
-              Join the Reader's Club for Even More Savings
+              Join the Reader's Club
             </h2>
             <p className="text-[#e5e5e5]/70 text-lg mb-8 max-w-2xl mx-auto">
-              Get 40% off all books, early access to new releases, exclusive bonus content, 
-              and a FREE prequel when you join. It's completely free to sign up!
+              New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free.
             </p>
             <Link href="/reader-club">
               <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-bold text-lg px-8 py-6 rounded-xl">
-                Join Reader's Club Free
+                Join Reader's Club
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>

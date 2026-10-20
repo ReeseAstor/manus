@@ -176,7 +176,7 @@ export default function Newsletter() {
               {
                 icon: Star,
                 title: "Exclusive Giveaways",
-                description: "Subscriber-only contests for signed books, merchandise, and special reader experiences",
+                description: "Subscriber-only notes and special reader experiences",
               },
             ].map((benefit) => (
               <StaggerItem key={benefit.title}>

@@ -223,7 +223,7 @@ function Reveal({
 // Verified affiliate URLs (canonical source: client/src/pages/Books.tsx)
 const MMK_AMAZON = {
   executiveAssistant: "https://swiy.co/b01",
-  fakeWife: "https://swiy.co/2rd",
+  fakeWife: "https://www.amazon.com/dp/B0FCCBNF8X",
   babySecret: "https://swiy.co/3rd",
   forbiddenNanny: "https://swiy.co/4rd",
 };

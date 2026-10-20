@@ -7,7 +7,7 @@ import { Reveal, StaggerReveal, StaggerItem, GlowOrb, GlassCard } from "@/compon
 
 export default function About() {
   useEffect(() => {
-    document.title = "About Reese Astor | USA Today Bestselling Romance Author";
+    document.title = "About Reese Astor | Romance Author";
   }, []);
 
   const authorStructuredData = {
@@ -16,7 +16,7 @@ export default function About() {
     "name": "Reese Astor",
     "url": "https://reeseastor.com/about",
     "jobTitle": "Romance Author & Writing Coach",
-    "description": "USA Today Bestselling romance author of the Manhattan Money Kings series.",
+    "description": "Romance author of the Manhattan Money Kings series.",
     "sameAs": [
       "https://www.amazon.com/Reese-Astor/e/B0DVGQY6TX",
       "https://www.instagram.com/reeseastor"
@@ -26,10 +26,10 @@ export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       <EnhancedSEOHead
-        title="About Reese Astor | USA Today Bestselling Romance Author"
-        description="Meet Reese Astor, USA Today Bestselling author of steamy billionaire romances. From the Bronx to bestseller lists, discover the story behind the Manhattan Money Kings series."
+        title="About Reese Astor | Romance Author"
+        description="Meet Reese Astor, author of steamy billionaire romances. Discover the story behind the Manhattan Money Kings series."
         canonical="/about"
-        keywords={["Reese Astor biography", "romance author", "USA Today bestselling", "writing coach", "Manhattan Money Kings author", "about Reese Astor"]}
+        keywords={["Reese Astor biography", "romance author", "Manhattan Money Kings author", "about Reese Astor"]}
         structuredData={[authorStructuredData]}
       />
 
@@ -68,7 +68,7 @@ export default function About() {
                 {/* Floating badge */}
                 <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] px-4 py-2 rounded-full font-semibold shadow-lg flex items-center gap-2">
                   <Sparkles className="w-4 h-4" />
-                  USA Today Bestseller
+                  Romance Author
                 </div>
               </div>
             </Reveal>
@@ -87,12 +87,12 @@ export default function About() {
               </h1>
 
               <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
-                From Corporate Finance VP to USA TODAY Bestselling Romance Author
+                From Corporate Finance VP to Romance Author
               </p>
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-4">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[#d4af37]">5</div>
+                  <div className="text-3xl font-bold text-[#d4af37]">9</div>
                   <div className="text-sm text-gray-400 mt-1">Books Published</div>
                 </div>
                 <div className="h-12 w-px bg-white/20 hidden sm:block" />
@@ -143,7 +143,7 @@ export default function About() {
                       The turning point came when I realized I could help other women do the same—turn their creative dreams into profitable businesses. I left corporate America to write full-time and teach aspiring authors the business strategies that actually work.
                     </p>
                     <p>
-                      Today, I'm a USA TODAY bestselling romance author with the Manhattan Money Kings series and a business strategist helping women build sustainable author careers. I bring my corporate expertise to the creative world, showing writers how to treat their passion like the business it deserves to be.
+                      Today, I write the Manhattan Money Kings series and the Hudson Dynasty novels. I bring my corporate expertise to the creative world, showing writers how to treat their passion like the business it deserves to be.
                     </p>
                   </div>
                 </div>

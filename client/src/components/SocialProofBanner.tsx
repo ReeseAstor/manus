@@ -31,7 +31,7 @@ export function SocialProofBanner() {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2 text-[#e5e5e5]/70 text-sm">
               <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
-              <span>USA Today Bestseller</span>
+              <span>Romance Author</span>
             </div>
             <div className="hidden md:flex items-center gap-2 text-[#e5e5e5]/70 text-sm">
               <Users className="w-4 h-4 text-[#d4af37]" />

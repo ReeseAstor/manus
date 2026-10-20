@@ -24,7 +24,7 @@ export default function Press() {
     >
       <EnhancedSEOHead
         title="Press · Reese Astor"
-        description="Press resources, bio, headshots, and contact for Reese Astor — USA Today bestselling romance author."
+        description="Press resources, bio, headshots, and contact for Reese Astor, romance author."
         canonical="https://reeseastor.com/press"
       />
 
@@ -57,9 +57,7 @@ export default function Press() {
             className="font-cormorant text-[19px] leading-[1.75]"
             style={{ color: TEXT, textWrap: "pretty" }}
           >
-            Reese Astor is a USA Today bestselling romance author and the voice behind the Manhattan
-            Money Kings and Hudson Dynasty series. Her new line, Intimate Psychological Narratives,
-            launches in 2026 with the audiobook <em>The Need for Permission</em>.
+            Reese Astor writes the Manhattan Money Kings series and the Hudson Dynasty series.
           </p>
         </div>
       </section>
@@ -71,15 +69,10 @@ export default function Press() {
             className="font-cormorant text-[19px] leading-[1.75]"
             style={{ color: TEXT, textWrap: "pretty" }}
           >
-            Reese Astor is a USA Today bestselling romance author. A former finance VP, she writes
-            contemporary billionaire romance set among New York&rsquo;s most dangerous heirs &mdash;
-            the Manhattan Money Kings (five novels, ongoing) and the Hudson Dynasty (a prequel
-            novella plus the audiobook-first novel <em>Hostile Tender</em>). In 2026 she launches
-            Intimate Psychological Narratives, a quieter line of audiobooks for late-night listening.
-            The first title, <em>The Need for Permission: On the Quiet Recovery of Self-Trust</em>,
-            is a ten-chapter, hour-long meditation on rebuilding self-trust. Reese lives in New York
-            and reads her own audiobooks. She believes romance novels are more than entertainment
-            &mdash; they&rsquo;re empowerment.
+            Reese Astor writes contemporary billionaire romance set among New York&rsquo;s most
+            dangerous heirs &mdash; the Manhattan Money Kings (a prequel and four novels) and the
+            Hudson Dynasty (a prequel novella and three novels, including <em>Hostile Tender</em>).
+            Reese lives in New York.
           </p>
         </div>
       </section>

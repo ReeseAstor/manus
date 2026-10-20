@@ -11,12 +11,6 @@ interface ComparisonItem {
 
 const comparisons: ComparisonItem[] = [
   {
-    feature: "Price",
-    direct: "20-40% OFF",
-    retailer: "Full Price",
-    directBetter: true,
-  },
-  {
     feature: "Author Earnings",
     direct: "96% to Author",
     retailer: "35-70% to Author",
@@ -52,7 +46,7 @@ const benefits = [
   {
     icon: DollarSign,
     title: "Save Money",
-    description: "Get 20-40% off retail prices when you buy direct. Reader's Club members save even more!",
+    description: "Retailer links for each title are on the book pages.",
   },
   {
     icon: Heart,

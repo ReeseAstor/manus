@@ -17,11 +17,7 @@ import {
 } from "@/components/author-kit";
 import { BOOKS, getBooksInLane, LANE_META, type Book, type Lane } from "@/data/books";
 
-const LANE_ORDER: Lane[] = [
-  "manhattan_money_kings",
-  "hudson_dynasty",
-  "intimate_psychological_narratives",
-];
+const LANE_ORDER: Lane[] = ["manhattan_money_kings", "hudson_dynasty"];
 
 export default function BooksCatalog() {
   useEffect(() => {
@@ -35,7 +31,7 @@ export default function BooksCatalog() {
     >
       <EnhancedSEOHead
         title="Books · Reese Astor"
-        description="The complete Reese Astor catalog — Manhattan Money Kings, Hudson Dynasty, and the Intimate Psychological Narratives audiobook line."
+        description="The Reese Astor catalog — Manhattan Money Kings and Hudson Dynasty."
         canonical="https://reeseastor.com/books"
       />
 

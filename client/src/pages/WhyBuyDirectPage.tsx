@@ -15,9 +15,9 @@ export default function WhyBuyDirectPage() {
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27]">
       <EnhancedSEOHead
         title="Why Buy Direct from Reese Astor | Support Your Author"
-        description="Learn why buying directly from Reese Astor means more royalties for the author, exclusive signed editions, and special bonuses you won't find on Amazon."
+        description="Learn why buying directly from Reese Astor means more royalties for the author."
         canonical="/why-buy-direct"
-        keywords={["buy direct from author", "support romance authors", "signed books", "author royalties", "buy books direct"]}
+        keywords={["buy direct from author", "support romance authors", "author royalties", "buy books direct"]}
       />
 
       {/* Back Navigation */}

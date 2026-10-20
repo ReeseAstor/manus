@@ -66,7 +66,7 @@ export default function Blog() {
     {
       id: 2,
       title: "From Zero to Published: My Self-Publishing Journey",
-      excerpt: "How I went from corporate VP to bestselling romance author, and the lessons I learned along the way about KDP publishing.",
+      excerpt: "How I went from corporate VP to romance author, and the lessons I learned along the way about KDP publishing.",
       category: "Author Journey",
       date: "November 10, 2025",
       readTime: "12 min read",
@@ -129,7 +129,7 @@ export default function Blog() {
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       <EnhancedSEOHead
         title="Romance Writing Blog | Tips & Insights by Reese Astor"
-        description="Writing tips, behind-the-scenes insights, and romance industry advice from USA Today Bestselling author Reese Astor. Learn the craft of storytelling."
+        description="Writing tips, behind-the-scenes insights, and romance industry advice from Reese Astor. Learn the craft of storytelling."
         canonical="/blog"
         ogType="website"
         keywords={["romance writing tips", "author blog", "writing advice", "Reese Astor blog", "romance author insights", "storytelling craft"]}

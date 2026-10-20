@@ -475,7 +475,7 @@ export default function Quiz() {
                           {[...Array(5)].map((_, i) => (
                             <Star key={i} className="h-4 w-4 fill-[#d4af37] text-[#d4af37]" />
                           ))}
-                          <span className="text-sm text-gray-400 ml-2">USA Today Bestseller</span>
+                          <span className="text-sm text-gray-400 ml-2">Romance Author</span>
                         </div>
                         <p className="text-gray-300 mb-6 leading-relaxed">
                           Based on your quiz results, this book from the Manhattan Money Kings series is your perfect match. A free copy is being delivered to your inbox now!

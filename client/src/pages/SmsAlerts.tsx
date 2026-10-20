@@ -29,7 +29,7 @@ export default function SmsAlerts() {
             Be first to know. By text.
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Get new release alerts and exclusive offers from USA Today bestselling
+            Get new release alerts and exclusive offers from
             author Reese Astor &mdash; sent straight to your phone, never anywhere else.
           </p>
         </div>

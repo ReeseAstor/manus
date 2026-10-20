@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { 
   Gift, 
-  Percent, 
   Clock, 
   BookOpen, 
   Mail, 
@@ -19,12 +18,6 @@ interface Benefit {
 }
 
 const benefits: Benefit[] = [
-  {
-    icon: Percent,
-    title: "40% Off All Books",
-    description: "Exclusive member pricing on every book in the Manhattan Money Kings series and future releases.",
-    highlight: "SAVE 40%",
-  },
   {
     icon: Clock,
     title: "Early Access",
@@ -155,10 +148,6 @@ export function MemberBenefits() {
               </h3>
               <ul className="space-y-4">
                 {[
-                  "40% off all books",
-                  "10-14 days early access",
-                  "Exclusive bonus chapters",
-                  "Character interviews",
                   "Free copy of The First Acquisition",
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-[#e5e5e5]">
@@ -183,7 +172,7 @@ export function MemberBenefitsBadge() {
     <div className="inline-flex items-center gap-2 bg-[#d4af37]/10 border border-[#d4af37]/30 rounded-lg px-3 py-2">
       <Users className="w-4 h-4 text-[#d4af37]" />
       <span className="text-[#e5e5e5] text-sm">
-        <span className="text-[#d4af37] font-semibold">Reader's Club:</span> 40% off + early access
+        <span className="text-[#d4af37] font-semibold">Reader's Club:</span> new-release news
       </span>
     </div>
   );

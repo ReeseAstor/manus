@@ -73,8 +73,8 @@ Writing compelling intimate scenes takes practice, but these fundamentals will s
     {
       title: "From Zero to Published: My Self-Publishing Journey",
       slug: "self-publishing-journey",
-      excerpt: "How I went from corporate VP to bestselling romance author, and the lessons I learned along the way about KDP publishing.",
-      content: `Five years ago, I was a Vice President at a Fortune 500 company, working 60-hour weeks and dreaming of a different life. Today, I'm a USA Today bestselling romance author with multiple series and a thriving author business. This is the story of how I made that transformation—and what I learned along the way.
+      excerpt: "How I went from corporate VP to romance author, and the lessons I learned along the way about KDP publishing.",
+      content: `Five years ago, I was a Vice President at a Fortune 500 company, working 60-hour weeks and dreaming of a different life. Today, I write romance with multiple series and a thriving author business. This is the story of how I made that transformation—and what I learned along the way.
 
 ## The Beginning: Writing in Secret
 

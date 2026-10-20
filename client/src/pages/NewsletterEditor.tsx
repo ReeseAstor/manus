@@ -256,7 +256,7 @@ export function NewsletterEditor() {
                     Reese Astor
                   </h1>
                   <p className="text-gray-600 text-sm tracking-wider">
-                    USA TODAY BESTSELLING AUTHOR
+                    ROMANCE AUTHOR
                   </p>
                 </div>
                 <div

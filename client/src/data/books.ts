@@ -5,8 +5,7 @@
  * each /books/[slug] page, and structured data are generated from this file.
  * No new pages or nav edits required for new titles.
  *
- * Lanes are intentionally separated. Cards never cross lanes in any rail —
- * romance and recovery have different reader need-states.
+ * Lanes are intentionally separated. Cards never cross lanes in any rail.
  */
 
 export type Lane = "manhattan_money_kings" | "hudson_dynasty" | "intimate_psychological_narratives";
@@ -70,9 +69,9 @@ export const BOOKS: Book[] = [
     slug: "the-billionaires-one-night-stand",
     title: "The Billionaire's One Night Stand",
     lane: "manhattan_money_kings",
-    series_position: 1,
+    series_position: 0,
     format: "ebook",
-    position_label: "Book 1",
+    position_label: "Prequel",
     tagline: "One night was supposed to mean nothing. He decided it would mean everything.",
     blurb:
       "She walked into the bar to forget her name. He spent the next morning learning every syllable of it. " +
@@ -83,20 +82,20 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/05",
+      amazon_kindle: "https://www.amazon.com/dp/B0DSG7NKGP",
     },
     audiobook_available: false,
     isbn: null,
-    asin: null,
-    price_usd: 3.99,
+    asin: "B0DSG7NKGP",
+    price_usd: null,
   },
   {
     slug: "the-billionaire-s-executive-assistant",
     title: "The Billionaire's Executive Assistant",
     lane: "manhattan_money_kings",
-    series_position: 2,
+    series_position: 1,
     format: "ebook",
-    position_label: "Book 2",
+    position_label: "Book 1",
     tagline: "The boardroom was never the most dangerous room.",
     blurb:
       "Sarah Shah needs this job to pay her mother's mounting medical bills. Michael Hastings needs a " +
@@ -108,20 +107,20 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/b01",
+      amazon_kindle: "https://www.amazon.com/dp/B0F2W8QL7S",
     },
     audiobook_available: false,
     isbn: null,
-    asin: null,
-    price_usd: 3.99,
+    asin: "B0F2W8QL7S",
+    price_usd: null,
   },
   {
     slug: "the-billionaire-s-fake-wife",
     title: "The Billionaire's Fake Wife",
     lane: "manhattan_money_kings",
-    series_position: 3,
+    series_position: 2,
     format: "ebook",
-    position_label: "Book 3",
+    position_label: "Book 2",
     tagline: "A ruthless engagement that turns devastatingly real.",
     blurb:
       "When thief Elena Kim breaks into his penthouse, billionaire David Kim catches her red-handed. But " +
@@ -133,20 +132,20 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/2rd",
+      amazon_kindle: "https://www.amazon.com/dp/B0FCCBNF8X",
     },
     audiobook_available: false,
     isbn: null,
-    asin: null,
-    price_usd: 3.99,
+    asin: "B0FCCBNF8X",
+    price_usd: null,
   },
   {
     slug: "the-billionaire-s-baby-secret",
     title: "The Billionaire's Baby Secret",
     lane: "manhattan_money_kings",
-    series_position: 4,
+    series_position: 3,
     format: "ebook",
-    position_label: "Book 4",
+    position_label: "Book 3",
     tagline: "One night. One secret. One second chance he refuses to lose.",
     blurb:
       "Three years ago, Sophia Reed walked away from a hotel room and a man she should've never trusted — " +
@@ -158,20 +157,20 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/3rd",
+      amazon_kindle: "https://www.amazon.com/dp/B0G12LBZ24",
     },
     audiobook_available: false,
     isbn: null,
-    asin: null,
-    price_usd: 3.99,
+    asin: "B0G12LBZ24",
+    price_usd: null,
   },
   {
     slug: "the-billionaires-forbidden-nanny",
     title: "The Billionaire's Forbidden Nanny",
     lane: "manhattan_money_kings",
-    series_position: 5,
+    series_position: 4,
     format: "ebook",
-    position_label: "Book 5",
+    position_label: "Book 4",
     tagline: "She's the nanny. He's her boss. His mother wants her gone.",
     blurb:
       "When Camille Torres takes a job caring for billionaire Ethan Calloway's silent daughter, she never " +
@@ -183,12 +182,12 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/4rd",
+      amazon_kindle: "https://www.amazon.com/dp/B0GDZ4T164",
     },
     audiobook_available: false,
     isbn: null,
-    asin: null,
-    price_usd: 3.99,
+    asin: "B0GDZ4T164",
+    price_usd: null,
   },
 
   // ─── Hudson Dynasty ────────────────────────────────────────────────────
@@ -205,17 +204,17 @@ export const BOOKS: Book[] = [
       "Hudson makes the first deal that will define every one that follows — and the first promise he " +
       "will fail to keep. A self-contained origin story for the family, the firm, and the silence.",
     pull_quote: "“He did not yet know what an empire cost. He was about to learn.”",
-    cover_image: "/covers/hudson-0-first-acquisition.jpg",
+    cover_image: "https://m.media-amazon.com/images/P/B0D82GWFD9.01._SCLZZZZZZZ_SX500_.jpg",
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/05",
+      amazon_kindle: "https://www.amazon.com/dp/B0D82GWFD9",
       bookfunnel: "https://dl.bookfunnel.com/kw1yge3479",
       audible: null,
     },
     audiobook_available: true,
     isbn: null,
-    asin: null,
+    asin: "B0D82GWFD9",
     price_usd: 0,
   },
   {
@@ -237,13 +236,13 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/HD1",
+      amazon_kindle: "https://www.amazon.com/dp/B0H1F9PV97",
       audible: null,
     },
     audiobook_available: true,
     isbn: null,
-    asin: null,
-    price_usd: 4.99,
+    asin: "B0H1F9PV97",
+    price_usd: null,
   },
   {
     slug: "poison-pills",
@@ -261,52 +260,38 @@ export const BOOKS: Book[] = [
       "toxic and the people closest to them choose sides, the line between protecting the dynasty and " +
       "destroying it disappears.",
     pull_quote: "“Every defense is a slow poison. The art is choosing who swallows it.”",
-    cover_image: "https://storage.mlcdn.com/account_image/1246760/sbcZf9GwBaCWBcC5QKmu8oWakuKfIhojGzbnYNMb.png",
+    cover_image: "https://m.media-amazon.com/images/P/B0H53BP5S1.01._SCLZZZZZZZ_SX500_.jpg",
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/HD2",
+      amazon_kindle: "https://www.amazon.com/dp/B0H53BP5S1",
       audible: null,
     },
     audiobook_available: true,
     isbn: null,
-    asin: null,
-    price_usd: 4.99,
+    asin: "B0H53BP5S1",
+    price_usd: null,
   },
-
-  // ─── Intimate Psychological Narratives ────────────────────────────────
   {
-    slug: "the-need-for-permission",
-    title: "The Need for Permission",
-    lane: "intimate_psychological_narratives",
-    series_position: 1,
-    format: "audiobook",
-    position_label: "On the Quiet Recovery of Self-Trust",
-    tagline: "A ten-chapter audiobook on rebuilding self-trust, in your own voice and your own hours.",
-    blurb:
-      "Sixty quiet minutes for the late hours. Across ten chapters, The Need for Permission examines what " +
-      "it means to live waiting for someone else to say yes — and what changes the moment you stop. " +
-      "Made for listening alone, in the dark, when the house is finally still.",
-    pull_quote:
-      "“You do not need anyone's permission to be the person you already are. You only need to stop waiting for it.”",
-    cover_image: "/covers/permission-cover.jpg",
-    cover_image_square: "/covers/permission-square-1200.jpg",
+    slug: "golden-parachute",
+    title: "Golden Parachute",
+    lane: "hudson_dynasty",
+    series_position: 3,
+    format: "ebook",
+    position_label: "Book 3",
+    tagline: "Hudson Dynasty, Book 3.",
+    blurb: "Book 3 of the Hudson Dynasty.",
+    pull_quote: null,
+    cover_image: "https://m.media-amazon.com/images/P/B0HDKNP9F6.01._SCLZZZZZZZ_SX500_.jpg",
     publication_date: null,
     kindle_unlimited: false,
     retailers: {
-      // Wired via env at runtime — see RetailerLink in components/permission.
-      gumroad: null,
-      audible: null,
-      apple_books: null,
-      spotify: null,
-      elevenreader: null,
-      google_play: null,
-      bookfunnel: null,
+      amazon_kindle: "https://www.amazon.com/dp/B0HDKNP9F6",
     },
-    audiobook_available: true,
+    audiobook_available: false,
     isbn: null,
-    asin: null,
-    price_usd: 4.99,
+    asin: "B0HDKNP9F6",
+    price_usd: null,
   },
 ];
 

@@ -101,7 +101,7 @@ export default function BlogPost() {
     
     // Cleanup - reset title when leaving page
     return () => {
-      document.title = 'Reese Astor | USA Today Bestselling Romance Author';
+      document.title = 'Reese Astor | Romance Author';
     };
   }, [post]);
 
@@ -376,7 +376,7 @@ export default function BlogPost() {
                     About Reese Astor
                   </h3>
                   <p className="text-gray-300 leading-relaxed mb-4">
-                    USA Today Bestselling Author of steamy billionaire romance. Former corporate VP turned full-time author, helping aspiring writers build profitable author businesses through coaching and mentorship.
+                    Author of steamy billionaire romance.
                   </p>
                   <div className="flex gap-3">
                     <Button

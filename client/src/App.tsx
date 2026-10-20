@@ -20,7 +20,6 @@ import ReaderClub from "./pages/ReaderClub";
 // ───── Lazy: secondary pages (code-split, load on demand) ─────
 const AuditOfTheHeart = lazy(() => import("./pages/AuditOfTheHeart"));
 const HostileTender = lazy(() => import("./pages/HostileTender"));
-const Permission = lazy(() => import("./pages/Permission"));
 const Press = lazy(() => import("./pages/Press"));
 const PurchaseSuccess = lazy(() => import("./pages/PurchaseSuccess"));
 const ExclusiveContentDetail = lazy(() => import("./pages/ExclusiveContentDetail"));
@@ -104,7 +103,6 @@ function Router() {
         <Route path={"/books/audit-of-the-heart"} component={AuditOfTheHeart} />
         <Route path={"/books/hostile-tender"} component={HostileTender} />
         <Route path={"/books/:slug"} component={BookTitle} />
-        <Route path={"/permission"} component={Permission} />
         <Route path={"/press"} component={Press} />
         <Route path={"/reader-club"} component={ReaderClub} />
         <Route path={"/reader-club/:slug"} component={ExclusiveContentDetail} />
