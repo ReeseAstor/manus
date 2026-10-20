@@ -58,7 +58,7 @@ Title mismatch, row 2: the log says "Late Night at Chen Technologies" (`late-nig
 
 `scripts/add-vip-stories.mjs` labels The Boardroom Confession as Elena Martinez and David Chen. Canon Fake Wife is Elena Volkov and David Kim. Fix those two names before any insert. Do not point that story at Sarah Shah and Michael Hastings. The script still reads `/home/ubuntu/story-*.md`, which are not in this repo. Do not invent those files.
 
-18+ gate, before any story restore: `VipClub.tsx` says "Steamy, 18+." There is no age attestation at checkout. Confirm that notice is still on the page, and add an age checkbox on subscribe, before the stories go back.
+18+ gate, before any story restore: the "Steamy, 18+." notice is on `VipClub.tsx` in PR #53. It is not on the live site until that PR ships. There is no age attestation at checkout. After #53 is deployed, confirm the notice is on the page, and add an age checkbox on subscribe, before the stories go back.
 
 ## products
 
@@ -76,7 +76,7 @@ Use the Stripe dashboard as the source. Restore a product row only for something
 
 `books.list` is what `/shop` used for "Start with any book in the series." The static catalog at `client/src/data/books.ts` is what `/books` already renders, and it does not need the `books` table. A separate PR points the shop grid at that catalog.
 
-`seed-books.ts` inserts only three titles: The Billionaire's Executive Assistant, The Billionaire's Fake Wife, and The Billionaire's Baby Secret. The owner's canon is nine live titles: Manhattan Money Kings prequel One Night Stand plus Executive Assistant, Fake Wife, Baby Secret, and Forbidden Nanny, and Hudson Dynasty prequel The First Acquisition plus Hostile Tender, Poison Pill, and Golden Parachute. The Need for Permission is not a live KDP title. PR #57 removes it from `books.ts` and from the `/permission` route, adds Golden Parachute, and hides the shop bundles. Do not seed Need for Permission. Seeding from `seed-books.ts` would publish three of the nine and would not fill the shop.
+`seed-books.ts` inserts only three titles: The Billionaire's Executive Assistant, The Billionaire's Fake Wife, and The Billionaire's Baby Secret. The owner's canon is nine live Reese Astor titles: Manhattan Money Kings prequel One Night Stand plus Executive Assistant, Fake Wife, Baby Secret, and Forbidden Nanny, and Hudson Dynasty prequel The First Acquisition plus Hostile Tender, Poison Pill, and Golden Parachute. The Need for Permission is not a live KDP title. PR #57 removes it from `books.ts` and from the `/permission` route, adds Golden Parachute, and hides the shop bundles. Do not seed Need for Permission. Seeding from `seed-books.ts` would publish three of the nine and would not fill the shop.
 
 `/books/audit-of-the-heart` is a separate page (`client/src/pages/AuditOfTheHeart.tsx`, also linked from `Books.tsx` and `HostileTender.tsx`). It is not in `client/src/data/books.ts` and it is not one of those nine titles. The cover and the video poster are the Manus CloudFront object `audit-of-the-heart-cover-v2-CiyiXxZuMB4J9rT8axkMQv.webp`, which returns 403. An old TiDB insert for that title is in `.manus/db/db-query-1774119901444.json`, marked Coming Soon, and it is not evidence that the book is a live KDP title. Whether that URL stays public is the owner's call. This plan does not unpublish it.
 
@@ -90,5 +90,5 @@ Use the Stripe dashboard as the source. Restore a product row only for something
 2. `psql "$OWNER_URL" -v ON_ERROR_STOP=1 -f drizzle/postgres/schema-catchup.sql`
 3. `psql "$OWNER_URL" -v ON_ERROR_STOP=1 -f drizzle/postgres/0028_ai_rate_limits.sql`
 4. Confirm `story_play_history_user_story_idx` exists before deploying PR #55. The catch-up creates it. `0029_story_play_history_unique.sql` is the same index with a duplicate stop, for a run that only adds the index.
-5. Confirm the "Steamy, 18+." notice and add an age checkbox at subscribe before any story insert.
+5. After PR #53 has shipped, confirm the "Steamy, 18+." notice is on the page, and add an age checkbox at subscribe before any story insert. That sentence is not live until #53 ships.
 6. Rewrite tier copy, including the VipClub line "Fresh stories added every month. Gold members can even request custom stories." Verify the three live Stripe prices, re-host the ten audio files, then insert tiers and stories under the title "Late Night on the Executive Floor" for the executive-floor story, with Boardroom Confession characters Elena Volkov and David Kim. Products come from Stripe, not from `seed-products.mjs`. Leave shop bundles hidden unless 30001–30003 exist with confirmed live prices. Books on `/shop` come from the static catalog, not from `seed-books.ts`.

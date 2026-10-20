@@ -50,7 +50,7 @@ Neon preview branches are already at the account limit, which is why Vercel prev
 Do one of these, and confirm it finished, before the pre-check or the catch-up:
 
 1. Free a Neon branch slot, then `neon branches create --name pre-catchup-20261020`.
-2. Or, from a machine that already has the owner URL in the environment and does not print it: `pg_dump -Fc "$OWNER_URL" -f pre-catchup.dump`, then `ls -lh pre-catchup.dump` and confirm the file is non-empty. The pg_dump client version must be >= the server version (`SELECT version()`). A client older than the Neon server refuses to dump.
+2. Or, from a machine that already has the owner URL in the environment and does not print it: `pg_dump -Fc "$OWNER_URL" -f pre-catchup.dump`, then `ls -lh pre-catchup.dump` and confirm the file is non-empty. The pg_dump client version must be >= the server version (`SELECT version()`). A client older than the Neon server refuses to dump. Then run `pg_restore --list pre-catchup.dump | head` and confirm it prints archive entries. An empty list, or a client that refuses the archive, means the backup is not usable.
 
 Neon point-in-time recovery is the fallback if both of those fail. Do not start the catch-up without one of them.
 
