@@ -6,6 +6,8 @@
 -- Foreign keys are omitted so an orphan row cannot abort the script.
 -- A new NOT NULL column with no default is added nullable. A populated table cannot accept NOT NULL without a default.
 -- Existing column types are not rewritten. If a column exists with a different type, this file leaves it alone.
+-- Camel-case enum types are quoted everywhere they are created and everywhere a column uses them.
+-- An unquoted name is folded to lowercase and does not match the created type.
 
 -- Enums
 DO $$ BEGIN
@@ -312,7 +314,7 @@ CREATE TABLE IF NOT EXISTS "admin_reminders" (
   "userId" integer,
   "title" varchar(255) NOT NULL,
   "description" text,
-  "reminderType" reminderType NOT NULL,
+  "reminderType" "reminderType" NOT NULL,
   "priority" priority DEFAULT 'medium' NOT NULL,
   "relatedEntityType" varchar(50),
   "relatedEntityId" integer,
@@ -330,7 +332,7 @@ CREATE TABLE IF NOT EXISTS "affiliate_clicks" (
   "productId" varchar(64),
   "affiliateUrl" text NOT NULL,
   "sourceSlug" varchar(255) NOT NULL,
-  "clickType" clickType DEFAULT 'inline' NOT NULL,
+  "clickType" "clickType" DEFAULT 'inline' NOT NULL,
   "sessionHash" varchar(64),
   "userAgent" text,
   "referrer" text,
@@ -353,7 +355,7 @@ CREATE TABLE IF NOT EXISTS "affiliate_metrics_daily" (
 CREATE TABLE IF NOT EXISTS "ai_chat_messages" (
   "id" serial PRIMARY KEY,
   "session_id" varchar(255) NOT NULL,
-  "role" aiRole NOT NULL,
+  "role" "aiRole" NOT NULL,
   "content" text NOT NULL,
   "created_at" timestamp DEFAULT now() NOT NULL
 );
@@ -361,7 +363,7 @@ CREATE TABLE IF NOT EXISTS "ai_chat_messages" (
 CREATE TABLE IF NOT EXISTS "ai_generated_content" (
   "id" serial PRIMARY KEY,
   "user_id" integer,
-  "content_type" aiContentType NOT NULL,
+  "content_type" "aiContentType" NOT NULL,
   "prompt" text NOT NULL,
   "result" text NOT NULL,
   "created_at" timestamp DEFAULT now() NOT NULL
@@ -454,7 +456,7 @@ CREATE TABLE IF NOT EXISTS "book_storylines" (
   "id" serial PRIMARY KEY,
   "bookId" integer NOT NULL,
   "title" varchar(255) NOT NULL,
-  "storylineType" storylineType NOT NULL,
+  "storylineType" "storylineType" NOT NULL,
   "description" text NOT NULL,
   "keyEvents" text,
   "resolution" text,
@@ -547,7 +549,7 @@ CREATE TABLE IF NOT EXISTS "character_relationships" (
   "id" serial PRIMARY KEY,
   "character1Id" integer NOT NULL,
   "character2Id" integer NOT NULL,
-  "relationshipType" relationshipType NOT NULL,
+  "relationshipType" "relationshipType" NOT NULL,
   "description" text,
   "bookId" integer,
   "createdAt" timestamp DEFAULT now() NOT NULL
@@ -619,7 +621,7 @@ CREATE TABLE IF NOT EXISTS "daily_briefings" (
 CREATE TABLE IF NOT EXISTS "daily_reports" (
   "id" serial PRIMARY KEY,
   "reportDate" timestamp NOT NULL,
-  "reportType" reportType DEFAULT 'daily_overview' NOT NULL,
+  "reportType" "reportType" DEFAULT 'daily_overview' NOT NULL,
   "pageViews" integer DEFAULT 0,
   "uniqueVisitors" integer DEFAULT 0,
   "bounceRate" numeric(5, 2),
@@ -661,11 +663,11 @@ CREATE TABLE IF NOT EXISTS "external_links" (
   "id" serial PRIMARY KEY,
   "url" text NOT NULL,
   "displayText" varchar(255),
-  "linkType" linkType DEFAULT 'other' NOT NULL,
+  "linkType" "linkType" DEFAULT 'other' NOT NULL,
   "location" varchar(255) NOT NULL,
   "componentPath" varchar(255),
   "lastChecked" timestamp,
-  "lastStatus" lastStatus DEFAULT 'unknown' NOT NULL,
+  "lastStatus" "lastStatus" DEFAULT 'unknown' NOT NULL,
   "httpStatus" integer,
   "responseTime" integer,
   "checkCount" integer DEFAULT 0 NOT NULL,
@@ -769,7 +771,7 @@ CREATE TABLE IF NOT EXISTS "products" (
   "description" text NOT NULL,
   "price" integer NOT NULL,
   "currency" varchar(3) DEFAULT 'usd' NOT NULL,
-  "type" purchaseType NOT NULL,
+  "type" "purchaseType" NOT NULL,
   "stripeProductId" varchar(255),
   "stripePriceId" varchar(255),
   "features" text,
@@ -782,7 +784,7 @@ CREATE TABLE IF NOT EXISTS "products" (
 CREATE TABLE IF NOT EXISTS "qa_checks" (
   "id" serial PRIMARY KEY,
   "checkDate" timestamp NOT NULL,
-  "checkType" checkType NOT NULL,
+  "checkType" "checkType" NOT NULL,
   "status" status DEFAULT 'passed' NOT NULL,
   "itemsChecked" integer DEFAULT 0 NOT NULL,
   "issuesFound" integer DEFAULT 0 NOT NULL,
@@ -794,7 +796,7 @@ CREATE TABLE IF NOT EXISTS "qa_checks" (
 CREATE TABLE IF NOT EXISTS "qa_issues" (
   "id" serial PRIMARY KEY,
   "checkId" integer,
-  "issueType" issueType NOT NULL,
+  "issueType" "issueType" NOT NULL,
   "severity" severity DEFAULT 'warning' NOT NULL,
   "location" varchar(255) NOT NULL,
   "description" text NOT NULL,
@@ -847,7 +849,7 @@ CREATE TABLE IF NOT EXISTS "sms_incoming_messages" (
   "twilioSid" varchar(64),
   "keyword" varchar(20),
   "processed" boolean DEFAULT false NOT NULL,
-  "responseStatus" responseStatus DEFAULT 'pending' NOT NULL,
+  "responseStatus" "responseStatus" DEFAULT 'pending' NOT NULL,
   "createdAt" timestamp DEFAULT now() NOT NULL
 );
 
@@ -868,7 +870,7 @@ CREATE TABLE IF NOT EXISTS "sms_opt_events" (
   "id" serial PRIMARY KEY,
   "phoneNumber" varchar(20) NOT NULL,
   "userId" integer,
-  "eventType" eventType NOT NULL,
+  "eventType" "eventType" NOT NULL,
   "source" varchar(50),
   "createdAt" timestamp DEFAULT now() NOT NULL
 );
@@ -967,7 +969,7 @@ CREATE TABLE IF NOT EXISTS "user_preferences" (
   "emailNewsletter" boolean DEFAULT true NOT NULL,
   "emailPromotions" boolean DEFAULT true NOT NULL,
   "emailBlogPosts" boolean DEFAULT false NOT NULL,
-  "preferredFormat" preferredFormat DEFAULT 'epub' NOT NULL,
+  "preferredFormat" "preferredFormat" DEFAULT 'epub' NOT NULL,
   "displayName" varchar(100),
   "bio" text,
   "favoriteGenres" text,
@@ -980,7 +982,7 @@ CREATE TABLE IF NOT EXISTS "user_purchases" (
   "userId" integer NOT NULL,
   "bookId" integer NOT NULL,
   "orderId" integer,
-  "purchaseType" purchaseType DEFAULT 'single' NOT NULL,
+  "purchaseType" "purchaseType" DEFAULT 'single' NOT NULL,
   "purchasePrice" integer,
   "bonusContentUnlocked" boolean DEFAULT false NOT NULL,
   "downloadCount" integer DEFAULT 0 NOT NULL,
@@ -1067,7 +1069,7 @@ CREATE TABLE IF NOT EXISTS "voice_presets" (
 ALTER TABLE "admin_reminders" ADD COLUMN IF NOT EXISTS "userId" integer;
 ALTER TABLE "admin_reminders" ADD COLUMN IF NOT EXISTS "title" varchar(255);
 ALTER TABLE "admin_reminders" ADD COLUMN IF NOT EXISTS "description" text;
-ALTER TABLE "admin_reminders" ADD COLUMN IF NOT EXISTS "reminderType" reminderType;
+ALTER TABLE "admin_reminders" ADD COLUMN IF NOT EXISTS "reminderType" "reminderType";
 ALTER TABLE "admin_reminders" ADD COLUMN IF NOT EXISTS "priority" priority DEFAULT 'medium' NOT NULL;
 ALTER TABLE "admin_reminders" ADD COLUMN IF NOT EXISTS "relatedEntityType" varchar(50);
 ALTER TABLE "admin_reminders" ADD COLUMN IF NOT EXISTS "relatedEntityId" integer;
@@ -1082,7 +1084,7 @@ ALTER TABLE "affiliate_clicks" ADD COLUMN IF NOT EXISTS "productName" varchar(25
 ALTER TABLE "affiliate_clicks" ADD COLUMN IF NOT EXISTS "productId" varchar(64);
 ALTER TABLE "affiliate_clicks" ADD COLUMN IF NOT EXISTS "affiliateUrl" text;
 ALTER TABLE "affiliate_clicks" ADD COLUMN IF NOT EXISTS "sourceSlug" varchar(255);
-ALTER TABLE "affiliate_clicks" ADD COLUMN IF NOT EXISTS "clickType" clickType DEFAULT 'inline' NOT NULL;
+ALTER TABLE "affiliate_clicks" ADD COLUMN IF NOT EXISTS "clickType" "clickType" DEFAULT 'inline' NOT NULL;
 ALTER TABLE "affiliate_clicks" ADD COLUMN IF NOT EXISTS "sessionHash" varchar(64);
 ALTER TABLE "affiliate_clicks" ADD COLUMN IF NOT EXISTS "userAgent" text;
 ALTER TABLE "affiliate_clicks" ADD COLUMN IF NOT EXISTS "referrer" text;
@@ -1099,12 +1101,12 @@ ALTER TABLE "affiliate_metrics_daily" ADD COLUMN IF NOT EXISTS "clickTypeBreakdo
 ALTER TABLE "affiliate_metrics_daily" ADD COLUMN IF NOT EXISTS "createdAt" timestamp DEFAULT now() NOT NULL;
 
 ALTER TABLE "ai_chat_messages" ADD COLUMN IF NOT EXISTS "session_id" varchar(255);
-ALTER TABLE "ai_chat_messages" ADD COLUMN IF NOT EXISTS "role" aiRole;
+ALTER TABLE "ai_chat_messages" ADD COLUMN IF NOT EXISTS "role" "aiRole";
 ALTER TABLE "ai_chat_messages" ADD COLUMN IF NOT EXISTS "content" text;
 ALTER TABLE "ai_chat_messages" ADD COLUMN IF NOT EXISTS "created_at" timestamp DEFAULT now() NOT NULL;
 
 ALTER TABLE "ai_generated_content" ADD COLUMN IF NOT EXISTS "user_id" integer;
-ALTER TABLE "ai_generated_content" ADD COLUMN IF NOT EXISTS "content_type" aiContentType;
+ALTER TABLE "ai_generated_content" ADD COLUMN IF NOT EXISTS "content_type" "aiContentType";
 ALTER TABLE "ai_generated_content" ADD COLUMN IF NOT EXISTS "prompt" text;
 ALTER TABLE "ai_generated_content" ADD COLUMN IF NOT EXISTS "result" text;
 ALTER TABLE "ai_generated_content" ADD COLUMN IF NOT EXISTS "created_at" timestamp DEFAULT now() NOT NULL;
@@ -1176,7 +1178,7 @@ ALTER TABLE "book_reviews" ADD COLUMN IF NOT EXISTS "createdAt" timestamp DEFAUL
 
 ALTER TABLE "book_storylines" ADD COLUMN IF NOT EXISTS "bookId" integer;
 ALTER TABLE "book_storylines" ADD COLUMN IF NOT EXISTS "title" varchar(255);
-ALTER TABLE "book_storylines" ADD COLUMN IF NOT EXISTS "storylineType" storylineType;
+ALTER TABLE "book_storylines" ADD COLUMN IF NOT EXISTS "storylineType" "storylineType";
 ALTER TABLE "book_storylines" ADD COLUMN IF NOT EXISTS "description" text;
 ALTER TABLE "book_storylines" ADD COLUMN IF NOT EXISTS "keyEvents" text;
 ALTER TABLE "book_storylines" ADD COLUMN IF NOT EXISTS "resolution" text;
@@ -1254,7 +1256,7 @@ ALTER TABLE "business_metrics" ADD COLUMN IF NOT EXISTS "createdAt" timestamp DE
 
 ALTER TABLE "character_relationships" ADD COLUMN IF NOT EXISTS "character1Id" integer;
 ALTER TABLE "character_relationships" ADD COLUMN IF NOT EXISTS "character2Id" integer;
-ALTER TABLE "character_relationships" ADD COLUMN IF NOT EXISTS "relationshipType" relationshipType;
+ALTER TABLE "character_relationships" ADD COLUMN IF NOT EXISTS "relationshipType" "relationshipType";
 ALTER TABLE "character_relationships" ADD COLUMN IF NOT EXISTS "description" text;
 ALTER TABLE "character_relationships" ADD COLUMN IF NOT EXISTS "bookId" integer;
 ALTER TABLE "character_relationships" ADD COLUMN IF NOT EXISTS "createdAt" timestamp DEFAULT now() NOT NULL;
@@ -1308,7 +1310,7 @@ ALTER TABLE "daily_briefings" ADD COLUMN IF NOT EXISTS "emailSentAt" timestamp;
 ALTER TABLE "daily_briefings" ADD COLUMN IF NOT EXISTS "createdAt" timestamp DEFAULT now() NOT NULL;
 
 ALTER TABLE "daily_reports" ADD COLUMN IF NOT EXISTS "reportDate" timestamp;
-ALTER TABLE "daily_reports" ADD COLUMN IF NOT EXISTS "reportType" reportType DEFAULT 'daily_overview' NOT NULL;
+ALTER TABLE "daily_reports" ADD COLUMN IF NOT EXISTS "reportType" "reportType" DEFAULT 'daily_overview' NOT NULL;
 ALTER TABLE "daily_reports" ADD COLUMN IF NOT EXISTS "pageViews" integer;
 ALTER TABLE "daily_reports" ADD COLUMN IF NOT EXISTS "uniqueVisitors" integer;
 ALTER TABLE "daily_reports" ADD COLUMN IF NOT EXISTS "bounceRate" numeric(5, 2);
@@ -1344,11 +1346,11 @@ ALTER TABLE "exclusive_content" ADD COLUMN IF NOT EXISTS "updatedAt" timestamp D
 
 ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "url" text;
 ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "displayText" varchar(255);
-ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "linkType" linkType DEFAULT 'other' NOT NULL;
+ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "linkType" "linkType" DEFAULT 'other' NOT NULL;
 ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "location" varchar(255);
 ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "componentPath" varchar(255);
 ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "lastChecked" timestamp;
-ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "lastStatus" lastStatus DEFAULT 'unknown' NOT NULL;
+ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "lastStatus" "lastStatus" DEFAULT 'unknown' NOT NULL;
 ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "httpStatus" integer;
 ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "responseTime" integer;
 ALTER TABLE "external_links" ADD COLUMN IF NOT EXISTS "checkCount" integer DEFAULT 0 NOT NULL;
@@ -1431,7 +1433,7 @@ ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "name" varchar(255);
 ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "description" text;
 ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "price" integer;
 ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "currency" varchar(3) DEFAULT 'usd' NOT NULL;
-ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "type" purchaseType;
+ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "type" "purchaseType";
 ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "stripeProductId" varchar(255);
 ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "stripePriceId" varchar(255);
 ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "features" text;
@@ -1441,7 +1443,7 @@ ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "createdAt" timestamp DEFAULT no
 ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "updatedAt" timestamp DEFAULT now() NOT NULL;
 
 ALTER TABLE "qa_checks" ADD COLUMN IF NOT EXISTS "checkDate" timestamp;
-ALTER TABLE "qa_checks" ADD COLUMN IF NOT EXISTS "checkType" checkType;
+ALTER TABLE "qa_checks" ADD COLUMN IF NOT EXISTS "checkType" "checkType";
 ALTER TABLE "qa_checks" ADD COLUMN IF NOT EXISTS "status" status DEFAULT 'passed' NOT NULL;
 ALTER TABLE "qa_checks" ADD COLUMN IF NOT EXISTS "itemsChecked" integer DEFAULT 0 NOT NULL;
 ALTER TABLE "qa_checks" ADD COLUMN IF NOT EXISTS "issuesFound" integer DEFAULT 0 NOT NULL;
@@ -1450,7 +1452,7 @@ ALTER TABLE "qa_checks" ADD COLUMN IF NOT EXISTS "autoResolved" integer;
 ALTER TABLE "qa_checks" ADD COLUMN IF NOT EXISTS "createdAt" timestamp DEFAULT now() NOT NULL;
 
 ALTER TABLE "qa_issues" ADD COLUMN IF NOT EXISTS "checkId" integer;
-ALTER TABLE "qa_issues" ADD COLUMN IF NOT EXISTS "issueType" issueType;
+ALTER TABLE "qa_issues" ADD COLUMN IF NOT EXISTS "issueType" "issueType";
 ALTER TABLE "qa_issues" ADD COLUMN IF NOT EXISTS "severity" severity DEFAULT 'warning' NOT NULL;
 ALTER TABLE "qa_issues" ADD COLUMN IF NOT EXISTS "location" varchar(255);
 ALTER TABLE "qa_issues" ADD COLUMN IF NOT EXISTS "description" text;
@@ -1491,7 +1493,7 @@ ALTER TABLE "sms_incoming_messages" ADD COLUMN IF NOT EXISTS "messageBody" text;
 ALTER TABLE "sms_incoming_messages" ADD COLUMN IF NOT EXISTS "twilioSid" varchar(64);
 ALTER TABLE "sms_incoming_messages" ADD COLUMN IF NOT EXISTS "keyword" varchar(20);
 ALTER TABLE "sms_incoming_messages" ADD COLUMN IF NOT EXISTS "processed" boolean DEFAULT false NOT NULL;
-ALTER TABLE "sms_incoming_messages" ADD COLUMN IF NOT EXISTS "responseStatus" responseStatus DEFAULT 'pending' NOT NULL;
+ALTER TABLE "sms_incoming_messages" ADD COLUMN IF NOT EXISTS "responseStatus" "responseStatus" DEFAULT 'pending' NOT NULL;
 ALTER TABLE "sms_incoming_messages" ADD COLUMN IF NOT EXISTS "createdAt" timestamp DEFAULT now() NOT NULL;
 
 ALTER TABLE "sms_message_log" ADD COLUMN IF NOT EXISTS "userId" integer;
@@ -1506,7 +1508,7 @@ ALTER TABLE "sms_message_log" ADD COLUMN IF NOT EXISTS "deliveredAt" timestamp;
 
 ALTER TABLE "sms_opt_events" ADD COLUMN IF NOT EXISTS "phoneNumber" varchar(20);
 ALTER TABLE "sms_opt_events" ADD COLUMN IF NOT EXISTS "userId" integer;
-ALTER TABLE "sms_opt_events" ADD COLUMN IF NOT EXISTS "eventType" eventType;
+ALTER TABLE "sms_opt_events" ADD COLUMN IF NOT EXISTS "eventType" "eventType";
 ALTER TABLE "sms_opt_events" ADD COLUMN IF NOT EXISTS "source" varchar(50);
 ALTER TABLE "sms_opt_events" ADD COLUMN IF NOT EXISTS "createdAt" timestamp DEFAULT now() NOT NULL;
 
@@ -1584,7 +1586,7 @@ ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "emailNewReleases" boole
 ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "emailNewsletter" boolean DEFAULT true NOT NULL;
 ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "emailPromotions" boolean DEFAULT true NOT NULL;
 ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "emailBlogPosts" boolean DEFAULT false NOT NULL;
-ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "preferredFormat" preferredFormat DEFAULT 'epub' NOT NULL;
+ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "preferredFormat" "preferredFormat" DEFAULT 'epub' NOT NULL;
 ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "displayName" varchar(100);
 ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "bio" text;
 ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "favoriteGenres" text;
@@ -1594,7 +1596,7 @@ ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "updatedAt" timestamp DE
 ALTER TABLE "user_purchases" ADD COLUMN IF NOT EXISTS "userId" integer;
 ALTER TABLE "user_purchases" ADD COLUMN IF NOT EXISTS "bookId" integer;
 ALTER TABLE "user_purchases" ADD COLUMN IF NOT EXISTS "orderId" integer;
-ALTER TABLE "user_purchases" ADD COLUMN IF NOT EXISTS "purchaseType" purchaseType DEFAULT 'single' NOT NULL;
+ALTER TABLE "user_purchases" ADD COLUMN IF NOT EXISTS "purchaseType" "purchaseType" DEFAULT 'single' NOT NULL;
 ALTER TABLE "user_purchases" ADD COLUMN IF NOT EXISTS "purchasePrice" integer;
 ALTER TABLE "user_purchases" ADD COLUMN IF NOT EXISTS "bonusContentUnlocked" boolean DEFAULT false NOT NULL;
 ALTER TABLE "user_purchases" ADD COLUMN IF NOT EXISTS "downloadCount" integer DEFAULT 0 NOT NULL;

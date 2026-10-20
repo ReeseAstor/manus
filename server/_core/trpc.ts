@@ -15,14 +15,22 @@ type PublicTrpcShape = {
   };
 };
 
+/** Drop bound query parameters before they reach production logs. */
+export function redactQueryParams(value: string): string {
+  return value.replace(/\nparams:[\s\S]*$/, "\nparams: [redacted]");
+}
+
 /** Hide database text on production 500s. Other codes stay specific. */
 export function publicTrpcErrorShape(
   shape: PublicTrpcShape,
   error: { code: string; message: string; cause?: unknown },
 ): PublicTrpcShape {
   if (process.env.NODE_ENV === "production" && error.code === "INTERNAL_SERVER_ERROR") {
-    console.error("[tRPC]", shape.data.path ?? "", error.message);
-    if (error.cause !== undefined) console.error("[tRPC] cause", error.cause);
+    console.error("[tRPC]", shape.data.path ?? "", redactQueryParams(error.message));
+    if (error.cause !== undefined) {
+      const causeText = error.cause instanceof Error ? error.cause.message : String(error.cause);
+      console.error("[tRPC] cause", redactQueryParams(causeText));
+    }
     return {
       ...shape,
       message: "Something went wrong.",

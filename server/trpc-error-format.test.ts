@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { publicTrpcErrorShape } from "./_core/trpc";
+import { publicTrpcErrorShape, redactQueryParams } from "./_core/trpc";
 
 const sqlShape = {
   message: 'Failed query: select "id" from "books"\nparams:',
@@ -25,8 +25,8 @@ describe("public tRPC errors", () => {
     const errorLog = vi.spyOn(console, "error").mockImplementation(() => {});
     const result = publicTrpcErrorShape(sqlShape, {
       code: "INTERNAL_SERVER_ERROR",
-      message: sqlShape.message,
-      cause: new Error('relation "books" does not exist'),
+      message: `${sqlShape.message}\nparams: reader@example.com`,
+      cause: new Error('relation "books" does not exist\nparams: reader@example.com'),
     });
 
     expect(result.message).toBe("Something went wrong.");
@@ -34,6 +34,11 @@ describe("public tRPC errors", () => {
     expect(result.data.path).toBe("books.list");
     expect(result.message).not.toContain("select");
     expect(errorLog).toHaveBeenCalled();
+    const logged = errorLog.mock.calls.flat().map((part) => String(part)).join(" ");
+    expect(logged).not.toContain("reader@example.com");
+    expect(redactQueryParams("Failed query: select 1\nparams: reader@example.com")).toBe(
+      "Failed query: select 1\nparams: [redacted]",
+    );
   });
 
   it("keeps client errors and non-production internal errors", () => {
