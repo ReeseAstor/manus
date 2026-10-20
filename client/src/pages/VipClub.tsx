@@ -397,9 +397,9 @@ export default function VipClub() {
                 <div className="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center mb-4">
                   <Headphones className="w-6 h-6 text-pink-400" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Every Story Comes With Audio</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">Audio You Can Play</h3>
                 <p className="text-gray-400">
-                  Every story has an audio version. Put it on for the train, or for later with the lights off.
+                  Stories come with audio you can play here. Put it on for the train, or for later with the lights off.
                 </p>
               </div>
 

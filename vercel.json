@@ -3,9 +3,13 @@
   "framework": "vite",
   "redirects": [
     { "source": "/blog/ai-assisted-romance-writing-workflow", "destination": "/blog", "permanent": true },
+    { "source": "/blog/ai-assisted-romance-writing-workflow/", "destination": "/blog", "permanent": true },
     { "source": "/blog/romance-author-writing-tools-setup", "destination": "/blog", "permanent": true },
+    { "source": "/blog/romance-author-writing-tools-setup/", "destination": "/blog", "permanent": true },
     { "source": "/blog/quality-control-workflows-romance-authors", "destination": "/blog", "permanent": true },
-    { "source": "/ai-newsletter", "destination": "/newsletter", "permanent": true }
+    { "source": "/blog/quality-control-workflows-romance-authors/", "destination": "/blog", "permanent": true },
+    { "source": "/ai-newsletter", "destination": "/newsletter", "permanent": true },
+    { "source": "/ai-newsletter/", "destination": "/newsletter", "permanent": true }
   ],
   "buildCommand": "vite build && node scripts/seal-admin-chunks.mjs && node scripts/bundle-server.mjs server/_core/vercel-app.ts dist/server-bundle.mjs",
   "outputDirectory": "dist/public",

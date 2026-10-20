@@ -1,4 +1,5 @@
-import { eq, desc, and } from "drizzle-orm";
+import { eq, desc, and, notInArray } from "drizzle-orm";
+import { isRetiredBlogSlug, RETIRED_BLOG_SLUGS } from "../shared/const";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { InsertUser, users, blogPosts, InsertBlogPost, books, bookReviews, type Book, type InsertBook, type BookReview, type InsertBookReview, newsletters, newsletterSubscribers, type Newsletter, type InsertNewsletter, type NewsletterSubscriber, type InsertNewsletterSubscriber, exclusiveContent, readerClubMembers, contentAccess, type ExclusiveContent, type InsertExclusiveContent, type ReaderClubMember, type InsertReaderClubMember, type ContentAccess, type InsertContentAccess } from "../drizzle/schema";
 import { ENV } from './_core/env';
@@ -102,6 +103,8 @@ export async function getAllBlogPosts(published?: boolean, category?: string) {
 
   try {
     const conditions = [];
+
+    conditions.push(notInArray(blogPosts.slug, [...RETIRED_BLOG_SLUGS]));
     
     if (published) {
       conditions.push(eq(blogPosts.published, "published"));
@@ -126,6 +129,10 @@ export async function getAllBlogPosts(published?: boolean, category?: string) {
 }
 
 export async function getBlogPostBySlug(slug: string) {
+  if (isRetiredBlogSlug(slug)) {
+    return undefined;
+  }
+
   const db = await getDb();
   if (!db) {
     console.warn("[Database] Cannot get blog post: database not available");
@@ -133,7 +140,11 @@ export async function getBlogPostBySlug(slug: string) {
   }
 
   try {
-    const result = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug)).limit(1);
+    const result = await db
+      .select()
+      .from(blogPosts)
+      .where(and(eq(blogPosts.slug, slug), notInArray(blogPosts.slug, [...RETIRED_BLOG_SLUGS])))
+      .limit(1);
     return result.length > 0 ? result[0] : undefined;
   } catch (error) {
     console.error("[Database] Failed to get blog post:", error);

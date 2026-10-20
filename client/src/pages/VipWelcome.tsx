@@ -94,7 +94,7 @@ export default function VipWelcome() {
                 Audio Included
               </h3>
               <p className="text-gray-700">
-                Every story has an audio version you can play here
+                Stories come with audio you can play here
               </p>
             </div>
 

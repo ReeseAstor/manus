@@ -155,6 +155,29 @@ describe("blog.getBySlug", () => {
     ).rejects.toThrow("Blog post not found");
   });
 
+  it("hides retired slugs from anonymous and admin callers", async () => {
+    const retired = {
+      ...mockBlogPost,
+      id: 99,
+      slug: "ai-assisted-romance-writing-workflow",
+      title: "Retired post",
+    };
+    vi.mocked(db.getBlogPostBySlug).mockResolvedValue(retired);
+    vi.mocked(db.getAllBlogPosts).mockResolvedValue([mockBlogPost, retired]);
+
+    const anonymous = appRouter.createCaller(createTestContext());
+    await expect(
+      anonymous.blog.getBySlug({ slug: retired.slug })
+    ).rejects.toThrow("Blog post not found");
+    const listed = await anonymous.blog.list();
+    expect(listed.map((post) => post.slug)).toEqual(["test-blog-post"]);
+
+    const admin = appRouter.createCaller(createTestContext(true));
+    await expect(
+      admin.blog.getBySlug({ slug: retired.slug })
+    ).rejects.toThrow("Blog post not found");
+  });
+
   it("lets an admin read a draft by slug", async () => {
     const ctx = createTestContext(true);
     const caller = appRouter.createCaller(ctx);

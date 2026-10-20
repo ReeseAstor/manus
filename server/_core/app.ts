@@ -12,7 +12,8 @@ import twilioVoiceWebhookRouter, {
   validateTwilioSignature as validateTwilioVoiceSignature,
 } from "../twilio-voice-webhook";
 import { authCallback } from "../api.auth.callback";
-import { eq } from "drizzle-orm";
+import { and, eq, notInArray } from "drizzle-orm";
+import { RETIRED_BLOG_SLUGS } from "../../shared/const";
 import { getDb } from "../db";
 import { blogPosts } from "../../drizzle/schema";
 import { adminChunks } from "../generated/adminChunks";
@@ -119,7 +120,12 @@ export function createApp(): Express {
         ? await database
             .select({ slug: blogPosts.slug })
             .from(blogPosts)
-            .where(eq(blogPosts.published, "published"))
+            .where(
+              and(
+                eq(blogPosts.published, "published"),
+                notInArray(blogPosts.slug, [...RETIRED_BLOG_SLUGS]),
+              ),
+            )
         : [];
       const blogUrls = blogPostRows.map((row: { slug: string }) => ({
         url: `/blog/${row.slug}`,

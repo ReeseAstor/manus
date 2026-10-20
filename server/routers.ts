@@ -1,4 +1,4 @@
-import { COOKIE_NAME } from "@shared/const";
+import { COOKIE_NAME, isRetiredBlogSlug } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { aiRouter } from "./routers/ai-simple";
@@ -229,7 +229,7 @@ export const appRouter = router({
         // if they ask for drafts. Admins keep the unfiltered list for the CMS.
         const publishedOnly = isAdmin ? input?.published : true;
         const posts = await getAllBlogPosts(publishedOnly, input?.category);
-        return posts;
+        return posts.filter((post) => !isRetiredBlogSlug(post.slug));
       }),
 
     // Content calendar - get all posts with scheduled dates for admin view
@@ -262,7 +262,7 @@ export const appRouter = router({
       .query(async ({ ctx, input }) => {
         const post = await getBlogPostBySlug(input.slug);
         const isAdmin = ctx.user?.role === "admin";
-        if (!post || (post.published !== "published" && !isAdmin)) {
+        if (!post || isRetiredBlogSlug(post.slug) || isRetiredBlogSlug(input.slug) || (post.published !== "published" && !isAdmin)) {
           throw new TRPCError({
             code: "NOT_FOUND",
             message: "Blog post not found",

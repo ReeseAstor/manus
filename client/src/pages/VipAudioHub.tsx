@@ -30,12 +30,18 @@ import {
   Lock,
 } from "lucide-react";
 
+/** Reader-facing voice picker. Off so stock voice names are not shown. Flip to restore. */
+const SHOW_READER_VOICE_LIBRARY = false;
+
 export default function VipAudioHub() {
   const { user, loading: authLoading } = useAuth();
   const [selectedVoice, setSelectedVoice] = useState<string>("bella");
 
   // Fetch audio data
-  const { data: voices } = trpc.audio.getVoices.useQuery({ includePremium: true });
+  const { data: voices } = trpc.audio.getVoices.useQuery(
+    { includePremium: true },
+    { enabled: SHOW_READER_VOICE_LIBRARY },
+  );
   const { data: usage, isLoading: usageLoading } = trpc.audio.getUsage.useQuery(
     undefined,
     { enabled: !!user }
@@ -44,7 +50,9 @@ export default function VipAudioHub() {
     { limit: 10 },
     { enabled: !!user }
   );
-  const { data: characterVoices } = trpc.audio.getCharacterVoices.useQuery();
+  const { data: characterVoices } = trpc.audio.getCharacterVoices.useQuery(undefined, {
+    enabled: SHOW_READER_VOICE_LIBRARY,
+  });
 
   // Voice preview mutation
   const previewVoice = trpc.audio.previewVoice.useMutation();
@@ -152,7 +160,7 @@ export default function VipAudioHub() {
                     <Music className="h-5 w-5 text-purple-400" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400">Stories in audio</p>
+                    <p className="text-xs text-slate-400">Audio added this month</p>
                     <p className="text-xl font-bold text-white">
                       {usageLoading ? "..." : usage?.usage.generationsThisMonth || 0}
                     </p>
@@ -200,7 +208,9 @@ export default function VipAudioHub() {
         </div>
       </section>
 
-      {/* Voice Library */}
+      {/* Voice Library and Character Voices stay in source. SHOW_READER_VOICE_LIBRARY restores them. */}
+      {SHOW_READER_VOICE_LIBRARY && (
+      <>
       <section className="py-12 border-t border-amber-500/10">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
@@ -322,6 +332,8 @@ export default function VipAudioHub() {
           </div>
         </div>
       </section>
+      </>
+      )}
 
       {/* Recent Audio Library */}
       <section className="py-12 border-t border-amber-500/10">
