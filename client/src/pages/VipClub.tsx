@@ -637,7 +637,7 @@ export default function VipClub() {
                   <Heart className="w-5 h-5 text-blue-400" />
                 </div>
                 <CardTitle className="text-white text-xl">
-                  "Midnight at Chen Technologies"
+                  "Late Night on the Executive Floor"
                 </CardTitle>
                 <CardDescription className="text-gray-400">
                   Sarah & Michael • Heat Level: 🔥🔥🔥🔥
@@ -736,7 +736,7 @@ export default function VipClub() {
                       <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Story Excerpt</Badge>
                       <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Heat Level: 🔥🔥🔥🔥</Badge>
                     </div>
-                    <DialogTitle className="text-2xl text-white">"Midnight at Chen Technologies"</DialogTitle>
+                    <DialogTitle className="text-2xl text-white">"Late Night on the Executive Floor"</DialogTitle>
                     <DialogDescription className="text-gray-400">Sarah & Michael • Manhattan Money Kings</DialogDescription>
                   </DialogHeader>
                   <div className="mt-6 space-y-4 text-gray-300 leading-relaxed">
