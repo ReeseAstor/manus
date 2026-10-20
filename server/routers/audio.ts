@@ -319,6 +319,39 @@ export const audioRouter = router({
       if (!story) {
         throw new Error("Story not found");
       }
+
+      // Signed-in readers share generateAudio's monthly minute cap.
+      // Free accounts get 10 minutes. Admins are not capped here.
+      if (ctx.user.role !== "admin") {
+        const now = new Date();
+        const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+        const membershipResult = await db
+          .select()
+          .from(vipMembers)
+          .where(and(
+            eq(vipMembers.userId, userId),
+            eq(vipMembers.status, "active")
+          ))
+          .limit(1);
+        const tierName = (membershipResult[0] ? "bronze" : "free") as SubscriptionTier;
+        const limits = TIER_LIMITS[tierName];
+        const usageResult = await db
+          .select({
+            totalMinutes: sql<number>`COALESCE(SUM(${audioUsage.minutesUsed}), 0)`,
+          })
+          .from(audioUsage)
+          .where(
+            and(
+              eq(audioUsage.userId, userId),
+              gte(audioUsage.createdAt, monthStart)
+            )
+          );
+        const currentMinutes = Number(usageResult[0]?.totalMinutes || 0);
+        const estimatedMinutes = estimateMinutes(story.content.length);
+        if (currentMinutes + estimatedMinutes > limits.monthlyMinutes) {
+          throw new Error(`Audio limit exceeded. You have ${limits.monthlyMinutes - currentMinutes} minutes remaining this month.`);
+        }
+      }
       
       // Generate audio
       const result = await generateAudio({
