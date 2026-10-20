@@ -1,13 +1,19 @@
+/**
+ * Concurrency proof for the Postgres rate limiter.
+ *
+ * Skipped unless RATE_LIMIT_TEST_DATABASE_URL is set to a disposable Postgres
+ * database (not production). Example:
+ *   RATE_LIMIT_TEST_DATABASE_URL=postgres://ratelimit:ratelimit@127.0.0.1:5432/ratelimit
+ * The suite opens 20 connections and creates ai_rate_limits if it is missing.
+ */
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
 import { consumeRateLimitSlot } from "./ai-usage";
 
-const databaseUrl =
-  process.env.RATE_LIMIT_TEST_DATABASE_URL ??
-  "postgres://ratelimit:ratelimit@127.0.0.1:5432/ratelimit";
+const databaseUrl = process.env.RATE_LIMIT_TEST_DATABASE_URL;
 
-describe("postgres rate limit concurrency", () => {
+describe.skipIf(!databaseUrl)("postgres rate limit concurrency", () => {
   let pool: pg.Pool;
   let db: ReturnType<typeof drizzle>;
 

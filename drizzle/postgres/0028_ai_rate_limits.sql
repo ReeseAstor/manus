@@ -10,13 +10,15 @@
 -- on ai_rate_limits. The limiter is one INSERT ... ON CONFLICT DO UPDATE per
 -- bucket. It does not issue CREATE, ALTER, DROP, or DELETE.
 --
--- This replaces the earlier append-only draft of this file (one row per hit).
--- That draft was not applied. If it was, drop it before running this version:
+-- Drop any older ai_rate_limits table before applying this file. CREATE TABLE
+-- IF NOT EXISTS will not change an existing table, including the earlier
+-- append-only draft (id, "bucketId", "createdAt"). Run this first:
 --   DROP TABLE IF EXISTS ai_rate_limits;
 --
--- Rollback (drops only this new table; no other data is involved):
+-- Rollback (drops only this table; no other data is involved):
 --   DROP TABLE IF EXISTS ai_rate_limits;
--- Data risk: additive. The table starts empty. Existing rows are not read or changed.
+-- Data risk: dropping an older ai_rate_limits removes its counter rows only.
+-- Those rows are rate-limit counters, not user data. Other tables are not read or changed.
 --
 -- Each bucket is a single counter row. "windowStart" is a timestamp without
 -- time zone holding the UTC wall clock from `now() AT TIME ZONE 'UTC'`.

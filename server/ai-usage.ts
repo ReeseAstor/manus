@@ -18,6 +18,10 @@
  * `pnpm start` outside Vercel must sit behind a proxy that overwrites
  * X-Forwarded-For. On Vercel, getClientKey prefers x-vercel-forwarded-for,
  * which the platform sets and clients cannot spoof.
+ *
+ * server/rate-limit-concurrency.test.ts talks to a real database only when
+ * RATE_LIMIT_TEST_DATABASE_URL is set. Leave it unset in CI and local runs
+ * that do not have Postgres; the suite skips.
  */
 import { sql, type SQL } from "drizzle-orm";
 import { getDb } from "./db";

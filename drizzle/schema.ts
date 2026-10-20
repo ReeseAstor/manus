@@ -486,13 +486,15 @@ export const steamyStories = pgTable("steamy_stories", {
 });
 
 /**
- * Shared rate-limit windows. Created at runtime if missing (`server/ai-usage.ts`).
- * One row is one consumed slot. bucketId is `${feature}:${caller}` or `global:${feature}`.
+ * Shared rate-limit counters. Applied by hand from
+ * drizzle/postgres/0028_ai_rate_limits.sql. The app does not create this table.
+ * One row is one bucket (`${feature}:${caller}` or `global:${feature}`).
+ * windowStart is a UTC wall-clock timestamp without time zone.
  */
 export const aiRateLimits = pgTable("ai_rate_limits", {
-  id: serial("id").primaryKey(),
-  bucketId: varchar("bucketId", { length: 255 }).notNull(),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  bucketId: varchar("bucketId", { length: 255 }).primaryKey(),
+  count: integer("count").notNull(),
+  windowStart: timestamp("windowStart").notNull(),
 });
 
 export type SteamyStory = typeof steamyStories.$inferSelect;

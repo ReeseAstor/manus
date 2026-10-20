@@ -79,8 +79,9 @@ export function createApp(): Express {
     }
   });
 
-  // Vercel Cron calls GET /api/cron/publish-scheduled hourly (vercel.json)
-  // with `Authorization: Bearer $CRON_SECRET`. POST stays for the same header.
+  // Vercel Cron calls GET /api/cron/publish-scheduled daily at 13:00 UTC
+  // (vercel.json). Hobby allows one daily run, not an hourly schedule.
+  // Authorization is `Bearer $CRON_SECRET`. POST stays for the same header.
   // An empty or missing CRON_SECRET is rejected. Do not set that secret here.
   const publishScheduled = async (
     req: express.Request,

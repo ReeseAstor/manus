@@ -1384,7 +1384,7 @@
 - [x] Build content calendar tRPC endpoint
 - [x] Write 13 SEO-optimized blog post drafts with full content
 - [x] Set up blog auto-publisher cron endpoint (/api/cron/publish-blogs)
-- [x] Schedule hourly cron job to auto-publish posts when date arrives
+- [x] Schedule a daily 13:00 UTC cron job to auto-publish posts when the date arrives
 - [x] Run database migration for new columns
 
 ## Remove Direct Download & Replace Big Sister
