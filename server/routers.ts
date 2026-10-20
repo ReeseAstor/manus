@@ -223,8 +223,12 @@ export const appRouter = router({
           category: z.string().optional(),
         }).optional()
       )
-      .query(async ({ input }) => {
-        const posts = await getAllBlogPosts(input?.published, input?.category);
+      .query(async ({ ctx, input }) => {
+        const isAdmin = ctx.user?.role === "admin";
+        // Anonymous and non-admin callers only ever see published posts, even
+        // if they ask for drafts. Admins keep the unfiltered list for the CMS.
+        const publishedOnly = isAdmin ? input?.published : true;
+        const posts = await getAllBlogPosts(publishedOnly, input?.category);
         return posts;
       }),
 
@@ -255,9 +259,10 @@ export const appRouter = router({
 
     getBySlug: publicProcedure
       .input(z.object({ slug: z.string() }))
-      .query(async ({ input }) => {
+      .query(async ({ ctx, input }) => {
         const post = await getBlogPostBySlug(input.slug);
-        if (!post) {
+        const isAdmin = ctx.user?.role === "admin";
+        if (!post || (post.published !== "published" && !isAdmin)) {
           throw new TRPCError({
             code: "NOT_FOUND",
             message: "Blog post not found",

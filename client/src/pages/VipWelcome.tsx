@@ -94,7 +94,7 @@ export default function VipWelcome() {
                 Professional Audio
               </h3>
               <p className="text-gray-700">
-                Every story narrated by professional voice actors with ElevenLabs AI
+                Every story includes professional voice narration
               </p>
             </div>
 
@@ -171,7 +171,7 @@ export default function VipWelcome() {
                   Listen Now
                 </h4>
                 <p className="text-gray-600 text-center mb-6">
-                  Professional narration with ElevenLabs AI
+                  Professional narration
                 </p>
 
                 {firstStory.audioUrl && (

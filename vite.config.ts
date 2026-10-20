@@ -25,6 +25,34 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
     chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        // Writing Studio is a lazy admin route. Put only that chunk under
+        // assets/admin so the seal step can pull it out of the public build.
+        // This does not change the chunk graph (no manualChunks).
+        chunkFileNames(chunkInfo) {
+          const normalize = (id: string) => id.replace(/\\/g, "/");
+          const facade = normalize(chunkInfo.facadeModuleId ?? "");
+          if (facade.endsWith("/pages/WritingStudio.tsx")) {
+            return "assets/admin/[name]-[hash].js";
+          }
+          const ids = (chunkInfo.moduleIds ?? []).map(normalize);
+          const hasStudio = ids.some(
+            (id) => id.includes("/pages/WritingStudio") || id.endsWith("/data/workflows.ts"),
+          );
+          const hasOtherAppCode = ids.some((id) => {
+            if (!id.includes("/client/src/")) return false;
+            if (id.includes("/pages/WritingStudio")) return false;
+            if (id.endsWith("/data/workflows.ts")) return false;
+            return true;
+          });
+          if (hasStudio && !hasOtherAppCode) {
+            return "assets/admin/[name]-[hash].js";
+          }
+          return "assets/[name]-[hash].js";
+        },
+      },
+    },
     // NOTE: manualChunks was removed entirely after two production blank-page
     // outages caused by Rollup's inability to preserve initialization order
     // across chunk boundaries when transitive deps form cycles.

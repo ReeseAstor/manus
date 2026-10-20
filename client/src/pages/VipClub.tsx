@@ -400,7 +400,7 @@ export default function VipClub() {
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">Professional Audio Narration</h3>
                 <p className="text-gray-400">
-                  Every story is brought to life with high-quality voice narration using cutting-edge AI technology. 
+                  Every story is brought to life with high-quality voice narration.
                   Listen anywhere, anytime.
                 </p>
               </div>

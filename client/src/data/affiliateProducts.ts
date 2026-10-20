@@ -261,47 +261,4 @@ export const affiliateProductsBySlug: Record<string, {
       },
     },
   },
-  "romance-author-writing-tools-setup": {
-    ftcDisclosure: true,
-    topPicks: [
-      {
-        name: "Kindle Paperwhite (2024)",
-        affiliateUrl: "https://www.amazon.com/dp/B09TMN58KL?tag=88away0d-20",
-        description: "Reading your manuscript on a different device from where you wrote it makes plot holes visible. The Paperwhite is perfect for structural editing passes.",
-        whyRecommend: "I read every manuscript on mine before final edits. Something about the e-ink screen catches rhythm problems your laptop misses.",
-        priceRange: "Around $150",
-        rating: 4.7,
-      },
-      {
-        name: "Sony WH-1000XM5 Noise Canceling Headphones",
-        affiliateUrl: "https://www.amazon.com/dp/B09XS7JWHH?tag=88away0d-20",
-        description: "Industry-leading noise cancellation that signals to your brain: we're working now. Essential for deep writing sessions.",
-        whyRecommend: "Hostile Tender was written almost entirely wearing these. The noise canceling creates an instant writing bubble.",
-        priceRange: "Around $350",
-        rating: 4.6,
-      },
-    ],
-    inlineProducts: {
-      "Scrivener 3": {
-        url: "https://www.amazon.com/dp/B0CP2FQMHP?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Leuchtturm1917 A5 notebook": {
-        url: "https://www.amazon.com/dp/B002TSIMW4?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Herman Miller Aeron": {
-        url: "https://www.amazon.com/dp/B01DGM7ZII?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "BenQ ScreenBar": {
-        url: "https://www.amazon.com/dp/B076VNFZJG?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Stanley tumbler": {
-        url: "https://www.amazon.com/dp/B0BX4LNQFH?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-    },
-  },
 };
