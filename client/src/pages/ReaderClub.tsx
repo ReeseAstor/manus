@@ -15,6 +15,7 @@ export default function ReaderClub() {
   }, []);
 
   const [email, setEmail] = useState("");
+  const [joined, setJoined] = useState(false);
   const { data: member, isLoading: memberLoading } = trpc.readerClub.checkMembership.useQuery({ email });
   const { data: content, isLoading: contentLoading } = trpc.readerClub.getAllContent.useQuery();
   const joinMutation = trpc.readerClub.join.useMutation();
@@ -27,8 +28,7 @@ export default function ReaderClub() {
 
     try {
       await joinMutation.mutateAsync({ email, name: "" });
-      alert("Welcome to the Reader's Club! Check your email for confirmation.");
-      window.location.reload();
+      setJoined(true);
     } catch (error) {
       alert("Failed to join. Please try again.");
     }
@@ -107,7 +107,7 @@ export default function ReaderClub() {
             New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free.
           </p>
 
-          {!isMember && (
+          {!isMember && !joined && (
             <motion.form
               onSubmit={handleJoin}
               className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
@@ -133,14 +133,24 @@ export default function ReaderClub() {
             </motion.form>
           )}
 
-          {isMember && (
+          {(isMember || joined) && (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#d4af37]/20 border-2 border-[#d4af37]"
+              className="flex flex-col items-center gap-4"
             >
-              <Unlock className="h-6 w-6 text-[#d4af37]" />
-              <span className="text-white font-semibold text-lg">You're a Member!</span>
+              <div className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#d4af37]/20 border-2 border-[#d4af37]">
+                <Unlock className="h-6 w-6 text-[#d4af37]" />
+                <span className="text-white font-semibold text-lg">You're a Member!</span>
+              </div>
+              {joined && (
+                <Link
+                  href="/free-book"
+                  className="text-[#d4af37] font-semibold underline underline-offset-4"
+                >
+                  Get the free book
+                </Link>
+              )}
             </motion.div>
           )}
         </motion.div>

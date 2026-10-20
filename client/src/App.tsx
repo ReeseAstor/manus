@@ -3,7 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import "./styles/animations.css";
 import { lazy, Suspense } from "react";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Redirect, Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
@@ -115,6 +115,7 @@ function Router() {
         <Route path={"/favorites"} component={Favorites} />
         <Route path={"/promo"} component={Promo} />
         <Route path={"/why-buy-direct"} component={WhyBuyDirectPage} />
+        <Route path={"/permission"}>{() => <Redirect to="/books" replace />}</Route>
         <Route path={"/purchase-success"} component={PurchaseSuccess} />
         <Route path={"/my-purchases"} component={MyPurchases} />
         <Route path={"/profile"} component={Profile} />

@@ -133,8 +133,8 @@ export default function WelcomeBack() {
               </span>
             </Link>
             <p style={{ margin: "24px 0 0", color: "rgba(200,200,200,0.6)", fontSize: 14, fontFamily: "Arial, sans-serif" }}>
-              Or browse the books on Amazon:{" "}
-              <a href="https://swiy.co/05" style={{ color: "#d4af37" }}>The First Acquisition</a>
+              Or get the free book:{" "}
+              <a href="https://dl.bookfunnel.com/kw1yge3479" style={{ color: "#d4af37" }}>The First Acquisition</a>
             </p>
           </>
         )}

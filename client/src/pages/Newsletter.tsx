@@ -161,7 +161,7 @@ export default function Newsletter() {
               {
                 icon: BookOpen,
                 title: "New Release Alerts",
-                description: "Be the first to know when a new Hudson Dynasty book drops, with exclusive early access deals",
+                description: "Be the first to know when a new Hudson Dynasty book drops",
               },
               {
                 icon: Sparkles,
@@ -271,8 +271,7 @@ export default function Newsletter() {
                 Don't Miss Out
               </h2>
               <p className="text-gray-300 font-['Montserrat'] mb-8 max-w-lg mx-auto">
-                Join thousands of readers who get exclusive content, early access to new releases,
-                and a free book — all delivered to their inbox. About two emails a month, no spam.
+                Join readers who get new-release news and a free book — all delivered to their inbox. About two emails a month, no spam.
               </p>
 
               {/* MailerLite embedded form (k0kQw5) */}

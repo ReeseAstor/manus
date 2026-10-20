@@ -179,7 +179,7 @@ Elena stared at him. "Why would you help me?"
 
 Her blood ran cold. "You know my father?"
 
-"Chen Wei." David's voice hardened. "Yes, I know him. And I know what he does to people who disappoint him." His eyes met hers, and she saw something unexpected there—not anger, but understanding. "Including his own daughter."
+"Yuri Volkov." David's voice hardened. "Yes, I know him. And I know what he does to people who disappoint him." His eyes met hers, and she saw something unexpected there—not anger, but understanding. "Including his own daughter."
 
 Elena's carefully constructed walls cracked. "If you know what he is, then you know I don't have a choice."
 
