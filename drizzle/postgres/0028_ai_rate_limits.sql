@@ -10,10 +10,7 @@
 -- on ai_rate_limits. The limiter is one INSERT ... ON CONFLICT DO UPDATE per
 -- bucket. It does not issue CREATE, ALTER, DROP, or DELETE.
 --
--- Drop any older ai_rate_limits table before applying this file. CREATE TABLE
--- IF NOT EXISTS will not change an existing table, including the earlier
--- append-only draft (id, "bucketId", "createdAt"). Run this first:
---   DROP TABLE IF EXISTS ai_rate_limits;
+-- After the backup in SCHEMA_CATCHUP.md, and only if \d ai_rate_limits shows an existing table, run: DROP TABLE IF EXISTS ai_rate_limits;
 --
 -- Rollback (drops only this table; no other data is involved):
 --   DROP TABLE IF EXISTS ai_rate_limits;
