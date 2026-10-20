@@ -41,6 +41,15 @@ function ctxFor(role: "admin" | "user" | null, ip: string): TrpcContext {
 const loyalAnswers = QUIZ_QUESTIONS.map((question) => question.options[2]);
 
 describe("static character quiz", () => {
+  it("maps the charm answers to Fake Wife's contract-marriage positioning", () => {
+    const charmAnswers = QUIZ_QUESTIONS.map((question) => question.options[1]);
+    const result = scoreCharacterQuiz(charmAnswers);
+    expect(result.bookLink).toBe("https://www.amazon.com/dp/B0FCCBNF8X");
+    expect(result.reason.toLowerCase()).not.toContain("enemies");
+    expect(result.reason.toLowerCase()).toContain("contract-wife");
+    expect(result.reason.toLowerCase()).toContain("marriage of convenience");
+  });
+
   it("maps the loyal answers to Baby Secret's live ASIN", () => {
     const result = scoreCharacterQuiz(loyalAnswers);
     expect(result.bookRecommendation).toBe("The Billionaire's Baby Secret");
