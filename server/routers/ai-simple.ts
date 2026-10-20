@@ -1,9 +1,11 @@
 import { z } from 'zod';
-import { publicProcedure, router } from '../_core/trpc';
+import { adminProcedure, publicProcedure, router } from '../_core/trpc';
 import { generateText } from '../_core/gemini';
 import { generateImage } from '../_core/imageGeneration';
-import { checkRateLimit, getClientKey, trackAiUsage } from '../ai-usage';
+import { checkRateLimit, getClientKey, trackAiUsage, type AiFeature } from '../ai-usage';
 import { TRPCError } from '@trpc/server';
+import type { TrpcContext } from '../_core/context';
+import { scoreCharacterQuiz } from '@shared/character-quiz';
 
 const CHATBOT_SYSTEM_INSTRUCTION = `You are a helpful assistant for Reese Astor's author website. You help readers learn about her Manhattan Money Kings romance series.
 
@@ -33,7 +35,7 @@ The Manhattan Money Kings is a steamy billionaire romance series set in Manhatta
    - Plot: Three years ago, Sophia walked away from Dominic. Now he's back and discovers the daughter she kept hidden. Set in Hudson Yards, Manhattan.
    - Trope: Second chance romance, secret baby, workplace romance
    - Price: $3.99 (Kindle), $19.99 (Print)
-   - Amazon: https://www.amazon.com/dp/B0DRZG5KKD
+   - Amazon: https://www.amazon.com/dp/B0G12LBZ24
 
 4. **The Billionaire's Forbidden Nanny: Forbidden and Forever** (Book 4 - FINAL BOOK)
    - Hero: Ethan Calloway (billionaire widower)
@@ -58,6 +60,27 @@ The Manhattan Money Kings is a steamy billionaire romance series set in Manhatta
 Reese writes steamy contemporary romance and also offers writing coaching for aspiring romance authors.
 
 Keep responses friendly, enthusiastic about romance, and always include relevant book links when discussing the series.`;
+
+async function enforceAdminSpendLimit(
+  ctx: TrpcContext,
+  feature: AiFeature,
+  model: string,
+  inputChars: number,
+  message: string,
+) {
+  const clientKey = getClientKey(ctx.req);
+  if (!(await checkRateLimit(clientKey, feature))) {
+    trackAiUsage({
+      feature,
+      model,
+      inputChars,
+      outputChars: 0,
+      status: "rate-limited",
+      key: clientKey,
+    });
+    throw new TRPCError({ code: "TOO_MANY_REQUESTS", message });
+  }
+}
 
 export const aiRouter = router({
   /**
@@ -113,7 +136,7 @@ export const aiRouter = router({
     }),
 
   /**
-   * Character Match Quiz - Submit answers and get AI-generated result
+   * Character match quiz. Results are a fixed list, not a model call.
    */
   submitQuiz: publicProcedure
     .input(
@@ -122,41 +145,13 @@ export const aiRouter = router({
       })
     )
     .mutation(async ({ input }) => {
-      const { answers } = input;
-
-      const quizPrompt = `Based on these quiz answers about romance preferences and personality traits, determine which Manhattan Money King the person would match with best and provide a detailed personality analysis.
-
-Quiz Answers: ${JSON.stringify(answers)}
-
-The three characters are:
-1. Michael Hastings (Book 1) - Demanding, brilliant CEO of Chen Technologies, workaholic who values excellence and competence, protective once he commits
-2. David Kim (Book 2) - Sharp, strategic Fortune 500 CEO, careful and calculating, sees through deception but believes in redemption
-3. Dominic Kane (Book 3) - Intense, powerful Kane Industries CEO, never gives up on what's his, second-chance romantic who fights for family
-
-Respond in JSON format:
-{
-  "character": "Michael Hastings" | "David Kim" | "Dominic Kane",
-  "matchPercentage": 85,
-  "personality": "A detailed 2-3 sentence personality analysis explaining why they match",
-  "bookRecommendation": "The Billionaire's Executive Assistant" | "The Billionaire's Fake Wife" | "The Billionaire's Baby Secret",
-  "bookLink": "https://www.amazon.com/dp/B0F2W8QL7S" | "https://www.amazon.com/dp/B0FCCBNF8X" | "https://www.amazon.com/dp/B0DRZG5KKD",
-  "reason": "Why this book is perfect for them"
-}`;
-
-      try {
-        const result = await generateText(quizPrompt);
-        const parsedResult = JSON.parse(result);
-        return parsedResult;
-      } catch (error) {
-        console.error('[Quiz] Error:', error);
-        throw new Error('Failed to generate quiz result. Please try again.');
-      }
+      return scoreCharacterQuiz(input.answers);
     }),
 
   /**
    * Generate blog post with AI assistance
    */
-  generateBlogPost: publicProcedure
+  generateBlogPost: adminProcedure
     .input(
       z.object({
         topic: z.string().min(5).max(200),
@@ -164,8 +159,15 @@ Respond in JSON format:
         length: z.enum(['short', 'medium', 'long']),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { topic, tone, length } = input;
+      await enforceAdminSpendLimit(
+        ctx,
+        "chat",
+        "gemini-1.5-flash",
+        topic.length,
+        "Too many writing requests. Please wait and try again.",
+      );
 
       const lengthGuide = {
         short: '300-500 words',
@@ -196,7 +198,7 @@ Format the response as markdown.`;
   /**
    * Generate story ideas for coaching clients
    */
-  generateStoryIdea: publicProcedure
+  generateStoryIdea: adminProcedure
     .input(
       z.object({
         genre: z.string(),
@@ -204,8 +206,15 @@ Format the response as markdown.`;
         setting: z.string().optional(),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { genre, tropes, setting } = input;
+      await enforceAdminSpendLimit(
+        ctx,
+        "chat",
+        "gemini-1.5-flash",
+        genre.length,
+        "Too many writing requests. Please wait and try again.",
+      );
 
       const prompt = `Generate a unique and compelling story idea for a ${genre} romance novel with these tropes: ${tropes.join(', ')}${setting ? ` set in ${setting}` : ''}.
 
@@ -232,7 +241,7 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
   /**
    * Generate book cover with AI
    */
-  generateBookCover: publicProcedure
+  generateBookCover: adminProcedure
     .input(
       z.object({
         title: z.string(),
@@ -240,8 +249,15 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
         style: z.enum(['romantic', 'dark', 'luxurious', 'playful']),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { title, subtitle, style } = input;
+      await enforceAdminSpendLimit(
+        ctx,
+        "image",
+        "image",
+        title.length,
+        "Too many image requests. Please wait and try again.",
+      );
 
       const stylePrompts = {
         romantic: 'soft pink and gold tones, elegant script font, romantic couple silhouette, dreamy atmosphere',
@@ -264,14 +280,21 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
   /**
    * Generate character portrait
    */
-  generateCharacterPortrait: publicProcedure
+  generateCharacterPortrait: adminProcedure
     .input(
       z.object({
         description: z.string().min(20).max(500),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { description } = input;
+      await enforceAdminSpendLimit(
+        ctx,
+        "image",
+        "image",
+        description.length,
+        "Too many image requests. Please wait and try again.",
+      );
 
       const prompt = `Professional character portrait for a romance novel: ${description}. Photorealistic style, attractive, romance book cover quality, professional lighting, detailed facial features, high quality portrait.`;
 
@@ -287,7 +310,7 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
   /**
    * Generate social media graphic
    */
-  generateSocialGraphic: publicProcedure
+  generateSocialGraphic: adminProcedure
     .input(
       z.object({
         text: z.string(),
@@ -295,8 +318,15 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
         theme: z.enum(['book_promo', 'quote', 'announcement']),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { text, platform, theme } = input;
+      await enforceAdminSpendLimit(
+        ctx,
+        "image",
+        "image",
+        text.length,
+        "Too many image requests. Please wait and try again.",
+      );
 
       const dimensions = {
         instagram: '1080x1080 square format',
