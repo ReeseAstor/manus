@@ -51,7 +51,7 @@ function wrapInTemplate(options: {
           </tr>
           <tr>
             <td class="header-cell" style="padding: 40px 40px 24px; text-align: center;">
-              <p style="margin: 0 0 6px; color: #d4af37; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-family: Arial, sans-serif;">USA Today Bestselling Author</p>
+              <p style="margin: 0 0 6px; color: #d4af37; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-family: Arial, sans-serif;">Romance Author</p>
               <h1 style="margin: 0; color: #d4af37; font-size: 30px; font-weight: bold; letter-spacing: 2px; font-family: Georgia, serif;">REESE ASTOR</h1>
             </td>
           </tr>
@@ -64,7 +64,7 @@ ${bodyContent}
             <td class="content-cell" style="padding: 10px 40px 30px;">
               <p style="margin: 0 0 8px; color: #c8c8c8; font-size: 16px; font-style: italic;">With love and gratitude,</p>
               <p style="margin: 0; color: #d4af37; font-size: 22px; font-weight: bold; font-family: Georgia, serif;">Reese Astor</p>
-              <p style="margin: 4px 0 0; color: rgba(200, 200, 200, 0.5); font-size: 12px; font-family: Arial, sans-serif;">USA Today Bestselling Author</p>
+              <p style="margin: 4px 0 0; color: rgba(200, 200, 200, 0.5); font-size: 12px; font-family: Arial, sans-serif;">Romance Author</p>
             </td>
           </tr>
 
@@ -392,7 +392,7 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
                       <tr>
                         <td style="width: 70%;">
                           <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">VIP Club Membership</p>
-                          <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">Early access, exclusive content, signed editions</p>
+                          <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">New-release news from Reese Astor</p>
                         </td>
                         <td style="text-align: right; vertical-align: middle;">
                           <span style="color: #d4af37; font-size: 18px; font-weight: bold;">$9.99<span style="font-size: 12px; font-weight: normal;">/mo</span></span>

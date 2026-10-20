@@ -194,7 +194,7 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
     <!-- Header -->
     <div class="header">
       <h1 class="logo">Reese Astor</h1>
-      <p style="margin: 10px 0 0 0; color: #e5e5e5; opacity: 0.8;">USA TODAY Bestselling Author</p>
+      <p style="margin: 10px 0 0 0; color: #e5e5e5; opacity: 0.8;">Romance Author</p>
     </div>
 
     <!-- Content -->

@@ -11,10 +11,11 @@ import { trpc } from "@/lib/trpc";
 
 export default function ReaderClub() {
   useEffect(() => {
-    document.title = "Reader Club | Exclusive Content from Reese Astor";
+    document.title = "Reader's Club | Reese Astor";
   }, []);
 
   const [email, setEmail] = useState("");
+  const [joined, setJoined] = useState(false);
   const { data: member, isLoading: memberLoading } = trpc.readerClub.checkMembership.useQuery({ email });
   const { data: content, isLoading: contentLoading } = trpc.readerClub.getAllContent.useQuery();
   const joinMutation = trpc.readerClub.join.useMutation();
@@ -27,8 +28,7 @@ export default function ReaderClub() {
 
     try {
       await joinMutation.mutateAsync({ email, name: "" });
-      alert("Welcome to the Reader's Club! Check your email for confirmation.");
-      window.location.reload();
+      setJoined(true);
     } catch (error) {
       alert("Failed to join. Please try again.");
     }
@@ -71,10 +71,10 @@ export default function ReaderClub() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#1a1f2e] to-[#0a0e1a]">
       <EnhancedSEOHead
-        title="Reader Club | Exclusive Content from Reese Astor"
-        description="Join Reese Astor's Reader Club for exclusive bonus chapters, early cover reveals, behind-the-scenes content, and special giveaways. Free to join."
+        title="Reader's Club | Reese Astor"
+        description="New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free."
         canonical="/reader-club"
-        keywords={["reader club", "Reese Astor exclusive content", "bonus chapters", "romance reader community", "book giveaways", "early access"]}
+        keywords={["reader club", "Reese Astor", "The First Acquisition", "romance reader community"]}
       />
 
       {/* Hero Section */}
@@ -96,7 +96,7 @@ export default function ReaderClub() {
         >
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/30 mb-8">
             <Sparkles className="h-5 w-5 text-[#d4af37]" />
-            <span className="text-[#d4af37] font-semibold">Exclusive Content</span>
+            <span className="text-[#d4af37] font-semibold">Reader's Club</span>
           </div>
           
           <h1 className="font-serif text-6xl md:text-7xl font-bold text-white mb-6">
@@ -104,11 +104,10 @@ export default function ReaderClub() {
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-            Join an exclusive community and unlock bonus chapters, character interviews,
-            and behind-the-scenes content from your favorite Manhattan Money Kings series.
+            New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free.
           </p>
 
-          {!isMember && (
+          {!isMember && !joined && (
             <motion.form
               onSubmit={handleJoin}
               className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
@@ -134,14 +133,24 @@ export default function ReaderClub() {
             </motion.form>
           )}
 
-          {isMember && (
+          {(isMember || joined) && (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#d4af37]/20 border-2 border-[#d4af37]"
+              className="flex flex-col items-center gap-4"
             >
-              <Unlock className="h-6 w-6 text-[#d4af37]" />
-              <span className="text-white font-semibold text-lg">You're a Member!</span>
+              <div className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#d4af37]/20 border-2 border-[#d4af37]">
+                <Unlock className="h-6 w-6 text-[#d4af37]" />
+                <span className="text-white font-semibold text-lg">You're a Member!</span>
+              </div>
+              {joined && (
+                <Link
+                  href="/free-book"
+                  className="text-[#d4af37] font-semibold underline underline-offset-4"
+                >
+                  Get the free book
+                </Link>
+              )}
             </motion.div>
           )}
         </motion.div>
@@ -156,12 +165,12 @@ export default function ReaderClub() {
           className="mb-12 text-center"
         >
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
-            Exclusive Content Library
+            Reader's Club
           </h2>
           <p className="text-gray-400 text-lg">
             {isMember
-              ? "Explore all the exclusive content available to you"
-              : "Join the Reader's Club to unlock all this content"}
+              ? "Posts for Reader's Club members."
+              : "Join to see member posts."}
           </p>
         </motion.div>
 
@@ -257,7 +266,7 @@ export default function ReaderClub() {
           <div className="text-center py-20">
             <BookOpen className="h-16 w-16 text-gray-600 mx-auto mb-4" />
             <p className="text-gray-400 text-lg">
-              New exclusive content coming soon!
+              Nothing is posted here yet.
             </p>
           </div>
         )}
@@ -279,8 +288,7 @@ export default function ReaderClub() {
               Ready to Join?
             </h2>
             <p className="text-gray-300 text-lg mb-8">
-              Get instant access to exclusive bonus chapters, character interviews,
-              and behind-the-scenes content. It's completely free!
+              New-release news from Reese Astor. The First Acquisition is free. Joining is free.
             </p>
             <Button
               onClick={() => {

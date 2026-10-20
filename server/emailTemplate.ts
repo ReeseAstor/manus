@@ -50,7 +50,7 @@ export function generateEmailTemplate(options: EmailTemplateOptions): string {
                 Reese Astor
               </h1>
               <p style="margin: 10px 0 0; color: rgba(229, 229, 229, 0.6); font-size: 14px; letter-spacing: 1px;">
-                USA TODAY BESTSELLING AUTHOR
+                ROMANCE AUTHOR
               </p>
             </td>
           </tr>

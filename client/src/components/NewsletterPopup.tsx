@@ -112,8 +112,7 @@ export function NewsletterPopup({ isOpen, onClose }: NewsletterPopupProps) {
                     <span className="text-[#d4af37] font-semibold">
                       "The First Acquisition"
                     </span>{" "}
-                    absolutely free, plus insider writing tips and early access
-                    to new releases.
+                    absolutely free, plus insider writing tips.
                   </p>
 
                   {/* Form */}

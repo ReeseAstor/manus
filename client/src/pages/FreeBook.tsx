@@ -51,7 +51,7 @@ export default function FreeBook() {
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
-    const text = "Get a FREE steamy billionaire romance by USA Today Bestselling Author Reese Astor!";
+    const text = "Get a free steamy billionaire romance by Reese Astor!";
     
     const shareUrls: Record<string, string> = {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
@@ -85,7 +85,7 @@ export default function FreeBook() {
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       <EnhancedSEOHead
         title="Free Book: The First Acquisition | Reese Astor Romance"
-        description="Download The First Acquisition for free. A steamy Manhattan billionaire romance and Hudson Dynasty prequel novella by USA Today Bestselling author Reese Astor. Join the newsletter and start reading today."
+        description="Download The First Acquisition for free. A steamy Manhattan billionaire romance and Hudson Dynasty prequel novella by Reese Astor. Join the newsletter and start reading today."
         canonical="/free-book"
         ogType="book"
         keywords={["free romance book", "The First Acquisition", "free billionaire romance", "Reese Astor free book", "Hudson Dynasty", "Manhattan Money Kings", "reader magnet"]}

@@ -13,6 +13,12 @@
   ],
   "buildCommand": "vite build && node scripts/seal-admin-chunks.mjs && node scripts/bundle-server.mjs server/_core/vercel-app.ts dist/server-bundle.mjs",
   "outputDirectory": "dist/public",
+  "redirects": [
+    { "source": "/why-buy-direct", "destination": "/books", "permanent": true },
+    { "source": "/why-buy-direct/", "destination": "/books", "permanent": true },
+    { "source": "/permission", "destination": "/books", "permanent": true },
+    { "source": "/permission/", "destination": "/books", "permanent": true }
+  ],
   "functions": {
     "api/index.ts": {
       "runtime": "@vercel/node@5.1.10",

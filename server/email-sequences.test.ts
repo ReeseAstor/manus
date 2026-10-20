@@ -21,7 +21,7 @@ describe("Launch Sequence Email Templates", () => {
     expect(html).toContain("A Hudson Dynasty Novel");
     expect(html).toContain("Get It Now on Kindle");
     expect(html).toContain("https://swiy.co/05");
-    expect(html).toContain("USA Today Bestselling Author");
+    expect(html).toContain("Romance Author");
     expect(html).toContain("{$unsubscribe}");
   });
 

@@ -106,7 +106,7 @@ And as Bella laughed at something on her placemat, Sophia prayed those walls wou
     series: "Manhattan Money Kings",
     seriesOrder: 2,
     coverImage: "/book2-cover.jpg",
-    description: `Lily Chen never wanted to be a thief. But when her father threatens her life unless she steals corporate secrets from billionaire David Kim, she has no choice.
+    description: `Elena Volkov never wanted to be a thief. But when her father threatens her life unless she steals corporate secrets from billionaire David Kim, she has no choice.
 
 Breaking into his Manhattan penthouse should have been simple—until David catches her in the act.
 
@@ -114,52 +114,52 @@ Instead of turning her over to the police, he offers a deal: help him expose her
 
 As they work together to bring down a dangerous man, their forced alliance ignites into something neither expected. Late nights planning their next move turn into stolen kisses. Fake touches for the cameras become all too real.
 
-But with her father's threats escalating and David's empire at risk, Lily must decide: betray the man she's falling for, or risk everything for a chance at redemption and love.`,
+But with her father's threats escalating and David's empire at risk, Elena must decide: betray the man she's falling for, or risk everything for a chance at redemption and love.`,
     sampleChapter: `Chapter One
 
-Lily Chen had broken into exactly seven buildings in her life, and she'd never been caught.
+Elena Volkov had broken into exactly seven buildings in her life, and she'd never been caught.
 
 Tonight would be number eight.
 
 She stood in the service corridor of the Apex Tower, Manhattan's newest luxury high-rise, dressed in the navy uniform of a cleaning service that didn't exist. Her hands were steady as she swiped the cloned keycard—steady because they had to be, because her father had made it clear what would happen if she failed.
 
-The penthouse elevator opened with a soft chime. Lily stepped inside, pressed the button for the 47th floor, and watched the numbers climb.
+The penthouse elevator opened with a soft chime. Elena stepped inside, pressed the button for the 47th floor, and watched the numbers climb.
 
 *In and out in twenty minutes,* she reminded herself. *Just like the others.*
 
 But this wasn't like the others. This was David Kim's penthouse—tech billionaire, venture capitalist, and according to her father, the man who held the key to destroying their family's enemies.
 
-Or so her father claimed. Lily had stopped believing his justifications years ago.
+Or so her father claimed. Elena had stopped believing his justifications years ago.
 
-The elevator doors opened directly into the penthouse. Lily's breath caught despite herself. Floor-to-ceiling windows showcased a glittering view of Manhattan, the city spread out like a jewel box. Modern art hung on white walls. Everything was clean lines and expensive taste.
+The elevator doors opened directly into the penthouse. Elena's breath caught despite herself. Floor-to-ceiling windows showcased a glittering view of Manhattan, the city spread out like a jewel box. Modern art hung on white walls. Everything was clean lines and expensive taste.
 
 And completely silent.
 
-*He's supposed to be in Tokyo,* Lily thought, consulting the schedule her father had provided. *Board meeting. Won't be back until tomorrow.*
+*He's supposed to be in Tokyo,* Elena thought, consulting the schedule her father had provided. *Board meeting. Won't be back until tomorrow.*
 
 She moved quickly through the living room, heading for the study her father had described. The safe would be behind the Rothko print, he'd said. Inside would be a flash drive containing financial records—proof of something, though her father had been vague about what.
 
-Lily found the study exactly where it should be. The Rothko hung on the far wall, a splash of red and orange that probably cost more than her entire apartment building.
+Elena found the study exactly where it should be. The Rothko hung on the far wall, a splash of red and orange that probably cost more than her entire apartment building.
 
 She was reaching for the painting when a voice spoke behind her.
 
 "I have to say, this is a first."
 
-Lily spun around, her heart slamming against her ribs.
+Elena spun around, her heart slamming against her ribs.
 
 David Kim stood in the doorway, wearing a t-shirt and sweatpants, his dark hair slightly mussed. He looked nothing like the sharp-suited businessman from the photos her father had shown her. He looked... human. And annoyingly attractive.
 
-"The board meeting," Lily said stupidly. "You're supposed to be—"
+"The board meeting," Elena said stupidly. "You're supposed to be—"
 
 "In Tokyo?" He leaned against the doorframe, arms crossed. "I was. Caught an earlier flight. Jet lag's a bitch, so I was in the kitchen making tea when I heard the elevator."
 
-Lily's mind raced. She could run—but the elevator required a keycard, and he was blocking the only other exit. She could fight—but he was bigger, and she'd never been good at that anyway.
+Elena's mind raced. She could run—but the elevator required a keycard, and he was blocking the only other exit. She could fight—but he was bigger, and she'd never been good at that anyway.
 
 "I can explain," she started.
 
 "Please do." David's voice was mild, almost curious. "Because from where I'm standing, you broke into my home wearing a fake uniform to steal from my safe. I'm very interested in your explanation."
 
-Lily's mouth went dry. She'd prepared for a lot of scenarios, but getting caught had never been one of them. Her father's threats echoed in her mind: *Fail me, and you'll wish you'd never been born.*
+Elena's mouth went dry. She'd prepared for a lot of scenarios, but getting caught had never been one of them. Her father's threats echoed in her mind: *Fail me, and you'll wish you'd never been born.*
 
 "I..." She swallowed hard. "I need what's in that safe."
 
@@ -169,19 +169,19 @@ Lily's mouth went dry. She'd prepared for a lot of scenarios, but getting caught
 
 David studied her for a long moment. Then, to her shock, he walked past her to the Rothko and moved it aside, revealing the safe. His fingers flew over the keypad.
 
-"What are you doing?" Lily asked.
+"What are you doing?" Elena asked.
 
 "Helping you." The safe clicked open. David reached inside and pulled out a flash drive. "This is what you came for, isn't it?"
 
-Lily stared at him. "Why would you help me?"
+Elena stared at him. "Why would you help me?"
 
 "Because," David said, turning to face her, "I know exactly who sent you. And I've been waiting for him to make a move like this."
 
 Her blood ran cold. "You know my father?"
 
-"Chen Wei." David's voice hardened. "Yes, I know him. And I know what he does to people who disappoint him." His eyes met hers, and she saw something unexpected there—not anger, but understanding. "Including his own daughter."
+"Yuri Volkov." David's voice hardened. "Yes, I know him. And I know what he does to people who disappoint him." His eyes met hers, and she saw something unexpected there—not anger, but understanding. "Including his own daughter."
 
-Lily's carefully constructed walls cracked. "If you know what he is, then you know I don't have a choice."
+Elena's carefully constructed walls cracked. "If you know what he is, then you know I don't have a choice."
 
 "Everyone has a choice." David held up the flash drive. "But some choices are harder than others. So here's mine: I'll give you this drive. You take it to your father, tell him you succeeded. But in return, you help me."
 
@@ -189,7 +189,7 @@ Lily's carefully constructed walls cracked. "If you know what he is, then you kn
 
 "Bring him down." David's smile was sharp. "I've been building a case against your father's organization for two years. You're going to help me finish it."
 
-"He'll kill me," Lily whispered.
+"He'll kill me," Elena whispered.
 
 "Not if I protect you." David stepped closer. "But there's a catch. To make this work, to get close enough to gather the evidence we need, we'll need to make it convincing. We'll need to make everyone believe we're together."
 
@@ -197,7 +197,7 @@ Lily's carefully constructed walls cracked. "If you know what he is, then you kn
 
 "Married." David said it like he was proposing a business merger, not a life-altering deception. "You'll move in here. We'll be seen in public. And while everyone's watching the happy couple, we'll be dismantling your father's empire piece by piece."
 
-Lily's head spun. "That's insane."
+Elena's head spun. "That's insane."
 
 "Probably." David held out the flash drive. "But it's your choice. Take this, go back to your father, and spend the rest of your life as his puppet. Or take a chance on something different."
 
@@ -205,11 +205,11 @@ She looked at the drive, then at David Kim's steady gaze. She thought about her 
 
 Maybe it was time to choose differently.
 
-Lily reached out and took the flash drive. "Okay. I'll do it."
+Elena reached out and took the flash drive. "Okay. I'll do it."
 
 David smiled. "Then welcome home, Mrs. Kim."
 
-And just like that, Lily Chen's life changed forever.`,
+And just like that, Elena Volkov's life changed forever.`,
     rating: 5,
     reviewCount: 892,
     tropes: "Fake Marriage, Suspense, Billionaire Romance, Enemies to Lovers",
@@ -349,7 +349,7 @@ const sampleReviews = [
     bookTitle: "The Billionaire's Fake Wife",
     reviewerName: "Emily R.",
     rating: 5,
-    review: "The fake marriage trope is my favorite, and this book delivers! Lily and David's relationship feels so real, even when they're pretending. The suspense element adds an extra layer that kept me on the edge of my seat.",
+    review: "The fake marriage trope is my favorite, and this book delivers! Elena and David's relationship feels so real, even when they're pretending. The suspense element adds an extra layer that kept me on the edge of my seat.",
     source: "Amazon",
     featured: true,
   },
@@ -357,7 +357,7 @@ const sampleReviews = [
     bookTitle: "The Billionaire's Fake Wife",
     reviewerName: "Sophie L.",
     rating: 5,
-    review: "I stayed up until 3 AM to finish this book. The tension between Lily and David is incredible, and the way their fake marriage becomes real is beautifully done. Plus, the action scenes are genuinely thrilling!",
+    review: "I stayed up until 3 AM to finish this book. The tension between Elena and David is incredible, and the way their fake marriage becomes real is beautifully done. Plus, the action scenes are genuinely thrilling!",
     source: "Goodreads",
     featured: true,
   },

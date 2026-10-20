@@ -39,7 +39,7 @@ export default function WelcomeBack() {
       }} />
       <div style={{ maxWidth: 680, margin: "0 auto", padding: "64px 24px", textAlign: "center" }}>
         <p style={{ margin: "0 0 8px", color: "#d4af37", fontSize: 11, letterSpacing: 3, textTransform: "uppercase", fontFamily: "Arial, sans-serif" }}>
-          USA Today Bestselling Author
+          Romance Author
         </p>
         <h1 style={{ margin: "0 0 8px", color: "#d4af37", fontSize: 32, fontWeight: "bold", letterSpacing: 2, fontFamily: "Georgia, serif" }}>
           REESE ASTOR
@@ -133,8 +133,8 @@ export default function WelcomeBack() {
               </span>
             </Link>
             <p style={{ margin: "24px 0 0", color: "rgba(200,200,200,0.6)", fontSize: 14, fontFamily: "Arial, sans-serif" }}>
-              Or browse the books on Amazon:{" "}
-              <a href="https://swiy.co/05" style={{ color: "#d4af37" }}>The First Acquisition</a>
+              Or get the free book:{" "}
+              <a href="https://dl.bookfunnel.com/kw1yge3479" style={{ color: "#d4af37" }}>The First Acquisition</a>
             </p>
           </>
         )}
