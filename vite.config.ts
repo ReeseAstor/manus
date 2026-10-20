@@ -27,26 +27,24 @@ export default defineConfig({
     chunkSizeWarningLimit: 1200,
     rollupOptions: {
       output: {
-        // Writing Studio is a lazy admin route. Put only that chunk under
-        // assets/admin so the seal step can pull it out of the public build.
-        // This does not change the chunk graph (no manualChunks).
+        // Admin-only pages (and Writing Studio's workflow data) go under
+        // assets/admin. The seal step removes that directory from the public
+        // build; the server then serves those files only to an admin session.
+        // This renames chunks. It does not use manualChunks, so the chunk
+        // graph stays the one Rollup already produced.
         chunkFileNames(chunkInfo) {
           const normalize = (id: string) => id.replace(/\\/g, "/");
+          const adminPage =
+            /\/pages\/(?:Admin(?:[A-Z][A-Za-z0-9]*)?|WritingStudio|ExclusiveContentManager|BlogEditor|NewsletterManager|NewsletterEditor)\.tsx$/;
           const facade = normalize(chunkInfo.facadeModuleId ?? "");
-          if (facade.endsWith("/pages/WritingStudio.tsx")) {
+          if (adminPage.test(facade)) {
             return "assets/admin/[name]-[hash].js";
           }
           const ids = (chunkInfo.moduleIds ?? []).map(normalize);
-          const hasStudio = ids.some(
-            (id) => id.includes("/pages/WritingStudio") || id.endsWith("/data/workflows.ts"),
-          );
-          const hasOtherAppCode = ids.some((id) => {
-            if (!id.includes("/client/src/")) return false;
-            if (id.includes("/pages/WritingStudio")) return false;
-            if (id.endsWith("/data/workflows.ts")) return false;
-            return true;
-          });
-          if (hasStudio && !hasOtherAppCode) {
+          const appIds = ids.filter((id) => id.includes("/client/src/"));
+          const privateModule =
+            /\/pages\/(?:Admin(?:[A-Z][A-Za-z0-9]*)?|WritingStudio|ExclusiveContentManager|BlogEditor|NewsletterManager|NewsletterEditor)\.tsx$|\/data\/workflows\.ts$/;
+          if (appIds.length > 0 && appIds.every((id) => privateModule.test(id))) {
             return "assets/admin/[name]-[hash].js";
           }
           return "assets/[name]-[hash].js";

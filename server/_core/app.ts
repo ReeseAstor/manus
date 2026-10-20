@@ -166,8 +166,8 @@ Sitemap: ${baseUrl}/sitemap.xml
 `);
   });
 
-  // Writing Studio ships outside dist/public. Admins load it from this route;
-  // everyone else gets the same 404 as a missing static file.
+  // Admin page chunks ship outside dist/public. Signed-in admins load them
+  // from this route; everyone else gets the same 404 as a missing static file.
   app.get("/assets/admin/:file", async (req, res) => {
     const file = req.params.file;
     res.setHeader("Cache-Control", "private, no-store");

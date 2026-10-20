@@ -1,6 +1,6 @@
 /**
- * Move the Writing Studio chunk out of the public Vite output and into a
- * server module. The public site must not ship that admin tool's copy.
+ * Move admin-only chunks out of the public Vite output and into a server
+ * module. Readers must not be able to download those files from the CDN.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -22,9 +22,39 @@ if (fs.existsSync(adminDir)) {
   fs.rmSync(adminDir, { recursive: true, force: true });
 }
 
-if (Object.keys(chunks).length === 0) {
-  console.error("[seal-admin-chunks] No Writing Studio chunk was emitted under dist/public/assets/admin.");
-  console.error("[seal-admin-chunks] Refusing to leave that admin tool in the public build.");
+const requiredPrefixes = [
+  "WritingStudio-",
+  "Admin-",
+  "AdminDashboard-",
+  "AdminAIStudio-",
+  "AdminAIUsage-",
+  "AdminAudioGenerator-",
+  "AdminCommandCenter-",
+  "AdminQA-",
+  "AdminLinks-",
+  "AdminBooks-",
+  "AdminReports-",
+  "AdminStripeAnalytics-",
+  "AdminEmailTemplates-",
+  "AdminAffiliateAnalytics-",
+  "AdminPartnerApplications-",
+  "AdminSocialMediaKit-",
+  "AdminSwitchy-",
+  "AdminWebhooks-",
+  "AdminTwilio-",
+  "AdminSmsAnalytics-",
+  "BlogEditor-",
+  "NewsletterManager-",
+  "NewsletterEditor-",
+  "ExclusiveContentManager-",
+];
+
+const names = Object.keys(chunks);
+const missing = requiredPrefixes.filter((prefix) => !names.some((name) => name.startsWith(prefix)));
+if (names.length === 0 || missing.length > 0) {
+  console.error("[seal-admin-chunks] Admin chunks were not all emitted under dist/public/assets/admin.");
+  if (missing.length > 0) console.error(`[seal-admin-chunks] Missing: ${missing.join(", ")}`);
+  console.error("[seal-admin-chunks] Refusing to leave admin tools in the public build.");
   process.exit(1);
 }
 
@@ -43,14 +73,21 @@ fs.writeFileSync(
 console.log(`[seal-admin-chunks] Sealed ${Object.keys(chunks).length} file(s): ${Object.keys(chunks).join(", ")}`);
 
 const forbidden = [
+  "AI Studio",
+  "AI Chat",
+  "AI Workflow",
+  "ElevenLabs",
+  "AI narration",
+  "AI content",
+  "ChatGPT",
+  "Claude",
+  "Yung-Lung",
   "Hudson Dynasty AI Workflow System",
   "Anti-AI Pass",
   "Powered by AI",
-  "Yung-Lung",
   "AI Trend Newsletter",
   "ai-assisted-romance-writing-workflow",
   "cutting-edge AI",
-  "ElevenLabs AI",
 ];
 
 function walk(dir) {
