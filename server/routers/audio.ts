@@ -1,5 +1,7 @@
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
+import { checkRateLimit, trackAiUsage } from "../ai-usage";
 import { getDb } from "../db";
 import { 
   audioUsage, 
@@ -57,11 +59,26 @@ export const audioRouter = router({
   /**
    * Generate a voice preview sample
    */
-  previewVoice: publicProcedure
+  previewVoice: protectedProcedure
     .input(z.object({
       voiceId: z.string(),
     }))
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
+      const clientKey = `user:${ctx.user.id}`;
+      if (!checkRateLimit(clientKey, "voice-preview")) {
+        trackAiUsage({
+          feature: "voice-preview",
+          model: "elevenlabs",
+          inputChars: input.voiceId.length,
+          outputChars: 0,
+          status: "rate-limited",
+          key: clientKey,
+        });
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Too many voice previews. Please wait and try again.",
+        });
+      }
       const audioUrl = await generateVoicePreview(input.voiceId);
       return { audioUrl };
     }),

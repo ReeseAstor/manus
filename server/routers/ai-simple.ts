@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { publicProcedure, router } from '../_core/trpc';
+import { adminProcedure, publicProcedure, router } from '../_core/trpc';
 import { generateText } from '../_core/gemini';
 import { generateImage } from '../_core/imageGeneration';
 import { checkRateLimit, getClientKey, trackAiUsage } from '../ai-usage';
@@ -63,7 +63,7 @@ export const aiRouter = router({
   /**
    * Chat with AI about books and series
    */
-  chat: publicProcedure
+  chat: adminProcedure
     .input(
       z.object({
         message: z.string().min(1).max(1000),
@@ -121,8 +121,23 @@ export const aiRouter = router({
         answers: z.array(z.string()),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { answers } = input;
+      const clientKey = getClientKey(ctx.req);
+      if (!checkRateLimit(clientKey, "quiz")) {
+        trackAiUsage({
+          feature: "quiz",
+          model: "gemini-1.5-flash",
+          inputChars: JSON.stringify(answers).length,
+          outputChars: 0,
+          status: "rate-limited",
+          key: clientKey,
+        });
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Too many quiz submissions. Please wait and try again.",
+        });
+      }
 
       const quizPrompt = `Based on these quiz answers about romance preferences and personality traits, determine which Manhattan Money King the person would match with best and provide a detailed personality analysis.
 
@@ -156,7 +171,7 @@ Respond in JSON format:
   /**
    * Generate blog post with AI assistance
    */
-  generateBlogPost: publicProcedure
+  generateBlogPost: adminProcedure
     .input(
       z.object({
         topic: z.string().min(5).max(200),
@@ -164,8 +179,23 @@ Respond in JSON format:
         length: z.enum(['short', 'medium', 'long']),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { topic, tone, length } = input;
+      const clientKey = getClientKey(ctx.req);
+      if (!checkRateLimit(clientKey, "chat")) {
+        trackAiUsage({
+          feature: "chat",
+          model: "gemini-1.5-flash",
+          inputChars: topic.length,
+          outputChars: 0,
+          status: "rate-limited",
+          key: clientKey,
+        });
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Too many writing requests. Please wait and try again.",
+        });
+      }
 
       const lengthGuide = {
         short: '300-500 words',
@@ -196,7 +226,7 @@ Format the response as markdown.`;
   /**
    * Generate story ideas for coaching clients
    */
-  generateStoryIdea: publicProcedure
+  generateStoryIdea: adminProcedure
     .input(
       z.object({
         genre: z.string(),
@@ -204,8 +234,23 @@ Format the response as markdown.`;
         setting: z.string().optional(),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { genre, tropes, setting } = input;
+      const clientKey = getClientKey(ctx.req);
+      if (!checkRateLimit(clientKey, "chat")) {
+        trackAiUsage({
+          feature: "chat",
+          model: "gemini-1.5-flash",
+          inputChars: genre.length,
+          outputChars: 0,
+          status: "rate-limited",
+          key: clientKey,
+        });
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Too many writing requests. Please wait and try again.",
+        });
+      }
 
       const prompt = `Generate a unique and compelling story idea for a ${genre} romance novel with these tropes: ${tropes.join(', ')}${setting ? ` set in ${setting}` : ''}.
 
@@ -232,7 +277,7 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
   /**
    * Generate book cover with AI
    */
-  generateBookCover: publicProcedure
+  generateBookCover: adminProcedure
     .input(
       z.object({
         title: z.string(),
@@ -240,8 +285,23 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
         style: z.enum(['romantic', 'dark', 'luxurious', 'playful']),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { title, subtitle, style } = input;
+      const clientKey = getClientKey(ctx.req);
+      if (!checkRateLimit(clientKey, "image")) {
+        trackAiUsage({
+          feature: "image",
+          model: "image",
+          inputChars: title.length,
+          outputChars: 0,
+          status: "rate-limited",
+          key: clientKey,
+        });
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Too many image requests. Please wait and try again.",
+        });
+      }
 
       const stylePrompts = {
         romantic: 'soft pink and gold tones, elegant script font, romantic couple silhouette, dreamy atmosphere',
@@ -264,14 +324,29 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
   /**
    * Generate character portrait
    */
-  generateCharacterPortrait: publicProcedure
+  generateCharacterPortrait: adminProcedure
     .input(
       z.object({
         description: z.string().min(20).max(500),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { description } = input;
+      const clientKey = getClientKey(ctx.req);
+      if (!checkRateLimit(clientKey, "image")) {
+        trackAiUsage({
+          feature: "image",
+          model: "image",
+          inputChars: description.length,
+          outputChars: 0,
+          status: "rate-limited",
+          key: clientKey,
+        });
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Too many image requests. Please wait and try again.",
+        });
+      }
 
       const prompt = `Professional character portrait for a romance novel: ${description}. Photorealistic style, attractive, romance book cover quality, professional lighting, detailed facial features, high quality portrait.`;
 
@@ -287,7 +362,7 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
   /**
    * Generate social media graphic
    */
-  generateSocialGraphic: publicProcedure
+  generateSocialGraphic: adminProcedure
     .input(
       z.object({
         text: z.string(),
@@ -295,8 +370,23 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
         theme: z.enum(['book_promo', 'quote', 'announcement']),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { text, platform, theme } = input;
+      const clientKey = getClientKey(ctx.req);
+      if (!checkRateLimit(clientKey, "image")) {
+        trackAiUsage({
+          feature: "image",
+          model: "image",
+          inputChars: text.length,
+          outputChars: 0,
+          status: "rate-limited",
+          key: clientKey,
+        });
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Too many image requests. Please wait and try again.",
+        });
+      }
 
       const dimensions = {
         instagram: '1080x1080 square format',

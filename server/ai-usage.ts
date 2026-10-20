@@ -11,6 +11,8 @@ export type AiFeature =
   | "image"
   | "video"
   | "prompt-enhance"
+  | "quiz"
+  | "voice-preview"
   | "other";
 
 export type AiStatus = "ok" | "rate-limited" | "error";
@@ -51,6 +53,8 @@ const DEFAULT_LIMITS: Record<AiFeature, { limit: number; windowMs: number }> = {
   image: { limit: 8, windowMs: 60 * 60 * 1000 },
   video: { limit: 4, windowMs: 60 * 60 * 1000 },
   "prompt-enhance": { limit: 20, windowMs: 5 * 60 * 1000 },
+  quiz: { limit: 6, windowMs: 60 * 60 * 1000 },
+  "voice-preview": { limit: 10, windowMs: 60 * 60 * 1000 },
   other: { limit: 30, windowMs: 5 * 60 * 1000 },
 };
 
@@ -112,13 +116,15 @@ export function estimateCostUsd(model: string, inputChars: number, outputChars: 
 export function checkRateLimit(key: string, feature: AiFeature): boolean {
   const { limit, windowMs } = DEFAULT_LIMITS[feature];
   const now = Date.now();
-  const bucket = (rateBuckets.get(key) ?? []).filter((t) => now - t < windowMs);
+  // Separate windows per feature so a public quiz cannot consume the chat budget, or the reverse.
+  const bucketId = `${feature}:${key}`;
+  const bucket = (rateBuckets.get(bucketId) ?? []).filter((t) => now - t < windowMs);
   if (bucket.length >= limit) {
-    rateBuckets.set(key, bucket);
+    rateBuckets.set(bucketId, bucket);
     return false;
   }
   bucket.push(now);
-  rateBuckets.set(key, bucket);
+  rateBuckets.set(bucketId, bucket);
   return true;
 }
 
