@@ -11,7 +11,16 @@ vi.mock("./_core/imageGeneration", () => ({
 }));
 
 vi.mock("./_core/audioService", () => ({
-  ALL_VOICES: [],
+  ALL_VOICES: [
+    { id: "rachel" },
+    { id: "drew" },
+    { id: "bella" },
+    { id: "antoni" },
+    { id: "charlotte" },
+    { id: "clyde" },
+    { id: "elli" },
+    { id: "josh" },
+  ],
   STANDARD_VOICES: [],
   PREMIUM_VOICES: [],
   TIER_LIMITS: {},
@@ -83,6 +92,34 @@ describe("anonymous LLM and voice spend", () => {
     expect(generateText).not.toHaveBeenCalled();
   });
 
+  it("rejects a signed-in non-admin for every author procedure", async () => {
+    const member = appRouter.createCaller(ctxFor(user("user", 3), "203.0.113.4"));
+
+    await expect(
+      member.ai.generateBlogPost({ topic: "a rainy reunion", tone: "casual", length: "short" }),
+    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    await expect(
+      member.ai.generateStoryIdea({ genre: "contemporary", tropes: ["rivals"] }),
+    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    await expect(
+      member.ai.generateBookCover({ title: "Midnight", style: "dark" }),
+    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    await expect(
+      member.ai.generateCharacterPortrait({
+        description: "A reserved founder in a charcoal coat",
+      }),
+    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    await expect(
+      member.ai.generateSocialGraphic({
+        text: "Out now",
+        platform: "instagram",
+        theme: "book_promo",
+      }),
+    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    expect(generateText).not.toHaveBeenCalled();
+    expect(generateImage).not.toHaveBeenCalled();
+  });
+
   it("rejects anonymous author-generation calls", async () => {
     const caller = appRouter.createCaller(ctxFor(null, "203.0.113.3"));
 
@@ -147,6 +184,9 @@ describe("anonymous LLM and voice spend", () => {
     expect(generateVoicePreview).not.toHaveBeenCalled();
 
     const member = appRouter.createCaller(ctxFor(user("user", 40), "203.0.113.40"));
+    await expect(
+      member.audio.previewVoice({ voiceId: "not-a-real-voice" as "rachel" }),
+    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
     const preview = await member.audio.previewVoice({ voiceId: "rachel" });
     expect(preview.audioUrl).toBe("https://example.com/preview.mp3");
 

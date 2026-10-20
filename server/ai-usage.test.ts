@@ -5,6 +5,7 @@ import {
   estimateTokens,
   getAiUsageStats,
   getClientKey,
+  GLOBAL_DAILY_CAPS,
   trackAiUsage,
 } from "./ai-usage";
 
@@ -31,20 +32,20 @@ describe("AI Usage Token & Cost Estimation", () => {
 });
 
 describe("AI Usage Rate Limiting", () => {
-  it("should allow requests up to the limit and block beyond it", () => {
+  it("should allow requests up to the limit and block beyond it", async () => {
     const key = "test-ip-1";
     for (let i = 0; i < 15; i++) {
-      expect(checkRateLimit(key, "chat")).toBe(true);
+      expect(await checkRateLimit(key, "chat")).toBe(true);
     }
-    expect(checkRateLimit(key, "chat")).toBe(false);
+    expect(await checkRateLimit(key, "chat")).toBe(false);
   });
 
-  it("should track rate-limited status in stats when blocked", () => {
+  it("should track rate-limited status in stats when blocked", async () => {
     const key = "test-ip-2";
     for (let i = 0; i < 15; i++) {
-      checkRateLimit(key, "chat");
+      await checkRateLimit(key, "chat");
     }
-    checkRateLimit(key, "chat");
+    await checkRateLimit(key, "chat");
     trackAiUsage({
       feature: "chat",
       model: "gemini-1.5-flash",
@@ -58,12 +59,50 @@ describe("AI Usage Rate Limiting", () => {
     expect(stats.recent[0].status).toBe("rate-limited");
   });
 
-  it("should have separate buckets per key", () => {
+  it("should have separate buckets per key", async () => {
     for (let i = 0; i < 15; i++) {
-      checkRateLimit("busy-ip", "chat");
+      await checkRateLimit("busy-ip", "chat");
     }
-    expect(checkRateLimit("busy-ip", "chat")).toBe(false);
-    expect(checkRateLimit("fresh-ip", "chat")).toBe(true);
+    expect(await checkRateLimit("busy-ip", "chat")).toBe(false);
+    expect(await checkRateLimit("fresh-ip", "chat")).toBe(true);
+  });
+
+  it("reads the Vercel client address before a forwarded-for header", () => {
+    expect(
+      getClientKey({
+        headers: {
+          "x-vercel-forwarded-for": "203.0.113.9, 10.0.0.1",
+          "x-real-ip": "198.51.100.8",
+          "x-forwarded-for": "198.51.100.7",
+        },
+      }),
+    ).toBe("203.0.113.9");
+  });
+
+  it("blocks a public feature once the shared daily cap is reached", async () => {
+    const previous = GLOBAL_DAILY_CAPS.quiz;
+    GLOBAL_DAILY_CAPS.quiz = 2;
+    try {
+      expect(await checkRateLimit("daily-a", "quiz")).toBe(true);
+      expect(await checkRateLimit("daily-b", "quiz")).toBe(true);
+      expect(await checkRateLimit("daily-c", "quiz")).toBe(false);
+    } finally {
+      GLOBAL_DAILY_CAPS.quiz = previous;
+    }
+  });
+
+  it("denies every request in production when the database is unset", async () => {
+    const previousEnv = process.env.NODE_ENV;
+    const previousDb = process.env.DATABASE_URL;
+    process.env.NODE_ENV = "production";
+    delete process.env.DATABASE_URL;
+    try {
+      expect(await checkRateLimit("prod-no-db", "chat")).toBe(false);
+    } finally {
+      process.env.NODE_ENV = previousEnv;
+      if (previousDb === undefined) delete process.env.DATABASE_URL;
+      else process.env.DATABASE_URL = previousDb;
+    }
   });
 });
 

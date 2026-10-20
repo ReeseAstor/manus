@@ -73,7 +73,7 @@ export const aiRouter = router({
       const { message } = input;
       const clientKey = getClientKey(ctx.req);
 
-      if (!checkRateLimit(clientKey, "chat")) {
+      if (!(await checkRateLimit(clientKey, "chat"))) {
         trackAiUsage({
           feature: "chat",
           model: "gemini-1.5-flash",
@@ -124,7 +124,7 @@ export const aiRouter = router({
     .mutation(async ({ ctx, input }) => {
       const { answers } = input;
       const clientKey = getClientKey(ctx.req);
-      if (!checkRateLimit(clientKey, "quiz")) {
+      if (!(await checkRateLimit(clientKey, "quiz"))) {
         trackAiUsage({
           feature: "quiz",
           model: "gemini-1.5-flash",
@@ -182,7 +182,7 @@ Respond in JSON format:
     .mutation(async ({ ctx, input }) => {
       const { topic, tone, length } = input;
       const clientKey = getClientKey(ctx.req);
-      if (!checkRateLimit(clientKey, "chat")) {
+      if (!(await checkRateLimit(clientKey, "chat"))) {
         trackAiUsage({
           feature: "chat",
           model: "gemini-1.5-flash",
@@ -237,7 +237,7 @@ Format the response as markdown.`;
     .mutation(async ({ ctx, input }) => {
       const { genre, tropes, setting } = input;
       const clientKey = getClientKey(ctx.req);
-      if (!checkRateLimit(clientKey, "chat")) {
+      if (!(await checkRateLimit(clientKey, "chat"))) {
         trackAiUsage({
           feature: "chat",
           model: "gemini-1.5-flash",
@@ -288,7 +288,7 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
     .mutation(async ({ ctx, input }) => {
       const { title, subtitle, style } = input;
       const clientKey = getClientKey(ctx.req);
-      if (!checkRateLimit(clientKey, "image")) {
+      if (!(await checkRateLimit(clientKey, "image"))) {
         trackAiUsage({
           feature: "image",
           model: "image",
@@ -333,7 +333,7 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
     .mutation(async ({ ctx, input }) => {
       const { description } = input;
       const clientKey = getClientKey(ctx.req);
-      if (!checkRateLimit(clientKey, "image")) {
+      if (!(await checkRateLimit(clientKey, "image"))) {
         trackAiUsage({
           feature: "image",
           model: "image",
@@ -373,7 +373,7 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
     .mutation(async ({ ctx, input }) => {
       const { text, platform, theme } = input;
       const clientKey = getClientKey(ctx.req);
-      if (!checkRateLimit(clientKey, "image")) {
+      if (!(await checkRateLimit(clientKey, "image"))) {
         trackAiUsage({
           feature: "image",
           model: "image",

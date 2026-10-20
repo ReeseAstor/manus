@@ -485,6 +485,16 @@ export const steamyStories = pgTable("steamy_stories", {
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
+/**
+ * Shared rate-limit windows. Created at runtime if missing (`server/ai-usage.ts`).
+ * One row is one consumed slot. bucketId is `${feature}:${caller}` or `global:${feature}`.
+ */
+export const aiRateLimits = pgTable("ai_rate_limits", {
+  id: serial("id").primaryKey(),
+  bucketId: varchar("bucketId", { length: 255 }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
 export type SteamyStory = typeof steamyStories.$inferSelect;
 export type InsertSteamyStory = typeof steamyStories.$inferInsert;
 

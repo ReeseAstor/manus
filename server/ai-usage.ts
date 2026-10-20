@@ -1,9 +1,19 @@
 /**
- * AI Usage Tracking — rate limiting, cost estimation, and interaction logging.
+ * AI usage tracking and rate limits.
  *
- * In-memory (per-process) implementation. Safe to deploy without DB migrations;
- * on multi-instance deployments each instance enforces its own limits.
+ * Production stores the sliding windows in Postgres (`ai_rate_limits`) so
+ * serverless instances share one counter. The table is created on first use.
+ * If production has no DATABASE_URL, or the write fails, the request is denied.
+ *
+ * Tests and local dev (NODE_ENV other than production) keep an in-memory
+ * window so they do not need a database.
+ *
+ * `pnpm start` outside Vercel must sit behind a proxy that overwrites
+ * X-Forwarded-For. On Vercel, getClientKey prefers x-vercel-forwarded-for,
+ * which the platform sets and clients cannot spoof.
  */
+import { sql } from "drizzle-orm";
+import { getDb } from "./db";
 
 export type AiFeature =
   | "chat"
@@ -13,6 +23,7 @@ export type AiFeature =
   | "prompt-enhance"
   | "quiz"
   | "voice-preview"
+  | "signup"
   | "other";
 
 export type AiStatus = "ok" | "rate-limited" | "error";
@@ -55,8 +66,17 @@ const DEFAULT_LIMITS: Record<AiFeature, { limit: number; windowMs: number }> = {
   "prompt-enhance": { limit: 20, windowMs: 5 * 60 * 1000 },
   quiz: { limit: 6, windowMs: 60 * 60 * 1000 },
   "voice-preview": { limit: 10, windowMs: 60 * 60 * 1000 },
+  signup: { limit: 5, windowMs: 60 * 60 * 1000 },
   other: { limit: 30, windowMs: 5 * 60 * 1000 },
 };
+
+/** Shared daily ceilings for public spend, across every caller. */
+export const GLOBAL_DAILY_CAPS: Partial<Record<AiFeature, number>> = {
+  quiz: 300,
+  "voice-preview": 200,
+};
+
+const DAY_MS = 24 * 60 * 60 * 1000;
 
 /** Sliding-window buckets: key -> recent timestamps */
 const rateBuckets = new Map<string, number[]>();
@@ -81,16 +101,22 @@ function todayKey(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
+function headerValue(headers: Record<string, unknown>, name: string): string | undefined {
+  const value = headers[name];
+  if (typeof value === "string" && value.length > 0) return value.split(",")[0].trim();
+  if (Array.isArray(value) && typeof value[0] === "string" && value[0].length > 0) {
+    return value[0].split(",")[0].trim();
+  }
+  return undefined;
+}
+
 export function getClientKey(req: { headers: Record<string, unknown> }): string {
-  const forwarded = req.headers["x-forwarded-for"];
-  if (typeof forwarded === "string" && forwarded.length > 0) {
-    return forwarded.split(",")[0].trim();
-  }
-  const ip = req.headers["x-real-ip"];
-  if (typeof ip === "string" && ip.length > 0) {
-    return ip;
-  }
-  return "unknown";
+  return (
+    headerValue(req.headers, "x-vercel-forwarded-for") ??
+    headerValue(req.headers, "x-real-ip") ??
+    headerValue(req.headers, "x-forwarded-for") ??
+    "unknown"
+  );
 }
 
 /** Heuristic token estimate: ~4 chars per token (English text). */
@@ -109,15 +135,23 @@ export function estimateCostUsd(model: string, inputChars: number, outputChars: 
   );
 }
 
-/**
- * Check whether a request is within the rate limit for the feature.
- * Returns true when allowed (and consumes one slot), false when blocked.
- */
-export function checkRateLimit(key: string, feature: AiFeature): boolean {
-  const { limit, windowMs } = DEFAULT_LIMITS[feature];
+function memoryAllow(
+  bucketId: string,
+  windowMs: number,
+  limit: number,
+  globalId?: string,
+  globalCap?: number,
+): boolean {
   const now = Date.now();
-  // Separate windows per feature so a public quiz cannot consume the chat budget, or the reverse.
-  const bucketId = `${feature}:${key}`;
+  if (globalId && globalCap) {
+    const globalBucket = (rateBuckets.get(globalId) ?? []).filter((t) => now - t < DAY_MS);
+    if (globalBucket.length >= globalCap) {
+      rateBuckets.set(globalId, globalBucket);
+      return false;
+    }
+    globalBucket.push(now);
+    rateBuckets.set(globalId, globalBucket);
+  }
   const bucket = (rateBuckets.get(bucketId) ?? []).filter((t) => now - t < windowMs);
   if (bucket.length >= limit) {
     rateBuckets.set(bucketId, bucket);
@@ -126,6 +160,97 @@ export function checkRateLimit(key: string, feature: AiFeature): boolean {
   bucket.push(now);
   rateBuckets.set(bucketId, bucket);
   return true;
+}
+
+let rateTableReady: Promise<void> | null = null;
+
+async function ensureRateTable(): Promise<void> {
+  if (!rateTableReady) {
+    rateTableReady = (async () => {
+      const db = await getDb();
+      if (!db) throw new Error("Database not available");
+      await db.execute(sql`
+        CREATE TABLE IF NOT EXISTS ai_rate_limits (
+          id SERIAL PRIMARY KEY,
+          "bucketId" VARCHAR(255) NOT NULL,
+          "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
+        )
+      `);
+      await db.execute(sql`
+        CREATE INDEX IF NOT EXISTS ai_rate_limits_bucket_created_idx
+        ON ai_rate_limits ("bucketId", "createdAt")
+      `);
+    })().catch((error) => {
+      rateTableReady = null;
+      throw error;
+    });
+  }
+  return rateTableReady;
+}
+
+async function postgresAllow(
+  bucketId: string,
+  windowMs: number,
+  limit: number,
+  globalId?: string,
+  globalCap?: number,
+): Promise<boolean> {
+  await ensureRateTable();
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const countSince = async (id: string, since: Date) => {
+    const result = await db.execute(sql`
+      SELECT COUNT(*)::int AS n
+      FROM ai_rate_limits
+      WHERE "bucketId" = ${id} AND "createdAt" >= ${since}
+    `);
+    const row = (result as unknown as { rows?: Array<{ n: number }> }).rows?.[0];
+    return Number(row?.n ?? 0);
+  };
+
+  if (globalId && globalCap) {
+    const globalCount = await countSince(globalId, new Date(Date.now() - DAY_MS));
+    if (globalCount >= globalCap) return false;
+  }
+  const callerCount = await countSince(bucketId, new Date(Date.now() - windowMs));
+  if (callerCount >= limit) return false;
+
+  await db.execute(sql`INSERT INTO ai_rate_limits ("bucketId") VALUES (${bucketId})`);
+  if (globalId && globalCap) {
+    await db.execute(sql`INSERT INTO ai_rate_limits ("bucketId") VALUES (${globalId})`);
+  }
+  await db.execute(sql`
+    DELETE FROM ai_rate_limits WHERE "createdAt" < NOW() - INTERVAL '2 days'
+  `);
+  return true;
+}
+
+/**
+ * Check whether a request is within the rate limit for the feature.
+ * Returns true when allowed (and consumes one slot), false when blocked.
+ * Buckets are `${feature}:${key}`, so features do not share a window.
+ */
+export async function checkRateLimit(key: string, feature: AiFeature): Promise<boolean> {
+  const { limit, windowMs } = DEFAULT_LIMITS[feature];
+  const bucketId = `${feature}:${key}`;
+  const globalCap = GLOBAL_DAILY_CAPS[feature];
+  const globalId = globalCap ? `global:${feature}` : undefined;
+  const production = process.env.NODE_ENV === "production";
+
+  if (production && process.env.DATABASE_URL) {
+    try {
+      return await postgresAllow(bucketId, windowMs, limit, globalId, globalCap);
+    } catch (error) {
+      console.error("[RateLimit] Shared store failed; denying the request.", error);
+      return false;
+    }
+  }
+  if (production) {
+    console.error("[RateLimit] DATABASE_URL is unset; denying the request.");
+    return false;
+  }
+  return memoryAllow(bucketId, windowMs, limit, globalId, globalCap);
 }
 
 /** Record a completed (or failed) AI interaction. Never throws. */

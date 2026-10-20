@@ -61,11 +61,11 @@ export const audioRouter = router({
    */
   previewVoice: protectedProcedure
     .input(z.object({
-      voiceId: z.string(),
+      voiceId: z.enum(ALL_VOICES.map((voice) => voice.id) as [string, ...string[]]),
     }))
     .mutation(async ({ ctx, input }) => {
       const clientKey = `user:${ctx.user.id}`;
-      if (!checkRateLimit(clientKey, "voice-preview")) {
+      if (!(await checkRateLimit(clientKey, "voice-preview"))) {
         trackAiUsage({
           feature: "voice-preview",
           model: "elevenlabs",
