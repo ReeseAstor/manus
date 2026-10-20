@@ -62,7 +62,7 @@ export default function VipWelcome() {
             Welcome to the VIP Spicy Stories Club!
           </h1>
           <p className="text-xl text-pink-100 max-w-2xl mx-auto">
-            Your VIP membership is now active. Get ready to experience exclusive steamy stories with professional audio narration.
+            Your VIP membership is active. Your first steamy story is below, with audio.
           </p>
         </div>
       </div>
@@ -91,10 +91,10 @@ export default function VipWelcome() {
             <div className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
               <Headphones className="w-10 h-10 text-purple-600 mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Professional Audio
+                Audio Included
               </h3>
               <p className="text-gray-700">
-                Every story includes professional voice narration
+                Every story has an audio version you can play here
               </p>
             </div>
 
@@ -171,7 +171,7 @@ export default function VipWelcome() {
                   Listen Now
                 </h4>
                 <p className="text-gray-600 text-center mb-6">
-                  Professional narration
+                  Press play to listen.
                 </p>
 
                 {firstStory.audioUrl && (

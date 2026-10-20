@@ -151,14 +151,14 @@ export default function VipClub() {
             </h1>
             
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Unlock exclusive steamy audio stories featuring your favorite Manhattan Money Kings characters. 
-              Listen to professionally narrated scenes that go beyond the books.
+              Steamy bonus stories with your favorite Manhattan Money Kings couples, the scenes that didn't fit in the books.
+              Read them or press play. Steamy, 18+.
             </p>
             
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               <div className="flex items-center gap-2 text-gray-300">
                 <Headphones className="w-5 h-5 text-pink-400" />
-                <span>Professional Narration</span>
+                <span>Audio Included</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <Heart className="w-5 h-5 text-pink-400" />
@@ -295,8 +295,7 @@ export default function VipClub() {
               Featured Steamy Stories
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Get a taste of what awaits you in our exclusive library. These professionally narrated stories 
-              feature your favorite characters in scenes that go beyond the books.
+              Here's a taste of the library: bonus scenes with your favorite couples, each one with an audio version.
             </p>
           </div>
 
@@ -398,10 +397,9 @@ export default function VipClub() {
                 <div className="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center mb-4">
                   <Headphones className="w-6 h-6 text-pink-400" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Professional Audio Narration</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">Every Story Comes With Audio</h3>
                 <p className="text-gray-400">
-                  Every story is brought to life with high-quality voice narration.
-                  Listen anywhere, anytime.
+                  Every story has an audio version. Put it on for the train, or for later with the lights off.
                 </p>
               </div>
 
@@ -503,7 +501,7 @@ export default function VipClub() {
                   "Midnight Confessions"
                 </CardTitle>
                 <CardDescription className="text-gray-400">
-                  Sarah & Michael • Narrated by Bella
+                  Sarah & Michael • Audio included
                 </CardDescription>
               </CardHeader>
               <CardContent>

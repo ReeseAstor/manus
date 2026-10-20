@@ -14,7 +14,7 @@ const POSTS_PER_PAGE = 9;
 
 export default function Blog() {
   useEffect(() => {
-    document.title = "Romance Writing Blog | Tips & Insights by Reese Astor";
+    document.title = "Reese Astor Blog | Romance Reads";
   }, []);
 
   const [email, setEmail] = useState("");
@@ -128,11 +128,11 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       <EnhancedSEOHead
-        title="Romance Writing Blog | Tips & Insights by Reese Astor"
-        description="Writing tips, behind-the-scenes insights, and romance industry advice from USA Today Bestselling author Reese Astor. Learn the craft of storytelling."
+        title="Reese Astor Blog | Romance Reads"
+        description="Notes from Reese Astor on the Manhattan Money Kings series, new releases, and what to read next."
         canonical="/blog"
         ogType="website"
-        keywords={["romance writing tips", "author blog", "writing advice", "Reese Astor blog", "romance author insights", "storytelling craft"]}
+        keywords={["Reese Astor blog", "Manhattan Money Kings", "romance books", "what to read next", "steamy romance"]}
       />
 
       {/* Hero Section */}
@@ -167,11 +167,11 @@ export default function Blog() {
             </div>
 
             <h1 className="font-serif text-5xl md:text-7xl font-bold text-white leading-tight">
-              Writing & Publishing Blog
+              The Reese Astor Blog
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
-              Tips, strategies, and insights on romance writing, self-publishing, and building a profitable author business.
+              New releases, bonus scenes, and what to read next from the Manhattan Money Kings series.
             </p>
           </motion.div>
         </div>

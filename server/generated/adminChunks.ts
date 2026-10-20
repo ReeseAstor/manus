@@ -1,9 +1,8 @@
 /**
- * Placeholder. `scripts/seal-admin-chunks.mjs` overwrites this during production
- * build with the Writing Studio chunk, which is then inlined into the server
- * bundle and served only to signed-in admins.
+ * Placeholder used by typecheck and local dev. Production builds seal admin
+ * chunks into dist/generated/adminChunks.ts (gitignored) and the server bundle
+ * inlines that file instead of this stub.
  *
- * The committed file stays empty so the workflow copy is not part of the public
- * static build or this source file.
+ * This file stays empty so admin page source is not committed.
  */
 export const adminChunks: Record<string, string> = {};

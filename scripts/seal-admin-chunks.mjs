@@ -8,7 +8,9 @@ import path from "node:path";
 const root = process.cwd();
 const publicDir = path.join(root, "dist", "public");
 const adminDir = path.join(publicDir, "assets", "admin");
-const outFile = path.join(root, "server", "generated", "adminChunks.ts");
+// dist/ is gitignored. The tracked stub at server/generated/adminChunks.ts stays
+// empty; the production bundle aliases this generated file in its place.
+const outFile = path.join(root, "dist", "generated", "adminChunks.ts");
 
 const chunks = {};
 

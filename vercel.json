@@ -1,7 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "buildCommand": "vite build && node scripts/seal-admin-chunks.mjs && pnpm exec esbuild server/_core/vercel-app.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/server-bundle.mjs",
+  "redirects": [
+    { "source": "/blog/ai-assisted-romance-writing-workflow", "destination": "/blog", "permanent": true },
+    { "source": "/blog/romance-author-writing-tools-setup", "destination": "/blog", "permanent": true },
+    { "source": "/blog/quality-control-workflows-romance-authors", "destination": "/blog", "permanent": true },
+    { "source": "/ai-newsletter", "destination": "/newsletter", "permanent": true }
+  ],
+  "buildCommand": "vite build && node scripts/seal-admin-chunks.mjs && node scripts/bundle-server.mjs server/_core/vercel-app.ts dist/server-bundle.mjs",
   "outputDirectory": "dist/public",
   "functions": {
     "api/index.ts": {

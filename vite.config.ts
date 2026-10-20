@@ -7,7 +7,14 @@ import { defineConfig } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()];
+const plugins = [
+  react(),
+  tailwindcss(),
+  jsxLocPlugin(),
+  // The runtime plugin only injects a preview script into index.html.
+  // Production builds omit it so that script is not shipped to readers.
+  ...(process.env.NODE_ENV !== "production" ? [vitePluginManusRuntime()] : []),
+];
 
 export default defineConfig({
   plugins,
