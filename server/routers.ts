@@ -229,6 +229,7 @@ export const appRouter = router({
         // if they ask for drafts. Admins keep the unfiltered list for the CMS.
         const publishedOnly = isAdmin ? input?.published : true;
         const posts = await getAllBlogPosts(publishedOnly, input?.category);
+        if (isAdmin) return posts;
         return posts.filter((post) => !isRetiredBlogSlug(post.slug));
       }),
 
@@ -260,9 +261,9 @@ export const appRouter = router({
     getBySlug: publicProcedure
       .input(z.object({ slug: z.string() }))
       .query(async ({ ctx, input }) => {
-        const post = await getBlogPostBySlug(input.slug);
         const isAdmin = ctx.user?.role === "admin";
-        if (!post || isRetiredBlogSlug(post.slug) || isRetiredBlogSlug(input.slug) || (post.published !== "published" && !isAdmin)) {
+        const post = await getBlogPostBySlug(input.slug, { includeRetired: isAdmin });
+        if (!post || (!isAdmin && (isRetiredBlogSlug(post.slug) || isRetiredBlogSlug(input.slug))) || (post.published !== "published" && !isAdmin)) {
           throw new TRPCError({
             code: "NOT_FOUND",
             message: "Blog post not found",

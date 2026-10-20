@@ -295,7 +295,7 @@ export default function VipClub() {
               Featured Steamy Stories
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Here's a taste of the library: bonus scenes with your favorite couples, each one with an audio version.
+              Here's a taste of the library: bonus scenes with your favorite couples. Many come with audio.
             </p>
           </div>
 

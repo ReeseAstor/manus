@@ -104,10 +104,11 @@ export async function getAllBlogPosts(published?: boolean, category?: string) {
   try {
     const conditions = [];
 
-    conditions.push(notInArray(blogPosts.slug, [...RETIRED_BLOG_SLUGS]));
-    
     if (published) {
       conditions.push(eq(blogPosts.published, "published"));
+      // Public lists ask for published posts. The admin CMS lists without
+      // that flag so rows 1–3 stay visible there for review or deletion.
+      conditions.push(notInArray(blogPosts.slug, [...RETIRED_BLOG_SLUGS]));
     }
     
     if (category) {
@@ -128,8 +129,8 @@ export async function getAllBlogPosts(published?: boolean, category?: string) {
   }
 }
 
-export async function getBlogPostBySlug(slug: string) {
-  if (isRetiredBlogSlug(slug)) {
+export async function getBlogPostBySlug(slug: string, options?: { includeRetired?: boolean }) {
+  if (!options?.includeRetired && isRetiredBlogSlug(slug)) {
     return undefined;
   }
 
@@ -143,7 +144,11 @@ export async function getBlogPostBySlug(slug: string) {
     const result = await db
       .select()
       .from(blogPosts)
-      .where(and(eq(blogPosts.slug, slug), notInArray(blogPosts.slug, [...RETIRED_BLOG_SLUGS])))
+      .where(
+        options?.includeRetired
+          ? eq(blogPosts.slug, slug)
+          : and(eq(blogPosts.slug, slug), notInArray(blogPosts.slug, [...RETIRED_BLOG_SLUGS])),
+      )
       .limit(1);
     return result.length > 0 ? result[0] : undefined;
   } catch (error) {

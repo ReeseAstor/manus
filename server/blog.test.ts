@@ -127,7 +127,7 @@ describe("blog.getBySlug", () => {
       title: "Test Blog Post",
       slug: "test-blog-post",
     });
-    expect(db.getBlogPostBySlug).toHaveBeenCalledWith("test-blog-post");
+    expect(db.getBlogPostBySlug).toHaveBeenCalledWith("test-blog-post", { includeRetired: false });
   });
 
   it("throws NOT_FOUND error when post doesn't exist", async () => {
@@ -155,7 +155,7 @@ describe("blog.getBySlug", () => {
     ).rejects.toThrow("Blog post not found");
   });
 
-  it("hides retired slugs from anonymous and admin callers", async () => {
+  it("hides retired slugs from anonymous callers and shows them to admins", async () => {
     const retired = {
       ...mockBlogPost,
       id: 99,
@@ -173,9 +173,11 @@ describe("blog.getBySlug", () => {
     expect(listed.map((post) => post.slug)).toEqual(["test-blog-post"]);
 
     const admin = appRouter.createCaller(createTestContext(true));
-    await expect(
-      admin.blog.getBySlug({ slug: retired.slug })
-    ).rejects.toThrow("Blog post not found");
+    const adminPost = await admin.blog.getBySlug({ slug: retired.slug });
+    expect(adminPost.slug).toBe(retired.slug);
+    expect(db.getBlogPostBySlug).toHaveBeenCalledWith(retired.slug, { includeRetired: true });
+    const adminList = await admin.blog.list();
+    expect(adminList.map((post) => post.slug)).toEqual(["test-blog-post", retired.slug]);
   });
 
   it("lets an admin read a draft by slug", async () => {
