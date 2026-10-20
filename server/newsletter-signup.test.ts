@@ -10,9 +10,13 @@ vi.mock("./mailerlite", () => ({
 
 import { subscribeToMailerLite } from "./mailerlite";
 
+let signupFixtureIp = 1;
 function createTestContext(userId?: string) {
+  const ip = `203.0.113.${signupFixtureIp++}`;
   return {
     user: userId ? { id: userId, claims: { sub: userId } } : null,
+    req: { headers: { "x-vercel-forwarded-for": ip } },
+    res: {},
   };
 }
 

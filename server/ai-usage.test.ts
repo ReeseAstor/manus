@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   checkRateLimit,
   estimateCostUsd,
@@ -8,6 +8,11 @@ import {
   GLOBAL_DAILY_CAPS,
   trackAiUsage,
 } from "./ai-usage";
+import * as db from "./db";
+
+vi.mock("./db", () => ({
+  getDb: vi.fn(),
+}));
 
 describe("AI Usage Token & Cost Estimation", () => {
   it("should estimate roughly 4 chars per token", () => {
@@ -91,13 +96,34 @@ describe("AI Usage Rate Limiting", () => {
     }
   });
 
-  it("denies every request in production when the database is unset", async () => {
+  it("denies spend features in production when the database is unset", async () => {
     const previousEnv = process.env.NODE_ENV;
     const previousDb = process.env.DATABASE_URL;
     process.env.NODE_ENV = "production";
     delete process.env.DATABASE_URL;
     try {
       expect(await checkRateLimit("prod-no-db", "chat")).toBe(false);
+      expect(await checkRateLimit("prod-no-db-signup", "signup")).toBe(true);
+    } finally {
+      process.env.NODE_ENV = previousEnv;
+      if (previousDb === undefined) delete process.env.DATABASE_URL;
+      else process.env.DATABASE_URL = previousDb;
+    }
+  });
+
+  it("keeps spend closed and signups in memory when the shared store throws", async () => {
+    const previousEnv = process.env.NODE_ENV;
+    const previousDb = process.env.DATABASE_URL;
+    process.env.NODE_ENV = "production";
+    process.env.DATABASE_URL = "postgres://rate-limit-test";
+    vi.mocked(db.getDb).mockRejectedValue(new Error("permission denied for schema public"));
+    try {
+      expect(await checkRateLimit("store-down-quiz", "quiz")).toBe(false);
+      expect(await checkRateLimit("store-down-voice", "voice-preview")).toBe(false);
+      for (let i = 0; i < 5; i++) {
+        expect(await checkRateLimit("store-down-signup", "signup")).toBe(true);
+      }
+      expect(await checkRateLimit("store-down-signup", "signup")).toBe(false);
     } finally {
       process.env.NODE_ENV = previousEnv;
       if (previousDb === undefined) delete process.env.DATABASE_URL;
@@ -158,5 +184,10 @@ describe("Client Key Extraction", () => {
   it("should default to unknown when no headers present", () => {
     const key = getClientKey({ headers: {} });
     expect(key).toBe("unknown");
+  });
+
+  it("should default to unknown when the request is missing", () => {
+    expect(getClientKey(undefined)).toBe("unknown");
+    expect(getClientKey(null)).toBe("unknown");
   });
 });

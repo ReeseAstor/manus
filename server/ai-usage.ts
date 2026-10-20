@@ -2,11 +2,15 @@
  * AI usage tracking and rate limits.
  *
  * Production stores the sliding windows in Postgres (`ai_rate_limits`) so
- * serverless instances share one counter. The table is created on first use.
- * If production has no DATABASE_URL, or the write fails, the request is denied.
+ * serverless instances share one counter. Create that table with
+ * drizzle/postgres/0028_ai_rate_limits.sql before deploy. The app does not
+ * run CREATE TABLE. Applying that file needs CREATE on schema public.
+ * Afterward the runtime role needs SELECT, INSERT, and DELETE only.
  *
- * Tests and local dev (NODE_ENV other than production) keep an in-memory
- * window so they do not need a database.
+ * If the shared store errors, signup falls back to this process's memory
+ * window. Chat, image, quiz, voice preview, and the other spend features
+ * stay denied. Tests and local dev (NODE_ENV other than production) always
+ * use the in-memory window.
  *
  * `pnpm start` outside Vercel must sit behind a proxy that overwrites
  * X-Forwarded-For. On Vercel, getClientKey prefers x-vercel-forwarded-for,
@@ -110,11 +114,12 @@ function headerValue(headers: Record<string, unknown>, name: string): string | u
   return undefined;
 }
 
-export function getClientKey(req: { headers: Record<string, unknown> }): string {
+export function getClientKey(req?: { headers?: Record<string, unknown> } | null): string {
+  const headers = req?.headers ?? {};
   return (
-    headerValue(req.headers, "x-vercel-forwarded-for") ??
-    headerValue(req.headers, "x-real-ip") ??
-    headerValue(req.headers, "x-forwarded-for") ??
+    headerValue(headers, "x-vercel-forwarded-for") ??
+    headerValue(headers, "x-real-ip") ??
+    headerValue(headers, "x-forwarded-for") ??
     "unknown"
   );
 }
@@ -162,31 +167,7 @@ function memoryAllow(
   return true;
 }
 
-let rateTableReady: Promise<void> | null = null;
-
-async function ensureRateTable(): Promise<void> {
-  if (!rateTableReady) {
-    rateTableReady = (async () => {
-      const db = await getDb();
-      if (!db) throw new Error("Database not available");
-      await db.execute(sql`
-        CREATE TABLE IF NOT EXISTS ai_rate_limits (
-          id SERIAL PRIMARY KEY,
-          "bucketId" VARCHAR(255) NOT NULL,
-          "createdAt" TIMESTAMP NOT NULL DEFAULT NOW()
-        )
-      `);
-      await db.execute(sql`
-        CREATE INDEX IF NOT EXISTS ai_rate_limits_bucket_created_idx
-        ON ai_rate_limits ("bucketId", "createdAt")
-      `);
-    })().catch((error) => {
-      rateTableReady = null;
-      throw error;
-    });
-  }
-  return rateTableReady;
-}
+const SIGNUP_FEATURES = new Set<AiFeature>(["signup"]);
 
 async function postgresAllow(
   bucketId: string,
@@ -195,7 +176,6 @@ async function postgresAllow(
   globalId?: string,
   globalCap?: number,
 ): Promise<boolean> {
-  await ensureRateTable();
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
@@ -238,15 +218,25 @@ export async function checkRateLimit(key: string, feature: AiFeature): Promise<b
   const globalId = globalCap ? `global:${feature}` : undefined;
   const production = process.env.NODE_ENV === "production";
 
+  const signupFallback = () => memoryAllow(bucketId, windowMs, limit, globalId, globalCap);
+
   if (production && process.env.DATABASE_URL) {
     try {
       return await postgresAllow(bucketId, windowMs, limit, globalId, globalCap);
     } catch (error) {
+      if (SIGNUP_FEATURES.has(feature)) {
+        console.error("[RateLimit] Shared store failed; using the in-memory signup window.", error);
+        return signupFallback();
+      }
       console.error("[RateLimit] Shared store failed; denying the request.", error);
       return false;
     }
   }
   if (production) {
+    if (SIGNUP_FEATURES.has(feature)) {
+      console.error("[RateLimit] DATABASE_URL is unset; using the in-memory signup window.");
+      return signupFallback();
+    }
     console.error("[RateLimit] DATABASE_URL is unset; denying the request.");
     return false;
   }

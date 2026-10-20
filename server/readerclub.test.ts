@@ -8,7 +8,7 @@ describe("Reader's Club", () => {
 
   // Mock context for tests
   const createContext = (): TrpcContext => ({
-    req: {} as any,
+    req: { headers: { "x-vercel-forwarded-for": "203.0.117.10" } } as any,
     res: {} as any,
     user: null,
   });
