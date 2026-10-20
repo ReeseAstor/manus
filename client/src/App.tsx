@@ -73,7 +73,6 @@ const AuthCallback = lazy(() => import("./pages/AuthCallback"));
 const Newsletter = lazy(() => import("./pages/Newsletter"));
 const NewsletterArchive = lazy(() => import("./pages/NewsletterArchive"));
 const NewsletterDetail = lazy(() => import("./pages/NewsletterDetail"));
-const AINewsletterSignup = lazy(() => import("./pages/AINewsletterSignup"));
 const Favorites = lazy(() => import("./pages/Favorites"));
 const MyPurchases = lazy(() => import("./pages/MyPurchases"));
 const Promo = lazy(() => import("./pages/Promo"));
@@ -82,7 +81,6 @@ const BlogPost = lazy(() => import("./pages/BlogPost"));
 
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import { AIChatbot } from "./components/AIChatbot";
 import { EmailCapturePopup } from "./components/EmailCapturePopup";
 import { ExitIntentPopup } from "./components/ExitIntentPopup";
 import { AdminRoute } from "./components/AdminRoute";
@@ -126,7 +124,6 @@ function Router() {
         <Route path={"/auth/login"} component={AuthLogin} />
         <Route path={"/auth/callback"} component={AuthCallback} />
         <Route path={"/newsletter"} component={Newsletter} />
-        <Route path={"/ai-newsletter"} component={AINewsletterSignup} />
         <Route path={"/newsletter-archive"} component={NewsletterArchive} />
         <Route path={"/newsletter-archive/:id"} component={NewsletterDetail} />
         <Route path={"/vip-audio"} component={VipAudioHub} />
@@ -182,7 +179,6 @@ function App() {
               <Router />
             </main>
             <Footer />
-            <AIChatbot />
             <EmailCapturePopup />
             <ExitIntentPopup />
           </div>

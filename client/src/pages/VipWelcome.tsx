@@ -62,7 +62,9 @@ export default function VipWelcome() {
             Welcome to the VIP Spicy Stories Club!
           </h1>
           <p className="text-xl text-pink-100 max-w-2xl mx-auto">
-            Your VIP membership is now active. Get ready to experience exclusive steamy stories with professional audio narration.
+            {firstStory?.audioUrl
+              ? "Your VIP membership is active. Your first steamy story is below, with audio."
+              : "Your VIP membership is active. Your first steamy story is below."}
           </p>
         </div>
       </div>
@@ -91,10 +93,10 @@ export default function VipWelcome() {
             <div className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
               <Headphones className="w-10 h-10 text-purple-600 mb-4" />
               <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Professional Audio
+                Audio Included
               </h3>
               <p className="text-gray-700">
-                Every story narrated by professional voice actors with ElevenLabs AI
+                Stories come with audio you can play here
               </p>
             </div>
 
@@ -165,16 +167,15 @@ export default function VipWelcome() {
                 </button>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl p-8 flex flex-col items-center justify-center">
-                <Headphones className="w-16 h-16 text-purple-600 mb-4" />
-                <h4 className="text-xl font-bold text-gray-900 mb-2">
-                  Listen Now
-                </h4>
-                <p className="text-gray-600 text-center mb-6">
-                  Professional narration with ElevenLabs AI
-                </p>
-
-                {firstStory.audioUrl && (
+              {firstStory.audioUrl && (
+                <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl p-8 flex flex-col items-center justify-center">
+                  <Headphones className="w-16 h-16 text-purple-600 mb-4" />
+                  <h4 className="text-xl font-bold text-gray-900 mb-2">
+                    Listen Now
+                  </h4>
+                  <p className="text-gray-600 text-center mb-6">
+                    Press play to listen.
+                  </p>
                   <div className="w-full">
                     <button
                       onClick={toggleAudio}
@@ -192,8 +193,8 @@ export default function VipWelcome() {
                       </div>
                     )}
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         ) : null}

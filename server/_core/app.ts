@@ -12,8 +12,11 @@ import twilioVoiceWebhookRouter, {
   validateTwilioSignature as validateTwilioVoiceSignature,
 } from "../twilio-voice-webhook";
 import { authCallback } from "../api.auth.callback";
+import { and, eq, notInArray } from "drizzle-orm";
+import { RETIRED_BLOG_SLUGS } from "../../shared/const";
 import { getDb } from "../db";
 import { blogPosts } from "../../drizzle/schema";
+import { adminChunks } from "../generated/adminChunks";
 import { sdk } from "./sdk";
 import { geminiChatStream, type GeminiMessage } from "../kie-service";
 import { checkRateLimit, getClientKey, trackAiUsage } from "../ai-usage";
@@ -113,7 +116,17 @@ export function createApp(): Express {
       ];
 
       const database = await getDb();
-      const blogPostRows = database ? await database.select({ slug: blogPosts.slug }).from(blogPosts) : [];
+      const blogPostRows = database
+        ? await database
+            .select({ slug: blogPosts.slug })
+            .from(blogPosts)
+            .where(
+              and(
+                eq(blogPosts.published, "published"),
+                notInArray(blogPosts.slug, [...RETIRED_BLOG_SLUGS]),
+              ),
+            )
+        : [];
       const blogUrls = blogPostRows.map((row: { slug: string }) => ({
         url: `/blog/${row.slug}`,
         priority: "0.7",
@@ -151,11 +164,35 @@ export function createApp(): Express {
 Allow: /
 Disallow: /admin
 Disallow: /admin/
+Disallow: /assets/admin/
 Disallow: /api/
 Disallow: /auth/
 
 Sitemap: ${baseUrl}/sitemap.xml
 `);
+  });
+
+  // Admin page chunks ship outside dist/public. Signed-in admins load them
+  // from this route; everyone else gets the same 404 as a missing static file.
+  app.get("/assets/admin/:file", async (req, res) => {
+    const file = req.params.file;
+    res.setHeader("Cache-Control", "private, no-store");
+    res.setHeader("X-Robots-Tag", "noindex");
+    if (typeof file !== "string" || !adminChunks[file]) {
+      return res.status(404).end();
+    }
+    const source = adminChunks[file];
+    try {
+      const user = await sdk.authenticateRequest(req);
+      if (user.role !== "admin") {
+        return res.status(404).end();
+      }
+    } catch {
+      return res.status(404).end();
+    }
+    const isCss = file.endsWith(".css");
+    res.setHeader("Content-Type", isCss ? "text/css; charset=utf-8" : "text/javascript; charset=utf-8");
+    res.send(source);
   });
 
   // tRPC API

@@ -14,7 +14,7 @@ const POSTS_PER_PAGE = 9;
 
 export default function Blog() {
   useEffect(() => {
-    document.title = "Romance Writing Blog | Tips & Insights by Reese Astor";
+    document.title = "Reese Astor Blog | Romance Reads";
   }, []);
 
   const [email, setEmail] = useState("");
@@ -53,65 +53,11 @@ export default function Blog() {
   const uniqueCategories = allPosts?.map((post) => post.category) || [];
   const categories = ["All", ...Array.from(new Set(uniqueCategories))];
 
-  const placeholderPosts = [
-    {
-      id: 1,
-      title: "5 Essential Tips for Writing Steamy Romance Scenes",
-      excerpt: "Learn how to write compelling, authentic intimate scenes that enhance your story and connect with readers on an emotional level.",
-      category: "Writing Tips",
-      date: "November 15, 2025",
-      readTime: "8 min read",
-      slug: "writing-steamy-romance-scenes",
-    },
-    {
-      id: 2,
-      title: "From Zero to Published: My Self-Publishing Journey",
-      excerpt: "How I went from corporate VP to bestselling romance author, and the lessons I learned along the way about KDP publishing.",
-      category: "Author Journey",
-      date: "November 10, 2025",
-      readTime: "12 min read",
-      slug: "self-publishing-journey",
-    },
-    {
-      id: 3,
-      title: "Building Your Author Brand on Social Media",
-      excerpt: "Practical strategies for growing your author platform on Instagram and Facebook without spending hours online every day.",
-      category: "Marketing",
-      date: "November 5, 2025",
-      readTime: "10 min read",
-      slug: "author-brand-social-media",
-    },
-    {
-      id: 4,
-      title: "The Business Side of Romance Writing",
-      excerpt: "Why treating your writing like a business is the key to building a sustainable, profitable author career.",
-      category: "Business Strategy",
-      date: "October 28, 2025",
-      readTime: "15 min read",
-      slug: "business-side-romance-writing",
-    },
-    {
-      id: 5,
-      title: "Character Development: Creating Unforgettable Heroes",
-      excerpt: "The secrets to crafting billionaire heroes who are powerful yet vulnerable, dominant yet respectful, and utterly irresistible.",
-      category: "Writing Tips",
-      date: "October 20, 2025",
-      readTime: "9 min read",
-      slug: "character-development-heroes",
-    },
-    {
-      id: 6,
-      title: "Email List Building for Authors: A Complete Guide",
-      excerpt: "How to grow your email list from zero to thousands of engaged readers who can't wait for your next release.",
-      category: "Marketing",
-      date: "October 12, 2025",
-      readTime: "11 min read",
-      slug: "email-list-building-authors",
-    },
-  ];
+  const placeholderPosts: NonNullable<typeof blogPosts> = [];
 
-  // Use placeholder posts if no real posts exist
-  const allDisplayPosts = blogPosts && blogPosts.length > 0 ? blogPosts : (!selectedCategory ? placeholderPosts : []);
+  // Empty when the API has no posts, so the empty state shows instead of sample articles.
+  const allDisplayPosts: NonNullable<typeof blogPosts> =
+    blogPosts && blogPosts.length > 0 ? blogPosts : placeholderPosts;
   
   // Paginated posts - show only visibleCount posts
   const displayPosts = useMemo(() => {
@@ -128,11 +74,11 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       <EnhancedSEOHead
-        title="Romance Writing Blog | Tips & Insights by Reese Astor"
-        description="Writing tips, behind-the-scenes insights, and romance industry advice from USA Today Bestselling author Reese Astor. Learn the craft of storytelling."
+        title="Reese Astor Blog | Romance Reads"
+        description="Reese Astor's reading lists and notes on steamy billionaire romance."
         canonical="/blog"
         ogType="website"
-        keywords={["romance writing tips", "author blog", "writing advice", "Reese Astor blog", "romance author insights", "storytelling craft"]}
+        keywords={["Reese Astor blog", "Manhattan Money Kings", "romance books", "what to read next", "steamy romance"]}
       />
 
       {/* Hero Section */}
@@ -162,16 +108,16 @@ export default function Blog() {
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 text-[#d4af37]" />
               <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
-                Insights & Inspiration
+                From Reese
               </span>
             </div>
 
             <h1 className="font-serif text-5xl md:text-7xl font-bold text-white leading-tight">
-              Writing & Publishing Blog
+              The Reese Astor Blog
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
-              Tips, strategies, and insights on romance writing, self-publishing, and building a profitable author business.
+              Reading lists and notes from Reese on steamy billionaire romance.
             </p>
           </motion.div>
         </div>
@@ -274,10 +220,8 @@ export default function Blog() {
                             <div className="flex items-center gap-2">
                               <Calendar className="h-4 w-4" />
                               <span>
-                                {"publishedAt" in post && post.publishedAt
+                                {post.publishedAt
                                   ? format(new Date(post.publishedAt), "MMM d, yyyy")
-                                  : "date" in post
-                                  ? post.date
                                   : ""}
                               </span>
                             </div>
@@ -380,7 +324,7 @@ export default function Blog() {
             </h2>
             
             <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Subscribe to get writing tips, publishing strategies, and exclusive content delivered to your inbox every week.
+              Get new posts and new-release news in your inbox.
             </p>
 
             <form onSubmit={handleNewsletterSubmit} className="max-w-xl mx-auto">

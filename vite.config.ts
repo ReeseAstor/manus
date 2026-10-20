@@ -7,7 +7,14 @@ import { defineConfig } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()];
+const plugins = [
+  react(),
+  tailwindcss(),
+  jsxLocPlugin(),
+  // The runtime plugin only injects a preview script into index.html.
+  // Production builds omit it so that script is not shipped to readers.
+  ...(process.env.NODE_ENV !== "production" ? [vitePluginManusRuntime()] : []),
+];
 
 export default defineConfig({
   plugins,
@@ -25,6 +32,32 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
     chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        // Admin-only pages (and Writing Studio's workflow data) go under
+        // assets/admin. The seal step removes that directory from the public
+        // build; the server then serves those files only to an admin session.
+        // This renames chunks. It does not use manualChunks, so the chunk
+        // graph stays the one Rollup already produced.
+        chunkFileNames(chunkInfo) {
+          const normalize = (id: string) => id.replace(/\\/g, "/");
+          const adminPage =
+            /\/pages\/(?:Admin(?:[A-Z][A-Za-z0-9]*)?|WritingStudio|ExclusiveContentManager|BlogEditor|NewsletterManager|NewsletterEditor)\.tsx$/;
+          const facade = normalize(chunkInfo.facadeModuleId ?? "");
+          if (adminPage.test(facade)) {
+            return "assets/admin/[name]-[hash].js";
+          }
+          const ids = (chunkInfo.moduleIds ?? []).map(normalize);
+          const appIds = ids.filter((id) => id.includes("/client/src/"));
+          const privateModule =
+            /\/pages\/(?:Admin(?:[A-Z][A-Za-z0-9]*)?|WritingStudio|ExclusiveContentManager|BlogEditor|NewsletterManager|NewsletterEditor)\.tsx$|\/data\/workflows\.ts$/;
+          if (appIds.length > 0 && appIds.every((id) => privateModule.test(id))) {
+            return "assets/admin/[name]-[hash].js";
+          }
+          return "assets/[name]-[hash].js";
+        },
+      },
+    },
     // NOTE: manualChunks was removed entirely after two production blank-page
     // outages caused by Rollup's inability to preserve initialization order
     // across chunk boundaries when transitive deps form cycles.

@@ -1,4 +1,5 @@
-import { eq, desc, and } from "drizzle-orm";
+import { eq, desc, and, notInArray } from "drizzle-orm";
+import { isRetiredBlogSlug, RETIRED_BLOG_SLUGS } from "../shared/const";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { InsertUser, users, blogPosts, InsertBlogPost, books, bookReviews, type Book, type InsertBook, type BookReview, type InsertBookReview, newsletters, newsletterSubscribers, type Newsletter, type InsertNewsletter, type NewsletterSubscriber, type InsertNewsletterSubscriber, exclusiveContent, readerClubMembers, contentAccess, type ExclusiveContent, type InsertExclusiveContent, type ReaderClubMember, type InsertReaderClubMember, type ContentAccess, type InsertContentAccess } from "../drizzle/schema";
 import { ENV } from './_core/env';
@@ -102,9 +103,12 @@ export async function getAllBlogPosts(published?: boolean, category?: string) {
 
   try {
     const conditions = [];
-    
+
     if (published) {
       conditions.push(eq(blogPosts.published, "published"));
+      // Public lists ask for published posts. The admin CMS lists without
+      // that flag so rows 1–3 stay visible there for review or deletion.
+      conditions.push(notInArray(blogPosts.slug, [...RETIRED_BLOG_SLUGS]));
     }
     
     if (category) {
@@ -125,7 +129,11 @@ export async function getAllBlogPosts(published?: boolean, category?: string) {
   }
 }
 
-export async function getBlogPostBySlug(slug: string) {
+export async function getBlogPostBySlug(slug: string, options?: { includeRetired?: boolean }) {
+  if (!options?.includeRetired && isRetiredBlogSlug(slug)) {
+    return undefined;
+  }
+
   const db = await getDb();
   if (!db) {
     console.warn("[Database] Cannot get blog post: database not available");
@@ -133,7 +141,15 @@ export async function getBlogPostBySlug(slug: string) {
   }
 
   try {
-    const result = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug)).limit(1);
+    const result = await db
+      .select()
+      .from(blogPosts)
+      .where(
+        options?.includeRetired
+          ? eq(blogPosts.slug, slug)
+          : and(eq(blogPosts.slug, slug), notInArray(blogPosts.slug, [...RETIRED_BLOG_SLUGS])),
+      )
+      .limit(1);
     return result.length > 0 ? result[0] : undefined;
   } catch (error) {
     console.error("[Database] Failed to get blog post:", error);

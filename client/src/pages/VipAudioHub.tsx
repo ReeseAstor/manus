@@ -30,12 +30,18 @@ import {
   Lock,
 } from "lucide-react";
 
+/** Reader-facing voice picker. Off so stock voice names are not shown. Flip to restore. */
+const SHOW_READER_VOICE_LIBRARY = false;
+
 export default function VipAudioHub() {
   const { user, loading: authLoading } = useAuth();
   const [selectedVoice, setSelectedVoice] = useState<string>("bella");
 
   // Fetch audio data
-  const { data: voices } = trpc.audio.getVoices.useQuery({ includePremium: true });
+  const { data: voices } = trpc.audio.getVoices.useQuery(
+    { includePremium: true },
+    { enabled: SHOW_READER_VOICE_LIBRARY },
+  );
   const { data: usage, isLoading: usageLoading } = trpc.audio.getUsage.useQuery(
     undefined,
     { enabled: !!user }
@@ -44,7 +50,9 @@ export default function VipAudioHub() {
     { limit: 10 },
     { enabled: !!user }
   );
-  const { data: characterVoices } = trpc.audio.getCharacterVoices.useQuery();
+  const { data: characterVoices } = trpc.audio.getCharacterVoices.useQuery(undefined, {
+    enabled: SHOW_READER_VOICE_LIBRARY,
+  });
 
   // Voice preview mutation
   const previewVoice = trpc.audio.previewVoice.useMutation();
@@ -75,7 +83,7 @@ export default function VipAudioHub() {
           <Lock className="h-16 w-16 text-amber-400 mx-auto mb-6" />
           <h1 className="text-4xl font-serif text-white mb-4">VIP Audio Hub</h1>
           <p className="text-slate-400 mb-8 max-w-md mx-auto">
-            Sign in to access your personalized audio library, generate narrations, and explore premium voices.
+            Sign in to open your audio library.
           </p>
           <a href={getLoginUrl()}>
             <Button className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700">
@@ -107,7 +115,7 @@ export default function VipAudioHub() {
               Your Personal <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-400">Audio Library</span>
             </h1>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Generate professional narrations, explore premium voices, and listen to your favorite steamy stories.
+              Your stories, ready to play.
             </p>
           </div>
 
@@ -152,7 +160,7 @@ export default function VipAudioHub() {
                     <Music className="h-5 w-5 text-purple-400" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400">Generations</p>
+                    <p className="text-xs text-slate-400">Audio added this month</p>
                     <p className="text-xl font-bold text-white">
                       {usageLoading ? "..." : usage?.usage.generationsThisMonth || 0}
                     </p>
@@ -200,7 +208,9 @@ export default function VipAudioHub() {
         </div>
       </section>
 
-      {/* Voice Library */}
+      {/* Voice Library and Character Voices stay in source. SHOW_READER_VOICE_LIBRARY restores them. */}
+      {SHOW_READER_VOICE_LIBRARY && (
+      <>
       <section className="py-12 border-t border-amber-500/10">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
@@ -322,6 +332,8 @@ export default function VipAudioHub() {
           </div>
         </div>
       </section>
+      </>
+      )}
 
       {/* Recent Audio Library */}
       <section className="py-12 border-t border-amber-500/10">
@@ -329,7 +341,7 @@ export default function VipAudioHub() {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-2xl font-serif text-white mb-2">Your Audio Library</h2>
-              <p className="text-slate-400">Recently generated narrations</p>
+              <p className="text-slate-400">Recently added</p>
             </div>
           </div>
 
@@ -362,7 +374,7 @@ export default function VipAudioHub() {
                 <Sparkles className="h-12 w-12 text-amber-400 mx-auto mb-4" />
                 <h3 className="text-xl font-medium text-white mb-2">No Audio Yet</h3>
                 <p className="text-slate-400 mb-6">
-                  Start generating narrations from your favorite stories!
+                  Pick a story from the library to add it here.
                 </p>
                 <Link href="/vip-club">
                   <Button className="bg-gradient-to-r from-amber-500 to-amber-600">
@@ -385,7 +397,7 @@ export default function VipAudioHub() {
                 <Crown className="h-12 w-12 text-amber-400 mx-auto mb-4" />
                 <h2 className="text-2xl font-serif text-white mb-2">Unlock Premium Features</h2>
                 <p className="text-slate-300 mb-6 max-w-md mx-auto">
-                  Upgrade to Gold for unlimited audio generation, premium voices, and exclusive content.
+                  Gold has no monthly audio limit and adds the Gold-only stories.
                 </p>
                 <Link href="/vip-club">
                   <Button className="bg-gradient-to-r from-amber-500 to-pink-500 hover:from-amber-600 hover:to-pink-600">

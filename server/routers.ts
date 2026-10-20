@@ -1,4 +1,4 @@
-import { COOKIE_NAME } from "@shared/const";
+import { COOKIE_NAME, isRetiredBlogSlug } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { aiRouter } from "./routers/ai-simple";
@@ -223,9 +223,14 @@ export const appRouter = router({
           category: z.string().optional(),
         }).optional()
       )
-      .query(async ({ input }) => {
-        const posts = await getAllBlogPosts(input?.published, input?.category);
-        return posts;
+      .query(async ({ ctx, input }) => {
+        const isAdmin = ctx.user?.role === "admin";
+        // Anonymous and non-admin callers only ever see published posts, even
+        // if they ask for drafts. Admins keep the unfiltered list for the CMS.
+        const publishedOnly = isAdmin ? input?.published : true;
+        const posts = await getAllBlogPosts(publishedOnly, input?.category);
+        if (isAdmin) return posts;
+        return posts.filter((post) => !isRetiredBlogSlug(post.slug));
       }),
 
     // Content calendar - get all posts with scheduled dates for admin view
@@ -255,9 +260,10 @@ export const appRouter = router({
 
     getBySlug: publicProcedure
       .input(z.object({ slug: z.string() }))
-      .query(async ({ input }) => {
-        const post = await getBlogPostBySlug(input.slug);
-        if (!post) {
+      .query(async ({ ctx, input }) => {
+        const isAdmin = ctx.user?.role === "admin";
+        const post = await getBlogPostBySlug(input.slug, { includeRetired: isAdmin });
+        if (!post || (!isAdmin && (isRetiredBlogSlug(post.slug) || isRetiredBlogSlug(input.slug))) || (post.published !== "published" && !isAdmin)) {
           throw new TRPCError({
             code: "NOT_FOUND",
             message: "Blog post not found",

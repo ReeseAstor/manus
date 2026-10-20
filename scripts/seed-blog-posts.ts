@@ -22,10 +22,15 @@ const categoryBySlug: Record<string, string> = {
   "reading-self-care-routine-book-lovers": "Reading Recommendations",
   "what-i-burn-while-i-write": "Reading Recommendations",
   "romance-reader-gift-guide": "Reading Recommendations",
-  "romance-author-writing-tools-setup": "Writing Tips",
-  "ai-assisted-romance-writing-workflow": "Writing Tips",
   "storyorigin-email-list-building-guide": "Marketing",
 };
+
+// Retired on purpose. Re-seeding these would put AI-workflow posts back on the public site.
+const retiredSlugs = new Set([
+  "ai-assisted-romance-writing-workflow",
+  "romance-author-writing-tools-setup",
+  "quality-control-workflows-romance-authors",
+]);
 
 function parsePost(md: string): { title: string; excerpt: string; content: string } {
   const lines = md.split(/\r?\n/);
@@ -64,6 +69,10 @@ async function seed() {
 
   for (const file of files) {
     const slug = file.replace(/\.md$/, "");
+    if (retiredSlugs.has(slug)) {
+      console.log(`⊘ Skipped retired post: ${slug}`);
+      continue;
+    }
     const md = await readFile(path.join(BLOG_DIR, file), "utf8");
     const { title, excerpt, content } = parsePost(md);
     const category = categoryBySlug[slug] ?? "Reading Recommendations";

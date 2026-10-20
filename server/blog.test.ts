@@ -59,7 +59,7 @@ describe("blog.list", () => {
     vi.clearAllMocks();
   });
 
-  it("returns all blog posts when no filter is provided", async () => {
+  it("returns only published posts to anonymous callers", async () => {
     const ctx = createTestContext();
     const caller = appRouter.createCaller(ctx);
 
@@ -72,6 +72,28 @@ describe("blog.list", () => {
       title: "Test Blog Post",
       slug: "test-blog-post",
     });
+    expect(db.getAllBlogPosts).toHaveBeenCalledWith(true, undefined);
+  });
+
+  it("does not return drafts when an anonymous caller asks for them", async () => {
+    const ctx = createTestContext();
+    const caller = appRouter.createCaller(ctx);
+
+    vi.mocked(db.getAllBlogPosts).mockResolvedValue([mockBlogPost]);
+
+    await caller.blog.list({ published: false });
+
+    expect(db.getAllBlogPosts).toHaveBeenCalledWith(true, undefined);
+  });
+
+  it("returns every post to an admin when no filter is provided", async () => {
+    const ctx = createTestContext(true);
+    const caller = appRouter.createCaller(ctx);
+
+    vi.mocked(db.getAllBlogPosts).mockResolvedValue([mockBlogPost]);
+
+    await caller.blog.list();
+
     expect(db.getAllBlogPosts).toHaveBeenCalledWith(undefined, undefined);
   });
 
@@ -105,7 +127,7 @@ describe("blog.getBySlug", () => {
       title: "Test Blog Post",
       slug: "test-blog-post",
     });
-    expect(db.getBlogPostBySlug).toHaveBeenCalledWith("test-blog-post");
+    expect(db.getBlogPostBySlug).toHaveBeenCalledWith("test-blog-post", { includeRetired: false });
   });
 
   it("throws NOT_FOUND error when post doesn't exist", async () => {
@@ -117,6 +139,57 @@ describe("blog.getBySlug", () => {
     await expect(
       caller.blog.getBySlug({ slug: "non-existent" })
     ).rejects.toThrow("Blog post not found");
+  });
+
+  it("hides draft posts from anonymous callers", async () => {
+    const ctx = createTestContext();
+    const caller = appRouter.createCaller(ctx);
+
+    vi.mocked(db.getBlogPostBySlug).mockResolvedValue({
+      ...mockBlogPost,
+      published: "draft",
+    });
+
+    await expect(
+      caller.blog.getBySlug({ slug: "test-blog-post" })
+    ).rejects.toThrow("Blog post not found");
+  });
+
+  it("hides retired slugs from anonymous callers and shows them to admins", async () => {
+    const retired = {
+      ...mockBlogPost,
+      id: 99,
+      slug: "ai-assisted-romance-writing-workflow",
+      title: "Retired post",
+    };
+    vi.mocked(db.getBlogPostBySlug).mockResolvedValue(retired);
+    vi.mocked(db.getAllBlogPosts).mockResolvedValue([mockBlogPost, retired]);
+
+    const anonymous = appRouter.createCaller(createTestContext());
+    await expect(
+      anonymous.blog.getBySlug({ slug: retired.slug })
+    ).rejects.toThrow("Blog post not found");
+    const listed = await anonymous.blog.list();
+    expect(listed.map((post) => post.slug)).toEqual(["test-blog-post"]);
+
+    const admin = appRouter.createCaller(createTestContext(true));
+    const adminPost = await admin.blog.getBySlug({ slug: retired.slug });
+    expect(adminPost.slug).toBe(retired.slug);
+    expect(db.getBlogPostBySlug).toHaveBeenCalledWith(retired.slug, { includeRetired: true });
+    const adminList = await admin.blog.list();
+    expect(adminList.map((post) => post.slug)).toEqual(["test-blog-post", retired.slug]);
+  });
+
+  it("lets an admin read a draft by slug", async () => {
+    const ctx = createTestContext(true);
+    const caller = appRouter.createCaller(ctx);
+    const draft = { ...mockBlogPost, published: "draft" as const };
+
+    vi.mocked(db.getBlogPostBySlug).mockResolvedValue(draft);
+
+    const result = await caller.blog.getBySlug({ slug: "test-blog-post" });
+
+    expect(result.published).toBe("draft");
   });
 });
 

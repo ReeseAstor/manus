@@ -19,9 +19,8 @@ interface MailerLiteFormProps {
  * Renders a MailerLite embedded form (`<div class="ml-embedded" data-form="...">`).
  *
  * The global MailerLite Universal snippet was removed from index.html because
- * the account-level auto-popup it loaded rendered the account owner's real name
- * ("Yung-Lung Chen"), which clashes with the Reese Astor pen-name brand on every
- * page. Embedded forms now opt in explicitly: this component bootstraps the
+ * the account-level auto-popup it loaded showed a name that does not belong on
+ * this site. Embedded forms now opt in explicitly: this component bootstraps the
  * universal loader + account on mount, then re-scans the DOM so the
  * `.ml-embedded` div hydrates on any client-side route. Loading MailerLite only
  * where a form is actually rendered keeps the auto-popup off the rest of the site.

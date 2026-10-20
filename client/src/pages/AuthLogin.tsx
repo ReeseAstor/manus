@@ -4,9 +4,9 @@ import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { getLoginUrl } from '../const';
 import { GOLD, GOLD_SOFT, INK, TEXT, TEXT_SOFT } from '@/components/author-kit';
 
-// If Manus OAuth env is set, getLoginUrl() returns the portal URL; otherwise
-// it falls back to /auth/login (this page). Used to offer "Continue with
-// Manus" as a fallback when Supabase isn't configured.
+// If the OAuth portal env is set, getLoginUrl() returns that URL; otherwise
+// it falls back to /auth/login (this page). Used when email sign-in is not
+// configured yet. The link still goes through getLoginUrl().
 const manusOAuthUrl = (() => {
   const portal = import.meta.env.VITE_OAUTH_PORTAL_URL;
   const appId = import.meta.env.VITE_APP_ID;
@@ -61,7 +61,7 @@ export default function AuthLogin() {
             style={{ color: TEXT_SOFT }}
           >
             {manusOAuthUrl
-              ? 'You can continue with the Manus OAuth portal, or come back later once email sign-in is configured.'
+              ? 'You can sign in through the member portal, or come back later once email sign-in is ready.'
               : 'Reader sign-in is being set up. Please come back soon.'}
           </p>
           {manusOAuthUrl && (
@@ -76,7 +76,7 @@ export default function AuthLogin() {
                 borderRadius: 4,
               }}
             >
-              Continue with Manus
+              Continue to sign in
             </a>
           )}
           <p className="font-cormorant italic text-[14px] mt-8" style={{ color: '#7B7464' }}>
