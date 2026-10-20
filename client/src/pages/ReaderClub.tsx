@@ -11,7 +11,7 @@ import { trpc } from "@/lib/trpc";
 
 export default function ReaderClub() {
   useEffect(() => {
-    document.title = "Reader Club | Exclusive Content from Reese Astor";
+    document.title = "Reader's Club | Reese Astor";
   }, []);
 
   const [email, setEmail] = useState("");
@@ -71,10 +71,10 @@ export default function ReaderClub() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#1a1f2e] to-[#0a0e1a]">
       <EnhancedSEOHead
-        title="Reader Club | Exclusive Content from Reese Astor"
-        description="Join Reese Astor's Reader Club for exclusive bonus chapters, early cover reveals, behind-the-scenes content, and special giveaways. Free to join."
+        title="Reader's Club | Reese Astor"
+        description="New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free."
         canonical="/reader-club"
-        keywords={["reader club", "Reese Astor exclusive content", "bonus chapters", "romance reader community", "book giveaways", "early access"]}
+        keywords={["reader club", "Reese Astor", "The First Acquisition", "romance reader community"]}
       />
 
       {/* Hero Section */}
@@ -96,7 +96,7 @@ export default function ReaderClub() {
         >
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/30 mb-8">
             <Sparkles className="h-5 w-5 text-[#d4af37]" />
-            <span className="text-[#d4af37] font-semibold">Exclusive Content</span>
+            <span className="text-[#d4af37] font-semibold">Reader's Club</span>
           </div>
           
           <h1 className="font-serif text-6xl md:text-7xl font-bold text-white mb-6">
@@ -104,8 +104,7 @@ export default function ReaderClub() {
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-            Join an exclusive community and unlock bonus chapters, character interviews,
-            and behind-the-scenes content from your favorite Manhattan Money Kings series.
+            New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free.
           </p>
 
           {!isMember && (
@@ -156,12 +155,12 @@ export default function ReaderClub() {
           className="mb-12 text-center"
         >
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
-            Exclusive Content Library
+            Reader's Club
           </h2>
           <p className="text-gray-400 text-lg">
             {isMember
-              ? "Explore all the exclusive content available to you"
-              : "Join the Reader's Club to unlock all this content"}
+              ? "Posts for Reader's Club members."
+              : "Join to see member posts."}
           </p>
         </motion.div>
 
@@ -257,7 +256,7 @@ export default function ReaderClub() {
           <div className="text-center py-20">
             <BookOpen className="h-16 w-16 text-gray-600 mx-auto mb-4" />
             <p className="text-gray-400 text-lg">
-              New exclusive content coming soon!
+              Nothing is posted here yet.
             </p>
           </div>
         )}
@@ -279,8 +278,7 @@ export default function ReaderClub() {
               Ready to Join?
             </h2>
             <p className="text-gray-300 text-lg mb-8">
-              Get instant access to exclusive bonus chapters, character interviews,
-              and behind-the-scenes content. It's completely free!
+              New-release news from Reese Astor. The First Acquisition is free. Joining is free.
             </p>
             <Button
               onClick={() => {

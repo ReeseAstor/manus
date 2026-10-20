@@ -31,6 +31,20 @@ describe("static book catalog", () => {
     }
   });
 
+  it("sets Kindle Unlimited only where the KDP listing confirms it", () => {
+    const ku = Object.fromEntries(BOOKS.map((book) => [book.slug, book.kindle_unlimited]));
+    expect(ku["the-billionaires-one-night-stand"]).toBe(false);
+    expect(ku["the-first-acquisition"]).toBe(false);
+    expect(ku["golden-parachute"]).toBe(true);
+  });
+
+  it("uses the KDP description for Golden Parachute", () => {
+    const book = BOOKS.find((entry) => entry.slug === "golden-parachute");
+    expect(book?.tagline).toContain("He can restructure a billion dollars of bad debt");
+    expect(book?.blurb).toContain("Miri Doyle-Levine");
+    expect(book?.blurb).toContain("Kai Hsu");
+  });
+
   it("keeps every local cover file in client/public", () => {
     for (const book of BOOKS) {
       for (const image of [book.cover_image, book.cover_image_square]) {

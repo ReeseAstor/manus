@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { DollarSign, Heart, Gift, Zap, Clock, Shield, ChevronRight } from "lucide-react";
+import { DollarSign, Heart, Shield, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ComparisonItem {
@@ -16,57 +16,18 @@ const comparisons: ComparisonItem[] = [
     retailer: "35-70% to Author",
     directBetter: true,
   },
-  {
-    feature: "Bonus Content",
-    direct: "Exclusive Chapters",
-    retailer: "Standard Only",
-    directBetter: true,
-  },
-  {
-    feature: "Delivery",
-    direct: "Instant Download",
-    retailer: "Instant Download",
-    directBetter: false,
-  },
-  {
-    feature: "Formats",
-    direct: "ePub, Mobi, PDF",
-    retailer: "Platform-Specific",
-    directBetter: true,
-  },
-  {
-    feature: "Early Access",
-    direct: "10-14 Days Early",
-    retailer: "Release Day",
-    directBetter: true,
-  },
 ];
 
 const benefits = [
   {
     icon: DollarSign,
-    title: "Save Money",
+    title: "Where to read",
     description: "Retailer links for each title are on the book pages.",
   },
   {
     icon: Heart,
     title: "Support the Author",
     description: "I earn 96% from direct sales vs. 35-70% from retailers. Your support directly funds more books!",
-  },
-  {
-    icon: Gift,
-    title: "Exclusive Bonuses",
-    description: "Every direct purchase includes bonus chapters, deleted scenes, and exclusive content.",
-  },
-  {
-    icon: Zap,
-    title: "Instant Delivery",
-    description: "Your books are delivered instantly to your email in ePub, Mobi, and PDF formats.",
-  },
-  {
-    icon: Clock,
-    title: "Early Access",
-    description: "Reader's Club members get new releases 10-14 days before they hit Amazon.",
   },
   {
     icon: Shield,
@@ -90,13 +51,10 @@ export function WhyBuyDirect() {
             Why Buy Direct?
           </span>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#e5e5e5] mb-6">
-            Save Money. Support the Author.
-            <br />
-            <span className="text-[#d4af37]">Get Exclusive Content.</span>
+            Support the Author.
           </h2>
           <p className="text-[#e5e5e5]/70 text-lg max-w-2xl mx-auto">
-            When you buy directly from me, you save money while I earn more per sale. 
-            It's a win-win that lets me keep writing the stories you love.
+            A direct sale returns more of the price to the author. Retailer links for each title are on the book pages.
           </p>
         </motion.div>
 
@@ -186,8 +144,7 @@ export function WhyBuyDirect() {
               <p className="text-[#e5e5e5]/80 leading-relaxed mb-6">
                 "When you buy from Amazon, I earn about $1.75 per book. When you buy direct, 
                 I earn $4.80. That extra income lets me write full-time and create more of 
-                the Manhattan Money Kings stories you love. Plus, you save money and get 
-                exclusive content. Thank you for supporting independent authors!"
+                the Manhattan Money Kings stories you love. Thank you for supporting independent authors!"
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <a href="/books">
@@ -222,8 +179,7 @@ export function WhyBuyDirectInline() {
       className="bg-white/5 border border-[#d4af37]/20 rounded-xl p-4 mt-4"
     >
       <p className="text-[#e5e5e5]/70 text-sm leading-relaxed">
-        <span className="text-[#d4af37] font-semibold">Why buy direct?</span> You save 20%, 
-        I earn 3x more, and you get exclusive bonus content. 
+        <span className="text-[#d4af37] font-semibold">Why buy direct?</span> A direct sale returns more of the price to the author. 
         <a href="/why-buy-direct" className="text-[#d4af37] hover:underline ml-1">
           Learn more →
         </a>

@@ -101,50 +101,24 @@ describe("Exit Intent Popup Logic", () => {
   });
 });
 
-// Test the trope result mapping
+// Test the trope result mapping against the quiz page.
 describe("Trope Result Mapping", () => {
-  const tropeResults: Record<string, { bookTitle: string; bookSubtitle: string }> = {
-    enemies: {
-      bookTitle: "The Billionaire's Rival",
-      bookSubtitle: "Manhattan Money Kings Book 2",
-    },
-    forbidden: {
-      bookTitle: "The Billionaire's Forbidden Nanny",
-      bookSubtitle: "Manhattan Money Kings Book 4",
-    },
-    "second-chance": {
-      bookTitle: "The Billionaire's Baby Secret",
-      bookSubtitle: "Manhattan Money Kings Book 3",
-    },
-    boss: {
-      bookTitle: "The First Acquisition",
-      bookSubtitle: "Manhattan Money Kings Book 1",
-    },
-  };
-
-  it("should map enemies trope to The Billionaire's Rival", () => {
-    expect(tropeResults["enemies"].bookTitle).toBe("The Billionaire's Rival");
-  });
-
-  it("should map forbidden trope to The Billionaire's Forbidden Nanny", () => {
-    expect(tropeResults["forbidden"].bookTitle).toBe("The Billionaire's Forbidden Nanny");
-  });
-
-  it("should map second-chance trope to The Billionaire's Baby Secret", () => {
+  it("maps each result to a real Reese Astor title", async () => {
+    const { tropeResults } = await import("../client/src/pages/Quiz");
+    expect(tropeResults.enemies.bookTitle).toBe("Hostile Tender");
+    expect(tropeResults.enemies.bookSubtitle).toBe("Hudson Dynasty Book 1");
+    expect(tropeResults.forbidden.bookTitle).toBe("The Billionaire's Forbidden Nanny");
+    expect(tropeResults.forbidden.bookLink).toBe("https://www.amazon.com/dp/B0GDZ4T164");
     expect(tropeResults["second-chance"].bookTitle).toBe("The Billionaire's Baby Secret");
-  });
-
-  it("should map boss trope to The First Acquisition", () => {
-    expect(tropeResults["boss"].bookTitle).toBe("The First Acquisition");
-  });
-
-  it("should have all 4 trope results", () => {
-    expect(Object.keys(tropeResults).length).toBe(4);
-  });
-
-  it("should have book subtitles referencing Manhattan Money Kings series", () => {
-    Object.values(tropeResults).forEach((result) => {
-      expect(result.bookSubtitle).toContain("Manhattan Money Kings");
-    });
+    expect(tropeResults["second-chance"].bookLink).toBe("https://www.amazon.com/dp/B0G12LBZ24");
+    expect(tropeResults.boss.bookTitle).toBe("The Billionaire's Executive Assistant");
+    expect(tropeResults.boss.bookSubtitle).toBe("Manhattan Money Kings Book 1");
+    expect(tropeResults.boss.bookLink).toBe("https://www.amazon.com/dp/B0F2W8QL7S");
+    expect(Object.values(tropeResults).map((result) => result.bookTitle)).not.toContain(
+      "The Billionaire's Rival",
+    );
+    for (const result of Object.values(tropeResults)) {
+      expect(result.bookLink.startsWith("https://www.amazon.com/dp/")).toBe(true);
+    }
   });
 });

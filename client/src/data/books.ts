@@ -80,7 +80,7 @@ export const BOOKS: Book[] = [
     pull_quote: "“You were supposed to be a stranger. You decided otherwise.”",
     cover_image: "https://m.media-amazon.com/images/I/815-iFRAlpL._SL1500_.jpg",
     publication_date: null,
-    kindle_unlimited: true,
+    kindle_unlimited: false,
     retailers: {
       amazon_kindle: "https://www.amazon.com/dp/B0DSG7NKGP",
     },
@@ -123,7 +123,7 @@ export const BOOKS: Book[] = [
     position_label: "Book 2",
     tagline: "A ruthless engagement that turns devastatingly real.",
     blurb:
-      "When thief Elena Kim breaks into his penthouse, billionaire David Kim catches her red-handed. But " +
+      "When thief Elena Volkov breaks into his penthouse, billionaire David Kim catches her red-handed. But " +
       "instead of calling the police, he makes her an offer she can't refuse: marry him for twelve months " +
       "in exchange for protection from her violent father. As they work together, their forced alliance " +
       "ignites into something neither expected.",
@@ -206,7 +206,7 @@ export const BOOKS: Book[] = [
     pull_quote: "“He did not yet know what an empire cost. He was about to learn.”",
     cover_image: "https://m.media-amazon.com/images/P/B0D82GWFD9.01._SCLZZZZZZZ_SX500_.jpg",
     publication_date: null,
-    kindle_unlimited: true,
+    kindle_unlimited: false,
     retailers: {
       amazon_kindle: "https://www.amazon.com/dp/B0D82GWFD9",
       bookfunnel: "https://dl.bookfunnel.com/kw1yge3479",
@@ -279,12 +279,24 @@ export const BOOKS: Book[] = [
     series_position: 3,
     format: "ebook",
     position_label: "Book 3",
-    tagline: "Hudson Dynasty, Book 3.",
-    blurb: "Book 3 of the Hudson Dynasty.",
+    tagline:
+      "He can restructure a billion dollars of bad debt. He cannot buy his way around the one woman who refuses to be managed.",
+    blurb:
+      "Miri Doyle-Levine has spent eight years keeping other people on their feet. A home health aide fighting " +
+      "her way into nursing school, she has no time for a man who treats every problem like a number he can make " +
+      "disappear. Kai Hsu built his life the same way he handles distressed credit: control the risk, close the " +
+      "exits, never need anything. Then Miri sees through him in one glance. The chemistry is immediate. The terms " +
+      "are not. She refuses his money. He keeps trying to turn care into logistics. And when the body Kai has " +
+      "ignored for years finally forces him to stop, both of them have to decide what love looks like when rescue " +
+      "is off the table. Miri will not become his cure. Kai will have to become a man who can stay. Golden " +
+      "Parachute is a high-heat contemporary romance about class difference, emotional recovery, boundaries, and " +
+      "choosing love without surrendering yourself. It can be read as a standalone and ends with a complete " +
+      "happily ever after. Content note: explicit consensual sexual content, compulsive sexual behavior recovery, " +
+      "and a serious medical emergency.",
     pull_quote: null,
     cover_image: "https://m.media-amazon.com/images/P/B0HDKNP9F6.01._SCLZZZZZZZ_SX500_.jpg",
     publication_date: null,
-    kindle_unlimited: false,
+    kindle_unlimited: true,
     retailers: {
       amazon_kindle: "https://www.amazon.com/dp/B0HDKNP9F6",
     },
