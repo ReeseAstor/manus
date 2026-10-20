@@ -6,8 +6,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Headphones, Play, Flame, Search, Filter, Music, Crown } from "lucide-react";
+import { Headphones, Play, Flame, Search, Filter, Music, Crown, Heart } from "lucide-react";
 import { Link } from "wouter";
+import { AudioPlayer } from "@/components/AudioPlayer";
 
 export default function VipAudioLibrary() {
   const { user, isAuthenticated } = useAuth();
@@ -23,6 +24,16 @@ export default function VipAudioLibrary() {
     { category: categoryFilter === "all" ? undefined : categoryFilter },
     { enabled: !!membership }
   );
+  const utils = trpc.useUtils();
+  const { data: dashboard } = trpc.vip.getDashboard.useQuery(undefined, {
+    enabled: !!membership,
+  });
+  const toggleLike = trpc.vip.toggleLike.useMutation({
+    onSuccess: () => {
+      utils.vip.getDashboard.invalidate();
+    },
+  });
+  const likedIds = new Set(dashboard?.favorites.map((story) => story.id) ?? []);
 
   // Filter stories by heat level and search query
   const filteredStories = stories?.filter((story) => {
@@ -198,10 +209,23 @@ export default function VipAudioLibrary() {
                     )}
                   </div>
                   <CardContent className="p-4">
-                    <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-start justify-between mb-2 gap-2">
                       <h3 className="font-serif text-lg font-semibold text-white flex-1">{story.title}</h3>
+                      <button
+                        type="button"
+                        aria-label={likedIds.has(story.id) ? "Remove from favorites" : "Save to favorites"}
+                        onClick={() => toggleLike.mutate({ storyId: story.id })}
+                        className="text-rose-400 hover:text-rose-300"
+                      >
+                        <Heart className={`w-5 h-5 ${likedIds.has(story.id) ? "fill-rose-400" : ""}`} />
+                      </button>
                     </div>
                     <p className="text-gray-400 text-sm line-clamp-2 mb-3">{story.description}</p>
+                    {story.audioUrl && (
+                      <div className="mb-3">
+                        <AudioPlayer audioUrl={story.audioUrl} storyId={story.id} showSpeedControl={false} />
+                      </div>
+                    )}
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center gap-2 text-gray-500">
                         <Headphones className="w-4 h-4" />

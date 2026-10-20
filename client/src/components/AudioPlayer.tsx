@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { trpc } from "@/lib/trpc";
 import { Play, Pause, Volume2, VolumeX, SkipBack, SkipForward, Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -13,6 +14,7 @@ import {
 interface AudioPlayerProps {
   audioUrl: string;
   title?: string;
+  storyId?: number;
   onDownload?: () => void;
   canDownload?: boolean;
   showSpeedControl?: boolean;
@@ -22,12 +24,15 @@ interface AudioPlayerProps {
 export function AudioPlayer({
   audioUrl,
   title,
+  storyId,
   onDownload,
   canDownload = false,
   showSpeedControl = true,
   className = "",
 }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const lastReportAt = useRef(0);
+  const reportProgress = trpc.vip.updatePlayProgress.useMutation();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -45,13 +50,28 @@ export function AudioPlayer({
       setIsLoading(false);
     };
 
+    const sendProgress = (completed: boolean) => {
+      if (!storyId) return;
+      const progress = Math.min(6 * 60 * 60, Math.max(0, Math.floor(audio.currentTime)));
+      lastReportAt.current = Date.now();
+      reportProgress.mutate({ storyId, progress, completed });
+    };
+
     const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
+      if (!audio.paused && Date.now() - lastReportAt.current >= 30_000) {
+        sendProgress(false);
+      }
+    };
+
+    const handlePause = () => {
+      if (audio.currentTime > 0 && !audio.ended) sendProgress(false);
     };
 
     const handleEnded = () => {
       setIsPlaying(false);
       setCurrentTime(0);
+      sendProgress(true);
     };
 
     const handleCanPlay = () => {
@@ -60,16 +80,18 @@ export function AudioPlayer({
 
     audio.addEventListener("loadedmetadata", handleLoadedMetadata);
     audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("pause", handlePause);
     audio.addEventListener("ended", handleEnded);
     audio.addEventListener("canplay", handleCanPlay);
 
     return () => {
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
       audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("pause", handlePause);
       audio.removeEventListener("ended", handleEnded);
       audio.removeEventListener("canplay", handleCanPlay);
     };
-  }, [audioUrl]);
+  }, [audioUrl, storyId]);
 
   const togglePlay = () => {
     const audio = audioRef.current;

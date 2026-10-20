@@ -10,6 +10,26 @@ import {
   Clock,
 } from 'lucide-react';
 
+function membershipLabel(status: string | null | undefined): string {
+  switch (status) {
+    case "active":
+      return "VIP Member • Active";
+    case "paused":
+      return "Membership paused";
+    case "pending":
+      return "Membership starting";
+    case "past_due":
+      return "Payment past due";
+    case "canceled":
+    case "cancelled":
+      return "Membership canceled";
+    case "expired":
+      return "Membership ended";
+    default:
+      return "No active membership";
+  }
+}
+
 export default function VipDashboard() {
   const [location, setLocation] = useLocation();
   const [activeTab, setActiveTab] = useState<'overview' | 'library' | 'history' | 'settings'>('overview');
@@ -174,7 +194,7 @@ export default function VipDashboard() {
                 <div>
                   <h2 className="text-2xl font-bold mb-2">Your Subscription</h2>
                   <p className="text-pink-100 mb-4">
-                    {dashboard?.subscriptionStatus === 'active' ? 'VIP Member • Active' : 'No active membership'}
+                    {membershipLabel(dashboard?.subscriptionStatus)}
                   </p>
                   {nextBilling && (
                     <p className="text-sm text-pink-100">

@@ -93,4 +93,31 @@ describe("vip.getDashboard", () => {
     expect(result.history).toEqual([]);
     expect(result.subscriptionStatus).toBeNull();
   });
+
+  it("rejects a playback position longer than six hours", async () => {
+    const caller = appRouter.createCaller(signedInContext());
+    await expect(
+      caller.vip.updatePlayProgress({ storyId: 1, progress: 6 * 60 * 60 + 1, completed: false }),
+    ).rejects.toBeInstanceOf(TRPCError);
+  });
+
+  it("upserts one furthest position per story", async () => {
+    const onConflictDoUpdate = vi.fn(() => Promise.resolve());
+    const values = vi.fn(() => ({ onConflictDoUpdate }));
+    vi.mocked(db.getDb).mockResolvedValue({
+      insert: () => ({ values }),
+    } as never);
+
+    const result = await appRouter.createCaller(signedInContext()).vip.updatePlayProgress({
+      storyId: 4,
+      progress: 90,
+      completed: false,
+    });
+
+    expect(result).toEqual({ success: true });
+    expect(values).toHaveBeenCalledWith(
+      expect.objectContaining({ userId: 7, storyId: 4, progress: 90, completed: false }),
+    );
+    expect(onConflictDoUpdate).toHaveBeenCalled();
+  });
 });

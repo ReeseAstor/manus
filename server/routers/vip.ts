@@ -433,21 +433,33 @@ export const vipRouter = router({
   updatePlayProgress: protectedProcedure
     .input(
       z.object({
-        storyId: z.number(),
-        progress: z.number(),
+        storyId: z.number().int(),
+        progress: z.number().int().min(0).max(6 * 60 * 60),
         completed: z.boolean().default(false),
       })
     )
     .mutation(async ({ ctx, input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
-      
-      await db.insert(storyPlayHistory).values({
-        userId: ctx.user.id,
-        storyId: input.storyId,
-        progress: input.progress,
-        completed: input.completed,
-      });
+
+      // One row per member and story. Progress is the furthest position, so a
+      // later SUM does not add every checkpoint together.
+      await db
+        .insert(storyPlayHistory)
+        .values({
+          userId: ctx.user.id,
+          storyId: input.storyId,
+          progress: input.progress,
+          completed: input.completed,
+        })
+        .onConflictDoUpdate({
+          target: [storyPlayHistory.userId, storyPlayHistory.storyId],
+          set: {
+            progress: sql`GREATEST(COALESCE(${storyPlayHistory.progress}, 0), ${input.progress})`,
+            playedAt: new Date(),
+            completed: sql`${storyPlayHistory.completed} OR ${input.completed}`,
+          },
+        });
 
       return { success: true };
     }),
