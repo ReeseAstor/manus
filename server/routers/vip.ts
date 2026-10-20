@@ -442,20 +442,67 @@ export const vipRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
+      const membership = await db
+        .select({ status: vipMembers.status, tierId: vipMembers.tierId })
+        .from(vipMembers)
+        .where(eq(vipMembers.userId, ctx.user.id))
+        .limit(1);
+
+      if (!membership[0] || membership[0].status !== "active") {
+        throw new TRPCError({ code: "FORBIDDEN", message: "VIP membership required" });
+      }
+
+      const story = await db
+        .select({
+          audioDuration: steamyStories.audioDuration,
+          minTier: steamyStories.minTier,
+        })
+        .from(steamyStories)
+        .where(eq(steamyStories.id, input.storyId))
+        .limit(1);
+
+      if (!story[0]) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Story not found" });
+      }
+
+      const tier = await db
+        .select({ displayOrder: vipTiers.displayOrder })
+        .from(vipTiers)
+        .where(eq(vipTiers.id, membership[0].tierId))
+        .limit(1);
+      const tierLevel = tier[0]?.displayOrder || 1;
+      if ((story[0].minTier ?? 1) > tierLevel) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "This story is not included in your membership",
+        });
+      }
+
       // One row per member and story. Progress is the furthest position, so a
-      // later SUM does not add every checkpoint together.
+      // later SUM does not add every checkpoint together. When the story has a
+      // known duration, the stored position cannot pass it.
+      const duration = story[0].audioDuration;
+      const progress =
+        typeof duration === "number" && duration > 0
+          ? Math.min(input.progress, duration)
+          : input.progress;
+      const progressSql =
+        typeof duration === "number" && duration > 0
+          ? sql`LEAST(${duration}, GREATEST(COALESCE(${storyPlayHistory.progress}, 0), ${progress}))`
+          : sql`GREATEST(COALESCE(${storyPlayHistory.progress}, 0), ${progress})`;
+
       await db
         .insert(storyPlayHistory)
         .values({
           userId: ctx.user.id,
           storyId: input.storyId,
-          progress: input.progress,
+          progress,
           completed: input.completed,
         })
         .onConflictDoUpdate({
           target: [storyPlayHistory.userId, storyPlayHistory.storyId],
           set: {
-            progress: sql`GREATEST(COALESCE(${storyPlayHistory.progress}, 0), ${input.progress})`,
+            progress: progressSql,
             playedAt: new Date(),
             completed: sql`${storyPlayHistory.completed} OR ${input.completed}`,
           },

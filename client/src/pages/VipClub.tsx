@@ -480,7 +480,7 @@ export default function VipClub() {
                     "David's hand found the small of my back, his touch sending electricity through the silk of my dress. 'We shouldn't,' I whispered, even as I leaned into him. His gilded eyes darkened. 'Then tell me to stop.' But we both knew I wouldn't..."
                   </p>
                   <div className="mt-3 text-center">
-                    <span className="text-pink-400 text-xs font-semibold">— Continues for 2,400 words —</span>
+                    <span className="text-pink-400 text-xs font-semibold">— Continues for members —</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-400">

@@ -104,7 +104,13 @@ describe("vip.getDashboard", () => {
   it("upserts one furthest position per story", async () => {
     const onConflictDoUpdate = vi.fn(() => Promise.resolve());
     const values = vi.fn(() => ({ onConflictDoUpdate }));
+    const queued = [
+      [{ status: "active", tierId: 2 }],
+      [{ audioDuration: null, minTier: 1 }],
+      [{ displayOrder: 1 }],
+    ];
     vi.mocked(db.getDb).mockResolvedValue({
+      select: () => queryResult(queued.shift() ?? []),
       insert: () => ({ values }),
     } as never);
 
@@ -119,5 +125,66 @@ describe("vip.getDashboard", () => {
       expect.objectContaining({ userId: 7, storyId: 4, progress: 90, completed: false }),
     );
     expect(onConflictDoUpdate).toHaveBeenCalled();
+  });
+
+  it("rejects a signed-in caller who is not an active member", async () => {
+    const values = vi.fn();
+    vi.mocked(db.getDb).mockResolvedValue({
+      select: () => queryResult([{ status: "paused", tierId: 2 }]),
+      insert: () => ({ values }),
+    } as never);
+
+    await expect(
+      appRouter.createCaller(signedInContext()).vip.updatePlayProgress({
+        storyId: 4,
+        progress: 30,
+        completed: false,
+      }),
+    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    expect(values).not.toHaveBeenCalled();
+  });
+
+  it("clamps progress to the story duration when that duration is known", async () => {
+    const onConflictDoUpdate = vi.fn(() => Promise.resolve());
+    const values = vi.fn(() => ({ onConflictDoUpdate }));
+    const queued = [
+      [{ status: "active", tierId: 2 }],
+      [{ audioDuration: 40, minTier: 1 }],
+      [{ displayOrder: 1 }],
+    ];
+    vi.mocked(db.getDb).mockResolvedValue({
+      select: () => queryResult(queued.shift() ?? []),
+      insert: () => ({ values }),
+    } as never);
+
+    await appRouter.createCaller(signedInContext()).vip.updatePlayProgress({
+      storyId: 4,
+      progress: 90,
+      completed: false,
+    });
+
+    expect(values).toHaveBeenCalledWith(expect.objectContaining({ progress: 40 }));
+  });
+
+  it("rejects a story above the member's tier", async () => {
+    const values = vi.fn();
+    const queued = [
+      [{ status: "active", tierId: 1 }],
+      [{ audioDuration: 40, minTier: 3 }],
+      [{ displayOrder: 1 }],
+    ];
+    vi.mocked(db.getDb).mockResolvedValue({
+      select: () => queryResult(queued.shift() ?? []),
+      insert: () => ({ values }),
+    } as never);
+
+    await expect(
+      appRouter.createCaller(signedInContext()).vip.updatePlayProgress({
+        storyId: 4,
+        progress: 10,
+        completed: false,
+      }),
+    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    expect(values).not.toHaveBeenCalled();
   });
 });
