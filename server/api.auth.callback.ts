@@ -46,7 +46,13 @@ export async function authCallback(req: Request, res: Response) {
   }
 
   try {
-    let supabaseUser: { id: string; email?: string | null; user_metadata?: any } | null = null;
+    let supabaseUser: {
+      id: string;
+      email?: string | null;
+      email_confirmed_at?: string | null;
+      confirmed_at?: string | null;
+      user_metadata?: any;
+    } | null = null;
 
     if (typeof code === 'string' && code.length > 0) {
       const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
@@ -72,6 +78,14 @@ export async function authCallback(req: Request, res: Response) {
 
     if (!supabaseUser?.id) {
       return res.redirect('/auth/login?error=Supabase+user+missing+id');
+    }
+
+    if (!supabaseUser.email_confirmed_at && !supabaseUser.confirmed_at) {
+      return res.redirect(
+        `/auth/login?error=${encodeURIComponent(
+          'Confirm your email before signing in. Check your inbox for the confirmation link.',
+        )}`,
+      );
     }
 
     const openId = `supabase:${supabaseUser.id}`;

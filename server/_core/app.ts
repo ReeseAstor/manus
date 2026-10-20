@@ -79,7 +79,13 @@ export function createApp(): Express {
     }
   });
 
-  app.post("/api/cron/publish-scheduled", async (req, res) => {
+  // Vercel Cron calls GET /api/cron/publish-scheduled hourly (vercel.json)
+  // with `Authorization: Bearer $CRON_SECRET`. POST stays for the same header.
+  // An empty or missing CRON_SECRET is rejected. Do not set that secret here.
+  const publishScheduled = async (
+    req: express.Request,
+    res: express.Response,
+  ) => {
     if (!cronAuthorized(req.headers.authorization)) {
       return res.status(401).json({ error: "Unauthorized" });
     }
@@ -91,7 +97,9 @@ export function createApp(): Express {
       console.error("[Cron] Blog publisher error:", error);
       res.status(500).json({ error: String(error) });
     }
-  });
+  };
+  app.get("/api/cron/publish-scheduled", publishScheduled);
+  app.post("/api/cron/publish-scheduled", publishScheduled);
 
   app.get("/sitemap.xml", async (_req, res) => {
     try {

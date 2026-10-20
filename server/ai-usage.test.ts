@@ -111,6 +111,27 @@ describe("AI Usage Rate Limiting", () => {
     }
   });
 
+  it("takes a production slot with one UTC upsert and honors the returned count", async () => {
+    const previousEnv = process.env.NODE_ENV;
+    const previousDb = process.env.DATABASE_URL;
+    const execute = vi.fn().mockResolvedValue({ rows: [{ count: 16 }] });
+    process.env.NODE_ENV = "production";
+    process.env.DATABASE_URL = "postgres://rate-limit-test";
+    vi.mocked(db.getDb).mockResolvedValue({ execute } as never);
+    try {
+      expect(await checkRateLimit("atomic-chat", "chat")).toBe(false);
+      expect(execute).toHaveBeenCalledTimes(1);
+      const text = JSON.stringify(execute.mock.calls[0]?.[0]);
+      expect(text).toContain("ON CONFLICT");
+      expect(text).toContain("AT TIME ZONE");
+      expect(text).toContain("UTC");
+    } finally {
+      process.env.NODE_ENV = previousEnv;
+      if (previousDb === undefined) delete process.env.DATABASE_URL;
+      else process.env.DATABASE_URL = previousDb;
+    }
+  });
+
   it("keeps spend closed and signups in memory when the shared store throws", async () => {
     const previousEnv = process.env.NODE_ENV;
     const previousDb = process.env.DATABASE_URL;

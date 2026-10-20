@@ -45,11 +45,13 @@ function dbReturning(results: unknown[][]) {
   const take = () => Promise.resolve(results[index++] ?? []);
   const chain: {
     from: () => typeof chain;
+    innerJoin: () => typeof chain;
     where: () => typeof chain;
     limit: () => Promise<unknown>;
     then: Promise<unknown>["then"];
   } = {
     from: () => chain,
+    innerJoin: () => chain,
     where: () => chain,
     limit: () => take(),
     then: (resolve, reject) => take().then(resolve, reject),
@@ -61,7 +63,11 @@ function dbReturning(results: unknown[][]) {
   };
 }
 
-describe("generateStoryAudio monthly quota", () => {
+function member(slug: "bronze" | "silver" | "gold") {
+  return { slug, name: slug };
+}
+
+describe("audio generation VIP gate", () => {
   beforeEach(() => {
     vi.mocked(generateAudio).mockReset();
     vi.mocked(generateAudio).mockResolvedValue({
@@ -72,9 +78,48 @@ describe("generateStoryAudio monthly quota", () => {
     });
   });
 
-  it("blocks a signed-in reader who has used the free 10 minutes", async () => {
+  it("rejects a signed-in non-VIP reader before any voice call", async () => {
     vi.mocked(getDb).mockResolvedValue(
-      dbReturning([[{ id: 1, content: "a".repeat(1000) }], [], [{ totalMinutes: 10 }]]) as never,
+      dbReturning([[{ id: 1, content: "a".repeat(1000) }], []]) as never,
+    );
+    const caller = appRouter.createCaller(ctxFor("user"));
+    await expect(caller.audio.generateStoryAudio({ storyId: 1 })).rejects.toMatchObject({
+      code: "FORBIDDEN",
+      message: expect.stringMatching(/Upgrade your membership/),
+    });
+    expect(generateAudio).not.toHaveBeenCalled();
+  });
+
+  it("rejects generateAudio for a signed-in non-VIP reader before any voice call", async () => {
+    vi.mocked(getDb).mockResolvedValue(dbReturning([[]]) as never);
+    const caller = appRouter.createCaller(ctxFor("user"));
+    await expect(caller.audio.generateAudio({ text: "hello" })).rejects.toMatchObject({
+      code: "FORBIDDEN",
+    });
+    expect(generateAudio).not.toHaveBeenCalled();
+  });
+
+  it("lets an active bronze member generate inside 60 minutes", async () => {
+    vi.mocked(getDb).mockResolvedValue(
+      dbReturning([
+        [{ id: 1, content: "a".repeat(1000) }],
+        [member("bronze")],
+        [{ totalMinutes: 59 }],
+      ]) as never,
+    );
+    const caller = appRouter.createCaller(ctxFor("user"));
+    const result = await caller.audio.generateStoryAudio({ storyId: 1 });
+    expect(result.audioUrl).toBe("https://example.com/story.mp3");
+    expect(generateAudio).toHaveBeenCalledTimes(1);
+  });
+
+  it("stops a bronze member at 60 minutes without calling the voice service", async () => {
+    vi.mocked(getDb).mockResolvedValue(
+      dbReturning([
+        [{ id: 1, content: "a".repeat(1000) }],
+        [member("bronze")],
+        [{ totalMinutes: 60 }],
+      ]) as never,
     );
     const caller = appRouter.createCaller(ctxFor("user"));
     await expect(caller.audio.generateStoryAudio({ storyId: 1 })).rejects.toThrow(
@@ -83,13 +128,25 @@ describe("generateStoryAudio monthly quota", () => {
     expect(generateAudio).not.toHaveBeenCalled();
   });
 
-  it("lets a signed-in reader generate inside the free 10 minutes", async () => {
+  it("gives a silver member 180 minutes", async () => {
     vi.mocked(getDb).mockResolvedValue(
-      dbReturning([[{ id: 1, content: "a".repeat(1000) }], [], [{ totalMinutes: 0 }]]) as never,
+      dbReturning([
+        [{ id: 1, content: "a".repeat(1000) }],
+        [member("silver")],
+        [{ totalMinutes: 179 }],
+      ]) as never,
     );
     const caller = appRouter.createCaller(ctxFor("user"));
-    const result = await caller.audio.generateStoryAudio({ storyId: 1 });
-    expect(result.audioUrl).toBe("https://example.com/story.mp3");
+    await caller.audio.generateStoryAudio({ storyId: 1 });
+    expect(generateAudio).toHaveBeenCalledTimes(1);
+  });
+
+  it("treats gold as unlimited past the silver allowance", async () => {
+    vi.mocked(getDb).mockResolvedValue(
+      dbReturning([[member("gold")], [{ totalMinutes: 5000 }]]) as never,
+    );
+    const caller = appRouter.createCaller(ctxFor("user"));
+    await caller.audio.generateAudio({ text: "a".repeat(1000) });
     expect(generateAudio).toHaveBeenCalledTimes(1);
   });
 

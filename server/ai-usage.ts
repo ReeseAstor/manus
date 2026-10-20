@@ -5,7 +5,10 @@
  * serverless instances share one counter. Create that table with
  * drizzle/postgres/0028_ai_rate_limits.sql before deploy. The app does not
  * run CREATE TABLE. Applying that file needs CREATE on schema public.
- * Afterward the runtime role needs SELECT, INSERT, and DELETE only.
+ * Afterward the runtime role needs SELECT, INSERT, and UPDATE. Each bucket
+ * is one counter row, consumed with INSERT ... ON CONFLICT DO UPDATE
+ * RETURNING count. The window is `now() AT TIME ZONE 'UTC'`, so it does
+ * not follow the database session timezone.
  *
  * If the shared store errors, signup falls back to this process's memory
  * window. Chat, image, quiz, voice preview, and the other spend features
@@ -16,7 +19,7 @@
  * X-Forwarded-For. On Vercel, getClientKey prefers x-vercel-forwarded-for,
  * which the platform sets and clients cannot spoof.
  */
-import { sql } from "drizzle-orm";
+import { sql, type SQL } from "drizzle-orm";
 import { getDb } from "./db";
 
 export type AiFeature =
@@ -169,6 +172,44 @@ function memoryAllow(
 
 const SIGNUP_FEATURES = new Set<AiFeature>(["signup"]);
 
+type SqlExecutor = (statement: SQL) => Promise<unknown>;
+
+function returnedCount(result: unknown): number {
+  const row = (result as { rows?: Array<{ count?: number | string }> }).rows?.[0];
+  const count = Number(row?.count);
+  return Number.isFinite(count) ? count : Number.POSITIVE_INFINITY;
+}
+
+/**
+ * Atomically take one slot in a single counter row.
+ * Allowed when the returned count is still within `limit`.
+ * Concurrent updates lock the row, so a limit of 6 cannot admit a 7th.
+ */
+export async function consumeRateLimitSlot(
+  execute: SqlExecutor,
+  bucketId: string,
+  windowMs: number,
+  limit: number,
+): Promise<boolean> {
+  const result = await execute(sql`
+    INSERT INTO ai_rate_limits ("bucketId", count, "windowStart")
+    VALUES (${bucketId}, 1, (now() AT TIME ZONE 'UTC'))
+    ON CONFLICT ("bucketId") DO UPDATE SET
+      count = CASE
+        WHEN ai_rate_limits."windowStart" <= (now() AT TIME ZONE 'UTC') - (${windowMs}::int * interval '1 millisecond')
+          THEN 1
+        ELSE ai_rate_limits.count + 1
+      END,
+      "windowStart" = CASE
+        WHEN ai_rate_limits."windowStart" <= (now() AT TIME ZONE 'UTC') - (${windowMs}::int * interval '1 millisecond')
+          THEN (now() AT TIME ZONE 'UTC')
+        ELSE ai_rate_limits."windowStart"
+      END
+    RETURNING count
+  `);
+  return returnedCount(result) <= limit;
+}
+
 async function postgresAllow(
   bucketId: string,
   windowMs: number,
@@ -179,30 +220,11 @@ async function postgresAllow(
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
-  const countSince = async (id: string, since: Date) => {
-    const result = await db.execute(sql`
-      SELECT COUNT(*)::int AS n
-      FROM ai_rate_limits
-      WHERE "bucketId" = ${id} AND "createdAt" >= ${since}
-    `);
-    const row = (result as unknown as { rows?: Array<{ n: number }> }).rows?.[0];
-    return Number(row?.n ?? 0);
-  };
-
+  const callerAllowed = await consumeRateLimitSlot(db.execute.bind(db), bucketId, windowMs, limit);
+  if (!callerAllowed) return false;
   if (globalId && globalCap) {
-    const globalCount = await countSince(globalId, new Date(Date.now() - DAY_MS));
-    if (globalCount >= globalCap) return false;
+    return consumeRateLimitSlot(db.execute.bind(db), globalId, DAY_MS, globalCap);
   }
-  const callerCount = await countSince(bucketId, new Date(Date.now() - windowMs));
-  if (callerCount >= limit) return false;
-
-  await db.execute(sql`INSERT INTO ai_rate_limits ("bucketId") VALUES (${bucketId})`);
-  if (globalId && globalCap) {
-    await db.execute(sql`INSERT INTO ai_rate_limits ("bucketId") VALUES (${globalId})`);
-  }
-  await db.execute(sql`
-    DELETE FROM ai_rate_limits WHERE "createdAt" < NOW() - INTERVAL '2 days'
-  `);
   return true;
 }
 
