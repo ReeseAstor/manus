@@ -73,7 +73,7 @@ const MATCHES: Omit<QuizMatch, "matchPercentage">[] = [
     personality: "You like charm, a quick mind, and someone who can turn tension into a game.",
     bookRecommendation: "The Billionaire's Fake Wife",
     bookLink: "https://www.amazon.com/dp/B0FCCBNF8X",
-    reason: "An enemies-to-lovers story with a strategic hero.",
+    reason: "A contract-wife story: a marriage of convenience offered for protection.",
   },
   {
     character: "Dominic Kane",
