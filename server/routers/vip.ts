@@ -59,7 +59,7 @@ export const vipRouter = router({
   getFeaturedStories: publicProcedure.query(async () => {
     const db = await getDb();
     if (!db) return [];
-    
+
     const stories = await db
       .select({
         id: steamyStories.id,
@@ -79,6 +79,67 @@ export const vipRouter = router({
       .orderBy(desc(steamyStories.publishedAt))
       .limit(6);
     return stories;
+  }),
+
+  // Real listening stats for the member dashboard. Empty history is zero, not a placeholder.
+  getDashboard: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
+
+    const membership = await db
+      .select({
+        status: vipMembers.status,
+        joinedAt: vipMembers.joinedAt,
+        currentPeriodEnd: vipMembers.currentPeriodEnd,
+      })
+      .from(vipMembers)
+      .where(eq(vipMembers.userId, ctx.user.id))
+      .limit(1);
+
+    const likes = await db
+      .select({
+        id: steamyStories.id,
+        title: steamyStories.title,
+        category: steamyStories.category,
+        excerpt: steamyStories.excerpt,
+        heatLevel: steamyStories.heatLevel,
+      })
+      .from(storyLikes)
+      .innerJoin(steamyStories, eq(storyLikes.storyId, steamyStories.id))
+      .where(eq(storyLikes.userId, ctx.user.id))
+      .orderBy(desc(storyLikes.createdAt));
+
+    const history = await db
+      .select({
+        id: storyPlayHistory.id,
+        title: steamyStories.title,
+        heatLevel: steamyStories.heatLevel,
+        progress: storyPlayHistory.progress,
+        playedAt: storyPlayHistory.playedAt,
+      })
+      .from(storyPlayHistory)
+      .innerJoin(steamyStories, eq(storyPlayHistory.storyId, steamyStories.id))
+      .where(eq(storyPlayHistory.userId, ctx.user.id))
+      .orderBy(desc(storyPlayHistory.playedAt))
+      .limit(20);
+
+    const totals = await db
+      .select({
+        seconds: sql<number>`COALESCE(SUM(${storyPlayHistory.progress}), 0)`,
+        stories: sql<number>`COUNT(DISTINCT ${storyPlayHistory.storyId})`,
+      })
+      .from(storyPlayHistory)
+      .where(eq(storyPlayHistory.userId, ctx.user.id));
+
+    return {
+      storiesPlayed: Number(totals[0]?.stories ?? 0),
+      minutesPlayed: Math.floor(Number(totals[0]?.seconds ?? 0) / 60),
+      favorites: likes,
+      memberSince: membership[0]?.joinedAt ?? null,
+      subscriptionStatus: membership[0]?.status ?? null,
+      currentPeriodEnd: membership[0]?.currentPeriodEnd ?? null,
+      history,
+    };
   }),
 
   // Get welcome story for new members (doesn't require active membership yet)
