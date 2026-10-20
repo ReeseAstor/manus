@@ -50,13 +50,13 @@ Neon preview branches are already at the account limit, which is why Vercel prev
 Do one of these, and confirm it finished, before the pre-check or the catch-up:
 
 1. Free a Neon branch slot, then `neon branches create --name pre-catchup-20261020`.
-2. Or, from a machine that already has the owner URL in the environment and does not print it: `pg_dump -Fc "$OWNER_URL" -f pre-catchup.dump`, then `ls -lh pre-catchup.dump` and confirm the file is non-empty.
+2. Or, from a machine that already has the owner URL in the environment and does not print it: `pg_dump -Fc "$OWNER_URL" -f pre-catchup.dump`, then `ls -lh pre-catchup.dump` and confirm the file is non-empty. The pg_dump client version must be >= the server version (`SELECT version()`). A client older than the Neon server refuses to dump.
 
 Neon point-in-time recovery is the fallback if both of those fail. Do not start the catch-up without one of them.
 
 ## Pre-check (read-only)
 
-Run this as the owner before the catch-up. Stop if the duplicate block warns. It does not change rows.
+Run this as the owner before the catch-up. It does not change rows. The duplicate block collects every group first, then raises one exception, so `psql -v ON_ERROR_STOP=1` exits 3. A warning would exit 0 and is not enough.
 
 ```sql
 -- 1. Inventory: what exists today, and how many rows
@@ -65,7 +65,7 @@ SELECT t.typname FROM pg_type t JOIN pg_namespace n ON n.oid = t.typnamespace
  WHERE n.nspname = 'public' AND t.typtype = 'e' ORDER BY 1;
 
 -- 2. Duplicates that would block each unique index (only for tables that exist)
-DO $$ DECLARE r record; n int; BEGIN
+DO $$ DECLARE r record; n int; msgs text := ''; BEGIN
  FOR r IN SELECT * FROM (VALUES
   ('blog_posts','"slug"'),('books','"slug"'),('exclusive_content','"slug"'),
   ('newsletter_subscribers','"email"'),('reader_club_members','"email"'),('sms_templates','"slug"'),
@@ -75,12 +75,14 @@ DO $$ DECLARE r record; n int; BEGIN
  LOOP
   IF to_regclass('public.'||r.tbl) IS NOT NULL THEN
    EXECUTE format('SELECT count(*) FROM (SELECT 1 FROM %I GROUP BY %s HAVING count(*) > 1) d', r.tbl, r.cols) INTO n;
-   IF n > 0 THEN RAISE WARNING 'DUPLICATES in %(%): % groups', r.tbl, r.cols, n; END IF;
+   IF n > 0 THEN msgs := msgs || format(E'DUPLICATES in %s(%s): %s groups\n', r.tbl, r.cols, n); END IF;
   END IF;
- END LOOP; END $$;
+ END LOOP;
+ IF msgs <> '' THEN RAISE EXCEPTION '%', msgs; END IF;
+END $$;
 ```
 
-`n_live_tup` is an estimate. A warning means that unique index will stop the file. Collapse those groups by hand. This plan does not delete them.
+`n_live_tup` is an estimate. An exception means that unique index will stop the file. Collapse those groups by hand. This plan does not delete them.
 
 ## Run command
 

@@ -34,6 +34,8 @@ Re-review the feature copy before it is shown again. The old JSON promises count
 
 The logs only show five story rows, and their audio URLs return 403. Restoring this copy would advertise 10+, 25+, and a monthly cadence the site does not have. Leave the features text for the owner to rewrite. Do not insert it as-is.
 
+`client/src/pages/VipClub.tsx` (about line 436) also promises "Fresh stories added every month. Gold members can even request custom stories tailored to their fantasies." Name that sentence in the rewrite. Do not restore it, and do not insert the old feature JSON as-is. The replacement tier copy has to match a library that does not add a story every month and does not take custom requests.
+
 `vip.subscribe` looks up `vip_tiers` by slug before it creates a Checkout session. With an empty table the Join buttons have nothing to render and the bottom call to action cannot find `bronze`.
 
 ## steamy_stories
@@ -52,9 +54,19 @@ Every audio and preview URL is on `d2xsxph8kpxj0f.cloudfront.net` under the Manu
 
 Re-host or replace all ten files (five full, five preview) before the library is offered. That is a hosting and voice-policy decision, not a SQL decision. The story text in the log for several rows is a placeholder (`Full story content here...`), so the log is an inventory, not a publishable archive.
 
+Title mismatch, row 2: the log says "Late Night at Chen Technologies" (`late-night-chen-technologies`). `VipClub.tsx` and `scripts/add-vip-stories.mjs` say "Midnight at Chen Technologies" (`midnight-at-chen-technologies`). Do not restore either marketing title. The public title is "Late Night on the Executive Floor", slug `late-night-executive-floor`. The series surname Chen Technologies stays in the books. This row's characters in the script are already Sarah Shah and Michael Hastings. Keep those names.
+
+`scripts/add-vip-stories.mjs` labels The Boardroom Confession as Elena Martinez and David Chen. Canon Fake Wife is Elena Volkov and David Kim. Fix those two names before any insert. Do not point that story at Sarah Shah and Michael Hastings. The script still reads `/home/ubuntu/story-*.md`, which are not in this repo. Do not invent those files.
+
+18+ gate, before any story restore: `VipClub.tsx` says "Steamy, 18+." There is no age attestation at checkout. Confirm that notice is still on the page, and add an age checkbox on subscribe, before the stories go back.
+
 ## products
 
 `stripe.getProducts` reads the `products` table. After the catch-up that table is empty, so checkout product data is an empty list rather than a 500.
+
+`/shop` bundle buttons hard-code `productId` 30001, 30002, and 30003. `server/email-service.ts` maps 30001–30006 to short links (30001 Book 1, 30002 the trilogy bundle, 30003 the ultimate collection, 30004 Executive Assistant, 30005 Fake Wife, 30006 Baby Secret). There are no Stripe price ids in the repo for 30001–30003. Live `stripe.getProducts` for those ids returns 500 because `products` is missing. After the catch-up an empty table returns not found. The old button text was $3.99, $9.99, and $12.99. Restoring rows with new serial ids leaves those buttons broken.
+
+PR #57 hides that bundle section, including the "3 books / early access to Book 4" copy, because those claims are off-canon and the buttons cannot charge a confirmed amount. Until that hide is in production, the three buttons fail. If the section is ever put back, the rows must use exactly 30001, 30002, and 30003, with live-mode price ids whose amounts equal the button text. Do not invent those price ids here.
 
 Do not load `seed-products.mjs` as-is. It includes off-catalog items, including "Write Your Own Billionaire Romance Masterclass" at 29700 cents. `scripts/add-vip-products.mjs` repeats the tier promises above and leaves `stripePriceId` null.
 
@@ -64,7 +76,7 @@ Use the Stripe dashboard as the source. Restore a product row only for something
 
 `books.list` is what `/shop` used for "Start with any book in the series." The static catalog at `client/src/data/books.ts` is what `/books` already renders, and it does not need the `books` table. A separate PR points the shop grid at that catalog.
 
-`seed-books.ts` inserts only three titles: The Billionaire's Executive Assistant, The Billionaire's Fake Wife, and The Billionaire's Baby Secret. The static catalog has eight romance titles plus The Need for Permission. It does not include Golden Parachute, which the owner’s canon list names with the Hudson Dynasty books (The First Acquisition, Hostile Tender, Poison Pill, Golden Parachute) alongside the five Manhattan Money Kings titles (Executive Assistant, Fake Wife, Baby Secret, Forbidden Nanny, One Night Stand). Seeding from `seed-books.ts` would publish three of those nine and would not fill the shop.
+`seed-books.ts` inserts only three titles: The Billionaire's Executive Assistant, The Billionaire's Fake Wife, and The Billionaire's Baby Secret. The owner's canon is nine live titles: Manhattan Money Kings prequel One Night Stand plus Executive Assistant, Fake Wife, Baby Secret, and Forbidden Nanny, and Hudson Dynasty prequel The First Acquisition plus Hostile Tender, Poison Pill, and Golden Parachute. The Need for Permission is not a live KDP title. PR #57 removes it from `books.ts` and from the `/permission` route, adds Golden Parachute, and hides the shop bundles. Do not seed Need for Permission. Seeding from `seed-books.ts` would publish three of the nine and would not fill the shop.
 
 `/books/audit-of-the-heart` is a separate page (`client/src/pages/AuditOfTheHeart.tsx`, also linked from `Books.tsx` and `HostileTender.tsx`). It is not in `client/src/data/books.ts` and it is not one of those nine titles. The cover and the video poster are the Manus CloudFront object `audit-of-the-heart-cover-v2-CiyiXxZuMB4J9rT8axkMQv.webp`, which returns 403. An old TiDB insert for that title is in `.manus/db/db-query-1774119901444.json`, marked Coming Soon, and it is not evidence that the book is a live KDP title. Whether that URL stays public is the owner's call. This plan does not unpublish it.
 
@@ -78,4 +90,5 @@ Use the Stripe dashboard as the source. Restore a product row only for something
 2. `psql "$OWNER_URL" -v ON_ERROR_STOP=1 -f drizzle/postgres/schema-catchup.sql`
 3. `psql "$OWNER_URL" -v ON_ERROR_STOP=1 -f drizzle/postgres/0028_ai_rate_limits.sql`
 4. Confirm `story_play_history_user_story_idx` exists before deploying PR #55. The catch-up creates it. `0029_story_play_history_unique.sql` is the same index with a duplicate stop, for a run that only adds the index.
-5. Rewrite tier copy, verify the three live Stripe prices, re-host the ten audio files, then insert tiers and stories. Products come from Stripe, not from `seed-products.mjs`. Books on `/shop` come from the static catalog, not from `seed-books.ts`.
+5. Confirm the "Steamy, 18+." notice and add an age checkbox at subscribe before any story insert.
+6. Rewrite tier copy, including the VipClub line "Fresh stories added every month. Gold members can even request custom stories." Verify the three live Stripe prices, re-host the ten audio files, then insert tiers and stories under the title "Late Night on the Executive Floor" for the executive-floor story, with Boardroom Confession characters Elena Volkov and David Kim. Products come from Stripe, not from `seed-products.mjs`. Leave shop bundles hidden unless 30001–30003 exist with confirmed live prices. Books on `/shop` come from the static catalog, not from `seed-books.ts`.
