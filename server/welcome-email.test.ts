@@ -46,7 +46,7 @@ describe("Welcome Email Template", () => {
 
   it("should include Amazon link as alternative", () => {
     const html = generateWelcomeEmail({});
-    expect(html).toContain("https://swiy.co/3rd");
+    expect(html).toContain("https://www.amazon.com/dp/B0D82GWFD9");
     expect(html).toContain("Amazon");
   });
 

@@ -10,7 +10,7 @@ export interface WelcomeEmailData {
 }
 
 const PREQUEL_BOOKFUNNEL_URL = "https://dl.bookfunnel.com/kw1yge3479";
-const PREQUEL_AMAZON_URL = "https://swiy.co/3rd";
+const PREQUEL_AMAZON_URL = "https://www.amazon.com/dp/B0D82GWFD9";
 
 export function generateWelcomeEmail(data: WelcomeEmailData): string {
   const greeting = data.subscriberName
