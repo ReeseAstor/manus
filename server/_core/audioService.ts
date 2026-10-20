@@ -111,8 +111,8 @@ export interface CharacterVoiceMapping {
 
 export const CHARACTER_VOICE_MAPPINGS: CharacterVoiceMapping[] = [
   // Book 1: The Billionaire's Executive Assistant
-  { characterName: "Sarah Chen", bookTitle: "The Billionaire's Executive Assistant", defaultVoiceId: "rachel", premiumVoiceId: "charlotte" },
-  { characterName: "Michael Chen", bookTitle: "The Billionaire's Executive Assistant", defaultVoiceId: "drew", premiumVoiceId: "josh" },
+  { characterName: "Sarah Shah", bookTitle: "The Billionaire's Executive Assistant", defaultVoiceId: "rachel", premiumVoiceId: "charlotte" },
+  { characterName: "Michael Hastings", bookTitle: "The Billionaire's Executive Assistant", defaultVoiceId: "drew", premiumVoiceId: "josh" },
   
   // Book 2: The Billionaire's Fake Wife
   { characterName: "Elena Kim", bookTitle: "The Billionaire's Fake Wife", defaultVoiceId: "bella", premiumVoiceId: "elli" },

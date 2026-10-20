@@ -20,8 +20,8 @@ The Manhattan Money Kings is a steamy billionaire romance series set in Manhatta
 
 2. **The Billionaire's Fake Wife** (Book 2)
    - Hero: David Kim (billionaire, Harvard MBA, Fortune 500 CEO)
-   - Heroine: Lily Chen (gymnast turned thief)
-   - Plot: Lily's father forces her to steal corporate secrets from David. When David catches her breaking into his penthouse, he offers a deal: help him expose her father's criminal empire.
+   - Heroine: Elena Volkov (gymnast turned thief)
+   - Plot: Elena's father forces her to steal corporate secrets from David. When David catches her breaking into his penthouse, he offers a deal: help him expose her father's criminal empire.
    - Trope: Enemies to lovers, redemption, corporate espionage
    - Price: $3.99 (Kindle), $19.99 (Print)
    - Amazon: https://www.amazon.com/dp/B0FCCBNF8X
