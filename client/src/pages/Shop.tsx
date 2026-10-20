@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import { CountdownTimer } from "@/components/CountdownTimer";
+import { RetailerButtons } from "@/components/author-kit";
+import { BOOKS, LANE_META } from "@/data/books";
 
 interface BundleOption {
   id: string;
@@ -79,13 +81,6 @@ const bundleOptions: BundleOption[] = [
   },
 ];
 
-// Map book slugs to product IDs
-const bookProductMap: Record<string, number> = {
-  "the-billionaires-executive-assistant": 30004,
-  "the-billionaires-fake-wife": 30005,
-  "the-billionaires-baby-secret": 30006,
-};
-
 export default function Shop() {
   useEffect(() => {
     document.title = "Shop Signed Books & Bundles | Reese Astor Romance Store";
@@ -100,7 +95,6 @@ export default function Shop() {
     "brand": { "@type": "Brand", "name": "Reese Astor" }
   };
 
-  const { data: books } = trpc.books.list.useQuery();
   const createCheckout = trpc.stripe.createCheckoutSession.useMutation();
   const [loadingProductId, setLoadingProductId] = useState<number | null>(null);
 
@@ -126,15 +120,6 @@ export default function Shop() {
     } finally {
       setLoadingProductId(null);
     }
-  };
-
-  const handleBookPurchase = async (bookSlug: string, bookTitle: string) => {
-    const productId = bookProductMap[bookSlug];
-    if (!productId) {
-      toast.error("This book is not available for direct purchase yet.");
-      return;
-    }
-    await handlePurchase(productId, bookTitle);
   };
 
   return (
@@ -321,82 +306,50 @@ export default function Shop() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-serif font-bold text-[#e5e5e5] mb-4">
-              Or Buy Individual Books
+              Or start with a single title
             </h2>
             <p className="text-[#e5e5e5]/70 text-lg">
-              Start with any book in the series
+              The same catalog as the books page. Each card links to its page and the stores that carry it.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {books?.map((book, index) => (
+            {BOOKS.map((book, index) => (
               <motion.div
-                key={book.id}
+                key={book.slug}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className="group"
               >
-                <div className="relative bg-white/5 backdrop-blur-xl border border-[#d4af37]/20 rounded-2xl overflow-hidden hover:border-[#d4af37]/40 transition-all">
-                  {/* Savings Badge */}
-                  {book.retailPrice && book.directPrice && book.retailPrice > book.directPrice && (
-                    <div className="absolute top-3 left-3 z-10">
-                      <span className="bg-[#d4af37] text-[#0a0e27] px-2 py-1 rounded-full text-xs font-bold">
-                        Save {calculateSavings(book.retailPrice, book.directPrice)}%
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Book Cover */}
+                <div className="relative bg-white/5 backdrop-blur-xl border border-[#d4af37]/20 rounded-2xl overflow-hidden hover:border-[#d4af37]/40 transition-all h-full">
                   <Link href={`/books/${book.slug}`}>
                     <div className="relative overflow-hidden cursor-pointer">
                       <img
-                        src={book.coverImage}
-                        alt={book.title}
+                        src={book.cover_image}
+                        alt={`${book.title} — cover`}
                         className="w-full aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                   </Link>
 
-                  {/* Book Info */}
                   <div className="p-4">
                     <Link href={`/books/${book.slug}`}>
                       <h3 className="text-lg font-serif font-bold text-[#e5e5e5] mb-1 line-clamp-2 group-hover:text-[#d4af37] transition-colors cursor-pointer">
                         {book.title}
                       </h3>
                     </Link>
-                    {book.series && (
-                      <p className="text-[#e5e5e5]/50 text-xs mb-3">
-                        {book.series} • Book {book.seriesOrder}
+                    <p className="text-[#e5e5e5]/50 text-xs mb-3">
+                      {LANE_META[book.lane].title}
+                      {book.position_label ? ` • ${book.position_label}` : ""}
+                    </p>
+                    {book.price_usd !== null && (
+                      <p className="text-xl font-bold text-[#d4af37] mb-4">
+                        {book.price_usd === 0 ? "Free" : `$${book.price_usd.toFixed(2)}`}
                       </p>
                     )}
-
-                    {/* Pricing */}
-                    <div className="flex items-baseline gap-2 mb-4">
-                      <span className="text-xl font-bold text-[#d4af37]">
-                        {formatPrice(book.directPrice || 399)}
-                      </span>
-                      {book.retailPrice && book.directPrice && book.retailPrice > book.directPrice && (
-                        <span className="text-sm text-[#e5e5e5]/40 line-through">
-                          {formatPrice(book.retailPrice)}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Buy Button */}
-                    <Button
-                      onClick={() => handleBookPurchase(book.slug, book.title)}
-                      disabled={loadingProductId === bookProductMap[book.slug]}
-                      className="w-full bg-[#d4af37]/20 hover:bg-[#d4af37]/30 text-[#d4af37] border border-[#d4af37]/30 font-semibold"
-                    >
-                      {loadingProductId === bookProductMap[book.slug] ? (
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      ) : (
-                        <ShoppingCart className="w-4 h-4 mr-2" />
-                      )}
-                      {loadingProductId === bookProductMap[book.slug] ? "Processing..." : "Buy Now"}
-                    </Button>
+                    <RetailerButtons book={book} layout="grid" />
                   </div>
                 </div>
               </motion.div>
