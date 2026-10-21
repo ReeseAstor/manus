@@ -90,6 +90,18 @@ const forbidden = [
   "AI Trend Newsletter",
   "ai-assisted-romance-writing-workflow",
   "cutting-edge AI",
+  // Unverifiable credentials and pen-name identity leaks (10/2026 audit).
+  "USA Today",
+  "USA TODAY",
+  "finance VP",
+  "Finance VP",
+  "corporate VP",
+  "Corporate VP",
+  "corporate identity",
+  "HSBC",
+  // Retired Hudson Dynasty canon.
+  "RIVIERA",
+  "Audit of the Heart",
 ];
 
 function walk(dir) {

@@ -1,5 +1,4 @@
 export { AudioSamplePlayer } from "./AudioSamplePlayer";
-export { AuthorIntro } from "./AuthorIntro";
 export { BookCard } from "./BookCard";
 export { BookHero } from "./BookHero";
 export { CoverHalo } from "./CoverHalo";

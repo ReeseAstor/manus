@@ -47,7 +47,7 @@ export default function Contact() {
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       <EnhancedSEOHead
         title="Contact Reese Astor | Romance Author & Writing Coach"
-        description="Get in touch with Reese Astor for book signings, writing coaching, media inquiries, or reader questions. Connect with a USA Today Bestselling romance author."
+        description="Contact Reese Astor for reader questions, media and rights inquiries, and ARC requests."
         canonical="/contact"
         keywords={["contact Reese Astor", "romance author contact", "writing coach inquiry", "book signing request", "media inquiry romance author"]}
       />
@@ -88,7 +88,7 @@ export default function Contact() {
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
-              Have questions about my books or coaching services? I'd love to hear from you.
+              Have a question about the books? I'd love to hear from you.
             </p>
           </motion.div>
         </div>
@@ -294,7 +294,7 @@ export default function Contact() {
                   </div>
                 </div>
                 <p className="text-gray-300 leading-relaxed">
-                  I typically respond to messages within 24-48 hours during business days. For urgent coaching inquiries, please mention that in your subject line.
+                  I typically respond to messages within 24-48 hours during business days. For media or rights inquiries, please say so in your subject line.
                 </p>
               </motion.div>
             </motion.div>
@@ -328,7 +328,7 @@ export default function Contact() {
               Looking for something specific?
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Check out my books, coaching services, or grab your free copy of The First Acquisition.
+              Browse the books, or grab your free copy of The First Acquisition.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button

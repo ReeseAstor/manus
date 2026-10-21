@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
+import { adminProcedure, publicProcedure, protectedProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
 import { affiliateClicks, affiliateMetricsDaily } from "../../drizzle/schema";
 import { eq, desc, sql, and, gte, lte, count } from "drizzle-orm";
@@ -92,7 +92,7 @@ export const affiliateTrackingRouter = router({
    * Get affiliate analytics overview (admin only).
    * Returns KPIs, time series, and breakdowns for the dashboard.
    */
-  getAnalytics: protectedProcedure
+  getAnalytics: adminProcedure
     .input(
       z.object({
         days: z.number().min(1).max(365).default(30),
@@ -192,7 +192,7 @@ export const affiliateTrackingRouter = router({
   /**
    * Get recent clicks (admin only).
    */
-  getRecentClicks: protectedProcedure
+  getRecentClicks: adminProcedure
     .input(
       z.object({
         limit: z.number().min(1).max(100).default(20),

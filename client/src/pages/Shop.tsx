@@ -6,7 +6,6 @@ import { Link } from "wouter";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
-import { CountdownTimer } from "@/components/CountdownTimer";
 
 interface BundleOption {
   id: string;
@@ -40,15 +39,15 @@ const bundleOptions: BundleOption[] = [
   },
   {
     id: "trilogy",
-    name: "Complete Trilogy",
-    description: "The full Manhattan Money Kings series",
+    name: "Three-Book Set",
+    description: "Three Manhattan Money Kings novels",
     books: 3,
     originalPrice: 1497,
     bundlePrice: 999,
     memberPrice: 799,
     productId: 30002, // Complete Trilogy product
     features: [
-      "All 3 Manhattan Money Kings books",
+      "Three Manhattan Money Kings novels",
       "Instant digital delivery",
       "ePub, Mobi & PDF formats",
       "Bonus: Character interviews",
@@ -141,7 +140,7 @@ export default function Shop() {
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27]">
       <EnhancedSEOHead
         title="Shop Signed Books & Bundles | Reese Astor Romance Store"
-        description="Shop signed paperbacks, exclusive bundles, and digital editions of the Manhattan Money Kings series. Direct from USA Today Bestselling author Reese Astor."
+        description="Shop signed paperbacks, exclusive bundles, and digital editions of the Manhattan Money Kings series. Direct from Reese Astor."
         canonical="/shop"
         ogType="product"
         keywords={["signed romance books", "Reese Astor shop", "Manhattan Money Kings paperback", "romance book bundles", "signed author copies", "buy direct from author"]}
@@ -202,11 +201,6 @@ export default function Shop() {
               All purchases include instant delivery and multiple formats
             </p>
           </motion.div>
-
-          {/* Countdown Timer */}
-          <div className="mb-12">
-            <CountdownTimer label="Direct Purchase Pricing Ends In" />
-          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {bundleOptions.map((bundle, index) => (

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { breadcrumbSchema, romanceSeriesSchemas } from "@/data/structured-data";
 import { Link } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
@@ -24,9 +24,6 @@ const LANE_ORDER: Lane[] = [
 ];
 
 export default function BooksCatalog() {
-  useEffect(() => {
-    document.title = "Books · Reese Astor";
-  }, []);
 
   return (
     <div
@@ -34,9 +31,16 @@ export default function BooksCatalog() {
       style={{ background: INK, color: TEXT }}
     >
       <EnhancedSEOHead
-        title="Books · Reese Astor"
-        description="The complete Reese Astor catalog — Manhattan Money Kings, Hudson Dynasty, and the Intimate Psychological Narratives audiobook line."
-        canonical="https://reeseastor.com/books"
+        title="Reese Astor Books in Reading Order"
+        description="Every Reese Astor book in reading order: the Hudson Dynasty and the Manhattan Money Kings. Steamy billionaire romance, each a standalone with a happy ending."
+        canonical="/books"
+        structuredData={[
+          ...romanceSeriesSchemas(),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Books", path: "/books" },
+          ]),
+        ]}
       />
 
       {/* Page eyebrow + heading */}

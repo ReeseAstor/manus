@@ -229,3 +229,8 @@
     .kit-halo-pulse { animation: none; opacity: 0.6; transform: none; }
   }
 }
+/* Decorative halos and carousels must never widen the page on phones. */
+html,
+body {
+  overflow-x: clip;
+}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, Sparkles, BookOpen, ArrowRight, ArrowLeft, Mail, CheckCircle, Star } from "lucide-react";
+import { Heart, Sparkles, BookOpen, ArrowRight, ArrowLeft, Mail, CheckCircle } from "lucide-react";
 import { ShareableResultCard } from "@/components/ShareableResultCard";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
@@ -472,10 +472,7 @@ export default function Quiz() {
                         </h3>
                         <p className="text-gray-400 mb-3">{result.bookSubtitle}</p>
                         <div className="flex items-center gap-1 mb-4 justify-center md:justify-start">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="h-4 w-4 fill-[#d4af37] text-[#d4af37]" />
-                          ))}
-                          <span className="text-sm text-gray-400 ml-2">USA Today Bestseller</span>
+                          <span className="text-sm text-gray-400 ml-2">Manhattan Money Kings</span>
                         </div>
                         <p className="text-gray-300 mb-6 leading-relaxed">
                           Based on your quiz results, this book from the Manhattan Money Kings series is your perfect match. A free copy is being delivered to your inbox now!
@@ -517,19 +514,6 @@ export default function Quiz() {
           </AnimatePresence>
         </div>
 
-        {/* Social Proof */}
-        {!showResult && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-center mt-12"
-          >
-            <p className="text-sm text-gray-500">
-              <span className="text-[#d4af37]">1,700+</span> romance readers have taken this quiz
-            </p>
-          </motion.div>
-        )}
       </div>
     </div>
   );

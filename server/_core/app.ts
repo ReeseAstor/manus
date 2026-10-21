@@ -14,6 +14,8 @@ import twilioVoiceWebhookRouter, {
 import { authCallback } from "../api.auth.callback";
 import { and, eq, notInArray } from "drizzle-orm";
 import { RETIRED_BLOG_SLUGS } from "../../shared/const";
+import { SITE_URL } from "../../shared/site";
+import { BOOKS } from "../../client/src/data/books";
 import { getDb } from "../db";
 import { blogPosts } from "../../drizzle/schema";
 import { adminChunks } from "../generated/adminChunks";
@@ -92,33 +94,32 @@ export function createApp(): Express {
 
   app.get("/sitemap.xml", async (_req, res) => {
     try {
-      const baseUrl = "https://www.reeseastor.com";
-      const today = new Date().toISOString().split("T")[0];
-
+      // Public, indexable pages only. Book URLs come from the catalog
+      // (client/src/data/books.ts) so a new title never needs a sitemap edit.
       const staticPages = [
-        { url: "/", priority: "1.0", changefreq: "weekly" },
-        { url: "/books", priority: "0.9", changefreq: "weekly" },
-        { url: "/books/audit-of-the-heart", priority: "0.9", changefreq: "monthly" },
-        { url: "/books/hostile-tender", priority: "0.9", changefreq: "monthly" },
-        { url: "/books/the-billionaire-s-executive-assistant", priority: "0.8", changefreq: "monthly" },
-        { url: "/books/the-billionaire-s-fake-wife", priority: "0.8", changefreq: "monthly" },
-        { url: "/books/the-billionaire-s-baby-secret", priority: "0.8", changefreq: "monthly" },
-        { url: "/books/the-billionaires-forbidden-nanny", priority: "0.8", changefreq: "monthly" },
-        { url: "/free-book", priority: "0.8", changefreq: "monthly" },
-        { url: "/about", priority: "0.7", changefreq: "monthly" },
-        { url: "/blog", priority: "0.8", changefreq: "daily" },
-        { url: "/contact", priority: "0.6", changefreq: "yearly" },
-        { url: "/quiz", priority: "0.7", changefreq: "monthly" },
-        { url: "/shop", priority: "0.7", changefreq: "weekly" },
-        { url: "/newsletter", priority: "0.6", changefreq: "monthly" },
-        { url: "/privacy", priority: "0.3", changefreq: "yearly" },
-        { url: "/terms", priority: "0.3", changefreq: "yearly" },
-      ];
+        "/",
+        "/books",
+        "/about",
+        "/blog",
+        "/newsletter",
+        "/free-book",
+        "/press",
+        "/contact",
+        "/romance-quiz",
+        "/shop",
+        "/privacy",
+        "/terms",
+      ].map((url) => ({ url, lastmod: undefined as string | undefined }));
+
+      const bookPages = BOOKS.map((b) => ({
+        url: `/books/${b.slug}`,
+        lastmod: b.publication_date ?? undefined,
+      }));
 
       const database = await getDb();
       const blogPostRows = database
         ? await database
-            .select({ slug: blogPosts.slug })
+            .select({ slug: blogPosts.slug, updatedAt: blogPosts.updatedAt, publishedAt: blogPosts.publishedAt })
             .from(blogPosts)
             .where(
               and(
@@ -127,22 +128,17 @@ export function createApp(): Express {
               ),
             )
         : [];
-      const blogUrls = blogPostRows.map((row: { slug: string }) => ({
+      const blogUrls = blogPostRows.map((row: { slug: string; updatedAt: Date | null; publishedAt: Date | null }) => ({
         url: `/blog/${row.slug}`,
-        priority: "0.7",
-        changefreq: "monthly",
+        lastmod: (row.updatedAt ?? row.publishedAt)?.toISOString().split("T")[0],
       }));
 
-      const allUrls = [...staticPages, ...blogUrls];
-      const urlEntries = allUrls
+      const urlEntries = [...staticPages, ...bookPages, ...blogUrls]
         .map(
-          page => `
-  <url>
-    <loc>${baseUrl}${page.url}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>
-  </url>`,
+          (page) =>
+            `\n  <url>\n    <loc>${SITE_URL}${page.url === "/" ? "/" : page.url}</loc>` +
+            (page.lastmod ? `\n    <lastmod>${page.lastmod}</lastmod>` : "") +
+            `\n  </url>`,
         )
         .join("");
 
@@ -150,6 +146,7 @@ export function createApp(): Express {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urlEntries}
 </urlset>`;
       res.header("Content-Type", "application/xml");
+      res.setHeader("Cache-Control", "public, max-age=3600");
       res.send(sitemap);
     } catch (error) {
       console.error("[Sitemap] Error generating sitemap:", error);
@@ -158,18 +155,28 @@ export function createApp(): Express {
   });
 
   app.get("/robots.txt", (_req, res) => {
-    const baseUrl = "https://www.reeseastor.com";
     res.header("Content-Type", "text/plain");
-    res.send(`User-agent: *
-Allow: /
-Disallow: /admin
-Disallow: /admin/
-Disallow: /assets/admin/
-Disallow: /api/
-Disallow: /auth/
-
-Sitemap: ${baseUrl}/sitemap.xml
-`);
+    // Search and AI answer engines are welcome on public pages: being cited
+    // by them is the point. Private and transactional areas stay closed.
+    const privatePaths = [
+      "/admin",
+      "/assets/admin/",
+      "/api/",
+      "/auth/",
+      "/profile",
+      "/my-purchases",
+      "/purchase-success",
+      "/vip-club/dashboard",
+      "/welcome-back",
+      "/stay-subscribed",
+    ];
+    const disallow = privatePaths.map((p) => `Disallow: ${p}`).join("\n");
+    const aiAgents = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "PerplexityBot", "Google-Extended", "Applebot-Extended"];
+    res.send(
+      `User-agent: *\nAllow: /\n${disallow}\n\n` +
+        aiAgents.map((a) => `User-agent: ${a}\nAllow: /\n${disallow}\n`).join("\n") +
+        `\nSitemap: ${SITE_URL}/sitemap.xml\n`,
+    );
   });
 
   // Admin page chunks ship outside dist/public. Signed-in admins load them

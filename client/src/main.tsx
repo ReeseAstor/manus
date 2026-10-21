@@ -53,6 +53,22 @@ const trpcClient = trpc.createClient({
   ],
 });
 
+// Prerendered pages (scripts/prerender-static.mjs) carry their own head tags
+// for crawlers. Remove them before React mounts so Helmet is the single
+// source of meta tags in the browser.
+document.querySelectorAll("[data-pre]").forEach((node) => node.remove());
+
+// Analytics loads only when configured, so unset placeholders never ship.
+const analyticsEndpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT;
+const analyticsSiteId = import.meta.env.VITE_ANALYTICS_WEBSITE_ID;
+if (analyticsEndpoint && analyticsSiteId) {
+  const tag = document.createElement("script");
+  tag.defer = true;
+  tag.src = `${analyticsEndpoint}/umami`;
+  tag.dataset.websiteId = analyticsSiteId;
+  document.body.appendChild(tag);
+}
+
 createRoot(document.getElementById("root")!).render(
   <HelmetProvider>
     <trpc.Provider client={trpcClient} queryClient={queryClient}>

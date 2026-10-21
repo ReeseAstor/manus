@@ -3,6 +3,16 @@ export const RETIRED_BLOG_SLUGS = [
   "ai-assisted-romance-writing-workflow",
   "romance-author-writing-tools-setup",
   "quality-control-workflows-romance-authors",
+  // 10/2026 audit: pen-name identity leaks, unverifiable credentials, and
+  // author-business posts that pull the brand away from readers.
+  "self-publishing-journey",
+  "usa-today-bestselling-author-journey",
+  "day-in-the-life-romance-author",
+  "business-side-romance-writing",
+  "author-brand-social-media",
+  "email-list-building-authors",
+  "self-publishing-romance-amazon-kdp-beginners-guide",
+  "author-email-list-strategy-sell-books",
 ] as const;
 
 export function isRetiredBlogSlug(slug: string): boolean {

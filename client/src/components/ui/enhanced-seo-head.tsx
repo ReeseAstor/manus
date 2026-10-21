@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { SITE_URL, AUTHOR_ID, DEFAULT_OG_IMAGE, absoluteUrl } from '@shared/site';
 
 interface SEOProps {
   title: string;
@@ -21,7 +22,7 @@ export function EnhancedSEOHead({
   description,
   keywords = [],
   canonical,
-  ogImage = '/images/default-og-image.jpg',
+  ogImage = DEFAULT_OG_IMAGE,
   ogType = 'website',
   twitterCard = 'summary_large_image',
   structuredData = [],
@@ -31,9 +32,9 @@ export function EnhancedSEOHead({
   publishDate,
   modifiedDate,
 }: SEOProps) {
-  const siteUrl = 'https://reeseastor.com';
-  const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
-  const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+  // canonical and ogImage may be paths or absolute URLs; never double-prefix.
+  const fullCanonical = absoluteUrl(canonical ?? '/');
+  const fullOgImage = absoluteUrl(ogImage);
   
   // Optimize title for SEO (55-60 characters ideal)
   const optimizedTitle = title.length > 60 ? title.substring(0, 57) + '...' : title;
@@ -71,13 +72,11 @@ export function EnhancedSEOHead({
       <meta property="og:locale" content="en_US" />
       
       {/* Twitter */}
-      <meta property="twitter:card" content={twitterCard} />
-      <meta property="twitter:url" content={fullCanonical} />
-      <meta property="twitter:title" content={optimizedTitle} />
-      <meta property="twitter:description" content={optimizedDescription} />
-      <meta property="twitter:image" content={fullOgImage} />
-      <meta property="twitter:image:alt" content={title} />
-      <meta property="twitter:creator" content="@reeseastor" />
+      <meta name="twitter:card" content={twitterCard} />
+      <meta name="twitter:title" content={optimizedTitle} />
+      <meta name="twitter:description" content={optimizedDescription} />
+      <meta name="twitter:image" content={fullOgImage} />
+      <meta name="twitter:image:alt" content={title} />
       
       {/* Article specific meta tags */}
       {ogType === 'article' && publishDate && (
@@ -85,7 +84,7 @@ export function EnhancedSEOHead({
           <meta property="article:published_time" content={publishDate} />
           {modifiedDate && <meta property="article:modified_time" content={modifiedDate} />}
           <meta property="article:author" content={author} />
-          <meta property="article:section" content="Romance Writing" />
+          <meta property="article:section" content="The Fine Print" />
         </>
       )}
       
@@ -95,21 +94,20 @@ export function EnhancedSEOHead({
           <meta property="book:author" content={author} />
           <meta property="book:tag" content="billionaire romance" />
           <meta property="book:tag" content="steamy romance" />
-          <meta property="book:tag" content="Manhattan Money Kings" />
+
         </>
       )}
       
       {/* Additional SEO tags */}
       <meta name="format-detection" content="telephone=no" />
-      <meta name="theme-color" content="#0E1620" />
+      <meta name="theme-color" content="#C9A3A0" />
       
       {/* Structured Data */}
       {structuredData.map((data, index) => (
-        <script
-          key={`structured-data-${index}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-        />
+        // Helmet ignores dangerouslySetInnerHTML; JSON-LD must be a text child.
+        <script key={`structured-data-${index}`} type="application/ld+json">
+          {JSON.stringify(data)}
+        </script>
       ))}
     </Helmet>
   );
@@ -135,11 +133,7 @@ export function generateBookSchema(book: {
     "name": book.name,
     "description": book.description,
     "url": book.url,
-    "author": {
-      "@type": "Person",
-      "name": "Reese Astor",
-      "url": "https://reeseastor.com"
-    },
+    "author": { "@type": "Person", "@id": AUTHOR_ID, "name": "Reese Astor", "url": SITE_URL },
     "genre": book.genre,
     "bookFormat": "https://schema.org/EBook",
     ...(book.isbn && { "isbn": book.isbn }),
@@ -176,27 +170,15 @@ export function generateArticleSchema(article: {
 }) {
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     "headline": article.title,
     "description": article.description,
     "url": article.url,
     "image": article.image,
     "datePublished": article.publishDate,
     "dateModified": article.modifiedDate || article.publishDate,
-    "author": {
-      "@type": "Person",
-      "name": "Reese Astor",
-      "url": "https://reeseastor.com"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Reese Astor",
-      "url": "https://reeseastor.com",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://reeseastor.com/images/logo.png"
-      }
-    },
+    "author": { "@type": "Person", "@id": AUTHOR_ID, "name": "Reese Astor", "url": SITE_URL },
+    "publisher": { "@type": "Organization", "name": "88Away LLC", "url": SITE_URL },
     ...(article.keywords && { "keywords": article.keywords.join(', ') })
   };
 }
@@ -210,7 +192,7 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
       "@type": "ListItem",
       "position": index + 1,
       "name": item.name,
-      "item": `https://reeseastor.com${item.url}`
+      "item": absoluteUrl(item.url)
     }))
   };
 }

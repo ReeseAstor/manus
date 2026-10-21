@@ -25,9 +25,15 @@ const validateTwilioSignature = (req: Request, res: Response, next: Function) =>
   const url = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
   
   // In development, skip signature validation
-  if (process.env.NODE_ENV === 'development' || !twilioSignature) {
+  if (process.env.NODE_ENV === 'development') {
     console.log('[SMS Webhook] Skipping signature validation in development');
     return next();
+  }
+
+  // Fail closed: an unsigned request is never from Twilio.
+  if (!twilioSignature) {
+    console.error('[SMS Webhook] Missing Twilio signature');
+    return res.status(403).send('Missing signature');
   }
 
   const isValid = twilio.validateRequest(

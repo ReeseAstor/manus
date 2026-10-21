@@ -164,7 +164,7 @@ export default function CharacterQuiz() {
       <EnhancedSEOHead
         title="Which Manhattan Billionaire Is Your Match? | Reese Astor"
         description="Take the fun character quiz to discover which Manhattan Money Kings billionaire is your perfect match. Find your book boyfriend from Reese Astor's romance series."
-        canonical="/character-quiz"
+        canonical="/quiz"
         keywords={["romance character quiz", "book boyfriend quiz", "Manhattan Money Kings quiz", "billionaire romance quiz", "Reese Astor quiz"]}
       />
       <div className="container max-w-2xl">

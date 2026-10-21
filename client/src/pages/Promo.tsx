@@ -311,7 +311,7 @@ export default function Promo() {
               <div className="flex-1 text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <span className="text-xs text-[#d4af37] font-semibold tracking-wider uppercase bg-[#d4af37]/10 px-3 py-1 rounded-full">
-                    USA Today Bestseller
+                    Featured
                   </span>
                 </div>
                 <h3 className="font-serif text-3xl font-bold text-white mb-1">

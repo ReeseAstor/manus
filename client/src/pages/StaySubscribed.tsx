@@ -18,7 +18,7 @@ export default function StaySubscribed() {
       }} />
       <div style={{ maxWidth: 600, margin: "0 auto", padding: "72px 24px", textAlign: "center" }}>
         <p style={{ margin: "0 0 8px", color: "#d4af37", fontSize: 11, letterSpacing: 3, textTransform: "uppercase", fontFamily: "Arial, sans-serif" }}>
-          USA Today Bestselling Author
+          Billionaire Romance
         </p>
         <h1 style={{ margin: "0 0 8px", color: "#d4af37", fontSize: 32, fontWeight: "bold", letterSpacing: 2, fontFamily: "Georgia, serif" }}>
           REESE ASTOR

@@ -12,25 +12,25 @@ const recommendations: Record<string, { title: string; tagline: string; bookSlug
   "writing-tips": {
     title: "See These Techniques in Action",
     tagline: "Discover how Reese Astor weaves tension, chemistry, and plot twists into the Manhattan Money Kings series.",
-    bookSlug: "the-billionaires-executive-assistant",
+    bookSlug: "the-billionaire-s-executive-assistant",
     bookTitle: "The Billionaire's Executive Assistant",
   },
   "book-news": {
-    title: "Don't Miss the Latest Release",
-    tagline: "Stay ahead of the story. Grab the newest book in the Manhattan Money Kings series before everyone else.",
-    bookSlug: "the-billionaires-baby-secret",
-    bookTitle: "The Billionaire's Baby Secret",
+    title: "The Newest Hudson Dynasty Book",
+    tagline: "Golden Parachute: Kai Hsu, Miri Doyle-Levine, and the one deal he can't buy his way out of.",
+    bookSlug: "golden-parachute",
+    bookTitle: "Golden Parachute",
   },
   "behind-the-scenes": {
     title: "Experience the Full Story",
     tagline: "You've seen behind the curtain — now experience the world of Manhattan's most powerful billionaires.",
-    bookSlug: "the-billionaires-executive-assistant",
+    bookSlug: "the-billionaire-s-executive-assistant",
     bookTitle: "The Billionaire's Executive Assistant",
   },
   default: {
     title: "Ready for Your Next Obsession?",
-    tagline: "Dive into the Manhattan Money Kings series — steamy billionaire romance that readers can't put down.",
-    bookSlug: "the-billionaires-executive-assistant",
+    tagline: "Start the Manhattan Money Kings: steamy billionaire romance, every book a standalone.",
+    bookSlug: "the-billionaire-s-executive-assistant",
     bookTitle: "The Billionaire's Executive Assistant",
   },
 };
