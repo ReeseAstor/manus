@@ -67,7 +67,7 @@ export const RETAILERS: Record<RetailerKey, RetailerMeta> = {
   },
   bookfunnel: {
     key: "bookfunnel",
-    label: "Get free copy (BookFunnel)",
+    label: "Get it free",
     order: 70,
     envVar: "VITE_PERMISSION_BOOKFUNNEL_URL",
   },

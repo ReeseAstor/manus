@@ -89,14 +89,15 @@ export const BOOKS: Book[] = [
     cover_image: "/covers/mmk-0-one-night-stand.jpg",
     publication_date: null,
     kindle_unlimited: false,
+    // Free prequel: BookFunnel is the only link shown, so the Amazon $0.99
+    // listing never competes with the newsletter signup.
     retailers: {
-      amazon_kindle: "https://www.amazon.com/dp/B0DSG7NKGP",
       bookfunnel: "https://dl.bookfunnel.com/xrodg0t77p",
     },
     audiobook_available: false,
     isbn: null,
     asin: "B0DSG7NKGP",
-    price_usd: 0.99,
+    price_usd: 0,
     tropes: ["one night stand", "billionaire romance", "Manhattan"],
     characters: ["James Chen", "Victoria"],
   },
@@ -226,15 +227,15 @@ export const BOOKS: Book[] = [
     cover_image: "/covers/hd-0-first-acquisition.jpg",
     publication_date: null,
     kindle_unlimited: false,
+    // Free prequel: BookFunnel only (see note on the MMK prequel above).
     retailers: {
-      amazon_kindle: "https://www.amazon.com/dp/B0D82GWFD9",
       bookfunnel: "https://dl.bookfunnel.com/kw1yge3479",
       audible: null,
     },
     audiobook_available: true,
     isbn: null,
     asin: "B0D82GWFD9",
-    price_usd: 0.99,
+    price_usd: 0,
     tropes: ["fake engagement", "billionaire romance"],
     characters: ["Sebastian Hudson", "Arden Shaw"],
   },

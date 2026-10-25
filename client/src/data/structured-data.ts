@@ -64,7 +64,7 @@ export function bookUrl(book: Book) {
 
 export function bookSchema(book: Book) {
   const isAudio = book.format === "audiobook";
-  const offerUrl = book.retailers.amazon_kindle ?? book.retailers.bookfunnel ?? undefined;
+  const offerUrl = book.retailers.bookfunnel ?? book.retailers.amazon_kindle ?? undefined;
   return {
     "@context": "https://schema.org",
     "@type": isAudio ? "Audiobook" : "Book",
