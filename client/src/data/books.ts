@@ -71,6 +71,8 @@ export const LANE_META: Record<Lane, { eyebrow: string; title: string; subtitle:
 export const BOOKS: Book[] = [
   // ─── Manhattan Money Kings ─────────────────────────────────────────────
   // Canon: ACCURATE_BOOK_INFO.md. Prequel + Books 1–4.
+  // Kindle Unlimited (owner-confirmed 10/2026): every Reese Astor title is in KU
+  // except the two free prequels, The First Acquisition and One Night Stand.
   {
     slug: "the-billionaires-one-night-stand",
     title: "The Billionaire's One Night Stand",
@@ -86,7 +88,7 @@ export const BOOKS: Book[] = [
     pull_quote: "“You were supposed to be a stranger. You decided otherwise.”",
     cover_image: "/covers/mmk-0-one-night-stand.jpg",
     publication_date: null,
-    kindle_unlimited: true,
+    kindle_unlimited: false,
     retailers: {
       amazon_kindle: "https://www.amazon.com/dp/B0DSG7NKGP",
       bookfunnel: "https://dl.bookfunnel.com/xrodg0t77p",
@@ -223,7 +225,7 @@ export const BOOKS: Book[] = [
     pull_quote: null,
     cover_image: "/covers/hd-0-first-acquisition.jpg",
     publication_date: null,
-    kindle_unlimited: true,
+    kindle_unlimited: false,
     retailers: {
       amazon_kindle: "https://www.amazon.com/dp/B0D82GWFD9",
       bookfunnel: "https://dl.bookfunnel.com/kw1yge3479",

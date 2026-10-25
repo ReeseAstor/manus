@@ -140,7 +140,7 @@ GEO (generative engine optimization) is about being the source an AI assistant c
 
 1. In Vercel → Domains, confirm `reeseastor.com` is primary. `vercel.json` now 301s `www` to it, so don't set the opposite redirect there.
 2. In Vercel → Settings → Environment Variables, make `DATABASE_URL` available to Build so blog posts are prerendered.
-3. Verify KU status on each live Amazon page. `kindle_unlimited` is `true` for every romance title in `books.ts`, but only Golden Parachute has been checked.
+3. KU status is set from the owner's confirmation (10/2026): every romance title is in Kindle Unlimited except the two free prequels, The First Acquisition and The Billionaire's One Night Stand. Update `kindle_unlimited` in `books.ts` if enrollment changes.
 4. Add Golden Parachute's and Poison Pill's ASINs to `books.ts`. Golden Parachute links to an Amazon search until then.
 5. Confirm whether *The Need for Permission* is a Reese Astor title. It is left unchanged in this PR.
 6. Purge old rows in the live database: seeded fake reviews (`book_reviews`), and the "Audit of the Heart" row in `books` if present.
