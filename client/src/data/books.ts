@@ -44,6 +44,10 @@ export type Book = {
   asin: string | null;
   /** Listed price in USD, used for structured data. */
   price_usd: number | null;
+  /** Trope keywords, as readers search them. Used in JSON-LD and llms.txt. */
+  tropes?: string[];
+  /** Lead couple, hero first. */
+  characters?: string[];
 };
 
 export const LANE_META: Record<Lane, { eyebrow: string; title: string; subtitle: string }> = {
@@ -53,9 +57,9 @@ export const LANE_META: Record<Lane, { eyebrow: string; title: string; subtitle:
     subtitle: "Manhattan's most powerful men, undone by the women who refuse to look away.",
   },
   hudson_dynasty: {
-    eyebrow: "A SERIES IN PROGRESS",
+    eyebrow: "A SERIES",
     title: "Hudson Dynasty",
-    subtitle: "A family built on acquisitions. A ledger that remembers everything.",
+    subtitle: "Each book stands alone. The dynasty does not.",
   },
   intimate_psychological_narratives: {
     eyebrow: "A NEW LINE",
@@ -66,37 +70,44 @@ export const LANE_META: Record<Lane, { eyebrow: string; title: string; subtitle:
 
 export const BOOKS: Book[] = [
   // ─── Manhattan Money Kings ─────────────────────────────────────────────
+  // Canon: ACCURATE_BOOK_INFO.md. Prequel + Books 1–4.
+  // Kindle Unlimited (owner-confirmed 10/2026): every Reese Astor title is in KU
+  // except the two free prequels, The First Acquisition and One Night Stand.
   {
     slug: "the-billionaires-one-night-stand",
     title: "The Billionaire's One Night Stand",
     lane: "manhattan_money_kings",
-    series_position: 1,
+    series_position: 0,
     format: "ebook",
-    position_label: "Book 1",
+    position_label: "Prequel",
     tagline: "One night was supposed to mean nothing. He decided it would mean everything.",
     blurb:
-      "She walked into the bar to forget her name. He spent the next morning learning every syllable of it. " +
-      "When the city's most ruthless dealmaker insists one night was never going to be enough, the woman " +
-      "who came to him as a stranger has to decide whether to disappear — or stay and be wholly seen.",
+      "Victoria walked into an upscale Manhattan bar the night she was passed over for partner. James Chen, " +
+      "the self-made tech billionaire every magazine wants to profile, was not supposed to be the one who " +
+      "noticed. One night was the plan. He has other ideas.",
     pull_quote: "“You were supposed to be a stranger. You decided otherwise.”",
-    cover_image: "https://m.media-amazon.com/images/I/815-iFRAlpL._SL1500_.jpg",
+    cover_image: "/covers/mmk-0-one-night-stand.jpg",
     publication_date: null,
-    kindle_unlimited: true,
+    kindle_unlimited: false,
+    // Free prequel: BookFunnel is the only link shown, so the Amazon $0.99
+    // listing never competes with the newsletter signup.
     retailers: {
-      amazon_kindle: "https://swiy.co/05",
+      bookfunnel: "https://dl.bookfunnel.com/xrodg0t77p",
     },
     audiobook_available: false,
     isbn: null,
-    asin: null,
-    price_usd: 3.99,
+    asin: "B0DSG7NKGP",
+    price_usd: 0,
+    tropes: ["one night stand", "billionaire romance", "Manhattan"],
+    characters: ["James Chen", "Victoria"],
   },
   {
     slug: "the-billionaire-s-executive-assistant",
     title: "The Billionaire's Executive Assistant",
     lane: "manhattan_money_kings",
-    series_position: 2,
+    series_position: 1,
     format: "ebook",
-    position_label: "Book 2",
+    position_label: "Book 1",
     tagline: "The boardroom was never the most dangerous room.",
     blurb:
       "Sarah Shah needs this job to pay her mother's mounting medical bills. Michael Hastings needs a " +
@@ -110,24 +121,26 @@ export const BOOKS: Book[] = [
     retailers: {
       amazon_kindle: "https://swiy.co/b01",
     },
-    audiobook_available: false,
+    audiobook_available: true,
     isbn: null,
-    asin: null,
+    asin: "B0F2W8QL7S",
     price_usd: 3.99,
+    tropes: ["boss and assistant", "forbidden romance", "corporate intrigue"],
+    characters: ["Michael Hastings", "Sarah Shah"],
   },
   {
     slug: "the-billionaire-s-fake-wife",
     title: "The Billionaire's Fake Wife",
     lane: "manhattan_money_kings",
-    series_position: 3,
+    series_position: 2,
     format: "ebook",
-    position_label: "Book 3",
+    position_label: "Book 2",
     tagline: "A ruthless engagement that turns devastatingly real.",
     blurb:
-      "When thief Elena Kim breaks into his penthouse, billionaire David Kim catches her red-handed. But " +
-      "instead of calling the police, he makes her an offer she can't refuse: marry him for twelve months " +
-      "in exchange for protection from her violent father. As they work together, their forced alliance " +
-      "ignites into something neither expected.",
+      "Lily Chen, a gymnast turned thief, breaks into David Kim's penthouse to steal the secrets her father " +
+      "demands. The billionaire catches her red-handed. Instead of calling the police, he makes her an offer: " +
+      "marry him, and he keeps her out of her father's reach. Their forced alliance turns into something " +
+      "neither of them planned for.",
     pull_quote: "“Twelve months. He intended every one of them.”",
     cover_image: "/author-kit/mmk-2-fake-wife.jpg",
     publication_date: null,
@@ -135,24 +148,26 @@ export const BOOKS: Book[] = [
     retailers: {
       amazon_kindle: "https://swiy.co/2rd",
     },
-    audiobook_available: false,
+    audiobook_available: true,
     isbn: null,
-    asin: null,
+    asin: "B0FCCBNF8X",
     price_usd: 3.99,
+    tropes: ["fake marriage", "enemies to lovers", "forced proximity"],
+    characters: ["David Kim", "Lily Chen"],
   },
   {
     slug: "the-billionaire-s-baby-secret",
     title: "The Billionaire's Baby Secret",
     lane: "manhattan_money_kings",
-    series_position: 4,
+    series_position: 3,
     format: "ebook",
-    position_label: "Book 4",
+    position_label: "Book 3",
     tagline: "One night. One secret. One second chance he refuses to lose.",
     blurb:
-      "Three years ago, Sophia Reed walked away from a hotel room and a man she should've never trusted — " +
+      "Three years ago, Sophia Reed walked away from a hotel room and a man she should never have trusted, " +
       "rising mogul Dominic Kane. Now the CEO who controls outcomes for a living is back, and the daughter " +
-      "Sophia has protected has the storm-gray eyes he can't deny. When Dominic returns to reclaim his " +
-      "empire, he discovers the truth he was never meant to miss.",
+      "Sophia has protected has eyes he can't deny. When Dominic returns to reclaim his empire, he " +
+      "discovers the truth he was never meant to miss.",
     pull_quote: "“He could buy silence. He could not buy back the years.”",
     cover_image: "/author-kit/mmk-3-baby-secret.jpg",
     publication_date: null,
@@ -160,24 +175,26 @@ export const BOOKS: Book[] = [
     retailers: {
       amazon_kindle: "https://swiy.co/3rd",
     },
-    audiobook_available: false,
+    audiobook_available: true,
     isbn: null,
-    asin: null,
+    asin: "B0G12LBZ24",
     price_usd: 3.99,
+    tropes: ["secret baby", "second chance", "workplace romance"],
+    characters: ["Dominic Kane", "Sophia Reed"],
   },
   {
     slug: "the-billionaires-forbidden-nanny",
     title: "The Billionaire's Forbidden Nanny",
     lane: "manhattan_money_kings",
-    series_position: 5,
+    series_position: 4,
     format: "ebook",
-    position_label: "Book 5",
+    position_label: "Book 4",
     tagline: "She's the nanny. He's her boss. His mother wants her gone.",
     blurb:
       "When Camille Torres takes a job caring for billionaire Ethan Calloway's silent daughter, she never " +
-      "expected to become the family they both desperately need. Ethan hasn't smiled since his wife died. " +
-      "His five-year-old daughter hasn't spoken. Seven nannies have quit. He doesn't need another " +
-      "complication — especially not one with quick wit, warm hands, and a mouth that talks back.",
+      "expected to become the family they both need. Ethan hasn't smiled since his wife died. His " +
+      "five-year-old daughter hasn't spoken. Seven nannies have quit. He doesn't need another " +
+      "complication, especially not one with quick wit, warm hands, and a mouth that talks back.",
     pull_quote: "“She also had something Gloria would never understand: a little girl who finally called her Mama.”",
     cover_image: "/author-kit/mmk-4-forbidden-nanny.jpg",
     publication_date: null,
@@ -185,13 +202,16 @@ export const BOOKS: Book[] = [
     retailers: {
       amazon_kindle: "https://swiy.co/4rd",
     },
-    audiobook_available: false,
+    audiobook_available: true,
     isbn: null,
-    asin: null,
+    asin: "B0GDZ4T164",
     price_usd: 3.99,
+    tropes: ["nanny romance", "single dad", "forbidden romance"],
+    characters: ["Ethan Calloway", "Camille Torres"],
   },
 
   // ─── Hudson Dynasty ────────────────────────────────────────────────────
+  // Canon: prequel + Books 1–3. Each book stands alone; the dynasty does not.
   {
     slug: "the-first-acquisition",
     title: "The First Acquisition",
@@ -199,79 +219,105 @@ export const BOOKS: Book[] = [
     series_position: 0,
     format: "ebook_and_audiobook",
     position_label: "Prequel novella",
-    tagline: "Before the empire. Before the auditor. The night a Hudson decided.",
+    tagline: "One fake engagement. One deal neither of them can afford to lose.",
     blurb:
-      "A Hudson Dynasty prequel novella. Twenty years before the RIVIERA Ledger leaks, a young Sebastian " +
-      "Hudson makes the first deal that will define every one that follows — and the first promise he " +
-      "will fail to keep. A self-contained origin story for the family, the firm, and the silence.",
-    pull_quote: "“He did not yet know what an empire cost. He was about to learn.”",
-    cover_image: "/covers/hudson-0-first-acquisition.jpg",
+      "Sebastian Hudson, CEO. Arden Shaw, forensic compliance attorney. One fake engagement that is " +
+      "supposed to protect them both. The Hudson Dynasty starts here.",
+    pull_quote: null,
+    cover_image: "/covers/hd-0-first-acquisition.jpg",
     publication_date: null,
-    kindle_unlimited: true,
+    kindle_unlimited: false,
+    // Free prequel: BookFunnel only (see note on the MMK prequel above).
     retailers: {
-      amazon_kindle: "https://swiy.co/05",
       bookfunnel: "https://dl.bookfunnel.com/kw1yge3479",
       audible: null,
     },
     audiobook_available: true,
     isbn: null,
-    asin: null,
+    asin: "B0D82GWFD9",
     price_usd: 0,
+    tropes: ["fake engagement", "billionaire romance"],
+    characters: ["Sebastian Hudson", "Arden Shaw"],
   },
   {
     slug: "hostile-tender",
     title: "Hostile Tender",
     lane: "hudson_dynasty",
     series_position: 1,
-    format: "ebook_and_audiobook",
+    format: "ebook",
     position_label: "Book 1",
-    tagline:
-      "She's the federal auditor sent to dismantle his empire. He's Manhattan's most dangerous billionaire fighting to save it.",
+    tagline: "Trust is a weapon. Desire is the risk.",
     blurb:
-      "When the RIVIERA Ledger exposes three generations of Hudson secrets, SDNY forensic auditor Nia " +
-      "Carter and CEO Sebastian Hudson are forced into dangerous proximity. The hostile takeover " +
-      "escalates. Secrets surface from the family archives. The line between investigation and intimacy " +
-      "dissolves — and trusting each other could cost them everything.",
-    pull_quote: "“A record outlives the men who keep it. The discipline is in waiting.”",
-    cover_image: "https://m.media-amazon.com/images/I/81iGQzEnacL._SL1500_.jpg",
+      "Dante Hudson builds Manhattan. Nia Carter defends the Bronx tenants his family's redevelopment would " +
+      "push out. She is the one obstacle his money can't move, and he is the one man she can't afford to " +
+      "want. An enemies-to-lovers standalone in the Hudson Dynasty.",
+    pull_quote: null,
+    cover_image: "/covers/hd-1-hostile-tender.jpg",
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
       amazon_kindle: "https://swiy.co/HD1",
       audible: null,
     },
-    audiobook_available: true,
+    audiobook_available: false,
     isbn: null,
-    asin: null,
+    asin: "B0H1F9PV97",
     price_usd: 4.99,
+    tropes: ["enemies to lovers", "billionaire developer", "steamy"],
+    characters: ["Dante Hudson", "Nia Carter"],
   },
   {
-    slug: "poison-pills",
+    slug: "poison-pill",
     title: "Poison Pill",
     lane: "hudson_dynasty",
     series_position: 2,
-    format: "ebook_and_audiobook",
+    format: "ebook",
     position_label: "Book 2",
-    tagline:
-      "The takeover failed. The war didn't end — it went underground, into the bloodstream of the family itself.",
+    tagline: "Power has a price. Love is the liability.",
     blurb:
-      "Book 2 of the Hudson Dynasty. With the hostile bid beaten back, Sebastian Hudson thought he'd " +
-      "secured the empire. But a poison-pill defense buried in the family trust is metabolizing into " +
-      "something lethal, and Nia Carter's audit has only scratched the surface. As old loyalties turn " +
-      "toxic and the people closest to them choose sides, the line between protecting the dynasty and " +
-      "destroying it disappears.",
-    pull_quote: "“Every defense is a slow poison. The art is choosing who swallows it.”",
-    cover_image: "https://storage.mlcdn.com/account_image/1246760/sbcZf9GwBaCWBcC5QKmu8oWakuKfIhojGzbnYNMb.png",
+      "Damien Vale is the corporate raider. Dr. Xia Zhao is the founder and scientist whose company he " +
+      "wants. A slow-burn, very steamy hostile-takeover romance in the Hudson Dynasty.",
+    pull_quote: null,
+    cover_image: "/covers/hd-2-poison-pill.jpg",
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
       amazon_kindle: "https://swiy.co/HD2",
       audible: null,
     },
-    audiobook_available: true,
+    audiobook_available: false,
     isbn: null,
     asin: null,
     price_usd: 4.99,
+    tropes: ["hostile takeover", "slow burn", "very steamy"],
+    characters: ["Damien Vale", "Dr. Xia Zhao"],
+  },
+  {
+    slug: "golden-parachute",
+    title: "Golden Parachute",
+    lane: "hudson_dynasty",
+    series_position: 3,
+    format: "ebook",
+    position_label: "Book 3",
+    tagline: "The golden parachute was never the money.",
+    blurb:
+      "Kai Hsu can restructure a billion dollars of bad debt. He cannot buy his way around Miri " +
+      "Doyle-Levine, the home health aide working her way into nursing school who refuses to be managed. " +
+      "A class-divide standalone in the Hudson Dynasty, told in dual POV, with high heat and a happy ending.",
+    pull_quote: null,
+    cover_image: "/covers/hd-3-golden-parachute.jpg",
+    publication_date: "2026-08-09",
+    kindle_unlimited: true,
+    retailers: {
+      // TODO(owner): replace with the dp/<ASIN> link once the ASIN is on file.
+      amazon_kindle: "https://www.amazon.com/s?k=Golden+Parachute+Reese+Astor&i=digital-text",
+    },
+    audiobook_available: false,
+    isbn: null,
+    asin: null,
+    price_usd: null,
+    tropes: ["class divide", "dual POV", "high heat", "HEA"],
+    characters: ["Kai Hsu", "Miri Doyle-Levine"],
   },
 
   // ─── Intimate Psychological Narratives ────────────────────────────────

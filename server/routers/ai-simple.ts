@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { publicProcedure, router } from '../_core/trpc';
+import { adminProcedure, publicProcedure, router } from '../_core/trpc';
 import { generateText } from '../_core/gemini';
 import { generateImage } from '../_core/imageGeneration';
 import { checkRateLimit, getClientKey, trackAiUsage } from '../ai-usage';
@@ -156,7 +156,7 @@ Respond in JSON format:
   /**
    * Generate blog post with AI assistance
    */
-  generateBlogPost: publicProcedure
+  generateBlogPost: adminProcedure
     .input(
       z.object({
         topic: z.string().min(5).max(200),
@@ -196,7 +196,7 @@ Format the response as markdown.`;
   /**
    * Generate story ideas for coaching clients
    */
-  generateStoryIdea: publicProcedure
+  generateStoryIdea: adminProcedure
     .input(
       z.object({
         genre: z.string(),
@@ -232,7 +232,7 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
   /**
    * Generate book cover with AI
    */
-  generateBookCover: publicProcedure
+  generateBookCover: adminProcedure
     .input(
       z.object({
         title: z.string(),
@@ -264,7 +264,7 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
   /**
    * Generate character portrait
    */
-  generateCharacterPortrait: publicProcedure
+  generateCharacterPortrait: adminProcedure
     .input(
       z.object({
         description: z.string().min(20).max(500),
@@ -287,7 +287,7 @@ Format as JSON with these exact keys: title, logline, hero, heroine, conflict, t
   /**
    * Generate social media graphic
    */
-  generateSocialGraphic: publicProcedure
+  generateSocialGraphic: adminProcedure
     .input(
       z.object({
         text: z.string(),

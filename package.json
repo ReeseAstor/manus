@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "NODE_ENV=development tsx watch server/_core/index.ts",
-    "build": "vite build && node scripts/seal-admin-chunks.mjs && node scripts/bundle-server.mjs server/_core/index.ts dist/index.js",
+    "build": "vite build && node scripts/prerender-static.mjs && node scripts/seal-admin-chunks.mjs && node scripts/bundle-server.mjs server/_core/index.ts dist/index.js",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc --noEmit",
     "format": "prettier --write .",

@@ -1,11 +1,13 @@
 import { useLocation } from 'wouter';
 import { BookOpen, Home, Search, ArrowLeft } from 'lucide-react';
+import { EnhancedSEOHead } from '@/components/ui/enhanced-seo-head';
 
 export default function NotFound() {
   const [, setLocation] = useLocation();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 flex items-center justify-center px-4">
+      <EnhancedSEOHead title="Page not found · Reese Astor" description="This page does not exist." canonical="/404" noindex />
       <div className="max-w-2xl w-full text-center">
         {/* 404 Illustration */}
         <div className="mb-8">

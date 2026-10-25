@@ -98,7 +98,9 @@ export async function authCallback(req: Request, res: Response) {
     res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
 
     const redirectUrl =
-      typeof redirect === 'string' && redirect.startsWith('/') ? redirect : '/';
+      typeof redirect === 'string' && redirect.startsWith('/') && !redirect.startsWith('//') && !redirect.startsWith('/\\')
+        ? redirect
+        : '/';
     return res.redirect(302, redirectUrl);
   } catch (err) {
     console.error('[Auth] Unexpected error in callback:', err);

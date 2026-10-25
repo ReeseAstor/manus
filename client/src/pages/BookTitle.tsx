@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
 import { trpc } from "@/lib/trpc";
@@ -23,14 +22,11 @@ import {
   LANE_META,
   type Book,
 } from "@/data/books";
+import { bookSchema, breadcrumbSchema } from "@/data/structured-data";
 
 export default function BookTitle() {
   const { slug } = useParams<{ slug: string }>();
   const book = slug ? getBook(slug) : undefined;
-
-  useEffect(() => {
-    if (book) document.title = `${book.title} · Reese Astor`;
-  }, [book]);
 
   if (!book) return <NotInCatalog slug={slug ?? ""} />;
   return <BookLayout book={book} />;
@@ -46,27 +42,14 @@ function BookLayout({ book }: { book: Book }) {
     await subscribeMutation.mutateAsync({ email: email.trim() });
   };
 
-  // Per-title structured data: Book or Audiobook depending on format.
-  const isAudiobook = book.format !== "ebook";
-  const schemaType = isAudiobook ? "Audiobook" : "Book";
-  const structured = {
-    "@context": "https://schema.org",
-    "@type": schemaType,
-    name: book.title,
-    author: { "@type": "Person", name: "Reese Astor" },
-    inLanguage: "en",
-    url: `https://reeseastor.com/books/${book.slug}`,
-    image: `https://reeseastor.com${book.cover_image_square ?? book.cover_image}`,
-    publisher: { "@type": "Organization", name: "Reese Astor" },
-    ...(book.price_usd != null && {
-      offers: {
-        "@type": "Offer",
-        price: book.price_usd.toFixed(2),
-        priceCurrency: "USD",
-        availability: "https://schema.org/InStock",
-      },
-    }),
-  };
+  const structured = [
+    bookSchema(book),
+    breadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Books", path: "/books" },
+      { name: book.title, path: `/books/${book.slug}` },
+    ]),
+  ];
 
   return (
     <div
@@ -74,12 +57,12 @@ function BookLayout({ book }: { book: Book }) {
       style={{ background: INK, color: TEXT }}
     >
       <EnhancedSEOHead
-        title={`${book.title} · Reese Astor`}
-        description={book.tagline}
-        canonical={`https://reeseastor.com/books/${book.slug}`}
+        title={`${book.title} by Reese Astor`}
+        description={`${book.tagline} ${book.blurb}`}
+        canonical={`/books/${book.slug}`}
         ogType="book"
-        ogImage={`https://reeseastor.com${book.cover_image_square ?? book.cover_image}`}
-        structuredData={[structured]}
+        ogImage={book.cover_image_square ?? book.cover_image}
+        structuredData={structured}
       />
 
       {/* ──────────────── Hero ──────────────── */}
@@ -211,6 +194,12 @@ function NotInCatalog({ slug }: { slug: string }) {
       className="kit-grain min-h-screen font-cormorant flex items-center justify-center px-6"
       style={{ background: INK, color: TEXT }}
     >
+      <EnhancedSEOHead
+        title="Title not found · Reese Astor"
+        description="That title is not in the Reese Astor catalog."
+        canonical="/books"
+        noindex
+      />
       <div className="max-w-[560px] text-center">
         <Eyebrow align="center">Not in catalog</Eyebrow>
         <h1

@@ -8,7 +8,9 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Streamdown } from "streamdown";
 import { useEffect } from "react";
-import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
+import { EnhancedSEOHead, generateArticleSchema } from "@/components/ui/enhanced-seo-head";
+import { breadcrumbSchema } from "@/data/structured-data";
+import { absoluteUrl, DEFAULT_OG_IMAGE } from "@shared/site";
 import { BlogToShopBridge } from "@/components/BlogToShopBridge";
 import { BlogContentUpgrade } from "@/components/BlogContentUpgrade";
 import { AffiliateProductSection, FTCDisclosure } from "@/components/AffiliateProductCard";
@@ -31,79 +33,6 @@ export default function BlogPost() {
 
   // Check if this article has affiliate product data
   const affiliateData = slug ? affiliateProductsBySlug[slug] : undefined;
-
-  // SEO Meta Tags - Update document head when post loads
-  useEffect(() => {
-    if (post) {
-      // Update page title
-      document.title = `${post.title} | Reese Astor - Romance Author`;
-      
-      // Update or create meta description
-      let metaDescription = document.querySelector('meta[name="description"]');
-      if (!metaDescription) {
-        metaDescription = document.createElement('meta');
-        metaDescription.setAttribute('name', 'description');
-        document.head.appendChild(metaDescription);
-      }
-      metaDescription.setAttribute('content', post.excerpt);
-      
-      // Update or create Open Graph tags for social sharing
-      const ogTags = [
-        { property: 'og:title', content: post.title },
-        { property: 'og:description', content: post.excerpt },
-        { property: 'og:type', content: 'article' },
-        { property: 'og:url', content: window.location.href },
-        { property: 'og:site_name', content: 'Reese Astor - Romance Author' },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: post.title },
-        { name: 'twitter:description', content: post.excerpt },
-      ];
-      
-      ogTags.forEach(tag => {
-        const selector = tag.property 
-          ? `meta[property="${tag.property}"]` 
-          : `meta[name="${tag.name}"]`;
-        let metaTag = document.querySelector(selector);
-        if (!metaTag) {
-          metaTag = document.createElement('meta');
-          if (tag.property) metaTag.setAttribute('property', tag.property);
-          if (tag.name) metaTag.setAttribute('name', tag.name);
-          document.head.appendChild(metaTag);
-        }
-        metaTag.setAttribute('content', tag.content);
-      });
-      
-      // Add article-specific meta tags
-      let articleAuthor = document.querySelector('meta[name="author"]');
-      if (!articleAuthor) {
-        articleAuthor = document.createElement('meta');
-        articleAuthor.setAttribute('name', 'author');
-        document.head.appendChild(articleAuthor);
-      }
-      articleAuthor.setAttribute('content', 'Reese Astor');
-      
-      // Add keywords based on category
-      let metaKeywords = document.querySelector('meta[name="keywords"]');
-      if (!metaKeywords) {
-        metaKeywords = document.createElement('meta');
-        metaKeywords.setAttribute('name', 'keywords');
-        document.head.appendChild(metaKeywords);
-      }
-      const baseKeywords = 'romance books, billionaire romance, Manhattan Money Kings, Reese Astor';
-      const categoryKeywords: Record<string, string> = {
-        'Reading Recommendations': 'book recommendations, romance series, best romance books 2024',
-        'Writing Tips': 'romance writing tips, how to write romance, author advice',
-        'Author Journey': 'self-publishing, indie author, author business',
-        'Marketing': 'book marketing, author platform, social media for authors',
-      };
-      metaKeywords.setAttribute('content', `${baseKeywords}, ${categoryKeywords[post.category] || ''}`);
-    }
-    
-    // Cleanup - reset title when leaving page
-    return () => {
-      document.title = 'Reese Astor | USA Today Bestselling Romance Author';
-    };
-  }, [post]);
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
@@ -159,11 +88,28 @@ export default function BlogPost() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
       <EnhancedSEOHead
-        title={`${post.title} | Reese Astor Blog`}
-        description={post.excerpt?.slice(0, 155) || `${post.title} - Read the latest from romance author Reese Astor's blog.`}
+        title={`${post.title} | Reese Astor`}
+        description={(post as { metaDescription?: string | null }).metaDescription || post.excerpt || post.title}
         canonical={`/blog/${slug}`}
         ogType="article"
-        keywords={[post.title, post.category || "romance", "Reese Astor blog", "romance writing"].filter(Boolean) as string[]}
+        ogImage={(post as { featuredImage?: string | null }).featuredImage || undefined}
+        publishDate={post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined}
+        modifiedDate={post.updatedAt ? new Date(post.updatedAt).toISOString() : undefined}
+        structuredData={[
+          generateArticleSchema({
+            title: post.title,
+            description: post.excerpt ?? post.title,
+            url: absoluteUrl(`/blog/${slug}`),
+            image: absoluteUrl((post as { featuredImage?: string | null }).featuredImage || DEFAULT_OG_IMAGE),
+            publishDate: post.publishedAt ? new Date(post.publishedAt).toISOString() : new Date(post.createdAt).toISOString(),
+            modifiedDate: post.updatedAt ? new Date(post.updatedAt).toISOString() : undefined,
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+            { name: post.title, path: `/blog/${slug}` },
+          ]),
+        ]}
       />
 
       {/* Hero Section */}
@@ -376,7 +322,7 @@ export default function BlogPost() {
                     About Reese Astor
                   </h3>
                   <p className="text-gray-300 leading-relaxed mb-4">
-                    USA Today Bestselling Author of steamy billionaire romance. Former corporate VP turned full-time author, helping aspiring writers build profitable author businesses through coaching and mentorship.
+                    Reese Astor writes steamy billionaire romance set in Manhattan: the Hudson Dynasty and the Manhattan Money Kings. Every book stands alone and ends happily.
                   </p>
                   <div className="flex gap-3">
                     <Button

@@ -320,64 +320,16 @@ And counting.`,
   },
 ];
 
-const sampleReviews = [
-  {
-    bookTitle: "The Billionaire's Baby Secret",
-    reviewerName: "Jessica M.",
-    rating: 5,
-    review: "Absolutely loved this book! The chemistry between Dominic and Sophia is off the charts. The secret baby trope is done perfectly here - it's not just a plot device, but a real exploration of what it means to be a parent and a partner. Couldn't put it down!",
-    source: "Amazon",
-    featured: true,
-  },
-  {
-    bookTitle: "The Billionaire's Baby Secret",
-    reviewerName: "Rachel T.",
-    rating: 5,
-    review: "This is everything I want in a romance novel. Strong characters, real emotional depth, and enough steam to fog up my Kindle. The way Dominic steps up as a father is swoon-worthy. Book 3 is the best in the series!",
-    source: "Goodreads",
-    featured: true,
-  },
-  {
-    bookTitle: "The Billionaire's Baby Secret",
-    reviewerName: "Amanda K.",
-    rating: 5,
-    review: "I've read hundreds of billionaire romances, and this one stands out. Sophia is a heroine I can root for - she's not perfect, but she's trying her best. And Dominic? *Chef's kiss*. The Manhattan setting is gorgeous too.",
-    source: "BookBub",
-    featured: true,
-  },
-  {
-    bookTitle: "The Billionaire's Fake Wife",
-    reviewerName: "Emily R.",
-    rating: 5,
-    review: "The fake marriage trope is my favorite, and this book delivers! Lily and David's relationship feels so real, even when they're pretending. The suspense element adds an extra layer that kept me on the edge of my seat.",
-    source: "Amazon",
-    featured: true,
-  },
-  {
-    bookTitle: "The Billionaire's Fake Wife",
-    reviewerName: "Sophie L.",
-    rating: 5,
-    review: "I stayed up until 3 AM to finish this book. The tension between Lily and David is incredible, and the way their fake marriage becomes real is beautifully done. Plus, the action scenes are genuinely thrilling!",
-    source: "Goodreads",
-    featured: true,
-  },
-  {
-    bookTitle: "The Billionaire's Executive Assistant",
-    reviewerName: "Lauren B.",
-    rating: 4,
-    review: "A solid start to the Manhattan Money Kings series! The office romance is steamy and well-written. Sarah is a great heroine - smart, capable, and not afraid to stand up to Michael. Looking forward to the rest of the series!",
-    source: "Amazon",
-    featured: true,
-  },
-  {
-    bookTitle: "The Billionaire's Executive Assistant",
-    reviewerName: "Megan S.",
-    rating: 5,
-    review: "This book is HOT. Like, seriously hot. But it's also got heart. The relationship between Sarah and Michael feels earned, not rushed. And the corporate intrigue adds a nice backdrop to the romance.",
-    source: "BookBub",
-    featured: true,
-  },
-];
+// Reader reviews are never seeded. Only real, attributable reviews may be
+// added, by hand, through the admin. (10/2026 audit: fabricated reviews removed.)
+const sampleReviews: Array<{
+  bookTitle: string;
+  reviewerName: string;
+  rating: number;
+  review: string;
+  source: string;
+  featured: boolean;
+}> = [];
 
 async function seed() {
   console.log("Seeding books...");

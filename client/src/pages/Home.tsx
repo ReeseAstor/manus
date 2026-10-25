@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { personSchema, romanceSeriesSchemas, websiteSchema } from "@/data/structured-data";
 import { motion, useReducedMotion, cubicBezier } from "framer-motion";
 import { Gift, ArrowRight } from "lucide-react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
@@ -71,8 +72,7 @@ const LEAD_MAGNETS: LeadMagnet[] = [
       "Best for readers who want corporate danger, forced proximity, fake engagement, legal tension, and a ruthless billionaire with secrets.",
     cta: "Get The First Acquisition Free",
     href: LINKS.firstAcquisition,
-    cover:
-      "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/uMHRMKanHXREGUzc.jpeg",
+    cover: "/covers/hd-0-first-acquisition.jpg",
     coverAlt: "The First Acquisition — a Hudson Dynasty billionaire romance by Reese Astor",
     eager: true,
     accent: WINE,
@@ -89,7 +89,7 @@ const LEAD_MAGNETS: LeadMagnet[] = [
       "Best for readers who want workplace tension, billionaire heat, emotional betrayal, sharp banter, and a fast, steamy read.",
     cta: "Get One Night Stand Free",
     href: LINKS.oneNightStand,
-    cover: "https://m.media-amazon.com/images/I/815-iFRAlpL._SL1500_.jpg",
+    cover: "/covers/mmk-0-one-night-stand.jpg",
     coverAlt:
       "The Billionaire’s One Night Stand — a Manhattan Money Kings billionaire romance by Reese Astor",
     accent: GOLD,
@@ -121,26 +121,12 @@ const SERIES: Series[] = [
   {
     name: "Hudson Dynasty",
     copy: "For readers who want hostile takeovers, legal warfare, corporate betrayal, ruthless ambition, fake engagements, forensic scandal, and morally gray billionaires.",
-    books: ["The First Acquisition", "Hostile Tender", "Poison Pill"],
+    books: ["The First Acquisition", "Hostile Tender", "Poison Pill", "Golden Parachute"],
     freeStarter: { title: "The First Acquisition", href: LINKS.firstAcquisition },
   },
 ];
 
-const homeStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Reese Astor",
-  url: "https://reeseastor.com",
-  description:
-    "Steamy billionaire romance by Reese Astor. Start with two free books — The First Acquisition (Hudson Dynasty) and The Billionaire's One Night Stand (Manhattan Money Kings).",
-  author: {
-    "@type": "Person",
-    name: "Reese Astor",
-    url: "https://reeseastor.com/about",
-    jobTitle: "Romance Author",
-    sameAs: [LINKS.amazonAuthor, "https://www.instagram.com/reeseastor"],
-  },
-};
+const homeStructuredData = [websiteSchema(), personSchema(), ...romanceSeriesSchemas()];
 
 // ── Small shared primitives ──────────────────────────────────────────────
 
@@ -264,7 +250,7 @@ export default function Home() {
           "corporate romance",
           "morally gray billionaire",
         ]}
-        structuredData={[homeStructuredData]}
+        structuredData={homeStructuredData}
       />
 
       {/* ───────────────── 1 + 2. HERO with the two free books above the fold ── */}
