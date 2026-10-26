@@ -48,12 +48,16 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
           style={{
             color: INK,
             background: GOLD,
-            padding: layout === "stack" ? "14px 12px" : "14px 22px",
+            padding: layout === "stack" ? "14px 10px" : "14px 22px",
             letterSpacing: layout === "stack" ? "0.04em" : "0.08em",
             textTransform: "none",
           }}
         >
-          Read free with Kindle+ (formerly Kindle Unlimited).
+          {/* Two unbreakable halves so narrow cards wrap after "Kindle+". */}
+          <span>
+            <span className="inline-block">Read free with Kindle+</span>{" "}
+            <span className="inline-block">(formerly Kindle Unlimited).</span>
+          </span>
         </a>
       )}
       {retailers.map(({ meta, href }) => {
