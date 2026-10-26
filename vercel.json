@@ -180,17 +180,7 @@
       "permanent": false
     },
     {
-      "source": "/reader-club/",
-      "destination": "/newsletter",
-      "permanent": false
-    },
-    {
       "source": "/vip-club",
-      "destination": "/newsletter",
-      "permanent": false
-    },
-    {
-      "source": "/vip-club/",
       "destination": "/newsletter",
       "permanent": false
     },
@@ -200,17 +190,7 @@
       "permanent": false
     },
     {
-      "source": "/welcome-back/",
-      "destination": "/newsletter",
-      "permanent": false
-    },
-    {
       "source": "/romance-quiz",
-      "destination": "/books",
-      "permanent": false
-    },
-    {
-      "source": "/romance-quiz/",
       "destination": "/books",
       "permanent": false
     }
@@ -240,6 +220,32 @@
         {
           "key": "Content-Type",
           "value": "text/plain; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/shop",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        },
+        {
+          "key": "Link",
+          "value": "<https://reeseastor.com/shop>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/shop/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        },
+        {
+          "key": "Link",
+          "value": "<https://reeseastor.com/shop>; rel=\"canonical\""
         }
       ]
     }
