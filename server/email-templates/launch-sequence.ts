@@ -193,7 +193,7 @@ export function generateLaunchEmail1(options?: {
   });
 }
 
-// ─── Email 2: First Chapters + Early Reactions (Day 2) ─────────────────────
+// ─── Email 2: Two Days In (Day 2) ─────────────────────────────────────────
 
 export function generateLaunchEmail2(options?: {
   subscriberName?: string;
@@ -217,31 +217,15 @@ export function generateLaunchEmail2(options?: {
                 I keep telling myself to stop refreshing the reviews page. I keep failing.
               </p>
               <p style="margin: 0 0 18px; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
-                ${bookTitle} has been out for two days, and the early readers have been incredible. A few of my favorite reactions from the launch:
+                ${bookTitle} has been out for two days, and the early readers have been incredible.
               </p>
-            </td>
-          </tr>
-
-          <!-- Social Proof Box -->
-          <tr>
-            <td style="padding: 0 40px 24px;">
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 10px;">
-                <tr>
-                  <td style="padding: 24px 28px;">
-                    <p style="margin: 0 0 12px; color: #d4af37; font-size: 14px; font-style: italic; font-family: Georgia, serif;">"Finished at 3am. I have work tomorrow. Zero regrets."</p>
-                    <p style="margin: 0 0 16px; color: rgba(200,200,200,0.55); font-size: 12px; font-family: Arial, sans-serif;">&mdash; early reader review</p>
-                    <p style="margin: 0; color: #d4af37; font-size: 14px; font-style: italic; font-family: Georgia, serif;">"I skipped sleep to finish this. Worth every missed hour."</p>
-                    <p style="margin: 0 0 4px; color: rgba(200,200,200,0.55); font-size: 12px; font-family: Arial, sans-serif;">&mdash; early reader review</p>
-                  </td>
-                </tr>
-              </table>
             </td>
           </tr>
 
           <tr>
             <td class="content-cell" style="padding: 0 40px 20px;">
               <p style="margin: 0 0 18px; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
-                If you haven't started yet — here's your sign. Grab it while release week buzz is still in the air:
+                If you haven't started yet, here's your sign. Grab it while release week buzz is still in the air:
               </p>
             </td>
           </tr>
@@ -273,8 +257,8 @@ export function generateLaunchEmail2(options?: {
           </tr>`;
 
   return wrapInTemplate({
-    subject: `What early readers are saying about ${bookTitle}...`,
-    preheader: "3am finishes, zero regrets, and one very exhausted author — the reviews are in",
+    subject: `${bookTitle}: two days in`,
+    preheader: "One very tired author, and a small favor if you have finished it",
     bodyContent,
   });
 }
@@ -370,10 +354,10 @@ export const launchSequence = [
   },
   {
     id: 2,
-    name: "First Chapters & Early Reactions",
-    subject: "What early readers are saying...",
+    name: "Two Days In",
+    subject: "Two days in",
     delay: "Day 2 — after release",
-    purpose: "Social proof + second conversion window for readers who haven't bought yet",
+    purpose: "Second conversion window for readers who haven't bought yet",
     generate: generateLaunchEmail2,
   },
   {

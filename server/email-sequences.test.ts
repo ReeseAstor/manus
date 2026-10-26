@@ -39,11 +39,12 @@ describe("Launch Sequence Email Templates", () => {
     expect(html).not.toContain("https://swiy.co/05");
   });
 
-  it("should generate First Chapters email with early reader social proof", () => {
+  it("should generate two-days-in email", () => {
     const html = generateLaunchEmail2({ subscriberName: "Emily", bookTitle: "The First Acquisition" });
     expect(html).toContain("Dear Emily");
-    expect(html).toContain("early readers");
-    expect(html).toContain("3am");
+    expect(html).toContain("early readers have been incredible");
+    expect(html).not.toContain("early reader review");
+    expect(html).not.toContain("3am");
     expect(html).toContain("Read The First Acquisition Now");
   });
 
@@ -61,7 +62,9 @@ describe("Launch Sequence Email Templates", () => {
     expect(launchSequence[1].delay).toContain("Day 2");
     expect(launchSequence[2].delay).toContain("Day 5");
     expect(launchSequence[0].purpose).toContain("Announce");
-    expect(launchSequence[1].purpose).toContain("Social proof");
+    expect(launchSequence[1].name).toBe("Two Days In");
+    expect(launchSequence[1].subject).toBe("Two days in");
+    expect(launchSequence[1].purpose).toContain("Second conversion window");
     expect(launchSequence[2].purpose).toContain("Last-chance");
   });
 });
