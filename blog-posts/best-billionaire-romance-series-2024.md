@@ -24,19 +24,19 @@ Set against the glittering backdrop of New York City's elite, this series follow
 
 ### Book 1: The Billionaire's Executive Assistant
 
-The series opens with **Michael Hastings**, Manhattan's most ruthless dealmaker, and **Sarah Shah**, the executive assistant who sees through his carefully constructed walls. This enemies-to-lovers office romance crackles with tension from the first page. Sarah isn't intimidated by Michael's reputation or his billions — she's there to do a job, not fall for her impossible boss.
+The series opens with **Michael Hastings**, Manhattan's most ruthless dealmaker, and **Sarah Shah**, the executive assistant who sees through his carefully constructed walls. This forbidden office romance crackles with tension from the first page. Sarah isn't intimidated by Michael's reputation or his billions — she's there to do a job, not fall for her impossible boss.
 
-*Tropes: Boss/Employee, Enemies to Lovers, Office Romance*
+*Tropes: Boss and Assistant, Forbidden Romance, Corporate Intrigue*
 
 ### Book 2: The Billionaire's Fake Wife
 
-The second installment introduces **David Kim**, tech billionaire and Michael's closest friend, in a fake marriage romance that becomes all too real. When **Lily Chen** breaks into David's penthouse under threat from her criminal father, David sees an opportunity — and Lily sees a way out.
+The second installment introduces **David Kim**, a billionaire CEO, in a fake marriage romance that becomes all too real. When **Elena Volkov** breaks into David's penthouse under pressure from her criminal father, David sees an opportunity — and Elena sees a way out.
 
-*Tropes: Fake Marriage, Forced Proximity, Redemption Romance*
+*Tropes: Fake Marriage, Enemies to Lovers, Forced Proximity*
 
 ### Book 3: The Billionaire's Baby Secret
 
-The series conclusion brings together **Dominic Kane** and **Sophia Reed** in a secret baby romance that will have you reaching for tissues. Three years after a one-night stand, Sophia has built a life for herself and her daughter — a daughter with unmistakable storm-gray eyes that match the billionaire who just walked back into her life.
+Book 3 brings together **Dominic Kane** and **Sophia Reed** in a secret baby romance that will have you reaching for tissues. Three years after one weekend in Chicago, Sophia has built a life for herself and her daughter — a daughter with unmistakable storm-gray eyes that match the billionaire who just walked back into her life.
 
 *Tropes: Secret Baby, Second Chance, Single Mom Romance*
 
@@ -52,7 +52,7 @@ What I love about this series is that Huang doesn't shy away from the darker edg
 
 ## Twisted Series by Ana Huang
 
-If you prefer your billionaire romance with a darker edge, Huang's [Twisted Love](https://www.amazon.com/dp/B08QGBR5NF?tag=88away0d-20) delivers. Alex Volkov is cold, calculating, and hiding secrets that could destroy everything. When he becomes the reluctant guardian of his best friend's sister, the slow-burn tension is almost unbearable.
+If you prefer your billionaire romance with a darker edge, Huang's [Twisted Love](https://www.amazon.com/dp/B08QGBR5NF?tag=88away0d-20) delivers. Alex Volkov is cold, calculating, and hiding secrets that could destroy everything. When he becomes the reluctant guardian of his best friend's sister, the tension is almost unbearable.
 
 The entire Twisted series follows interconnected characters in a world of wealth and danger. Each book works as a standalone, but reading them in order rewards you with callbacks and character development that builds across the series.
 
@@ -88,7 +88,7 @@ Since we're talking about binge-reading entire series, I'll share what I actuall
 
 The best billionaire romance series transport readers into worlds of luxury and passion while delivering the emotional satisfaction of watching two people find their way to each other despite the odds. Whether you're new to the genre or a longtime fan, the series recommended here offer something special.
 
-For readers ready to fall in love with Manhattan's most eligible billionaires, the **Manhattan Money Kings series** provides the perfect entry point. Start with the free prequel, then prepare to binge-read your way through three unforgettable love stories.
+For readers ready to fall in love with Manhattan's most eligible billionaires, the **Manhattan Money Kings series** provides the perfect entry point. Start with the free prequel, then prepare to binge-read your way through four unforgettable love stories.
 
 *What's your favorite billionaire romance series? I'm always looking for my next obsession.*
 

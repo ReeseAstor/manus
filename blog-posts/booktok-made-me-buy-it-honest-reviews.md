@@ -22,7 +22,7 @@ The algorithm rewards emotional reactions, not nuanced criticism. A book that ma
 
 ### Things We Never Got Over by Lucy Score
 
-[Things We Never Got Over](https://www.amazon.com/dp/B09FGCFZ9S?tag=88away0d-20) went viral for the grumpy hero, and honestly, Knox Morgan deserves every thirsty comment. Score writes the grumpy/sunshine dynamic with a deft hand — Knox's grumpiness has real roots, Naomi's sunshine isn't naive, and their slow-burn chemistry builds to a satisfying payoff.
+[Things We Never Got Over](https://www.amazon.com/dp/B09FGCFZ9S?tag=88away0d-20) went viral for the grumpy hero, and honestly, Knox Morgan deserves every thirsty comment. Score writes the grumpy/sunshine dynamic with a deft hand — Knox's grumpiness has real roots, Naomi's sunshine isn't naive, and their chemistry builds to a satisfying payoff.
 
 **My honest take**: This one earns the hype. It's long — over 500 pages — but it never drags. The small-town setting is charming without being saccharine, and the secondary characters are developed enough that you'll want their books too (and they exist). A safe recommendation for anyone curious about BookTok romance.
 
