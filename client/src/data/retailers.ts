@@ -12,6 +12,7 @@
  */
 
 import type { Book, RetailerKey } from "./books";
+import { withAmazonTag } from "@/lib/amazon-tag";
 
 export type RetailerMeta = {
   key: RetailerKey;
@@ -88,7 +89,7 @@ export function resolveRetailers(book: Book): { meta: RetailerMeta; href: string
     const bookHref = book.retailers[meta.key];
     const href = envHref || bookHref;
     if (href && href !== "https://www.amazon.com/dp/PLACEHOLDER") {
-      out.push({ meta, href });
+      out.push({ meta, href: withAmazonTag(href) });
     }
   }
   return out.sort((a, b) => a.meta.order - b.meta.order);

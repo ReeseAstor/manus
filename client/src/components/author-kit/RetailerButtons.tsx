@@ -4,16 +4,19 @@ import { GOLD, INK, TEXT } from "./tokens";
 
 type Props = {
   book: Book;
-  /** Layout: "grid" wraps to multiple rows; "row" forces single row. */
-  layout?: "grid" | "row";
-  /** Hide the "Read on Kindle Unlimited" KU pitch even if applicable. */
+  /**
+   * Layout: "grid" wraps to multiple rows; "row" forces single row;
+   * "stack" puts every button on its own full-width row (narrow cards).
+   */
+  layout?: "grid" | "row" | "stack";
+  /** Hide the Kindle+ (formerly Kindle Unlimited) pitch even if applicable. */
   hideKindleUnlimited?: boolean;
 };
 
 /**
  * Renders the buy-button matrix for a book. Resolves URLs from env vars +
  * book data; any channel without a usable URL is hidden, never rendered as
- * a dead link. KU titles get a "Read on Kindle Unlimited" primary button
+ * a dead link. KU titles get a "Read free with Kindle+" primary button
  * pointing at the same Amazon link.
  */
 export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: Props) {
@@ -24,14 +27,16 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
   const showKU = book.kindle_unlimited && amazon && !hideKindleUnlimited;
 
   const baseBtn =
-    "font-inter inline-flex items-center justify-center gap-2 text-[11px] font-semibold uppercase no-underline transition-all duration-200 hover:-translate-y-px text-center";
+    `font-inter ${layout === "stack" ? "flex w-full" : "inline-flex"} items-center justify-center gap-2 text-[11px] font-semibold uppercase no-underline transition-all duration-200 hover:-translate-y-px text-center`;
 
   return (
     <div
       className={
-        layout === "grid"
-          ? "grid grid-cols-1 sm:grid-cols-2 gap-3"
-          : "flex flex-wrap gap-3"
+        layout === "stack"
+          ? "grid grid-cols-1 gap-3"
+          : layout === "grid"
+            ? "grid grid-cols-1 sm:grid-cols-2 gap-3"
+            : "flex flex-wrap gap-3"
       }
     >
       {showKU && amazon && (
@@ -43,11 +48,16 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
           style={{
             color: INK,
             background: GOLD,
-            padding: "14px 22px",
-            letterSpacing: "0.22em",
+            padding: layout === "stack" ? "14px 10px" : "14px 22px",
+            letterSpacing: layout === "stack" ? "0.04em" : "0.08em",
+            textTransform: "none",
           }}
         >
-          Read on Kindle Unlimited
+          {/* Two unbreakable halves so narrow cards wrap after "Kindle+". */}
+          <span>
+            <span className="inline-block">Read free with Kindle+</span>{" "}
+            <span className="inline-block">(formerly Kindle Unlimited).</span>
+          </span>
         </a>
       )}
       {retailers.map(({ meta, href }) => {

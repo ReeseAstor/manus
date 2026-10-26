@@ -11,31 +11,26 @@ const TROPE_RECOMMENDATIONS: Record<string, {
   label: string;
   description: string;
   matchReason: string;
-  icon: string;
 }> = {
   "enemies-to-lovers": {
     label: "Enemies to Lovers",
-    description: "You love the tension, the banter, the slow burn that ignites into passion.",
+    description: "You love the tension, the banter, and the spark that ignites into passion.",
     matchReason: "Based on your love of enemies-to-lovers dynamics",
-    icon: "⚔️",
   },
   "forbidden-love": {
     label: "Forbidden Love",
     description: "You're drawn to the thrill of what you can't have — and the courage to take it anyway.",
     matchReason: "Because you crave forbidden, high-stakes romance",
-    icon: "🔒",
   },
   "second-chance": {
     label: "Second Chance",
     description: "You believe in the power of unfinished love stories finding their way back.",
     matchReason: "For fans of second-chance love stories",
-    icon: "🔄",
   },
   "boss-employee": {
     label: "Boss/Employee",
     description: "You love the power dynamics, the stolen glances across the boardroom.",
     matchReason: "Perfect for fans of workplace romance",
-    icon: "💼",
   },
 };
 
@@ -113,7 +108,7 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
   // Determine which tabs to show
   const tabs: { key: typeof activeTab; label: string; count: number }[] = [];
   if (quizResult && personalizedBooks.length > 0) {
-    tabs.push({ key: "personalized", label: `For You ${tropeInfo?.icon || "✨"}`, count: personalizedBooks.length });
+    tabs.push({ key: "personalized", label: "For You", count: personalizedBooks.length });
   }
   if (tropeMatched.length > 0) {
     tabs.push({ key: "trope-match", label: "Similar Vibes", count: tropeMatched.length });

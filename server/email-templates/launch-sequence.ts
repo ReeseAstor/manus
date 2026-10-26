@@ -230,8 +230,6 @@ export function generateLaunchEmail2(options?: {
                   <td style="padding: 24px 28px;">
                     <p style="margin: 0 0 12px; color: #d4af37; font-size: 14px; font-style: italic; font-family: Georgia, serif;">"Finished at 3am. I have work tomorrow. Zero regrets."</p>
                     <p style="margin: 0 0 16px; color: rgba(200,200,200,0.55); font-size: 12px; font-family: Arial, sans-serif;">&mdash; early reader review</p>
-                    <p style="margin: 0 0 12px; color: #d4af37; font-size: 14px; font-style: italic; font-family: Georgia, serif;">"The tension. The slow burn. THE MANHATTAN POWER PLAY. Reese, how dare you."</p>
-                    <p style="margin: 0 0 16px; color: rgba(200,200,200,0.55); font-size: 12px; font-family: Arial, sans-serif;">&mdash; early reader review</p>
                     <p style="margin: 0; color: #d4af37; font-size: 14px; font-style: italic; font-family: Georgia, serif;">"I skipped sleep to finish this. Worth every missed hour."</p>
                     <p style="margin: 0 0 4px; color: rgba(200,200,200,0.55); font-size: 12px; font-family: Arial, sans-serif;">&mdash; early reader review</p>
                   </td>

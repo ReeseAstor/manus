@@ -82,7 +82,7 @@ export const BOOKS: Book[] = [
     position_label: "Prequel",
     tagline: "One night with Manhattan's most ruthless CEO.",
     blurb:
-      "Victoria walked into an upscale Manhattan bar the night she was passed over for partner. James Chen, " +
+      "Victoria walked into an upscale Manhattan bar the night she was passed over for partner. James, " +
       "the self-made tech billionaire every magazine wants to profile, was not supposed to be the one who " +
       "noticed. One night was the plan. He has other ideas.",
     pull_quote: "“You were supposed to be a stranger. You decided otherwise.”",
@@ -99,7 +99,7 @@ export const BOOKS: Book[] = [
     asin: "B0DSG7NKGP",
     price_usd: 0,
     tropes: ["one night stand", "billionaire romance", "Manhattan"],
-    characters: ["James Chen", "Victoria"],
+    characters: ["James", "Victoria"],
   },
   {
     slug: "the-billionaire-s-executive-assistant",
@@ -137,10 +137,10 @@ export const BOOKS: Book[] = [
     position_label: "Book 2",
     tagline: "A ruthless engagement that turns devastatingly real.",
     blurb:
-      "Lily Chen, a gymnast turned thief, breaks into David Kim's penthouse to steal the secrets her father " +
+      "Elena Volkov, a gymnast turned thief, breaks into David Kim's penthouse to steal the secrets her father " +
       "demands. The billionaire catches her red-handed. Instead of calling the police, he makes her an offer: " +
-      "marry him, and he keeps her out of her father's reach. Their forced alliance turns into something " +
-      "neither of them planned for.",
+      "marry him for twelve months, and he keeps her out of her father's reach. Their forced alliance turns " +
+      "into something neither of them planned for.",
     pull_quote: "“Twelve months. He intended every one of them.”",
     cover_image: "/author-kit/mmk-2-fake-wife.jpg",
     publication_date: null,
@@ -153,7 +153,7 @@ export const BOOKS: Book[] = [
     asin: "B0FCCBNF8X",
     price_usd: 3.99,
     tropes: ["fake marriage", "enemies to lovers", "forced proximity"],
-    characters: ["David Kim", "Lily Chen"],
+    characters: ["David Kim", "Elena Volkov"],
   },
   {
     slug: "the-billionaire-s-baby-secret",
@@ -276,7 +276,7 @@ export const BOOKS: Book[] = [
     tagline: "Power has a price. Love is the liability.",
     blurb:
       "Damien Vale is the corporate raider. Dr. Xia Zhao is the founder and scientist whose company he " +
-      "wants. A slow-burn, very steamy hostile-takeover romance in the Hudson Dynasty.",
+      "wants. A very steamy enemies-to-lovers hostile-takeover romance in the Hudson Dynasty.",
     pull_quote: null,
     cover_image: "/covers/hd-2-poison-pill.jpg",
     publication_date: null,
@@ -289,7 +289,7 @@ export const BOOKS: Book[] = [
     isbn: null,
     asin: null,
     price_usd: 4.99,
-    tropes: ["hostile takeover", "slow burn", "very steamy"],
+    tropes: ["hostile takeover", "enemies to lovers", "very steamy"],
     characters: ["Damien Vale", "Dr. Xia Zhao"],
   },
   {

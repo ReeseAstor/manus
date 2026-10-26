@@ -3,6 +3,8 @@ export const RETIRED_BLOG_SLUGS = [
   "ai-assisted-romance-writing-workflow",
   "romance-author-writing-tools-setup",
   "quality-control-workflows-romance-authors",
+  // 10/2026 brand ruling: retired with a 301 to /blog.
+  "dark-romance-books-beginners-guide",
   // 10/2026 audit: pen-name identity leaks, unverifiable credentials, and
   // author-business posts that pull the brand away from readers.
   "self-publishing-journey",

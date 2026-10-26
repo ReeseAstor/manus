@@ -124,7 +124,7 @@ export const CHARACTER_VOICE_MAPPINGS: CharacterVoiceMapping[] = [
   
   // Book 0.5: The Billionaire's One Night Stand
   { characterName: "Victoria Cruz", bookTitle: "The Billionaire's One Night Stand", defaultVoiceId: "bella", premiumVoiceId: "elli" },
-  { characterName: "James Chen", bookTitle: "The Billionaire's One Night Stand", defaultVoiceId: "antoni", premiumVoiceId: "clyde" },
+  { characterName: "James", bookTitle: "The Billionaire's One Night Stand", defaultVoiceId: "antoni", premiumVoiceId: "clyde" },
 ];
 
 // ============================================

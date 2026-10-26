@@ -26,7 +26,8 @@ export default function Shop() {
       <EnhancedSEOHead
         title="Books | Reese Astor"
         description="Every Reese Astor title, with links to the stores that carry it."
-        canonical="https://www.reeseastor.com/shop"
+        canonical="https://reeseastor.com/shop"
+        noindex
         ogType="website"
         keywords={["Reese Astor books", "Manhattan Money Kings", "Hudson Dynasty"]}
         structuredData={[shopStructuredData]}
@@ -84,7 +85,7 @@ export default function Shop() {
                     {book.price_usd === 0 && (
                       <p className="text-xl font-bold text-[#7A4F4C] mb-4">Free</p>
                     )}
-                    <RetailerButtons book={book} layout="grid" />
+                    <RetailerButtons book={book} layout="stack" />
                   </div>
                 </div>
               </motion.div>

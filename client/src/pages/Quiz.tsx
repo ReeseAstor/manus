@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { HoneypotField } from "@/components/HoneypotField";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
+import { withAmazonTag } from "@/lib/amazon-tag";
 
 interface QuizQuestion {
   id: number;
@@ -486,7 +487,7 @@ export default function Quiz() {
                             Get Your Free Book
                           </Button>
                           <Button
-                            onClick={() => window.open(result.bookLink, "_blank")}
+                            onClick={() => window.open(withAmazonTag(result.bookLink), "_blank")}
                             variant="outline"
                             className="border-[#4A3B3A]/20 text-[#4A3B3A] hover:bg-[#EBD6D3]/30 px-6 py-5 rounded-full"
                           >

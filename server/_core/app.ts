@@ -120,8 +120,6 @@ export function createApp(): Express {
         "/free-book",
         "/press",
         "/contact",
-        "/romance-quiz",
-        "/shop",
         "/privacy",
         "/terms",
       ].map((url) => ({ url, lastmod: undefined as string | undefined }));

@@ -10,6 +10,7 @@ import { EnhancedSEOHead } from '@/components/ui/enhanced-seo-head';
 import { MailerLiteForm } from '@/components/MailerLiteForm';
 import { BOOKS } from '@/data/books';
 import { Reveal, StaggerReveal, StaggerItem, GlowOrb, GlassCard } from '@/components/author-kit';
+import { pinPost } from '@/lib/pin-post';
 
 /**
  * Newsletter Signup Page — Manhattan Luxury Redesign
@@ -305,7 +306,8 @@ export default function Newsletter() {
  */
 function RecentNewsSection() {
   const { data: posts, isLoading } = trpc.blog.list.useQuery<BlogPost[]>({ published: true });
-  const recentPosts = posts?.slice(0, 3) || [];
+  // The enemies-to-lovers reading list stays pinned as the first card.
+  const recentPosts = pinPost(posts);
 
   if (isLoading) {
     return (

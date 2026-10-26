@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
-import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
+import { router, publicProcedure, protectedProcedure, adminProcedure } from "../_core/trpc";
 import { checkRateLimit, trackAiUsage } from "../ai-usage";
 import { getDb } from "../db";
 import { 
@@ -75,9 +75,10 @@ export const audioRouter = router({
   // ============================================
   
   /**
-   * Get all available voices based on user's subscription tier
+   * Get all available voices. Admin-only: the response carries vendor voice ids.
+   * The reader page keeps this query disabled (SHOW_READER_VOICE_LIBRARY = false).
    */
-  getVoices: publicProcedure
+  getVoices: adminProcedure
     .input(z.object({
       includePremium: z.boolean().optional().default(false),
     }))
@@ -97,9 +98,9 @@ export const audioRouter = router({
     }),
 
   /**
-   * Get character voice mappings for books
+   * Get character voice mappings for books. Admin-only (internal voice casting).
    */
-  getCharacterVoices: publicProcedure.query(async () => {
+  getCharacterVoices: adminProcedure.query(async () => {
     return CHARACTER_VOICE_MAPPINGS;
   }),
 
