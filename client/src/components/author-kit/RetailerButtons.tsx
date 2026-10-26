@@ -6,14 +6,14 @@ type Props = {
   book: Book;
   /** Layout: "grid" wraps to multiple rows; "row" forces single row. */
   layout?: "grid" | "row";
-  /** Hide the "Read on Kindle Unlimited" KU pitch even if applicable. */
+  /** Hide the Kindle+ (formerly Kindle Unlimited) pitch even if applicable. */
   hideKindleUnlimited?: boolean;
 };
 
 /**
  * Renders the buy-button matrix for a book. Resolves URLs from env vars +
  * book data; any channel without a usable URL is hidden, never rendered as
- * a dead link. KU titles get a "Read on Kindle Unlimited" primary button
+ * a dead link. KU titles get a "Read free with Kindle+" primary button
  * pointing at the same Amazon link.
  */
 export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: Props) {
@@ -44,10 +44,11 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
             color: INK,
             background: GOLD,
             padding: "14px 22px",
-            letterSpacing: "0.22em",
+            letterSpacing: "0.08em",
+            textTransform: "none",
           }}
         >
-          Read on Kindle Unlimited
+          Read free with Kindle+ (formerly Kindle Unlimited).
         </a>
       )}
       {retailers.map(({ meta, href }) => {
