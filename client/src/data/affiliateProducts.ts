@@ -98,20 +98,6 @@ export const affiliateProductsBySlug: Record<string, {
     topPicks: [],
     inlineProducts: {},
   },
-  "dark-romance-books-beginners-guide": {
-    ftcDisclosure: true,
-    topPicks: [
-      {
-        name: "Kindle Paperwhite (2024)",
-        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=88away0d-20",
-        description: "Dark romance reads best late at night with the warm light on. No blue light, no notifications — just you and the story.",
-        whyRecommend: "The warm light setting creates the perfect moody atmosphere for dark romance. Plus no one can see what you're reading.",
-        priceRange: "Around $150",
-        rating: 4.7,
-      },
-    ],
-    inlineProducts: {},
-  },
   "best-kindle-setup-romance-readers": {
     ftcDisclosure: true,
     topPicks: [

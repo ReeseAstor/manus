@@ -6,7 +6,6 @@ import { join } from "path";
 const AFFILIATE_TAG = "88away0d-20";
 
 const newBlogSlugs = [
-  "dark-romance-books-beginners-guide",
   "best-kindle-setup-romance-readers",
   "enemies-to-lovers-books-that-ruined-me",
   "booktok-made-me-buy-it-honest-reviews",

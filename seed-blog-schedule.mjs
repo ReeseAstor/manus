@@ -9,12 +9,12 @@ const DATABASE_URL = process.env.DATABASE_URL;
 
 const posts = [
   {
-    title: "Enemies to Lovers: Why This Romance Trope Never Gets Old",
-    slug: "enemies-to-lovers-romance-trope-guide",
+    title: "Enemies to Lovers Books That Absolutely Ruined Me (In the Best Way)",
+    slug: "enemies-to-lovers-books-that-ruined-me",
     excerpt: "From Pride and Prejudice to modern billionaire romances, the enemies-to-lovers trope remains the most beloved in romance fiction. Discover why readers can't resist the tension, the banter, and the inevitable surrender.",
     category: "Romance Tropes",
     readTime: "8 min read",
-    seoKeywords: "enemies to lovers romance, enemies to lovers books, romance tropes, best enemies to lovers novels, slow burn romance",
+    seoKeywords: "enemies to lovers romance, enemies to lovers books, romance tropes, best enemies to lovers novels",
     metaDescription: "Explore why enemies to lovers is the most popular romance trope. Discover the best enemies-to-lovers books and what makes this tension-filled dynamic irresistible.",
     scheduledPublishAt: "2026-03-28 09:00:00",
     content: `# Enemies to Lovers: Why This Romance Trope Never Gets Old
@@ -49,7 +49,7 @@ In my Manhattan Money Kings series, I love exploring what happens when a woman w
 
 ## The Best Enemies-to-Lovers Books to Read Right Now
 
-If you're craving that slow-burn tension, here are some recommendations across the romance spectrum:
+If you're craving that kind of tension, here are some recommendations across the romance spectrum:
 
 - **The Hating Game** by Sally Thorne — The office rivals story that launched a thousand TikToks
 - **Beach Read** by Emily Henry — Two writers with opposing worldviews challenge each other to swap genres
@@ -249,7 +249,7 @@ Before we talk about publishing, let's talk about your book. The romance market 
 Your cover is your most important marketing asset. In romance, readers absolutely judge books by their covers, and they can spot a DIY cover from a mile away.
 
 **What romance covers need:**
-- Genre-appropriate imagery (shirtless men for steamy, illustrated for rom-com, moody for dark romance)
+- Genre-appropriate imagery (shirtless men for steamy, illustrated for rom-com, moody for romantic suspense)
 - Professional typography that's readable at thumbnail size
 - A color palette that signals your subgenre
 - Series branding if it's part of a series
@@ -318,8 +318,8 @@ If you're just starting out, I'm rooting for you. This industry changed my life,
 *Reese*`
   },
   {
-    title: "Manhattan Romance: 10 NYC Love Stories That Capture the City's Magic",
-    slug: "manhattan-romance-nyc-love-stories",
+    title: "NYC Romance Books: Fall in Love with Manhattan",
+    slug: "nyc-romance-books-manhattan-guide",
     excerpt: "From Central Park meet-cutes to penthouse love affairs, these Manhattan-set romance novels capture everything we love about falling in love in New York City.",
     category: "Reading Recommendations",
     readTime: "7 min read",
@@ -384,10 +384,10 @@ When I set my Manhattan Money Kings series in NYC, I wanted readers to feel the 
   {
     title: "Steamy Romance vs. Sweet Romance: Finding Your Heat Level",
     slug: "steamy-vs-sweet-romance-heat-levels-guide",
-    excerpt: "Not sure what heat level you prefer in romance? This guide breaks down everything from clean romance to dark romance, helping you find the perfect temperature for your reading taste.",
+    excerpt: "Not sure what heat level you prefer in romance? This guide breaks down everything from clean romance to erotic romance, helping you find the perfect temperature for your reading taste.",
     category: "Reading Recommendations",
     readTime: "8 min read",
-    seoKeywords: "steamy romance books, sweet romance, romance heat levels, clean romance, spicy romance books, dark romance",
+    seoKeywords: "steamy romance books, sweet romance, romance heat levels, clean romance, spicy romance books",
     metaDescription: "Guide to romance heat levels: from clean and sweet to steamy and dark. Find your perfect romance temperature with book recommendations for every preference.",
     scheduledPublishAt: "2026-05-09 09:00:00",
     content: `# Steamy Romance vs. Sweet Romance: Finding Your Heat Level
@@ -416,8 +416,8 @@ Let me break down the heat levels so you can find your perfect reading temperatu
 **What to expect:** Multiple detailed sex scenes with explicit language. The physical relationship is an important part of the story, and the scenes are written to be both emotionally meaningful and, well, hot.
 **Perfect for:** Readers who want passion on the page and aren't shy about it. This is where my Manhattan Money Kings series lives.
 
-### Level 5: Erotic Romance / Dark Romance
-**What to expect:** Frequent, highly explicit scenes that may include kink, power dynamics, or taboo elements. In dark romance, the hero may have morally gray (or outright dark) characteristics.
+### Level 5: Erotic Romance
+**What to expect:** Frequent, highly explicit scenes that may include kink, power dynamics, or taboo elements. The hero may have morally gray (or outright dark) characteristics.
 **Perfect for:** Readers who want intensity, boundary-pushing scenarios, and characters who exist outside conventional romance norms.
 
 ## How to Tell Before You Buy
@@ -529,7 +529,7 @@ Growing an email list is a marathon, not a sprint. Here's what realistic growth 
 
 - **Month 1-3:** 100-500 subscribers (mostly from your existing network and reader magnet)
 - **Month 4-12:** 500-2,000 subscribers (as you add more books and cross-promote)
-- **Year 2+:** 2,000-10,000+ subscribers (compounding growth from backlist and word of mouth)
+- **Year 2+:** 2,000 to 10,000 subscribers (compounding growth from backlist and word of mouth)
 
 Every single subscriber is more valuable to my career than a thousand social media followers.
 
@@ -551,8 +551,8 @@ Your future self will thank you.
 *P.S. Want to see my reader magnet in action? Sign up at reeseastor.com/free-book and you'll experience exactly the funnel I described above.*`
   },
   {
-    title: "The Secret Baby Trope: Why Romance Readers Can't Get Enough",
-    slug: "secret-baby-trope-romance-readers-guide",
+    title: "Secret Baby Romance Books: The Ultimate Reading Guide",
+    slug: "secret-baby-romance-books-guide",
     excerpt: "The secret baby trope delivers instant high stakes, emotional complexity, and the ultimate second chance at love. Here's why it remains one of romance's most enduring favorites.",
     category: "Romance Tropes",
     readTime: "7 min read",
@@ -594,7 +594,7 @@ The answer, as in all great romance, involves vulnerability, forgiveness, and th
 If this trope is your catnip, here are some recommendations:
 
 - **The Billionaire's Secret Heir** by Reese Astor — Manhattan billionaire meets the child (and the woman) he never knew he needed
-- **Kulti** by Mariana Zapata — A slow-burn masterpiece with secret baby elements
+- **Kulti** by Mariana Zapata — A masterclass in tension with secret baby elements
 - **The Chase** by Elle Kennedy — College romance with a surprise pregnancy twist
 - **Baby for the Billionaire** by Maxine Sullivan — Classic billionaire secret baby with all the trimmings
 - **Archer's Voice** by Mia Sheridan — Not strictly secret baby, but the family revelations hit the same emotional notes
@@ -716,8 +716,8 @@ And if you want to see how I turned a "what if a woman refused to be impressed b
 *Reese*`
   },
   {
-    title: "BookTok Romance: The Viral Books Every Reader Is Talking About",
-    slug: "booktok-romance-viral-books-2026",
+    title: "BookTok Made Me Buy It: Honest Reviews of the Most Hyped Romance Books",
+    slug: "booktok-made-me-buy-it-honest-reviews",
     excerpt: "From spicy reads to emotional gut-punches, these are the romance novels dominating BookTok in 2026. Plus, how BookTok is changing the way we discover love stories.",
     category: "Reading Recommendations",
     readTime: "8 min read",
@@ -756,7 +756,7 @@ BookTok loves its spice, and these books deliver:
 
 **Twisted Love** by Ana Huang — Dark, possessive heroes and morally gray romance. The Twisted series is BookTok royalty.
 
-**Haunting Adeline** by H.D. Carlton — Dark romance that pushes boundaries. Not for everyone, but the readers who love it are passionate advocates.
+**Haunting Adeline** by H.D. Carlton — A romance that pushes boundaries. Not for everyone, but the readers who love it are passionate advocates.
 
 ### The Feel-Good Favorites
 For readers who want to smile, not sob:
@@ -780,7 +780,7 @@ BookTok has been especially powerful for indie authors:
 
 **Don't be afraid of trends.** Yes, some books are overhyped. But most BookTok favorites earned their status by genuinely connecting with readers.
 
-**Check trigger warnings.** BookTok is good about flagging content warnings, especially for dark romance. Pay attention to these if certain themes are difficult for you.
+**Check trigger warnings.** BookTok is good about flagging content warnings, especially for darker reads. Pay attention to these if certain themes are difficult for you.
 
 ## How to Use BookTok as an Author
 
@@ -923,7 +923,7 @@ It also creates natural conflict. Two people with different habits, different bo
 The classic. A blizzard, a remote location, and two people who have no choice but to wait it out together. Bonus points if there's a fireplace and only one source of warmth.
 
 ### Roommates
-Whether by choice or circumstance, sharing a living space with someone you're attracted to is a slow-burn masterpiece waiting to happen. The domesticity—cooking together, hearing each other through thin walls, accidentally walking in on each other—creates intimacy that feels earned.
+Whether by choice or circumstance, sharing a living space with someone you're attracted to is tension waiting to happen. The domesticity—cooking together, hearing each other through thin walls, accidentally walking in on each other—creates intimacy that feels earned.
 
 ### Road Trip
 Thousands of miles, one car, and nowhere to hide. Road trip romances combine forced proximity with the metaphor of a journey—both literal and emotional.
@@ -942,7 +942,7 @@ A broken-down car, a deserted island, a delayed flight that leads to sharing a h
 
 **People We Meet on Vacation by Emily Henry** — Best friends take annual road trips together. The year everything changed is the story we can't stop thinking about.
 
-**The Wall of Winnipeg and Me by Mariana Zapata** — She quits her job as his personal assistant. He convinces her to come back—and move in—with a marriage of convenience. Slow burn at its absolute finest.
+**The Wall of Winnipeg and Me by Mariana Zapata** — She quits her job as his personal assistant. He convinces her to come back—and move in—with a marriage of convenience. Tension at its absolute finest.
 
 **The First Acquisition by Reese Astor** — When a Manhattan power player and the woman who challenges him are forced into close quarters during a business negotiation, the boardroom tension becomes something much more personal. (Free at reeseastor.com/free-book)
 
