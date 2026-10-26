@@ -7,31 +7,51 @@ import {
   BookOpen,
   Heart,
   Settings,
-  TrendingUp,
   Clock,
 } from 'lucide-react';
+
+function membershipLabel(status: string | null | undefined): string {
+  switch (status) {
+    case "active":
+      return "VIP Member • Active";
+    case "paused":
+      return "Membership paused";
+    case "pending":
+      return "Membership starting";
+    case "past_due":
+      return "Payment past due";
+    case "canceled":
+    case "cancelled":
+      return "Membership canceled";
+    case "expired":
+      return "Membership ended";
+    default:
+      return "No active membership";
+  }
+}
 
 export default function VipDashboard() {
   const [location, setLocation] = useLocation();
   const [activeTab, setActiveTab] = useState<'overview' | 'library' | 'history' | 'settings'>('overview');
 
   const { data: user } = trpc.auth.me.useQuery();
-  const { data: stories } = trpc.vip.getStories.useQuery({ limit: 100 });
+  const { data: stories } = trpc.vip.getStories.useQuery({ limit: 100 }, { enabled: !!user });
+  const dashboardQuery = trpc.vip.getDashboard.useQuery(undefined, { enabled: !!user });
+  const dashboard = dashboardQuery.data;
+  const statsReady = dashboardQuery.isSuccess;
 
   if (!user) {
     setLocation('/auth/login?redirect=/vip-club/dashboard');
     return null;
   }
 
-  // Mock data for demonstration (replace with real data from backend)
-  const stats = {
-    storiesRead: 12,
-    minutesListened: 245,
-    favoriteStories: 5,
-    memberSince: 'January 2025',
-  };
-
   const recentStories = stories?.slice(0, 3) || [];
+  const memberSince = dashboard?.memberSince
+    ? new Date(dashboard.memberSince).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })
+    : '—';
+  const nextBilling = dashboard?.currentPeriodEnd
+    ? new Date(dashboard.currentPeriodEnd).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })
+    : null;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100">
@@ -111,9 +131,9 @@ export default function VipDashboard() {
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <div className="flex items-center gap-3 mb-2">
                   <BookOpen className="w-6 h-6 text-pink-600" />
-                  <h3 className="text-sm font-semibold text-gray-600">Stories Read</h3>
+                  <h3 className="text-sm font-semibold text-gray-600">Stories Played</h3>
                 </div>
-                <p className="text-3xl font-bold text-gray-900">{stats.storiesRead}</p>
+                <p className="text-3xl font-bold text-gray-900">{statsReady ? dashboard?.storiesPlayed ?? 0 : "—"}</p>
               </div>
 
               <div className="bg-white rounded-xl shadow-lg p-6">
@@ -121,7 +141,7 @@ export default function VipDashboard() {
                   <Headphones className="w-6 h-6 text-purple-600" />
                   <h3 className="text-sm font-semibold text-gray-600">Minutes Listened</h3>
                 </div>
-                <p className="text-3xl font-bold text-gray-900">{stats.minutesListened}</p>
+                <p className="text-3xl font-bold text-gray-900">{statsReady ? dashboard?.minutesPlayed ?? 0 : "—"}</p>
               </div>
 
               <div className="bg-white rounded-xl shadow-lg p-6">
@@ -129,7 +149,7 @@ export default function VipDashboard() {
                   <Heart className="w-6 h-6 text-rose-600" />
                   <h3 className="text-sm font-semibold text-gray-600">Favorites</h3>
                 </div>
-                <p className="text-3xl font-bold text-gray-900">{stats.favoriteStories}</p>
+                <p className="text-3xl font-bold text-gray-900">{statsReady ? dashboard?.favorites.length ?? 0 : "—"}</p>
               </div>
 
               <div className="bg-white rounded-xl shadow-lg p-6">
@@ -137,7 +157,7 @@ export default function VipDashboard() {
                   <Crown className="w-6 h-6 text-amber-600" />
                   <h3 className="text-sm font-semibold text-gray-600">Member Since</h3>
                 </div>
-                <p className="text-xl font-bold text-gray-900">{stats.memberSince}</p>
+                <p className="text-xl font-bold text-gray-900">{memberSince}</p>
               </div>
             </div>
 
@@ -174,11 +194,13 @@ export default function VipDashboard() {
                 <div>
                   <h2 className="text-2xl font-bold mb-2">Your Subscription</h2>
                   <p className="text-pink-100 mb-4">
-                    VIP Member • Active
+                    {membershipLabel(dashboard?.subscriptionStatus)}
                   </p>
-                  <p className="text-sm text-pink-100">
-                    Next billing date: February 12, 2025
-                  </p>
+                  {nextBilling && (
+                    <p className="text-sm text-pink-100">
+                      Current period ends {nextBilling}
+                    </p>
+                  )}
                 </div>
                 <button
                   onClick={() => setActiveTab('settings')}
@@ -202,7 +224,7 @@ export default function VipDashboard() {
               Stories you've marked as favorites will appear here.
             </p>
             <div className="grid md:grid-cols-3 gap-6">
-              {recentStories.slice(0, 3).map((story) => (
+              {(dashboard?.favorites ?? []).map((story) => (
                 <div
                   key={story.id}
                   className="border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-all cursor-pointer"
@@ -216,7 +238,7 @@ export default function VipDashboard() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{story.title}</h3>
                   <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                    {story.excerpt || story.content?.substring(0, 100)}...
+                    {story.excerpt}
                   </p>
                   <div className="flex items-center gap-1">
                     {Array.from({ length: story.heatLevel || 4 }).map((_, i) => (
@@ -240,7 +262,13 @@ export default function VipDashboard() {
               Track your reading and listening progress across all VIP stories.
             </p>
             <div className="space-y-4">
-              {recentStories.map((story, index) => (
+              {dashboardQuery.isError && (
+                <p className="text-gray-600">Listening history is unavailable right now.</p>
+              )}
+              {statsReady && (dashboard?.history.length ?? 0) === 0 && (
+                <p className="text-gray-600">No listening history yet.</p>
+              )}
+              {(dashboard?.history ?? []).map((story) => (
                 <div
                   key={story.id}
                   className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:shadow-lg transition-all cursor-pointer"
@@ -252,7 +280,11 @@ export default function VipDashboard() {
                   <div className="flex-1">
                     <h3 className="font-bold text-gray-900">{story.title}</h3>
                     <p className="text-sm text-gray-600">
-                      Listened {3 - index} days ago • {Math.floor(Math.random() * 20 + 10)} minutes
+                      {new Date(story.playedAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
+                      {' • '}
+                      {(story.progress ?? 0) < 60
+                        ? 'Under a minute'
+                        : `${Math.round((story.progress ?? 0) / 60)} minutes`}
                     </p>
                   </div>
                   <div className="flex items-center gap-1">

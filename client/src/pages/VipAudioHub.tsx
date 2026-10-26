@@ -359,6 +359,7 @@ export default function VipAudioHub() {
                       </div>
                       <AudioPlayer
                         audioUrl={audio.audioUrl}
+                        storyId={/^\d+$/.test(audio.storyId ?? "") ? Number(audio.storyId) : undefined}
                         canDownload={usage?.limits.canDownload}
                         showSpeedControl={false}
                         className="flex-1"

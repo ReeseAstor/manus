@@ -1,4 +1,4 @@
-﻿import { pgEnum, integer, pgTable, text, timestamp, varchar, boolean, json, serial, numeric } from "drizzle-orm/pg-core";
+﻿import { pgEnum, integer, pgTable, text, timestamp, varchar, boolean, json, serial, numeric, uniqueIndex } from "drizzle-orm/pg-core";
 
 
 
@@ -528,10 +528,12 @@ export const storyPlayHistory = pgTable("story_play_history", {
   id: serial("id").primaryKey(),
   userId: integer("userId").notNull().references(() => users.id),
   storyId: integer("storyId").notNull().references(() => steamyStories.id),
-  progress: integer("progress").default(0), // Playback progress in seconds
+  progress: integer("progress").default(0), // Furthest playback position in seconds
   completed: boolean("completed").default(false),
   playedAt: timestamp("playedAt").defaultNow().notNull(),
-});
+}, (table) => [
+  uniqueIndex("story_play_history_user_story_idx").on(table.userId, table.storyId),
+]);
 
 export type StoryPlayHistory = typeof storyPlayHistory.$inferSelect;
 export type InsertStoryPlayHistory = typeof storyPlayHistory.$inferInsert;

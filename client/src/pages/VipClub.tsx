@@ -478,7 +478,7 @@ export default function VipClub() {
                     "David's hand found the small of my back, his touch sending electricity through the silk of my dress. 'We shouldn't,' I whispered, even as I leaned into him. His gilded eyes darkened. 'Then tell me to stop.' But we both knew I wouldn't..."
                   </p>
                   <div className="mt-3 text-center">
-                    <span className="text-pink-400 text-xs font-semibold">— Continues for 2,400 words —</span>
+                    <span className="text-pink-400 text-xs font-semibold">— Continues for members —</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-400">
@@ -561,7 +561,7 @@ export default function VipClub() {
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-400">
                   <Music className="w-4 h-4 text-purple-400" />
-                  <span>Full 8-minute audio for Silver+ members</span>
+                  <span>Full audio for Silver+ members</span>
                 </div>
               </CardContent>
             </Card>
@@ -614,7 +614,7 @@ export default function VipClub() {
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-400">
                   <Lock className="w-4 h-4 text-amber-400" />
-                  <span>12+ bonus items for Gold members</span>
+                  <span>Bonus items for Gold members</span>
                 </div>
               </CardContent>
             </Card>
@@ -647,7 +647,7 @@ export default function VipClub() {
                     "The office was silent except for the hum of my computer and the pounding of my heart. I didn't hear Michael approach until his shadow fell across my desk. 'You're still here,' he said, his voice rough with exhaustion—or something else entirely..."
                   </p>
                   <div className="mt-3 text-center">
-                    <span className="text-blue-400 text-xs font-semibold">— Continues for 1,800 words —</span>
+                    <span className="text-blue-400 text-xs font-semibold">— Continues for members —</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-400">
@@ -682,7 +682,7 @@ export default function VipClub() {
                     "The last person I expected to see at Kane Industries was Dominic Kane himself. Three years hadn't changed him—same intense dark eyes, same commanding presence that once made my knees weak. Still made them weak, apparently..."
                   </p>
                   <div className="mt-3 text-center">
-                    <span className="text-rose-400 text-xs font-semibold">— Continues for 2,200 words —</span>
+                    <span className="text-rose-400 text-xs font-semibold">— Continues for members —</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-400">
@@ -721,7 +721,7 @@ export default function VipClub() {
                     <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-6 text-center">
                       <Lock className="w-12 h-12 text-pink-400 mx-auto mb-3" />
                       <p className="text-white font-semibold mb-2">Continue Reading</p>
-                      <p className="text-gray-400 text-sm mb-4">This story continues for another 2,000+ words of steamy content.</p>
+                      <p className="text-gray-400 text-sm mb-4">This story continues for members.</p>
                       <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
                     </div>
                   </div>
@@ -753,7 +753,7 @@ export default function VipClub() {
                     <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-6 text-center">
                       <Lock className="w-12 h-12 text-pink-400 mx-auto mb-3" />
                       <p className="text-white font-semibold mb-2">Continue Reading</p>
-                      <p className="text-gray-400 text-sm mb-4">This story continues for another 1,800+ words of steamy content.</p>
+                      <p className="text-gray-400 text-sm mb-4">This story continues for members.</p>
                       <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
                     </div>
                   </div>
@@ -786,7 +786,7 @@ export default function VipClub() {
                     <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-6 text-center">
                       <Lock className="w-12 h-12 text-pink-400 mx-auto mb-3" />
                       <p className="text-white font-semibold mb-2">Continue Reading</p>
-                      <p className="text-gray-400 text-sm mb-4">This story continues for another 2,200+ words of steamy content.</p>
+                      <p className="text-gray-400 text-sm mb-4">This story continues for members.</p>
                       <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
                     </div>
                   </div>

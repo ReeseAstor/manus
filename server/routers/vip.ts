@@ -59,7 +59,7 @@ export const vipRouter = router({
   getFeaturedStories: publicProcedure.query(async () => {
     const db = await getDb();
     if (!db) return [];
-    
+
     const stories = await db
       .select({
         id: steamyStories.id,
@@ -79,6 +79,67 @@ export const vipRouter = router({
       .orderBy(desc(steamyStories.publishedAt))
       .limit(6);
     return stories;
+  }),
+
+  // Real listening stats for the member dashboard. Empty history is zero, not a placeholder.
+  getDashboard: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
+
+    const membership = await db
+      .select({
+        status: vipMembers.status,
+        joinedAt: vipMembers.joinedAt,
+        currentPeriodEnd: vipMembers.currentPeriodEnd,
+      })
+      .from(vipMembers)
+      .where(eq(vipMembers.userId, ctx.user.id))
+      .limit(1);
+
+    const likes = await db
+      .select({
+        id: steamyStories.id,
+        title: steamyStories.title,
+        category: steamyStories.category,
+        excerpt: steamyStories.excerpt,
+        heatLevel: steamyStories.heatLevel,
+      })
+      .from(storyLikes)
+      .innerJoin(steamyStories, eq(storyLikes.storyId, steamyStories.id))
+      .where(eq(storyLikes.userId, ctx.user.id))
+      .orderBy(desc(storyLikes.createdAt));
+
+    const history = await db
+      .select({
+        id: storyPlayHistory.id,
+        title: steamyStories.title,
+        heatLevel: steamyStories.heatLevel,
+        progress: storyPlayHistory.progress,
+        playedAt: storyPlayHistory.playedAt,
+      })
+      .from(storyPlayHistory)
+      .innerJoin(steamyStories, eq(storyPlayHistory.storyId, steamyStories.id))
+      .where(eq(storyPlayHistory.userId, ctx.user.id))
+      .orderBy(desc(storyPlayHistory.playedAt))
+      .limit(20);
+
+    const totals = await db
+      .select({
+        seconds: sql<number>`COALESCE(SUM(${storyPlayHistory.progress}), 0)`,
+        stories: sql<number>`COUNT(DISTINCT ${storyPlayHistory.storyId})`,
+      })
+      .from(storyPlayHistory)
+      .where(eq(storyPlayHistory.userId, ctx.user.id));
+
+    return {
+      storiesPlayed: Number(totals[0]?.stories ?? 0),
+      minutesPlayed: Math.floor(Number(totals[0]?.seconds ?? 0) / 60),
+      favorites: likes,
+      memberSince: membership[0]?.joinedAt ?? null,
+      subscriptionStatus: membership[0]?.status ?? null,
+      currentPeriodEnd: membership[0]?.currentPeriodEnd ?? null,
+      history,
+    };
   }),
 
   // Get welcome story for new members (doesn't require active membership yet)
@@ -372,21 +433,80 @@ export const vipRouter = router({
   updatePlayProgress: protectedProcedure
     .input(
       z.object({
-        storyId: z.number(),
-        progress: z.number(),
+        storyId: z.number().int(),
+        progress: z.number().int().min(0).max(6 * 60 * 60),
         completed: z.boolean().default(false),
       })
     )
     .mutation(async ({ ctx, input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
-      
-      await db.insert(storyPlayHistory).values({
-        userId: ctx.user.id,
-        storyId: input.storyId,
-        progress: input.progress,
-        completed: input.completed,
-      });
+
+      const membership = await db
+        .select({ status: vipMembers.status, tierId: vipMembers.tierId })
+        .from(vipMembers)
+        .where(eq(vipMembers.userId, ctx.user.id))
+        .limit(1);
+
+      if (!membership[0] || membership[0].status !== "active") {
+        throw new TRPCError({ code: "FORBIDDEN", message: "VIP membership required" });
+      }
+
+      const story = await db
+        .select({
+          audioDuration: steamyStories.audioDuration,
+          minTier: steamyStories.minTier,
+        })
+        .from(steamyStories)
+        .where(eq(steamyStories.id, input.storyId))
+        .limit(1);
+
+      if (!story[0]) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Story not found" });
+      }
+
+      const tier = await db
+        .select({ displayOrder: vipTiers.displayOrder })
+        .from(vipTiers)
+        .where(eq(vipTiers.id, membership[0].tierId))
+        .limit(1);
+      const tierLevel = tier[0]?.displayOrder || 1;
+      if ((story[0].minTier ?? 1) > tierLevel) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "This story is not included in your membership",
+        });
+      }
+
+      // One row per member and story. Progress is the furthest position, so a
+      // later SUM does not add every checkpoint together. When the story has a
+      // known duration, the stored position cannot pass it.
+      const duration = story[0].audioDuration;
+      const progress =
+        typeof duration === "number" && duration > 0
+          ? Math.min(input.progress, duration)
+          : input.progress;
+      const progressSql =
+        typeof duration === "number" && duration > 0
+          ? sql`LEAST(${duration}, GREATEST(COALESCE(${storyPlayHistory.progress}, 0), ${progress}))`
+          : sql`GREATEST(COALESCE(${storyPlayHistory.progress}, 0), ${progress})`;
+
+      await db
+        .insert(storyPlayHistory)
+        .values({
+          userId: ctx.user.id,
+          storyId: input.storyId,
+          progress,
+          completed: input.completed,
+        })
+        .onConflictDoUpdate({
+          target: [storyPlayHistory.userId, storyPlayHistory.storyId],
+          set: {
+            progress: progressSql,
+            playedAt: new Date(),
+            completed: sql`${storyPlayHistory.completed} OR ${input.completed}`,
+          },
+        });
 
       return { success: true };
     }),
