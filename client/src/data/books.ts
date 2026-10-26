@@ -137,10 +137,10 @@ export const BOOKS: Book[] = [
     position_label: "Book 2",
     tagline: "A ruthless engagement that turns devastatingly real.",
     blurb:
-      "Lily Chen, a gymnast turned thief, breaks into David Kim's penthouse to steal the secrets her father " +
+      "Elena Volkov, a gymnast turned thief, breaks into David Kim's penthouse to steal the secrets her father " +
       "demands. The billionaire catches her red-handed. Instead of calling the police, he makes her an offer: " +
-      "marry him, and he keeps her out of her father's reach. Their forced alliance turns into something " +
-      "neither of them planned for.",
+      "marry him for twelve months, and he keeps her out of her father's reach. Their forced alliance turns " +
+      "into something neither of them planned for.",
     pull_quote: "“Twelve months. He intended every one of them.”",
     cover_image: "/author-kit/mmk-2-fake-wife.jpg",
     publication_date: null,
@@ -153,7 +153,7 @@ export const BOOKS: Book[] = [
     asin: "B0FCCBNF8X",
     price_usd: 3.99,
     tropes: ["fake marriage", "enemies to lovers", "forced proximity"],
-    characters: ["David Kim", "Lily Chen"],
+    characters: ["David Kim", "Elena Volkov"],
   },
   {
     slug: "the-billionaire-s-baby-secret",
