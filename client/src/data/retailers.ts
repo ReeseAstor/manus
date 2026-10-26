@@ -78,10 +78,24 @@ export const RETAILERS: Record<RetailerKey, RetailerMeta> = {
  * data so we can flip channels live without redeploying. Null entries are
  * filtered out so the consumer can map cleanly.
  */
+// Each variable is read by name. Indexing import.meta.env with a computed key
+// makes Vite inline the whole env object into the public bundle, including the
+// build host's VITE_* system variables such as the commit message.
+const RETAILER_ENV: Record<RetailerKey, string | undefined> = {
+  amazon_kindle: import.meta.env.VITE_PERMISSION_AMAZON_URL,
+  audible: import.meta.env.VITE_PERMISSION_AUDIBLE_URL,
+  apple_books: import.meta.env.VITE_PERMISSION_APPLE_URL,
+  spotify: import.meta.env.VITE_PERMISSION_SPOTIFY_URL,
+  elevenreader: import.meta.env.VITE_PERMISSION_ELEVENREADER_URL,
+  google_play: import.meta.env.VITE_PERMISSION_GOOGLEPLAY_URL,
+  gumroad: import.meta.env.VITE_PERMISSION_GUMROAD_URL,
+  bookfunnel: import.meta.env.VITE_PERMISSION_BOOKFUNNEL_URL,
+};
+
 export function resolveRetailers(book: Book): { meta: RetailerMeta; href: string }[] {
   const out: { meta: RetailerMeta; href: string }[] = [];
   for (const meta of Object.values(RETAILERS)) {
-    const envHref = (import.meta.env as Record<string, string | undefined>)[meta.envVar];
+    const envHref = RETAILER_ENV[meta.key];
     const bookHref = book.retailers[meta.key];
     const href = envHref || bookHref;
     if (href && href !== "https://www.amazon.com/dp/PLACEHOLDER") {
