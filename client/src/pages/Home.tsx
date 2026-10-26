@@ -67,7 +67,7 @@ const LEAD_MAGNETS: LeadMagnet[] = [
     offer: "Free Book",
     title: "The First Acquisition",
     description:
-      "A darker corporate romance prequel with fake engagement tension, forensic scandal, boardroom warfare, personal threats, and a morally gray billionaire hero.",
+      "A darker corporate romance prequel with fake engagement tension, forensic scandal, boardroom warfare, a media firestorm, and a morally gray billionaire hero.",
     bestFor:
       "Best for readers who want corporate danger, forced proximity, fake engagement, legal tension, and a ruthless billionaire with secrets.",
     cta: "Get The First Acquisition Free",
