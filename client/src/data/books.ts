@@ -287,7 +287,7 @@ export const BOOKS: Book[] = [
     },
     audiobook_available: false,
     isbn: null,
-    asin: null,
+    asin: "B0H53BP5S1", // verified live on amazon.com/dp/B0H53BP5S1 (Poison Pill, Reese Astor) 10/26/2026
     price_usd: 4.99,
     tropes: ["hostile takeover", "enemies to lovers", "very steamy"],
     characters: ["Damien Vale", "Dr. Xia Zhao"],
