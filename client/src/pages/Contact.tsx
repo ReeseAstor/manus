@@ -44,7 +44,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+    <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7]">
       <EnhancedSEOHead
         title="Contact Reese Astor | Romance Author & Writing Coach"
         description="Contact Reese Astor for reader questions, media and rights inquiries, and ARC requests."
@@ -63,11 +63,11 @@ export default function Contact() {
             backgroundAttachment: "fixed",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/98 via-[#0a0e1a]/95 to-[#0a0e1a]/98" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F7]/98 via-[#FAF7F7]/95 to-[#FAF7F7]/98" />
         </div>
 
         {/* Gold ambient glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-[#d4af37]/10 blur-[120px] rounded-full" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-[#C9A3A0]/10 blur-[120px] rounded-full" />
 
         <div className="container relative z-10">
           <motion.div
@@ -76,18 +76,18 @@ export default function Contact() {
             transition={{ duration: 1 }}
             className="max-w-4xl mx-auto text-center space-y-8"
           >
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm">
-              <MessageCircle className="h-4 w-4 text-[#d4af37]" />
-              <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#B59A6A]/30 bg-[#C9A3A0]/5 backdrop-blur-sm">
+              <MessageCircle className="h-4 w-4 text-[#7A4F4C]" />
+              <span className="text-sm font-medium text-[#7A4F4C] tracking-widest uppercase">
                 Let's Connect
               </span>
             </div>
 
-            <h1 className="font-serif text-5xl md:text-7xl font-bold text-white leading-tight">
+            <h1 className="font-serif text-5xl md:text-7xl font-bold text-[#4A3B3A] leading-tight">
               Get In Touch
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-[#6E5F5A] font-light max-w-3xl mx-auto leading-relaxed">
               Have a question about the books? I'd love to hear from you.
             </p>
           </motion.div>
@@ -112,20 +112,20 @@ export default function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="p-10 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl"
+              className="p-10 rounded-3xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 shadow-2xl"
             >
               <div className="mb-8">
-                <h2 className="font-serif text-3xl font-bold text-white mb-3">
+                <h2 className="font-serif text-3xl font-bold text-[#4A3B3A] mb-3">
                   Send a Message
                 </h2>
-                <p className="text-gray-400">
+                <p className="text-[#6E5F5A]">
                   Fill out the form below and I'll get back to you soon.
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-3">
-                  <Label htmlFor="name" className="text-white font-medium">
+                  <Label htmlFor="name" className="text-[#4A3B3A] font-medium">
                     Name
                   </Label>
                   <Input
@@ -135,12 +135,12 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="Your name"
                     required
-                    className="px-6 py-6 text-lg rounded-2xl border-2 border-white/20 focus:border-[#d4af37] bg-white/5 backdrop-blur-sm text-white placeholder:text-gray-500"
+                    className="px-6 py-6 text-lg rounded-2xl border-2 border-[#4A3B3A]/20 focus:border-[#B59A6A] bg-[#EBD6D3]/30 backdrop-blur-sm text-[#4A3B3A] placeholder:text-[#6E5F5A]"
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <Label htmlFor="email" className="text-white font-medium">
+                  <Label htmlFor="email" className="text-[#4A3B3A] font-medium">
                     Email
                   </Label>
                   <Input
@@ -151,12 +151,12 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="your.email@example.com"
                     required
-                    className="px-6 py-6 text-lg rounded-2xl border-2 border-white/20 focus:border-[#d4af37] bg-white/5 backdrop-blur-sm text-white placeholder:text-gray-500"
+                    className="px-6 py-6 text-lg rounded-2xl border-2 border-[#4A3B3A]/20 focus:border-[#B59A6A] bg-[#EBD6D3]/30 backdrop-blur-sm text-[#4A3B3A] placeholder:text-[#6E5F5A]"
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <Label htmlFor="subject" className="text-white font-medium">
+                  <Label htmlFor="subject" className="text-[#4A3B3A] font-medium">
                     Subject
                   </Label>
                   <Input
@@ -166,12 +166,12 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="What's this about?"
                     required
-                    className="px-6 py-6 text-lg rounded-2xl border-2 border-white/20 focus:border-[#d4af37] bg-white/5 backdrop-blur-sm text-white placeholder:text-gray-500"
+                    className="px-6 py-6 text-lg rounded-2xl border-2 border-[#4A3B3A]/20 focus:border-[#B59A6A] bg-[#EBD6D3]/30 backdrop-blur-sm text-[#4A3B3A] placeholder:text-[#6E5F5A]"
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <Label htmlFor="message" className="text-white font-medium">
+                  <Label htmlFor="message" className="text-[#4A3B3A] font-medium">
                     Message
                   </Label>
                   <Textarea
@@ -182,13 +182,13 @@ export default function Contact() {
                     placeholder="Tell me more..."
                     rows={6}
                     required
-                    className="px-6 py-6 text-lg rounded-2xl border-2 border-white/20 focus:border-[#d4af37] bg-white/5 backdrop-blur-sm text-white placeholder:text-gray-500 resize-none"
+                    className="px-6 py-6 text-lg rounded-2xl border-2 border-[#4A3B3A]/20 focus:border-[#B59A6A] bg-[#EBD6D3]/30 backdrop-blur-sm text-[#4A3B3A] placeholder:text-[#6E5F5A] resize-none"
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
+                  className="w-full bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
                   disabled={submitMutation.isPending}
                 >
                   <Send className="mr-2 h-5 w-5" />
@@ -206,23 +206,23 @@ export default function Contact() {
               className="space-y-8"
             >
               <div>
-                <h2 className="font-serif text-3xl font-bold text-white mb-6">
+                <h2 className="font-serif text-3xl font-bold text-[#4A3B3A] mb-6">
                   Other Ways to Connect
                 </h2>
                 <div className="space-y-4">
                   <motion.div
                     whileHover={{ x: 10 }}
-                    className="p-6 rounded-2xl bg-gradient-to-r from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/30 transition-all duration-300 shadow-xl"
+                    className="p-6 rounded-2xl bg-gradient-to-r from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 hover:border-[#B59A6A]/30 transition-all duration-300 shadow-xl"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 flex items-center justify-center">
-                        <Mail className="h-7 w-7 text-[#d4af37]" />
+                      <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[#C9A3A0]/20 to-[#C9A3A0]/10 flex items-center justify-center">
+                        <Mail className="h-7 w-7 text-[#7A4F4C]" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white text-lg mb-2">Email</h3>
+                        <h3 className="font-semibold text-[#4A3B3A] text-lg mb-2">Email</h3>
                         <a
                           href="mailto:contact@reeseastor.com"
-                          className="text-gray-400 hover:text-[#d4af37] transition-colors"
+                          className="text-[#6E5F5A] hover:text-[#7A4F4C] transition-colors"
                         >
                           contact@reeseastor.com
                         </a>
@@ -232,19 +232,19 @@ export default function Contact() {
 
                   <motion.div
                     whileHover={{ x: 10 }}
-                    className="p-6 rounded-2xl bg-gradient-to-r from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/30 transition-all duration-300 shadow-xl"
+                    className="p-6 rounded-2xl bg-gradient-to-r from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 hover:border-[#B59A6A]/30 transition-all duration-300 shadow-xl"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 flex items-center justify-center">
-                        <Instagram className="h-7 w-7 text-[#d4af37]" />
+                      <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[#C9A3A0]/20 to-[#C9A3A0]/10 flex items-center justify-center">
+                        <Instagram className="h-7 w-7 text-[#7A4F4C]" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white text-lg mb-2">Instagram</h3>
+                        <h3 className="font-semibold text-[#4A3B3A] text-lg mb-2">Instagram</h3>
                         <a
                           href="https://www.instagram.com/reeseastor/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-[#d4af37] transition-colors"
+                          className="text-[#6E5F5A] hover:text-[#7A4F4C] transition-colors"
                         >
                           @reeseastor
                         </a>
@@ -254,19 +254,19 @@ export default function Contact() {
 
                   <motion.div
                     whileHover={{ x: 10 }}
-                    className="p-6 rounded-2xl bg-gradient-to-r from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/30 transition-all duration-300 shadow-xl"
+                    className="p-6 rounded-2xl bg-gradient-to-r from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 hover:border-[#B59A6A]/30 transition-all duration-300 shadow-xl"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 flex items-center justify-center">
-                        <Facebook className="h-7 w-7 text-[#d4af37]" />
+                      <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[#C9A3A0]/20 to-[#C9A3A0]/10 flex items-center justify-center">
+                        <Facebook className="h-7 w-7 text-[#7A4F4C]" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white text-lg mb-2">Facebook</h3>
+                        <h3 className="font-semibold text-[#4A3B3A] text-lg mb-2">Facebook</h3>
                         <a
                           href="https://www.facebook.com/profile.php?id=61571178214136"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-[#d4af37] transition-colors"
+                          className="text-[#6E5F5A] hover:text-[#7A4F4C] transition-colors"
                         >
                           Reese Astor
                         </a>
@@ -281,19 +281,19 @@ export default function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="p-8 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl"
+                className="p-8 rounded-3xl bg-gradient-to-br from-[#C9A3A0]/10 via-transparent to-[#C9A3A0]/5 border-2 border-[#B59A6A]/20 backdrop-blur-xl shadow-2xl"
               >
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 flex items-center justify-center">
-                    <Sparkles className="h-6 w-6 text-[#d4af37]" />
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[#C9A3A0]/20 to-[#C9A3A0]/10 flex items-center justify-center">
+                    <Sparkles className="h-6 w-6 text-[#7A4F4C]" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-xl font-bold text-white mb-2">
+                    <h3 className="font-serif text-xl font-bold text-[#4A3B3A] mb-2">
                       Response Time
                     </h3>
                   </div>
                 </div>
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-[#6E5F5A] leading-relaxed">
                   I typically respond to messages within 24-48 hours during business days. For media or rights inquiries, please say so in your subject line.
                 </p>
               </motion.div>
@@ -313,7 +313,7 @@ export default function Contact() {
             backgroundAttachment: "fixed",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/98 via-[#0a0e1a]/95 to-[#0a0e1a]/98" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F7]/98 via-[#FAF7F7]/95 to-[#FAF7F7]/98" />
         </div>
 
         <div className="container relative z-10">
@@ -324,17 +324,17 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#4A3B3A] mb-6">
               Looking for something specific?
             </h2>
-            <p className="text-xl text-gray-300 mb-8">
+            <p className="text-xl text-[#6E5F5A] mb-8">
               Browse the books, or grab your free copy of The First Acquisition.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 asChild
                 size="lg"
-                className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
                 <a href="/books">View Books</a>
               </Button>
@@ -342,7 +342,7 @@ export default function Contact() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold px-10 py-7 rounded-full"
+                className="border-2 border-[#4A3B3A]/20 bg-[#EBD6D3]/30 hover:bg-[#EBD6D3]/60 text-[#4A3B3A] font-semibold px-10 py-7 rounded-full"
               >
                 <a href="/free-book">Get Free Book</a>
               </Button>

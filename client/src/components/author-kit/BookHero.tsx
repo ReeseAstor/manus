@@ -76,7 +76,7 @@ export function BookHero({
             alt={parts[0]}
             className="block w-full max-w-[380px] select-none"
             style={{
-              boxShadow: "0 50px 100px -20px rgba(0,0,0,0.85), 0 16px 36px rgba(0,0,0,0.55)",
+              boxShadow: "0 50px 100px -20px rgba(74, 59, 58,0.85), 0 16px 36px rgba(74, 59, 58,0.55)",
               rotateX: tiltX,
               rotateY: tiltY,
               transformStyle: "preserve-3d",

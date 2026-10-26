@@ -170,7 +170,7 @@ export function LazyImage({
 
       {/* Loading skeleton */}
       {!isLoaded && !lqipSrc && (
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#F0E6E5] to-[#F0E6E5] dark:from-[#FAF7F7] dark:to-[#F0E6E5] animate-pulse" />
       )}
 
       {/* Actual image */}

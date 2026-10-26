@@ -114,7 +114,7 @@ export function StaggerItem({
 
 export function GlowOrb({
   className = "",
-  color = "rgba(201,166,70,0.15)",
+  color = "rgba(201, 163, 160,0.15)",
   size = 400,
 }: {
   className?: string;
@@ -142,13 +142,13 @@ export function GlassCard({
 }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl shadow-2xl ${className}`}
+      className={`relative overflow-hidden rounded-2xl border border-[#4A3B3A]/10 bg-[#EBD6D3]/0 backdrop-blur-xl shadow-2xl ${className}`}
       style={{
         boxShadow:
-          "0 24px 80px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05)",
+          "0 24px 80px rgba(74, 59, 58,0.35), inset 0 1px 0 rgba(255,255,255,0.05)",
       }}
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(201,166,70,0.3)] to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(201, 163, 160,0.3)] to-transparent" />
       {children}
     </div>
   );

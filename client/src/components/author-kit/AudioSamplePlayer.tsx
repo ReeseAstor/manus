@@ -49,7 +49,7 @@ export function AudioSamplePlayer({ src, caption, durationLabel, downloadHref }:
   return (
     <div
       className="rounded-[10px] p-6"
-      style={{ background: "rgba(0,0,0,0.35)", border: `1px solid ${GOLD_SOFT}` }}
+      style={{ background: "rgba(74, 59, 58,0.35)", border: `1px solid ${GOLD_SOFT}` }}
     >
       <div
         className="font-inter text-[11px] font-semibold uppercase mb-3"

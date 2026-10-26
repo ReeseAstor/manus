@@ -69,17 +69,17 @@ export default function ExclusiveContentDetail() {
 
   if (contentLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#1a1f2e] to-[#0a0e1a] flex items-center justify-center">
-        <div className="text-[#d4af37] text-xl">Loading...</div>
+      <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7] flex items-center justify-center">
+        <div className="text-[#7A4F4C] text-xl">Loading...</div>
       </div>
     );
   }
 
   if (!content) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#1a1f2e] to-[#0a0e1a] flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Content Not Found</h1>
+          <h1 className="text-4xl font-bold text-[#4A3B3A] mb-4">Content Not Found</h1>
           <Button asChild>
             <Link href="/newsletter">Back to Reader's Club</Link>
           </Button>
@@ -91,12 +91,12 @@ export default function ExclusiveContentDetail() {
   // If not a member, show locked content
   if (!isMember) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#1a1f2e] to-[#0a0e1a]">
+      <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7]">
         <div className="container mx-auto px-4 py-20">
           <Button
             variant="ghost"
             onClick={() => setLocation("/newsletter")}
-            className="mb-8 text-gray-400 hover:text-white"
+            className="mb-8 text-[#6E5F5A] hover:text-[#4A3B3A]"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Reader's Club
@@ -106,20 +106,20 @@ export default function ExclusiveContentDetail() {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="p-12 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 to-[#c9a961]/5 border border-[#d4af37]/20"
+              className="p-12 rounded-3xl bg-gradient-to-br from-[#C9A3A0]/10 to-[#C9A3A0]/5 border border-[#B59A6A]/20"
             >
-              <Lock className="h-20 w-20 text-[#d4af37] mx-auto mb-6" />
-              <h1 className="font-serif text-4xl font-bold text-white mb-4">
+              <Lock className="h-20 w-20 text-[#7A4F4C] mx-auto mb-6" />
+              <h1 className="font-serif text-4xl font-bold text-[#4A3B3A] mb-4">
                 Members-Only Content
               </h1>
-              <p className="text-gray-300 text-lg mb-8">
+              <p className="text-[#6E5F5A] text-lg mb-8">
                 This exclusive content is available only to Reader's Club members.
                 Join for free to unlock access!
               </p>
               <Button
                 size="lg"
                 onClick={() => setLocation("/newsletter")}
-                className="px-12 py-6 bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-lg rounded-xl"
+                className="px-12 py-6 bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold text-lg rounded-xl"
               >
                 Join the Reader's Club
               </Button>
@@ -131,7 +131,7 @@ export default function ExclusiveContentDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#1a1f2e] to-[#0a0e1a]">
+    <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7]">
       {/* Hero Section */}
       {content.coverImage && (
         <div
@@ -142,7 +142,7 @@ export default function ExclusiveContentDetail() {
             backgroundPosition: "center",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/70 to-[#0a0e1a]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FAF7F7]/50 via-[#FAF7F7]/70 to-[#FAF7F7]" />
         </div>
       )}
 
@@ -153,14 +153,14 @@ export default function ExclusiveContentDetail() {
           <Button
             variant="ghost"
             onClick={() => setLocation("/newsletter")}
-            className="mb-8 text-gray-400 hover:text-white"
+            className="mb-8 text-[#6E5F5A] hover:text-[#4A3B3A]"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Reader's Club
           </Button>
 
           {/* Type Badge */}
-          <Badge className="mb-4 bg-[#d4af37]/20 text-[#d4af37] border border-[#d4af37]/30">
+          <Badge className="mb-4 bg-[#C9A3A0]/20 text-[#7A4F4C] border border-[#B59A6A]/30">
             <span className="flex items-center gap-2">
               {getTypeIcon(content.type)}
               {getTypeLabel(content.type)}
@@ -171,7 +171,7 @@ export default function ExclusiveContentDetail() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-serif text-5xl md:text-6xl font-bold text-white mb-6"
+            className="font-serif text-5xl md:text-6xl font-bold text-[#4A3B3A] mb-6"
           >
             {content.title}
           </motion.h1>
@@ -181,7 +181,7 @@ export default function ExclusiveContentDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="flex flex-wrap items-center gap-6 text-gray-400 mb-12 pb-12 border-b border-white/10"
+            className="flex flex-wrap items-center gap-6 text-[#6E5F5A] mb-12 pb-12 border-b border-[#4A3B3A]/10"
           >
             <span className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
@@ -192,7 +192,7 @@ export default function ExclusiveContentDetail() {
               })}
             </span>
             {content.category && (
-              <span className="text-[#d4af37]">{content.category}</span>
+              <span className="text-[#7A4F4C]">{content.category}</span>
             )}
           </motion.div>
 
@@ -202,7 +202,7 @@ export default function ExclusiveContentDetail() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-gray-300 mb-12 leading-relaxed"
+              className="text-xl text-[#6E5F5A] mb-12 leading-relaxed"
             >
               {content.description}
             </motion.div>
@@ -223,20 +223,20 @@ export default function ExclusiveContentDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="p-8 rounded-2xl bg-gradient-to-br from-[#d4af37]/10 to-[#c9a961]/5 border border-[#d4af37]/20 text-center"
+            className="p-8 rounded-2xl bg-gradient-to-br from-[#C9A3A0]/10 to-[#C9A3A0]/5 border border-[#B59A6A]/20 text-center"
           >
-            <Sparkles className="h-10 w-10 text-[#d4af37] mx-auto mb-4" />
-            <h3 className="font-serif text-2xl font-bold text-white mb-3">
+            <Sparkles className="h-10 w-10 text-[#7A4F4C] mx-auto mb-4" />
+            <h3 className="font-serif text-2xl font-bold text-[#4A3B3A] mb-3">
               Enjoying the Exclusive Content?
             </h3>
-            <p className="text-gray-300 mb-6">
+            <p className="text-[#6E5F5A] mb-6">
               Explore more bonus chapters, character interviews, and behind-the-scenes content
               in the Reader's Club.
             </p>
             <Button
               asChild
               size="lg"
-              className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold"
+              className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold"
             >
               <Link href="/newsletter">Explore More Content</Link>
             </Button>

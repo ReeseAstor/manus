@@ -70,18 +70,18 @@ export function Header() {
               <div className="relative" ref={userMenuRef}>
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#d4af37]/30 hover:bg-[#d4af37]/10 transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#B59A6A]/30 hover:bg-[#C9A3A0]/10 transition-colors"
                 >
-                  <User className="w-4 h-4 text-[#d4af37]" />
-                  <span className="text-sm text-[#e5e5e5]">{user.name || "Account"}</span>
-                  <ChevronDown className={`w-4 h-4 text-[#e5e5e5]/60 transition-transform ${userMenuOpen ? "rotate-180" : ""}`} />
+                  <User className="w-4 h-4 text-[#7A4F4C]" />
+                  <span className="text-sm text-[#4A3B3A]">{user.name || "Account"}</span>
+                  <ChevronDown className={`w-4 h-4 text-[#4A3B3A]/60 transition-transform ${userMenuOpen ? "rotate-180" : ""}`} />
                 </button>
                 
                 {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-[#1a1f3a] border border-[#d4af37]/20 rounded-lg shadow-xl overflow-hidden">
+                  <div className="absolute right-0 mt-2 w-48 bg-[#F0E6E5] border border-[#B59A6A]/20 rounded-lg shadow-xl overflow-hidden">
                     <Link href="/profile">
                       <button 
-                        className="w-full px-4 py-2 text-left text-sm text-[#e5e5e5] hover:bg-[#d4af37]/10 flex items-center gap-2"
+                        className="w-full px-4 py-2 text-left text-sm text-[#4A3B3A] hover:bg-[#C9A3A0]/10 flex items-center gap-2"
                         onClick={() => setUserMenuOpen(false)}
                       >
                         <User className="w-4 h-4" />
@@ -90,7 +90,7 @@ export function Header() {
                     </Link>
                     <Link href="/my-purchases">
                       <button 
-                        className="w-full px-4 py-2 text-left text-sm text-[#e5e5e5] hover:bg-[#d4af37]/10 flex items-center gap-2"
+                        className="w-full px-4 py-2 text-left text-sm text-[#4A3B3A] hover:bg-[#C9A3A0]/10 flex items-center gap-2"
                         onClick={() => setUserMenuOpen(false)}
                       >
                         <ShoppingBag className="w-4 h-4" />
@@ -100,7 +100,7 @@ export function Header() {
                     {user.role === "admin" && (
                       <Link href="/admin">
                         <button 
-                          className="w-full px-4 py-2 text-left text-sm text-[#e5e5e5] hover:bg-[#d4af37]/10 flex items-center gap-2"
+                          className="w-full px-4 py-2 text-left text-sm text-[#4A3B3A] hover:bg-[#C9A3A0]/10 flex items-center gap-2"
                           onClick={() => setUserMenuOpen(false)}
                         >
                           <Settings className="w-4 h-4" />
@@ -108,13 +108,13 @@ export function Header() {
                         </button>
                       </Link>
                     )}
-                    <hr className="border-[#d4af37]/10" />
+                    <hr className="border-[#B59A6A]/10" />
                     <button
                       onClick={() => {
                         logout();
                         setUserMenuOpen(false);
                       }}
-                      className="w-full px-4 py-2 text-left text-sm text-red-400 hover:bg-red-500/10 flex items-center gap-2"
+                      className="w-full px-4 py-2 text-left text-sm text-[#7A4F4C] hover:bg-[#7A4F4C]/10 flex items-center gap-2"
                     >
                       <LogOut className="w-4 h-4" />
                       Sign Out
@@ -126,7 +126,7 @@ export function Header() {
               <Button
                 variant="outline"
                 size="sm"
-                className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10"
+                className="border-[#B59A6A]/30 text-[#7A4F4C] hover:bg-[#C9A3A0]/10"
                 onClick={() => window.location.href = getLoginUrl()}
               >
                 Sign In
@@ -202,7 +202,7 @@ export function Header() {
                       logout();
                       setMobileMenuOpen(false);
                     }}
-                    className="text-sm font-medium text-red-400 hover:text-red-300 flex items-center gap-2"
+                    className="text-sm font-medium text-[#7A4F4C] hover:text-[#7A4F4C] flex items-center gap-2"
                   >
                     <LogOut className="w-4 h-4" />
                     Sign Out
@@ -212,7 +212,7 @@ export function Header() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 w-fit"
+                  className="border-[#B59A6A]/30 text-[#7A4F4C] hover:bg-[#C9A3A0]/10 w-fit"
                   onClick={() => window.location.href = getLoginUrl()}
                 >
                   Sign In

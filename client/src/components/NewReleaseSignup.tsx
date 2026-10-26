@@ -57,7 +57,7 @@ export default function NewReleaseSignup() {
         }}
       />
       {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#d4af37]/8 blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C9A3A0]/8 blur-[160px] rounded-full pointer-events-none" />
 
       <div className="container relative z-10">
         <motion.div
@@ -67,27 +67,27 @@ export default function NewReleaseSignup() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="p-10 md:p-16 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl relative overflow-hidden">
+          <div className="p-10 md:p-16 rounded-3xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 shadow-2xl relative overflow-hidden">
             {/* Decorative corner accents */}
-            <div className="absolute top-0 left-0 w-24 h-24 border-t-2 border-l-2 border-[#d4af37]/30 rounded-tl-3xl pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-24 h-24 border-b-2 border-r-2 border-[#d4af37]/30 rounded-br-3xl pointer-events-none" />
+            <div className="absolute top-0 left-0 w-24 h-24 border-t-2 border-l-2 border-[#B59A6A]/30 rounded-tl-3xl pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-24 h-24 border-b-2 border-r-2 border-[#B59A6A]/30 rounded-br-3xl pointer-events-none" />
 
             {!isSubmitted ? (
               <div className="text-center">
                 {/* Icon */}
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 mb-8">
-                  <Sparkles className="h-8 w-8 text-[#d4af37]" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#C9A3A0]/20 to-[#C9A3A0]/10 mb-8">
+                  <Sparkles className="h-8 w-8 text-[#7A4F4C]" />
                 </div>
 
                 {/* Heading */}
-                <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
+                <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#4A3B3A] mb-4">
                   Join the VIP Reader List
                 </h2>
-                <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto leading-relaxed">
-                  Get a <span className="text-[#d4af37] font-semibold">free copy of The First Acquisition</span> plus
+                <p className="text-xl text-[#6E5F5A] mb-4 max-w-2xl mx-auto leading-relaxed">
+                  Get a <span className="text-[#7A4F4C] font-semibold">free copy of The First Acquisition</span> plus
                   exclusive content, early release alerts, and bonus chapters.
                 </p>
-                <p className="text-sm text-gray-400 mb-10">
+                <p className="text-sm text-[#6E5F5A] mb-10">
                   Join the readers who already love the Manhattan Money Kings series.
                 </p>
 
@@ -100,12 +100,12 @@ export default function NewReleaseSignup() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: i * 0.15 }}
-                      className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/[0.03] border border-white/5"
+                      className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-[#EBD6D3]/0 border border-[#4A3B3A]/5"
                     >
-                      <div className="w-10 h-10 rounded-full bg-[#d4af37]/10 flex items-center justify-center">
-                        <b.icon className="h-5 w-5 text-[#d4af37]" />
+                      <div className="w-10 h-10 rounded-full bg-[#C9A3A0]/10 flex items-center justify-center">
+                        <b.icon className="h-5 w-5 text-[#7A4F4C]" />
                       </div>
-                      <span className="text-sm text-gray-300 text-center leading-snug">
+                      <span className="text-sm text-[#6E5F5A] text-center leading-snug">
                         {b.text}
                       </span>
                     </motion.div>
@@ -120,7 +120,7 @@ export default function NewReleaseSignup() {
                       placeholder="First name (optional)"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="flex-[0.8] bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-full px-6 py-6 focus:border-[#d4af37]/50 focus:ring-[#d4af37]/20 transition-colors"
+                      className="flex-[0.8] bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] rounded-full px-6 py-6 focus:border-[#B59A6A]/50 focus:ring-[#C9A3A0]/20 transition-colors"
                     />
                     <Input
                       type="email"
@@ -128,13 +128,13 @@ export default function NewReleaseSignup() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="flex-1 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-full px-6 py-6 focus:border-[#d4af37]/50 focus:ring-[#d4af37]/20 transition-colors"
+                      className="flex-1 bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] rounded-full px-6 py-6 focus:border-[#B59A6A]/50 focus:ring-[#C9A3A0]/20 transition-colors"
                     />
                   </div>
                   <Button
                     type="submit"
                     disabled={subscribeMutation.isPending}
-                    className="w-full sm:w-auto btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg disabled:opacity-60 disabled:hover:scale-100"
+                    className="w-full sm:w-auto btn-premium bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg disabled:opacity-60 disabled:hover:scale-100"
                   >
                     {subscribeMutation.isPending ? (
                       <span className="flex items-center gap-2">
@@ -168,7 +168,7 @@ export default function NewReleaseSignup() {
                   </Button>
                 </form>
 
-                <p className="text-sm text-gray-500 mt-6">
+                <p className="text-sm text-[#6E5F5A] mt-6">
                   No spam, ever. Unsubscribe anytime. Your privacy is protected.
                 </p>
               </div>
@@ -180,26 +180,26 @@ export default function NewReleaseSignup() {
                 transition={{ duration: 0.5 }}
                 className="text-center py-8"
               >
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 mb-8">
-                  <CheckCircle className="h-10 w-10 text-emerald-400" />
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#C9A3A0]/20 to-[#C9A3A0]/10 mb-8">
+                  <CheckCircle className="h-10 w-10 text-[#7A4F4C]" />
                 </div>
 
-                <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
+                <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#4A3B3A] mb-4">
                   You're In!
                 </h2>
-                <p className="text-xl text-gray-300 mb-6 max-w-lg mx-auto leading-relaxed">
+                <p className="text-xl text-[#6E5F5A] mb-6 max-w-lg mx-auto leading-relaxed">
                   Your free copy of{" "}
-                  <span className="text-[#d4af37] font-semibold">
+                  <span className="text-[#7A4F4C] font-semibold">
                     The First Acquisition
                   </span>
                   {" "}is being delivered to your inbox now. A download page should open in a new tab shortly.
                 </p>
-                <p className="text-gray-400 mb-8">
+                <p className="text-[#6E5F5A] mb-8">
                   You'll be the first to know about every new Manhattan Money Kings release.
                 </p>
                 <Button
                   onClick={() => window.open("https://dl.bookfunnel.com/kw1yge3479", "_blank")}
-                  className="btn-premium bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  className="btn-premium bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                 >
                   <BookOpen className="mr-2 h-5 w-5" />
                   Get Your Free Book

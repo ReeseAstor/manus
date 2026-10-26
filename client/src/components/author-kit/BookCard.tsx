@@ -42,7 +42,7 @@ export function BookCard({
       whileHover={reduce ? undefined : { y: -6 }}
     >
       <div
-        className="relative overflow-hidden mb-7 bg-black"
+        className="relative overflow-hidden mb-7 bg-[#FAF7F7]"
         style={{ aspectRatio: "2/3" }}
       >
         <motion.img
@@ -59,7 +59,7 @@ export function BookCard({
           initial={false}
           animate={{ opacity: hover ? 1 : 0 }}
           transition={{ duration: 0.4 }}
-          style={{ boxShadow: "inset 0 0 0 1px rgba(201,166,70,0.5), inset 0 0 80px rgba(201,166,70,0.18)" }}
+          style={{ boxShadow: "inset 0 0 0 1px rgba(201, 163, 160,0.5), inset 0 0 80px rgba(201, 163, 160,0.18)" }}
         />
       </div>
 
@@ -120,7 +120,7 @@ export function BookCard({
         onClick={(e) => e.stopPropagation()}
         className="font-inter mt-4 inline-flex items-center justify-center gap-2 text-[11px] font-semibold uppercase no-underline transition-all duration-200 hover:-translate-y-px"
         style={{
-          color: "#070D1C",
+          color: "#4A3B3A",
           background: GOLD,
           padding: "12px 18px",
           letterSpacing: "0.24em",

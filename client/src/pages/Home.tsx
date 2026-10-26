@@ -33,13 +33,13 @@ const LINKS = {
 
 // Local accent tokens that extend the author-kit palette for this page:
 // deep-wine accent + ivory card surfaces, per the brand mood.
-const WINE = "#6E1F2E";
-const IVORY = "#F4EEE3";
-const CARD_INK = "#14110A"; // headline text on ivory
-const CARD_BODY = "#43392B"; // body text on ivory
-const CARD_MUTED = "#6A6052"; // supporting text on ivory
-const BRONZE = "#7A5E10"; // deep antique-gold; AA-legible on ivory (~5.4:1)
-const IVORY_RULE = "rgba(20,17,10,0.12)";
+const WINE = "#7A4F4C"; // rosewood
+const IVORY = "#FAF7F7"; // pearl card
+const CARD_INK = "#4A3B3A"; // cocoa
+const CARD_BODY = "#4A3B3A"; // cocoa
+const CARD_MUTED = "#6E5F5A"; // taupe
+const BRONZE = "#7A4F4C"; // rosewood
+const IVORY_RULE = "rgba(74,59,58,0.14)";
 
 type LeadMagnet = {
   id: string;
@@ -191,7 +191,7 @@ function Reveal({
           textDecoration: "none",
           border: ivory ? `1px solid ${CARD_INK}` : `1px solid ${GOLD}`,
           background: ivory ? CARD_INK : GOLD,
-          color: ivory ? GOLD : INK,
+          color: INK, // pearl on cocoa / rosewood
           textWrap: "balance",
           transition: "all 280ms cubic-bezier(0.65,0.05,0.36,1)",
           outlineColor: ivory ? CARD_INK : GOLD,
@@ -259,7 +259,7 @@ export default function Home() {
         className="relative overflow-hidden px-5 pt-14 pb-20 sm:px-8 sm:pt-20 sm:pb-28"
         style={{
           background: `radial-gradient(120% 90% at 50% 0%, ${RAISED} 0%, ${INK} 55%),
-                       radial-gradient(80% 60% at 85% 10%, rgba(110,31,46,0.28) 0%, transparent 60%)`,
+                       radial-gradient(80% 60% at 85% 10%, rgba(201, 163, 160,0.28) 0%, transparent 60%)`,
         }}
       >
         {/* thin gold edge rules — luxury framing on larger screens */}
@@ -321,7 +321,7 @@ export default function Home() {
                     style={{
                       background: IVORY,
                       border: `1px solid ${IVORY_RULE}`,
-                      boxShadow: "0 30px 70px -30px rgba(0,0,0,0.75)",
+                      boxShadow: "0 30px 70px -30px rgba(74, 59, 58,0.75)",
                       transition: "transform 300ms cubic-bezier(0.65,0.05,0.36,1), box-shadow 300ms",
                     }}
                   >
@@ -340,13 +340,13 @@ export default function Home() {
                       <span
                         className="font-inter absolute right-4 top-4 text-[10px] font-bold uppercase"
                         style={{
-                          color: book.accent === GOLD ? CARD_INK : "#FFFFFF",
-                          background: book.accent === GOLD ? GOLD : WINE,
+                          color: INK,
+                          background: book.accent === GOLD ? GOLD : CARD_INK,
                           letterSpacing: "0.16em",
                           padding: "5px 11px",
-                          borderRadius: 999,
+                          borderRadius: 0,
                           whiteSpace: "nowrap",
-                          boxShadow: "0 6px 16px rgba(0,0,0,0.4)",
+                          boxShadow: "0 6px 16px rgba(74, 59, 58,0.4)",
                         }}
                       >
                         {book.offer}
@@ -360,7 +360,7 @@ export default function Home() {
                         className="block h-auto w-auto max-h-[260px] select-none transition-transform duration-700 ease-[cubic-bezier(0.65,0.05,0.36,1)] group-hover:scale-[1.04] group-hover:-translate-y-1"
                         draggable={false}
                         style={{
-                          boxShadow: "0 22px 48px -16px rgba(0,0,0,0.85)",
+                          boxShadow: "0 22px 48px -16px rgba(74, 59, 58,0.85)",
                           border: `1px solid ${RULE}`,
                         }}
                         onError={(e) => {
@@ -467,14 +467,14 @@ export default function Home() {
               className="pointer-events-none absolute inset-0 rounded-2xl"
               style={{
                 background:
-                  "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 45%, transparent 55%, rgba(201,166,70,0.04) 100%)",
+                  "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 45%, transparent 55%, rgba(201, 163, 160,0.04) 100%)",
               }}
               aria-hidden="true"
             />
               {SERIES.map((series, i) => (
                 <Reveal key={series.name} delay={i * 0.08} style={{ background: SURFACE }}>
                   <div
-                    className="group relative flex h-full flex-col p-7 transition-colors duration-300 hover:bg-white/[0.02] sm:p-10"
+                    className="group relative flex h-full flex-col p-7 transition-colors duration-300 hover:bg-[#EBD6D3]/0 sm:p-10"
                     style={{ background: SURFACE }}
                   >
                   <h3
@@ -503,7 +503,7 @@ export default function Home() {
                             style={{ background: GOLD }}
                             aria-hidden="true"
                           />
-                          <span className="font-cormorant text-[18px] leading-[1.4] transition-colors duration-300 group-hover:text-white">
+                          <span className="font-cormorant text-[18px] leading-[1.4] transition-colors duration-300 group-hover:text-[#4A3B3A]">
                             {bookTitle}
                             {isFree && (
                                 <a
@@ -516,7 +516,7 @@ export default function Home() {
                                     background: GOLD,
                                     letterSpacing: "0.12em",
                                     padding: "2px 8px",
-                                    borderRadius: 999,
+                                    borderRadius: 0,
                                   }}
                                 >
                                 Free <ArrowRight className="h-3 w-3" aria-hidden="true" />
@@ -624,7 +624,7 @@ export default function Home() {
       <div
         className="fixed inset-x-0 bottom-0 z-40 px-4 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 md:hidden"
         style={{
-          background: "linear-gradient(180deg, rgba(7,13,28,0) 0%, rgba(7,13,28,0.92) 38%)",
+          background: "linear-gradient(180deg, rgba(74, 59, 58,0) 0%, rgba(74, 59, 58,0.92) 38%)",
           transform: showStickyCta ? "translateY(0)" : "translateY(120%)",
           opacity: showStickyCta ? 1 : 0,
           // visibility:hidden removes the off-screen link from the tab order;
@@ -650,7 +650,7 @@ export default function Home() {
             textTransform: "uppercase",
             textDecoration: "none",
             border: `1px solid ${GOLD}`,
-            boxShadow: "0 12px 30px rgba(0,0,0,0.5)",
+            boxShadow: "0 12px 30px rgba(74, 59, 58,0.5)",
             transition: "all 280ms cubic-bezier(0.65,0.05,0.36,1)",
           }}
         >

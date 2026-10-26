@@ -43,28 +43,28 @@ export function BlogToShopBridge({ category }: BlogToShopBridgeProps) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="mt-12 bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5 border border-[#d4af37]/30 rounded-2xl p-6 md:p-8"
+      className="mt-12 bg-gradient-to-br from-[#C9A3A0]/10 to-[#C9A3A0]/5 border border-[#B59A6A]/30 rounded-2xl p-6 md:p-8"
     >
       <div className="flex items-start gap-4">
-        <div className="bg-[#d4af37]/20 rounded-lg p-3 flex-shrink-0 hidden md:block">
-          <BookOpen className="w-6 h-6 text-[#d4af37]" />
+        <div className="bg-[#C9A3A0]/20 rounded-lg p-3 flex-shrink-0 hidden md:block">
+          <BookOpen className="w-6 h-6 text-[#7A4F4C]" />
         </div>
         <div className="flex-1">
-          <h3 className="text-xl font-serif font-bold text-[#e5e5e5] mb-2">
+          <h3 className="text-xl font-serif font-bold text-[#4A3B3A] mb-2">
             {rec.title}
           </h3>
-          <p className="text-[#e5e5e5]/70 mb-4">
+          <p className="text-[#4A3B3A]/70 mb-4">
             {rec.tagline}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/books">
-              <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-semibold">
+              <Button className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-semibold">
                 Browse the Books
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
             <Link href={`/books/${rec.bookSlug}`}>
-              <Button variant="outline" className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10">
+              <Button variant="outline" className="border-[#B59A6A]/30 text-[#7A4F4C] hover:bg-[#C9A3A0]/10">
                 Start with {rec.bookTitle}
               </Button>
             </Link>

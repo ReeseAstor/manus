@@ -46,22 +46,22 @@ export function BuyDirectSection({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6 }}
-      className="bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5 backdrop-blur-xl border-2 border-[#d4af37]/40 rounded-2xl p-6 md:p-8"
+      className="bg-gradient-to-br from-[#C9A3A0]/10 to-[#C9A3A0]/5 backdrop-blur-xl border-2 border-[#B59A6A]/40 rounded-2xl p-6 md:p-8"
     >
       {/* Header Badge */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <span className="bg-[#d4af37] text-[#0a0e27] px-3 py-1 rounded-full text-sm font-bold">
+          <span className="bg-[#4A3B3A] text-[#FAF7F7] px-3 py-1 rounded-full text-sm font-bold">
             BEST VALUE
           </span>
           {savingsPercent > 0 && (
-            <span className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-semibold">
+            <span className="bg-[#7A4F4C]/20 text-[#7A4F4C] px-3 py-1 rounded-full text-sm font-semibold">
               Save {savingsPercent}%
             </span>
           )}
         </div>
         {isMember && (
-          <span className="text-[#d4af37] text-sm font-semibold">
+          <span className="text-[#7A4F4C] text-sm font-semibold">
             ✨ Reader's Club Member
           </span>
         )}
@@ -70,16 +70,16 @@ export function BuyDirectSection({
       {/* Pricing Display */}
       <div className="mb-6">
         <div className="flex items-baseline gap-3 mb-2">
-          <span className="text-4xl md:text-5xl font-bold text-[#d4af37]">
+          <span className="text-4xl md:text-5xl font-bold text-[#7A4F4C]">
             {formatPrice(currentPrice)}
           </span>
           {retailPrice > currentPrice && (
-            <span className="text-xl text-[#e5e5e5]/50 line-through">
+            <span className="text-xl text-[#4A3B3A]/50 line-through">
               {formatPrice(retailPrice)}
             </span>
           )}
         </div>
-        <p className="text-[#e5e5e5]/70 text-sm">
+        <p className="text-[#4A3B3A]/70 text-sm">
           {isMember ? "Reader's Club exclusive price" : "Buy direct and save!"}
         </p>
       </div>
@@ -94,10 +94,10 @@ export function BuyDirectSection({
             transition={{ delay: 0.7 + index * 0.1 }}
             className="flex items-center gap-3"
           >
-            <div className="w-8 h-8 rounded-full bg-[#d4af37]/20 flex items-center justify-center">
-              <benefit.icon className="w-4 h-4 text-[#d4af37]" />
+            <div className="w-8 h-8 rounded-full bg-[#C9A3A0]/20 flex items-center justify-center">
+              <benefit.icon className="w-4 h-4 text-[#7A4F4C]" />
             </div>
-            <span className="text-[#e5e5e5]/80 text-sm">{benefit.text}</span>
+            <span className="text-[#4A3B3A]/80 text-sm">{benefit.text}</span>
           </motion.div>
         ))}
       </div>
@@ -110,7 +110,7 @@ export function BuyDirectSection({
           rel="noopener noreferrer"
           className="block"
         >
-          <Button className="w-full bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-bold text-lg py-6 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-[#d4af37]/20">
+          <Button className="w-full bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold text-lg py-6 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-[#C9A3A0]/20">
             <ShoppingCart className="w-5 h-5 mr-2" />
             Buy Direct & Save {savingsPercent}%
             <ArrowRight className="w-5 h-5 ml-2" />
@@ -123,7 +123,7 @@ export function BuyDirectSection({
           rel="noopener noreferrer"
           className="block"
         >
-          <Button className="w-full bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-bold text-lg py-6 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-[#d4af37]/20">
+          <Button className="w-full bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold text-lg py-6 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-[#C9A3A0]/20">
             <ShoppingCart className="w-5 h-5 mr-2" />
             Get Your Copy Now
             <ArrowRight className="w-5 h-5 ml-2" />
@@ -133,13 +133,13 @@ export function BuyDirectSection({
 
       {/* Member Upsell */}
       {!isMember && memberPrice < directPrice && (
-        <div className="mt-4 p-4 bg-white/5 rounded-xl border border-[#d4af37]/20">
+        <div className="mt-4 p-4 bg-[#EBD6D3]/30 rounded-xl border border-[#B59A6A]/20">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[#e5e5e5] font-semibold text-sm">
+              <p className="text-[#4A3B3A] font-semibold text-sm">
                 Reader's Club Members Pay Only {formatPrice(memberPrice)}
               </p>
-              <p className="text-[#e5e5e5]/60 text-xs">
+              <p className="text-[#4A3B3A]/60 text-xs">
                 Join free and save {calculateSavings(retailPrice, memberPrice)}% on all books
               </p>
             </div>
@@ -147,7 +147,7 @@ export function BuyDirectSection({
               <Button
                 variant="outline"
                 size="sm"
-                className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10"
+                className="border-[#B59A6A]/30 text-[#7A4F4C] hover:bg-[#C9A3A0]/10"
               >
                 Join Free
               </Button>
@@ -157,8 +157,8 @@ export function BuyDirectSection({
       )}
 
       {/* Trust Indicators */}
-      <div className="mt-6 pt-4 border-t border-[#d4af37]/20">
-        <div className="flex items-center justify-center gap-4 text-[#e5e5e5]/50 text-xs">
+      <div className="mt-6 pt-4 border-t border-[#B59A6A]/20">
+        <div className="flex items-center justify-center gap-4 text-[#4A3B3A]/50 text-xs">
           <span className="flex items-center gap-1">
             <Shield className="w-3 h-3" /> Secure Checkout
           </span>
@@ -188,7 +188,7 @@ export function BuyDirectBadge({
 
   return (
     <div className="absolute top-3 left-3 z-10">
-      <span className="bg-[#d4af37] text-[#0a0e27] px-2 py-1 rounded-full text-xs font-bold shadow-lg">
+      <span className="bg-[#4A3B3A] text-[#FAF7F7] px-2 py-1 rounded-full text-xs font-bold shadow-lg">
         Save {savingsPercent}%
       </span>
     </div>

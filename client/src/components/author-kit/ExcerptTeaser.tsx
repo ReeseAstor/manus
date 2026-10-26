@@ -36,7 +36,7 @@ export function ExcerptTeaser({
       <div
         aria-hidden
         className="font-display pointer-events-none absolute left-1/2 top-2 -translate-x-1/2 select-none leading-none"
-        style={{ fontSize: "min(40vw, 420px)", color: "rgba(201,166,70,0.07)" }}
+        style={{ fontSize: "min(40vw, 420px)", color: "rgba(201, 163, 160,0.07)" }}
       >
         &ldquo;
       </div>

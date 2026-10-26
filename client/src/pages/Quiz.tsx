@@ -112,7 +112,7 @@ export const tropeResults: Record<string, TropeResult> = {
     bookSubtitle: "Hudson Dynasty Book 1",
     bookLink: "https://www.amazon.com/dp/B0H1F9PV97",
     bookCover: "https://m.media-amazon.com/images/I/81iGQzEnacL._SL1500_.jpg",
-    color: "#e74c3c",
+    color: "#7A4F4C",
     icon: "⚔️",
   },
   forbidden: {
@@ -125,7 +125,7 @@ export const tropeResults: Record<string, TropeResult> = {
     bookSubtitle: "Manhattan Money Kings Book 4",
     bookLink: "https://www.amazon.com/dp/B0GDZ4T164",
     bookCover: "/author-kit/mmk-4-forbidden-nanny.jpg",
-    color: "#9b59b6",
+    color: "#7A4F4C",
     icon: "🚫",
   },
   "second-chance": {
@@ -138,7 +138,7 @@ export const tropeResults: Record<string, TropeResult> = {
     bookSubtitle: "Manhattan Money Kings Book 3",
     bookLink: "https://www.amazon.com/dp/B0G12LBZ24",
     bookCover: "/author-kit/mmk-3-baby-secret.jpg",
-    color: "#e67e22",
+    color: "#7A4F4C",
     icon: "✨",
   },
   boss: {
@@ -151,7 +151,7 @@ export const tropeResults: Record<string, TropeResult> = {
     bookSubtitle: "Manhattan Money Kings Book 1",
     bookLink: "https://www.amazon.com/dp/B0F2W8QL7S",
     bookCover: "/author-kit/mmk-1-executive-assistant.jpg",
-    color: "#d4af37",
+    color: "#7A4F4C",
     icon: "👑",
   },
 };
@@ -257,7 +257,7 @@ export default function Quiz() {
   }];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] relative overflow-hidden">
+    <div className="min-h-screen bg-[#FAF7F7] relative overflow-hidden">
       <EnhancedSEOHead
         title="What's Your Romance Trope? | Reese Astor Quiz"
         description="Take this fun 7-question quiz to discover your romance trope personality and get a personalized book recommendation from the Manhattan Money Kings series."
@@ -267,8 +267,8 @@ export default function Quiz() {
 
       {/* Background ambience */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#d4af37]/5 blur-[200px] rounded-full" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-rose-500/5 blur-[180px] rounded-full" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#C9A3A0]/5 blur-[200px] rounded-full" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#7A4F4C]/5 blur-[180px] rounded-full" />
       </div>
 
       <div className="container relative z-10 py-12 md:py-20 px-4">
@@ -278,27 +278,27 @@ export default function Quiz() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 mb-6">
-            <Heart className="h-4 w-4 text-[#d4af37]" />
-            <span className="text-sm text-[#d4af37] font-medium tracking-wider uppercase">Romance Personality Quiz</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A3A0]/10 border border-[#B59A6A]/20 mb-6">
+            <Heart className="h-4 w-4 text-[#7A4F4C]" />
+            <span className="text-sm text-[#7A4F4C] font-medium tracking-wider uppercase">Romance Personality Quiz</span>
           </div>
-          <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-4">
-            What's Your <span className="text-[#d4af37]">Romance Trope</span>?
+          <h1 className="font-serif text-4xl md:text-6xl font-bold text-[#4A3B3A] mb-4">
+            What's Your <span className="text-[#7A4F4C]">Romance Trope</span>?
           </h1>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-[#6E5F5A] max-w-2xl mx-auto">
             Answer 7 quick questions to discover which romance trope matches your personality — plus get a personalized book recommendation.
           </p>
         </motion.div>
 
         {/* Progress Bar */}
         <div className="max-w-2xl mx-auto mb-10">
-          <div className="flex justify-between text-sm text-gray-500 mb-2">
+          <div className="flex justify-between text-sm text-[#6E5F5A] mb-2">
             <span>Question {Math.min(currentQuestion + 1, quizQuestions.length)} of {quizQuestions.length}</span>
             <span>{Math.round(progress)}% complete</span>
           </div>
-          <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+          <div className="h-2 bg-[#EBD6D3]/30 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] rounded-full"
+              className="h-full bg-gradient-to-r from-[#C9A3A0] to-[#C9A3A0] rounded-full"
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             />
@@ -317,8 +317,8 @@ export default function Quiz() {
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.4 }}
               >
-                <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
-                  <h2 className="font-serif text-2xl md:text-3xl font-bold text-white mb-8 text-center">
+                <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 shadow-2xl">
+                  <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#4A3B3A] mb-8 text-center">
                     {quizQuestions[currentQuestion].question}
                   </h2>
 
@@ -330,11 +330,11 @@ export default function Quiz() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.1 }}
                         onClick={() => handleAnswer(option.trope)}
-                        className="w-full p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/5 transition-all duration-300 text-left group cursor-pointer"
+                        className="w-full p-5 rounded-2xl bg-[#EBD6D3]/0 border border-[#4A3B3A]/10 hover:border-[#B59A6A]/50 hover:bg-[#C9A3A0]/5 transition-all duration-300 text-left group cursor-pointer"
                       >
                         <div className="flex items-center gap-4">
                           <span className="text-2xl">{option.emoji}</span>
-                          <span className="text-lg text-gray-300 group-hover:text-white transition-colors">
+                          <span className="text-lg text-[#6E5F5A] group-hover:text-[#4A3B3A] transition-colors">
                             {option.text}
                           </span>
                         </div>
@@ -345,7 +345,7 @@ export default function Quiz() {
                   {currentQuestion > 0 && (
                     <button
                       onClick={handleBack}
-                      className="mt-6 flex items-center gap-2 text-gray-500 hover:text-[#d4af37] transition-colors mx-auto"
+                      className="mt-6 flex items-center gap-2 text-[#6E5F5A] hover:text-[#7A4F4C] transition-colors mx-auto"
                     >
                       <ArrowLeft className="h-4 w-4" />
                       <span className="text-sm">Go back</span>
@@ -364,19 +364,19 @@ export default function Quiz() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl text-center">
-                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 mb-8">
-                    <Sparkles className="h-10 w-10 text-[#d4af37]" />
+                <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 shadow-2xl text-center">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#C9A3A0]/20 to-[#C9A3A0]/10 mb-8">
+                    <Sparkles className="h-10 w-10 text-[#7A4F4C]" />
                   </div>
 
-                  <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+                  <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#4A3B3A] mb-4">
                     Your Results Are Ready!
                   </h2>
-                  <p className="text-lg text-gray-300 mb-2">
+                  <p className="text-lg text-[#6E5F5A] mb-2">
                     We've identified your romance trope personality.
                   </p>
-                  <p className="text-gray-400 mb-8">
-                    Enter your email to reveal your result and get a <span className="text-[#d4af37] font-semibold">free romance novel</span> matched to your trope.
+                  <p className="text-[#6E5F5A] mb-8">
+                    Enter your email to reveal your result and get a <span className="text-[#7A4F4C] font-semibold">free romance novel</span> matched to your trope.
                   </p>
 
                   <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
@@ -387,7 +387,7 @@ export default function Quiz() {
                         placeholder="First name (optional)"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-full px-6 py-6 focus:border-[#d4af37]/50 focus:ring-[#d4af37]/20"
+                        className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] rounded-full px-6 py-6 focus:border-[#B59A6A]/50 focus:ring-[#C9A3A0]/20"
                       />
                       <Input
                         type="email"
@@ -395,13 +395,13 @@ export default function Quiz() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-full px-6 py-6 focus:border-[#d4af37]/50 focus:ring-[#d4af37]/20"
+                        className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] rounded-full px-6 py-6 focus:border-[#B59A6A]/50 focus:ring-[#C9A3A0]/20"
                       />
                     </div>
                     <Button
                       type="submit"
                       disabled={subscribeMutation.isPending}
-                      className="w-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
+                      className="w-full bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-8 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
                     >
                       {subscribeMutation.isPending ? (
                         <span className="flex items-center gap-2">
@@ -420,7 +420,7 @@ export default function Quiz() {
                     </Button>
                   </form>
 
-                  <p className="text-xs text-gray-500 mt-6">
+                  <p className="text-xs text-[#6E5F5A] mt-6">
                     You'll also get a link to the free prequel. No spam, ever. Unsubscribe anytime.
                   </p>
                 </div>
@@ -435,31 +435,31 @@ export default function Quiz() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
+                <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 shadow-2xl">
                   {/* Result Header */}
                   <div className="text-center mb-10">
                     <span className="text-6xl mb-4 block">{result.icon}</span>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 mb-4">
-                      <span className="text-sm text-[#d4af37] font-medium tracking-wider uppercase">Your Romance Trope</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A3A0]/10 border border-[#B59A6A]/20 mb-4">
+                      <span className="text-sm text-[#7A4F4C] font-medium tracking-wider uppercase">Your Romance Trope</span>
                     </div>
-                    <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
+                    <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#4A3B3A] mb-3">
                       {result.title}
                     </h2>
-                    <p className="text-xl text-[#d4af37] italic">{result.subtitle}</p>
+                    <p className="text-xl text-[#7A4F4C] italic">{result.subtitle}</p>
                   </div>
 
                   {/* Description */}
-                  <p className="text-lg text-gray-300 leading-relaxed text-center mb-10 max-w-xl mx-auto">
+                  <p className="text-lg text-[#6E5F5A] leading-relaxed text-center mb-10 max-w-xl mx-auto">
                     {result.description}
                   </p>
 
                   {/* Book Recommendation */}
-                  <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8">
-                    <p className="text-sm text-[#d4af37] font-medium tracking-wider uppercase mb-4 text-center">
+                  <div className="bg-[#EBD6D3]/0 border border-[#4A3B3A]/10 rounded-2xl p-6 md:p-8">
+                    <p className="text-sm text-[#7A4F4C] font-medium tracking-wider uppercase mb-4 text-center">
                       Your Perfect Book Match
                     </p>
                     <div className="flex flex-col md:flex-row items-center gap-8">
-                      <div className="w-40 h-60 rounded-xl overflow-hidden shadow-2xl flex-shrink-0 border border-white/10">
+                      <div className="w-40 h-60 rounded-xl overflow-hidden shadow-2xl flex-shrink-0 border border-[#4A3B3A]/10">
                         <img
                           src={result.bookCover}
                           alt={result.bookTitle}
@@ -467,20 +467,20 @@ export default function Quiz() {
                         />
                       </div>
                       <div className="text-center md:text-left flex-1">
-                        <h3 className="font-serif text-2xl font-bold text-white mb-1">
+                        <h3 className="font-serif text-2xl font-bold text-[#4A3B3A] mb-1">
                           {result.bookTitle}
                         </h3>
-                        <p className="text-gray-400 mb-3">{result.bookSubtitle}</p>
+                        <p className="text-[#6E5F5A] mb-3">{result.bookSubtitle}</p>
                         <div className="flex items-center gap-1 mb-4 justify-center md:justify-start">
-                          <span className="text-sm text-gray-400 ml-2">Manhattan Money Kings</span>
+                          <span className="text-sm text-[#6E5F5A] ml-2">Manhattan Money Kings</span>
                         </div>
-                        <p className="text-gray-300 mb-6 leading-relaxed">
+                        <p className="text-[#6E5F5A] mb-6 leading-relaxed">
                           Based on your quiz results, this book from the Manhattan Money Kings series is your perfect match. A free copy is being delivered to your inbox now!
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
                           <Button
                             onClick={() => window.open("https://dl.bookfunnel.com/kw1yge3479", "_blank")}
-                            className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-6 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                            className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-6 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                           >
                             <BookOpen className="mr-2 h-5 w-5" />
                             Get Your Free Book
@@ -488,7 +488,7 @@ export default function Quiz() {
                           <Button
                             onClick={() => window.open(result.bookLink, "_blank")}
                             variant="outline"
-                            className="border-white/20 text-white hover:bg-white/5 px-6 py-5 rounded-full"
+                            className="border-[#4A3B3A]/20 text-[#4A3B3A] hover:bg-[#EBD6D3]/30 px-6 py-5 rounded-full"
                           >
                             View on Amazon
                           </Button>

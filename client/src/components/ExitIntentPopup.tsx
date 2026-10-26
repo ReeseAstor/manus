@@ -82,7 +82,7 @@ export function ExitIntentPopup() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[9999]"
+            className="fixed inset-0 bg-[#FAF7F7]/70 backdrop-blur-sm z-[9999]"
             onClick={handleDismiss}
           />
 
@@ -94,35 +94,35 @@ export function ExitIntentPopup() {
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[10000] w-[90vw] max-w-lg"
           >
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] border border-[#d4af37]/30 shadow-2xl shadow-[#d4af37]/10">
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#F0E6E5] to-[#FAF7F7] border border-[#B59A6A]/30 shadow-2xl shadow-[#C9A3A0]/10">
               {/* Close button */}
               <button
                 onClick={handleDismiss}
                 aria-label="Close"
-                className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors z-10"
+                className="absolute top-4 right-4 text-[#6E5F5A] hover:text-[#4A3B3A] transition-colors z-10"
               >
                 <X className="h-5 w-5" />
               </button>
 
               {/* Gold accent line */}
-              <div className="h-1 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent" />
+              <div className="h-1 bg-gradient-to-r from-transparent via-[#C9A3A0] to-transparent" />
 
               <div className="p-8 md:p-10 text-center">
                 {/* Icon */}
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/5 mb-6">
-                  <BookOpen className="h-8 w-8 text-[#d4af37]" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#C9A3A0]/20 to-[#C9A3A0]/5 mb-6">
+                  <BookOpen className="h-8 w-8 text-[#7A4F4C]" />
                 </div>
 
                 {/* Headline */}
-                <h2 className="font-serif text-3xl font-bold text-white mb-3">
+                <h2 className="font-serif text-3xl font-bold text-[#4A3B3A] mb-3">
                   Wait — Before You Go!
                 </h2>
 
-                <p className="text-gray-300 text-lg mb-2">
-                  Get <span className="text-[#d4af37] font-semibold">The First Acquisition</span>, a free Hudson Dynasty prequel novella.
+                <p className="text-[#6E5F5A] text-lg mb-2">
+                  Get <span className="text-[#7A4F4C] font-semibold">The First Acquisition</span>, a free Hudson Dynasty prequel novella.
                 </p>
 
-                <p className="text-gray-500 text-sm mb-6">
+                <p className="text-[#6E5F5A] text-sm mb-6">
                   Join the newsletter for new release alerts and bonus scenes.
                 </p>
 
@@ -134,12 +134,12 @@ export function ExitIntentPopup() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-full px-6 py-6 focus:border-[#d4af37]/50 focus:ring-[#d4af37]/20 text-center"
+                    className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] rounded-full px-6 py-6 focus:border-[#B59A6A]/50 focus:ring-[#C9A3A0]/20 text-center"
                   />
                   <Button
                     type="submit"
                     disabled={subscribeMutation.isPending}
-                    className="w-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
+                    className="w-full bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
                   >
                     {subscribeMutation.isPending ? (
                       <span className="flex items-center gap-2 justify-center">
@@ -158,13 +158,13 @@ export function ExitIntentPopup() {
                   </Button>
                 </form>
 
-                <p className="text-xs text-gray-600 mt-4">
+                <p className="text-xs text-[#6E5F5A] mt-4">
                   No spam, ever. Unsubscribe anytime.
                 </p>
 
                 <button
                   onClick={handleDismiss}
-                  className="mt-4 text-sm text-gray-500 hover:text-gray-400 transition-colors underline"
+                  className="mt-4 text-sm text-[#6E5F5A] hover:text-[#6E5F5A] transition-colors underline"
                 >
                   No thanks, I'll pass on the free book
                 </button>

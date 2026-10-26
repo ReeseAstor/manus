@@ -116,56 +116,56 @@ export default function VipClub() {
 
   const getTierIcon = (tierName: string) => {
     switch (tierName.toLowerCase()) {
-      case 'bronze': return <Crown className="w-8 h-8 text-amber-600" />;
-      case 'silver': return <Crown className="w-8 h-8 text-gray-400" />;
-      case 'gold': return <Crown className="w-8 h-8 text-yellow-400" />;
+      case 'bronze': return <Crown className="w-8 h-8 text-[#7A4F4C]" />;
+      case 'silver': return <Crown className="w-8 h-8 text-[#6E5F5A]" />;
+      case 'gold': return <Crown className="w-8 h-8 text-[#7A4F4C]" />;
       default: return <Crown className="w-8 h-8" />;
     }
   };
 
   const getTierGradient = (tierName: string) => {
     switch (tierName.toLowerCase()) {
-      case 'bronze': return 'from-amber-900/20 to-amber-700/10 border-amber-600/30';
-      case 'silver': return 'from-gray-700/20 to-gray-500/10 border-gray-400/30';
-      case 'gold': return 'from-yellow-900/20 to-yellow-600/10 border-yellow-500/30 ring-2 ring-yellow-500/20';
-      default: return 'from-gray-800 to-gray-900';
+      case 'bronze': return 'from-[#C9A3A0]/20 to-[#C9A3A0]/10 border-[#C9A3A0]/30';
+      case 'silver': return 'from-[#F0E6E5]/20 to-[#F0E6E5]/10 border-[#E5D6D3]/30';
+      case 'gold': return 'from-[#C9A3A0]/20 to-[#C9A3A0]/10 border-[#C9A3A0]/30 ring-2 ring-[#C9A3A0]/20';
+      default: return 'from-[#FAF7F7] to-[#FAF7F7]';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950">
+    <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#FAF7F7] to-[#FAF7F7]">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/images/manhattan-night.jpg')] bg-cover bg-center opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-950/80 to-gray-950" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FAF7F7]/80 to-[#FAF7F7]" />
         
         <div className="container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 bg-gradient-to-r from-pink-500 to-rose-500 text-white border-0 px-4 py-1.5">
+            <Badge className="mb-6 bg-[#4A3B3A] text-[#FAF7F7] border-0 px-4 py-1.5">
               <Flame className="w-4 h-4 mr-2" />
               Exclusive VIP Access
             </Badge>
             
-            <h1 className="text-5xl md:text-6xl font-serif font-bold text-white mb-6">
-              The <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-400">Spicy Stories</span> Club
+            <h1 className="text-5xl md:text-6xl font-serif font-bold text-[#4A3B3A] mb-6">
+              The <span className="text-[#7A4F4C] ">Spicy Stories</span> Club
             </h1>
             
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-[#6E5F5A] mb-8 max-w-2xl mx-auto">
               Steamy bonus stories with your favorite Manhattan Money Kings couples, the scenes that didn't fit in the books.
               Read them or press play. Steamy, 18+.
             </p>
             
             <div className="flex flex-wrap justify-center gap-6 mb-8">
-              <div className="flex items-center gap-2 text-gray-300">
-                <Headphones className="w-5 h-5 text-pink-400" />
+              <div className="flex items-center gap-2 text-[#6E5F5A]">
+                <Headphones className="w-5 h-5 text-[#7A4F4C]" />
                 <span>Audio Included</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-300">
-                <Heart className="w-5 h-5 text-pink-400" />
+              <div className="flex items-center gap-2 text-[#6E5F5A]">
+                <Heart className="w-5 h-5 text-[#7A4F4C]" />
                 <span>Exclusive Content</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-300">
-                <Sparkles className="w-5 h-5 text-pink-400" />
+              <div className="flex items-center gap-2 text-[#6E5F5A]">
+                <Sparkles className="w-5 h-5 text-[#7A4F4C]" />
                 <span>New Stories Monthly</span>
               </div>
             </div>
@@ -175,12 +175,12 @@ export default function VipClub() {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="border-pink-500/50 text-pink-400 hover:bg-pink-500/10 hover:text-pink-300 gap-2"
+                className="border-[#C9A3A0]/50 text-[#7A4F4C] hover:bg-[#7A4F4C]/10 hover:text-[#7A4F4C] gap-2"
                 onClick={() => document.querySelector('#featured-stories')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 <Play className="w-5 h-5" />
                 Listen to Audio Samples
-                <span className="text-xs text-gray-400">(Hover over stories below)</span>
+                <span className="text-xs text-[#6E5F5A]">(Hover over stories below)</span>
               </Button>
             </div>
           </div>
@@ -189,15 +189,15 @@ export default function VipClub() {
 
       {/* Current Membership Status */}
       {membership && (
-        <section className="py-8 bg-gradient-to-r from-pink-900/20 to-rose-900/20 border-y border-pink-500/20">
+        <section className="py-8 bg-gradient-to-r from-[#C9A3A0]/20 to-[#C9A3A0]/20 border-y border-[#C9A3A0]/20">
           <div className="container">
             <div className="flex items-center justify-center gap-4">
-              <Crown className="w-6 h-6 text-yellow-400" />
-              <span className="text-lg text-white">
-                You're a <strong className="text-yellow-400">{membership.tier.name}</strong> member!
+              <Crown className="w-6 h-6 text-[#7A4F4C]" />
+              <span className="text-lg text-[#4A3B3A]">
+                You're a <strong className="text-[#7A4F4C]">{membership.tier.name}</strong> member!
               </span>
               <Link href="/vip-audio">
-                <Button variant="outline" className="border-pink-500/50 text-pink-400 hover:bg-pink-500/10">
+                <Button variant="outline" className="border-[#C9A3A0]/50 text-[#7A4F4C] hover:bg-[#7A4F4C]/10">
                   <Music className="w-4 h-4 mr-2" />
                   Open Audio Hub
                 </Button>
@@ -211,10 +211,10 @@ export default function VipClub() {
       <section className="py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#4A3B3A] mb-4">
               Choose Your VIP Experience
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <p className="text-[#6E5F5A] max-w-2xl mx-auto">
               Select the membership tier that's right for you. All plans include instant access to our steamy audio story library.
             </p>
           </div>
@@ -223,7 +223,7 @@ export default function VipClub() {
             {tiersLoading ? (
               // Loading skeleton
               Array.from({ length: 3 }).map((_, i) => (
-                <Card key={i} className="bg-gray-800/50 border-gray-700 animate-pulse">
+                <Card key={i} className="bg-[#F0E6E5]/50 border-[#E5D6D3] animate-pulse">
                   <CardHeader className="h-40" />
                   <CardContent className="h-60" />
                   <CardFooter className="h-20" />
@@ -237,7 +237,7 @@ export default function VipClub() {
                 >
                   {tier.name === 'Gold' && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <Badge className="bg-gradient-to-r from-yellow-500 to-amber-500 text-black font-bold">
+                      <Badge className="bg-[#4A3B3A] text-[#FAF7F7] font-bold">
                         Most Popular
                       </Badge>
                     </div>
@@ -247,20 +247,20 @@ export default function VipClub() {
                     <div className="mx-auto mb-4">
                       {getTierIcon(tier.name)}
                     </div>
-                    <CardTitle className="text-2xl font-serif text-white">{tier.name}</CardTitle>
-                    <CardDescription className="text-gray-400">{tier.description}</CardDescription>
+                    <CardTitle className="text-2xl font-serif text-[#4A3B3A]">{tier.name}</CardTitle>
+                    <CardDescription className="text-[#6E5F5A]">{tier.description}</CardDescription>
                   </CardHeader>
                   
                   <CardContent className="text-center">
                     <div className="mb-6">
-                      <span className="text-4xl font-bold text-white">${(tier.price / 100).toFixed(2)}</span>
-                      <span className="text-gray-400">/month</span>
+                      <span className="text-4xl font-bold text-[#4A3B3A]">${(tier.price / 100).toFixed(2)}</span>
+                      <span className="text-[#6E5F5A]">/month</span>
                     </div>
                     
                     <ul className="space-y-3 text-left">
                       {JSON.parse(tier.features as string).map((feature: string, i: number) => (
-                        <li key={i} className="flex items-start gap-2 text-gray-300">
-                          <Check className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
+                        <li key={i} className="flex items-start gap-2 text-[#6E5F5A]">
+                          <Check className="w-5 h-5 text-[#7A4F4C] shrink-0 mt-0.5" />
                           <span>{feature}</span>
                         </li>
                       ))}
@@ -271,8 +271,8 @@ export default function VipClub() {
                     <Button 
                       className={`w-full ${
                         tier.name === 'Gold' 
-                          ? 'bg-gradient-to-r from-yellow-500 to-amber-500 text-black hover:from-yellow-400 hover:to-amber-400' 
-                          : 'bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400'
+                          ? 'bg-[#4A3B3A] text-[#FAF7F7] hover:bg-[#7A4F4C]' 
+                          : 'bg-[#4A3B3A] hover:bg-[#7A4F4C]'
                       }`}
                       onClick={() => handleSubscribe(tier.slug)}
                       disabled={subscribeMutation.isPending || (membership?.tier.id === tier.id)}
@@ -288,53 +288,53 @@ export default function VipClub() {
       </section>
 
       {/* Featured Stories Preview */}
-      <section id="featured-stories" className="py-20 bg-gray-900/50">
+      <section id="featured-stories" className="py-20 bg-[#FAF7F7]/50">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#4A3B3A] mb-4">
               Featured Steamy Stories
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <p className="text-[#6E5F5A] max-w-2xl mx-auto">
               Here's a taste of the library: bonus scenes with your favorite couples. Many come with audio.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {featuredStories?.map((story: { id: number; title: string; slug: string; description: string; excerpt: string | null; coverImage: string | null; category: string; heatLevel: number | null; audioDuration: number | null; playCount: number | null; previewAudioUrl?: string | null }) => (
-              <Card key={story.id} className="bg-gray-800/50 border-gray-700 overflow-hidden group">
-                <div className="relative aspect-[4/3] bg-gradient-to-br from-pink-900/30 to-rose-900/30">
+              <Card key={story.id} className="bg-[#F0E6E5]/50 border-[#E5D6D3] overflow-hidden group">
+                <div className="relative aspect-[4/3] bg-gradient-to-br from-[#C9A3A0]/30 to-[#C9A3A0]/30">
                   {story.coverImage ? (
                     <img src={story.coverImage} alt={story.title} className="w-full h-full object-cover" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <Headphones className="w-16 h-16 text-pink-500/50" />
+                      <Headphones className="w-16 h-16 text-[#7A4F4C]/50" />
                     </div>
                   )}
                   <div 
-                    className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute inset-0 bg-[#FAF7F7]/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                     onMouseEnter={() => story.previewAudioUrl && !membership && handlePreviewPlay(story.id, story.previewAudioUrl)}
                     onMouseLeave={() => story.previewAudioUrl && !membership && handlePreviewStop(story.id)}
                   >
                     {membership ? (
-                      <Button size="lg" className="bg-pink-500 hover:bg-pink-400">
+                      <Button size="lg" className="bg-[#7A4F4C] hover:bg-[#C9A3A0]">
                         <Play className="w-5 h-5 mr-2" />
                         Listen Now
                       </Button>
                     ) : story.previewAudioUrl ? (
                       <div className="text-center">
                         <div className="relative">
-                          <Headphones className="w-12 h-12 text-pink-400 mx-auto mb-2 animate-pulse" />
-                          <Play className="w-6 h-6 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                          <Headphones className="w-12 h-12 text-[#7A4F4C] mx-auto mb-2 animate-pulse" />
+                          <Play className="w-6 h-6 text-[#4A3B3A] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                         </div>
-                        <span className="text-white font-medium">Hover to Preview</span>
-                        <p className="text-gray-400 text-sm mt-1">
+                        <span className="text-[#4A3B3A] font-medium">Hover to Preview</span>
+                        <p className="text-[#6E5F5A] text-sm mt-1">
                           {audioDurations[story.id] ? `${audioDurations[story.id]}s sample` : 'Loading...'}
                         </p>
                         {/* Progress Bar */}
                         {audioProgress[story.id] > 0 && (
-                          <div className="w-32 h-1 bg-gray-600 rounded-full mt-2 overflow-hidden">
+                          <div className="w-32 h-1 bg-[#EBD6D3] rounded-full mt-2 overflow-hidden">
                             <div 
-                              className="h-full bg-pink-400 transition-all duration-100"
+                              className="h-full bg-[#C9A3A0] transition-all duration-100"
                               style={{ width: `${audioProgress[story.id]}%` }}
                             />
                           </div>
@@ -342,23 +342,23 @@ export default function VipClub() {
                       </div>
                     ) : (
                       <div className="text-center">
-                        <Lock className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                        <span className="text-gray-300">VIP Members Only</span>
+                        <Lock className="w-8 h-8 text-[#6E5F5A] mx-auto mb-2" />
+                        <span className="text-[#6E5F5A]">VIP Members Only</span>
                       </div>
                     )}
                   </div>
                   <div className="absolute top-3 right-3">
-                    <Badge className="bg-pink-500/80">
+                    <Badge className="bg-[#7A4F4C]/80">
                       <Flame className="w-3 h-3 mr-1" />
                       {story.heatLevel}/5
                     </Badge>
                   </div>
                 </div>
                 <CardContent className="p-4">
-                  <h3 className="font-serif text-lg font-semibold text-white mb-2">{story.title}</h3>
-                  <p className="text-gray-400 text-sm line-clamp-2">{story.description}</p>
+                  <h3 className="font-serif text-lg font-semibold text-[#4A3B3A] mb-2">{story.title}</h3>
+                  <p className="text-[#6E5F5A] text-sm line-clamp-2">{story.description}</p>
                   {story.audioDuration && (
-                    <div className="flex items-center gap-2 mt-3 text-gray-500 text-sm">
+                    <div className="flex items-center gap-2 mt-3 text-[#6E5F5A] text-sm">
                       <Headphones className="w-4 h-4" />
                       <span>{Math.floor(story.audioDuration / 60)} min</span>
                     </div>
@@ -372,7 +372,7 @@ export default function VipClub() {
             <div className="text-center mt-12">
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400"
+                className="bg-gradient-to-r from-[#C9A3A0] to-[#C9A3A0] hover:from-[#C9A3A0] hover:to-[#C9A3A0]"
                 onClick={() => document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Unlock All Stories
@@ -387,50 +387,50 @@ export default function VipClub() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#4A3B3A] mb-4">
                 What's Inside the VIP Club?
               </h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
-                <div className="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center mb-4">
-                  <Headphones className="w-6 h-6 text-pink-400" />
+              <div className="bg-[#F0E6E5]/30 rounded-2xl p-6 border border-[#E5D6D3]/50">
+                <div className="w-12 h-12 rounded-full bg-[#7A4F4C]/20 flex items-center justify-center mb-4">
+                  <Headphones className="w-6 h-6 text-[#7A4F4C]" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Audio You Can Play</h3>
-                <p className="text-gray-400">
+                <h3 className="text-xl font-semibold text-[#4A3B3A] mb-2">Audio You Can Play</h3>
+                <p className="text-[#6E5F5A]">
                   Stories come with audio you can play here. Put it on for the train, or for later with the lights off.
                 </p>
               </div>
 
-              <div className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
-                <div className="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center mb-4">
-                  <Heart className="w-6 h-6 text-pink-400" />
+              <div className="bg-[#F0E6E5]/30 rounded-2xl p-6 border border-[#E5D6D3]/50">
+                <div className="w-12 h-12 rounded-full bg-[#7A4F4C]/20 flex items-center justify-center mb-4">
+                  <Heart className="w-6 h-6 text-[#7A4F4C]" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Your Favorite Characters</h3>
-                <p className="text-gray-400">
+                <h3 className="text-xl font-semibold text-[#4A3B3A] mb-2">Your Favorite Characters</h3>
+                <p className="text-[#6E5F5A]">
                   Exclusive stories featuring Elena & David, Sarah & Michael, Sophia & Dominic, and more 
                   from the Manhattan Money Kings universe.
                 </p>
               </div>
 
-              <div className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
-                <div className="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center mb-4">
-                  <Flame className="w-6 h-6 text-pink-400" />
+              <div className="bg-[#F0E6E5]/30 rounded-2xl p-6 border border-[#E5D6D3]/50">
+                <div className="w-12 h-12 rounded-full bg-[#7A4F4C]/20 flex items-center justify-center mb-4">
+                  <Flame className="w-6 h-6 text-[#7A4F4C]" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Steamy Scenes Beyond the Books</h3>
-                <p className="text-gray-400">
+                <h3 className="text-xl font-semibold text-[#4A3B3A] mb-2">Steamy Scenes Beyond the Books</h3>
+                <p className="text-[#6E5F5A]">
                   Discover what happens after the fade-to-black moments. Extended scenes, deleted chapters, 
                   and exclusive encounters.
                 </p>
               </div>
 
-              <div className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
-                <div className="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center mb-4">
-                  <Sparkles className="w-6 h-6 text-pink-400" />
+              <div className="bg-[#F0E6E5]/30 rounded-2xl p-6 border border-[#E5D6D3]/50">
+                <div className="w-12 h-12 rounded-full bg-[#7A4F4C]/20 flex items-center justify-center mb-4">
+                  <Sparkles className="w-6 h-6 text-[#7A4F4C]" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">New Content Monthly</h3>
-                <p className="text-gray-400">
+                <h3 className="text-xl font-semibold text-[#4A3B3A] mb-2">New Content Monthly</h3>
+                <p className="text-[#6E5F5A]">
                   Fresh stories added every month. Gold members can even request custom stories 
                   tailored to their fantasies.
                 </p>
@@ -439,15 +439,15 @@ export default function VipClub() {
           </div>
         </div>
       </section>      {/* Exclusive Content      {/* Pricing Tiers */}
-      <section id="pricing" className="py-20 bg-gradient-to-b from-gray-900 to-gray-950">   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="pricing" className="py-20 bg-gradient-to-b from-[#FAF7F7] to-[#FAF7F7]">   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0">
+            <Badge className="mb-4 bg-[#4A3B3A] text-[#FAF7F7] border-0">
               Exclusive Previews
             </Badge>
-            <h2 className="text-4xl font-bold text-white mb-4">
+            <h2 className="text-4xl font-bold text-[#4A3B3A] mb-4">
               Taste What Awaits You
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-[#6E5F5A] max-w-3xl mx-auto">
               Get a glimpse of the exclusive steamy content, bonus chapters, and behind-the-scenes material available to VIP members.
             </p>
           </div>
@@ -455,60 +455,60 @@ export default function VipClub() {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Preview Card 1: Story Excerpt */}
             <Card 
-              className="bg-gradient-to-br from-pink-950/50 to-purple-950/30 border-pink-500/20 hover:border-pink-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/20 cursor-pointer"
+              className="bg-gradient-to-br from-[#C9A3A0]/50 to-[#C9A3A0]/30 border-[#C9A3A0]/20 hover:border-[#C9A3A0]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/20 cursor-pointer"
               onClick={() => { setCurrentExcerpt('elena'); setShowExcerptModal(true); }}
             >
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
-                  <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30">
+                  <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30">
                     Story Excerpt
                   </Badge>
-                  <Sparkles className="w-5 h-5 text-pink-400" />
+                  <Sparkles className="w-5 h-5 text-[#7A4F4C]" />
                 </div>
-                <CardTitle className="text-white text-xl">
+                <CardTitle className="text-[#4A3B3A] text-xl">
                   "The Boardroom Confession"
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-[#6E5F5A]">
                   Elena & David • Heat Level: 🔥🔥🔥🔥
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="bg-gray-950/50 p-4 rounded-lg border border-pink-500/10 mb-4">
-                  <p className="text-gray-300 text-sm italic leading-relaxed">
+                <div className="bg-[#FAF7F7]/50 p-4 rounded-lg border border-[#C9A3A0]/10 mb-4">
+                  <p className="text-[#6E5F5A] text-sm italic leading-relaxed">
                     "David's hand found the small of my back, his touch sending electricity through the silk of my dress. 'We shouldn't,' I whispered, even as I leaned into him. His gilded eyes darkened. 'Then tell me to stop.' But we both knew I wouldn't..."
                   </p>
                   <div className="mt-3 text-center">
-                    <span className="text-pink-400 text-xs font-semibold">— Continues for members —</span>
+                    <span className="text-[#7A4F4C] text-xs font-semibold">— Continues for members —</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-400">
-                  <Lock className="w-4 h-4 text-pink-400" />
+                <div className="flex items-center gap-2 text-sm text-[#6E5F5A]">
+                  <Lock className="w-4 h-4 text-[#7A4F4C]" />
                   <span>Full story available to Bronze+ members</span>
                 </div>
               </CardContent>
             </Card>
 
             {/* Preview Card 2: Audio Sample */}
-            <Card className="bg-gradient-to-br from-purple-950/50 to-pink-950/30 border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20">
+            <Card className="bg-gradient-to-br from-[#C9A3A0]/50 to-[#C9A3A0]/30 border-[#C9A3A0]/20 hover:border-[#C9A3A0]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20">
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
-                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                  <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30">
                     Audio Preview
                   </Badge>
-                  <Headphones className="w-5 h-5 text-purple-400" />
+                  <Headphones className="w-5 h-5 text-[#7A4F4C]" />
                 </div>
-                <CardTitle className="text-white text-xl">
+                <CardTitle className="text-[#4A3B3A] text-xl">
                   "Midnight Confessions"
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-[#6E5F5A]">
                   Sarah & Michael • Audio included
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="bg-gray-950/50 p-6 rounded-lg border border-purple-500/10 mb-4">
+                <div className="bg-[#FAF7F7]/50 p-6 rounded-lg border border-[#C9A3A0]/10 mb-4">
                   <div className="flex items-center justify-center mb-4">
                     <div className="relative">
-                      <div className={`absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-30 ${previewAudioPlaying ? 'animate-pulse' : ''}`}></div>
+                      <div className={`absolute inset-0 bg-gradient-to-r from-[#C9A3A0] to-[#C9A3A0] rounded-full blur-xl opacity-30 ${previewAudioPlaying ? 'animate-pulse' : ''}`}></div>
                       <button
                         aria-label={previewAudioPlaying ? "Pause audio preview" : "Play audio preview"}
                         onClick={() => {
@@ -538,7 +538,7 @@ export default function VipClub() {
                             setPreviewAudioPlaying(true);
                           }
                         }}
-                        className="relative bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-full p-6 transition-all duration-300 hover:scale-110 shadow-lg"
+                        className="relative bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] rounded-full p-6 transition-all duration-300 hover:scale-110 shadow-lg"
                       >
                         {previewAudioPlaying ? (
                           <Pause className="w-8 h-8" fill="currentColor" />
@@ -548,73 +548,73 @@ export default function VipClub() {
                       </button>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between text-xs text-gray-400">
+                  <div className="flex items-center justify-between text-xs text-[#6E5F5A]">
                     <span>{Math.floor((previewAudioProgress / 100) * previewAudioDuration)}s</span>
-                    <div className="flex-1 mx-3 h-1 bg-gray-800 rounded-full overflow-hidden">
+                    <div className="flex-1 mx-3 h-1 bg-[#F0E6E5] rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-100"
+                        className="h-full bg-gradient-to-r from-[#C9A3A0] to-[#C9A3A0] rounded-full transition-all duration-100"
                         style={{ width: `${previewAudioProgress}%` }}
                       ></div>
                     </div>
                     <span>{previewAudioDuration}s</span>
                   </div>
-                  <p className="text-center text-gray-400 text-xs mt-3">15-second sample</p>
+                  <p className="text-center text-[#6E5F5A] text-xs mt-3">15-second sample</p>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-400">
-                  <Music className="w-4 h-4 text-purple-400" />
+                <div className="flex items-center gap-2 text-sm text-[#6E5F5A]">
+                  <Music className="w-4 h-4 text-[#7A4F4C]" />
                   <span>Full audio for Silver+ members</span>
                 </div>
               </CardContent>
             </Card>
 
             {/* Preview Card 3: Bonus Content */}
-            <Card className="bg-gradient-to-br from-amber-950/50 to-yellow-950/30 border-amber-500/20 hover:border-amber-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/20">
+            <Card className="bg-gradient-to-br from-[#C9A3A0]/50 to-[#C9A3A0]/30 border-[#C9A3A0]/20 hover:border-[#C9A3A0]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/20">
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
-                  <Badge className="bg-amber-500/20 text-amber-300 border-amber-500/30">
+                  <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30">
                     Bonus Content
                   </Badge>
-                  <Star className="w-5 h-5 text-amber-400" />
+                  <Star className="w-5 h-5 text-[#7A4F4C]" />
                 </div>
-                <CardTitle className="text-white text-xl">
+                <CardTitle className="text-[#4A3B3A] text-xl">
                   Deleted Scene Collection
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-[#6E5F5A]">
                   Behind the Books • Exclusive
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 mb-4">
-                  <div className="bg-gray-950/50 p-3 rounded-lg border border-amber-500/10 hover:border-amber-500/30 transition-colors">
+                  <div className="bg-[#FAF7F7]/50 p-3 rounded-lg border border-[#C9A3A0]/10 hover:border-[#C9A3A0]/30 transition-colors">
                     <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-amber-400 mt-2"></div>
+                      <div className="w-2 h-2 rounded-full bg-[#C9A3A0] mt-2"></div>
                       <div>
-                        <p className="text-white text-sm font-medium">"The First Kiss" (Deleted Chapter)</p>
-                        <p className="text-gray-400 text-xs mt-1">What really happened at the charity gala...</p>
+                        <p className="text-[#4A3B3A] text-sm font-medium">"The First Kiss" (Deleted Chapter)</p>
+                        <p className="text-[#6E5F5A] text-xs mt-1">What really happened at the charity gala...</p>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-gray-950/50 p-3 rounded-lg border border-amber-500/10 hover:border-amber-500/30 transition-colors">
+                  <div className="bg-[#FAF7F7]/50 p-3 rounded-lg border border-[#C9A3A0]/10 hover:border-[#C9A3A0]/30 transition-colors">
                     <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-amber-400 mt-2"></div>
+                      <div className="w-2 h-2 rounded-full bg-[#C9A3A0] mt-2"></div>
                       <div>
-                        <p className="text-white text-sm font-medium">Character Interview: Elena</p>
-                        <p className="text-gray-400 text-xs mt-1">Exclusive Q&A about her relationship with David</p>
+                        <p className="text-[#4A3B3A] text-sm font-medium">Character Interview: Elena</p>
+                        <p className="text-[#6E5F5A] text-xs mt-1">Exclusive Q&A about her relationship with David</p>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-gray-950/50 p-3 rounded-lg border border-amber-500/10 hover:border-amber-500/30 transition-colors">
+                  <div className="bg-[#FAF7F7]/50 p-3 rounded-lg border border-[#C9A3A0]/10 hover:border-[#C9A3A0]/30 transition-colors">
                     <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-amber-400 mt-2"></div>
+                      <div className="w-2 h-2 rounded-full bg-[#C9A3A0] mt-2"></div>
                       <div>
-                        <p className="text-white text-sm font-medium">Author's Notes & Insights</p>
-                        <p className="text-gray-400 text-xs mt-1">Behind-the-scenes writing process</p>
+                        <p className="text-[#4A3B3A] text-sm font-medium">Author's Notes & Insights</p>
+                        <p className="text-[#6E5F5A] text-xs mt-1">Behind-the-scenes writing process</p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-400">
-                  <Lock className="w-4 h-4 text-amber-400" />
+                <div className="flex items-center gap-2 text-sm text-[#6E5F5A]">
+                  <Lock className="w-4 h-4 text-[#7A4F4C]" />
                   <span>Bonus items for Gold members</span>
                 </div>
               </CardContent>
@@ -625,34 +625,34 @@ export default function VipClub() {
           <div className="grid md:grid-cols-2 gap-8 mt-8">
             {/* Sarah & Michael Excerpt */}
             <Card 
-              className="bg-gradient-to-br from-blue-950/50 to-indigo-950/30 border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/20 cursor-pointer"
+              className="bg-gradient-to-br from-[#C9A3A0]/50 to-[#C9A3A0]/30 border-[#C9A3A0]/20 hover:border-[#C9A3A0]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/20 cursor-pointer"
               onClick={() => { setCurrentExcerpt('sarah'); setShowExcerptModal(true); }}
             >
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
-                  <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
+                  <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30">
                     Story Excerpt
                   </Badge>
-                  <Heart className="w-5 h-5 text-blue-400" />
+                  <Heart className="w-5 h-5 text-[#7A4F4C]" />
                 </div>
-                <CardTitle className="text-white text-xl">
+                <CardTitle className="text-[#4A3B3A] text-xl">
                   "Late Night on the Executive Floor"
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-[#6E5F5A]">
                   Sarah & Michael • Heat Level: 🔥🔥🔥🔥
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="bg-gray-950/50 p-4 rounded-lg border border-blue-500/10 mb-4">
-                  <p className="text-gray-300 text-sm italic leading-relaxed">
+                <div className="bg-[#FAF7F7]/50 p-4 rounded-lg border border-[#C9A3A0]/10 mb-4">
+                  <p className="text-[#6E5F5A] text-sm italic leading-relaxed">
                     "The office was silent except for the hum of my computer and the pounding of my heart. I didn't hear Michael approach until his shadow fell across my desk. 'You're still here,' he said, his voice rough with exhaustion—or something else entirely..."
                   </p>
                   <div className="mt-3 text-center">
-                    <span className="text-blue-400 text-xs font-semibold">— Continues for members —</span>
+                    <span className="text-[#7A4F4C] text-xs font-semibold">— Continues for members —</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-400">
-                  <Lock className="w-4 h-4 text-blue-400" />
+                <div className="flex items-center gap-2 text-sm text-[#6E5F5A]">
+                  <Lock className="w-4 h-4 text-[#7A4F4C]" />
                   <span>Full story available to Bronze+ members</span>
                 </div>
               </CardContent>
@@ -660,34 +660,34 @@ export default function VipClub() {
 
             {/* Sophia & Dominic Excerpt */}
             <Card 
-              className="bg-gradient-to-br from-rose-950/50 to-red-950/30 border-rose-500/20 hover:border-rose-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-rose-500/20 cursor-pointer"
+              className="bg-gradient-to-br from-[#C9A3A0]/50 to-[#C9A3A0]/30 border-[#C9A3A0]/20 hover:border-[#C9A3A0]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-rose-500/20 cursor-pointer"
               onClick={() => { setCurrentExcerpt('sophia'); setShowExcerptModal(true); }}
             >
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
-                  <Badge className="bg-rose-500/20 text-rose-300 border-rose-500/30">
+                  <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30">
                     Story Excerpt
                   </Badge>
-                  <Flame className="w-5 h-5 text-rose-400" />
+                  <Flame className="w-5 h-5 text-[#7A4F4C]" />
                 </div>
-                <CardTitle className="text-white text-xl">
+                <CardTitle className="text-[#4A3B3A] text-xl">
                   "Three Years Later"
                 </CardTitle>
-                <CardDescription className="text-gray-400">
+                <CardDescription className="text-[#6E5F5A]">
                   Sophia & Dominic • Heat Level: 🔥🔥🔥🔥🔥
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="bg-gray-950/50 p-4 rounded-lg border border-rose-500/10 mb-4">
-                  <p className="text-gray-300 text-sm italic leading-relaxed">
+                <div className="bg-[#FAF7F7]/50 p-4 rounded-lg border border-[#C9A3A0]/10 mb-4">
+                  <p className="text-[#6E5F5A] text-sm italic leading-relaxed">
                     "The last person I expected to see at Kane Industries was Dominic Kane himself. Three years hadn't changed him—same intense dark eyes, same commanding presence that once made my knees weak. Still made them weak, apparently..."
                   </p>
                   <div className="mt-3 text-center">
-                    <span className="text-rose-400 text-xs font-semibold">— Continues for members —</span>
+                    <span className="text-[#7A4F4C] text-xs font-semibold">— Continues for members —</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-400">
-                  <Lock className="w-4 h-4 text-rose-400" />
+                <div className="flex items-center gap-2 text-sm text-[#6E5F5A]">
+                  <Lock className="w-4 h-4 text-[#7A4F4C]" />
                   <span>Full story available to Silver+ members</span>
                 </div>
               </CardContent>
@@ -696,18 +696,18 @@ export default function VipClub() {
 
           {/* Read Full Excerpt Modal - Dynamic Content */}
           <Dialog open={showExcerptModal} onOpenChange={setShowExcerptModal}>
-            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-gray-900 to-gray-950 border-pink-500/30">
+            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-[#FAF7F7] to-[#FAF7F7] border-[#C9A3A0]/30">
               {currentExcerpt === 'elena' && (
                 <>
                   <DialogHeader>
                     <div className="flex items-center justify-between">
-                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Story Excerpt</Badge>
-                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Heat Level: 🔥🔥🔥🔥</Badge>
+                      <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30 mb-2">Story Excerpt</Badge>
+                      <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30 mb-2">Heat Level: 🔥🔥🔥🔥</Badge>
                     </div>
-                    <DialogTitle className="text-2xl text-white">"The Boardroom Confession"</DialogTitle>
-                    <DialogDescription className="text-gray-400">Elena & David • Manhattan Money Kings</DialogDescription>
+                    <DialogTitle className="text-2xl text-[#4A3B3A]">"The Boardroom Confession"</DialogTitle>
+                    <DialogDescription className="text-[#6E5F5A]">Elena & David • Manhattan Money Kings</DialogDescription>
                   </DialogHeader>
-                  <div className="mt-6 space-y-4 text-gray-300 leading-relaxed">
+                  <div className="mt-6 space-y-4 text-[#6E5F5A] leading-relaxed">
                     <p className="italic">David's hand found the small of my back, his touch sending electricity through the silk of my dress. 'We shouldn't,' I whispered, even as I leaned into him. His gilded eyes darkened. 'Then tell me to stop.' But we both knew I wouldn't.</p>
                     <p>The boardroom was empty, the city lights of Manhattan twinkling through the floor-to-ceiling windows. We'd stayed late to finalize the merger, but the tension between us had nothing to do with business.</p>
                     <p>"Elena," he murmured, his voice low and rough. His fingers traced the curve of my spine, and I shivered despite the warmth flooding through me. "I've been trying to resist this. Trying to be professional."</p>
@@ -719,11 +719,11 @@ export default function VipClub() {
                     <p>I could feel exactly what I did to him, and it sent a thrill through my entire body. My fingers worked at his tie, loosening it, then moving to the buttons of his shirt. He caught my wrists gently, his eyes searching mine.</p>
                     <p>"Are you sure about this?" he asked, his voice strained with the effort of holding back. "Once we cross this line..."</p>
                     <p>"I've never been more sure of anything," I breathed, pulling him back to me.</p>
-                    <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-6 text-center">
-                      <Lock className="w-12 h-12 text-pink-400 mx-auto mb-3" />
-                      <p className="text-white font-semibold mb-2">Continue Reading</p>
-                      <p className="text-gray-400 text-sm mb-4">This story continues for members.</p>
-                      <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
+                    <div className="bg-[#7A4F4C]/30 border border-[#C9A3A0]/20 rounded-lg p-6 text-center">
+                      <Lock className="w-12 h-12 text-[#7A4F4C] mx-auto mb-3" />
+                      <p className="text-[#4A3B3A] font-semibold mb-2">Continue Reading</p>
+                      <p className="text-[#6E5F5A] text-sm mb-4">This story continues for members.</p>
+                      <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7]"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
                     </div>
                   </div>
                 </>
@@ -732,13 +732,13 @@ export default function VipClub() {
                 <>
                   <DialogHeader>
                     <div className="flex items-center justify-between">
-                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Story Excerpt</Badge>
-                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Heat Level: 🔥🔥🔥🔥</Badge>
+                      <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30 mb-2">Story Excerpt</Badge>
+                      <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30 mb-2">Heat Level: 🔥🔥🔥🔥</Badge>
                     </div>
-                    <DialogTitle className="text-2xl text-white">"Late Night on the Executive Floor"</DialogTitle>
-                    <DialogDescription className="text-gray-400">Sarah & Michael • Manhattan Money Kings</DialogDescription>
+                    <DialogTitle className="text-2xl text-[#4A3B3A]">"Late Night on the Executive Floor"</DialogTitle>
+                    <DialogDescription className="text-[#6E5F5A]">Sarah & Michael • Manhattan Money Kings</DialogDescription>
                   </DialogHeader>
-                  <div className="mt-6 space-y-4 text-gray-300 leading-relaxed">
+                  <div className="mt-6 space-y-4 text-[#6E5F5A] leading-relaxed">
                     <p className="italic">The office was silent except for the hum of my computer and the pounding of my heart. I didn't hear Michael approach until his shadow fell across my desk. 'You're still here,' he said, his voice rough with exhaustion—or something else entirely.</p>
                     <p>I looked up to find him standing there, tie loosened, shirt sleeves rolled up, looking more human than I'd ever seen him. More dangerous, too.</p>
                     <p>"The Redwood Project deadline is tomorrow," I managed, trying to ignore how my pulse quickened at his proximity. "I wanted to make sure everything was perfect."</p>
@@ -751,11 +751,11 @@ export default function VipClub() {
                     <p>Instead of answering, I stood, closing the space between us. His hands found my waist immediately, pulling me flush against him. The heat of his body through my blouse made me dizzy.</p>
                     <p>"I feel it," I breathed against his lips. "Every single day."</p>
                     <p>His mouth crashed into mine with a hunger that stole my breath. One hand tangled in my hair while the other pressed against the small of my back, holding me to him as if he'd never let go. I melted into him, all my reservations burning away in the heat between us.</p>
-                    <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-6 text-center">
-                      <Lock className="w-12 h-12 text-pink-400 mx-auto mb-3" />
-                      <p className="text-white font-semibold mb-2">Continue Reading</p>
-                      <p className="text-gray-400 text-sm mb-4">This story continues for members.</p>
-                      <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
+                    <div className="bg-[#7A4F4C]/30 border border-[#C9A3A0]/20 rounded-lg p-6 text-center">
+                      <Lock className="w-12 h-12 text-[#7A4F4C] mx-auto mb-3" />
+                      <p className="text-[#4A3B3A] font-semibold mb-2">Continue Reading</p>
+                      <p className="text-[#6E5F5A] text-sm mb-4">This story continues for members.</p>
+                      <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7]"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
                     </div>
                   </div>
                 </>
@@ -764,13 +764,13 @@ export default function VipClub() {
                 <>
                   <DialogHeader>
                     <div className="flex items-center justify-between">
-                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Story Excerpt</Badge>
-                      <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30 mb-2">Heat Level: 🔥🔥🔥🔥🔥</Badge>
+                      <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30 mb-2">Story Excerpt</Badge>
+                      <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30 mb-2">Heat Level: 🔥🔥🔥🔥🔥</Badge>
                     </div>
-                    <DialogTitle className="text-2xl text-white">"Three Years Later"</DialogTitle>
-                    <DialogDescription className="text-gray-400">Sophia & Dominic • Manhattan Money Kings</DialogDescription>
+                    <DialogTitle className="text-2xl text-[#4A3B3A]">"Three Years Later"</DialogTitle>
+                    <DialogDescription className="text-[#6E5F5A]">Sophia & Dominic • Manhattan Money Kings</DialogDescription>
                   </DialogHeader>
-                  <div className="mt-6 space-y-4 text-gray-300 leading-relaxed">
+                  <div className="mt-6 space-y-4 text-[#6E5F5A] leading-relaxed">
                     <p className="italic">The last person I expected to see at Kane Industries was Dominic Kane himself. Three years hadn't changed him—same intense dark eyes, same commanding presence that once made my knees weak. Still made them weak, apparently.</p>
                     <p>"Sophia." My name on his lips sent a shiver down my spine. "I didn't know you were the candidate."</p>
                     <p>"Would it have mattered?" I kept my voice steady despite my racing heart. "You made it clear three years ago that we were a mistake."</p>
@@ -784,11 +784,11 @@ export default function VipClub() {
                     <p>"Then let me remind you." His hand cupped my face, thumb brushing my lower lip. "Unless you want me to stop?"</p>
                     <p>I should have said yes. Should have pushed him away. Instead, I grabbed his tie and pulled him down to me, our lips meeting in a kiss that was three years of longing and regret and desperate need all rolled into one.</p>
                     <p>He groaned against my mouth, lifting me onto the desk and stepping between my thighs. His hands were everywhere—my hair, my waist, sliding up my thighs beneath my skirt. I arched into him, all rational thought abandoning me as his lips trailed down my neck.</p>
-                    <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-6 text-center">
-                      <Lock className="w-12 h-12 text-pink-400 mx-auto mb-3" />
-                      <p className="text-white font-semibold mb-2">Continue Reading</p>
-                      <p className="text-gray-400 text-sm mb-4">This story continues for members.</p>
-                      <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
+                    <div className="bg-[#7A4F4C]/30 border border-[#C9A3A0]/20 rounded-lg p-6 text-center">
+                      <Lock className="w-12 h-12 text-[#7A4F4C] mx-auto mb-3" />
+                      <p className="text-[#4A3B3A] font-semibold mb-2">Continue Reading</p>
+                      <p className="text-[#6E5F5A] text-sm mb-4">This story continues for members.</p>
+                      <Button onClick={(e) => { e.stopPropagation(); setShowExcerptModal(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7]"><Crown className="w-4 h-4 mr-2" />Unlock Full Story</Button>
                     </div>
                   </div>
                 </>
@@ -800,13 +800,13 @@ export default function VipClub() {
           <div className="text-center mt-12">
             <Button 
               size="lg"
-              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl hover:shadow-pink-500/30 transition-all duration-300"
+              className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl hover:shadow-pink-500/30 transition-all duration-300"
               onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <Crown className="w-5 h-5 mr-2" />
               Unlock All Exclusive Content
             </Button>
-            <p className="text-gray-400 text-sm mt-4">
+            <p className="text-[#6E5F5A] text-sm mt-4">
               Join the VIP list for exclusive steamy content
             </p>
           </div>
@@ -815,13 +815,13 @@ export default function VipClub() {
 
       {/* SMS Opt-in Modal */}
       <Dialog open={showSmsModal} onOpenChange={setShowSmsModal}>
-        <DialogContent className="bg-gray-900 border-gray-800 text-white max-w-md">
+        <DialogContent className="bg-[#FAF7F7] border-[#E5D6D3] text-[#4A3B3A] max-w-md">
           <DialogHeader>
             <DialogTitle className="text-2xl font-serif flex items-center gap-2">
-              <MessageSquare className="w-6 h-6 text-pink-400" />
+              <MessageSquare className="w-6 h-6 text-[#7A4F4C]" />
               Stay Connected
             </DialogTitle>
-            <DialogDescription className="text-gray-400">
+            <DialogDescription className="text-[#6E5F5A]">
               Get exclusive SMS alerts for new story releases and VIP perks!
             </DialogDescription>
           </DialogHeader>
@@ -832,13 +832,13 @@ export default function VipClub() {
                 id="sms-optin" 
                 checked={smsOptIn}
                 onCheckedChange={(checked) => setSmsOptIn(checked as boolean)}
-                className="mt-1 border-pink-500 data-[state=checked]:bg-pink-500"
+                className="mt-1 border-[#C9A3A0] data-[state=checked]:bg-[#7A4F4C]"
               />
               <div>
-                <Label htmlFor="sms-optin" className="text-white font-medium cursor-pointer">
+                <Label htmlFor="sms-optin" className="text-[#4A3B3A] font-medium cursor-pointer">
                   Yes! Send me SMS notifications
                 </Label>
-                <p className="text-gray-400 text-sm mt-1">
+                <p className="text-[#6E5F5A] text-sm mt-1">
                   Get instant alerts when new steamy stories drop and exclusive VIP offers.
                 </p>
               </div>
@@ -846,30 +846,30 @@ export default function VipClub() {
             
             {smsOptIn && (
               <div className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
-                <Label htmlFor="phone" className="text-gray-300">Phone Number</Label>
+                <Label htmlFor="phone" className="text-[#6E5F5A]">Phone Number</Label>
                 <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6E5F5A]" />
                   <Input
                     id="phone"
                     type="tel"
                     placeholder="+1 (555) 123-4567"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="pl-10 bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-pink-500"
+                    className="pl-10 bg-[#F0E6E5] border-[#E5D6D3] text-[#4A3B3A] placeholder:text-[#6E5F5A] focus:border-[#C9A3A0]"
                   />
                 </div>
-                <p className="text-gray-500 text-xs">
+                <p className="text-[#6E5F5A] text-xs">
                   Standard message rates may apply. You can opt out anytime.
                 </p>
               </div>
             )}
             
-            <div className="bg-pink-950/30 border border-pink-500/20 rounded-lg p-4">
-              <div className="flex items-center gap-2 text-pink-300 mb-2">
+            <div className="bg-[#7A4F4C]/30 border border-[#C9A3A0]/20 rounded-lg p-4">
+              <div className="flex items-center gap-2 text-[#7A4F4C] mb-2">
                 <Sparkles className="w-4 h-4" />
                 <span className="font-medium">VIP SMS Benefits</span>
               </div>
-              <ul className="text-gray-400 text-sm space-y-1">
+              <ul className="text-[#6E5F5A] text-sm space-y-1">
                 <li>• First to know about new story releases</li>
                 <li>• Exclusive flash sales & promo codes</li>
                 <li>• Behind-the-scenes author updates</li>
@@ -888,14 +888,14 @@ export default function VipClub() {
                   subscribeMutation.mutate({ tierSlug: pendingTierSlug, mode: "embedded" });
                 }
               }}
-              className="flex-1 border-gray-700 text-gray-300 hover:bg-gray-800"
+              className="flex-1 border-[#E5D6D3] text-[#6E5F5A] hover:bg-[#F0E6E5]"
             >
               Skip for Now
             </Button>
             <Button
               onClick={proceedToCheckout}
               disabled={smsOptIn && !phoneNumber}
-              className="flex-1 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"
+              className="flex-1 bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7]"
             >
               Continue to Checkout
             </Button>
@@ -904,24 +904,24 @@ export default function VipClub() {
       </Dialog>
 
       {/* What's Inside Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-950 to-gray-900">       <div className="container">
+      <section className="py-20 bg-gradient-to-b from-[#FAF7F7] to-[#FAF7F7]">       <div className="container">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#4A3B3A] mb-6">
               Ready to Unlock Your Fantasies?
             </h2>
-            <p className="text-xl text-gray-300 mb-8">
+            <p className="text-xl text-[#6E5F5A] mb-8">
               Join the Spicy Stories Club today and get instant access to our library of 
               exclusive steamy audio content.
             </p>
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-lg px-8 py-6"
+              className="bg-gradient-to-r from-[#C9A3A0] to-[#C9A3A0] hover:from-[#C9A3A0] hover:to-[#C9A3A0] text-lg px-8 py-6"
               onClick={() => handleSubscribe('bronze')}
             >
               <Crown className="w-5 h-5 mr-2" />
               Start Your VIP Membership
             </Button>
-            <p className="text-gray-500 mt-4 text-sm">
+            <p className="text-[#6E5F5A] mt-4 text-sm">
               Cancel anytime. No commitment required.
             </p>
           </div>

@@ -49,7 +49,7 @@ export default function Press() {
 
       <section
         className="px-6 md:px-16 py-[100px]"
-        style={{ background: "#0B1226", borderTop: `1px solid ${GOLD_SOFT}` }}
+        style={{ background: "#F0E6E5", borderTop: `1px solid ${GOLD_SOFT}` }}
       >
         <div className="max-w-[820px] mx-auto">
           <SectionHeading kicker="Bio · Short" title="Short version" />
@@ -85,7 +85,7 @@ export default function Press() {
 
       <section
         className="px-6 md:px-16 py-[100px]"
-        style={{ background: "#0B1226", borderTop: `1px solid ${GOLD_SOFT}` }}
+        style={{ background: "#F0E6E5", borderTop: `1px solid ${GOLD_SOFT}` }}
       >
         <div className="max-w-[820px] mx-auto">
           <SectionHeading kicker="Contact" title="One inbox" />

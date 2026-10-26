@@ -80,8 +80,8 @@ export default function AuthCallback() {
       <div
         className="max-w-[420px] w-full p-10 text-center"
         style={{
-          background: 'rgba(0,0,0,0.35)',
-          border: '1px solid rgba(201,166,70,0.25)',
+          background: 'rgba(74, 59, 58,0.35)',
+          border: '1px solid rgba(201, 163, 160,0.25)',
           borderRadius: 4,
         }}
       >
