@@ -11,6 +11,12 @@
       "maxDuration": 60
     }
   },
+  "crons": [
+    {
+      "path": "/api/cron/publish-scheduled",
+      "schedule": "0 13 * * *"
+    }
+  ],
   "redirects": [
     {
       "source": "/(.*)",

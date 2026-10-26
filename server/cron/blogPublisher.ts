@@ -2,7 +2,8 @@
  * Blog Auto-Publisher Cron Handler
  * 
  * Checks for draft blog posts with a scheduledPublishAt date that has passed
- * and automatically publishes them. Runs every hour via API endpoint.
+ * and automatically publishes them. Vercel Cron calls the route daily at
+ * 13:00 UTC. A post is published on the first run after scheduledPublishAt.
  */
 import { getDb } from "../db";
 import { blogPosts } from "../../drizzle/schema";

@@ -27,6 +27,16 @@ import { checkRateLimit, getClientKey, trackAiUsage } from "../ai-usage";
  * Build the configured Express app. Does NOT call listen — that's the caller's
  * job (local dev does it in index.ts; Vercel Functions wraps the app directly).
  */
+/**
+ * Vercel Cron sends `Authorization: Bearer $CRON_SECRET`.
+ * Missing or empty CRON_SECRET fails closed. Do not reuse JWT_SECRET.
+ */
+function cronAuthorized(authHeader: string | undefined): boolean {
+  const cronSecret = process.env.CRON_SECRET;
+  if (!cronSecret) return false;
+  return authHeader === `Bearer ${cronSecret}`;
+}
+
 export function createApp(): Express {
   const app = express();
 
@@ -61,9 +71,7 @@ export function createApp(): Express {
   app.get("/api/auth/callback", authCallback);
 
   app.post("/api/cron/daily-briefing", async (req, res) => {
-    const authHeader = req.headers.authorization;
-    const cronSecret = process.env.JWT_SECRET;
-    if (authHeader !== `Bearer ${cronSecret}`) {
+    if (!cronAuthorized(req.headers.authorization)) {
       return res.status(401).json({ error: "Unauthorized" });
     }
     try {
@@ -76,10 +84,15 @@ export function createApp(): Express {
     }
   });
 
-  app.post("/api/cron/publish-scheduled", async (req, res) => {
-    const authHeader = req.headers.authorization;
-    const cronSecret = process.env.JWT_SECRET;
-    if (authHeader !== `Bearer ${cronSecret}`) {
+  // Vercel Cron calls GET /api/cron/publish-scheduled daily at 13:00 UTC
+  // (vercel.json). Hobby allows one daily run, not an hourly schedule.
+  // Authorization is `Bearer $CRON_SECRET`. POST stays for the same header.
+  // An empty or missing CRON_SECRET is rejected. Do not set that secret here.
+  const publishScheduled = async (
+    req: express.Request,
+    res: express.Response,
+  ) => {
+    if (!cronAuthorized(req.headers.authorization)) {
       return res.status(401).json({ error: "Unauthorized" });
     }
     try {
@@ -90,7 +103,9 @@ export function createApp(): Express {
       console.error("[Cron] Blog publisher error:", error);
       res.status(500).json({ error: String(error) });
     }
-  });
+  };
+  app.get("/api/cron/publish-scheduled", publishScheduled);
+  app.post("/api/cron/publish-scheduled", publishScheduled);
 
   app.get("/sitemap.xml", async (_req, res) => {
     try {
@@ -230,7 +245,7 @@ export function createApp(): Express {
     }
 
     const clientKey = getClientKey(req);
-    if (!checkRateLimit(clientKey, "workflow")) {
+    if (!(await checkRateLimit(clientKey, "workflow"))) {
       trackAiUsage({
         feature: "workflow",
         model: "gemini-2.5-flash",

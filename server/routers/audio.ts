@@ -1,10 +1,13 @@
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
+import { checkRateLimit, trackAiUsage } from "../ai-usage";
 import { getDb } from "../db";
 import { 
   audioUsage, 
   generatedAudio, 
   vipMembers,
+  vipTiers,
   steamyStories 
 } from "../../drizzle/schema";
 import { eq, and, sql, gte, desc } from "drizzle-orm";
@@ -19,6 +22,52 @@ import {
   estimateMinutes,
   type SubscriptionTier,
 } from "../_core/audioService";
+
+const VIP_AUDIO_MESSAGE =
+  "Audio generation is for VIP members. Upgrade your membership to continue.";
+
+type AudioDb = NonNullable<Awaited<ReturnType<typeof getDb>>>;
+
+/** Map a tier slug or name onto the audio allowance. Unknown paid tiers use bronze. */
+export function tierFromLabel(label: string): SubscriptionTier {
+  const value = label.toLowerCase();
+  if (value.includes("gold")) return "gold";
+  if (value.includes("silver")) return "silver";
+  if (value.includes("bronze")) return "bronze";
+  return "bronze";
+}
+
+async function activeMembershipTier(db: AudioDb, userId: number): Promise<SubscriptionTier | null> {
+  const rows = await db
+    .select({ slug: vipTiers.slug, name: vipTiers.name })
+    .from(vipMembers)
+    .innerJoin(vipTiers, eq(vipMembers.tierId, vipTiers.id))
+    .where(and(eq(vipMembers.userId, userId), eq(vipMembers.status, "active")))
+    .limit(1);
+  const row = rows[0];
+  if (!row) return null;
+  return tierFromLabel(`${row.slug} ${row.name}`);
+}
+
+async function minutesUsedThisMonth(db: AudioDb, userId: number): Promise<number> {
+  const now = new Date();
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  const usageResult = await db
+    .select({
+      totalMinutes: sql<number>`COALESCE(SUM(${audioUsage.minutesUsed}), 0)`,
+    })
+    .from(audioUsage)
+    .where(and(eq(audioUsage.userId, userId), gte(audioUsage.createdAt, monthStart)));
+  return Number(usageResult[0]?.totalMinutes || 0);
+}
+
+function assertWithinMinutes(currentMinutes: number, estimatedMinutes: number, limit: number) {
+  if (currentMinutes + estimatedMinutes > limit) {
+    throw new Error(
+      `Audio limit exceeded. You have ${limit - currentMinutes} minutes remaining this month.`,
+    );
+  }
+}
 
 export const audioRouter = router({
   // ============================================
@@ -57,11 +106,26 @@ export const audioRouter = router({
   /**
    * Generate a voice preview sample
    */
-  previewVoice: publicProcedure
+  previewVoice: protectedProcedure
     .input(z.object({
-      voiceId: z.string(),
+      voiceId: z.enum(ALL_VOICES.map((voice) => voice.id) as [string, ...string[]]),
     }))
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
+      const clientKey = `user:${ctx.user.id}`;
+      if (!(await checkRateLimit(clientKey, "voice-preview"))) {
+        trackAiUsage({
+          feature: "voice-preview",
+          model: "elevenlabs",
+          inputChars: input.voiceId.length,
+          outputChars: 0,
+          status: "rate-limited",
+          key: clientKey,
+        });
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Too many voice previews. Please wait and try again.",
+        });
+      }
       const audioUrl = await generateVoicePreview(input.voiceId);
       return { audioUrl };
     }),
@@ -83,18 +147,7 @@ export const audioRouter = router({
     const now = new Date();
     const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
     
-    // Get user's membership tier
-    const membershipResult = await db
-      .select()
-      .from(vipMembers)
-      .where(and(
-        eq(vipMembers.userId, userId),
-        eq(vipMembers.status, "active")
-      ))
-      .limit(1);
-    
-    const membership = membershipResult[0];
-    const tierName = (membership ? "bronze" : "free") as SubscriptionTier;
+    const tierName = (await activeMembershipTier(db, userId)) ?? "free";
     const limits = TIER_LIMITS[tierName];
     
     // Get usage for current month
@@ -144,49 +197,20 @@ export const audioRouter = router({
       if (!db) throw new Error("Database not available");
       
       const userId = ctx.user.id;
-      
-      // Check usage limits
-      const now = new Date();
-      const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-      
-      // Get user's membership tier
-      const membershipResult = await db
-        .select()
-        .from(vipMembers)
-        .where(and(
-          eq(vipMembers.userId, userId),
-          eq(vipMembers.status, "active")
-        ))
-        .limit(1);
-      
-      const membership = membershipResult[0];
-      const tierName = (membership ? "bronze" : "free") as SubscriptionTier;
-      const limits = TIER_LIMITS[tierName];
-      
-      // Check if voice is premium and user has access
-      const voice = ALL_VOICES.find(v => v.id === input.voiceId);
-      if (voice?.isPremium && !limits.canUsePremiumVoices) {
-        throw new Error("Premium voices require Gold membership");
-      }
-      
-      // Get current usage
-      const usageResult = await db
-        .select({
-          totalMinutes: sql<number>`COALESCE(SUM(${audioUsage.minutesUsed}), 0)`,
-        })
-        .from(audioUsage)
-        .where(
-          and(
-            eq(audioUsage.userId, userId),
-            gte(audioUsage.createdAt, monthStart)
-          )
-        );
-      
-      const currentMinutes = Number(usageResult[0]?.totalMinutes || 0);
+      const isAdmin = ctx.user.role === "admin";
       const estimatedMinutes = estimateMinutes(input.text.length);
-      
-      if (currentMinutes + estimatedMinutes > limits.monthlyMinutes) {
-        throw new Error(`Audio limit exceeded. You have ${limits.monthlyMinutes - currentMinutes} minutes remaining this month.`);
+
+      if (!isAdmin) {
+        const tierName = await activeMembershipTier(db, userId);
+        if (!tierName) {
+          throw new TRPCError({ code: "FORBIDDEN", message: VIP_AUDIO_MESSAGE });
+        }
+        const limits = TIER_LIMITS[tierName];
+        const voice = ALL_VOICES.find(v => v.id === input.voiceId);
+        if (voice?.isPremium && !limits.canUsePremiumVoices) {
+          throw new Error("Premium voices require Gold membership");
+        }
+        assertWithinMinutes(await minutesUsedThisMonth(db, userId), estimatedMinutes, limits.monthlyMinutes);
       }
       
       // Generate audio
@@ -302,6 +326,18 @@ export const audioRouter = router({
       if (!story) {
         throw new Error("Story not found");
       }
+
+      // Until VIP launches, only admins and active members can spend ElevenLabs.
+      // Admins are not capped. Members use their tier's monthly minutes.
+      if (ctx.user.role !== "admin") {
+        const tierName = await activeMembershipTier(db, userId);
+        if (!tierName) {
+          throw new TRPCError({ code: "FORBIDDEN", message: VIP_AUDIO_MESSAGE });
+        }
+        const limits = TIER_LIMITS[tierName];
+        const estimatedMinutes = estimateMinutes(story.content.length);
+        assertWithinMinutes(await minutesUsedThisMonth(db, userId), estimatedMinutes, limits.monthlyMinutes);
+      }
       
       // Generate audio
       const result = await generateAudio({
@@ -346,18 +382,7 @@ export const audioRouter = router({
       
       const userId = ctx.user.id;
       
-      // Check membership for download access
-      const membershipResult = await db
-        .select()
-        .from(vipMembers)
-        .where(and(
-          eq(vipMembers.userId, userId),
-          eq(vipMembers.status, "active")
-        ))
-        .limit(1);
-      
-      const membership = membershipResult[0];
-      const tierName = (membership ? "bronze" : "free") as SubscriptionTier;
+      const tierName = (await activeMembershipTier(db, userId)) ?? "free";
       const limits = TIER_LIMITS[tierName];
       
       if (!limits.canDownload) {

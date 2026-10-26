@@ -19,6 +19,7 @@ import { aiUsageRouter } from "./routers/ai-usage";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
 import { detectBotSignup } from "./signupBotGuard";
+import { checkRateLimit, getClientKey } from "./ai-usage";
 import { sendEmail } from "./email-service";
 import { generateWelcomeEmail } from "./email-templates/welcome";
 import { generateEmailTemplate, sanitizeEmailContent } from "./emailTemplate";
@@ -125,7 +126,13 @@ export const appRouter = router({
           formSubmittedAt: z.number().optional(),
         })
       )
-      .mutation(async ({ input }) => {
+      .mutation(async ({ ctx, input }) => {
+        if (!(await checkRateLimit(getClientKey(ctx.req), "signup"))) {
+          throw new TRPCError({
+            code: "TOO_MANY_REQUESTS",
+            message: "Please wait a few minutes and try again.",
+          });
+        }
         // Silently drop suspected bot signups: no MailerLite call, no welcome
         // email, but the same success shape a real signup gets so bots can't
         // tell they were blocked.
@@ -780,7 +787,13 @@ export const appRouter = router({
           name: z.string().optional(),
         })
       )
-      .mutation(async ({ input }) => {
+      .mutation(async ({ ctx, input }) => {
+        if (!(await checkRateLimit(getClientKey(ctx.req), "signup"))) {
+          throw new TRPCError({
+            code: "TOO_MANY_REQUESTS",
+            message: "Please wait a few minutes and try again.",
+          });
+        }
         // Check if already a member
         const existing = await getReaderClubMemberByEmail(input.email);
         if (existing) {
@@ -911,7 +924,13 @@ export const appRouter = router({
           message: z.string().min(10, "Message must be at least 10 characters"),
         })
       )
-      .mutation(async ({ input }) => {
+      .mutation(async ({ ctx, input }) => {
+        if (!(await checkRateLimit(getClientKey(ctx.req), "signup"))) {
+          throw new TRPCError({
+            code: "TOO_MANY_REQUESTS",
+            message: "Please wait a few minutes and try again.",
+          });
+        }
         const { notifyOwner } = await import("./_core/notification");
         
         const emailContent = `

@@ -8,12 +8,14 @@ vi.mock("./_core/notification", () => ({
   notifyOwner: vi.fn(),
 }));
 
+let signupFixtureIp = 1;
 function createTestContext(): TrpcContext {
+  const ip = `203.0.116.${signupFixtureIp++}`;
   const ctx: TrpcContext = {
     user: null,
     req: {
       protocol: "https",
-      headers: {},
+      headers: { "x-vercel-forwarded-for": ip },
     } as TrpcContext["req"],
     res: {} as TrpcContext["res"],
   };

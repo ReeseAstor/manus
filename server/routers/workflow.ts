@@ -30,7 +30,7 @@ export const workflowRouter = router({
       requireAdmin(ctx.user.role);
 
       const clientKey = getClientKey(ctx.req);
-      if (!checkRateLimit(clientKey, "workflow")) {
+      if (!(await checkRateLimit(clientKey, "workflow"))) {
         trackAiUsage({
           feature: "workflow",
           model: "gemini-2.5-flash",

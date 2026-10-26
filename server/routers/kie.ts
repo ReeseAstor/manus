@@ -95,7 +95,7 @@ export const kieRouter = router({
       requireAdmin(ctx.user.role);
       try {
         const clientKey = getClientKey(ctx.req);
-        if (!checkRateLimit(clientKey, "image")) {
+        if (!(await checkRateLimit(clientKey, "image"))) {
           trackAiUsage({
             feature: "image",
             model: input.model,
@@ -261,7 +261,7 @@ export const kieRouter = router({
         }
         
         const clientKey = getClientKey(ctx.req);
-        if (!checkRateLimit(clientKey, "chat")) {
+        if (!(await checkRateLimit(clientKey, "chat"))) {
           trackAiUsage({
             feature: "chat",
             model: input.model,
