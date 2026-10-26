@@ -48,8 +48,8 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
           style={{
             color: INK,
             background: GOLD,
-            padding: "14px 22px",
-            letterSpacing: "0.08em",
+            padding: layout === "stack" ? "14px 12px" : "14px 22px",
+            letterSpacing: layout === "stack" ? "0.04em" : "0.08em",
             textTransform: "none",
           }}
         >
