@@ -32,32 +32,32 @@
     {
       "source": "/blog/ai-assisted-romance-writing-workflow",
       "destination": "/blog",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/blog/ai-assisted-romance-writing-workflow/",
       "destination": "/blog",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/blog/romance-author-writing-tools-setup",
       "destination": "/blog",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/blog/romance-author-writing-tools-setup/",
       "destination": "/blog",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/blog/quality-control-workflows-romance-authors",
       "destination": "/blog",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/blog/quality-control-workflows-romance-authors/",
       "destination": "/blog",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/ai-newsletter",
@@ -172,6 +172,46 @@
     {
       "source": "/promo/",
       "destination": "/free-book",
+      "permanent": false
+    },
+    {
+      "source": "/reader-club",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
+      "source": "/reader-club/",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
+      "source": "/vip-club",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
+      "source": "/vip-club/",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
+      "source": "/welcome-back",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
+      "source": "/welcome-back/",
+      "destination": "/newsletter",
+      "permanent": false
+    },
+    {
+      "source": "/romance-quiz",
+      "destination": "/books",
+      "permanent": false
+    },
+    {
+      "source": "/romance-quiz/",
+      "destination": "/books",
       "permanent": false
     }
   ],
