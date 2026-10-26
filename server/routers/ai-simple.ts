@@ -4,6 +4,7 @@ import { generateText } from '../_core/gemini';
 import { generateImage } from '../_core/imageGeneration';
 import { checkRateLimit, getClientKey, trackAiUsage } from '../ai-usage';
 import { TRPCError } from '@trpc/server';
+import { scoreCharacterQuiz } from '@shared/character-quiz';
 
 const CHATBOT_SYSTEM_INSTRUCTION = `You are a helpful assistant for Reese Astor's author website. You help readers learn about her Manhattan Money Kings romance series.
 
@@ -33,7 +34,7 @@ The Manhattan Money Kings is a steamy billionaire romance series set in Manhatta
    - Plot: Three years ago, Sophia walked away from Dominic. Now he's back and discovers the daughter she kept hidden. Set in Hudson Yards, Manhattan.
    - Trope: Second chance romance, secret baby, workplace romance
    - Price: $3.99 (Kindle), $19.99 (Print)
-   - Amazon: https://www.amazon.com/dp/B0DRZG5KKD
+   - Amazon: https://www.amazon.com/dp/B0G12LBZ24
 
 4. **The Billionaire's Forbidden Nanny: Forbidden and Forever** (Book 4 - FINAL BOOK)
    - Hero: Ethan Calloway (billionaire widower)
@@ -113,7 +114,7 @@ export const aiRouter = router({
     }),
 
   /**
-   * Character Match Quiz - Submit answers and get AI-generated result
+   * Character match quiz. Results are a fixed list, not a model call.
    */
   submitQuiz: publicProcedure
     .input(
@@ -139,33 +140,7 @@ export const aiRouter = router({
         });
       }
 
-      const quizPrompt = `Based on these quiz answers about romance preferences and personality traits, determine which Manhattan Money King the person would match with best and provide a detailed personality analysis.
-
-Quiz Answers: ${JSON.stringify(answers)}
-
-The three characters are:
-1. Michael Hastings (Book 1) - Demanding, brilliant CEO of Chen Technologies, workaholic who values excellence and competence, protective once he commits
-2. David Kim (Book 2) - Sharp, strategic Fortune 500 CEO, careful and calculating, sees through deception but believes in redemption
-3. Dominic Kane (Book 3) - Intense, powerful Kane Industries CEO, never gives up on what's his, second-chance romantic who fights for family
-
-Respond in JSON format:
-{
-  "character": "Michael Hastings" | "David Kim" | "Dominic Kane",
-  "matchPercentage": 85,
-  "personality": "A detailed 2-3 sentence personality analysis explaining why they match",
-  "bookRecommendation": "The Billionaire's Executive Assistant" | "The Billionaire's Fake Wife" | "The Billionaire's Baby Secret",
-  "bookLink": "https://www.amazon.com/dp/B0F2W8QL7S" | "https://www.amazon.com/dp/B0FCCBNF8X" | "https://www.amazon.com/dp/B0DRZG5KKD",
-  "reason": "Why this book is perfect for them"
-}`;
-
-      try {
-        const result = await generateText(quizPrompt);
-        const parsedResult = JSON.parse(result);
-        return parsedResult;
-      } catch (error) {
-        console.error('[Quiz] Error:', error);
-        throw new Error('Failed to generate quiz result. Please try again.');
-      }
+      return scoreCharacterQuiz(answers);
     }),
 
   /**

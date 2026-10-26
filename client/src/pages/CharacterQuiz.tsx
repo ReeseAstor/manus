@@ -1,54 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { EnhancedSEOHead } from '@/components/ui/enhanced-seo-head';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { Loader2, Heart, Sparkles } from 'lucide-react';
-import { trpc } from '@/lib/trpc';
-
-const questions = [
-  {
-    question: "What's your ideal date night?",
-    options: [
-      "Fancy dinner at a Michelin-star restaurant",
-      "Adventure like skydiving or rock climbing",
-      "Quiet night at home with wine and conversation",
-    ],
-  },
-  {
-    question: "What quality do you value most in a partner?",
-    options: [
-      "Ambition and success",
-      "Spontaneity and fun",
-      "Loyalty and depth",
-    ],
-  },
-  {
-    question: "How do you handle conflict?",
-    options: [
-      "Direct and decisive - address it immediately",
-      "Avoid it with humor and distraction",
-      "Take time to process, then discuss deeply",
-    ],
-  },
-  {
-    question: "What's your perfect vacation?",
-    options: [
-      "Luxury resort with spa and fine dining",
-      "Backpacking through Europe",
-      "Secluded cabin in the mountains",
-    ],
-  },
-  {
-    question: "What attracts you most?",
-    options: [
-      "Power and confidence",
-      "Charm and wit",
-      "Mystery and intensity",
-    ],
-  },
-];
+import { Heart, Sparkles } from 'lucide-react';
+import { QUIZ_QUESTIONS, scoreCharacterQuiz, type QuizMatch } from '@shared/character-quiz';
 
 export default function CharacterQuiz() {
   useEffect(() => {
@@ -58,13 +15,7 @@ export default function CharacterQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
-  const [result, setResult] = useState<any>(null);
-
-  const quizMutation = trpc.ai.submitQuiz.useMutation({
-    onSuccess: (data) => {
-      setResult(data);
-    },
-  });
+  const [result, setResult] = useState<QuizMatch | null>(null);
 
   const handleNext = () => {
     if (!selectedAnswer) return;
@@ -73,11 +24,10 @@ export default function CharacterQuiz() {
     setAnswers(newAnswers);
     setSelectedAnswer('');
 
-    if (currentQuestion < questions.length - 1) {
+    if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      // Submit quiz
-      quizMutation.mutate({ answers: newAnswers });
+      setResult(scoreCharacterQuiz(newAnswers));
     }
   };
 
@@ -143,22 +93,6 @@ export default function CharacterQuiz() {
     );
   }
 
-  if (quizMutation.isPending) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="w-full max-w-md">
-          <CardContent className="pt-6 text-center space-y-4">
-            <Loader2 className="w-12 h-12 animate-spin mx-auto text-primary" />
-            <p className="text-lg font-medium">Analyzing your answers...</p>
-            <p className="text-sm text-muted-foreground">
-              Finding your perfect Manhattan Money King match!
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen py-20 bg-gradient-to-b from-background to-primary/5">
       <EnhancedSEOHead
@@ -181,17 +115,17 @@ export default function CharacterQuiz() {
           <CardHeader>
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-muted-foreground">
-                Question {currentQuestion + 1} of {questions.length}
+                Question {currentQuestion + 1} of {QUIZ_QUESTIONS.length}
               </span>
               <span className="text-sm font-medium text-primary">
-                {Math.round(((currentQuestion + 1) / questions.length) * 100)}%
+                {Math.round(((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100)}%
               </span>
             </div>
             <div className="w-full bg-muted rounded-full h-2">
               <div
                 className="bg-primary h-2 rounded-full transition-all duration-300"
                 style={{
-                  width: `${((currentQuestion + 1) / questions.length) * 100}%`,
+                  width: `${((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100}%`,
                 }}
               />
             </div>
@@ -199,12 +133,12 @@ export default function CharacterQuiz() {
 
           <CardContent className="space-y-6">
             <CardTitle className="text-2xl font-playfair">
-              {questions[currentQuestion].question}
+              {QUIZ_QUESTIONS[currentQuestion].question}
             </CardTitle>
 
             <RadioGroup value={selectedAnswer} onValueChange={setSelectedAnswer}>
               <div className="space-y-3">
-                {questions[currentQuestion].options.map((option, index) => (
+                {QUIZ_QUESTIONS[currentQuestion].options.map((option, index) => (
                   <div
                     key={index}
                     className={`flex items-center space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer hover:border-primary/50 ${
@@ -232,7 +166,7 @@ export default function CharacterQuiz() {
               className="w-full bg-primary hover:bg-primary/90"
               size="lg"
             >
-              {currentQuestion < questions.length - 1 ? 'Next Question' : 'See My Match!'}
+              {currentQuestion < QUIZ_QUESTIONS.length - 1 ? 'Next Question' : 'See My Match!'}
             </Button>
           </CardContent>
         </Card>
