@@ -26,7 +26,8 @@ export default function Shop() {
       <EnhancedSEOHead
         title="Books | Reese Astor"
         description="Every Reese Astor title, with links to the stores that carry it."
-        canonical="https://www.reeseastor.com/shop"
+        canonical="https://reeseastor.com/shop"
+        noindex
         ogType="website"
         keywords={["Reese Astor books", "Manhattan Money Kings", "Hudson Dynasty"]}
         structuredData={[shopStructuredData]}
