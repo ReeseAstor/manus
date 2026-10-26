@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Check, Zap, Gift, Heart, Shield, ArrowRight } from "lucide-react";
+import { withAmazonTag } from "@/lib/amazon-tag";
 
 interface BuyDirectSectionProps {
   retailPrice: number; // in cents
@@ -118,7 +119,7 @@ export function BuyDirectSection({
         </a>
       ) : amazonUrl ? (
         <a
-          href={amazonUrl}
+          href={withAmazonTag(amazonUrl)}
           target="_blank"
           rel="noopener noreferrer"
           className="block"
