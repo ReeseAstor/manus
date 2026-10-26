@@ -82,7 +82,7 @@ export const BOOKS: Book[] = [
     position_label: "Prequel",
     tagline: "One night with Manhattan's most ruthless CEO.",
     blurb:
-      "Victoria walked into an upscale Manhattan bar the night she was passed over for partner. James Chen, " +
+      "Victoria walked into an upscale Manhattan bar the night she was passed over for partner. James, " +
       "the self-made tech billionaire every magazine wants to profile, was not supposed to be the one who " +
       "noticed. One night was the plan. He has other ideas.",
     pull_quote: "“You were supposed to be a stranger. You decided otherwise.”",
@@ -99,7 +99,7 @@ export const BOOKS: Book[] = [
     asin: "B0DSG7NKGP",
     price_usd: 0,
     tropes: ["one night stand", "billionaire romance", "Manhattan"],
-    characters: ["James Chen", "Victoria"],
+    characters: ["James", "Victoria"],
   },
   {
     slug: "the-billionaire-s-executive-assistant",
