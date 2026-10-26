@@ -276,7 +276,7 @@ export const BOOKS: Book[] = [
     tagline: "Power has a price. Love is the liability.",
     blurb:
       "Damien Vale is the corporate raider. Dr. Xia Zhao is the founder and scientist whose company he " +
-      "wants. A slow-burn, very steamy hostile-takeover romance in the Hudson Dynasty.",
+      "wants. A very steamy enemies-to-lovers hostile-takeover romance in the Hudson Dynasty.",
     pull_quote: null,
     cover_image: "/covers/hd-2-poison-pill.jpg",
     publication_date: null,
@@ -289,7 +289,7 @@ export const BOOKS: Book[] = [
     isbn: null,
     asin: null,
     price_usd: 4.99,
-    tropes: ["hostile takeover", "slow burn", "very steamy"],
+    tropes: ["hostile takeover", "enemies to lovers", "very steamy"],
     characters: ["Damien Vale", "Dr. Xia Zhao"],
   },
   {

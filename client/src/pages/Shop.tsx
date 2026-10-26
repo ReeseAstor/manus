@@ -85,7 +85,7 @@ export default function Shop() {
                     {book.price_usd === 0 && (
                       <p className="text-xl font-bold text-[#7A4F4C] mb-4">Free</p>
                     )}
-                    <RetailerButtons book={book} layout="grid" />
+                    <RetailerButtons book={book} layout="stack" />
                   </div>
                 </div>
               </motion.div>

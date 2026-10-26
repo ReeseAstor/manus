@@ -4,8 +4,11 @@ import { GOLD, INK, TEXT } from "./tokens";
 
 type Props = {
   book: Book;
-  /** Layout: "grid" wraps to multiple rows; "row" forces single row. */
-  layout?: "grid" | "row";
+  /**
+   * Layout: "grid" wraps to multiple rows; "row" forces single row;
+   * "stack" puts every button on its own full-width row (narrow cards).
+   */
+  layout?: "grid" | "row" | "stack";
   /** Hide the Kindle+ (formerly Kindle Unlimited) pitch even if applicable. */
   hideKindleUnlimited?: boolean;
 };
@@ -24,14 +27,16 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
   const showKU = book.kindle_unlimited && amazon && !hideKindleUnlimited;
 
   const baseBtn =
-    "font-inter inline-flex items-center justify-center gap-2 text-[11px] font-semibold uppercase no-underline transition-all duration-200 hover:-translate-y-px text-center";
+    `font-inter ${layout === "stack" ? "flex w-full" : "inline-flex"} items-center justify-center gap-2 text-[11px] font-semibold uppercase no-underline transition-all duration-200 hover:-translate-y-px text-center`;
 
   return (
     <div
       className={
-        layout === "grid"
-          ? "grid grid-cols-1 sm:grid-cols-2 gap-3"
-          : "flex flex-wrap gap-3"
+        layout === "stack"
+          ? "grid grid-cols-1 gap-3"
+          : layout === "grid"
+            ? "grid grid-cols-1 sm:grid-cols-2 gap-3"
+            : "flex flex-wrap gap-3"
       }
     >
       {showKU && amazon && (

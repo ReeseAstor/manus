@@ -165,13 +165,13 @@ describe("anonymous LLM and voice spend", () => {
 
   it("keeps the public quiz available and caps it per address", async () => {
     const caller = appRouter.createCaller(ctxFor(null, "203.0.113.20"));
-    const result = await caller.ai.submitQuiz({ answers: ["slow burn"] });
+    const result = await caller.ai.submitQuiz({ answers: ["a quiet night in"] });
     expect(result.character).toBe("Michael Hastings");
 
     for (let i = 0; i < 5; i++) {
-      await caller.ai.submitQuiz({ answers: ["slow burn"] });
+      await caller.ai.submitQuiz({ answers: ["a quiet night in"] });
     }
-    await expect(caller.ai.submitQuiz({ answers: ["slow burn"] })).rejects.toMatchObject({
+    await expect(caller.ai.submitQuiz({ answers: ["a quiet night in"] })).rejects.toMatchObject({
       code: "TOO_MANY_REQUESTS",
     });
   });
