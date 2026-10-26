@@ -63,6 +63,9 @@ const clip = (s, n) => (s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s);
 const template = fs.readFileSync(templatePath, "utf8");
 // Keep an untouched copy of the SPA shell for every non-prerendered route.
 fs.writeFileSync(path.join(publicDir, "app-shell.html"), template);
+// Vercel serves 404.html with a real 404 status for any path no route matches;
+// the SPA shell then renders the Not Found page.
+fs.writeFileSync(path.join(publicDir, "404.html"), template);
 
 const NAV = `<nav aria-label="Site"><a href="/">Reese Astor</a> · <a href="/books">Books</a> · <a href="/about">About</a> · <a href="/blog">Blog</a> · <a href="/newsletter">Newsletter</a> · <a href="/free-book">Free book</a></nav>`;
 

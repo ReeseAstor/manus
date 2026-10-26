@@ -60,6 +60,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/dark-romance-books-beginners-guide",
+      "destination": "/blog",
+      "statusCode": 301
+    },
+    {
       "source": "/ai-newsletter",
       "destination": "/newsletter",
       "permanent": true
@@ -226,7 +231,143 @@
       "destination": "/api"
     },
     {
-      "source": "/(.*)",
+      "source": "/about",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/auth/callback",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/auth/login",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/blog",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/books",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/contact",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/favorites",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/free-book",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/my-purchases",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/newsletter",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/newsletter-archive",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/newsletter-archive/:id",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/permission",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/press",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/profile",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/purchase-success",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/quiz",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/reader-club",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/reader-club/:slug",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/romance-quiz",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/shop",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/sms",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/stay-subscribed",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/terms",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/vip-audio",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/vip-audio-library",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/vip-club",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/vip-club/dashboard",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/vip-club/welcome",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/welcome-back",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/why-buy-direct",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/admin",
+      "destination": "/app-shell"
+    },
+    {
+      "source": "/admin/:path*",
       "destination": "/app-shell"
     }
   ]
