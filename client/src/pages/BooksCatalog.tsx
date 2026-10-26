@@ -17,11 +17,7 @@ import {
 } from "@/components/author-kit";
 import { BOOKS, getBooksInLane, LANE_META, type Book, type Lane } from "@/data/books";
 
-const LANE_ORDER: Lane[] = [
-  "manhattan_money_kings",
-  "hudson_dynasty",
-  "intimate_psychological_narratives",
-];
+const LANE_ORDER: Lane[] = ["manhattan_money_kings", "hudson_dynasty"];
 
 export default function BooksCatalog() {
 

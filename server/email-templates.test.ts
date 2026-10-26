@@ -11,7 +11,7 @@ describe("Post-Purchase Email Templates", () => {
     expect(html).toContain("Character relationship map");
     expect(html).toContain("Spotify playlist");
     expect(html).toContain("Reese Astor");
-    expect(html).toContain("USA Today Bestselling Author");
+    expect(html).toContain("Romance Author");
     expect(html).toContain("{$unsubscribe}");
   });
 

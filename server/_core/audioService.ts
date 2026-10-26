@@ -115,7 +115,7 @@ export const CHARACTER_VOICE_MAPPINGS: CharacterVoiceMapping[] = [
   { characterName: "Michael Hastings", bookTitle: "The Billionaire's Executive Assistant", defaultVoiceId: "drew", premiumVoiceId: "josh" },
   
   // Book 2: The Billionaire's Fake Wife
-  { characterName: "Elena Kim", bookTitle: "The Billionaire's Fake Wife", defaultVoiceId: "bella", premiumVoiceId: "elli" },
+  { characterName: "Elena Volkov", bookTitle: "The Billionaire's Fake Wife", defaultVoiceId: "bella", premiumVoiceId: "elli" },
   { characterName: "David Kim", bookTitle: "The Billionaire's Fake Wife", defaultVoiceId: "antoni", premiumVoiceId: "clyde" },
   
   // Book 3: The Billionaire's Baby Secret

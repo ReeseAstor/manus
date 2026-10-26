@@ -9,8 +9,8 @@ export interface WelcomeEmailData {
   subscriberName?: string;
 }
 
-const PREQUEL_BOOKFUNNEL_URL = "https://swiy.co/05";
-const PREQUEL_AMAZON_URL = "https://swiy.co/3rd";
+const PREQUEL_BOOKFUNNEL_URL = "https://dl.bookfunnel.com/kw1yge3479";
+const PREQUEL_AMAZON_URL = "https://www.amazon.com/dp/B0D82GWFD9";
 
 export function generateWelcomeEmail(data: WelcomeEmailData): string {
   const greeting = data.subscriberName
@@ -53,7 +53,7 @@ export function generateWelcomeEmail(data: WelcomeEmailData): string {
                 Reese Astor
               </h1>
               <p style="margin: 10px 0 0; color: rgba(229, 229, 229, 0.6); font-size: 14px; letter-spacing: 1px;">
-                USA TODAY BESTSELLING AUTHOR
+                ROMANCE AUTHOR
               </p>
             </td>
           </tr>

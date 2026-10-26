@@ -123,6 +123,26 @@
       "source": "/character-quiz",
       "destination": "/quiz",
       "permanent": true
+    },
+    {
+      "source": "/why-buy-direct",
+      "destination": "/books",
+      "permanent": true
+    },
+    {
+      "source": "/why-buy-direct/",
+      "destination": "/books",
+      "permanent": true
+    },
+    {
+      "source": "/permission",
+      "destination": "/books",
+      "permanent": true
+    },
+    {
+      "source": "/permission/",
+      "destination": "/books",
+      "permanent": true
     }
   ],
   "headers": [

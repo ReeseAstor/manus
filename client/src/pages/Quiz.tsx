@@ -101,17 +101,17 @@ interface TropeResult {
   icon: string;
 }
 
-const tropeResults: Record<string, TropeResult> = {
+export const tropeResults: Record<string, TropeResult> = {
   enemies: {
     trope: "enemies",
     title: "Enemies-to-Lovers",
     subtitle: "You thrive on tension",
     description:
       "You're drawn to the electric spark between two people who can't stand each other — until they can't resist each other. The banter, the tension, the moment when hate melts into something far more dangerous... that's your sweet spot. You believe the best love stories start with a fight.",
-    bookTitle: "The Billionaire's Rival",
-    bookSubtitle: "Manhattan Money Kings Book 2",
-    bookLink: "https://swiy.co/4rd",
-    bookCover: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/oaQdLJMJEZhBnDjA.jpg",
+    bookTitle: "Hostile Tender",
+    bookSubtitle: "Hudson Dynasty Book 1",
+    bookLink: "https://www.amazon.com/dp/B0H1F9PV97",
+    bookCover: "https://m.media-amazon.com/images/I/81iGQzEnacL._SL1500_.jpg",
     color: "#e74c3c",
     icon: "⚔️",
   },
@@ -123,8 +123,8 @@ const tropeResults: Record<string, TropeResult> = {
       "You're captivated by love that shouldn't exist but burns too bright to deny. Whether it's crossing professional boundaries, defying family expectations, or breaking every rule in the book — you believe the most passionate love is the kind that comes with consequences. The higher the stakes, the deeper you fall.",
     bookTitle: "The Billionaire's Forbidden Nanny",
     bookSubtitle: "Manhattan Money Kings Book 4",
-    bookLink: "https://swiy.co/4rd",
-    bookCover: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/wyOruOlpqOcFfhnS.jpg",
+    bookLink: "https://www.amazon.com/dp/B0GDZ4T164",
+    bookCover: "/author-kit/mmk-4-forbidden-nanny.jpg",
     color: "#9b59b6",
     icon: "🚫",
   },
@@ -136,8 +136,8 @@ const tropeResults: Record<string, TropeResult> = {
       "You believe in fate — in the loves that come back around stronger, and in the secrets that change everything. There's something irresistible about unfinished business, about two people who were torn apart finding their way back to each other. You know that sometimes the best love stories have a plot twist.",
     bookTitle: "The Billionaire's Baby Secret",
     bookSubtitle: "Manhattan Money Kings Book 3",
-    bookLink: "https://swiy.co/4rd",
-    bookCover: "/book3-cover.jpg",
+    bookLink: "https://www.amazon.com/dp/B0G12LBZ24",
+    bookCover: "/author-kit/mmk-3-baby-secret.jpg",
     color: "#e67e22",
     icon: "✨",
   },
@@ -147,10 +147,10 @@ const tropeResults: Record<string, TropeResult> = {
     subtitle: "Power is the ultimate aphrodisiac",
     description:
       "You're drawn to the magnetic pull of power, ambition, and the moment when control finally slips. There's something intoxicating about a love that starts in the boardroom — where every glance across the conference table is loaded with meaning, and the line between professional and personal becomes impossibly blurred.",
-    bookTitle: "The First Acquisition",
+    bookTitle: "The Billionaire's Executive Assistant",
     bookSubtitle: "Manhattan Money Kings Book 1",
-    bookLink: "https://swiy.co/4rd",
-    bookCover: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/nkhgPTPhVEhCBAIZ.jpg",
+    bookLink: "https://www.amazon.com/dp/B0F2W8QL7S",
+    bookCover: "/author-kit/mmk-1-executive-assistant.jpg",
     color: "#d4af37",
     icon: "👑",
   },

@@ -1,12 +1,8 @@
 import { motion } from "framer-motion";
 import { 
   Gift, 
-  Percent, 
-  Clock, 
-  BookOpen, 
   Mail, 
   Users, 
-  Star,
   Sparkles,
   Check
 } from "lucide-react";
@@ -20,37 +16,15 @@ interface Benefit {
 
 const benefits: Benefit[] = [
   {
-    icon: Percent,
-    title: "40% Off All Books",
-    description: "Exclusive member pricing on every book in the Manhattan Money Kings series and future releases.",
-    highlight: "SAVE 40%",
-  },
-  {
-    icon: Clock,
-    title: "Early Access",
-    description: "Read new releases 10-14 days before they hit Amazon. Be the first to discover what happens next!",
-    highlight: "2 WEEKS EARLY",
-  },
-  {
     icon: Gift,
     title: "Free Book",
-    description: "Get 'The First Acquisition' absolutely free when you join. Start the Hudson Dynasty series from the beginning!",
+    description: "Get The First Acquisition free when you join. It is the Hudson Dynasty prequel.",
     highlight: "FREE BOOK",
   },
   {
-    icon: BookOpen,
-    title: "Bonus Chapters",
-    description: "Exclusive scenes and extended epilogues not available anywhere else. See your favorite characters' stories continue.",
-  },
-  {
-    icon: Star,
-    title: "Character Interviews",
-    description: "Go behind the scenes with exclusive Q&A sessions with your favorite Manhattan Money Kings characters.",
-  },
-  {
     icon: Mail,
-    title: "Author Updates",
-    description: "Monthly newsletter with writing updates, sneak peeks, and exclusive giveaways for members only.",
+    title: "New-release news",
+    description: "Notes from Reese Astor when a new book is out.",
   },
 ];
 
@@ -73,8 +47,7 @@ export function MemberBenefits() {
             Member Benefits
           </h2>
           <p className="text-[#e5e5e5]/70 text-lg max-w-2xl mx-auto">
-            Join thousands of romance readers who enjoy exclusive perks, early access, 
-            and special member-only content.
+            New-release news from Reese Astor, and a free copy of The First Acquisition.
           </p>
         </motion.div>
 
@@ -127,11 +100,7 @@ export function MemberBenefits() {
               </h3>
               <ul className="space-y-4">
                 {[
-                  "Pay full retail price",
-                  "Wait for Amazon release",
-                  "Standard book content only",
-                  "No bonus chapters",
-                  "No early access",
+                  "Retailer editions",
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-[#e5e5e5]/50">
                     <div className="w-5 h-5 rounded-full border border-[#e5e5e5]/30 flex items-center justify-center">
@@ -155,10 +124,6 @@ export function MemberBenefits() {
               </h3>
               <ul className="space-y-4">
                 {[
-                  "40% off all books",
-                  "10-14 days early access",
-                  "Exclusive bonus chapters",
-                  "Character interviews",
                   "Free copy of The First Acquisition",
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-[#e5e5e5]">
@@ -183,7 +148,7 @@ export function MemberBenefitsBadge() {
     <div className="inline-flex items-center gap-2 bg-[#d4af37]/10 border border-[#d4af37]/30 rounded-lg px-3 py-2">
       <Users className="w-4 h-4 text-[#d4af37]" />
       <span className="text-[#e5e5e5] text-sm">
-        <span className="text-[#d4af37] font-semibold">Reader's Club:</span> 40% off + early access
+        <span className="text-[#d4af37] font-semibold">Reader's Club:</span> new-release news
       </span>
     </div>
   );

@@ -5,8 +5,7 @@
  * each /books/[slug] page, and structured data are generated from this file.
  * No new pages or nav edits required for new titles.
  *
- * Lanes are intentionally separated. Cards never cross lanes in any rail —
- * romance and recovery have different reader need-states.
+ * Lanes are intentionally separated. Cards never cross lanes in any rail.
  */
 
 export type Lane = "manhattan_money_kings" | "hudson_dynasty" | "intimate_psychological_narratives";
@@ -119,7 +118,7 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/b01",
+      amazon_kindle: "https://www.amazon.com/dp/B0F2W8QL7S",
     },
     audiobook_available: true,
     isbn: null,
@@ -146,7 +145,7 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/2rd",
+      amazon_kindle: "https://www.amazon.com/dp/B0FCCBNF8X",
     },
     audiobook_available: true,
     isbn: null,
@@ -173,7 +172,7 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/3rd",
+      amazon_kindle: "https://www.amazon.com/dp/B0G12LBZ24",
     },
     audiobook_available: true,
     isbn: null,
@@ -200,7 +199,7 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/4rd",
+      amazon_kindle: "https://www.amazon.com/dp/B0GDZ4T164",
     },
     audiobook_available: true,
     isbn: null,
@@ -256,7 +255,7 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/HD1",
+      amazon_kindle: "https://www.amazon.com/dp/B0H1F9PV97",
       audible: null,
     },
     audiobook_available: false,
@@ -282,7 +281,7 @@ export const BOOKS: Book[] = [
     publication_date: null,
     kindle_unlimited: true,
     retailers: {
-      amazon_kindle: "https://swiy.co/HD2",
+      amazon_kindle: "https://www.amazon.com/dp/B0H53BP5S1",
       audible: null,
     },
     audiobook_available: false,
@@ -319,40 +318,38 @@ export const BOOKS: Book[] = [
     tropes: ["class divide", "dual POV", "high heat", "HEA"],
     characters: ["Kai Hsu", "Miri Doyle-Levine"],
   },
-
-  // ─── Intimate Psychological Narratives ────────────────────────────────
   {
-    slug: "the-need-for-permission",
-    title: "The Need for Permission",
-    lane: "intimate_psychological_narratives",
-    series_position: 1,
-    format: "audiobook",
-    position_label: "On the Quiet Recovery of Self-Trust",
-    tagline: "A ten-chapter audiobook on rebuilding self-trust, in your own voice and your own hours.",
+    slug: "golden-parachute",
+    title: "Golden Parachute",
+    lane: "hudson_dynasty",
+    series_position: 3,
+    format: "ebook",
+    position_label: "Book 3",
+    tagline:
+      "He can restructure a billion dollars of bad debt. He cannot buy his way around the one woman who refuses to be managed.",
     blurb:
-      "Sixty quiet minutes for the late hours. Across ten chapters, The Need for Permission examines what " +
-      "it means to live waiting for someone else to say yes — and what changes the moment you stop. " +
-      "Made for listening alone, in the dark, when the house is finally still.",
-    pull_quote:
-      "“You do not need anyone's permission to be the person you already are. You only need to stop waiting for it.”",
-    cover_image: "/covers/permission-cover.jpg",
-    cover_image_square: "/covers/permission-square-1200.jpg",
+      "Miri Doyle-Levine has spent eight years keeping other people on their feet. A home health aide fighting " +
+      "her way into nursing school, she has no time for a man who treats every problem like a number he can make " +
+      "disappear. Kai Hsu built his life the same way he handles distressed credit: control the risk, close the " +
+      "exits, never need anything. Then Miri sees through him in one glance. The chemistry is immediate. The terms " +
+      "are not. She refuses his money. He keeps trying to turn care into logistics. And when the body Kai has " +
+      "ignored for years finally forces him to stop, both of them have to decide what love looks like when rescue " +
+      "is off the table. Miri will not become his cure. Kai will have to become a man who can stay. Golden " +
+      "Parachute is a high-heat contemporary romance about class difference, emotional recovery, boundaries, and " +
+      "choosing love without surrendering yourself. It can be read as a standalone and ends with a complete " +
+      "happily ever after. Content note: explicit consensual sexual content, compulsive sexual behavior recovery, " +
+      "and a serious medical emergency.",
+    pull_quote: null,
+    cover_image: "https://m.media-amazon.com/images/P/B0HDKNP9F6.01._SCLZZZZZZZ_SX500_.jpg",
     publication_date: null,
-    kindle_unlimited: false,
+    kindle_unlimited: true,
     retailers: {
-      // Wired via env at runtime — see RetailerLink in components/permission.
-      gumroad: null,
-      audible: null,
-      apple_books: null,
-      spotify: null,
-      elevenreader: null,
-      google_play: null,
-      bookfunnel: null,
+      amazon_kindle: "https://www.amazon.com/dp/B0HDKNP9F6",
     },
-    audiobook_available: true,
+    audiobook_available: false,
     isbn: null,
-    asin: null,
-    price_usd: 4.99,
+    asin: "B0HDKNP9F6",
+    price_usd: null,
   },
 ];
 
