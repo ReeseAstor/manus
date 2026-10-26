@@ -27,7 +27,7 @@ export default function Newsletter() {
 
   // ─── Main Page ──────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a] relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7] relative overflow-hidden">
       <EnhancedSEOHead
         title="Join Reese Astor's Newsletter | Free Book & New Release Alerts"
         description="Subscribe to Reese Astor's newsletter and get The First Acquisition free. Receive bonus scenes, early cover reveals, ARC invitations, and new release alerts."
@@ -36,8 +36,8 @@ export default function Newsletter() {
       />
 
       {/* Ambient lighting effects */}
-      <GlowOrb color="rgba(212,175,55,0.15)" size={520} className="top-[-80px] left-[10%]" />
-      <GlowOrb color="rgba(110,31,46,0.12)" size={360} className="top-[180px] right-[-60px]" />
+      <GlowOrb color="rgba(201, 163, 160,0.15)" size={520} className="top-[-80px] left-[10%]" />
+      <GlowOrb color="rgba(201, 163, 160,0.12)" size={360} className="top-[180px] right-[-60px]" />
 
       {/* ─── Hero Section ──────────────────────────────────────────────── */}
       <section className="relative z-10 pt-12 md:pt-20 pb-8">
@@ -46,37 +46,37 @@ export default function Newsletter() {
             {/* Left: Copy */}
             <Reveal direction="left" duration={0.6}>
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-4 py-2 rounded-full text-sm font-semibold font-['Montserrat'] mb-6">
+              <div className="inline-flex items-center gap-2 bg-[#C9A3A0]/10 border border-[#B59A6A]/30 text-[#7A4F4C] px-4 py-2 rounded-full text-sm font-semibold font-['Cormorant_Garamond'] mb-6">
                 <Mail className="w-4 h-4" />
                 Join the Reese Astor Newsletter
               </div>
 
-              <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.1]">
+              <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl lg:text-6xl font-bold text-[#4A3B3A] mb-6 leading-[1.1]">
                 Get a Free Book
-                <span className="block text-[#d4af37] italic mt-2">
+                <span className="block text-[#7A4F4C] italic mt-2">
                   & Never Miss a Release
                 </span>
               </h1>
 
-              <p className="text-lg text-gray-300 mb-8 font-['Montserrat'] leading-relaxed max-w-lg">
+              <p className="text-lg text-[#6E5F5A] mb-8 font-['Cormorant_Garamond'] leading-relaxed max-w-lg">
                 Join the Hudson Dynasty inner circle. Get your free copy of 
-                <em className="text-[#d4af37]"> The First Acquisition</em>, 
+                <em className="text-[#7A4F4C]"> The First Acquisition</em>, 
                 plus new release alerts, bonus scenes, and early cover reveals delivered 
                 straight to your inbox.
               </p>
 
               {/* Trust indicators */}
-              <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400 font-['Montserrat']">
+              <div className="flex flex-wrap items-center gap-6 text-sm text-[#6E5F5A] font-['Cormorant_Garamond']">
                 <span className="flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-[#d4af37]/60" />
+                  <Shield className="w-4 h-4 text-[#7A4F4C]/60" />
                   No spam, ever
                 </span>
                 <span className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-[#d4af37]/60" />
+                  <CheckCircle className="w-4 h-4 text-[#7A4F4C]/60" />
                   Unsubscribe anytime
                 </span>
                 <span className="flex items-center gap-2">
-                  <Gift className="w-4 h-4 text-[#d4af37]/60" />
+                  <Gift className="w-4 h-4 text-[#7A4F4C]/60" />
                   Instant free book
                 </span>
               </div>
@@ -84,33 +84,33 @@ export default function Newsletter() {
 
             {/* Right: Book Cover + Form Card */}
             <Reveal direction="right" delay={0.2} duration={0.6}>
-              <GlassCard className="border-[#d4af37]/20 p-6 md:p-8">
+              <GlassCard className="border-[#B59A6A]/20 p-6 md:p-8">
                 {/* Gold corner accent */}
                 <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden rounded-tr-2xl">
-                  <div className="absolute top-0 right-0 w-[140%] h-[2px] bg-gradient-to-l from-[#d4af37] to-transparent origin-top-right rotate-[-45deg] translate-y-[14px] translate-x-[14px]" />
+                  <div className="absolute top-0 right-0 w-[140%] h-[2px] bg-gradient-to-l from-[#C9A3A0] to-transparent origin-top-right rotate-[-45deg] translate-y-[14px] translate-x-[14px]" />
                 </div>
 
                 {/* Book Preview */}
-                <div className="flex items-center gap-4 mb-6 pb-6 border-b border-white/10">
+                <div className="flex items-center gap-4 mb-6 pb-6 border-b border-[#4A3B3A]/10">
                   <div className="relative flex-shrink-0">
-                    <div className="absolute -inset-1 bg-gradient-to-br from-[#d4af37]/40 to-transparent rounded-lg blur-sm" />
+                    <div className="absolute -inset-1 bg-gradient-to-br from-[#C9A3A0]/40 to-transparent rounded-lg blur-sm" />
                     <img 
                       src="/prequel-cover.jpg" 
                       alt="The First Acquisition" 
                       className="relative w-20 h-28 object-cover rounded-lg shadow-xl"
                     />
-                    <div className="absolute -top-2 -right-2 bg-[#d4af37] text-[#0a0e1a] text-[10px] font-bold px-2 py-0.5 rounded-full font-['Montserrat']">
+                    <div className="absolute -top-2 -right-2 bg-[#4A3B3A] text-[#FAF7F7] text-[10px] font-bold px-2 py-0.5 rounded-full font-['Cormorant_Garamond']">
                       FREE
                     </div>
                   </div>
                   <div>
-                    <p className="text-[#d4af37] text-xs font-semibold font-['Montserrat'] uppercase tracking-wider mb-1">
+                    <p className="text-[#7A4F4C] text-xs font-semibold font-['Cormorant_Garamond'] uppercase tracking-wider mb-1">
                       Your Free Gift
                     </p>
-                    <h3 className="font-['Cormorant_Garamond'] text-lg font-bold text-white leading-tight">
+                    <h3 className="font-['Cormorant_Garamond'] text-lg font-bold text-[#4A3B3A] leading-tight">
                       The First Acquisition
                     </h3>
-                    <p className="text-gray-400 text-xs font-['Montserrat'] mt-1">
+                    <p className="text-[#6E5F5A] text-xs font-['Cormorant_Garamond'] mt-1">
                       A Manhattan Billionaire Romance (Hudson Dynasty)
                     </p>
                   </div>
@@ -120,17 +120,17 @@ export default function Newsletter() {
                 <MailerLiteForm formId="k0kQw5" />
 
                 {/* Expectation setting — improves open rates & reduces spam complaints */}
-                <p className="text-xs text-gray-400 text-center font-['Montserrat'] mt-4 leading-relaxed">
-                  Expect about <span className="text-[#d4af37]">a couple of emails a month</span>. Your free
+                <p className="text-xs text-[#6E5F5A] text-center font-['Cormorant_Garamond'] mt-4 leading-relaxed">
+                  Expect about <span className="text-[#7A4F4C]">a couple of emails a month</span>. Your free
                   book link arrives instantly — check your inbox (and promotions tab).
                 </p>
 
                 {/* Explicit consent — GDPR / CAN-SPAM compliant */}
-                <p className="text-[11px] text-gray-500 text-center font-['Montserrat'] mt-3 leading-relaxed">
+                <p className="text-[11px] text-[#6E5F5A] text-center font-['Cormorant_Garamond'] mt-3 leading-relaxed">
                   By subscribing, you agree to receive marketing emails from Reese Astor and accept
                   our{' '}
                   <Link href="/privacy">
-                    <span className="text-gray-400 underline underline-offset-2 hover:text-[#d4af37] cursor-pointer">
+                    <span className="text-[#6E5F5A] underline underline-offset-2 hover:text-[#7A4F4C] cursor-pointer">
                       Privacy Policy
                     </span>
                   </Link>
@@ -144,15 +144,15 @@ export default function Newsletter() {
 
       {/* ─── Benefits Section ──────────────────────────────────────────── */}
       <section className="relative z-10 py-16 md:py-24">
-        <GlowOrb color="rgba(212,175,55,0.18)" size={460} className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-        <GlowOrb color="rgba(110,31,46,0.12)" size={320} className="top-[20%] right-[5%]" />
+        <GlowOrb color="rgba(201, 163, 160,0.18)" size={460} className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <GlowOrb color="rgba(201, 163, 160,0.12)" size={320} className="top-[20%] right-[5%]" />
 
         <div className="max-w-6xl mx-auto px-4">
           <Reveal className="text-center mb-12">
-            <p className="text-[#d4af37] text-sm font-semibold font-['Montserrat'] uppercase tracking-widest mb-3">
+            <p className="text-[#7A4F4C] text-sm font-semibold font-['Cormorant_Garamond'] uppercase tracking-widest mb-3">
               What You'll Get
             </p>
-            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white">
+            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-[#4A3B3A]">
               More Than Just a Newsletter
             </h2>
           </Reveal>
@@ -181,14 +181,14 @@ export default function Newsletter() {
               },
             ].map((benefit) => (
               <StaggerItem key={benefit.title}>
-                <GlassCard className="group p-6 border-white/10 hover:border-[#d4af37]/30 h-full">
-                  <div className="bg-[#d4af37]/10 rounded-lg w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-[#d4af37]/20 transition-colors">
-                    <benefit.icon className="w-6 h-6 text-[#d4af37]" />
+                <GlassCard className="group p-6 border-[#4A3B3A]/10 hover:border-[#B59A6A]/30 h-full">
+                  <div className="bg-[#C9A3A0]/10 rounded-lg w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-[#C9A3A0]/20 transition-colors">
+                    <benefit.icon className="w-6 h-6 text-[#7A4F4C]" />
                   </div>
-                  <h3 className="font-['Cormorant_Garamond'] text-xl font-bold text-white mb-2">
+                  <h3 className="font-['Cormorant_Garamond'] text-xl font-bold text-[#4A3B3A] mb-2">
                     {benefit.title}
                   </h3>
-                  <p className="text-gray-400 text-sm font-['Montserrat'] leading-relaxed">
+                  <p className="text-[#6E5F5A] text-sm font-['Cormorant_Garamond'] leading-relaxed">
                     {benefit.description}
                   </p>
                 </GlassCard>
@@ -202,13 +202,13 @@ export default function Newsletter() {
       <section className="relative z-10 py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-4">
           <Reveal className="text-center mb-12">
-            <p className="text-[#d4af37] text-sm font-semibold font-['Montserrat'] uppercase tracking-widest mb-3">
+            <p className="text-[#7A4F4C] text-sm font-semibold font-['Cormorant_Garamond'] uppercase tracking-widest mb-3">
               The Hudson Dynasty
             </p>
-            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-[#4A3B3A] mb-4">
               A Family Built on Acquisitions. A Ledger That Remembers Everything.
             </h2>
-            <p className="text-gray-400 font-['Montserrat'] max-w-2xl mx-auto">
+            <p className="text-[#6E5F5A] font-['Cormorant_Garamond'] max-w-2xl mx-auto">
               Start with the free Hudson Dynasty prequel, then read on with Hostile Tender, Poison Pill and Golden Parachute.
             </p>
           </Reveal>
@@ -224,7 +224,7 @@ export default function Newsletter() {
               }))
               .map((book, i) => (
               <StaggerItem key={book.alt} className={`relative group ${i === 0 ? 'z-10' : ''}`}>
-                <div className={`relative ${i === 0 ? 'ring-2 ring-[#d4af37]/50 rounded-lg' : ''}`}>
+                <div className={`relative ${i === 0 ? 'ring-2 ring-[#C9A3A0]/50 rounded-lg' : ''}`}>
                   <img
                     src={book.src}
                     alt={book.alt}
@@ -232,10 +232,10 @@ export default function Newsletter() {
                       i === 0 ? 'w-24 h-36 md:w-32 md:h-48' : 'w-20 h-30 md:w-28 md:h-42'
                     }`}
                   />
-                  <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-bold font-['Montserrat'] px-2 py-0.5 rounded-full whitespace-nowrap ${
+                  <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-bold font-['Cormorant_Garamond'] px-2 py-0.5 rounded-full whitespace-nowrap ${
                     i === 0 
-                      ? 'bg-[#d4af37] text-[#0a0e1a]' 
-                      : 'bg-white/10 text-gray-300 border border-white/20'
+                      ? 'bg-[#4A3B3A] text-[#FAF7F7]' 
+                      : 'bg-[#EBD6D3]/60 text-[#6E5F5A] border border-[#4A3B3A]/20'
                   }`}>
                     {book.label}
                   </div>
@@ -247,7 +247,7 @@ export default function Newsletter() {
           {/* CTA */}
           <div className="text-center">
             <Link href="/books">
-              <span className="inline-flex items-center gap-2 text-[#d4af37] font-semibold font-['Montserrat'] hover:underline underline-offset-4 cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98]">
+              <span className="inline-flex items-center gap-2 text-[#7A4F4C] font-semibold font-['Cormorant_Garamond'] hover:underline underline-offset-4 cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98]">
                 See all the books
                 <ArrowRight className="w-4 h-4" />
               </span>
@@ -267,12 +267,12 @@ export default function Newsletter() {
       <section className="relative z-10 py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <Reveal>
-            <GlassCard className="border-[#d4af37]/20 p-8 md:p-12">
-              <Gift className="w-10 h-10 text-[#d4af37] mx-auto mb-4" />
-              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white mb-4">
+            <GlassCard className="border-[#B59A6A]/20 p-8 md:p-12">
+              <Gift className="w-10 h-10 text-[#7A4F4C] mx-auto mb-4" />
+              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-[#4A3B3A] mb-4">
                 Don't Miss Out
               </h2>
-              <p className="text-gray-300 font-['Montserrat'] mb-8 max-w-lg mx-auto">
+              <p className="text-[#6E5F5A] font-['Cormorant_Garamond'] mb-8 max-w-lg mx-auto">
                 Join readers who get new-release news and a free book — all delivered to their inbox. About two emails a month, no spam.
               </p>
 
@@ -282,11 +282,11 @@ export default function Newsletter() {
               </div>
 
                 {/* Deliverability tip — boosts inbox placement & engagement */}
-                <p className="text-[11px] text-gray-500 text-center font-['Montserrat'] mt-4 leading-relaxed max-w-md mx-auto">
-                  Tip: add <span className="text-[#d4af37]">hello@reeseastor.com</span> to your
+                <p className="text-[11px] text-[#6E5F5A] text-center font-['Cormorant_Garamond'] mt-4 leading-relaxed max-w-md mx-auto">
+                  Tip: add <span className="text-[#7A4F4C]">hello@reeseastor.com</span> to your
                   contacts so your free book never lands in spam. Unsubscribe anytime — see our{' '}
                   <Link href="/privacy">
-                    <span className="text-gray-400 underline underline-offset-2 hover:text-[#d4af37] cursor-pointer">
+                    <span className="text-[#6E5F5A] underline underline-offset-2 hover:text-[#7A4F4C] cursor-pointer">
                       Privacy Policy
                     </span>
                   </Link>
@@ -310,7 +310,7 @@ function RecentNewsSection() {
   if (isLoading) {
     return (
       <div className="text-center py-12">
-        <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-[#d4af37]" />
+        <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-[#B59A6A]" />
       </div>
     );
   }
@@ -320,13 +320,13 @@ function RecentNewsSection() {
   return (
     <div>
       <Reveal className="text-center mb-10">
-        <p className="text-[#d4af37] text-sm font-semibold font-['Montserrat'] uppercase tracking-widest mb-3">
+        <p className="text-[#7A4F4C] text-sm font-semibold font-['Cormorant_Garamond'] uppercase tracking-widest mb-3">
           Latest from Reese
         </p>
-        <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-white mb-3">
+        <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl font-bold text-[#4A3B3A] mb-3">
           A Taste of What's in Your Inbox
         </h2>
-        <p className="text-gray-400 font-['Montserrat']">
+        <p className="text-[#6E5F5A] font-['Cormorant_Garamond']">
           Here's the kind of content subscribers get first
         </p>
       </Reveal>
@@ -335,21 +335,21 @@ function RecentNewsSection() {
         {recentPosts.map((post) => (
           <StaggerItem key={post.id}>
             <Link href={`/blog/${post.slug}`}>
-              <GlassCard className="group border-white/10 overflow-hidden hover:border-[#d4af37]/30 h-full flex flex-col">
+              <GlassCard className="group border-[#4A3B3A]/10 overflow-hidden hover:border-[#B59A6A]/30 h-full flex flex-col">
                 <div className="p-5 pb-0">
-                  <span className="inline-block bg-[#d4af37]/10 text-[#d4af37] text-xs font-semibold font-['Montserrat'] px-3 py-1 rounded-full">
+                  <span className="inline-block bg-[#C9A3A0]/10 text-[#7A4F4C] text-xs font-semibold font-['Cormorant_Garamond'] px-3 py-1 rounded-full">
                     {post.category}
                   </span>
                 </div>
                 <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="font-['Cormorant_Garamond'] text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-[#d4af37] transition-colors">
+                  <h3 className="font-['Cormorant_Garamond'] text-xl font-bold text-[#4A3B3A] mb-3 line-clamp-2 group-hover:text-[#7A4F4C] transition-colors">
                     {post.title}
                   </h3>
-                  <p className="text-gray-400 text-sm font-['Montserrat'] mb-4 line-clamp-3 flex-1">
+                  <p className="text-[#6E5F5A] text-sm font-['Cormorant_Garamond'] mb-4 line-clamp-3 flex-1">
                     {post.excerpt}
                   </p>
-                  <div className="flex items-center justify-between text-sm pt-4 border-t border-white/10">
-                    <span className="flex items-center gap-1 text-gray-500 font-['Montserrat']">
+                  <div className="flex items-center justify-between text-sm pt-4 border-t border-[#4A3B3A]/10">
+                    <span className="flex items-center gap-1 text-[#6E5F5A] font-['Cormorant_Garamond']">
                       <Calendar className="w-4 h-4" />
                       {new Date(post.publishedAt || post.createdAt).toLocaleDateString('en-US', {
                         month: 'short',
@@ -357,7 +357,7 @@ function RecentNewsSection() {
                         year: 'numeric',
                       })}
                     </span>
-                    <span className="text-[#d4af37] font-semibold font-['Montserrat'] flex items-center gap-1 group-hover:gap-2 transition-all text-xs">
+                    <span className="text-[#7A4F4C] font-semibold font-['Cormorant_Garamond'] flex items-center gap-1 group-hover:gap-2 transition-all text-xs">
                       Read More
                       <ArrowRight className="w-3 h-3" />
                     </span>
@@ -371,7 +371,7 @@ function RecentNewsSection() {
 
       <div className="text-center">
         <Link href="/blog">
-          <span className="inline-flex items-center gap-2 text-[#d4af37] font-semibold font-['Montserrat'] hover:underline underline-offset-4 cursor-pointer transition-all">
+          <span className="inline-flex items-center gap-2 text-[#7A4F4C] font-semibold font-['Cormorant_Garamond'] hover:underline underline-offset-4 cursor-pointer transition-all">
             View All Blog Posts
             <ArrowRight className="w-4 h-4" />
           </span>

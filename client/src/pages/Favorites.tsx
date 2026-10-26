@@ -45,13 +45,13 @@ export default function Favorites() {
   const totalProducts = filteredCategories.reduce((sum, cat) => sum + cat.products.length, 0);
 
   return (
-    <div className="min-h-screen bg-[#0a0e1a]">
+    <div className="min-h-screen bg-[#FAF7F7]">
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#d4af37]/5 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#C9A3A0]/5 via-transparent to-transparent" />
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-1/4 w-96 h-96 bg-[#d4af37]/5 rounded-full blur-[120px]" />
-          <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-[#d4af37]/3 rounded-full blur-[100px]" />
+          <div className="absolute top-20 left-1/4 w-96 h-96 bg-[#C9A3A0]/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-[#C9A3A0]/3 rounded-full blur-[100px]" />
         </div>
 
         <div className="relative max-w-4xl mx-auto px-6 text-center">
@@ -60,20 +60,20 @@ export default function Favorites() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 mb-6">
-              <Heart className="w-4 h-4 text-[#d4af37] fill-[#d4af37]" />
-              <span className="text-[#d4af37] text-sm font-bold uppercase tracking-wider">Curated by Reese</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A3A0]/10 border border-[#B59A6A]/20 mb-6">
+              <Heart className="w-4 h-4 text-[#7A4F4C] fill-[#7A4F4C]" />
+              <span className="text-[#7A4F4C] text-sm font-bold uppercase tracking-wider">Curated by Reese</span>
             </div>
 
-            <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Reese's <span className="text-[#d4af37]">Favorites</span>
+            <h1 className="font-serif text-4xl md:text-6xl font-bold text-[#4A3B3A] mb-6 leading-tight">
+              Reese's <span className="text-[#7A4F4C]">Favorites</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-4">
+            <p className="text-lg md:text-xl text-[#6E5F5A] max-w-2xl mx-auto leading-relaxed mb-4">
               My personally curated collection of products I actually use and love — from the reading pillow that changed my life to the candle that smells like a Manhattan library.
             </p>
 
-            <p className="text-sm text-gray-500 max-w-xl mx-auto">
+            <p className="text-sm text-[#6E5F5A] max-w-xl mx-auto">
               Every product on this page is something I've personally tried and genuinely recommend. No filler, no fluff — just the things that make reading and writing better.
             </p>
           </motion.div>
@@ -86,18 +86,18 @@ export default function Favorites() {
       </div>
 
       {/* Sticky Filter Bar */}
-      <div className="sticky top-0 z-40 bg-[#0a0e1a]/95 backdrop-blur-xl border-b border-white/10">
+      <div className="sticky top-0 z-40 bg-[#FAF7F7]/95 backdrop-blur-xl border-b border-[#4A3B3A]/10">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex flex-col md:flex-row items-center gap-4">
             {/* Search */}
             <div className="relative flex-1 w-full md:max-w-sm">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6E5F5A]" />
               <input
                 type="text"
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-[#d4af37]/40 transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#EBD6D3]/30 border border-[#4A3B3A]/10 text-[#4A3B3A] placeholder-[#6E5F5A] text-sm focus:outline-none focus:border-[#B59A6A]/40 transition-colors"
               />
             </div>
 
@@ -107,8 +107,8 @@ export default function Favorites() {
                 onClick={() => setActiveCategory(null)}
                 className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium transition-all ${
                   !activeCategory
-                    ? "bg-[#d4af37] text-black"
-                    : "bg-white/5 text-gray-400 hover:text-white border border-white/10"
+                    ? "bg-[#4A3B3A] text-[#4A3B3A]"
+                    : "bg-[#EBD6D3]/30 text-[#6E5F5A] hover:text-[#4A3B3A] border border-[#4A3B3A]/10"
                 }`}
               >
                 All ({allFavoritesProducts.length})
@@ -119,8 +119,8 @@ export default function Favorites() {
                   onClick={() => setActiveCategory(activeCategory === cat.id ? null : cat.id)}
                   className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium transition-all ${
                     activeCategory === cat.id
-                      ? "bg-[#d4af37] text-black"
-                      : "bg-white/5 text-gray-400 hover:text-white border border-white/10"
+                      ? "bg-[#4A3B3A] text-[#4A3B3A]"
+                      : "bg-[#EBD6D3]/30 text-[#6E5F5A] hover:text-[#4A3B3A] border border-[#4A3B3A]/10"
                   }`}
                 >
                   {cat.emoji} {cat.title} ({cat.products.length})
@@ -147,14 +147,14 @@ export default function Favorites() {
               <div className="mb-8">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-3xl">{category.emoji}</span>
-                  <h2 className="font-serif text-2xl md:text-3xl font-bold text-white">
+                  <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#4A3B3A]">
                     {category.title}
                   </h2>
                 </div>
-                <p className="text-gray-400 text-sm ml-12">
+                <p className="text-[#6E5F5A] text-sm ml-12">
                   {category.subtitle}
                 </p>
-                <div className="w-24 h-0.5 bg-gradient-to-r from-[#d4af37] to-transparent mt-4 ml-12" />
+                <div className="w-24 h-0.5 bg-gradient-to-r from-[#C9A3A0] to-transparent mt-4 ml-12" />
               </div>
 
               {/* Product Grid */}
@@ -166,21 +166,21 @@ export default function Favorites() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 hover:border-[#d4af37]/40 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-[#d4af37]/5"
+                    className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#FAF7F7]/[0.06] to-[#FAF7F7]/[0.02] border border-[#4A3B3A]/10 hover:border-[#B59A6A]/40 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-[#C9A3A0]/5"
                   >
                     <div className="p-6 space-y-4">
                       {/* Product Header */}
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1">
-                          <h3 className="font-serif text-lg font-bold text-white group-hover:text-[#d4af37] transition-colors leading-tight">
+                          <h3 className="font-serif text-lg font-bold text-[#4A3B3A] group-hover:text-[#7A4F4C] transition-colors leading-tight">
                             {product.name}
                           </h3>
-                          <p className="text-[#d4af37]/80 font-medium text-sm mt-1">
+                          <p className="text-[#7A4F4C]/80 font-medium text-sm mt-1">
                             {product.priceRange}
                           </p>
                         </div>
-                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#d4af37]/10 flex items-center justify-center border border-[#d4af37]/20">
-                          <ShoppingCart className="w-5 h-5 text-[#d4af37]" />
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#C9A3A0]/10 flex items-center justify-center border border-[#B59A6A]/20">
+                          <ShoppingCart className="w-5 h-5 text-[#7A4F4C]" />
                         </div>
                       </div>
 
@@ -192,28 +192,28 @@ export default function Favorites() {
                               key={i}
                               className={`w-4 h-4 ${
                                 i < Math.floor(product.rating!)
-                                  ? "text-[#d4af37] fill-[#d4af37]"
+                                  ? "text-[#7A4F4C] fill-[#7A4F4C]"
                                   : i < product.rating!
-                                  ? "text-[#d4af37] fill-[#d4af37]/50"
-                                  : "text-gray-600"
+                                  ? "text-[#7A4F4C] fill-[#7A4F4C]/50"
+                                  : "text-[#6E5F5A]"
                               }`}
                             />
                           ))}
-                          <span className="text-xs text-gray-400 ml-1">({product.rating})</span>
+                          <span className="text-xs text-[#6E5F5A] ml-1">({product.rating})</span>
                         </div>
                       )}
 
                       {/* Description */}
-                      <p className="text-gray-300 text-sm leading-relaxed">
+                      <p className="text-[#6E5F5A] text-sm leading-relaxed">
                         {product.description}
                       </p>
 
                       {/* Why Recommend - Personal Touch */}
-                      <div className="flex items-start gap-2 p-3 rounded-xl bg-[#d4af37]/5 border border-[#d4af37]/10">
-                        <Sparkles className="w-4 h-4 text-[#d4af37] flex-shrink-0 mt-0.5" />
+                      <div className="flex items-start gap-2 p-3 rounded-xl bg-[#C9A3A0]/5 border border-[#B59A6A]/10">
+                        <Sparkles className="w-4 h-4 text-[#7A4F4C] flex-shrink-0 mt-0.5" />
                         <div>
-                          <span className="text-[#d4af37] text-xs font-bold uppercase tracking-wider block mb-1">Reese's Take:</span>
-                          <p className="text-gray-300 text-xs leading-relaxed italic">"{product.whyRecommend}"</p>
+                          <span className="text-[#7A4F4C] text-xs font-bold uppercase tracking-wider block mb-1">Reese's Take:</span>
+                          <p className="text-[#6E5F5A] text-xs leading-relaxed italic">"{product.whyRecommend}"</p>
                         </div>
                       </div>
 
@@ -223,7 +223,7 @@ export default function Favorites() {
                         target="_blank"
                         rel="noopener noreferrer nofollow"
                         onClick={() => handleProductClick(product.name, product.affiliateUrl)}
-                        className="flex items-center justify-center gap-2 w-full py-3 px-6 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-[#d4af37]/20"
+                        className="flex items-center justify-center gap-2 w-full py-3 px-6 rounded-full bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-[#C9A3A0]/20"
                       >
                         Check Price on Amazon
                         <ExternalLink className="w-4 h-4" />
@@ -231,7 +231,7 @@ export default function Favorites() {
                     </div>
 
                     {/* Decorative corner accent */}
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#d4af37]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#C9A3A0]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </motion.div>
                 ))}
               </div>
@@ -242,11 +242,11 @@ export default function Favorites() {
         {/* Empty State */}
         {filteredCategories.length === 0 && (
           <div className="text-center py-20">
-            <Search className="w-12 h-12 mx-auto text-gray-600 mb-4" />
-            <p className="text-gray-400 text-lg">No products match your search.</p>
+            <Search className="w-12 h-12 mx-auto text-[#6E5F5A] mb-4" />
+            <p className="text-[#6E5F5A] text-lg">No products match your search.</p>
             <button
               onClick={() => { setSearchQuery(""); setActiveCategory(null); }}
-              className="mt-4 text-[#d4af37] hover:underline text-sm"
+              className="mt-4 text-[#7A4F4C] hover:underline text-sm"
             >
               Clear filters
             </button>
@@ -255,21 +255,21 @@ export default function Favorites() {
       </div>
 
       {/* Bottom CTA Section */}
-      <section className="py-16 border-t border-white/10">
+      <section className="py-16 border-t border-[#4A3B3A]/10">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="font-serif text-2xl md:text-3xl font-bold text-white mb-4">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#4A3B3A] mb-4">
             Have a Product Suggestion?
           </h2>
-          <p className="text-gray-400 mb-6 leading-relaxed">
+          <p className="text-[#6E5F5A] mb-6 leading-relaxed">
             I'm always looking for new products to try. If you've found something amazing that belongs on this page, let me know! Send me a message through the{" "}
-            <a href="/contact" className="text-[#d4af37] underline underline-offset-2 hover:no-underline">contact page</a>{" "}
+            <a href="/contact" className="text-[#7A4F4C] underline underline-offset-2 hover:no-underline">contact page</a>{" "}
             or reply to any of my newsletters.
           </p>
-          <div className="flex items-center justify-center gap-4 text-sm text-gray-400">
+          <div className="flex items-center justify-center gap-4 text-sm text-[#6E5F5A]">
             <span>{allFavoritesProducts.length} products curated</span>
-            <span className="w-1 h-1 rounded-full bg-gray-600" />
+            <span className="w-1 h-1 rounded-full bg-[#EBD6D3]" />
             <span>{favoritesCategories.length} categories</span>
-            <span className="w-1 h-1 rounded-full bg-gray-600" />
+            <span className="w-1 h-1 rounded-full bg-[#EBD6D3]" />
             <span>Updated regularly</span>
           </div>
         </div>
@@ -283,7 +283,7 @@ export default function Favorites() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-[#d4af37] text-black flex items-center justify-center shadow-lg hover:shadow-xl hover:shadow-[#d4af37]/20 transition-all z-50"
+            className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-[#4A3B3A] text-[#4A3B3A] flex items-center justify-center shadow-lg hover:shadow-xl hover:shadow-[#C9A3A0]/20 transition-all z-50"
           >
             <ArrowUp className="w-5 h-5" />
           </motion.button>

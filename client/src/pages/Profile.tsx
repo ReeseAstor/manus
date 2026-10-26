@@ -89,25 +89,25 @@ export default function Profile() {
   
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27] flex items-center justify-center">
-        <div className="text-[#d4af37] text-xl">Loading...</div>
+      <div className="min-h-screen bg-gradient-to-br from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7] flex items-center justify-center">
+        <div className="text-[#7A4F4C] text-xl">Loading...</div>
       </div>
     );
   }
   
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27] flex items-center justify-center">
-        <Card className="max-w-md bg-[#1a1f3a]/80 border-[#d4af37]/20">
+      <div className="min-h-screen bg-gradient-to-br from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7] flex items-center justify-center">
+        <Card className="max-w-md bg-[#FAF7F7]/80 border-[#B59A6A]/20">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-[#e5e5e5]">Sign In Required</CardTitle>
-            <CardDescription className="text-[#e5e5e5]/60">
+            <CardTitle className="text-2xl text-[#4A3B3A]">Sign In Required</CardTitle>
+            <CardDescription className="text-[#4A3B3A]/60">
               Please sign in to view your profile and preferences.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex justify-center">
             <Button 
-              className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27]"
+              className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7]"
               onClick={() => window.location.href = getLoginUrl()}
             >
               Sign In
@@ -137,73 +137,73 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27] py-20">
+    <div className="min-h-screen bg-gradient-to-br from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7] py-20">
       <div className="container max-w-4xl">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-serif font-bold text-[#e5e5e5] mb-2">My Profile</h1>
-          <p className="text-[#e5e5e5]/60">Manage your account settings and preferences</p>
+          <h1 className="text-4xl font-serif font-bold text-[#4A3B3A] mb-2">My Profile</h1>
+          <p className="text-[#4A3B3A]/60">Manage your account settings and preferences</p>
         </div>
         
         {/* Stats Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <Card className="bg-[#1a1f3a]/60 border-[#d4af37]/20">
+          <Card className="bg-[#FAF7F7]/60 border-[#B59A6A]/20">
             <CardContent className="p-4 text-center">
-              <BookOpen className="w-8 h-8 text-[#d4af37] mx-auto mb-2" />
-              <div className="text-2xl font-bold text-[#e5e5e5]">
+              <BookOpen className="w-8 h-8 text-[#7A4F4C] mx-auto mb-2" />
+              <div className="text-2xl font-bold text-[#4A3B3A]">
                 {purchaseHistory?.stats.totalBooks || 0}
               </div>
-              <div className="text-sm text-[#e5e5e5]/60">Books Owned</div>
+              <div className="text-sm text-[#4A3B3A]/60">Books Owned</div>
             </CardContent>
           </Card>
           
-          <Card className="bg-[#1a1f3a]/60 border-[#d4af37]/20">
+          <Card className="bg-[#FAF7F7]/60 border-[#B59A6A]/20">
             <CardContent className="p-4 text-center">
-              <Download className="w-8 h-8 text-[#d4af37] mx-auto mb-2" />
-              <div className="text-2xl font-bold text-[#e5e5e5]">
+              <Download className="w-8 h-8 text-[#7A4F4C] mx-auto mb-2" />
+              <div className="text-2xl font-bold text-[#4A3B3A]">
                 {purchaseHistory?.stats.totalDownloads || 0}
               </div>
-              <div className="text-sm text-[#e5e5e5]/60">Downloads</div>
+              <div className="text-sm text-[#4A3B3A]/60">Downloads</div>
             </CardContent>
           </Card>
           
-          <Card className="bg-[#1a1f3a]/60 border-[#d4af37]/20">
+          <Card className="bg-[#FAF7F7]/60 border-[#B59A6A]/20">
             <CardContent className="p-4 text-center">
-              <DollarSign className="w-8 h-8 text-[#d4af37] mx-auto mb-2" />
-              <div className="text-2xl font-bold text-[#e5e5e5]">
+              <DollarSign className="w-8 h-8 text-[#7A4F4C] mx-auto mb-2" />
+              <div className="text-2xl font-bold text-[#4A3B3A]">
                 {formatCurrency(purchaseHistory?.stats.totalSpent || 0)}
               </div>
-              <div className="text-sm text-[#e5e5e5]/60">Total Spent</div>
+              <div className="text-sm text-[#4A3B3A]/60">Total Spent</div>
             </CardContent>
           </Card>
           
-          <Card className="bg-[#1a1f3a]/60 border-[#d4af37]/20">
+          <Card className="bg-[#FAF7F7]/60 border-[#B59A6A]/20">
             <CardContent className="p-4 text-center">
-              <Eye className="w-8 h-8 text-[#d4af37] mx-auto mb-2" />
-              <div className="text-2xl font-bold text-[#e5e5e5]">
+              <Eye className="w-8 h-8 text-[#7A4F4C] mx-auto mb-2" />
+              <div className="text-2xl font-bold text-[#4A3B3A]">
                 {recentlyViewed?.length || 0}
               </div>
-              <div className="text-sm text-[#e5e5e5]/60">Books Viewed</div>
+              <div className="text-sm text-[#4A3B3A]/60">Books Viewed</div>
             </CardContent>
           </Card>
         </div>
         
         {/* Tabs */}
         <Tabs defaultValue="profile" className="space-y-6">
-          <TabsList className="bg-[#1a1f3a]/60 border border-[#d4af37]/20">
-            <TabsTrigger value="profile" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-[#0a0e27]">
+          <TabsList className="bg-[#FAF7F7]/60 border border-[#B59A6A]/20">
+            <TabsTrigger value="profile" className="data-[state=active]:bg-[#7A4F4C] data-[state=active]:text-[#FAF7F7]">
               <Settings className="w-4 h-4 mr-2" />
               Profile
             </TabsTrigger>
-            <TabsTrigger value="email" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-[#0a0e27]">
+            <TabsTrigger value="email" className="data-[state=active]:bg-[#7A4F4C] data-[state=active]:text-[#FAF7F7]">
               <Bell className="w-4 h-4 mr-2" />
               Email
             </TabsTrigger>
-            <TabsTrigger value="purchases" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-[#0a0e27]">
+            <TabsTrigger value="purchases" className="data-[state=active]:bg-[#7A4F4C] data-[state=active]:text-[#FAF7F7]">
               <ShoppingBag className="w-4 h-4 mr-2" />
               Purchases
             </TabsTrigger>
-            <TabsTrigger value="history" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-[#0a0e27]">
+            <TabsTrigger value="history" className="data-[state=active]:bg-[#7A4F4C] data-[state=active]:text-[#FAF7F7]">
               <History className="w-4 h-4 mr-2" />
               Recently Viewed
             </TabsTrigger>
@@ -211,38 +211,38 @@ export default function Profile() {
           
           {/* Profile Settings Tab */}
           <TabsContent value="profile">
-            <Card className="bg-[#1a1f3a]/60 border-[#d4af37]/20">
+            <Card className="bg-[#FAF7F7]/60 border-[#B59A6A]/20">
               <CardHeader>
-                <CardTitle className="text-[#e5e5e5]">Profile Settings</CardTitle>
-                <CardDescription className="text-[#e5e5e5]/60">
+                <CardTitle className="text-[#4A3B3A]">Profile Settings</CardTitle>
+                <CardDescription className="text-[#4A3B3A]/60">
                   Customize your profile and reading preferences
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label className="text-[#e5e5e5]">Display Name</Label>
+                  <Label className="text-[#4A3B3A]">Display Name</Label>
                   <Input
                     value={formData.displayName}
                     onChange={(e) => setFormData({ ...formData, displayName: e.target.value })}
                     placeholder={user.name || "Enter display name"}
-                    className="bg-[#0a0e27]/50 border-[#d4af37]/20 text-[#e5e5e5]"
+                    className="bg-[#FAF7F7]/50 border-[#B59A6A]/20 text-[#4A3B3A]"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label className="text-[#e5e5e5]">Bio</Label>
+                  <Label className="text-[#4A3B3A]">Bio</Label>
                   <Textarea
                     value={formData.bio}
                     onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                     placeholder="Tell us about yourself..."
-                    className="bg-[#0a0e27]/50 border-[#d4af37]/20 text-[#e5e5e5] min-h-[100px]"
+                    className="bg-[#FAF7F7]/50 border-[#B59A6A]/20 text-[#4A3B3A] min-h-[100px]"
                   />
                 </div>
                 
                 <Button 
                   onClick={handleSavePreferences}
                   disabled={updatePrefs.isPending}
-                  className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27]"
+                  className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7]"
                 >
                   {updatePrefs.isPending ? "Saving..." : "Save Changes"}
                 </Button>
@@ -252,18 +252,18 @@ export default function Profile() {
           
           {/* Email Preferences Tab */}
           <TabsContent value="email">
-            <Card className="bg-[#1a1f3a]/60 border-[#d4af37]/20">
+            <Card className="bg-[#FAF7F7]/60 border-[#B59A6A]/20">
               <CardHeader>
-                <CardTitle className="text-[#e5e5e5]">Email Preferences</CardTitle>
-                <CardDescription className="text-[#e5e5e5]/60">
+                <CardTitle className="text-[#4A3B3A]">Email Preferences</CardTitle>
+                <CardDescription className="text-[#4A3B3A]/60">
                   Control what emails you receive from us
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-[#e5e5e5] font-medium">New Release Announcements</div>
-                    <div className="text-sm text-[#e5e5e5]/60">Get notified when new books are released</div>
+                    <div className="text-[#4A3B3A] font-medium">New Release Announcements</div>
+                    <div className="text-sm text-[#4A3B3A]/60">Get notified when new books are released</div>
                   </div>
                   <Switch
                     checked={formData.emailNewReleases}
@@ -273,8 +273,8 @@ export default function Profile() {
                 
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-[#e5e5e5] font-medium">Newsletter</div>
-                    <div className="text-sm text-[#e5e5e5]/60">Monthly updates, behind-the-scenes content</div>
+                    <div className="text-[#4A3B3A] font-medium">Newsletter</div>
+                    <div className="text-sm text-[#4A3B3A]/60">Monthly updates, behind-the-scenes content</div>
                   </div>
                   <Switch
                     checked={formData.emailNewsletter}
@@ -284,8 +284,8 @@ export default function Profile() {
                 
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-[#e5e5e5] font-medium">Promotions & Deals</div>
-                    <div className="text-sm text-[#e5e5e5]/60">Special offers and discounts</div>
+                    <div className="text-[#4A3B3A] font-medium">Promotions & Deals</div>
+                    <div className="text-sm text-[#4A3B3A]/60">Special offers and discounts</div>
                   </div>
                   <Switch
                     checked={formData.emailPromotions}
@@ -295,8 +295,8 @@ export default function Profile() {
                 
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-[#e5e5e5] font-medium">Blog Post Notifications</div>
-                    <div className="text-sm text-[#e5e5e5]/60">Get notified when new blog posts are published</div>
+                    <div className="text-[#4A3B3A] font-medium">Blog Post Notifications</div>
+                    <div className="text-sm text-[#4A3B3A]/60">Get notified when new blog posts are published</div>
                   </div>
                   <Switch
                     checked={formData.emailBlogPosts}
@@ -307,7 +307,7 @@ export default function Profile() {
                 <Button 
                   onClick={handleSavePreferences}
                   disabled={updatePrefs.isPending}
-                  className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27]"
+                  className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7]"
                 >
                   {updatePrefs.isPending ? "Saving..." : "Save Preferences"}
                 </Button>
@@ -317,22 +317,22 @@ export default function Profile() {
           
           {/* Purchases Tab */}
           <TabsContent value="purchases">
-            <Card className="bg-[#1a1f3a]/60 border-[#d4af37]/20">
+            <Card className="bg-[#FAF7F7]/60 border-[#B59A6A]/20">
               <CardHeader>
-                <CardTitle className="text-[#e5e5e5]">Purchase History</CardTitle>
-                <CardDescription className="text-[#e5e5e5]/60">
+                <CardTitle className="text-[#4A3B3A]">Purchase History</CardTitle>
+                <CardDescription className="text-[#4A3B3A]/60">
                   View your purchased books and download them
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 {purchasesLoading ? (
-                  <div className="text-center py-8 text-[#e5e5e5]/60">Loading purchases...</div>
+                  <div className="text-center py-8 text-[#4A3B3A]/60">Loading purchases...</div>
                 ) : !purchaseHistory?.purchases.length ? (
                   <div className="text-center py-8">
-                    <ShoppingBag className="w-12 h-12 text-[#d4af37]/40 mx-auto mb-4" />
-                    <p className="text-[#e5e5e5]/60 mb-4">You haven't purchased any books yet.</p>
+                    <ShoppingBag className="w-12 h-12 text-[#7A4F4C]/40 mx-auto mb-4" />
+                    <p className="text-[#4A3B3A]/60 mb-4">You haven't purchased any books yet.</p>
                     <Link href="/books">
-                      <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27]">
+                      <Button className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7]">
                         Browse Books
                       </Button>
                     </Link>
@@ -342,7 +342,7 @@ export default function Profile() {
                     {purchaseHistory.purchases.map((purchase) => (
                       <div 
                         key={purchase.id}
-                        className="flex items-center gap-4 p-4 bg-[#0a0e27]/30 rounded-lg border border-[#d4af37]/10"
+                        className="flex items-center gap-4 p-4 bg-[#FAF7F7]/30 rounded-lg border border-[#B59A6A]/10"
                       >
                         <img
                           src={purchase.bookCover}
@@ -350,16 +350,16 @@ export default function Profile() {
                           className="w-16 h-24 object-cover rounded"
                         />
                         <div className="flex-1">
-                          <h4 className="text-[#e5e5e5] font-medium">{purchase.bookTitle}</h4>
-                          <p className="text-sm text-[#e5e5e5]/60">
+                          <h4 className="text-[#4A3B3A] font-medium">{purchase.bookTitle}</h4>
+                          <p className="text-sm text-[#4A3B3A]/60">
                             Purchased: {formatDate(purchase.purchasedAt)}
                           </p>
-                          <p className="text-sm text-[#d4af37]">
+                          <p className="text-sm text-[#7A4F4C]">
                             {formatCurrency(purchase.purchasePrice)}
                           </p>
                         </div>
                         <Link href={`/my-purchases`}>
-                          <Button size="sm" variant="outline" className="border-[#d4af37]/30 text-[#d4af37]">
+                          <Button size="sm" variant="outline" className="border-[#B59A6A]/30 text-[#7A4F4C]">
                             <Download className="w-4 h-4 mr-2" />
                             Download
                           </Button>
@@ -374,11 +374,11 @@ export default function Profile() {
           
           {/* Recently Viewed Tab */}
           <TabsContent value="history">
-            <Card className="bg-[#1a1f3a]/60 border-[#d4af37]/20">
+            <Card className="bg-[#FAF7F7]/60 border-[#B59A6A]/20">
               <CardHeader className="flex flex-row items-center justify-between">
                 <div>
-                  <CardTitle className="text-[#e5e5e5]">Recently Viewed</CardTitle>
-                  <CardDescription className="text-[#e5e5e5]/60">
+                  <CardTitle className="text-[#4A3B3A]">Recently Viewed</CardTitle>
+                  <CardDescription className="text-[#4A3B3A]/60">
                     Books you've browsed recently
                   </CardDescription>
                 </div>
@@ -388,7 +388,7 @@ export default function Profile() {
                     size="sm"
                     onClick={() => clearHistory.mutate()}
                     disabled={clearHistory.isPending}
-                    className="border-red-500/30 text-red-400 hover:bg-red-500/10"
+                    className="border-[#C9A3A0]/30 text-[#7A4F4C] hover:bg-[#7A4F4C]/10"
                   >
                     <Trash2 className="w-4 h-4 mr-2" />
                     Clear History
@@ -397,13 +397,13 @@ export default function Profile() {
               </CardHeader>
               <CardContent>
                 {historyLoading ? (
-                  <div className="text-center py-8 text-[#e5e5e5]/60">Loading history...</div>
+                  <div className="text-center py-8 text-[#4A3B3A]/60">Loading history...</div>
                 ) : !recentlyViewed?.length ? (
                   <div className="text-center py-8">
-                    <History className="w-12 h-12 text-[#d4af37]/40 mx-auto mb-4" />
-                    <p className="text-[#e5e5e5]/60 mb-4">No browsing history yet.</p>
+                    <History className="w-12 h-12 text-[#7A4F4C]/40 mx-auto mb-4" />
+                    <p className="text-[#4A3B3A]/60 mb-4">No browsing history yet.</p>
                     <Link href="/books">
-                      <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27]">
+                      <Button className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7]">
                         Browse Books
                       </Button>
                     </Link>
@@ -413,7 +413,7 @@ export default function Profile() {
                     {recentlyViewed.map((item) => (
                       <div 
                         key={item.bookId}
-                        className="flex items-center gap-4 p-4 bg-[#0a0e27]/30 rounded-lg border border-[#d4af37]/10 hover:border-[#d4af37]/30 transition-colors"
+                        className="flex items-center gap-4 p-4 bg-[#FAF7F7]/30 rounded-lg border border-[#B59A6A]/10 hover:border-[#B59A6A]/30 transition-colors"
                       >
                         <img
                           src={item.bookCover}
@@ -421,11 +421,11 @@ export default function Profile() {
                           className="w-16 h-24 object-cover rounded"
                         />
                         <div className="flex-1">
-                          <h4 className="text-[#e5e5e5] font-medium">{item.bookTitle}</h4>
+                          <h4 className="text-[#4A3B3A] font-medium">{item.bookTitle}</h4>
                           {item.bookSeries && (
-                            <p className="text-sm text-[#d4af37]">{item.bookSeries}</p>
+                            <p className="text-sm text-[#7A4F4C]">{item.bookSeries}</p>
                           )}
-                          <div className="flex items-center gap-4 mt-1 text-sm text-[#e5e5e5]/60">
+                          <div className="flex items-center gap-4 mt-1 text-sm text-[#4A3B3A]/60">
                             <span className="flex items-center gap-1">
                               <Eye className="w-3 h-3" />
                               {item.viewCount} {item.viewCount === 1 ? "view" : "views"}
@@ -436,7 +436,7 @@ export default function Profile() {
                           </div>
                         </div>
                         <Link href={`/books/${item.bookSlug}`}>
-                          <Button size="sm" variant="outline" className="border-[#d4af37]/30 text-[#d4af37]">
+                          <Button size="sm" variant="outline" className="border-[#B59A6A]/30 text-[#7A4F4C]">
                             <ExternalLink className="w-4 h-4 mr-2" />
                             View
                           </Button>

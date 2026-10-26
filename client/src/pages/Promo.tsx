@@ -132,7 +132,7 @@ export default function Promo() {
   }];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] relative overflow-hidden">
+    <div className="min-h-screen bg-[#FAF7F7] relative overflow-hidden">
       <EnhancedSEOHead
         title="Free Romance Books Giveaway | Multi-Author Promo | Reese Astor"
         description="Grab free romance books from bestselling authors! Limited-time multi-author giveaway featuring billionaire romance, dark romance, and contemporary love stories."
@@ -142,9 +142,9 @@ export default function Promo() {
 
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#d4af37]/5 via-transparent to-[#d4af37]/5" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#d4af37]/3 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#d4af37]/3 rounded-full blur-[120px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#C9A3A0]/5 via-transparent to-[#C9A3A0]/5" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#C9A3A0]/3 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#C9A3A0]/3 rounded-full blur-[120px]" />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-16 md:py-24">
@@ -156,19 +156,19 @@ export default function Promo() {
           className="text-center mb-16"
         >
           {/* Urgency Badge */}
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-500/10 border border-red-500/20 mb-6">
-            <Clock className="h-4 w-4 text-red-400" />
-            <span className="text-sm text-red-400 font-medium tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#7A4F4C]/10 border border-[#C9A3A0]/20 mb-6">
+            <Clock className="h-4 w-4 text-[#7A4F4C]" />
+            <span className="text-sm text-[#7A4F4C] font-medium tracking-wider uppercase">
               Limited Time — Ends Soon
             </span>
           </div>
 
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-            Grab <span className="text-[#d4af37]">Free Books</span> from
+          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-[#4A3B3A] mb-6 leading-tight">
+            Grab <span className="text-[#7A4F4C]">Free Books</span> from
             <br />Top Romance Authors
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p className="text-lg md:text-xl text-[#6E5F5A] max-w-2xl mx-auto mb-8 leading-relaxed">
             Join our exclusive multi-author giveaway and discover your next obsession.
             Steamy billionaire romances, forbidden love stories, and heart-pounding second chances — all free.
           </p>
@@ -176,16 +176,16 @@ export default function Promo() {
           {/* Stats */}
           <div className="flex flex-wrap items-center justify-center gap-8 mb-10">
             <div className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5 text-[#d4af37]" />
-              <span className="text-white font-semibold">{promoBooks.length} Free Books</span>
+              <BookOpen className="h-5 w-5 text-[#7A4F4C]" />
+              <span className="text-[#4A3B3A] font-semibold">{promoBooks.length} Free Books</span>
             </div>
             <div className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-[#d4af37]" />
-              <span className="text-white font-semibold">6 Bestselling Authors</span>
+              <Users className="h-5 w-5 text-[#7A4F4C]" />
+              <span className="text-[#4A3B3A] font-semibold">6 Bestselling Authors</span>
             </div>
             <div className="flex items-center gap-2">
-              <Gift className="h-5 w-5 text-[#d4af37]" />
-              <span className="text-white font-semibold">100% Free</span>
+              <Gift className="h-5 w-5 text-[#7A4F4C]" />
+              <span className="text-[#4A3B3A] font-semibold">100% Free</span>
             </div>
           </div>
         </motion.div>
@@ -198,13 +198,13 @@ export default function Promo() {
           className="max-w-xl mx-auto mb-20"
         >
           {!isSubmitted ? (
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-[#d4af37]/20 shadow-2xl">
+            <div className="p-8 rounded-2xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#B59A6A]/20 shadow-2xl">
               <div className="text-center mb-6">
-                <Sparkles className="h-8 w-8 text-[#d4af37] mx-auto mb-3" />
-                <h2 className="font-serif text-2xl font-bold text-white mb-2">
+                <Sparkles className="h-8 w-8 text-[#7A4F4C] mx-auto mb-3" />
+                <h2 className="font-serif text-2xl font-bold text-[#4A3B3A] mb-2">
                   Claim Your Free Books
                 </h2>
-                <p className="text-gray-400 text-sm">
+                <p className="text-[#6E5F5A] text-sm">
                   Enter your email below and we'll send download links for all {promoBooks.length} books instantly.
                 </p>
               </div>
@@ -216,7 +216,7 @@ export default function Promo() {
                   placeholder="Your first name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 h-12 rounded-xl"
+                  className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-12 rounded-xl"
                 />
                 <Input
                   type="email"
@@ -224,12 +224,12 @@ export default function Promo() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 h-12 rounded-xl"
+                  className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-12 rounded-xl"
                 />
                 <Button
                   type="submit"
                   disabled={subscribeMutation.isPending}
-                  className="w-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold h-12 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
+                  className="w-full bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold h-12 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
                 >
                   {subscribeMutation.isPending ? (
                     "Sending..."
@@ -242,17 +242,17 @@ export default function Promo() {
                 </Button>
               </form>
 
-              <div className="flex items-center justify-center gap-4 mt-4 text-xs text-gray-500">
+              <div className="flex items-center justify-center gap-4 mt-4 text-xs text-[#6E5F5A]">
                 <span className="flex items-center gap-1">
-                  <CheckCircle className="h-3 w-3 text-green-500" />
+                  <CheckCircle className="h-3 w-3 text-[#7A4F4C]" />
                   Instant delivery
                 </span>
                 <span className="flex items-center gap-1">
-                  <CheckCircle className="h-3 w-3 text-green-500" />
+                  <CheckCircle className="h-3 w-3 text-[#7A4F4C]" />
                   No spam, ever
                 </span>
                 <span className="flex items-center gap-1">
-                  <CheckCircle className="h-3 w-3 text-green-500" />
+                  <CheckCircle className="h-3 w-3 text-[#7A4F4C]" />
                   Unsubscribe anytime
                 </span>
               </div>
@@ -261,20 +261,20 @@ export default function Promo() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="p-8 rounded-2xl bg-gradient-to-br from-green-500/10 to-green-500/5 border border-green-500/20 text-center"
+              className="p-8 rounded-2xl bg-gradient-to-br from-[#C9A3A0]/10 to-[#C9A3A0]/5 border border-[#C9A3A0]/20 text-center"
             >
-              <CheckCircle className="h-12 w-12 text-green-400 mx-auto mb-4" />
-              <h3 className="font-serif text-2xl font-bold text-white mb-2">
+              <CheckCircle className="h-12 w-12 text-[#7A4F4C] mx-auto mb-4" />
+              <h3 className="font-serif text-2xl font-bold text-[#4A3B3A] mb-2">
                 You're In! 🎉
               </h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-[#6E5F5A] mb-4">
                 Check your email for download links. Your free books are on their way!
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-[#6E5F5A]">
                 Didn't receive it? Check your spam folder or{" "}
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="text-[#d4af37] hover:underline"
+                  className="text-[#7A4F4C] hover:underline"
                 >
                   try again
                 </button>
@@ -291,17 +291,17 @@ export default function Promo() {
           className="mb-16"
         >
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 mb-4">
-              <Star className="h-4 w-4 text-[#d4af37] fill-[#d4af37]" />
-              <span className="text-sm text-[#d4af37] font-medium tracking-wider uppercase">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A3A0]/10 border border-[#B59A6A]/20 mb-4">
+              <Star className="h-4 w-4 text-[#7A4F4C] fill-[#7A4F4C]" />
+              <span className="text-sm text-[#7A4F4C] font-medium tracking-wider uppercase">
                 Featured Book
               </span>
             </div>
           </div>
 
-          <div className="max-w-4xl mx-auto p-8 md:p-10 rounded-3xl bg-gradient-to-br from-[#d4af37]/5 to-white/[0.02] border border-[#d4af37]/20 shadow-2xl">
+          <div className="max-w-4xl mx-auto p-8 md:p-10 rounded-3xl bg-gradient-to-br from-[#C9A3A0]/5 to-[#FAF7F7]/[0.02] border border-[#B59A6A]/20 shadow-2xl">
             <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="w-48 h-72 rounded-xl overflow-hidden shadow-2xl flex-shrink-0 border-2 border-[#d4af37]/30">
+              <div className="w-48 h-72 rounded-xl overflow-hidden shadow-2xl flex-shrink-0 border-2 border-[#B59A6A]/30">
                 <img
                   src={promoBooks[0].cover}
                   alt={promoBooks[0].title}
@@ -310,28 +310,28 @@ export default function Promo() {
               </div>
               <div className="flex-1 text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <span className="text-xs text-[#d4af37] font-semibold tracking-wider uppercase bg-[#d4af37]/10 px-3 py-1 rounded-full">
+                  <span className="text-xs text-[#7A4F4C] font-semibold tracking-wider uppercase bg-[#C9A3A0]/10 px-3 py-1 rounded-full">
                     Featured
                   </span>
                 </div>
-                <h3 className="font-serif text-3xl font-bold text-white mb-1">
+                <h3 className="font-serif text-3xl font-bold text-[#4A3B3A] mb-1">
                   {promoBooks[0].title}
                 </h3>
-                <p className="text-[#d4af37] font-medium mb-3">by {promoBooks[0].author}</p>
+                <p className="text-[#7A4F4C] font-medium mb-3">by {promoBooks[0].author}</p>
                 <div className="flex items-center gap-1 mb-3 justify-center md:justify-start">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-[#d4af37] text-[#d4af37]" />
+                    <Star key={i} className="h-4 w-4 fill-[#7A4F4C] text-[#7A4F4C]" />
                   ))}
-                  <span className="text-sm text-gray-400 ml-2">4.8 average rating</span>
+                  <span className="text-sm text-[#6E5F5A] ml-2">4.8 average rating</span>
                 </div>
-                <p className="text-gray-300 leading-relaxed mb-4">
+                <p className="text-[#6E5F5A] leading-relaxed mb-4">
                   {promoBooks[0].description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4 justify-center md:justify-start">
                   {promoBooks[0].tropes.map((trope) => (
                     <span
                       key={trope}
-                      className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-400"
+                      className="text-xs px-3 py-1 rounded-full bg-[#EBD6D3]/30 border border-[#4A3B3A]/10 text-[#6E5F5A]"
                     >
                       {trope}
                     </span>
@@ -350,10 +350,10 @@ export default function Promo() {
           className="mb-20"
         >
           <div className="text-center mb-10">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-3">
-              All Books in This <span className="text-[#d4af37]">Giveaway</span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#4A3B3A] mb-3">
+              All Books in This <span className="text-[#7A4F4C]">Giveaway</span>
             </h2>
-            <p className="text-gray-400 max-w-lg mx-auto">
+            <p className="text-[#6E5F5A] max-w-lg mx-auto">
               Each book is a full-length novel from a bestselling romance author. Claim them all with a single email.
             </p>
           </div>
@@ -367,12 +367,12 @@ export default function Promo() {
                 transition={{ duration: 0.4, delay: 0.1 * index }}
                 className={`p-6 rounded-2xl border transition-all duration-300 hover:scale-[1.02] ${
                   book.featured
-                    ? "bg-gradient-to-br from-[#d4af37]/10 to-white/[0.02] border-[#d4af37]/30"
-                    : "bg-white/[0.02] border-white/10 hover:border-white/20"
+                    ? "bg-gradient-to-br from-[#C9A3A0]/10 to-[#FAF7F7]/[0.02] border-[#B59A6A]/30"
+                    : "bg-[#EBD6D3]/0 border-[#4A3B3A]/10 hover:border-[#4A3B3A]/20"
                 }`}
               >
                 {/* Book Cover */}
-                <div className="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-gray-800 to-gray-900 border border-white/5">
+                <div className="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-[#FAF7F7] to-[#FAF7F7] border border-[#4A3B3A]/5">
                   {book.cover ? (
                     <img
                       src={book.cover}
@@ -381,10 +381,10 @@ export default function Promo() {
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center p-4">
-                      <BookOpen className="h-12 w-12 text-gray-600 mb-3" />
-                      <p className="text-gray-500 text-sm text-center font-medium">{book.title}</p>
-                      <p className="text-gray-600 text-xs text-center mt-1">by {book.author}</p>
-                      <p className="text-[#d4af37]/40 text-xs mt-3 italic">Partner slot available</p>
+                      <BookOpen className="h-12 w-12 text-[#6E5F5A] mb-3" />
+                      <p className="text-[#6E5F5A] text-sm text-center font-medium">{book.title}</p>
+                      <p className="text-[#6E5F5A] text-xs text-center mt-1">by {book.author}</p>
+                      <p className="text-[#7A4F4C]/40 text-xs mt-3 italic">Partner slot available</p>
                     </div>
                   )}
                 </div>
@@ -392,22 +392,22 @@ export default function Promo() {
                 {/* Book Info */}
                 <div>
                   {book.featured && (
-                    <span className="text-[10px] text-[#d4af37] font-semibold tracking-[0.15em] uppercase mb-1 block">
+                    <span className="text-[10px] text-[#7A4F4C] font-semibold tracking-[0.15em] uppercase mb-1 block">
                       ★ Featured
                     </span>
                   )}
-                  <h3 className="font-serif text-lg font-bold text-white mb-0.5">
+                  <h3 className="font-serif text-lg font-bold text-[#4A3B3A] mb-0.5">
                     {book.title}
                   </h3>
-                  <p className="text-sm text-[#d4af37] mb-2">by {book.author}</p>
-                  <p className="text-sm text-gray-400 leading-relaxed mb-3 line-clamp-3">
+                  <p className="text-sm text-[#7A4F4C] mb-2">by {book.author}</p>
+                  <p className="text-sm text-[#6E5F5A] leading-relaxed mb-3 line-clamp-3">
                     {book.description}
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {book.tropes.map((trope) => (
                       <span
                         key={trope}
-                        className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-500"
+                        className="text-[10px] px-2 py-0.5 rounded-full bg-[#EBD6D3]/30 border border-[#4A3B3A]/10 text-[#6E5F5A]"
                       >
                         {trope}
                       </span>
@@ -427,8 +427,8 @@ export default function Promo() {
           className="mb-20"
         >
           <div className="text-center mb-10">
-            <h2 className="font-serif text-3xl font-bold text-white mb-3">
-              How It <span className="text-[#d4af37]">Works</span>
+            <h2 className="font-serif text-3xl font-bold text-[#4A3B3A] mb-3">
+              How It <span className="text-[#7A4F4C]">Works</span>
             </h2>
           </div>
 
@@ -454,14 +454,14 @@ export default function Promo() {
               },
             ].map((item, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 flex items-center justify-center mx-auto mb-4">
-                  <item.icon className="h-7 w-7 text-[#d4af37]" />
+                <div className="w-16 h-16 rounded-full bg-[#C9A3A0]/10 border border-[#B59A6A]/20 flex items-center justify-center mx-auto mb-4">
+                  <item.icon className="h-7 w-7 text-[#7A4F4C]" />
                 </div>
-                <div className="text-xs text-[#d4af37] font-semibold tracking-wider uppercase mb-2">
+                <div className="text-xs text-[#7A4F4C] font-semibold tracking-wider uppercase mb-2">
                   Step {item.step}
                 </div>
-                <h3 className="font-serif text-xl font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
+                <h3 className="font-serif text-xl font-bold text-[#4A3B3A] mb-2">{item.title}</h3>
+                <p className="text-sm text-[#6E5F5A] leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
@@ -474,16 +474,16 @@ export default function Promo() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center"
         >
-          <div className="max-w-xl mx-auto p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-[#d4af37]/20">
-            <h2 className="font-serif text-2xl font-bold text-white mb-3">
+          <div className="max-w-xl mx-auto p-8 rounded-2xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] border border-[#B59A6A]/20">
+            <h2 className="font-serif text-2xl font-bold text-[#4A3B3A] mb-3">
               Don't Miss Out
             </h2>
-            <p className="text-gray-400 mb-6">
+            <p className="text-[#6E5F5A] mb-6">
               This giveaway won't last forever. Claim your free books now before the promotion ends.
             </p>
             <Button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-8 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
             >
               <ArrowRight className="mr-2 h-5 w-5" />
               Claim Your Free Books Now
@@ -498,7 +498,7 @@ export default function Promo() {
           transition={{ duration: 0.6, delay: 0.7 }}
           className="mt-20 max-w-3xl mx-auto"
         >
-          <h2 className="font-serif text-2xl font-bold text-white text-center mb-8">
+          <h2 className="font-serif text-2xl font-bold text-[#4A3B3A] text-center mb-8">
             Frequently Asked Questions
           </h2>
 
@@ -527,10 +527,10 @@ export default function Promo() {
             ].map((faq, index) => (
               <div
                 key={index}
-                className="p-5 rounded-xl bg-white/[0.02] border border-white/10"
+                className="p-5 rounded-xl bg-[#EBD6D3]/0 border border-[#4A3B3A]/10"
               >
-                <h3 className="font-semibold text-white mb-2">{faq.q}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{faq.a}</p>
+                <h3 className="font-semibold text-[#4A3B3A] mb-2">{faq.q}</h3>
+                <p className="text-sm text-[#6E5F5A] leading-relaxed">{faq.a}</p>
               </div>
             ))}
           </div>
@@ -592,10 +592,10 @@ function PartnerApplicationForm() {
     >
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <h3 className="font-serif text-2xl font-bold text-white mb-2">
-            Are You a Romance <span className="text-[#d4af37]">Author</span>?
+          <h3 className="font-serif text-2xl font-bold text-[#4A3B3A] mb-2">
+            Are You a Romance <span className="text-[#7A4F4C]">Author</span>?
           </h3>
-          <p className="text-gray-400 leading-relaxed">
+          <p className="text-[#6E5F5A] leading-relaxed">
             Want to participate in our next group promotion? We're looking for romance authors
             with quality books to join our cross-promotion events.
           </p>
@@ -605,7 +605,7 @@ function PartnerApplicationForm() {
           <div className="text-center">
             <Button
               onClick={() => setShowForm(true)}
-              className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-8 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
             >
               Apply to Partner With Us
             </Button>
@@ -613,138 +613,138 @@ function PartnerApplicationForm() {
         )}
 
         {submitted && (
-          <div className="p-8 rounded-2xl bg-green-500/5 border border-green-500/20 text-center">
-            <CheckCircle className="h-12 w-12 text-green-400 mx-auto mb-4" />
-            <h4 className="font-serif text-xl font-bold text-white mb-2">Application Received!</h4>
-            <p className="text-gray-400">
+          <div className="p-8 rounded-2xl bg-[#7A4F4C]/5 border border-[#C9A3A0]/20 text-center">
+            <CheckCircle className="h-12 w-12 text-[#7A4F4C] mx-auto mb-4" />
+            <h4 className="font-serif text-xl font-bold text-[#4A3B3A] mb-2">Application Received!</h4>
+            <p className="text-[#6E5F5A]">
               Thank you for your interest. We'll review your application and get back to you within 48 hours.
             </p>
           </div>
         )}
 
         {showForm && !submitted && (
-          <form onSubmit={handleSubmit} className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-5">
+          <form onSubmit={handleSubmit} className="p-8 rounded-2xl bg-[#EBD6D3]/0 border border-[#4A3B3A]/10 space-y-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Author Name *</label>
+                <label className="text-xs text-[#6E5F5A] uppercase tracking-wider mb-1.5 block">Author Name *</label>
                 <Input
                   value={formData.authorName}
                   onChange={(e) => updateField("authorName", e.target.value)}
                   placeholder="Your pen name"
                   required
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                  className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-11 rounded-xl"
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Email *</label>
+                <label className="text-xs text-[#6E5F5A] uppercase tracking-wider mb-1.5 block">Email *</label>
                 <Input
                   type="email"
                   value={formData.email}
                   onChange={(e) => updateField("email", e.target.value)}
                   placeholder="author@example.com"
                   required
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                  className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-11 rounded-xl"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Website</label>
+                <label className="text-xs text-[#6E5F5A] uppercase tracking-wider mb-1.5 block">Website</label>
                 <Input
                   value={formData.website}
                   onChange={(e) => updateField("website", e.target.value)}
                   placeholder="https://yoursite.com"
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                  className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-11 rounded-xl"
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Newsletter Subscribers</label>
+                <label className="text-xs text-[#6E5F5A] uppercase tracking-wider mb-1.5 block">Newsletter Subscribers</label>
                 <Input
                   value={formData.subscriberCount}
                   onChange={(e) => updateField("subscriberCount", e.target.value)}
                   placeholder="e.g. 2,500"
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                  className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-11 rounded-xl"
                 />
               </div>
             </div>
 
-            <div className="border-t border-white/5 pt-5">
-              <h4 className="text-sm font-semibold text-white mb-4">Book Details</h4>
+            <div className="border-t border-[#4A3B3A]/5 pt-5">
+              <h4 className="text-sm font-semibold text-[#4A3B3A] mb-4">Book Details</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Book Title *</label>
+                  <label className="text-xs text-[#6E5F5A] uppercase tracking-wider mb-1.5 block">Book Title *</label>
                   <Input
                     value={formData.bookTitle}
                     onChange={(e) => updateField("bookTitle", e.target.value)}
                     placeholder="Your book title"
                     required
-                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                    className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-11 rounded-xl"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Genre *</label>
+                  <label className="text-xs text-[#6E5F5A] uppercase tracking-wider mb-1.5 block">Genre *</label>
                   <Input
                     value={formData.genre}
                     onChange={(e) => updateField("genre", e.target.value)}
                     placeholder="e.g. Billionaire Romance"
                     required
-                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                    className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-11 rounded-xl"
                   />
                 </div>
               </div>
             </div>
 
             <div>
-              <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Tropes (comma-separated)</label>
+              <label className="text-xs text-[#6E5F5A] uppercase tracking-wider mb-1.5 block">Tropes (comma-separated)</label>
               <Input
                 value={formData.tropes}
                 onChange={(e) => updateField("tropes", e.target.value)}
                 placeholder="e.g. Enemies to Lovers, Office Romance, Second Chance"
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-11 rounded-xl"
               />
             </div>
 
             <div>
-              <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Book Description *</label>
+              <label className="text-xs text-[#6E5F5A] uppercase tracking-wider mb-1.5 block">Book Description *</label>
               <textarea
                 value={formData.bookDescription}
                 onChange={(e) => updateField("bookDescription", e.target.value)}
                 placeholder="A brief description of your book (2-3 sentences)..."
                 required
                 rows={3}
-                className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#d4af37]/30 resize-none"
+                className="w-full bg-[#EBD6D3]/30 border border-[#4A3B3A]/10 rounded-xl p-3 text-sm text-[#4A3B3A] placeholder:text-[#6E5F5A] focus:outline-none focus:border-[#B59A6A]/30 resize-none"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">BookFunnel/StoryOrigin Link</label>
+                <label className="text-xs text-[#6E5F5A] uppercase tracking-wider mb-1.5 block">BookFunnel/StoryOrigin Link</label>
                 <Input
                   value={formData.downloadLink}
                   onChange={(e) => updateField("downloadLink", e.target.value)}
                   placeholder="https://bookfunnel.com/..."
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                  className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-11 rounded-xl"
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Cover Image URL</label>
+                <label className="text-xs text-[#6E5F5A] uppercase tracking-wider mb-1.5 block">Cover Image URL</label>
                 <Input
                   value={formData.coverImageUrl}
                   onChange={(e) => updateField("coverImageUrl", e.target.value)}
                   placeholder="https://..."
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                  className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-11 rounded-xl"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-xs text-gray-400 uppercase tracking-wider mb-1.5 block">Social Media Links</label>
+              <label className="text-xs text-[#6E5F5A] uppercase tracking-wider mb-1.5 block">Social Media Links</label>
               <Input
                 value={formData.socialLinks}
                 onChange={(e) => updateField("socialLinks", e.target.value)}
                 placeholder="Instagram, TikTok, Facebook URLs (comma-separated)"
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-600 h-11 rounded-xl"
+                className="bg-[#EBD6D3]/30 border-[#4A3B3A]/10 text-[#4A3B3A] placeholder:text-[#6E5F5A] h-11 rounded-xl"
               />
             </div>
 
@@ -752,7 +752,7 @@ function PartnerApplicationForm() {
               <Button
                 type="submit"
                 disabled={submitMutation.isPending}
-                className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
+                className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-8 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
               >
                 {submitMutation.isPending ? "Submitting..." : "Submit Application"}
               </Button>
@@ -760,7 +760,7 @@ function PartnerApplicationForm() {
                 type="button"
                 variant="outline"
                 onClick={() => setShowForm(false)}
-                className="border-white/10 text-gray-400 hover:text-white rounded-full"
+                className="border-[#4A3B3A]/10 text-[#6E5F5A] hover:text-[#4A3B3A] rounded-full"
               >
                 Cancel
               </Button>

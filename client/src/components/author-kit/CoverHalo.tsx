@@ -56,7 +56,7 @@ export function CoverHalo({ src, title, alt, width = 280, className = "" }: Prop
           style={{
             width: "100%",
             height: "auto",
-            boxShadow: "0 22px 48px rgba(0, 0, 0, 0.55)",
+            boxShadow: "0 22px 48px rgba(74, 59, 58, 0.55)",
             border: `1px solid ${GOLD}33`,
             zIndex: 1,
           }}
@@ -69,12 +69,12 @@ export function CoverHalo({ src, title, alt, width = 280, className = "" }: Prop
           style={{
             width: "100%",
             aspectRatio: "2 / 3",
-            background: "#10131c",
+            background: "#FAF7F7",
             color: TEXT,
             padding: "12%",
             fontSize: Math.max(14, Math.round(width * 0.075)),
             lineHeight: 1.3,
-            boxShadow: "0 22px 48px rgba(0, 0, 0, 0.55)",
+            boxShadow: "0 22px 48px rgba(74, 59, 58, 0.55)",
             border: `1px solid ${GOLD}33`,
             zIndex: 1,
           }}

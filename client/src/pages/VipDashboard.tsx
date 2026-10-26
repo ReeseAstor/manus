@@ -54,9 +54,9 @@ export default function VipDashboard() {
     : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100">
+    <div className="min-h-screen bg-gradient-to-br from-[#EBD6D3] via-[#EBD6D3] to-[#EBD6D3]">
       {/* Header */}
-      <div className="bg-gradient-to-r from-pink-600 to-purple-600 text-white py-8">
+      <div className="bg-[#4A3B3A] text-[#FAF7F7] py-8">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             <div>
@@ -64,13 +64,13 @@ export default function VipDashboard() {
                 <Crown className="w-8 h-8" />
                 <h1 className="text-3xl font-bold">VIP Dashboard</h1>
               </div>
-              <p className="text-pink-100">
+              <p className="text-[#7A4F4C]">
                 Welcome back, {user.name || 'VIP Member'}!
               </p>
             </div>
             <button
               onClick={() => setLocation('/vip-audio-library')}
-              className="px-6 py-3 bg-white text-pink-600 rounded-lg font-semibold hover:shadow-lg transition-all"
+              className="px-6 py-3 bg-[#FAF7F7] text-[#7A4F4C] rounded-lg font-semibold hover:shadow-lg transition-all"
             >
               Browse Library
             </button>
@@ -80,13 +80,13 @@ export default function VipDashboard() {
 
       <div className="container mx-auto px-4 py-8">
         {/* Tabs */}
-        <div className="bg-white rounded-xl shadow-lg mb-8 p-2 flex gap-2">
+        <div className="bg-[#FAF7F7] rounded-xl shadow-lg mb-8 p-2 flex gap-2">
           <button
             onClick={() => setActiveTab('overview')}
             className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
               activeTab === 'overview'
-                ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white'
-                : 'text-gray-600 hover:bg-gray-100'
+                ? 'bg-[#4A3B3A] text-[#FAF7F7]'
+                : 'text-[#6E5F5A] hover:bg-[#F0E6E5]'
             }`}
           >
             Overview
@@ -95,8 +95,8 @@ export default function VipDashboard() {
             onClick={() => setActiveTab('library')}
             className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
               activeTab === 'library'
-                ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white'
-                : 'text-gray-600 hover:bg-gray-100'
+                ? 'bg-[#4A3B3A] text-[#FAF7F7]'
+                : 'text-[#6E5F5A] hover:bg-[#F0E6E5]'
             }`}
           >
             My Library
@@ -105,8 +105,8 @@ export default function VipDashboard() {
             onClick={() => setActiveTab('history')}
             className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
               activeTab === 'history'
-                ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white'
-                : 'text-gray-600 hover:bg-gray-100'
+                ? 'bg-[#4A3B3A] text-[#FAF7F7]'
+                : 'text-[#6E5F5A] hover:bg-[#F0E6E5]'
             }`}
           >
             History
@@ -115,8 +115,8 @@ export default function VipDashboard() {
             onClick={() => setActiveTab('settings')}
             className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
               activeTab === 'settings'
-                ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white'
-                : 'text-gray-600 hover:bg-gray-100'
+                ? 'bg-[#4A3B3A] text-[#FAF7F7]'
+                : 'text-[#6E5F5A] hover:bg-[#F0E6E5]'
             }`}
           >
             Settings
@@ -128,59 +128,59 @@ export default function VipDashboard() {
           <div className="space-y-8">
             {/* Stats Grid */}
             <div className="grid md:grid-cols-4 gap-6">
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="bg-[#FAF7F7] rounded-xl shadow-lg p-6">
                 <div className="flex items-center gap-3 mb-2">
-                  <BookOpen className="w-6 h-6 text-pink-600" />
-                  <h3 className="text-sm font-semibold text-gray-600">Stories Played</h3>
+                  <BookOpen className="w-6 h-6 text-[#7A4F4C]" />
+                  <h3 className="text-sm font-semibold text-[#6E5F5A]">Stories Played</h3>
                 </div>
-                <p className="text-3xl font-bold text-gray-900">{statsReady ? dashboard?.storiesPlayed ?? 0 : "—"}</p>
+                <p className="text-3xl font-bold text-[#4A3B3A]">{statsReady ? dashboard?.storiesPlayed ?? 0 : "—"}</p>
               </div>
 
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="bg-[#FAF7F7] rounded-xl shadow-lg p-6">
                 <div className="flex items-center gap-3 mb-2">
-                  <Headphones className="w-6 h-6 text-purple-600" />
-                  <h3 className="text-sm font-semibold text-gray-600">Minutes Listened</h3>
+                  <Headphones className="w-6 h-6 text-[#7A4F4C]" />
+                  <h3 className="text-sm font-semibold text-[#6E5F5A]">Minutes Listened</h3>
                 </div>
-                <p className="text-3xl font-bold text-gray-900">{statsReady ? dashboard?.minutesPlayed ?? 0 : "—"}</p>
+                <p className="text-3xl font-bold text-[#4A3B3A]">{statsReady ? dashboard?.minutesPlayed ?? 0 : "—"}</p>
               </div>
 
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="bg-[#FAF7F7] rounded-xl shadow-lg p-6">
                 <div className="flex items-center gap-3 mb-2">
-                  <Heart className="w-6 h-6 text-rose-600" />
-                  <h3 className="text-sm font-semibold text-gray-600">Favorites</h3>
+                  <Heart className="w-6 h-6 text-[#7A4F4C]" />
+                  <h3 className="text-sm font-semibold text-[#6E5F5A]">Favorites</h3>
                 </div>
-                <p className="text-3xl font-bold text-gray-900">{statsReady ? dashboard?.favorites.length ?? 0 : "—"}</p>
+                <p className="text-3xl font-bold text-[#4A3B3A]">{statsReady ? dashboard?.favorites.length ?? 0 : "—"}</p>
               </div>
 
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="bg-[#FAF7F7] rounded-xl shadow-lg p-6">
                 <div className="flex items-center gap-3 mb-2">
-                  <Crown className="w-6 h-6 text-amber-600" />
-                  <h3 className="text-sm font-semibold text-gray-600">Member Since</h3>
+                  <Crown className="w-6 h-6 text-[#7A4F4C]" />
+                  <h3 className="text-sm font-semibold text-[#6E5F5A]">Member Since</h3>
                 </div>
-                <p className="text-xl font-bold text-gray-900">{memberSince}</p>
+                <p className="text-xl font-bold text-[#4A3B3A]">{memberSince}</p>
               </div>
             </div>
 
             {/* Continue Reading */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Continue Reading</h2>
+            <div className="bg-[#FAF7F7] rounded-xl shadow-lg p-8">
+              <h2 className="text-2xl font-bold text-[#4A3B3A] mb-6">Continue Reading</h2>
               <div className="grid md:grid-cols-3 gap-6">
                 {recentStories.map((story) => (
                   <div
                     key={story.id}
-                    className="border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-all cursor-pointer"
+                    className="border border-[#E5D6D3] rounded-lg p-4 hover:shadow-lg transition-all cursor-pointer"
                     onClick={() => setLocation(`/vip-audio-library`)}
                   >
-                    <div className="inline-block px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-xs font-semibold mb-3">
+                    <div className="inline-block px-3 py-1 bg-[#EBD6D3] text-[#7A4F4C] rounded-full text-xs font-semibold mb-3">
                       {story.category?.toUpperCase() || 'ROMANCE'}
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{story.title}</h3>
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                    <h3 className="text-lg font-bold text-[#4A3B3A] mb-2">{story.title}</h3>
+                    <p className="text-sm text-[#6E5F5A] mb-3 line-clamp-2">
                       {story.excerpt || story.content?.substring(0, 100)}...
                     </p>
                     <div className="flex items-center gap-1">
                       {Array.from({ length: story.heatLevel || 4 }).map((_, i) => (
-                        <span key={i} className="text-orange-500 text-sm">🔥</span>
+                        <span key={i} className="text-[#7A4F4C] text-sm">🔥</span>
                       ))}
                     </div>
                   </div>
@@ -189,22 +189,22 @@ export default function VipDashboard() {
             </div>
 
             {/* Subscription Status */}
-            <div className="bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl shadow-lg p-8 text-white">
+            <div className="bg-[#4A3B3A] rounded-xl shadow-lg p-8 text-[#FAF7F7]">
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-2xl font-bold mb-2">Your Subscription</h2>
-                  <p className="text-pink-100 mb-4">
+                  <p className="text-[#7A4F4C] mb-4">
                     {membershipLabel(dashboard?.subscriptionStatus)}
                   </p>
                   {nextBilling && (
-                    <p className="text-sm text-pink-100">
+                    <p className="text-sm text-[#7A4F4C]">
                       Current period ends {nextBilling}
                     </p>
                   )}
                 </div>
                 <button
                   onClick={() => setActiveTab('settings')}
-                  className="px-6 py-3 bg-white text-pink-600 rounded-lg font-semibold hover:shadow-lg transition-all"
+                  className="px-6 py-3 bg-[#FAF7F7] text-[#7A4F4C] rounded-lg font-semibold hover:shadow-lg transition-all"
                 >
                   Manage Subscription
                 </button>
@@ -215,34 +215,34 @@ export default function VipDashboard() {
 
         {/* My Library Tab */}
         {activeTab === 'library' && (
-          <div className="bg-white rounded-xl shadow-lg p-8">
+          <div className="bg-[#FAF7F7] rounded-xl shadow-lg p-8">
             <div className="flex items-center gap-3 mb-6">
-              <Heart className="w-8 h-8 text-rose-600" />
-              <h2 className="text-2xl font-bold text-gray-900">Favorite Stories</h2>
+              <Heart className="w-8 h-8 text-[#7A4F4C]" />
+              <h2 className="text-2xl font-bold text-[#4A3B3A]">Favorite Stories</h2>
             </div>
-            <p className="text-gray-600 mb-6">
+            <p className="text-[#6E5F5A] mb-6">
               Stories you've marked as favorites will appear here.
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               {(dashboard?.favorites ?? []).map((story) => (
                 <div
                   key={story.id}
-                  className="border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-all cursor-pointer"
+                  className="border border-[#E5D6D3] rounded-lg p-4 hover:shadow-lg transition-all cursor-pointer"
                   onClick={() => setLocation(`/vip-audio-library`)}
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <div className="inline-block px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-xs font-semibold">
+                    <div className="inline-block px-3 py-1 bg-[#EBD6D3] text-[#7A4F4C] rounded-full text-xs font-semibold">
                       {story.category?.toUpperCase() || 'ROMANCE'}
                     </div>
-                    <Heart className="w-5 h-5 text-rose-600 fill-rose-600" />
+                    <Heart className="w-5 h-5 text-[#7A4F4C] fill-[#7A4F4C]" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{story.title}</h3>
-                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                  <h3 className="text-lg font-bold text-[#4A3B3A] mb-2">{story.title}</h3>
+                  <p className="text-sm text-[#6E5F5A] mb-3 line-clamp-2">
                     {story.excerpt}
                   </p>
                   <div className="flex items-center gap-1">
                     {Array.from({ length: story.heatLevel || 4 }).map((_, i) => (
-                      <span key={i} className="text-orange-500 text-sm">🔥</span>
+                      <span key={i} className="text-[#7A4F4C] text-sm">🔥</span>
                     ))}
                   </div>
                 </div>
@@ -253,33 +253,33 @@ export default function VipDashboard() {
 
         {/* History Tab */}
         {activeTab === 'history' && (
-          <div className="bg-white rounded-xl shadow-lg p-8">
+          <div className="bg-[#FAF7F7] rounded-xl shadow-lg p-8">
             <div className="flex items-center gap-3 mb-6">
-              <Clock className="w-8 h-8 text-purple-600" />
-              <h2 className="text-2xl font-bold text-gray-900">Listening History</h2>
+              <Clock className="w-8 h-8 text-[#7A4F4C]" />
+              <h2 className="text-2xl font-bold text-[#4A3B3A]">Listening History</h2>
             </div>
-            <p className="text-gray-600 mb-6">
+            <p className="text-[#6E5F5A] mb-6">
               Track your reading and listening progress across all VIP stories.
             </p>
             <div className="space-y-4">
               {dashboardQuery.isError && (
-                <p className="text-gray-600">Listening history is unavailable right now.</p>
+                <p className="text-[#6E5F5A]">Listening history is unavailable right now.</p>
               )}
               {statsReady && (dashboard?.history.length ?? 0) === 0 && (
-                <p className="text-gray-600">No listening history yet.</p>
+                <p className="text-[#6E5F5A]">No listening history yet.</p>
               )}
               {(dashboard?.history ?? []).map((story) => (
                 <div
                   key={story.id}
-                  className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:shadow-lg transition-all cursor-pointer"
+                  className="flex items-center gap-4 p-4 border border-[#E5D6D3] rounded-lg hover:shadow-lg transition-all cursor-pointer"
                   onClick={() => setLocation(`/vip-audio-library`)}
                 >
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-100 to-purple-100 rounded-lg flex items-center justify-center">
-                    <Headphones className="w-6 h-6 text-purple-600" />
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-[#EBD6D3] to-[#EBD6D3] rounded-lg flex items-center justify-center">
+                    <Headphones className="w-6 h-6 text-[#7A4F4C]" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-gray-900">{story.title}</h3>
-                    <p className="text-sm text-gray-600">
+                    <h3 className="font-bold text-[#4A3B3A]">{story.title}</h3>
+                    <p className="text-sm text-[#6E5F5A]">
                       {new Date(story.playedAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                       {' • '}
                       {(story.progress ?? 0) < 60
@@ -289,7 +289,7 @@ export default function VipDashboard() {
                   </div>
                   <div className="flex items-center gap-1">
                     {Array.from({ length: story.heatLevel || 4 }).map((_, i) => (
-                      <span key={i} className="text-orange-500 text-sm">🔥</span>
+                      <span key={i} className="text-[#7A4F4C] text-sm">🔥</span>
                     ))}
                   </div>
                 </div>
@@ -301,43 +301,43 @@ export default function VipDashboard() {
         {/* Settings Tab */}
         {activeTab === 'settings' && (
           <div className="space-y-6">
-            <div className="bg-white rounded-xl shadow-lg p-8">
+            <div className="bg-[#FAF7F7] rounded-xl shadow-lg p-8">
               <div className="flex items-center gap-3 mb-6">
-                <Settings className="w-8 h-8 text-gray-600" />
-                <h2 className="text-2xl font-bold text-gray-900">Account Settings</h2>
+                <Settings className="w-8 h-8 text-[#6E5F5A]" />
+                <h2 className="text-2xl font-bold text-[#4A3B3A]">Account Settings</h2>
               </div>
               
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-[#4A3B3A] mb-2">
                     Email
                   </label>
                   <input
                     type="email"
                     value={user.email || ''}
                     disabled
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-600"
+                    className="w-full px-4 py-3 border border-[#E5D6D3] rounded-lg bg-[#F0E6E5] text-[#6E5F5A]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-[#4A3B3A] mb-2">
                     Name
                   </label>
                   <input
                     type="text"
                     value={user.name || ''}
                     disabled
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-600"
+                    className="w-full px-4 py-3 border border-[#E5D6D3] rounded-lg bg-[#F0E6E5] text-[#6E5F5A]"
                   />
                 </div>
 
-                <div className="pt-6 border-t border-gray-200">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Subscription Management</h3>
-                  <p className="text-gray-600 mb-4">
+                <div className="pt-6 border-t border-[#E5D6D3]">
+                  <h3 className="text-lg font-bold text-[#4A3B3A] mb-4">Subscription Management</h3>
+                  <p className="text-[#6E5F5A] mb-4">
                     Manage your VIP membership, update payment method, or cancel your subscription.
                   </p>
-                  <button className="px-6 py-3 bg-gradient-to-r from-pink-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all">
+                  <button className="px-6 py-3 bg-[#4A3B3A] text-[#FAF7F7] rounded-lg font-semibold hover:shadow-lg transition-all">
                     Manage in Stripe
                   </button>
                 </div>

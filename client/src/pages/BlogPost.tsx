@@ -62,21 +62,21 @@ export default function BlogPost() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a] flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-[#d4af37]" />
+      <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7] flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-[#7A4F4C]" />
       </div>
     );
   }
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a] flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7] flex items-center justify-center">
         <div className="text-center space-y-6">
-          <h1 className="font-serif text-4xl font-bold text-white">Post Not Found</h1>
-          <p className="text-gray-400">The blog post you're looking for doesn't exist.</p>
+          <h1 className="font-serif text-4xl font-bold text-[#4A3B3A]">Post Not Found</h1>
+          <p className="text-[#6E5F5A]">The blog post you're looking for doesn't exist.</p>
           <Button
             asChild
-            className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-6 rounded-full"
+            className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-8 py-6 rounded-full"
           >
             <Link href="/blog">Back to Blog</Link>
           </Button>
@@ -86,7 +86,7 @@ export default function BlogPost() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+    <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7]">
       <EnhancedSEOHead
         title={`${post.title} | Reese Astor`}
         description={(post as { metaDescription?: string | null }).metaDescription || post.excerpt || post.title}
@@ -123,11 +123,11 @@ export default function BlogPost() {
             backgroundAttachment: "fixed",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/98 via-[#0a0e1a]/95 to-[#0a0e1a]/98" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F7]/98 via-[#FAF7F7]/95 to-[#FAF7F7]/98" />
         </div>
 
         {/* Gold ambient glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-[#d4af37]/10 blur-[120px] rounded-full" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-[#C9A3A0]/10 blur-[120px] rounded-full" />
 
         <div className="container relative z-10">
           <motion.div
@@ -140,7 +140,7 @@ export default function BlogPost() {
             <Link href="/blog">
               <Button
                 variant="ghost"
-                className="mb-8 text-gray-400 hover:text-[#d4af37] hover:bg-white/5"
+                className="mb-8 text-[#6E5F5A] hover:text-[#7A4F4C] hover:bg-[#EBD6D3]/30"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Blog
@@ -148,17 +148,17 @@ export default function BlogPost() {
             </Link>
 
             {/* Category Badge */}
-            <Badge className="bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 px-4 py-1 text-sm font-medium mb-6">
+            <Badge className="bg-[#C9A3A0]/10 text-[#7A4F4C] border border-[#B59A6A]/30 px-4 py-1 text-sm font-medium mb-6">
               {post.category}
             </Badge>
 
             {/* Title */}
-            <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="font-serif text-4xl md:text-6xl font-bold text-[#4A3B3A] mb-6 leading-tight">
               {post.title}
             </h1>
 
             {/* Meta Info */}
-            <div className="flex flex-wrap items-center gap-6 text-gray-400 mb-8">
+            <div className="flex flex-wrap items-center gap-6 text-[#6E5F5A] mb-8">
               <div className="flex items-center gap-2">
                 <Calendar className="h-5 w-5" />
                 <span>
@@ -174,13 +174,13 @@ export default function BlogPost() {
             </div>
 
             {/* Share Buttons */}
-            <div className="flex items-center gap-3 pb-8 border-b border-white/10">
-              <span className="text-gray-400 text-sm font-medium">Share:</span>
+            <div className="flex items-center gap-3 pb-8 border-b border-[#4A3B3A]/10">
+              <span className="text-[#6E5F5A] text-sm font-medium">Share:</span>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => handleShare("twitter")}
-                className="text-gray-400 hover:text-[#d4af37] hover:bg-white/5"
+                className="text-[#6E5F5A] hover:text-[#7A4F4C] hover:bg-[#EBD6D3]/30"
               >
                 <Twitter className="h-4 w-4" />
               </Button>
@@ -188,7 +188,7 @@ export default function BlogPost() {
                 variant="ghost"
                 size="sm"
                 onClick={() => handleShare("facebook")}
-                className="text-gray-400 hover:text-[#d4af37] hover:bg-white/5"
+                className="text-[#6E5F5A] hover:text-[#7A4F4C] hover:bg-[#EBD6D3]/30"
               >
                 <Facebook className="h-4 w-4" />
               </Button>
@@ -196,7 +196,7 @@ export default function BlogPost() {
                 variant="ghost"
                 size="sm"
                 onClick={() => handleShare("linkedin")}
-                className="text-gray-400 hover:text-[#d4af37] hover:bg-white/5"
+                className="text-[#6E5F5A] hover:text-[#7A4F4C] hover:bg-[#EBD6D3]/30"
               >
                 <Linkedin className="h-4 w-4" />
               </Button>
@@ -204,7 +204,7 @@ export default function BlogPost() {
                 variant="ghost"
                 size="sm"
                 onClick={() => handleShare("copy")}
-                className="text-gray-400 hover:text-[#d4af37] hover:bg-white/5"
+                className="text-[#6E5F5A] hover:text-[#7A4F4C] hover:bg-[#EBD6D3]/30"
               >
                 <Share2 className="h-4 w-4" />
               </Button>
@@ -221,14 +221,14 @@ export default function BlogPost() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 -mt-8"
+              className="relative rounded-2xl overflow-hidden shadow-2xl shadow-[#4A3B3A]/50 -mt-8"
             >
               <img
                 src={post.featuredImage}
                 alt={post.title}
                 className="w-full h-[300px] md:h-[450px] object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F7]/40 to-transparent" />
             </motion.div>
           </div>
         </section>
@@ -252,24 +252,24 @@ export default function BlogPost() {
             className="max-w-4xl mx-auto"
           >
             {/* Excerpt */}
-            <div className="mb-12 p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10">
-              <p className="text-xl text-gray-300 leading-relaxed italic">
+            <div className="mb-12 p-8 rounded-3xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10">
+              <p className="text-xl text-[#6E5F5A] leading-relaxed italic">
                 {post.excerpt}
               </p>
             </div>
 
             {/* Audio Player */}
             {post.audioUrl && (
-              <div className="mb-12 p-8 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl">
+              <div className="mb-12 p-8 rounded-3xl bg-gradient-to-br from-[#C9A3A0]/10 via-transparent to-[#C9A3A0]/5 border-2 border-[#B59A6A]/20 backdrop-blur-xl">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#d4af37] to-[#c9a961] flex items-center justify-center">
-                    <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#C9A3A0] to-[#C9A3A0] flex items-center justify-center">
+                    <svg className="w-6 h-6 text-[#4A3B3A]" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-serif text-xl font-bold text-white">Listen to this Article</h3>
-                    <p className="text-sm text-gray-400">Audio narration available</p>
+                    <h3 className="font-serif text-xl font-bold text-[#4A3B3A]">Listen to this Article</h3>
+                    <p className="text-sm text-[#6E5F5A]">Audio narration available</p>
                   </div>
                 </div>
                 <audio
@@ -291,7 +291,7 @@ export default function BlogPost() {
 
             {/* Main Content */}
             <div className="prose prose-lg prose-invert max-w-none mb-16">
-              <div className="text-gray-300 leading-relaxed space-y-6 text-lg">
+              <div className="text-[#6E5F5A] leading-relaxed space-y-6 text-lg">
                 <Streamdown>{post.content}</Streamdown>
               </div>
             </div>
@@ -310,25 +310,25 @@ export default function BlogPost() {
             )}
 
             {/* Author Bio Section */}
-            <div className="p-10 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl mb-16">
+            <div className="p-10 rounded-3xl bg-gradient-to-br from-[#C9A3A0]/10 via-transparent to-[#C9A3A0]/5 border-2 border-[#B59A6A]/20 backdrop-blur-xl shadow-2xl mb-16">
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="flex-shrink-0">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 flex items-center justify-center border-2 border-[#d4af37]/30">
-                    <span className="text-3xl font-serif font-bold text-[#d4af37]">RA</span>
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#C9A3A0]/20 to-[#C9A3A0]/10 flex items-center justify-center border-2 border-[#B59A6A]/30">
+                    <span className="text-3xl font-serif font-bold text-[#7A4F4C]">RA</span>
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-serif text-2xl font-bold text-white mb-3">
+                  <h3 className="font-serif text-2xl font-bold text-[#4A3B3A] mb-3">
                     About Reese Astor
                   </h3>
-                  <p className="text-gray-300 leading-relaxed mb-4">
+                  <p className="text-[#6E5F5A] leading-relaxed mb-4">
                     Reese Astor writes steamy billionaire romance set in Manhattan: the Hudson Dynasty and the Manhattan Money Kings. Every book stands alone and ends happily.
                   </p>
                   <div className="flex gap-3">
                     <Button
                       asChild
                       size="sm"
-                      className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-6 py-5 rounded-full"
+                      className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-6 py-5 rounded-full"
                     >
                       <Link href="/about">Learn More</Link>
                     </Button>
@@ -336,7 +336,7 @@ export default function BlogPost() {
                       asChild
                       size="sm"
                       variant="outline"
-                      className="border-2 border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold px-6 py-5 rounded-full"
+                      className="border-2 border-[#4A3B3A]/20 bg-[#EBD6D3]/30 hover:bg-[#EBD6D3]/60 text-[#4A3B3A] font-semibold px-6 py-5 rounded-full"
                     >
                       <Link href="/books">View Books</Link>
                     </Button>
@@ -362,7 +362,7 @@ export default function BlogPost() {
               backgroundAttachment: "fixed",
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/98 via-[#0a0e1a]/95 to-[#0a0e1a]/98" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F7]/98 via-[#FAF7F7]/95 to-[#FAF7F7]/98" />
           </div>
 
           <div className="container relative z-10">
@@ -373,7 +373,7 @@ export default function BlogPost() {
               transition={{ duration: 0.8 }}
               className="max-w-6xl mx-auto"
             >
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-white text-center mb-12">
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#4A3B3A] text-center mb-12">
                 Related Articles
               </h2>
 
@@ -389,21 +389,21 @@ export default function BlogPost() {
                     className="group"
                   >
                     <Link href={`/blog/${relatedPost.slug}`}>
-                      <div className="h-full p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/30 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-[#d4af37]/10">
+                      <div className="h-full p-8 rounded-3xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 hover:border-[#B59A6A]/30 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-[#C9A3A0]/10">
                         <div className="space-y-4">
-                          <Badge className="bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 px-4 py-1 text-xs font-medium">
+                          <Badge className="bg-[#C9A3A0]/10 text-[#7A4F4C] border border-[#B59A6A]/30 px-4 py-1 text-xs font-medium">
                             {relatedPost.category}
                           </Badge>
 
-                          <h3 className="font-serif text-xl font-bold text-white group-hover:text-[#d4af37] transition-colors leading-tight">
+                          <h3 className="font-serif text-xl font-bold text-[#4A3B3A] group-hover:text-[#7A4F4C] transition-colors leading-tight">
                             {relatedPost.title}
                           </h3>
 
-                          <p className="text-gray-400 leading-relaxed line-clamp-3 text-sm">
+                          <p className="text-[#6E5F5A] leading-relaxed line-clamp-3 text-sm">
                             {relatedPost.excerpt}
                           </p>
 
-                          <div className="flex items-center gap-3 text-xs text-gray-500 pt-4 border-t border-white/10">
+                          <div className="flex items-center gap-3 text-xs text-[#6E5F5A] pt-4 border-t border-[#4A3B3A]/10">
                             <div className="flex items-center gap-1">
                               <Clock className="h-3 w-3" />
                               <span>{relatedPost.readTime}</span>
@@ -420,7 +420,7 @@ export default function BlogPost() {
                 <Button
                   asChild
                   size="lg"
-                  className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                 >
                   <Link href="/blog">View All Articles</Link>
                 </Button>

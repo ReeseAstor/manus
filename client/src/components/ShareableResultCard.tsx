@@ -78,32 +78,32 @@ export function ShareableResultCard({
 
       // Background gradient
       const gradient = ctx.createLinearGradient(0, 0, 1080, 1080);
-      gradient.addColorStop(0, "#0a0a0a");
-      gradient.addColorStop(0.5, "#1a1a1a");
-      gradient.addColorStop(1, "#0a0a0a");
+      gradient.addColorStop(0, "#4A3B3A");
+      gradient.addColorStop(0.5, "#4A3B3A");
+      gradient.addColorStop(1, "#4A3B3A");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, 1080, 1080);
 
       // Gold border
-      ctx.strokeStyle = "#d4af37";
+      ctx.strokeStyle = "#7A4F4C";
       ctx.lineWidth = 4;
       ctx.strokeRect(40, 40, 1000, 1000);
 
       // Inner border
-      ctx.strokeStyle = "rgba(212, 175, 55, 0.3)";
+      ctx.strokeStyle = "rgba(201, 163, 160, 0.3)";
       ctx.lineWidth = 1;
       ctx.strokeRect(55, 55, 970, 970);
 
       // Top badge
-      ctx.fillStyle = "rgba(212, 175, 55, 0.15)";
+      ctx.fillStyle = "rgba(201, 163, 160, 0.15)";
       roundRect(ctx, 370, 100, 340, 44, 22);
       ctx.fill();
-      ctx.strokeStyle = "rgba(212, 175, 55, 0.3)";
+      ctx.strokeStyle = "rgba(201, 163, 160, 0.3)";
       ctx.lineWidth = 1;
       roundRect(ctx, 370, 100, 340, 44, 22);
       ctx.stroke();
 
-      ctx.fillStyle = "#d4af37";
+      ctx.fillStyle = "#7A4F4C";
       ctx.font = "600 14px 'Inter', sans-serif";
       ctx.textAlign = "center";
       ctx.fillText("MY ROMANCE TROPE IS", 540, 128);
@@ -114,18 +114,18 @@ export function ShareableResultCard({
       ctx.fillText(icon, 540, 230);
 
       // Title
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = "#4A3B3A";
       ctx.font = "bold 56px 'Georgia', serif";
       ctx.textAlign = "center";
       ctx.fillText(title, 540, 310);
 
       // Subtitle
-      ctx.fillStyle = "#d4af37";
+      ctx.fillStyle = "#7A4F4C";
       ctx.font = "italic 24px 'Georgia', serif";
       ctx.fillText(`"${subtitle}"`, 540, 360);
 
       // Divider line
-      ctx.strokeStyle = "rgba(212, 175, 55, 0.4)";
+      ctx.strokeStyle = "rgba(201, 163, 160, 0.4)";
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(340, 400);
@@ -133,18 +133,18 @@ export function ShareableResultCard({
       ctx.stroke();
 
       // Book recommendation label
-      ctx.fillStyle = "#d4af37";
+      ctx.fillStyle = "#7A4F4C";
       ctx.font = "600 13px 'Inter', sans-serif";
       ctx.textAlign = "center";
       ctx.fillText("MY PERFECT BOOK MATCH", 540, 450);
 
       // Book title
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = "#4A3B3A";
       ctx.font = "bold 30px 'Georgia', serif";
       ctx.fillText(bookTitle, 540, 500);
 
       // Stars
-      ctx.fillStyle = "#d4af37";
+      ctx.fillStyle = "#7A4F4C";
       ctx.font = "20px serif";
       ctx.fillText("★ ★ ★ ★ ★", 540, 540);
 
@@ -159,7 +159,7 @@ export function ShareableResultCard({
         });
 
         // Book cover with shadow
-        ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+        ctx.shadowColor = "rgba(74, 59, 58, 0.5)";
         ctx.shadowBlur = 30;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 10;
@@ -183,24 +183,24 @@ export function ShareableResultCard({
         ctx.shadowOffsetY = 0;
       } catch {
         // If image fails, draw placeholder
-        ctx.fillStyle = "rgba(212, 175, 55, 0.1)";
+        ctx.fillStyle = "rgba(201, 163, 160, 0.1)";
         roundRect(ctx, 450, 570, 180, 270, 12);
         ctx.fill();
-        ctx.fillStyle = "#d4af37";
+        ctx.fillStyle = "#7A4F4C";
         ctx.font = "16px 'Inter', sans-serif";
         ctx.fillText(bookTitle, 540, 710);
       }
 
       // Bottom CTA
-      ctx.fillStyle = "rgba(212, 175, 55, 0.15)";
+      ctx.fillStyle = "rgba(201, 163, 160, 0.15)";
       roundRect(ctx, 280, 880, 520, 50, 25);
       ctx.fill();
-      ctx.strokeStyle = "rgba(212, 175, 55, 0.4)";
+      ctx.strokeStyle = "rgba(201, 163, 160, 0.4)";
       ctx.lineWidth = 1;
       roundRect(ctx, 280, 880, 520, 50, 25);
       ctx.stroke();
 
-      ctx.fillStyle = "#d4af37";
+      ctx.fillStyle = "#7A4F4C";
       ctx.font = "600 16px 'Inter', sans-serif";
       ctx.textAlign = "center";
       ctx.fillText("Take the quiz → reeseastor.com/romance-quiz", 540, 912);
@@ -228,7 +228,7 @@ export function ShareableResultCard({
     <div className="mt-10">
       {/* Visual Result Card Preview */}
       <div className="mb-6">
-        <p className="text-sm text-[#d4af37] font-medium tracking-wider uppercase text-center mb-4">
+        <p className="text-sm text-[#7A4F4C] font-medium tracking-wider uppercase text-center mb-4">
           Share Your Result
         </p>
 
@@ -237,14 +237,14 @@ export function ShareableResultCard({
           ref={cardRef}
           className="mx-auto max-w-sm aspect-square rounded-2xl overflow-hidden relative"
           style={{
-            background: "linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)",
-            border: "2px solid #d4af37",
+            background: "linear-gradient(135deg, #FAF7F7 0%, #F0E6E5 50%, #4A3B3A 100%)",
+            border: "2px solid #B59A6A",
           }}
         >
           <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 mb-3">
-              <span className="text-[10px] text-[#d4af37] font-semibold tracking-[0.2em] uppercase">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C9A3A0]/10 border border-[#B59A6A]/20 mb-3">
+              <span className="text-[10px] text-[#7A4F4C] font-semibold tracking-[0.2em] uppercase">
                 My Romance Trope Is
               </span>
             </div>
@@ -253,23 +253,23 @@ export function ShareableResultCard({
             <span className="text-5xl mb-2">{icon}</span>
 
             {/* Title */}
-            <h3 className="font-serif text-2xl md:text-3xl font-bold text-white text-center mb-1">
+            <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#4A3B3A] text-center mb-1">
               {title}
             </h3>
 
             {/* Subtitle */}
-            <p className="text-sm text-[#d4af37] italic mb-4">"{subtitle}"</p>
+            <p className="text-sm text-[#7A4F4C] italic mb-4">"{subtitle}"</p>
 
             {/* Divider */}
-            <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#d4af37]/40 to-transparent mb-4" />
+            <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#C9A3A0]/40 to-transparent mb-4" />
 
             {/* Book Match */}
-            <p className="text-[10px] text-[#d4af37] font-semibold tracking-[0.2em] uppercase mb-2">
+            <p className="text-[10px] text-[#7A4F4C] font-semibold tracking-[0.2em] uppercase mb-2">
               My Perfect Book Match
             </p>
 
             {/* Book Cover */}
-            <div className="w-20 h-28 rounded-lg overflow-hidden shadow-2xl border border-white/10 mb-3">
+            <div className="w-20 h-28 rounded-lg overflow-hidden shadow-2xl border border-[#4A3B3A]/10 mb-3">
               <img
                 src={bookCover}
                 alt={bookTitle}
@@ -277,16 +277,16 @@ export function ShareableResultCard({
               />
             </div>
 
-            <p className="text-xs text-white font-medium text-center">{bookTitle}</p>
+            <p className="text-xs text-[#4A3B3A] font-medium text-center">{bookTitle}</p>
             <div className="flex items-center gap-0.5 mt-1">
               {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-[#d4af37] text-[10px]">★</span>
+                <span key={i} className="text-[#7A4F4C] text-[10px]">★</span>
               ))}
             </div>
 
             {/* CTA */}
-            <div className="mt-4 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30">
-              <p className="text-[10px] text-[#d4af37] font-medium">
+            <div className="mt-4 px-4 py-1.5 rounded-full bg-[#C9A3A0]/10 border border-[#B59A6A]/30">
+              <p className="text-[10px] text-[#7A4F4C] font-medium">
                 Take the quiz → reeseastor.com/romance-quiz
               </p>
             </div>
@@ -300,7 +300,7 @@ export function ShareableResultCard({
         <Button
           onClick={handleDownloadCard}
           disabled={isSharing}
-          className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-8 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full max-w-xs"
+          className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-8 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full max-w-xs"
         >
           <Download className="mr-2 h-5 w-5" />
           {isSharing ? "Generating..." : "Download for Instagram / TikTok"}
@@ -311,7 +311,7 @@ export function ShareableResultCard({
           <Button
             variant="outline"
             size="sm"
-            className="border-white/10 text-gray-300 hover:bg-white/5 rounded-full gap-2"
+            className="border-[#4A3B3A]/10 text-[#6E5F5A] hover:bg-[#EBD6D3]/30 rounded-full gap-2"
             onClick={handleShareTwitter}
           >
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
@@ -323,7 +323,7 @@ export function ShareableResultCard({
           <Button
             variant="outline"
             size="sm"
-            className="border-white/10 text-gray-300 hover:bg-white/5 rounded-full gap-2"
+            className="border-[#4A3B3A]/10 text-[#6E5F5A] hover:bg-[#EBD6D3]/30 rounded-full gap-2"
             onClick={handleShareFacebook}
           >
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
@@ -335,7 +335,7 @@ export function ShareableResultCard({
           <Button
             variant="outline"
             size="sm"
-            className="border-white/10 text-gray-300 hover:bg-white/5 rounded-full gap-2"
+            className="border-[#4A3B3A]/10 text-[#6E5F5A] hover:bg-[#EBD6D3]/30 rounded-full gap-2"
             onClick={handleSharePinterest}
           >
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
@@ -348,7 +348,7 @@ export function ShareableResultCard({
             <Button
               variant="outline"
               size="sm"
-              className="border-white/10 text-gray-300 hover:bg-white/5 rounded-full gap-2"
+              className="border-[#4A3B3A]/10 text-[#6E5F5A] hover:bg-[#EBD6D3]/30 rounded-full gap-2"
               onClick={handleNativeShare}
             >
               <Share2 className="h-4 w-4" />
@@ -359,7 +359,7 @@ export function ShareableResultCard({
           <Button
             variant="outline"
             size="sm"
-            className="border-white/10 text-gray-300 hover:bg-white/5 rounded-full gap-2"
+            className="border-[#4A3B3A]/10 text-[#6E5F5A] hover:bg-[#EBD6D3]/30 rounded-full gap-2"
             onClick={handleCopyLink}
           >
             <Copy className="h-4 w-4" />
@@ -369,15 +369,15 @@ export function ShareableResultCard({
 
         {/* Hashtag suggestion */}
         <div className="text-center mt-2">
-          <p className="text-xs text-gray-500 mb-1">Suggested hashtags:</p>
+          <p className="text-xs text-[#6E5F5A] mb-1">Suggested hashtags:</p>
           <button
             onClick={() => {
               navigator.clipboard.writeText(hashtags);
               toast.success("Hashtags copied!");
             }}
-            className="text-xs text-[#d4af37]/60 hover:text-[#d4af37] transition-colors cursor-pointer"
+            className="text-xs text-[#7A4F4C]/60 hover:text-[#7A4F4C] transition-colors cursor-pointer"
           >
-            {hashtags} <span className="text-gray-600 ml-1">(tap to copy)</span>
+            {hashtags} <span className="text-[#6E5F5A] ml-1">(tap to copy)</span>
           </button>
         </div>
       </div>

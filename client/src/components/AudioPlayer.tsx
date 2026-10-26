@@ -161,12 +161,12 @@ export function AudioPlayer({
   };
 
   return (
-    <div className={`bg-gradient-to-r from-amber-900/20 to-amber-800/10 border border-amber-500/30 rounded-xl p-4 ${className}`}>
+    <div className={`bg-gradient-to-r from-[#C9A3A0]/20 to-[#C9A3A0]/10 border border-[#C9A3A0]/30 rounded-xl p-4 ${className}`}>
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
       
       {/* Title */}
       {title && (
-        <div className="mb-3 text-amber-200 font-medium text-sm truncate">
+        <div className="mb-3 text-[#7A4F4C] font-medium text-sm truncate">
           🎧 {title}
         </div>
       )}
@@ -181,7 +181,7 @@ export function AudioPlayer({
           className="cursor-pointer"
           disabled={isLoading}
         />
-        <div className="flex justify-between text-xs text-amber-300/70 mt-1">
+        <div className="flex justify-between text-xs text-[#7A4F4C]/70 mt-1">
           <span>{formatTime(currentTime)}</span>
           <span>{formatTime(duration)}</span>
         </div>
@@ -195,7 +195,7 @@ export function AudioPlayer({
             variant="ghost"
             size="icon"
             onClick={() => skip(-10)}
-            className="h-8 w-8 text-amber-300 hover:text-amber-100 hover:bg-amber-500/20"
+            className="h-8 w-8 text-[#7A4F4C] hover:text-[#7A4F4C] hover:bg-[#7A4F4C]/20"
             disabled={isLoading}
           >
             <SkipBack className="h-4 w-4" />
@@ -205,7 +205,7 @@ export function AudioPlayer({
             variant="ghost"
             size="icon"
             onClick={togglePlay}
-            className="h-10 w-10 text-amber-300 hover:text-amber-100 hover:bg-amber-500/20"
+            className="h-10 w-10 text-[#7A4F4C] hover:text-[#7A4F4C] hover:bg-[#7A4F4C]/20"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -221,7 +221,7 @@ export function AudioPlayer({
             variant="ghost"
             size="icon"
             onClick={() => skip(10)}
-            className="h-8 w-8 text-amber-300 hover:text-amber-100 hover:bg-amber-500/20"
+            className="h-8 w-8 text-[#7A4F4C] hover:text-[#7A4F4C] hover:bg-[#7A4F4C]/20"
             disabled={isLoading}
           >
             <SkipForward className="h-4 w-4" />
@@ -231,7 +231,7 @@ export function AudioPlayer({
         {/* Center: Speed control */}
         {showSpeedControl && (
           <Select value={playbackRate.toString()} onValueChange={handleSpeedChange}>
-            <SelectTrigger className="w-20 h-8 text-xs bg-transparent border-amber-500/30 text-amber-300">
+            <SelectTrigger className="w-20 h-8 text-xs bg-transparent border-[#C9A3A0]/30 text-[#7A4F4C]">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -251,7 +251,7 @@ export function AudioPlayer({
             variant="ghost"
             size="icon"
             onClick={toggleMute}
-            className="h-8 w-8 text-amber-300 hover:text-amber-100 hover:bg-amber-500/20"
+            className="h-8 w-8 text-[#7A4F4C] hover:text-[#7A4F4C] hover:bg-[#7A4F4C]/20"
           >
             {isMuted ? (
               <VolumeX className="h-4 w-4" />
@@ -273,7 +273,7 @@ export function AudioPlayer({
               variant="ghost"
               size="icon"
               onClick={onDownload}
-              className="h-8 w-8 text-amber-300 hover:text-amber-100 hover:bg-amber-500/20"
+              className="h-8 w-8 text-[#7A4F4C] hover:text-[#7A4F4C] hover:bg-[#7A4F4C]/20"
             >
               <Download className="h-4 w-4" />
             </Button>
@@ -339,7 +339,7 @@ export function CompactAudioPlayer({
         variant="ghost"
         size="icon"
         onClick={togglePlay}
-        className="h-8 w-8 text-amber-400 hover:text-amber-300 hover:bg-amber-500/20 rounded-full"
+        className="h-8 w-8 text-[#7A4F4C] hover:text-[#7A4F4C] hover:bg-[#7A4F4C]/20 rounded-full"
       >
         {isPlaying ? (
           <Pause className="h-4 w-4" />
@@ -347,9 +347,9 @@ export function CompactAudioPlayer({
           <Play className="h-4 w-4" />
         )}
       </Button>
-      <div className="flex-1 h-1 bg-amber-900/50 rounded-full overflow-hidden">
+      <div className="flex-1 h-1 bg-[#7A4F4C]/50 rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-amber-500 to-amber-400 transition-all duration-100"
+          className="h-full bg-gradient-to-r from-[#C9A3A0] to-[#C9A3A0] transition-all duration-100"
           style={{ width: `${progress}%` }}
         />
       </div>

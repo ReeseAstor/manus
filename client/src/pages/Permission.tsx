@@ -287,7 +287,7 @@ export default function Permission() {
                 disabled={subscribeMutation.isPending}
                 className="flex-1 px-4 py-3 font-inter text-[14px]"
                 style={{
-                  background: "rgba(0,0,0,0.35)",
+                  background: "rgba(74, 59, 58,0.35)",
                   color: TEXT,
                   border: `1px solid ${GOLD_SOFT}`,
                   borderRadius: 4,
@@ -313,7 +313,7 @@ export default function Permission() {
           {error && (
             <p
               className="font-inter text-[12px] mt-4"
-              style={{ color: "#e08d8d" }}
+              style={{ color: "#7A4F4C" }}
               role="alert"
             >
               {error}

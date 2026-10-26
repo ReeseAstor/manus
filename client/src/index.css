@@ -1,11 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -45,74 +47,74 @@
 }
 
 :root {
-  --primary: oklch(0.75 0.15 85);
-  --primary-foreground: oklch(0.15 0.005 285);
-  --sidebar-primary: oklch(0.75 0.15 85);
-  --sidebar-primary-foreground: oklch(0.15 0.005 285);
-  --chart-1: oklch(0.75 0.15 85);
-  --chart-2: oklch(0.65 0.12 85);
-  --chart-3: oklch(0.55 0.10 85);
-  --chart-4: oklch(0.45 0.08 85);
-  --chart-5: oklch(0.35 0.06 85);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  --primary: #4A3B3A;
+  --primary-foreground: #FAF7F7;
+  --sidebar-primary: #4A3B3A;
+  --sidebar-primary-foreground: #FAF7F7;
+  --chart-1: #7A4F4C;
+  --chart-2: #C9A3A0;
+  --chart-3: #6E5F5A;
+  --chart-4: #EBD6D3;
+  --chart-5: #B59A6A;
+  --radius: 0rem;
+  --background: #FAF7F7;
+  --foreground: #4A3B3A;
+  --card: #F0E6E5;
+  --card-foreground: #4A3B3A;
+  --popover: #FAF7F7;
+  --popover-foreground: #4A3B3A;
+  --secondary: #EBD6D3;
+  --secondary-foreground: #4A3B3A;
+  --muted: #F0E6E5;
+  --muted-foreground: #6E5F5A;
+  --accent: #EBD6D3;
+  --accent-foreground: #4A3B3A;
+  --destructive: #7A4F4C;
+  --destructive-foreground: #FAF7F7;
+  --border: #E5D6D3;
+  --input: #E5D6D3;
+  --ring: #C9A3A0;
+  --sidebar: #F0E6E5;
+  --sidebar-foreground: #4A3B3A;
+  --sidebar-accent: #EBD6D3;
+  --sidebar-accent-foreground: #4A3B3A;
+  --sidebar-border: #E5D6D3;
+  --sidebar-ring: #C9A3A0;
 }
 
 .dark {
-  --primary: oklch(0.75 0.15 85);
-  --primary-foreground: oklch(0.15 0.005 285);
-  --sidebar-primary: oklch(0.75 0.15 85);
-  --sidebar-primary-foreground: oklch(0.15 0.005 285);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: oklch(0.75 0.15 85);
-  --chart-2: oklch(0.65 0.12 85);
-  --chart-3: oklch(0.55 0.10 85);
-  --chart-4: oklch(0.45 0.08 85);
-  --chart-5: oklch(0.35 0.06 85);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --primary: #4A3B3A;
+  --primary-foreground: #FAF7F7;
+  --sidebar-primary: #4A3B3A;
+  --sidebar-primary-foreground: #FAF7F7;
+  --background: #FAF7F7;
+  --foreground: #4A3B3A;
+  --card: #F0E6E5;
+  --card-foreground: #4A3B3A;
+  --popover: #FAF7F7;
+  --popover-foreground: #4A3B3A;
+  --secondary: #EBD6D3;
+  --secondary-foreground: #4A3B3A;
+  --muted: #F0E6E5;
+  --muted-foreground: #6E5F5A;
+  --accent: #EBD6D3;
+  --accent-foreground: #4A3B3A;
+  --destructive: #7A4F4C;
+  --destructive-foreground: #FAF7F7;
+  --border: #E5D6D3;
+  --input: #E5D6D3;
+  --ring: #C9A3A0;
+  --chart-1: #7A4F4C;
+  --chart-2: #C9A3A0;
+  --chart-3: #6E5F5A;
+  --chart-4: #EBD6D3;
+  --chart-5: #B59A6A;
+  --sidebar: #F0E6E5;
+  --sidebar-foreground: #4A3B3A;
+  --sidebar-accent: #EBD6D3;
+  --sidebar-accent-foreground: #4A3B3A;
+  --sidebar-border: #E5D6D3;
+  --sidebar-ring: #C9A3A0;
 }
 
 @layer base {
@@ -121,14 +123,20 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    font-weight: 500;
+    font-size: 1.125rem;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-playfair {
+    font-family: 'Bodoni Moda', 'Didot', Georgia, serif;
     font-weight: 400;
     letter-spacing: 0.01em;
   }
-  .font-playfair {
-    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+  h1, h2, h3 {
+    font-family: 'Bodoni Moda', 'Didot', Georgia, serif;
+    font-weight: 400;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -201,10 +209,10 @@
   }
 
   /* ───────── Author-kit (editorial / luxury) utilities ───────── */
-  .font-cinzel    { font-family: 'Cinzel', 'Trajan Pro', 'Playfair Display', serif; letter-spacing: 0.18em; }
-  .font-display   { font-family: 'Playfair Display', 'Didot', Georgia, serif; }
+  .font-cinzel    { font-family: 'Bodoni Moda', 'Didot', Georgia, serif; letter-spacing: 0.18em; }
+  .font-display   { font-family: 'Bodoni Moda', 'Didot', Georgia, serif; font-weight: 400; }
   .font-cormorant { font-family: 'Cormorant Garamond', 'EB Garamond', Georgia, 'Times New Roman', serif; }
-  .font-inter     { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+  .font-inter     { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
 
   /* Film grain — top-level body overlay for the kit homepage */
   .kit-grain::after {
@@ -233,4 +241,81 @@
 html,
 body {
   overflow-x: clip;
+}
+
+
+/* ── The Deal Room (10/2026) ──────────────────────────────────────────────
+   Square corners everywhere except the seal, avatars and decorative dots;
+   labels, buttons and terms in IBM Plex Mono caps; no glow, no black. */
+@layer utilities {
+  .rounded, .rounded-sm, .rounded-md, .rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl,
+  [class*="rounded-t-"], [class*="rounded-b-"], [class*="rounded-l-"], [class*="rounded-r-"],
+  .rounded-full:not(img):not(:empty):not(:has(> img)) {
+    border-radius: 0 !important;
+  }
+}
+@layer base {
+  html { background: #FAF7F7; }
+  body { background: #FAF7F7; color: #4A3B3A; }
+  ::selection { background: #EBD6D3; color: #4A3B3A; }
+  .uppercase:not(h1):not(h2):not(h3):not(.font-serif):not(.font-display):not(.font-playfair):not(.font-cinzel) {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+  }
+  button, [type="submit"], [type="button"], .btn-premium {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    letter-spacing: 0.08em;
+  }
+  input, textarea, select {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+  }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid #C9A3A0; outline-offset: 2px; }
+}
+
+/* Headings stay Bodoni 400; never synthesize bold or italic weights the brand doesn't load. */
+h1, h2, h3, .font-display, .font-playfair { font-weight: 400 !important; }
+html { font-synthesis-weight: none; }
+input.rounded-full, textarea.rounded-full, select.rounded-full { border-radius: 0 !important; }
+
+/* MailerLite embedded forms: restyle MailerLite's own markup to the Deal Room. */
+.ml-embedded .ml-form-embedWrapper,
+.ml-embedded .ml-form-embedBody,
+.ml-embedded .ml-form-successBody {
+  background: #F0E6E5 !important; border: 1px solid #E5D6D3 !important; border-radius: 0 !important;
+}
+.ml-embedded h4, .ml-embedded .ml-form-embedContent h4 {
+  font-family: 'Bodoni Moda', Georgia, serif !important; font-weight: 400 !important; color: #4A3B3A !important;
+}
+.ml-embedded p, .ml-embedded label, .ml-embedded .ml-form-embedContent p {
+  font-family: 'Cormorant Garamond', Georgia, serif !important; color: #4A3B3A !important;
+}
+.ml-embedded a { color: #7A4F4C !important; }
+.ml-embedded input.form-control, .ml-embedded input[type="email"], .ml-embedded input[type="text"] {
+  background: #FAF7F7 !important; color: #4A3B3A !important; border: 1px solid #C9A3A0 !important;
+  border-radius: 0 !important; font-family: 'Cormorant Garamond', Georgia, serif !important;
+}
+.ml-embedded button, .ml-embedded button.primary, .ml-embedded .ml-form-embedSubmit button {
+  background: #4A3B3A !important; color: #FAF7F7 !important; border: 0 !important; border-radius: 0 !important;
+  font-family: 'IBM Plex Mono', monospace !important; letter-spacing: 0.14em !important; text-transform: uppercase !important;
+  min-height: 44px !important;
+}
+.ml-embedded button:hover { background: #7A4F4C !important; }
+/* MailerLite scopes its own rules to #mlb2-<id> with !important; :is() with an
+   ID argument gives these overrides ID-level specificity for any form id. */
+.ml-embedded :is([id^="mlb2-"], #ra-ml).ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button,
+.ml-embedded :is([id^="mlb2-"], #ra-ml).ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button.primary {
+  background-color: #4A3B3A !important; color: #FAF7F7 !important; border-radius: 0 !important;
+  font-family: 'IBM Plex Mono', monospace !important; font-weight: 500 !important;
+  letter-spacing: 0.14em !important; text-transform: uppercase !important; font-size: 13px !important;
+}
+.ml-embedded :is([id^="mlb2-"], #ra-ml).ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
+  background-color: #7A4F4C !important;
+}
+.ml-embedded :is([id^="mlb2-"], #ra-ml).ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody input {
+  background-color: #FAF7F7 !important; color: #4A3B3A !important; border-color: #C9A3A0 !important; border-radius: 0 !important;
+}
+.ml-embedded :is([id^="mlb2-"], #ra-ml).ml-form-embedContainer .ml-form-embedWrapper {
+  background-color: #F0E6E5 !important; border-radius: 0 !important;
 }

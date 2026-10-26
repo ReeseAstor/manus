@@ -39,7 +39,7 @@ export function RAButton({
     position: "relative",
     overflow: "hidden",
   };
-  const hoverClass = "hover:translate-y-[-2px] hover:shadow-[0_12px_32px_rgba(201,166,70,0.22)] active:translate-y-[0px] active:scale-[0.98]";
+  const hoverClass = "hover:translate-y-[-2px] hover:shadow-[0_12px_32px_rgba(201, 163, 160,0.22)] active:translate-y-[0px] active:scale-[0.98]";
 
   const cls = `font-inter inline-flex ${hoverClass} ${className}`;
 

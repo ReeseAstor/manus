@@ -16,10 +16,10 @@ export default function NewsletterDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-[#EBD6D3] via-[#FAF7F7] to-[#EBD6D3] flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600 mb-4"></div>
-          <p className="text-gray-600">Loading newsletter...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#C9A3A0] mb-4"></div>
+          <p className="text-[#6E5F5A]">Loading newsletter...</p>
         </div>
       </div>
     );
@@ -27,15 +27,15 @@ export default function NewsletterDetail() {
 
   if (!newsletter) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-[#EBD6D3] via-[#FAF7F7] to-[#EBD6D3] flex items-center justify-center">
         <div className="text-center max-w-md px-4">
-          <Mail className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Newsletter Not Found</h2>
-          <p className="text-gray-600 mb-6">
+          <Mail className="w-16 h-16 text-[#6E5F5A] mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-[#4A3B3A] mb-2">Newsletter Not Found</h2>
+          <p className="text-[#6E5F5A] mb-6">
             This newsletter may have been removed or the link is incorrect.
           </p>
           <Link href="/newsletter-archive">
-            <a className="inline-flex items-center gap-2 bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition">
+            <a className="inline-flex items-center gap-2 bg-[#7A4F4C] text-[#FAF7F7] px-6 py-3 rounded-lg font-semibold hover:bg-[#7A4F4C] transition">
               <ArrowLeft className="w-5 h-5" />
               Back to Archive
             </a>
@@ -71,20 +71,20 @@ export default function NewsletterDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#EBD6D3] via-[#FAF7F7] to-[#EBD6D3]">
       {/* Header */}
-      <div className="bg-gradient-to-r from-pink-600 to-purple-600 text-white py-12">
+      <div className="bg-[#4A3B3A] text-[#FAF7F7] py-12">
         <div className="max-w-4xl mx-auto px-4">
           {/* Back Button */}
           <Link href="/newsletter-archive">
-            <a className="inline-flex items-center gap-2 text-pink-100 hover:text-white transition mb-6">
+            <a className="inline-flex items-center gap-2 text-[#7A4F4C] hover:text-[#4A3B3A] transition mb-6">
               <ArrowLeft className="w-5 h-5" />
               Back to Archive
             </a>
           </Link>
 
           {/* Date */}
-          <div className="flex items-center gap-2 text-pink-100 mb-4">
+          <div className="flex items-center gap-2 text-[#7A4F4C] mb-4">
             <Calendar className="w-5 h-5" />
             {formattedDate}
           </div>
@@ -94,13 +94,13 @@ export default function NewsletterDetail() {
 
           {/* Preview Text */}
           {newsletter.preheader && (
-            <p className="text-xl text-pink-100">{newsletter.preheader}</p>
+            <p className="text-xl text-[#7A4F4C]">{newsletter.preheader}</p>
           )}
 
           {/* Share Button */}
           <button
             onClick={handleShare}
-            className="mt-6 inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition"
+            className="mt-6 inline-flex items-center gap-2 bg-[#EBD6D3]/100 hover:bg-[#EBD6D3]/100 text-[#4A3B3A] px-4 py-2 rounded-lg transition"
           >
             <Share2 className="w-4 h-4" />
             Share
@@ -110,7 +110,7 @@ export default function NewsletterDetail() {
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+        <div className="bg-[#FAF7F7] rounded-2xl shadow-xl p-8 md:p-12">
           {/* Newsletter Content */}
           <div 
             className="prose prose-lg max-w-none
@@ -124,13 +124,13 @@ export default function NewsletterDetail() {
           />
 
           {/* Footer */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
+          <div className="mt-12 pt-8 border-t border-[#E5D6D3]">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-[#6E5F5A]">
                 <p>© {new Date().getFullYear()} Reese Astor. All rights reserved.</p>
               </div>
               <Link href="/newsletter">
-                <a className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-pink-700 hover:to-purple-700 transition">
+                <a className="inline-flex items-center gap-2 bg-[#4A3B3A] text-[#FAF7F7] px-6 py-3 rounded-lg font-semibold hover:bg-[#7A4F4C] transition">
                   <Mail className="w-5 h-5" />
                   Subscribe to Newsletter
                 </a>
@@ -142,10 +142,10 @@ export default function NewsletterDetail() {
 
       {/* Related Newsletters */}
       <div className="max-w-4xl mx-auto px-4 pb-16">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">More from the Archive</h2>
+        <h2 className="text-2xl font-bold text-[#4A3B3A] mb-6">More from the Archive</h2>
         <div className="text-center">
           <Link href="/newsletter-archive">
-            <a className="inline-flex items-center gap-2 text-pink-600 font-semibold hover:text-pink-700 transition">
+            <a className="inline-flex items-center gap-2 text-[#7A4F4C] font-semibold hover:text-[#7A4F4C] transition">
               Browse All Newsletters
               <ArrowLeft className="w-5 h-5 rotate-180" />
             </a>

@@ -37,7 +37,7 @@ export function JournalCard({
         whileHover={reduce ? undefined : { y: -6 }}
       >
         {image && (
-          <div className="relative mb-6 overflow-hidden bg-black" style={{ aspectRatio: "16/10" }}>
+          <div className="relative mb-6 overflow-hidden bg-[#FAF7F7]" style={{ aspectRatio: "16/10" }}>
             <motion.img
               src={image}
               alt=""
@@ -51,7 +51,7 @@ export function JournalCard({
               initial={false}
               animate={{ opacity: hover ? 1 : 0 }}
               transition={{ duration: 0.4 }}
-              style={{ boxShadow: "inset 0 0 0 1px rgba(201,166,70,0.5), inset 0 0 80px rgba(201,166,70,0.15)" }}
+              style={{ boxShadow: "inset 0 0 0 1px rgba(201, 163, 160,0.5), inset 0 0 80px rgba(201, 163, 160,0.15)" }}
             />
           </div>
         )}

@@ -103,7 +103,7 @@ export function NewsletterBand({ onSubscribe, freeBookHref = "/free-book" }: Pro
             {error && (
               <p
                 className="font-inter text-[12px] mt-4"
-                style={{ color: "#E5C36B", letterSpacing: "0.08em" }}
+                style={{ color: "#7A4F4C", letterSpacing: "0.08em" }}
                 role="alert"
               >
                 {error}

@@ -309,48 +309,14 @@ export const BOOKS: Book[] = [
     publication_date: "2026-08-09",
     kindle_unlimited: true,
     retailers: {
-      // TODO(owner): replace with the dp/<ASIN> link once the ASIN is on file.
-      amazon_kindle: "https://www.amazon.com/s?k=Golden+Parachute+Reese+Astor&i=digital-text",
-    },
-    audiobook_available: false,
-    isbn: null,
-    asin: null,
-    price_usd: null,
-    tropes: ["class divide", "dual POV", "high heat", "HEA"],
-    characters: ["Kai Hsu", "Miri Doyle-Levine"],
-  },
-  {
-    slug: "golden-parachute",
-    title: "Golden Parachute",
-    lane: "hudson_dynasty",
-    series_position: 3,
-    format: "ebook",
-    position_label: "Book 3",
-    tagline:
-      "He can restructure a billion dollars of bad debt. He cannot buy his way around the one woman who refuses to be managed.",
-    blurb:
-      "Miri Doyle-Levine has spent eight years keeping other people on their feet. A home health aide fighting " +
-      "her way into nursing school, she has no time for a man who treats every problem like a number he can make " +
-      "disappear. Kai Hsu built his life the same way he handles distressed credit: control the risk, close the " +
-      "exits, never need anything. Then Miri sees through him in one glance. The chemistry is immediate. The terms " +
-      "are not. She refuses his money. He keeps trying to turn care into logistics. And when the body Kai has " +
-      "ignored for years finally forces him to stop, both of them have to decide what love looks like when rescue " +
-      "is off the table. Miri will not become his cure. Kai will have to become a man who can stay. Golden " +
-      "Parachute is a high-heat contemporary romance about class difference, emotional recovery, boundaries, and " +
-      "choosing love without surrendering yourself. It can be read as a standalone and ends with a complete " +
-      "happily ever after. Content note: explicit consensual sexual content, compulsive sexual behavior recovery, " +
-      "and a serious medical emergency.",
-    pull_quote: null,
-    cover_image: "https://m.media-amazon.com/images/P/B0HDKNP9F6.01._SCLZZZZZZZ_SX500_.jpg",
-    publication_date: null,
-    kindle_unlimited: true,
-    retailers: {
       amazon_kindle: "https://www.amazon.com/dp/B0HDKNP9F6",
     },
     audiobook_available: false,
     isbn: null,
-    asin: "B0HDKNP9F6",
+    asin: "B0HDKNP9F6", // verified on amazon.es / amazon.it listings 10/26/2026
     price_usd: null,
+    tropes: ["class divide", "dual POV", "high heat", "HEA"],
+    characters: ["Kai Hsu", "Miri Doyle-Levine"],
   },
 ];
 

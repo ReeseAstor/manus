@@ -72,7 +72,7 @@ export default function Blog() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+    <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7]">
       <EnhancedSEOHead
         title="Reese Astor Blog | Romance Reads"
         description="Reese Astor's reading lists and notes on steamy billionaire romance."
@@ -92,11 +92,11 @@ export default function Blog() {
             backgroundAttachment: "fixed",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/98 via-[#0a0e1a]/95 to-[#0a0e1a]/98" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F7]/98 via-[#FAF7F7]/95 to-[#FAF7F7]/98" />
         </div>
 
         {/* Gold ambient glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-[#d4af37]/10 blur-[120px] rounded-full" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-[#C9A3A0]/10 blur-[120px] rounded-full" />
 
         <div className="container relative z-10">
           <motion.div
@@ -105,18 +105,18 @@ export default function Blog() {
             transition={{ duration: 1 }}
             className="max-w-4xl mx-auto text-center space-y-8"
           >
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm">
-              <Sparkles className="h-4 w-4 text-[#d4af37]" />
-              <span className="text-sm font-medium text-[#d4af37] tracking-widest uppercase">
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#B59A6A]/30 bg-[#C9A3A0]/5 backdrop-blur-sm">
+              <Sparkles className="h-4 w-4 text-[#7A4F4C]" />
+              <span className="text-sm font-medium text-[#7A4F4C] tracking-widest uppercase">
                 From Reese
               </span>
             </div>
 
-            <h1 className="font-serif text-5xl md:text-7xl font-bold text-white leading-tight">
+            <h1 className="font-serif text-5xl md:text-7xl font-bold text-[#4A3B3A] leading-tight">
               The Reese Astor Blog
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-[#6E5F5A] font-light max-w-3xl mx-auto leading-relaxed">
               Reading lists and notes from Reese on steamy billionaire romance.
             </p>
           </motion.div>
@@ -151,8 +151,8 @@ export default function Blog() {
                   variant={(category === "All" && !selectedCategory) || category === selectedCategory ? "default" : "outline"}
                   className={`cursor-pointer px-6 py-3 text-sm font-medium rounded-full transition-all duration-300 ${
                     (category === "All" && !selectedCategory) || category === selectedCategory
-                      ? "bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black border-0 hover:shadow-lg hover:shadow-[#d4af37]/30"
-                      : "border-2 border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-[#d4af37]/50"
+                      ? "bg-[#4A3B3A] text-[#FAF7F7] border-0 hover:shadow-lg hover:shadow-[#C9A3A0]/30"
+                      : "border-2 border-[#4A3B3A]/20 bg-[#EBD6D3]/30 text-[#FAF7F7] hover:bg-[#EBD6D3]/60 hover:border-[#B59A6A]/50"
                   }`}
                   onClick={() => setSelectedCategory(category === "All" ? undefined : category)}
                 >
@@ -169,7 +169,7 @@ export default function Blog() {
         <div className="container">
           {isLoading ? (
             <div className="flex items-center justify-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-[#d4af37]" />
+              <Loader2 className="h-8 w-8 animate-spin text-[#7A4F4C]" />
             </div>
           ) : displayPosts.length > 0 ? (
             <>
@@ -185,7 +185,7 @@ export default function Blog() {
                     className="group"
                   >
                     <Link href={`/blog/${post.slug}`}>
-                      <div className="h-full rounded-3xl card-premium bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#d4af37]/30 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-[#d4af37]/10 overflow-hidden">
+                      <div className="h-full rounded-3xl card-premium bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 hover:border-[#B59A6A]/30 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-[#C9A3A0]/10 overflow-hidden">
                         {/* Featured Image */}
                         {"featuredImage" in post && post.featuredImage && (
                           <div className="relative h-48 w-full overflow-hidden">
@@ -194,29 +194,29 @@ export default function Blog() {
                               alt={post.title}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F7]/60 to-transparent" />
                           </div>
                         )}
                         <div className="space-y-6 p-8">
                           {/* Category Badge */}
                           <div className="inline-flex">
-                            <Badge className="bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 px-4 py-1 text-xs font-medium">
+                            <Badge className="bg-[#C9A3A0]/10 text-[#7A4F4C] border border-[#B59A6A]/30 px-4 py-1 text-xs font-medium">
                               {post.category}
                             </Badge>
                           </div>
 
                           {/* Title */}
-                          <h2 className="font-serif text-2xl font-bold text-white group-hover:text-[#d4af37] transition-colors leading-tight">
+                          <h2 className="font-serif text-2xl font-bold text-[#4A3B3A] group-hover:text-[#7A4F4C] transition-colors leading-tight">
                             {post.title}
                           </h2>
 
                           {/* Excerpt */}
-                          <p className="text-gray-400 leading-relaxed line-clamp-3">
+                          <p className="text-[#6E5F5A] leading-relaxed line-clamp-3">
                             {post.excerpt}
                           </p>
 
                           {/* Meta Info */}
-                          <div className="flex items-center gap-4 text-sm text-gray-500 pt-4 border-t border-white/10">
+                          <div className="flex items-center gap-4 text-sm text-[#6E5F5A] pt-4 border-t border-[#4A3B3A]/10">
                             <div className="flex items-center gap-2">
                               <Calendar className="h-4 w-4" />
                               <span>
@@ -232,7 +232,7 @@ export default function Blog() {
                           </div>
 
                           {/* Read More */}
-                          <div className="flex items-center gap-2 text-[#d4af37] font-medium group-hover:gap-4 transition-all">
+                          <div className="flex items-center gap-2 text-[#7A4F4C] font-medium group-hover:gap-4 transition-all">
                             <span>Read More</span>
                             <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform" />
                           </div>
@@ -252,13 +252,13 @@ export default function Blog() {
                   transition={{ duration: 0.6 }}
                   className="flex flex-col items-center mt-16 gap-4"
                 >
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-[#6E5F5A] text-sm">
                     Showing {displayPosts.length} of {allDisplayPosts.length} posts
                   </p>
                   <Button
                     onClick={handleLoadMore}
                     size="lg"
-                    className="bg-gradient-to-r from-[#d4af37]/20 to-[#c9a961]/20 hover:from-[#d4af37]/30 hover:to-[#c9a961]/30 text-[#d4af37] border-2 border-[#d4af37]/30 hover:border-[#d4af37]/60 font-semibold px-12 py-7 rounded-full shadow-lg hover:shadow-xl hover:shadow-[#d4af37]/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+                    className="bg-gradient-to-r from-[#C9A3A0]/20 to-[#C9A3A0]/20 hover:from-[#C9A3A0]/30 hover:to-[#C9A3A0]/30 text-[#7A4F4C] border-2 border-[#B59A6A]/30 hover:border-[#B59A6A]/60 font-semibold px-12 py-7 rounded-full shadow-lg hover:shadow-xl hover:shadow-[#C9A3A0]/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
                   >
                     Load More Posts
                     <span className="ml-2 text-sm opacity-70">({remainingCount} remaining)</span>
@@ -274,7 +274,7 @@ export default function Blog() {
                   transition={{ duration: 0.6 }}
                   className="flex justify-center mt-16"
                 >
-                  <p className="text-gray-500 text-sm italic">
+                  <p className="text-[#6E5F5A] text-sm italic">
                     You've reached the end — all {allDisplayPosts.length} posts loaded
                   </p>
                 </motion.div>
@@ -285,9 +285,9 @@ export default function Blog() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="max-w-2xl mx-auto p-12 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 text-center"
+              className="max-w-2xl mx-auto p-12 rounded-3xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 text-center"
             >
-              <p className="text-gray-400 text-lg">No blog posts found in this category.</p>
+              <p className="text-[#6E5F5A] text-lg">No blog posts found in this category.</p>
             </motion.div>
           )}
         </div>
@@ -304,7 +304,7 @@ export default function Blog() {
             backgroundAttachment: "fixed",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/98 via-[#0a0e1a]/95 to-[#0a0e1a]/98" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F7]/98 via-[#FAF7F7]/95 to-[#FAF7F7]/98" />
         </div>
 
         <div className="container relative z-10">
@@ -313,17 +313,17 @@ export default function Blog() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center p-12 md:p-16 rounded-3xl bg-gradient-to-br from-[#d4af37]/10 via-transparent to-[#d4af37]/5 border-2 border-[#d4af37]/20 backdrop-blur-xl shadow-2xl"
+            className="max-w-4xl mx-auto text-center p-12 md:p-16 rounded-3xl bg-gradient-to-br from-[#C9A3A0]/10 via-transparent to-[#C9A3A0]/5 border-2 border-[#B59A6A]/20 backdrop-blur-xl shadow-2xl"
           >
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 mb-8">
-              <Mail className="h-8 w-8 text-[#d4af37]" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#C9A3A0]/20 to-[#C9A3A0]/10 mb-8">
+              <Mail className="h-8 w-8 text-[#7A4F4C]" />
             </div>
 
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#4A3B3A] mb-6">
               Never Miss a Post
             </h2>
             
-            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-[#6E5F5A] mb-10 max-w-2xl mx-auto leading-relaxed">
               Get new posts and new-release news in your inbox.
             </p>
 
@@ -335,18 +335,18 @@ export default function Blog() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="flex-1 px-6 py-7 text-lg rounded-full border-2 border-white/20 focus:border-[#d4af37] bg-white/5 backdrop-blur-sm text-white placeholder:text-gray-500"
+                  className="flex-1 px-6 py-7 text-lg rounded-full border-2 border-[#4A3B3A]/20 focus:border-[#B59A6A] bg-[#EBD6D3]/30 backdrop-blur-sm text-[#4A3B3A] placeholder:text-[#6E5F5A]"
                 />
                 <Button 
                   type="submit" 
                   size="lg" 
                   disabled={subscribeMutation.isPending}
-                  className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                 >
                   {subscribeMutation.isPending ? "Subscribing..." : "Subscribe"}
                 </Button>
               </div>
-              <p className="text-xs text-gray-400 text-center mt-4">
+              <p className="text-xs text-[#6E5F5A] text-center mt-4">
                 No spam. Unsubscribe anytime. Your privacy is protected.
               </p>
             </form>

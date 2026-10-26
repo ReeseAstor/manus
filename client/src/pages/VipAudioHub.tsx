@@ -70,23 +70,23 @@ export default function VipAudioHub() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-amber-400" />
+      <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#FAF7F7] to-[#FAF7F7] flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-[#7A4F4C]" />
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#FAF7F7] to-[#FAF7F7]">
         <div className="container py-20 text-center">
-          <Lock className="h-16 w-16 text-amber-400 mx-auto mb-6" />
-          <h1 className="text-4xl font-serif text-white mb-4">VIP Audio Hub</h1>
-          <p className="text-slate-400 mb-8 max-w-md mx-auto">
+          <Lock className="h-16 w-16 text-[#7A4F4C] mx-auto mb-6" />
+          <h1 className="text-4xl font-serif text-[#4A3B3A] mb-4">VIP Audio Hub</h1>
+          <p className="text-[#6E5F5A] mb-8 max-w-md mx-auto">
             Sign in to open your audio library.
           </p>
           <a href={getLoginUrl()}>
-            <Button className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700">
+            <Button className="bg-gradient-to-r from-[#C9A3A0] to-[#C9A3A0] hover:from-[#C9A3A0] hover:to-[#C9A3A0]">
               Sign In to Access
             </Button>
           </a>
@@ -100,36 +100,36 @@ export default function VipAudioHub() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#FAF7F7] to-[#FAF7F7]">
       {/* Hero Section */}
       <section className="relative py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-900/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#C9A3A0]/20 via-transparent to-transparent" />
         
         <div className="container relative">
           <div className="text-center mb-12">
-            <Badge className="bg-amber-500/20 text-amber-300 border-amber-500/30 mb-4">
+            <Badge className="bg-[#7A4F4C]/20 text-[#7A4F4C] border-[#C9A3A0]/30 mb-4">
               <Headphones className="h-3 w-3 mr-1" />
               VIP Audio Hub
             </Badge>
-            <h1 className="text-4xl md:text-5xl font-serif text-white mb-4">
-              Your Personal <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-400">Audio Library</span>
+            <h1 className="text-4xl md:text-5xl font-serif text-[#4A3B3A] mb-4">
+              Your Personal <span className="text-[#7A4F4C] ">Audio Library</span>
             </h1>
-            <p className="text-slate-400 max-w-2xl mx-auto">
+            <p className="text-[#6E5F5A] max-w-2xl mx-auto">
               Your stories, ready to play.
             </p>
           </div>
 
           {/* Usage Stats */}
           <div className="grid md:grid-cols-4 gap-4 mb-12">
-            <Card className="bg-slate-900/50 border-amber-500/20">
+            <Card className="bg-[#FAF7F7]/50 border-[#C9A3A0]/20">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-amber-500/20 rounded-lg">
-                    <Clock className="h-5 w-5 text-amber-400" />
+                  <div className="p-2 bg-[#7A4F4C]/20 rounded-lg">
+                    <Clock className="h-5 w-5 text-[#7A4F4C]" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400">Minutes Used</p>
-                    <p className="text-xl font-bold text-white">
+                    <p className="text-xs text-[#6E5F5A]">Minutes Used</p>
+                    <p className="text-xl font-bold text-[#4A3B3A]">
                       {usageLoading ? "..." : usage?.usage.minutesUsed || 0}
                     </p>
                   </div>
@@ -137,15 +137,15 @@ export default function VipAudioHub() {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-900/50 border-amber-500/20">
+            <Card className="bg-[#FAF7F7]/50 border-[#C9A3A0]/20">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-green-500/20 rounded-lg">
-                    <Zap className="h-5 w-5 text-green-400" />
+                  <div className="p-2 bg-[#7A4F4C]/20 rounded-lg">
+                    <Zap className="h-5 w-5 text-[#7A4F4C]" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400">Minutes Remaining</p>
-                    <p className="text-xl font-bold text-white">
+                    <p className="text-xs text-[#6E5F5A]">Minutes Remaining</p>
+                    <p className="text-xl font-bold text-[#4A3B3A]">
                       {usageLoading ? "..." : usage?.usage.minutesRemaining || 0}
                     </p>
                   </div>
@@ -153,15 +153,15 @@ export default function VipAudioHub() {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-900/50 border-amber-500/20">
+            <Card className="bg-[#FAF7F7]/50 border-[#C9A3A0]/20">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-purple-500/20 rounded-lg">
-                    <Music className="h-5 w-5 text-purple-400" />
+                  <div className="p-2 bg-[#7A4F4C]/20 rounded-lg">
+                    <Music className="h-5 w-5 text-[#7A4F4C]" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400">Audio added this month</p>
-                    <p className="text-xl font-bold text-white">
+                    <p className="text-xs text-[#6E5F5A]">Audio added this month</p>
+                    <p className="text-xl font-bold text-[#4A3B3A]">
                       {usageLoading ? "..." : usage?.usage.generationsThisMonth || 0}
                     </p>
                   </div>
@@ -169,15 +169,15 @@ export default function VipAudioHub() {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-900/50 border-amber-500/20">
+            <Card className="bg-[#FAF7F7]/50 border-[#C9A3A0]/20">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-pink-500/20 rounded-lg">
-                    <Crown className="h-5 w-5 text-pink-400" />
+                  <div className="p-2 bg-[#7A4F4C]/20 rounded-lg">
+                    <Crown className="h-5 w-5 text-[#7A4F4C]" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400">Your Tier</p>
-                    <p className="text-xl font-bold text-white capitalize">
+                    <p className="text-xs text-[#6E5F5A]">Your Tier</p>
+                    <p className="text-xl font-bold text-[#4A3B3A] capitalize">
                       {usageLoading ? "..." : usage?.tier || "Free"}
                     </p>
                   </div>
@@ -188,17 +188,17 @@ export default function VipAudioHub() {
 
           {/* Usage Progress */}
           {usage && (
-            <Card className="bg-slate-900/50 border-amber-500/20 mb-12">
+            <Card className="bg-[#FAF7F7]/50 border-[#C9A3A0]/20 mb-12">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-slate-400">Monthly Usage</span>
-                  <span className="text-sm text-amber-400">
+                  <span className="text-sm text-[#6E5F5A]">Monthly Usage</span>
+                  <span className="text-sm text-[#7A4F4C]">
                     {usage.usage.minutesUsed} / {usage.limits.monthlyMinutes === 999999 ? "∞" : usage.limits.monthlyMinutes} minutes
                   </span>
                 </div>
                 <Progress value={usagePercent} className="h-2" />
                 {usagePercent > 80 && usage.tier !== "gold" && (
-                  <p className="text-xs text-amber-400 mt-2">
+                  <p className="text-xs text-[#7A4F4C] mt-2">
                     ⚠️ Running low on minutes! <Link href="/newsletter" className="underline">Upgrade your plan</Link> for more.
                   </p>
                 )}
@@ -211,12 +211,12 @@ export default function VipAudioHub() {
       {/* Voice Library and Character Voices stay in source. SHOW_READER_VOICE_LIBRARY restores them. */}
       {SHOW_READER_VOICE_LIBRARY && (
       <>
-      <section className="py-12 border-t border-amber-500/10">
+      <section className="py-12 border-t border-[#C9A3A0]/10">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-2xl font-serif text-white mb-2">Voice Library</h2>
-              <p className="text-slate-400">Choose the perfect voice for your stories</p>
+              <h2 className="text-2xl font-serif text-[#4A3B3A] mb-2">Voice Library</h2>
+              <p className="text-[#6E5F5A]">Choose the perfect voice for your stories</p>
             </div>
           </div>
 
@@ -224,29 +224,29 @@ export default function VipAudioHub() {
             {voices?.all.map((voice) => (
               <Card
                 key={voice.id}
-                className={`bg-slate-900/50 border-amber-500/20 hover:border-amber-500/40 transition-all cursor-pointer ${
-                  selectedVoice === voice.id ? "ring-2 ring-amber-500" : ""
+                className={`bg-[#FAF7F7]/50 border-[#C9A3A0]/20 hover:border-[#C9A3A0]/40 transition-all cursor-pointer ${
+                  selectedVoice === voice.id ? "ring-2 ring-[#C9A3A0]" : ""
                 }`}
                 onClick={() => setSelectedVoice(voice.id)}
               >
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <h3 className="font-medium text-white">{voice.name}</h3>
-                      <p className="text-xs text-slate-400 capitalize">{voice.gender} • {voice.style}</p>
+                      <h3 className="font-medium text-[#4A3B3A]">{voice.name}</h3>
+                      <p className="text-xs text-[#6E5F5A] capitalize">{voice.gender} • {voice.style}</p>
                     </div>
                     {voice.isPremium && (
-                      <Badge className="bg-gradient-to-r from-amber-500 to-pink-500 text-white text-xs">
+                      <Badge className="bg-[#4A3B3A] text-[#FAF7F7] text-xs">
                         <Crown className="h-3 w-3 mr-1" />
                         Premium
                       </Badge>
                     )}
                   </div>
-                  <p className="text-sm text-slate-300 mb-3">{voice.description}</p>
+                  <p className="text-sm text-[#6E5F5A] mb-3">{voice.description}</p>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full border-amber-500/30 text-amber-300 hover:bg-amber-500/20"
+                    className="w-full border-[#C9A3A0]/30 text-[#7A4F4C] hover:bg-[#7A4F4C]/20"
                     onClick={(e) => {
                       e.stopPropagation();
                       handlePreviewVoice(voice.id);
@@ -268,11 +268,11 @@ export default function VipAudioHub() {
       </section>
 
       {/* Character Voice Mappings */}
-      <section className="py-12 border-t border-amber-500/10">
+      <section className="py-12 border-t border-[#C9A3A0]/10">
         <div className="container">
           <div className="mb-8">
-            <h2 className="text-2xl font-serif text-white mb-2">Character Voices</h2>
-            <p className="text-slate-400">Each character has a perfectly matched voice</p>
+            <h2 className="text-2xl font-serif text-[#4A3B3A] mb-2">Character Voices</h2>
+            <p className="text-[#6E5F5A]">Each character has a perfectly matched voice</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -288,9 +288,9 @@ export default function VipAudioHub() {
               });
               
               return Object.entries(bookGroups).map(([bookTitle, characters]) => (
-                <Card key={bookTitle} className="bg-slate-900/50 border-amber-500/20">
+                <Card key={bookTitle} className="bg-[#FAF7F7]/50 border-[#C9A3A0]/20">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-lg text-amber-300">
+                    <CardTitle className="text-lg text-[#7A4F4C]">
                       {bookTitle}
                     </CardTitle>
                   </CardHeader>
@@ -302,20 +302,20 @@ export default function VipAudioHub() {
                         return (
                           <div key={mapping.characterName} className="flex items-center justify-between gap-4">
                             <div className="flex items-center gap-2">
-                              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500/30 to-pink-500/30 flex items-center justify-center">
-                                <span className="text-xs font-bold text-amber-300">
+                              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#C9A3A0]/30 to-[#C9A3A0]/30 flex items-center justify-center">
+                                <span className="text-xs font-bold text-[#7A4F4C]">
                                   {mapping.characterName.split(' ').map(n => n[0]).join('')}
                                 </span>
                               </div>
-                              <span className="text-white font-medium">{mapping.characterName}</span>
+                              <span className="text-[#4A3B3A] font-medium">{mapping.characterName}</span>
                             </div>
                             <div className="flex gap-2">
-                              <Badge variant="outline" className="border-amber-500/30 text-amber-300 text-xs">
+                              <Badge variant="outline" className="border-[#C9A3A0]/30 text-[#7A4F4C] text-xs">
                                 <Mic className="h-3 w-3 mr-1" />
                                 {defaultVoice?.name || mapping.defaultVoiceId}
                               </Badge>
                               {premiumVoice && (
-                                <Badge className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 text-pink-300 border border-pink-500/30 text-xs">
+                                <Badge className="bg-gradient-to-r from-[#C9A3A0]/20 to-[#C9A3A0]/20 text-[#7A4F4C] border border-[#C9A3A0]/30 text-xs">
                                   <Crown className="h-3 w-3 mr-1" />
                                   {premiumVoice.name}
                                 </Badge>
@@ -336,24 +336,24 @@ export default function VipAudioHub() {
       )}
 
       {/* Recent Audio Library */}
-      <section className="py-12 border-t border-amber-500/10">
+      <section className="py-12 border-t border-[#C9A3A0]/10">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-2xl font-serif text-white mb-2">Your Audio Library</h2>
-              <p className="text-slate-400">Recently added</p>
+              <h2 className="text-2xl font-serif text-[#4A3B3A] mb-2">Your Audio Library</h2>
+              <p className="text-[#6E5F5A]">Recently added</p>
             </div>
           </div>
 
           {library && library.length > 0 ? (
             <div className="space-y-4">
               {library.map((audio) => (
-                <Card key={audio.id} className="bg-slate-900/50 border-amber-500/20">
+                <Card key={audio.id} className="bg-[#FAF7F7]/50 border-[#C9A3A0]/20">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-4">
                       <div className="flex-1">
-                        <h3 className="font-medium text-white mb-1">{audio.title}</h3>
-                        <p className="text-xs text-slate-400">
+                        <h3 className="font-medium text-[#4A3B3A] mb-1">{audio.title}</h3>
+                        <p className="text-xs text-[#6E5F5A]">
                           {Math.round(audio.durationSeconds / 60)} min • {new Date(audio.createdAt).toLocaleDateString()}
                         </p>
                       </div>
@@ -370,15 +370,15 @@ export default function VipAudioHub() {
               ))}
             </div>
           ) : (
-            <Card className="bg-slate-900/50 border-amber-500/20">
+            <Card className="bg-[#FAF7F7]/50 border-[#C9A3A0]/20">
               <CardContent className="p-12 text-center">
-                <Sparkles className="h-12 w-12 text-amber-400 mx-auto mb-4" />
-                <h3 className="text-xl font-medium text-white mb-2">No Audio Yet</h3>
-                <p className="text-slate-400 mb-6">
+                <Sparkles className="h-12 w-12 text-[#7A4F4C] mx-auto mb-4" />
+                <h3 className="text-xl font-medium text-[#4A3B3A] mb-2">No Audio Yet</h3>
+                <p className="text-[#6E5F5A] mb-6">
                   Pick a story from the library to add it here.
                 </p>
                 <Link href="/newsletter">
-                  <Button className="bg-gradient-to-r from-amber-500 to-amber-600">
+                  <Button className="bg-gradient-to-r from-[#C9A3A0] to-[#C9A3A0]">
                     Browse Stories
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
@@ -391,17 +391,17 @@ export default function VipAudioHub() {
 
       {/* Upgrade CTA */}
       {usage?.tier !== "gold" && (
-        <section className="py-12 border-t border-amber-500/10">
+        <section className="py-12 border-t border-[#C9A3A0]/10">
           <div className="container">
-            <Card className="bg-gradient-to-r from-amber-900/30 to-pink-900/30 border-amber-500/30">
+            <Card className="bg-gradient-to-r from-[#C9A3A0]/30 to-[#C9A3A0]/30 border-[#C9A3A0]/30">
               <CardContent className="p-8 text-center">
-                <Crown className="h-12 w-12 text-amber-400 mx-auto mb-4" />
-                <h2 className="text-2xl font-serif text-white mb-2">Unlock Premium Features</h2>
-                <p className="text-slate-300 mb-6 max-w-md mx-auto">
+                <Crown className="h-12 w-12 text-[#7A4F4C] mx-auto mb-4" />
+                <h2 className="text-2xl font-serif text-[#4A3B3A] mb-2">Unlock Premium Features</h2>
+                <p className="text-[#6E5F5A] mb-6 max-w-md mx-auto">
                   Gold has no monthly audio limit and adds the Gold-only stories.
                 </p>
                 <Link href="/newsletter">
-                  <Button className="bg-gradient-to-r from-amber-500 to-pink-500 hover:from-amber-600 hover:to-pink-600">
+                  <Button className="bg-gradient-to-r from-[#C9A3A0] to-[#C9A3A0] hover:from-[#C9A3A0] hover:to-[#C9A3A0]">
                     Upgrade to Gold
                     <Sparkles className="h-4 w-4 ml-2" />
                   </Button>

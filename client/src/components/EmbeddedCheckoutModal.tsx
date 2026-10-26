@@ -78,7 +78,7 @@ export function EmbeddedCheckoutModal({ open, onClose, clientSecret, error, titl
       aria-modal="true"
       aria-label={title ?? "Checkout"}
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 font-cormorant"
-      style={{ background: "rgba(0, 0, 0, 0.72)" }}
+      style={{ background: "rgba(74, 59, 58, 0.72)" }}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -86,7 +86,7 @@ export function EmbeddedCheckoutModal({ open, onClose, clientSecret, error, titl
       <div
         className="relative w-full max-w-[640px] max-h-[90vh] overflow-auto"
         style={{
-          background: "#070D1C",
+          background: "#FAF7F7",
           border: `1px solid ${GOLD_SOFT}`,
           borderRadius: 4,
           color: TEXT,
@@ -132,7 +132,7 @@ export function EmbeddedCheckoutModal({ open, onClose, clientSecret, error, titl
           {error && (
             <div
               className="font-inter text-[13px] py-8 text-center"
-              style={{ color: "#e08d8d" }}
+              style={{ color: "#7A4F4C" }}
               role="alert"
             >
               {error}

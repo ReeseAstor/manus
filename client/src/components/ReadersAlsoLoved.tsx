@@ -153,7 +153,7 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
       <Star
         key={i}
         className={`w-3.5 h-3.5 ${
-          i < rating ? "fill-[#d4af37] text-[#d4af37]" : "text-[#e5e5e5]/20"
+          i < rating ? "fill-[#7A4F4C] text-[#7A4F4C]" : "text-[#4A3B3A]/20"
         }`}
       />
     ));
@@ -170,11 +170,11 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
           className="text-center mb-12"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Sparkles className="w-6 h-6 text-[#d4af37]" />
-            <h2 className="text-4xl font-serif font-bold text-[#e5e5e5]">
+            <Sparkles className="w-6 h-6 text-[#7A4F4C]" />
+            <h2 className="text-4xl font-serif font-bold text-[#4A3B3A]">
               Readers Also Loved
             </h2>
-            <Sparkles className="w-6 h-6 text-[#d4af37]" />
+            <Sparkles className="w-6 h-6 text-[#7A4F4C]" />
           </div>
 
           {/* Personalized message if quiz taken */}
@@ -182,10 +182,10 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#d4af37]/15 to-[#d4af37]/5 border border-[#d4af37]/30 mt-3"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#C9A3A0]/15 to-[#C9A3A0]/5 border border-[#B59A6A]/30 mt-3"
             >
-              <Heart className="w-4 h-4 text-[#d4af37] fill-[#d4af37]" />
-              <span className="text-[#d4af37] text-sm font-medium">
+              <Heart className="w-4 h-4 text-[#7A4F4C] fill-[#7A4F4C]" />
+              <span className="text-[#7A4F4C] text-sm font-medium">
                 {tropeInfo.matchReason}
               </span>
             </motion.div>
@@ -209,8 +209,8 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
                 }}
                 className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                   validTab === tab.key
-                    ? "bg-[#d4af37] text-[#0a0e27] shadow-lg shadow-[#d4af37]/20"
-                    : "bg-white/5 text-[#e5e5e5]/70 border border-[#d4af37]/20 hover:bg-[#d4af37]/10 hover:text-[#e5e5e5]"
+                    ? "bg-[#4A3B3A] text-[#FAF7F7] shadow-lg shadow-[#C9A3A0]/20"
+                    : "bg-[#EBD6D3]/30 text-[#FAF7F7]/70 border border-[#B59A6A]/20 hover:bg-[#C9A3A0]/10 hover:text-[#FAF7F7]"
                 }`}
               >
                 {tab.label}
@@ -237,7 +237,7 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
                 transition={{ delay: index * 0.1 }}
               >
                 <Link href={`/books/${book.slug}`}>
-                  <div className="group cursor-pointer bg-white/5 backdrop-blur-xl border-2 border-[#d4af37]/10 hover:border-[#d4af37]/40 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-[#d4af37]/10">
+                  <div className="group cursor-pointer bg-[#EBD6D3]/30 backdrop-blur-xl border-2 border-[#B59A6A]/10 hover:border-[#B59A6A]/40 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-[#C9A3A0]/10">
                     {/* Book Cover */}
                     <div className="relative overflow-hidden aspect-[2/3]">
                       <img
@@ -245,23 +245,23 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
                         alt={book.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e27] via-transparent to-transparent opacity-60" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F7] via-transparent to-transparent opacity-60" />
 
                       {/* Match Badge */}
                       {validTab === "personalized" && quizResult && (
-                        <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-[#d4af37]/90 text-[#0a0e27] text-xs font-bold flex items-center gap-1.5">
+                        <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-[#C9A3A0]/90 text-[#4A3B3A] text-xs font-bold flex items-center gap-1.5">
                           <Sparkles className="w-3 h-3" />
                           Picked for You
                         </div>
                       )}
                       {validTab === "trope-match" && "sharedTropes" in book && (
-                        <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-[#d4af37]/90 text-[#0a0e27] text-xs font-bold flex items-center gap-1.5">
+                        <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-[#C9A3A0]/90 text-[#4A3B3A] text-xs font-bold flex items-center gap-1.5">
                           <Heart className="w-3 h-3" />
                           {(book as any).sharedTropes.length} Shared Trope{(book as any).sharedTropes.length > 1 ? "s" : ""}
                         </div>
                       )}
                       {validTab === "series" && book.seriesOrder && (
-                        <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-[#d4af37]/90 text-[#0a0e27] text-xs font-bold flex items-center gap-1.5">
+                        <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-[#C9A3A0]/90 text-[#4A3B3A] text-xs font-bold flex items-center gap-1.5">
                           <BookOpen className="w-3 h-3" />
                           Book {book.seriesOrder}
                         </div>
@@ -269,7 +269,7 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
 
                       {/* Hover overlay */}
                       <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                        <div className="flex items-center justify-center gap-2 bg-[#d4af37] text-[#0a0e27] rounded-xl py-2.5 px-4 font-semibold text-sm">
+                        <div className="flex items-center justify-center gap-2 bg-[#4A3B3A] text-[#FAF7F7] rounded-xl py-2.5 px-4 font-semibold text-sm">
                           <BookOpen className="w-4 h-4" />
                           View Book
                           <ArrowRight className="w-4 h-4" />
@@ -279,17 +279,17 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
 
                     {/* Book Info */}
                     <div className="p-5">
-                      <h3 className="text-lg font-serif font-bold text-[#e5e5e5] mb-1.5 group-hover:text-[#d4af37] transition-colors line-clamp-1">
+                      <h3 className="text-lg font-serif font-bold text-[#4A3B3A] mb-1.5 group-hover:text-[#7A4F4C] transition-colors line-clamp-1">
                         {book.title}
                       </h3>
                       {book.series && (
-                        <p className="text-[#d4af37]/70 text-xs font-semibold tracking-wider uppercase mb-2">
+                        <p className="text-[#7A4F4C]/70 text-xs font-semibold tracking-wider uppercase mb-2">
                           {book.series} {book.seriesOrder ? `• Book ${book.seriesOrder}` : ""}
                         </p>
                       )}
                       <div className="flex items-center gap-2 mb-3">
                         <div className="flex">{renderStars(book.rating || 0)}</div>
-                        <span className="text-[#e5e5e5]/50 text-xs">
+                        <span className="text-[#4A3B3A]/50 text-xs">
                           {(book.rating || 0).toFixed(1)}
                         </span>
                       </div>
@@ -303,7 +303,7 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
                             .map((trope: string, i: number) => (
                               <span
                                 key={i}
-                                className="px-2 py-0.5 bg-[#d4af37]/10 border border-[#d4af37]/20 rounded text-[#d4af37]/80 text-xs"
+                                className="px-2 py-0.5 bg-[#C9A3A0]/10 border border-[#B59A6A]/20 rounded text-[#7A4F4C]/80 text-xs"
                               >
                                 {trope.trim()}
                               </span>
@@ -326,7 +326,7 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
               size="sm"
               onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
               disabled={currentPage === 0}
-              className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 disabled:opacity-30"
+              className="border-[#B59A6A]/30 text-[#7A4F4C] hover:bg-[#C9A3A0]/10 disabled:opacity-30"
             >
               <ChevronLeft className="w-4 h-4" />
             </Button>
@@ -337,8 +337,8 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
                   onClick={() => setCurrentPage(i)}
                   className={`w-2.5 h-2.5 rounded-full transition-all ${
                     i === currentPage
-                      ? "bg-[#d4af37] scale-125"
-                      : "bg-[#e5e5e5]/20 hover:bg-[#d4af37]/40"
+                      ? "bg-[#4A3B3A] scale-125"
+                      : "bg-[#FAF7F7]/20 hover:bg-[#C9A3A0]/40"
                   }`}
                 />
               ))}
@@ -348,7 +348,7 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
               size="sm"
               onClick={() => setCurrentPage(Math.min(totalPages - 1, currentPage + 1))}
               disabled={currentPage === totalPages - 1}
-              className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 disabled:opacity-30"
+              className="border-[#B59A6A]/30 text-[#7A4F4C] hover:bg-[#C9A3A0]/10 disabled:opacity-30"
             >
               <ChevronRight className="w-4 h-4" />
             </Button>
@@ -363,16 +363,16 @@ export function ReadersAlsoLoved({ currentBookId, currentBookTropes, currentBook
             viewport={{ once: true }}
             className="mt-14 text-center"
           >
-            <div className="inline-block bg-gradient-to-r from-[#d4af37]/10 via-[#d4af37]/5 to-[#d4af37]/10 border border-[#d4af37]/20 rounded-2xl p-8 max-w-lg">
-              <Sparkles className="w-8 h-8 text-[#d4af37] mx-auto mb-3" />
-              <h3 className="text-xl font-serif font-bold text-[#e5e5e5] mb-2">
+            <div className="inline-block bg-gradient-to-r from-[#C9A3A0]/10 via-[#C9A3A0]/5 to-[#C9A3A0]/10 border border-[#B59A6A]/20 rounded-2xl p-8 max-w-lg">
+              <Sparkles className="w-8 h-8 text-[#7A4F4C] mx-auto mb-3" />
+              <h3 className="text-xl font-serif font-bold text-[#4A3B3A] mb-2">
                 Get Personalized Recommendations
               </h3>
-              <p className="text-[#e5e5e5]/60 text-sm mb-5">
+              <p className="text-[#4A3B3A]/60 text-sm mb-5">
                 Take our 2-minute Romance Trope Quiz and we'll match you with your perfect Reese Astor book.
               </p>
               <Link href="/romance-quiz">
-                <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-semibold px-6">
+                <Button className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-semibold px-6">
                   Take the Quiz
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>

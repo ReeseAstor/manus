@@ -40,21 +40,21 @@ export function AffiliateProductCard({ product, index, sourceSlug }: AffiliatePr
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 hover:border-[#d4af37]/40 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-[#d4af37]/5"
+      className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#FAF7F7]/[0.06] to-[#FAF7F7]/[0.02] border border-[#4A3B3A]/10 hover:border-[#B59A6A]/40 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-[#C9A3A0]/5"
     >
       <div className="p-6 space-y-4">
         {/* Product Header */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
-            <h4 className="font-serif text-lg font-bold text-white group-hover:text-[#d4af37] transition-colors leading-tight">
+            <h4 className="font-serif text-lg font-bold text-[#4A3B3A] group-hover:text-[#7A4F4C] transition-colors leading-tight">
               {product.name}
             </h4>
-            <p className="text-[#d4af37]/80 font-medium text-sm mt-1">
+            <p className="text-[#7A4F4C]/80 font-medium text-sm mt-1">
               {product.priceRange}
             </p>
           </div>
-          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#d4af37]/10 flex items-center justify-center border border-[#d4af37]/20">
-            <ShoppingCart className="w-5 h-5 text-[#d4af37]" />
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#C9A3A0]/10 flex items-center justify-center border border-[#B59A6A]/20">
+            <ShoppingCart className="w-5 h-5 text-[#7A4F4C]" />
           </div>
         </div>
 
@@ -66,26 +66,26 @@ export function AffiliateProductCard({ product, index, sourceSlug }: AffiliatePr
                 key={i}
                 className={`w-4 h-4 ${
                   i < Math.floor(product.rating!)
-                    ? "text-[#d4af37] fill-[#d4af37]"
+                    ? "text-[#7A4F4C] fill-[#7A4F4C]"
                     : i < product.rating!
-                    ? "text-[#d4af37] fill-[#d4af37]/50"
-                    : "text-gray-600"
+                    ? "text-[#7A4F4C] fill-[#7A4F4C]/50"
+                    : "text-[#6E5F5A]"
                 }`}
               />
             ))}
-            <span className="text-xs text-gray-400 ml-1">({product.rating})</span>
+            <span className="text-xs text-[#6E5F5A] ml-1">({product.rating})</span>
           </div>
         )}
 
         {/* Description */}
-        <p className="text-gray-300 text-sm leading-relaxed">
+        <p className="text-[#6E5F5A] text-sm leading-relaxed">
           {product.description}
         </p>
 
         {/* Why Recommend */}
-        <div className="flex items-start gap-2 p-3 rounded-xl bg-[#d4af37]/5 border border-[#d4af37]/10">
-          <span className="text-[#d4af37] text-xs font-bold uppercase tracking-wider flex-shrink-0 mt-0.5">Why I love it:</span>
-          <p className="text-gray-300 text-xs leading-relaxed">{product.whyRecommend}</p>
+        <div className="flex items-start gap-2 p-3 rounded-xl bg-[#C9A3A0]/5 border border-[#B59A6A]/10">
+          <span className="text-[#7A4F4C] text-xs font-bold uppercase tracking-wider flex-shrink-0 mt-0.5">Why I love it:</span>
+          <p className="text-[#6E5F5A] text-xs leading-relaxed">{product.whyRecommend}</p>
         </div>
 
         {/* CTA Button */}
@@ -94,7 +94,7 @@ export function AffiliateProductCard({ product, index, sourceSlug }: AffiliatePr
           target="_blank"
           rel="noopener noreferrer nofollow"
           onClick={handleClick}
-          className="flex items-center justify-center gap-2 w-full py-3 px-6 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-[#d4af37]/20"
+          className="flex items-center justify-center gap-2 w-full py-3 px-6 rounded-full bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-[#C9A3A0]/20"
         >
           Check Price on Amazon
           <ExternalLink className="w-4 h-4" />
@@ -102,7 +102,7 @@ export function AffiliateProductCard({ product, index, sourceSlug }: AffiliatePr
       </div>
 
       {/* Decorative corner accent */}
-      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#d4af37]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#C9A3A0]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </motion.div>
   );
 }
@@ -119,14 +119,14 @@ export function AffiliateProductSection({ products, title = "Top Picks", subtitl
     <div className="my-12">
       {/* Section Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 mb-4">
-          <ShoppingCart className="w-4 h-4 text-[#d4af37]" />
-          <span className="text-[#d4af37] text-sm font-bold uppercase tracking-wider">{title}</span>
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A3A0]/10 border border-[#B59A6A]/20 mb-4">
+          <ShoppingCart className="w-4 h-4 text-[#7A4F4C]" />
+          <span className="text-[#7A4F4C] text-sm font-bold uppercase tracking-wider">{title}</span>
         </div>
-        <h3 className="font-serif text-2xl md:text-3xl font-bold text-white mb-2">
+        <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#4A3B3A] mb-2">
           {subtitle}
         </h3>
-        <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent mx-auto" />
+        <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#C9A3A0] to-transparent mx-auto" />
       </div>
 
       {/* Product Grid */}
@@ -141,9 +141,9 @@ export function AffiliateProductSection({ products, title = "Top Picks", subtitl
 
 export function FTCDisclosure() {
   return (
-    <div className="mb-8 p-4 rounded-xl bg-white/[0.03] border border-white/10">
-      <p className="text-gray-400 text-xs leading-relaxed italic">
-        <span className="font-semibold text-gray-400">Disclosure:</span>{" "}
+    <div className="mb-8 p-4 rounded-xl bg-[#EBD6D3]/0 border border-[#4A3B3A]/10">
+      <p className="text-[#6E5F5A] text-xs leading-relaxed italic">
+        <span className="font-semibold text-[#6E5F5A]">Disclosure:</span>{" "}
         As an Amazon Associate I earn from qualifying purchases. This means I may earn a small commission at no extra cost to you if you click a link and make a purchase.
       </p>
     </div>
