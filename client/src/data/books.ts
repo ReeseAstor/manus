@@ -314,7 +314,7 @@ export const BOOKS: Book[] = [
     audiobook_available: false,
     isbn: null,
     asin: "B0HDKNP9F6", // verified on amazon.es / amazon.it listings 10/26/2026
-    price_usd: null,
+    price_usd: 4.99, // live Kindle price on amazon.com/dp/B0HDKNP9F6 10/26/2026; JSON-LD offers only
     tropes: ["class divide", "dual POV", "high heat", "HEA"],
     characters: ["Kai Hsu", "Miri Doyle-Levine"],
   },
