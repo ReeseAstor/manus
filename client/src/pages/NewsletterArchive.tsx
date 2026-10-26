@@ -47,7 +47,7 @@ export default function NewsletterArchive() {
             <h1 className="text-4xl md:text-5xl font-bold">Newsletter Archive</h1>
           </div>
           <p className="text-xl text-pink-100 max-w-2xl">
-            Browse past newsletters and catch up on exclusive content, writing updates, and romance book recommendations
+            Browse past newsletters and catch up on writing updates, and romance book recommendations
           </p>
         </div>
       </div>
@@ -61,10 +61,11 @@ export default function NewsletterArchive() {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
+                aria-label="Search newsletters"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search newsletters..."
-                className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition"
+                className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition bg-white text-gray-900 placeholder:text-gray-500"
               />
             </div>
 
@@ -72,9 +73,10 @@ export default function NewsletterArchive() {
             <div className="relative md:w-48">
               <Filter className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <select
+                aria-label="Filter by year"
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition appearance-none bg-white cursor-pointer"
+                className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition appearance-none bg-white text-gray-900 cursor-pointer"
               >
                 <option value="all">All Years</option>
                 {years.map((year) => (
@@ -130,7 +132,7 @@ export default function NewsletterArchive() {
             Don't Miss Future Newsletters!
           </h2>
           <p className="text-xl text-pink-100 mb-8">
-            Subscribe now to get exclusive content, writing updates, and romance recommendations delivered to your inbox
+            Subscribe now to get writing updates, and romance recommendations delivered to your inbox
           </p>
           <Link href="/newsletter">
             <a className="inline-flex items-center gap-2 bg-white text-pink-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-pink-50 transition shadow-lg">

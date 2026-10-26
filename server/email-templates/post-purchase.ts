@@ -86,7 +86,7 @@ ${bodyContent}
                   <td style="color: rgba(200,200,200,0.25); font-size: 13px;">|</td>
                   <td style="padding: 0 12px;"><a href="${SITE_URL}/books" style="color: #d4af37; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Books</a></td>
                   <td style="color: rgba(200,200,200,0.25); font-size: 13px;">|</td>
-                  <td style="padding: 0 12px;"><a href="${SITE_URL}/shop" style="color: #d4af37; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Shop</a></td>
+                  <td style="padding: 0 12px;"><a href="${SITE_URL}/newsletter" style="color: #d4af37; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Newsletter</a></td>
                   <td style="color: rgba(200,200,200,0.25); font-size: 13px;">|</td>
                   <td style="padding: 0 12px;"><a href="${SITE_URL}/blog" style="color: #d4af37; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Blog</a></td>
                 </tr>
@@ -110,7 +110,7 @@ ${bodyContent}
 </html>`;
 }
 
-// ─── Email 1: Thank You + Your Reading Companion (Day 1) ────────────────────
+// ─── Email 1: Thank You + Series Reading Order (Day 1) ────────────────────
 
 export function generatePostPurchaseEmail1(buyerName?: string): string {
   const greeting = buyerName ? `Dear ${buyerName}` : "Dear Reader";
@@ -129,7 +129,7 @@ export function generatePostPurchaseEmail1(buyerName?: string): string {
                 I just saw your order come through, and I had to write to you personally. <strong style="color: #e5e5e5;">Thank you.</strong> Every single purchase means the world to me as an indie author — you're not just buying a book, you're supporting a dream.
               </p>
               <p style="margin: 0 0 18px; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
-                I want to make sure your reading experience is absolutely perfect, so I've put together something special just for my buyers:
+                In case it helps, here is the Manhattan Money Kings series in reading order:
               </p>
             </td>
           </tr>
@@ -140,31 +140,37 @@ export function generatePostPurchaseEmail1(buyerName?: string): string {
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px;">
                 <tr>
                   <td style="padding: 24px 28px;">
-                    <p style="margin: 0 0 4px; color: #d4af37; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif;">Your Exclusive Bonus</p>
-                    <h2 style="margin: 0 0 14px; color: #f5d76e; font-size: 22px; font-weight: bold;">Manhattan Money Kings Reading Companion</h2>
+                    <p style="margin: 0 0 4px; color: #d4af37; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif;">The Series</p>
+                    <h2 style="margin: 0 0 14px; color: #f5d76e; font-size: 22px; font-weight: bold;">Manhattan Money Kings, in order</h2>
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0">
                       <tr>
                         <td style="padding: 0 0 8px;">
                           <span style="color: #d4af37; font-size: 14px;">&#10022;</span>
-                          <span style="color: #c8c8c8; font-size: 15px; padding-left: 8px;">Character relationship map for the entire series</span>
+                          <span style="color: #c8c8c8; font-size: 15px; padding-left: 8px;">Prequel: The Billionaire&rsquo;s One Night Stand</span>
                         </td>
                       </tr>
                       <tr>
                         <td style="padding: 0 0 8px;">
                           <span style="color: #d4af37; font-size: 14px;">&#10022;</span>
-                          <span style="color: #c8c8c8; font-size: 15px; padding-left: 8px;">Curated Spotify playlist — the soundtrack I wrote to</span>
+                          <span style="color: #c8c8c8; font-size: 15px; padding-left: 8px;">Book 1: The Billionaire&rsquo;s Executive Assistant</span>
                         </td>
                       </tr>
                       <tr>
                         <td style="padding: 0 0 8px;">
                           <span style="color: #d4af37; font-size: 14px;">&#10022;</span>
-                          <span style="color: #c8c8c8; font-size: 15px; padding-left: 8px;">Recommended reading order guide</span>
+                          <span style="color: #c8c8c8; font-size: 15px; padding-left: 8px;">Book 2: The Billionaire&rsquo;s Fake Wife</span>
                         </td>
                       </tr>
                       <tr>
-                        <td style="padding: 0 0 0;">
+                        <td style="padding: 0 0 8px;">
                           <span style="color: #d4af37; font-size: 14px;">&#10022;</span>
-                          <span style="color: #c8c8c8; font-size: 15px; padding-left: 8px;">Manhattan landmarks map from the series</span>
+                          <span style="color: #c8c8c8; font-size: 15px; padding-left: 8px;">Book 3: The Billionaire&rsquo;s Baby Secret</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0 0 8px;">
+                          <span style="color: #d4af37; font-size: 14px;">&#10022;</span>
+                          <span style="color: #c8c8c8; font-size: 15px; padding-left: 8px;">Book 4: The Billionaire&rsquo;s Forbidden Nanny</span>
                         </td>
                       </tr>
                     </table>
@@ -180,8 +186,8 @@ export function generatePostPurchaseEmail1(buyerName?: string): string {
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
                 <tr>
                   <td style="background-color: #d4af37; border-radius: 8px; padding: 16px 40px;">
-                    <a href="${SITE_URL}/reading-companion" class="cta-button" style="color: #0a0e27; text-decoration: none; font-size: 16px; font-weight: bold; font-family: Arial, sans-serif; letter-spacing: 0.5px; display: inline-block;">
-                      Download Your Reading Companion
+                    <a href="${SITE_URL}/books" class="cta-button" style="color: #0a0e27; text-decoration: none; font-size: 16px; font-weight: bold; font-family: Arial, sans-serif; letter-spacing: 0.5px; display: inline-block;">
+                      See the Full Series
                     </a>
                   </td>
                 </tr>
@@ -201,13 +207,13 @@ export function generatePostPurchaseEmail1(buyerName?: string): string {
           </tr>`;
 
   return wrapInTemplate({
-    subject: "Your books are on their way — plus a surprise inside",
-    preheader: "A personal thank you and an exclusive reading companion just for you",
+    subject: "Thank you for your order",
+    preheader: "A personal thank you from Reese",
     bodyContent,
   });
 }
 
-// ─── Email 2: Behind the Scenes (Day 5) ─────────────────────────────────────
+// ─── Email 2: Check-In (Day 5) ─────────────────────────────────────
 
 export function generatePostPurchaseEmail2(buyerName?: string): string {
   const greeting = buyerName ? `Dear ${buyerName}` : "Dear Reader";
@@ -223,34 +229,11 @@ export function generatePostPurchaseEmail2(buyerName?: string): string {
           <tr>
             <td class="content-cell" style="padding: 10px 40px 20px;">
               <p style="margin: 0 0 18px; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
-                I hope you're settling into the Manhattan Money Kings world. Today I want to share something I've never published anywhere — a deleted scene from Book 1 that almost made the final cut.
+                I hope you're settling into the Manhattan Money Kings world. I wanted to check in and say thank you again for reading.
               </p>
-              <p style="margin: 0 0 18px; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
-                My editor and I debated this scene for weeks. It reveals a side of the hero that changes everything you think you know about him. In the end, we decided the mystery was more powerful — but I've always wondered if readers would have preferred to see this moment.
+              <p style="margin: 0 0 16px; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
+                If the book gave you a good few hours, an honest review on Amazon, even a sentence or two, is the single most helpful thing you can do for an independent author. It helps the next reader find the series.
               </p>
-            </td>
-          </tr>
-
-          <!-- Deleted Scene Box -->
-          <tr>
-            <td style="padding: 0 40px 24px;">
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(212, 175, 55, 0.06); border-left: 4px solid #d4af37; border-radius: 0 10px 10px 0;">
-                <tr>
-                  <td style="padding: 28px;">
-                    <p style="margin: 0 0 6px; color: #d4af37; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif;">Exclusive Deleted Scene</p>
-                    <h2 style="margin: 0 0 16px; color: #f5d76e; font-size: 20px; font-weight: bold; font-style: italic;">"The Night Before Everything Changed"</h2>
-                    <p style="margin: 0 0 14px; color: #c8c8c8; font-size: 15px; line-height: 1.8; font-style: italic;">
-                      The penthouse was dark except for the amber glow of Manhattan below. He stood at the floor-to-ceiling windows, tie loosened, whiskey untouched in his hand. The city that had given him everything was about to take the one thing he couldn't buy back.
-                    </p>
-                    <p style="margin: 0 0 14px; color: #c8c8c8; font-size: 15px; line-height: 1.8; font-style: italic;">
-                      He pulled out his phone. Her name glowed on the screen — the last message she'd sent, three words that had unraveled every wall he'd spent a decade building...
-                    </p>
-                    <p style="margin: 0; color: rgba(212, 175, 55, 0.7); font-size: 14px; font-style: italic;">
-                      [Scene continues — 1,200 words]
-                    </p>
-                  </td>
-                </tr>
-              </table>
             </td>
           </tr>
 
@@ -260,8 +243,8 @@ export function generatePostPurchaseEmail2(buyerName?: string): string {
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
                 <tr>
                   <td style="background-color: #d4af37; border-radius: 8px; padding: 16px 40px;">
-                    <a href="${SITE_URL}/deleted-scene" class="cta-button" style="color: #0a0e27; text-decoration: none; font-size: 16px; font-weight: bold; font-family: Arial, sans-serif; letter-spacing: 0.5px; display: inline-block;">
-                      Read the Full Deleted Scene
+                    <a href="${SITE_URL}/books" class="cta-button" style="color: #0a0e27; text-decoration: none; font-size: 16px; font-weight: bold; font-family: Arial, sans-serif; letter-spacing: 0.5px; display: inline-block;">
+                      Browse the Books
                     </a>
                   </td>
                 </tr>
@@ -272,22 +255,20 @@ export function generatePostPurchaseEmail2(buyerName?: string): string {
           <tr>
             <td class="content-cell" style="padding: 0 40px 20px;">
               <p style="margin: 0 0 18px; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
-                This is one of the things I love most about connecting with readers directly — I get to share the stories behind the stories. Things you'll never find on Amazon or in any bookstore.
-              </p>
+                If you have any questions about the books or just want to say hi, simply reply to this email. I read every response.</p>
               <p style="margin: 0; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
-                I'd love to know what you think. Would you have kept this scene in? Hit reply and tell me — I genuinely want to know.
-              </p>
+                Thank you for supporting independent romance.</p>
             </td>
           </tr>`;
 
   return wrapInTemplate({
-    subject: "The deleted scene I almost kept in Book 1",
-    preheader: "An exclusive behind-the-scenes look that changes everything you thought you knew",
+    subject: "How is the reading going?",
+    preheader: "A quick hello and a small favor",
     bodyContent,
   });
 }
 
-// ─── Email 3: What's Next (Day 14) ──────────────────────────────────────────
+// ─── Email 3: What to Read Next (Day 14) ──────────────────────────────────────────
 
 export function generatePostPurchaseEmail3(buyerName?: string): string {
   const greeting = buyerName ? `Dear ${buyerName}` : "Dear Reader";
@@ -306,7 +287,7 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
                 It's been two weeks since you stepped into the Manhattan Money Kings world, and I hope these characters have found a permanent place in your heart — they certainly have in mine.
               </p>
               <p style="margin: 0 0 18px; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
-                I wanted to give you a sneak peek at what's coming next — because the story is far from over.
+                I wanted to point you to what you can read next.
               </p>
             </td>
           </tr>
@@ -317,11 +298,11 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px;">
                 <tr>
                   <td style="padding: 24px 28px;">
-                    <p style="margin: 0 0 4px; color: #d4af37; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif;">Coming Soon</p>
+                    <p style="margin: 0 0 4px; color: #d4af37; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif;">Also by Reese Astor</p>
                     <h2 style="margin: 0 0 6px; color: #f5d76e; font-size: 22px; font-weight: bold;">The Hudson Dynasty Series</h2>
-                    <p style="margin: 0 0 16px; color: rgba(200,200,200,0.6); font-size: 13px; font-family: Arial, sans-serif;">A new generation of Manhattan power players</p>
+                    <p style="margin: 0 0 16px; color: rgba(200,200,200,0.6); font-size: 13px; font-family: Arial, sans-serif;">Manhattan billionaire romance</p>
                     <p style="margin: 0; color: #c8c8c8; font-size: 15px; line-height: 1.8;">
-                      When the daughter of a Manhattan Money King crosses paths with the one man her family forbids, old alliances shatter and new empires rise. If you loved the intensity of the MMK series, the Hudson Dynasty will take your breath away.
+                      The Hudson Dynasty starts with The First Acquisition, a free prequel novella, and continues with Hostile Tender, Poison Pill and Golden Parachute. If you enjoyed the Manhattan Money Kings books, it is the next place to go.
                     </p>
                   </td>
                 </tr>
@@ -333,29 +314,19 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
           <tr>
             <td class="content-cell" style="padding: 0 40px 16px;">
               <p style="margin: 0; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
-                But first — have you explored the complete Manhattan Money Kings collection? Here's what's waiting for you:
+                And if you haven't read the whole Manhattan Money Kings series yet, here it is in order:
               </p>
             </td>
           </tr>
 
-          <!-- Product Cards -->
+          <!-- Series Cards -->
           <tr>
             <td style="padding: 0 40px 10px;">
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(26, 31, 58, 0.8); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 8px;">
                 <tr>
                   <td style="padding: 18px 22px;">
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
-                      <tr>
-                        <td style="width: 70%;">
-                          <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">The Complete Trilogy Bundle</p>
-                          <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">All 3 books + bonus content</p>
-                        </td>
-                        <td style="text-align: right; vertical-align: middle;">
-                          <span style="color: rgba(200,200,200,0.4); font-size: 13px; text-decoration: line-through;">$44.97</span>
-                          <span style="color: #d4af37; font-size: 18px; font-weight: bold; padding-left: 6px;">$29.99</span>
-                        </td>
-                      </tr>
-                    </table>
+                    <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">The Billionaire&rsquo;s One Night Stand</p>
+                    <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">Manhattan Money Kings, Prequel</p>
                   </td>
                 </tr>
               </table>
@@ -366,18 +337,8 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(26, 31, 58, 0.8); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 8px;">
                 <tr>
                   <td style="padding: 18px 22px;">
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
-                      <tr>
-                        <td style="width: 70%;">
-                          <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">The Ultimate Collection</p>
-                          <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">Trilogy + prequel + exclusive extras</p>
-                        </td>
-                        <td style="text-align: right; vertical-align: middle;">
-                          <span style="color: rgba(200,200,200,0.4); font-size: 13px; text-decoration: line-through;">$59.96</span>
-                          <span style="color: #d4af37; font-size: 18px; font-weight: bold; padding-left: 6px;">$39.99</span>
-                        </td>
-                      </tr>
-                    </table>
+                    <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">The Billionaire&rsquo;s Executive Assistant</p>
+                    <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">Manhattan Money Kings, Book 1</p>
                   </td>
                 </tr>
               </table>
@@ -388,17 +349,32 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(26, 31, 58, 0.8); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 8px;">
                 <tr>
                   <td style="padding: 18px 22px;">
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
-                      <tr>
-                        <td style="width: 70%;">
-                          <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">VIP Club Membership</p>
-                          <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">New-release news from Reese Astor</p>
-                        </td>
-                        <td style="text-align: right; vertical-align: middle;">
-                          <span style="color: #d4af37; font-size: 18px; font-weight: bold;">$9.99<span style="font-size: 12px; font-weight: normal;">/mo</span></span>
-                        </td>
-                      </tr>
-                    </table>
+                    <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">The Billionaire&rsquo;s Fake Wife</p>
+                    <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">Manhattan Money Kings, Book 2</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 40px 10px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(26, 31, 58, 0.8); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 8px;">
+                <tr>
+                  <td style="padding: 18px 22px;">
+                    <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">The Billionaire&rsquo;s Baby Secret</p>
+                    <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">Manhattan Money Kings, Book 3</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 40px 10px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(26, 31, 58, 0.8); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 8px;">
+                <tr>
+                  <td style="padding: 18px 22px;">
+                    <p style="margin: 0 0 4px; color: #d4af37; font-size: 15px; font-weight: bold;">The Billionaire&rsquo;s Forbidden Nanny</p>
+                    <p style="margin: 0; color: rgba(200,200,200,0.6); font-size: 13px;">Manhattan Money Kings, Book 4</p>
                   </td>
                 </tr>
               </table>
@@ -411,8 +387,8 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
                 <tr>
                   <td style="background-color: #d4af37; border-radius: 8px; padding: 16px 40px;">
-                    <a href="${SITE_URL}/shop" class="cta-button" style="color: #0a0e27; text-decoration: none; font-size: 16px; font-weight: bold; font-family: Arial, sans-serif; letter-spacing: 0.5px; display: inline-block;">
-                      Explore the Full Collection
+                    <a href="${SITE_URL}/books" class="cta-button" style="color: #0a0e27; text-decoration: none; font-size: 16px; font-weight: bold; font-family: Arial, sans-serif; letter-spacing: 0.5px; display: inline-block;">
+                      Browse All the Books
                     </a>
                   </td>
                 </tr>
@@ -429,8 +405,8 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
           </tr>`;
 
   return wrapInTemplate({
-    subject: "Finished the series? Here's what's coming next",
-    preheader: "A sneak peek at the Hudson Dynasty series + exclusive collection offers",
+    subject: "Finished the series? Here's where to read next",
+    preheader: "The Hudson Dynasty, and the Manhattan Money Kings in order",
     bodyContent,
   });
 }
@@ -438,26 +414,26 @@ export function generatePostPurchaseEmail3(buyerName?: string): string {
 export const postPurchaseSequence = [
   {
     id: 1,
-    name: "Thank You + Your Reading Companion",
-    subject: "Your books are on their way — plus a surprise inside",
+    name: "Thank You + Series Reading Order",
+    subject: "Thank you for your order",
     delay: "1 day after purchase",
-    purpose: "Immediate gratification, reduce buyer's remorse, deliver bonus content",
+    purpose: "Thank the buyer and point to the rest of the series in reading order",
     generate: generatePostPurchaseEmail1,
   },
   {
     id: 2,
-    name: "Behind the Scenes — Deleted Scene",
-    subject: "The deleted scene I almost kept in Book 1",
+    name: "Check-In + Review Request",
+    subject: "How is the reading going?",
     delay: "5 days after purchase",
-    purpose: "Exclusive content that rewards the purchase decision",
+    purpose: "Check in with the buyer and ask for an honest review",
     generate: generatePostPurchaseEmail2,
   },
   {
     id: 3,
-    name: "What's Next — Upsell & Preview",
-    subject: "Finished the series? Here's what's coming next",
+    name: "What to Read Next",
+    subject: "Finished the series? Here's where to read next",
     delay: "14 days after purchase",
-    purpose: "Forward momentum toward next purchase, introduce new series",
+    purpose: "Point readers to the rest of the catalog",
     generate: generatePostPurchaseEmail3,
   },
 ];

@@ -78,7 +78,7 @@ export default function VipAudioLibrary() {
           <p className="text-gray-400 mb-8">
             Join the Spicy Stories Club to access our exclusive audio library
           </p>
-          <Link href="/vip-club">
+          <Link href="/newsletter">
             <Button
               size="lg"
               className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400"

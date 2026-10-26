@@ -531,7 +531,7 @@ Growing an email list is a marathon, not a sprint. Here's what realistic growth 
 - **Month 4-12:** 500-2,000 subscribers (as you add more books and cross-promote)
 - **Year 2+:** 2,000-10,000+ subscribers (compounding growth from backlist and word of mouth)
 
-I'm currently at 1,763 subscribers, and every single one of them is more valuable to my career than a thousand social media followers.
+Every single subscriber is more valuable to my career than a thousand social media followers.
 
 ## Start Today
 

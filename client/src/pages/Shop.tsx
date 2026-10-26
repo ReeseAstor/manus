@@ -64,7 +64,7 @@ export default function Shop() {
                   <Link href={`/books/${book.slug}`}>
                     <div className="relative overflow-hidden cursor-pointer">
                       <img
-                        src={book.cover_image}
+                        src={book.cover_image ?? undefined}
                         alt={`${book.title} — cover`}
                         className="w-full aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-500"
                       />
@@ -108,7 +108,7 @@ export default function Shop() {
             <p className="text-[#e5e5e5]/70 text-lg mb-8 max-w-2xl mx-auto">
               New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free.
             </p>
-            <Link href="/reader-club">
+            <Link href="/free-book">
               <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-bold text-lg px-8 py-6 rounded-xl">
                 Join Reader's Club
                 <ArrowRight className="w-5 h-5 ml-2" />

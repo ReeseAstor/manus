@@ -38,7 +38,7 @@ export default function MyPurchases() {
               My Purchases
             </h1>
             <p className="text-[#e5e5e5]/60 text-lg">
-              Access your purchased books and download links.
+              Find the links to your purchased books.
             </p>
           </motion.div>
 
@@ -59,7 +59,7 @@ export default function MyPurchases() {
               <p className="text-[#e5e5e5]/60 mb-8 max-w-md mx-auto">
                 You haven't made any purchases yet. Browse our collection and start your Manhattan journey.
               </p>
-              <Link href="/shop">
+              <Link href="/books">
                 <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-bold px-8 py-6 rounded-xl">
                   Browse Books
                   <ExternalLink className="w-5 h-5 ml-2" />
@@ -102,11 +102,11 @@ export default function MyPurchases() {
                       >
                         <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-bold">
                           <Download className="w-4 h-4 mr-2" />
-                          Download
+                          Open book link
                         </Button>
                       </a>
                     ) : (
-                      <Link href="/shop">
+                      <Link href="/books">
                         <Button variant="outline" className="border-[#d4af37]/30 text-[#e5e5e5]">
                           <BookOpen className="w-4 h-4 mr-2" />
                           View in Shop
@@ -129,10 +129,10 @@ export default function MyPurchases() {
             <p className="text-[#e5e5e5]/40 text-sm">
               Need help with your purchase? Contact us at{" "}
               <a
-                href="mailto:support@reeseastor.us"
+                href="mailto:contact@reeseastor.com"
                 className="text-[#d4af37] hover:underline"
               >
-                support@reeseastor.us
+                contact@reeseastor.com
               </a>
             </p>
           </motion.div>

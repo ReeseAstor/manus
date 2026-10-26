@@ -1,7 +1,8 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "./styles/animations.css";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ComponentType } from "react";
+import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import NotFound from "@/pages/NotFound";
 import { Redirect, Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -15,7 +16,6 @@ import FreeBook from "./pages/FreeBook";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import ReaderClub from "./pages/ReaderClub";
 
 // ───── Lazy: secondary pages (code-split, load on demand) ─────
 const Press = lazy(() => import("./pages/Press"));
@@ -45,7 +45,6 @@ const AdminTwilio = lazy(() => import("./pages/AdminTwilio"));
 const AdminSmsAnalytics = lazy(() => import("./pages/AdminSmsAnalytics"));
 const AdminAIUsage = lazy(() => import("./pages/AdminAIUsage"));
 const ExclusiveContentManager = lazy(() => import("./pages/ExclusiveContentManager"));
-const WelcomeBack = lazy(() => import("./pages/WelcomeBack"));
 const StaySubscribed = lazy(() => import("./pages/StaySubscribed"));
 const AdminAIStudio = lazy(() => import("./pages/AdminAIStudio"));
 const WritingStudio = lazy(() => import("./pages/WritingStudio"));
@@ -57,10 +56,8 @@ const NewsletterEditor = lazy(() =>
   import("./pages/NewsletterEditor").then(m => ({ default: m.NewsletterEditor })),
 );
 const CharacterQuiz = lazy(() => import("./pages/CharacterQuiz"));
-const RomanceTropeQuiz = lazy(() => import("./pages/Quiz"));
 const WhyBuyDirectPage = lazy(() => import("./pages/WhyBuyDirectPage"));
 const Profile = lazy(() => import("./pages/Profile"));
-const VipClub = lazy(() => import("./pages/VipClub"));
 const VipWelcome = lazy(() => import("./pages/VipWelcome"));
 const VipDashboard = lazy(() => import("./pages/VipDashboard"));
 const VipAudioHub = lazy(() => import("./pages/VipAudioHub"));
@@ -72,7 +69,6 @@ const NewsletterArchive = lazy(() => import("./pages/NewsletterArchive"));
 const NewsletterDetail = lazy(() => import("./pages/NewsletterDetail"));
 const Favorites = lazy(() => import("./pages/Favorites"));
 const MyPurchases = lazy(() => import("./pages/MyPurchases"));
-const Promo = lazy(() => import("./pages/Promo"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 
@@ -81,6 +77,57 @@ import { Footer } from "./components/Footer";
 import { EmailCapturePopup } from "./components/EmailCapturePopup";
 import { ExitIntentPopup } from "./components/ExitIntentPopup";
 import { AdminRoute } from "./components/AdminRoute";
+
+/**
+ * Wraps a page that has no SEO head of its own (or only renders one after data loads) so every
+ * route gets an accurate title, description and canonical. A page's own head, when present,
+ * is deeper in the tree and takes precedence.
+ */
+function withSEO(Page: ComponentType, seo: { title: string; description: string; canonical: string; noindex?: boolean }) {
+  return function PageWithSEO() {
+    return (
+      <>
+        <EnhancedSEOHead {...seo} />
+        <Page />
+      </>
+    );
+  };
+}
+
+// /reader-club, /vip-club and /welcome-back are retired for now (the vercel.json 307s cover direct
+// loads; this keeps in-app navigation consistent). The page components stay in the repo, unrouted.
+const ToNewsletter = () => <Redirect to="/newsletter" />;
+// /romance-quiz is retired (its result page named a book that does not exist); the page file stays unrouted.
+const ToBooks = () => <Redirect to="/books" />;
+
+const FavoritesPage = withSEO(Favorites, {
+  title: "Reese's Favorites | Reese Astor",
+  description: "Products recommended by Reese Astor for reading and writing. Some links are affiliate links.",
+  canonical: "/favorites",
+});
+const NewsletterArchivePage = withSEO(NewsletterArchive, {
+  title: "Newsletter Archive | Reese Astor",
+  description: "Browse past newsletters from Reese Astor.",
+  canonical: "/newsletter-archive",
+});
+const StaySubscribedPage = withSEO(StaySubscribed, {
+  title: "Thank You | Reese Astor",
+  description: "Thank you for staying on Reese Astor's email list.",
+  canonical: "/stay-subscribed",
+  noindex: true,
+});
+const VipAudioHubPage = withSEO(VipAudioHub, {
+  title: "VIP Audio Hub | Reese Astor",
+  description: "Member audio area for Reese Astor's VIP Club.",
+  canonical: "/vip-audio",
+  noindex: true,
+});
+const VipAudioLibraryPage = withSEO(VipAudioLibrary, {
+  title: "VIP Audio Library | Reese Astor",
+  description: "Member audio library for Reese Astor's VIP Club.",
+  canonical: "/vip-audio-library",
+  noindex: true,
+});
 
 function RouteFallback() {
   return (
@@ -98,22 +145,21 @@ function Router() {
         <Route path={"/books"} component={BooksCatalog} />
         <Route path={"/books/:slug"} component={BookTitle} />
         <Route path={"/press"} component={Press} />
-        <Route path={"/reader-club"} component={ReaderClub} />
+        <Route path={"/reader-club"} component={ToNewsletter} />
         <Route path={"/reader-club/:slug"} component={ExclusiveContentDetail} />
-        <Route path={"/welcome-back"} component={WelcomeBack} />
-        <Route path={"/stay-subscribed"} component={StaySubscribed} />
+        <Route path={"/welcome-back"} component={ToNewsletter} />
+        <Route path={"/stay-subscribed"} component={StaySubscribedPage} />
         <Route path={"/free-book"} component={FreeBook} />
         <Route path={"/quiz"} component={CharacterQuiz} />
-        <Route path={"/romance-quiz"} component={RomanceTropeQuiz} />
+        <Route path={"/romance-quiz"} component={ToBooks} />
         <Route path={"/shop"} component={Shop} />
-        <Route path={"/favorites"} component={Favorites} />
-        <Route path={"/promo"} component={Promo} />
+        <Route path={"/favorites"} component={FavoritesPage} />
         <Route path={"/why-buy-direct"} component={WhyBuyDirectPage} />
         <Route path={"/permission"}>{() => <Redirect to="/books" replace />}</Route>
         <Route path={"/purchase-success"} component={PurchaseSuccess} />
         <Route path={"/my-purchases"} component={MyPurchases} />
         <Route path={"/profile"} component={Profile} />
-        <Route path={"/vip-club"} component={VipClub} />
+        <Route path={"/vip-club"} component={ToNewsletter} />
         <Route path={"/vip-club/welcome"} component={VipWelcome} />
         <Route path={"/vip-club/dashboard"} component={VipDashboard} />
         <Route path={"/auth/login"} component={AuthLogin} />
@@ -121,8 +167,8 @@ function Router() {
         <Route path={"/newsletter"} component={Newsletter} />
         <Route path={"/newsletter-archive"} component={NewsletterArchive} />
         <Route path={"/newsletter-archive/:id"} component={NewsletterDetail} />
-        <Route path={"/vip-audio"} component={VipAudioHub} />
-        <Route path={"/vip-audio-library"} component={VipAudioLibrary} />
+        <Route path={"/vip-audio"} component={VipAudioHubPage} />
+        <Route path={"/vip-audio-library"} component={VipAudioLibraryPage} />
         <Route path={"/about"} component={About} />
         <Route path={"/contact"} component={Contact} />
         <Route path={"/blog"} component={Blog} />

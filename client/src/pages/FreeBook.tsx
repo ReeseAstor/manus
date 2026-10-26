@@ -65,11 +65,11 @@ export default function FreeBook() {
   };
 
   const benefits = [
-    "Instant access to the complete full-length novella",
+    "Instant access to the complete novella",
     "The perfect introduction to the Hudson Dynasty series",
-    "Early notifications for new releases",
-    "Exclusive bonus content and character insights",
-    "Behind-the-scenes author updates",
+    "New release alerts",
+    "Bonus scenes and early cover reveals",
+    "Invitations to join the ARC team",
   ];
 
   const freeBookSchema = generateBookSchema({
@@ -82,7 +82,7 @@ export default function FreeBook() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a]" style={{ overflowX: "clip" }}>
       <EnhancedSEOHead
         title="Free Book: The First Acquisition | Reese Astor Romance"
         description="Download The First Acquisition for free. A steamy Manhattan billionaire romance and Hudson Dynasty prequel novella by Reese Astor. Join the newsletter and start reading today."
@@ -121,7 +121,7 @@ export default function FreeBook() {
               >
                 <div className="absolute -inset-12 bg-gradient-to-r from-[#d4af37]/30 to-transparent blur-3xl rounded-full" />
                 <div className="relative">
-                  <div className="absolute -top-6 -right-6 z-10 px-8 py-4 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-xl shadow-2xl animate-pulse">
+                  <div className="absolute -top-4 -right-2 md:-top-6 md:-right-6 z-10 px-6 py-3 md:px-8 md:py-4 rounded-full bg-gradient-to-r from-[#d4af37] to-[#c9a961] text-black font-bold text-xl shadow-2xl animate-pulse">
                     100% FREE
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
@@ -171,7 +171,7 @@ export default function FreeBook() {
                 </div>
 
                 <p className="text-gray-300 text-xl leading-relaxed">
-                  Power. Passion. Manhattan. Before the empire, before the auditor, a young Hudson made the first deal that would define every one that followed. This steamy prequel novella is the perfect introduction to the Hudson Dynasty world.
+                  Power. Passion. Manhattan. She was hired to audit his empire. Falling for him could destroy them both. This high-heat corporate billionaire prequel novella is the perfect introduction to the Hudson Dynasty world.
                 </p>
 
                 {/* Email Signup Form */}
@@ -238,7 +238,7 @@ export default function FreeBook() {
                 What You'll Get
               </h2>
               <p className="text-xl text-gray-400">
-                More than just a free book — your VIP pass to the Hudson Dynasty world
+                Your free prequel, plus news from Reese by email.
               </p>
             </div>
 
@@ -312,10 +312,10 @@ export default function FreeBook() {
             <Sparkles className="h-12 w-12 text-[#d4af37] mx-auto mb-6" />
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
               Ready to Enter the World of<br />
-              <span className="text-[#d4af37]">Manhattan's Most Dangerous Family?</span>
+              <span className="text-[#d4af37]">the Hudson Dynasty?</span>
             </h2>
             <p className="text-xl text-gray-300 mb-10 leading-relaxed">
-              Join readers who've already fallen for the Hudson Dynasty. Your free copy of The First Acquisition is waiting.
+              Your free copy of The First Acquisition is waiting.
             </p>
             <Button
               asChild

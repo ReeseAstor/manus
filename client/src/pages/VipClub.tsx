@@ -509,7 +509,8 @@ export default function VipClub() {
                   <div className="flex items-center justify-center mb-4">
                     <div className="relative">
                       <div className={`absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-30 ${previewAudioPlaying ? 'animate-pulse' : ''}`}></div>
-                      <button 
+                      <button
+                        aria-label={previewAudioPlaying ? "Pause audio preview" : "Play audio preview"}
                         onClick={() => {
                           if (!previewAudioRef.current) {
                             // Create audio element with sample preview URL
@@ -806,7 +807,7 @@ export default function VipClub() {
               Unlock All Exclusive Content
             </Button>
             <p className="text-gray-400 text-sm mt-4">
-              Join thousands of readers enjoying exclusive steamy content
+              Join the VIP list for exclusive steamy content
             </p>
           </div>
         </div>

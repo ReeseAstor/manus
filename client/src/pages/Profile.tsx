@@ -239,25 +239,6 @@ export default function Profile() {
                   />
                 </div>
                 
-                <div className="space-y-2">
-                  <Label className="text-[#e5e5e5]">Preferred Ebook Format</Label>
-                  <Select
-                    value={formData.preferredFormat}
-                    onValueChange={(value: "epub" | "mobi" | "pdf") => 
-                      setFormData({ ...formData, preferredFormat: value })
-                    }
-                  >
-                    <SelectTrigger className="bg-[#0a0e27]/50 border-[#d4af37]/20 text-[#e5e5e5]">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#1a1f3a] border-[#d4af37]/20">
-                      <SelectItem value="epub">ePub (Most Readers)</SelectItem>
-                      <SelectItem value="mobi">Mobi (Kindle)</SelectItem>
-                      <SelectItem value="pdf">PDF (Universal)</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
                 <Button 
                   onClick={handleSavePreferences}
                   disabled={updatePrefs.isPending}
@@ -350,9 +331,9 @@ export default function Profile() {
                   <div className="text-center py-8">
                     <ShoppingBag className="w-12 h-12 text-[#d4af37]/40 mx-auto mb-4" />
                     <p className="text-[#e5e5e5]/60 mb-4">You haven't purchased any books yet.</p>
-                    <Link href="/shop">
+                    <Link href="/books">
                       <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27]">
-                        Browse Shop
+                        Browse Books
                       </Button>
                     </Link>
                   </div>

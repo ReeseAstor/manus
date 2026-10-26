@@ -209,7 +209,7 @@ export const stripeRouter = router({
       const PRODUCT_NAME = "The Need for Permission";
       const PRODUCT_DESCRIPTION =
         "On the Quiet Recovery of Self-Trust — a ten-chapter audiobook by Reese Astor.";
-      const BOOK_COVER = "/covers/permission-cover.jpg";
+      // No cover file exists yet for this title; omit the image rather than point at a missing file.
 
       const existing = await db
         .select()
@@ -266,7 +266,6 @@ export const stripeRouter = router({
           userId: ctx.user?.id?.toString() ?? "",
           productId: productRow.id.toString(),
           bookTitle: PRODUCT_NAME,
-          bookCover: BOOK_COVER,
           product_slug: "the-need-for-permission",
           source: "/permission",
         },

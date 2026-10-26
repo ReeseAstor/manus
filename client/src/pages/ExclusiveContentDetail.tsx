@@ -81,7 +81,7 @@ export default function ExclusiveContentDetail() {
         <div className="text-center">
           <h1 className="text-4xl font-bold text-white mb-4">Content Not Found</h1>
           <Button asChild>
-            <Link href="/reader-club">Back to Reader's Club</Link>
+            <Link href="/newsletter">Back to Reader's Club</Link>
           </Button>
         </div>
       </div>
@@ -95,7 +95,7 @@ export default function ExclusiveContentDetail() {
         <div className="container mx-auto px-4 py-20">
           <Button
             variant="ghost"
-            onClick={() => setLocation("/reader-club")}
+            onClick={() => setLocation("/newsletter")}
             className="mb-8 text-gray-400 hover:text-white"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -118,7 +118,7 @@ export default function ExclusiveContentDetail() {
               </p>
               <Button
                 size="lg"
-                onClick={() => setLocation("/reader-club")}
+                onClick={() => setLocation("/newsletter")}
                 className="px-12 py-6 bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold text-lg rounded-xl"
               >
                 Join the Reader's Club
@@ -152,7 +152,7 @@ export default function ExclusiveContentDetail() {
           {/* Back Button */}
           <Button
             variant="ghost"
-            onClick={() => setLocation("/reader-club")}
+            onClick={() => setLocation("/newsletter")}
             className="mb-8 text-gray-400 hover:text-white"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -238,7 +238,7 @@ export default function ExclusiveContentDetail() {
               size="lg"
               className="bg-gradient-to-r from-[#d4af37] to-[#c9a961] hover:from-[#c9a961] hover:to-[#d4af37] text-black font-bold"
             >
-              <Link href="/reader-club">Explore More Content</Link>
+              <Link href="/newsletter">Explore More Content</Link>
             </Button>
           </motion.div>
         </div>

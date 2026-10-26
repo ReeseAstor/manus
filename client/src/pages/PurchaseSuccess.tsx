@@ -6,7 +6,7 @@ import { Link, useSearch } from "wouter";
 export default function PurchaseSuccess() {
   const searchString = useSearch();
   const params = new URLSearchParams(searchString);
-  const productName = params.get("product") || "your purchase";
+  const productName = params.get("product");
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0e27] via-[#1a1f3a] to-[#0a0e27] flex items-center justify-center px-4">
@@ -39,10 +39,14 @@ export default function PurchaseSuccess() {
               Thank You for Your Purchase!
             </h1>
             <p className="text-[#e5e5e5]/70 text-lg mb-2">
-              Your order for <span className="text-[#d4af37] font-semibold">{productName}</span> is confirmed.
+              {productName ? (
+                <>Your order for <span className="text-[#d4af37] font-semibold">{productName}</span> is confirmed.</>
+              ) : (
+                <>Your order is confirmed.</>
+              )}
             </p>
             <p className="text-[#e5e5e5]/60 text-sm mb-8">
-              A confirmation email with your download links has been sent to your email address.
+              A confirmation email with a link to your book has been sent to your email address.
             </p>
           </motion.div>
 
@@ -64,7 +68,7 @@ export default function PurchaseSuccess() {
                 <div>
                   <h3 className="text-[#e5e5e5] font-semibold">Check Your Email</h3>
                   <p className="text-[#e5e5e5]/60 text-sm">
-                    Your download links are waiting in your inbox. Check spam if you don't see it.
+                    Your book link is waiting in your inbox. Check spam if you don't see it.
                   </p>
                 </div>
               </div>
@@ -73,9 +77,9 @@ export default function PurchaseSuccess() {
                   <Download className="w-5 h-5 text-[#d4af37]" />
                 </div>
                 <div>
-                  <h3 className="text-[#e5e5e5] font-semibold">Download Your Books</h3>
+                  <h3 className="text-[#e5e5e5] font-semibold">Open Your Book</h3>
                   <p className="text-[#e5e5e5]/60 text-sm">
-                    Available in ePub, Mobi, and PDF formats. Download as many times as you need.
+                    Your book is delivered through its Amazon Kindle page. The link in the email opens it.
                   </p>
                 </div>
               </div>
@@ -100,9 +104,9 @@ export default function PurchaseSuccess() {
             transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Link href="/reader-club">
+            <Link href="/newsletter">
               <Button className="bg-[#d4af37] hover:bg-[#c9a961] text-[#0a0e27] font-bold px-8 py-6 rounded-xl">
-                Join Reader's Club
+                Get the Free Book &amp; Updates
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
@@ -124,8 +128,8 @@ export default function PurchaseSuccess() {
             className="text-[#e5e5e5]/50 text-sm mt-8"
           >
             Need help? Contact us at{" "}
-            <a href="mailto:support@reeseastor.us" className="text-[#d4af37] hover:underline">
-              support@reeseastor.us
+            <a href="mailto:contact@reeseastor.com" className="text-[#d4af37] hover:underline">
+              contact@reeseastor.com
             </a>
           </motion.p>
         </div>

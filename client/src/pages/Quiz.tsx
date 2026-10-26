@@ -421,7 +421,7 @@ export default function Quiz() {
                   </form>
 
                   <p className="text-xs text-gray-500 mt-6">
-                    You'll also receive a free copy of your matched book + VIP reader perks. No spam, ever. Unsubscribe anytime.
+                    You'll also get a link to the free prequel. No spam, ever. Unsubscribe anytime.
                   </p>
                 </div>
               </motion.div>

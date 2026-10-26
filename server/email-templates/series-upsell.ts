@@ -85,7 +85,7 @@ ${bodyContent}
                   <td style="color: rgba(200,200,200,0.25); font-size: 13px;">|</td>
                   <td style="padding: 0 12px;"><a href="${SITE_URL}/books" style="color: #d4af37; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Books</a></td>
                   <td style="color: rgba(200,200,200,0.25); font-size: 13px;">|</td>
-                  <td style="padding: 0 12px;"><a href="${SITE_URL}/shop" style="color: #d4af37; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Shop</a></td>
+                  <td style="padding: 0 12px;"><a href="${SITE_URL}/newsletter" style="color: #d4af37; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Newsletter</a></td>
                 </tr>
               </table>
               <p style="margin: 0 0 8px; color: rgba(200,200,200,0.35); font-size: 11px; line-height: 1.5; font-family: Arial, sans-serif;">
@@ -333,10 +333,10 @@ export function generateSeriesUpsellEmail3(options?: {
           <tr>
             <td class="content-cell" style="padding: 10px 40px 20px;">
               <p style="margin: 0 0 14px; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
-                And if reader club perks sound like your kind of penthouse — members get first looks at new covers, bonus scenes, and early excerpts. The door's open:
+                And if you'd like a note when the next book is out, the newsletter is open:
               </p>
               <p style="margin: 0 0 14px; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
-                <a href="${SITE_URL}/reader-club" style="color: #d4af37; text-decoration: underline;">Join the Reader's Club &rarr;</a>
+                <a href="${SITE_URL}/newsletter" style="color: #d4af37; text-decoration: underline;">Join the newsletter &rarr;</a>
               </p>
               <p style="margin: 0; color: #c8c8c8; font-size: 16px; line-height: 1.8;">
                 Thank you for reading these stories. It honestly means the world.
@@ -346,7 +346,7 @@ export function generateSeriesUpsellEmail3(options?: {
 
   return wrapInTemplate({
     subject: "The full Hudson Dynasty, ready when you are",
-    preheader: "Every Hudson novel in reading order — plus a reader club perk for the dedicated",
+    preheader: "Every Hudson novel in reading order",
     bodyContent,
   });
 }

@@ -16,7 +16,7 @@ export default function SmsAlerts() {
     <div className="min-h-screen py-12">
       <EnhancedSEOHead
         title="Join Reese Astor Text Alerts"
-        description="Subscribe to Reese Astor SMS text alerts for new release announcements and exclusive offers. Recurring automated marketing messages. Msg & data rates may apply. Reply STOP to opt out."
+        description="Subscribe to Reese Astor SMS text alerts for new release and sale announcements. Recurring automated marketing messages. Msg & data rates may apply. Reply STOP to opt out."
         canonical="/sms"
       />
       <div className="container max-w-3xl">

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "wouter";
 
 /**
@@ -6,10 +5,6 @@ import { Link } from "wouter";
  * destination from the win-back sequence's re-engagement ask.
  */
 export default function StaySubscribed() {
-  useEffect(() => {
-    document.title = "You're Staying — Thank You | Reese Astor";
-  }, []);
-
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#0a0e27", color: "#e5e5e5" }}>
       <div style={{
@@ -29,7 +24,7 @@ export default function StaySubscribed() {
           You're staying. Thank you.
         </h2>
         <p style={{ margin: "0 0 8px", color: "#c8c8c8", fontSize: 16, lineHeight: 1.8 }}>
-          Noted — I'll keep the emails coming: new releases first, exclusive scenes, and the
+          Noted — I'll keep the emails coming: new releases first, bonus scenes, and the
           occasional peek behind the Manhattan skyline.
         </p>
         <p style={{ margin: "0 0 32px", color: "rgba(200,200,200,0.6)", fontSize: 14, lineHeight: 1.7 }}>

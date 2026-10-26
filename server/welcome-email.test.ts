@@ -56,10 +56,12 @@ describe("Welcome Email Template", () => {
 
   it("should include benefit list", () => {
     const html = generateWelcomeEmail({});
-    expect(html).toContain("New release alerts before anyone else");
-    expect(html).toContain("Exclusive bonus chapters");
-    expect(html).toContain("Behind-the-scenes sneak peeks");
-    expect(html).toContain("Special deals");
+    expect(html).toContain("New release alerts");
+    expect(html).not.toContain("before anyone else");
+    expect(html).toContain("Bonus scenes from the series");
+    expect(html).toContain("Early cover reveals and ARC team invitations");
+    expect(html).toContain("Sales and release-day news");
+    expect(html).not.toMatch(/deleted scenes|epilogues|POV chapters|Exclusive bonus chapters/i);
   });
 
   it("should include preheader text", () => {

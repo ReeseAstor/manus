@@ -214,7 +214,7 @@ export default function AuthLogin() {
             className="font-cormorant italic text-[16px] mt-3"
             style={{ color: TEXT_SOFT }}
           >
-            For VIP audio, purchase history, and bonus chapters.
+            For your purchase history and account details.
           </p>
         </div>
 

@@ -108,7 +108,7 @@ export function NewsletterPopup({ isOpen, onClose }: NewsletterPopupProps) {
                   </h2>
 
                   <p className="text-[#e5e5e5]/80 text-center mb-6 text-base leading-relaxed">
-                    Join my exclusive community and receive{" "}
+                    Join my newsletter and receive{" "}
                     <span className="text-[#d4af37] font-semibold">
                       "The First Acquisition"
                     </span>{" "}

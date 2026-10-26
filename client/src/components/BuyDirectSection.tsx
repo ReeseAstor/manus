@@ -143,7 +143,7 @@ export function BuyDirectSection({
                 Join free and save {calculateSavings(retailPrice, memberPrice)}% on all books
               </p>
             </div>
-            <a href="/reader-club">
+            <a href="/newsletter">
               <Button
                 variant="outline"
                 size="sm"

@@ -162,7 +162,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
           day: "numeric",
         }),
         bookTitle: bookTitle,
-        bookCover: bookCover || "/covers/default.jpg",
+        bookCover: bookCover || "",
         purchasePrice: `$${(session.amount_total! / 100).toFixed(2)}`,
         downloadLinks,
       });

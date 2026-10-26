@@ -1,5 +1,6 @@
 import { Link, useParams } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
+import { toAbsoluteUrl } from "@/lib/seo-url";
 import { trpc } from "@/lib/trpc";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import {
@@ -61,7 +62,7 @@ function BookLayout({ book }: { book: Book }) {
         description={`${book.tagline} ${book.blurb}`}
         canonical={`/books/${book.slug}`}
         ogType="book"
-        ogImage={book.cover_image_square ?? book.cover_image}
+        ogImage={book.cover_image_square ?? book.cover_image ?? undefined}
         structuredData={structured}
       />
 
@@ -100,6 +101,7 @@ function BookLayout({ book }: { book: Book }) {
           >
             <CoverHalo
               src={book.cover_image_square ?? book.cover_image}
+              title={book.title}
               alt={`${book.title} — cover`}
               width={320}
             />
@@ -159,6 +161,7 @@ function BookLayout({ book }: { book: Book }) {
                     <div className="flex justify-center">
                       <CoverHalo
                         src={other.cover_image}
+                        title={other.title}
                         alt={`${other.title} — cover`}
                         width={180}
                       />

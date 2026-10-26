@@ -158,6 +158,21 @@
       "source": "/book2/countdown/:path*",
       "destination": "/books/the-billionaire-s-fake-wife",
       "permanent": false
+    },
+    {
+      "source": "/books/audit-of-the-heart/",
+      "destination": "/books/the-first-acquisition",
+      "permanent": true
+    },
+    {
+      "source": "/promo",
+      "destination": "/free-book",
+      "permanent": false
+    },
+    {
+      "source": "/promo/",
+      "destination": "/free-book",
+      "permanent": false
     }
   ],
   "headers": [

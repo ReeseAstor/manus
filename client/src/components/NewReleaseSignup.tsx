@@ -88,7 +88,7 @@ export default function NewReleaseSignup() {
                   exclusive content, early release alerts, and bonus chapters.
                 </p>
                 <p className="text-sm text-gray-400 mb-10">
-                  Join 1,700+ readers who already love the Manhattan Money Kings series.
+                  Join the readers who already love the Manhattan Money Kings series.
                 </p>
 
                 {/* Benefits */}

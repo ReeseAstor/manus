@@ -40,7 +40,7 @@ describe("Send Test Email Feature", () => {
       subject,
       html,
       from: {
-        email: "noreply@reeseastor.us",
+        email: "hello@reeseastor.com",
         name: "Reese Astor (Test)",
       },
     });
@@ -50,7 +50,7 @@ describe("Send Test Email Feature", () => {
       subject: "[TEST] New Music Release",
       html: expect.stringContaining("TEST EMAIL"),
       from: {
-        email: "noreply@reeseastor.us",
+        email: "hello@reeseastor.com",
         name: "Reese Astor (Test)",
       },
     });
@@ -113,7 +113,7 @@ describe("Send Test Email Feature", () => {
       subject: "[TEST] Test Subject",
       html: "<p>test</p>",
       from: {
-        email: "noreply@reeseastor.us",
+        email: "hello@reeseastor.com",
         name: "Reese Astor (Test)",
       },
     });
@@ -121,7 +121,7 @@ describe("Send Test Email Feature", () => {
     expect(mockSendEmail).toHaveBeenCalledWith(
       expect.objectContaining({
         from: {
-          email: "noreply@reeseastor.us",
+          email: "hello@reeseastor.com",
           name: "Reese Astor (Test)",
         },
       })

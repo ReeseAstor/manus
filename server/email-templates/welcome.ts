@@ -92,7 +92,7 @@ export function generateWelcomeEmail(data: WelcomeEmailData): string {
                       A Manhattan Billionaire Romance (Hudson Dynasty)
                     </p>
                     <p style="margin: 0 0 24px; color: #e5e5e5; font-size: 15px; line-height: 1.7;">
-                      Before the empire. Before the auditor. The night a Hudson decided. A darker corporate romance prequel with fake engagement tension, forensic scandal, and a morally gray billionaire hero.
+                      She was hired to audit his empire. Falling for him could destroy them both. A high-heat corporate billionaire romance novella.
                     </p>
 
                     <!-- Download Button -->
@@ -124,22 +124,22 @@ export function generateWelcomeEmail(data: WelcomeEmailData): string {
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tr>
                   <td style="padding: 8px 0; color: #e5e5e5; font-size: 15px; line-height: 1.6;">
-                    &#128276;&nbsp;&nbsp;New release alerts before anyone else
+                    &#128276;&nbsp;&nbsp;New release alerts
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #e5e5e5; font-size: 15px; line-height: 1.6;">
-                    &#127873;&nbsp;&nbsp;Exclusive bonus chapters &amp; epilogues
+                    &#127873;&nbsp;&nbsp;Bonus scenes from the series
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #e5e5e5; font-size: 15px; line-height: 1.6;">
-                    &#128064;&nbsp;&nbsp;Behind-the-scenes sneak peeks
+                    &#128064;&nbsp;&nbsp;Early cover reveals and ARC team invitations
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #e5e5e5; font-size: 15px; line-height: 1.6;">
-                    &#128150;&nbsp;&nbsp;Special deals &amp; giveaways
+                    &#128150;&nbsp;&nbsp;Sales and release-day news
                   </td>
                 </tr>
               </table>

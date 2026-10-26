@@ -36,7 +36,7 @@ export async function sendEmail(params: SendEmailParams): Promise<boolean> {
       body: JSON.stringify({
         to: [{ email: params.to }],
         from: params.from || {
-          email: "noreply@reeseastor.us",
+          email: "hello@reeseastor.com",
           name: "Reese Astor",
         },
         subject: params.subject,
@@ -58,7 +58,7 @@ export async function sendEmail(params: SendEmailParams): Promise<boolean> {
 }
 
 /**
- * Send purchase confirmation email with download links
+ * Send purchase confirmation email with the link to the purchased book
  */
 export async function sendPurchaseConfirmationEmail(
   data: PurchaseConfirmationData
@@ -67,10 +67,10 @@ export async function sendPurchaseConfirmationEmail(
 
   return sendEmail({
     to: data.customerEmail,
-    subject: `Your ${data.bookTitle} is Ready to Download!`,
+    subject: `Your order: ${data.bookTitle}`,
     html,
     from: {
-      email: "noreply@reeseastor.us",
+      email: "hello@reeseastor.com",
       name: "Reese Astor",
     },
   });
@@ -89,7 +89,7 @@ export function generateDownloadLinks(bookId: number): {
   mobi: string;
   pdf: string;
 } {
-  const baseUrl = "https://reeseastor.us/my-purchases";
+  const baseUrl = "https://reeseastor.com/my-purchases";
 
   // Map known book IDs to their retailer / delivery URLs so confirmation
   // emails always contain at least one working link even before per-product
@@ -99,7 +99,7 @@ export function generateDownloadLinks(bookId: number): {
     30002: "https://swiy.co/mmk",  // Complete trilogy
     30003: "https://swiy.co/05",   // Ultimate collection (incl. prequel)
     30004: "https://swiy.co/b01",  // Executive Assistant
-    30005: "https://swiy.co/2rd",  // Fake Wife
+    30005: "https://www.amazon.com/dp/B0FCCBNF8X?tag=reeseastor-20",  // Fake Wife (Kindle; swiy.co/2rd was the paperback, 88away0d-20)
     30006: "https://swiy.co/3rd",  // Baby Secret
   };
 

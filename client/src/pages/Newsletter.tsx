@@ -8,6 +8,7 @@ import {
 import { Link } from 'wouter';
 import { EnhancedSEOHead } from '@/components/ui/enhanced-seo-head';
 import { MailerLiteForm } from '@/components/MailerLiteForm';
+import { BOOKS } from '@/data/books';
 import { Reveal, StaggerReveal, StaggerItem, GlowOrb, GlassCard } from '@/components/author-kit';
 
 /**
@@ -21,17 +22,17 @@ import { Reveal, StaggerReveal, StaggerItem, GlowOrb, GlassCard } from '@/compon
  */
 export default function Newsletter() {
   useEffect(() => {
-    document.title = "Join Reese Astor's Newsletter | Free Book & Exclusive Content";
+    document.title = "Join Reese Astor's Newsletter | Free Book & New Release Alerts";
   }, []);
 
   // ─── Main Page ──────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a] relative overflow-hidden">
       <EnhancedSEOHead
-        title="Join Reese Astor's Newsletter | Free Book & Exclusive Content"
-        description="Subscribe to Reese Astor's newsletter and get The First Acquisition free. Receive exclusive bonus scenes, early cover reveals, and new release alerts."
+        title="Join Reese Astor's Newsletter | Free Book & New Release Alerts"
+        description="Subscribe to Reese Astor's newsletter and get The First Acquisition free. Receive bonus scenes, early cover reveals, ARC invitations, and new release alerts."
         canonical="/newsletter"
-        keywords={["romance newsletter", "Reese Astor newsletter", "free romance book", "book release alerts", "exclusive bonus content", "reader newsletter"]}
+        keywords={["romance newsletter", "Reese Astor newsletter", "free romance book", "book release alerts", "bonus scenes", "reader newsletter"]}
       />
 
       {/* Ambient lighting effects */}
@@ -60,7 +61,7 @@ export default function Newsletter() {
               <p className="text-lg text-gray-300 mb-8 font-['Montserrat'] leading-relaxed max-w-lg">
                 Join the Hudson Dynasty inner circle. Get your free copy of 
                 <em className="text-[#d4af37]"> The First Acquisition</em>, 
-                plus new release alerts, deleted scenes, and exclusive bonus content delivered 
+                plus new release alerts, bonus scenes, and early cover reveals delivered 
                 straight to your inbox.
               </p>
 
@@ -94,7 +95,7 @@ export default function Newsletter() {
                   <div className="relative flex-shrink-0">
                     <div className="absolute -inset-1 bg-gradient-to-br from-[#d4af37]/40 to-transparent rounded-lg blur-sm" />
                     <img 
-                      src="/covers/hudson-0-first-acquisition.jpg" 
+                      src="/prequel-cover.jpg" 
                       alt="The First Acquisition" 
                       className="relative w-20 h-28 object-cover rounded-lg shadow-xl"
                     />
@@ -120,7 +121,7 @@ export default function Newsletter() {
 
                 {/* Expectation setting — improves open rates & reduces spam complaints */}
                 <p className="text-xs text-gray-400 text-center font-['Montserrat'] mt-4 leading-relaxed">
-                  Expect about <span className="text-[#d4af37]">2 emails a month</span>. Your free
+                  Expect about <span className="text-[#d4af37]">a couple of emails a month</span>. Your free
                   book link arrives instantly — check your inbox (and promotions tab).
                 </p>
 
@@ -165,13 +166,13 @@ export default function Newsletter() {
               },
               {
                 icon: Sparkles,
-                title: "Bonus Chapters",
-                description: "Deleted scenes, extended epilogues, and character POV chapters you won't find anywhere else",
+                title: "Bonus Scenes",
+                description: "Bonus scenes from the Hudson Dynasty books, sent to subscribers.",
               },
               {
                 icon: Heart,
-                title: "Behind the Scenes",
-                description: "Character inspiration, writing process updates, and sneak peeks at upcoming Hudson Dynasty storylines",
+                title: "First Looks",
+                description: "Early cover reveals, release dates, and the occasional behind-the-scenes note.",
               },
               {
                 icon: Star,
@@ -208,19 +209,20 @@ export default function Newsletter() {
               A Family Built on Acquisitions. A Ledger That Remembers Everything.
             </h2>
             <p className="text-gray-400 font-['Montserrat'] max-w-2xl mx-auto">
-              Start with the free Hudson Dynasty prequel and discover why readers can't put this series down.
+              Start with the free Hudson Dynasty prequel, then read on with Hostile Tender, Poison Pill and Golden Parachute.
             </p>
           </Reveal>
 
           {/* Book covers row */}
           <StaggerReveal className="flex justify-center items-end gap-3 md:gap-6 mb-12" stagger={0.1}>
-            {[
-              { src: "/prequel-cover.jpg", label: "FREE", alt: "Prequel" },
-              { src: "/book1-cover.jpg", label: "Book 1", alt: "Book 1" },
-              { src: "/book2-cover.jpg", label: "Book 2", alt: "Book 2" },
-              { src: "/book3-cover.jpg", label: "Book 3", alt: "Book 3" },
-              { src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/wyOruOlpqOcFfhnS.jpg", label: "Book 4", alt: "Book 4" },
-            ].map((book, i) => (
+            {BOOKS.filter((b) => b.lane === "hudson_dynasty" && b.cover_image)
+              .sort((x, y) => (x.series_position ?? 0) - (y.series_position ?? 0))
+              .map((b) => ({
+                src: b.cover_image as string,
+                label: b.series_position === 0 ? "FREE prequel" : b.position_label,
+                alt: b.title,
+              }))
+              .map((book, i) => (
               <StaggerItem key={book.alt} className={`relative group ${i === 0 ? 'z-10' : ''}`}>
                 <div className={`relative ${i === 0 ? 'ring-2 ring-[#d4af37]/50 rounded-lg' : ''}`}>
                   <img
@@ -246,7 +248,7 @@ export default function Newsletter() {
           <div className="text-center">
             <Link href="/books">
               <span className="inline-flex items-center gap-2 text-[#d4af37] font-semibold font-['Montserrat'] hover:underline underline-offset-4 cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98]">
-                View the Complete Series
+                See all the books
                 <ArrowRight className="w-4 h-4" />
               </span>
             </Link>

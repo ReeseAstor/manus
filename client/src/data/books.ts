@@ -32,9 +32,10 @@ export type Book = {
   tagline: string;
   blurb: string;
   pull_quote: string | null;
-  cover_image: string;
+  /** null renders a typographic placeholder until a real cover exists. */
+  cover_image: string | null;
   /** 1200x1200 social-share variant. Falls back to cover_image when absent. */
-  cover_image_square?: string;
+  cover_image_square?: string | null;
   publication_date: string | null;
   kindle_unlimited: boolean;
   retailers: Partial<Record<RetailerKey, string | null>>;
@@ -79,7 +80,7 @@ export const BOOKS: Book[] = [
     series_position: 0,
     format: "ebook",
     position_label: "Prequel",
-    tagline: "One night was supposed to mean nothing. He decided it would mean everything.",
+    tagline: "One night with Manhattan's most ruthless CEO.",
     blurb:
       "Victoria walked into an upscale Manhattan bar the night she was passed over for partner. James Chen, " +
       "the self-made tech billionaire every magazine wants to profile, was not supposed to be the one who " +
@@ -113,7 +114,7 @@ export const BOOKS: Book[] = [
       "competent assistant to save his billion-dollar Redwood project. Neither can afford distractions or " +
       "workplace scandal. When Sarah uncovers financial sabotage orchestrated by Michael's ruthless " +
       "competitor, they're forced into a dangerous alliance that crosses every professional boundary.",
-    pull_quote: "“He didn't hire her to ruin him. She didn't apply expecting to.”",
+    pull_quote: null, // not found in the live EPUB; BookTitle hides "Inside this book" when null
     cover_image: "/author-kit/mmk-1-executive-assistant.jpg",
     publication_date: null,
     kindle_unlimited: true,

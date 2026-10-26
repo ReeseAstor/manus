@@ -7,9 +7,9 @@ import { eq } from 'drizzle-orm';
 const router = Router();
 
 // Keywords for unsubscribe/resubscribe
-const STOP_KEYWORDS = ['STOP', 'UNSUBSCRIBE', 'CANCEL', 'END', 'QUIT'];
-const START_KEYWORDS = ['START', 'SUBSCRIBE', 'YES', 'UNSTOP', 'JOIN', 'CLUB'];
-const HELP_KEYWORDS = ['HELP', 'INFO'];
+export const STOP_KEYWORDS = ['STOP', 'UNSUBSCRIBE', 'CANCEL', 'END', 'QUIT'];
+export const START_KEYWORDS = ['START', 'SUBSCRIBE', 'YES', 'UNSTOP', 'JOIN', 'CLUB'];
+export const HELP_KEYWORDS = ['HELP', 'INFO'];
 
 // Twilio signature validation middleware
 const validateTwilioSignature = (req: Request, res: Response, next: Function) => {
@@ -52,7 +52,7 @@ const validateTwilioSignature = (req: Request, res: Response, next: Function) =>
 };
 
 // Main incoming SMS handler
-const handleIncomingSms = async (req: Request, res: Response) => {
+export const handleIncomingSms = async (req: Request, res: Response) => {
   try {
     const {
       From: fromNumber,
@@ -139,7 +139,7 @@ router.post('/incoming', validateTwilioSignature, handleIncomingSms);
 router.post('/', validateTwilioSignature, handleIncomingSms);
 
 // Handle STOP/unsubscribe request
-async function handleStop(db: any, phoneNumber: string, existingPrefs: any): Promise<string> {
+export async function handleStop(db: any, phoneNumber: string, existingPrefs: any): Promise<string> {
   try {
     if (existingPrefs) {
       // Update existing preferences to opt out
@@ -176,7 +176,7 @@ async function handleStop(db: any, phoneNumber: string, existingPrefs: any): Pro
 }
 
 // Handle START/resubscribe request
-async function handleStart(db: any, phoneNumber: string, existingPrefs: any): Promise<string> {
+export async function handleStart(db: any, phoneNumber: string, existingPrefs: any): Promise<string> {
   try {
     if (existingPrefs) {
       // Update existing preferences to opt back in
@@ -192,7 +192,7 @@ async function handleStart(db: any, phoneNumber: string, existingPrefs: any): Pr
 
       console.log(`[SMS Webhook] User ${phoneNumber} resubscribed to SMS`);
       
-      return `Welcome back! 🎉 You're now subscribed to Reese Astor's SMS notifications. You'll receive updates about new steamy stories, exclusive offers, and VIP perks. Reply STOP to unsubscribe anytime.`;
+      return "Reese Astor: You're resubscribed to texts about new releases and sales. Msg frequency varies. Msg&data rates may apply. Reply HELP for help, STOP to opt out.";
     } else {
       // Create new preferences with opt-in
       await db.insert(userSmsPreferences).values({
@@ -207,7 +207,7 @@ async function handleStart(db: any, phoneNumber: string, existingPrefs: any): Pr
 
       console.log(`[SMS Webhook] Created opt-in record for ${phoneNumber}`);
       
-      return `Welcome! 🎉 You're now subscribed to Reese Astor's SMS notifications. Get ready for updates about new steamy stories and exclusive VIP content. Reply STOP to unsubscribe anytime.`;
+      return "Reese Astor: You're subscribed to texts about new releases and sales. Msg frequency varies. Msg&data rates may apply. Reply HELP for help, STOP to opt out.";
     }
   } catch (error) {
     console.error('[SMS Webhook] Error handling START:', error);
@@ -216,12 +216,12 @@ async function handleStart(db: any, phoneNumber: string, existingPrefs: any): Pr
 }
 
 // Help message
-function getHelpMessage(): string {
-  return `Reese Astor SMS Help 📚\n\nReply STOP to unsubscribe\nReply START to resubscribe\n\nVisit reeseastor.com for more info or email support@reeseastor.com`;
+export function getHelpMessage(): string {
+  return `Reese Astor SMS Help 📚\n\nReply STOP to unsubscribe\nReply START to resubscribe\n\nVisit reeseastor.com for more info or email contact@reeseastor.com`;
 }
 
 // Default message for unrecognized commands
-function getDefaultMessage(): string {
+export function getDefaultMessage(): string {
   return `Thanks for your message! 💕\n\nReply STOP to unsubscribe\nReply HELP for assistance\n\nVisit reeseastor.com to explore our steamy romance collection!`;
 }
 
