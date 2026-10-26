@@ -16,6 +16,7 @@ import { partnerApplicationsRouter } from "./routers/partnerApplications";
 import { switchyRouter } from "./routers/switchy";
 import { workflowRouter } from "./routers/workflow";
 import { aiUsageRouter } from "./routers/ai-usage";
+import { canonRouter } from "./routers/canon";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { subscribeToMailerLite, sendMailerLiteCampaign, getMailerLiteSubscribers } from "./mailerlite";
 import { detectBotSignup } from "./signupBotGuard";
@@ -94,6 +95,7 @@ export const appRouter = router({
   switchy: switchyRouter,
   workflow: workflowRouter,
   aiUsage: aiUsageRouter,
+  canon: canonRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

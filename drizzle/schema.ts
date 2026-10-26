@@ -1177,3 +1177,65 @@ export const partnerApplications = pgTable("partner_applications", {
 
 export type PartnerApplication = typeof partnerApplications.$inferSelect;
 export type InsertPartnerApplication = typeof partnerApplications.$inferInsert;
+
+/**
+ * Editorial series and private canon archive. Manuscripts remain private;
+ * only approved, reader-visible excerpts may be returned by the canon API.
+ */
+export const series = pgTable("series", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  description: text("description"),
+  status: varchar("status", { length: 32 }).default("draft").notNull(),
+  displayOrder: integer("displayOrder").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export const canonDocuments = pgTable("canon_documents", {
+  id: serial("id").primaryKey(),
+  seriesId: integer("seriesId").notNull().references(() => series.id),
+  bookId: integer("bookId").references(() => books.id),
+  title: varchar("title", { length: 255 }).notNull(),
+  storageKey: text("storageKey").notNull(),
+  sourceType: varchar("sourceType", { length: 32 }).default("manuscript").notNull(),
+  status: varchar("status", { length: 32 }).default("uploaded").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export const canonChunks = pgTable("canon_chunks", {
+  id: serial("id").primaryKey(),
+  documentId: integer("documentId").notNull().references(() => canonDocuments.id),
+  chapter: varchar("chapter", { length: 255 }),
+  sequence: integer("sequence").notNull(),
+  content: text("content").notNull(),
+  citation: varchar("citation", { length: 512 }).notNull(),
+  approved: boolean("approved").default(false).notNull(),
+  readerVisible: boolean("readerVisible").default(false).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export const readerEntitlements = pgTable("reader_entitlements", {
+  id: serial("id").primaryKey(),
+  userId: integer("userId").notNull().references(() => users.id),
+  productId: integer("productId").references(() => products.id),
+  entitlementKey: varchar("entitlementKey", { length: 255 }).notNull(),
+  sourceOrderId: integer("sourceOrderId").references(() => orders.id),
+  status: varchar("status", { length: 32 }).default("active").notNull(),
+  expiresAt: timestamp("expiresAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export const editorialApprovals = pgTable("editorial_approvals", {
+  id: serial("id").primaryKey(),
+  resourceType: varchar("resourceType", { length: 64 }).notNull(),
+  resourceId: integer("resourceId").notNull(),
+  status: varchar("status", { length: 32 }).default("draft").notNull(),
+  approvedBy: integer("approvedBy").references(() => users.id),
+  approvedAt: timestamp("approvedAt"),
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});

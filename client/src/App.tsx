@@ -31,6 +31,7 @@ const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const AdminQA = lazy(() => import("./pages/AdminQA"));
 const AdminLinks = lazy(() => import("./pages/AdminLinks"));
 const AdminBooks = lazy(() => import("./pages/AdminBooks"));
+const AdminCanonArchive = lazy(() => import("./pages/AdminCanonArchive"));
 const AdminReports = lazy(() => import("./pages/AdminReports"));
 const AdminCommandCenter = lazy(() => import("./pages/AdminCommandCenter"));
 const AdminStripeAnalytics = lazy(() => import("./pages/AdminStripeAnalytics"));
@@ -178,6 +179,7 @@ function Router() {
         <Route path={"/admin/qa"}><AdminRoute><AdminQA /></AdminRoute></Route>
         <Route path={"/admin/links"}><AdminRoute><AdminLinks /></AdminRoute></Route>
         <Route path={"/admin/books"}><AdminRoute><AdminBooks /></AdminRoute></Route>
+        <Route path={"/admin/canon-archive"}><AdminRoute><AdminCanonArchive /></AdminRoute></Route>
         <Route path={"/admin/reports"}><AdminRoute><AdminReports /></AdminRoute></Route>
         <Route path={"/admin/command-center"}><AdminRoute><AdminCommandCenter /></AdminRoute></Route>
         <Route path={"/admin/stripe-analytics"}><AdminRoute><AdminStripeAnalytics /></AdminRoute></Route>
