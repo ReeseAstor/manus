@@ -143,6 +143,21 @@
       "source": "/permission/",
       "destination": "/books",
       "permanent": true
+    },
+    {
+      "source": "/book2/countdown",
+      "destination": "/books/the-billionaire-s-fake-wife",
+      "permanent": false
+    },
+    {
+      "source": "/book2/countdown/",
+      "destination": "/books/the-billionaire-s-fake-wife",
+      "permanent": false
+    },
+    {
+      "source": "/book2/countdown/:path*",
+      "destination": "/books/the-billionaire-s-fake-wife",
+      "permanent": false
     }
   ],
   "headers": [

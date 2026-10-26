@@ -54,7 +54,7 @@ function BookLayout({ book }: { book: Book }) {
   return (
     <div
       className="kit-grain min-h-screen font-cormorant"
-      style={{ background: INK, color: TEXT }}
+      style={{ background: INK, color: TEXT, overflowX: "clip" }}
     >
       <EnhancedSEOHead
         title={`${book.title} by Reese Astor`}
