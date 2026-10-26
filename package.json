@@ -8,11 +8,12 @@
   },
   "scripts": {
     "dev": "NODE_ENV=development tsx watch server/_core/index.ts",
-    "build": "vite build && node scripts/prerender-static.mjs && node scripts/seal-admin-chunks.mjs && node scripts/bundle-server.mjs server/_core/index.ts dist/index.js",
+    "build": "npm run test:books-fallback && vite build && node scripts/prerender-static.mjs && node scripts/seal-admin-chunks.mjs && node scripts/bundle-server.mjs server/_core/index.ts dist/index.js",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
+    "test:books-fallback": "vitest run server/books-fallback.test.ts",
     "brand:sweep": "node scripts/brand-sweep-report.mjs --files",
     "db:push": "drizzle-kit generate && drizzle-kit migrate"
   },

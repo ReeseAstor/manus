@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "buildCommand": "vite build && node scripts/prerender-static.mjs && node scripts/seal-admin-chunks.mjs && node scripts/bundle-server.mjs server/_core/vercel-app.ts dist/server-bundle.mjs",
+  "buildCommand": "npm run test:books-fallback && vite build && node scripts/prerender-static.mjs && node scripts/seal-admin-chunks.mjs && node scripts/bundle-server.mjs server/_core/vercel-app.ts dist/server-bundle.mjs",
   "outputDirectory": "dist/public",
   "cleanUrls": true,
   "trailingSlash": false,

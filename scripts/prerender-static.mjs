@@ -57,8 +57,11 @@ await build({
   logLevel: "silent",
 });
 const { withAmazonTag } = await import(pathToFileURL(tagBundled).href);
-const { bookFallbackFactsHtml, bookFallbackBuyHtml, fallbackProblems } = await import(
+const { bookFallbackFactsHtml, bookFallbackBuyHtml } = await import(
   pathToFileURL(path.join(root, "scripts/lib/book-fallback.mjs")).href
+);
+const { fallbackProblems } = await import(
+  pathToFileURL(path.join(root, "scripts/lib/book-fallback-guard.mjs")).href
 );
 const { BOOKS, LANE_META, ROMANCE_LANES } = sd;
 const { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE, absoluteUrl } = sd;
@@ -194,8 +197,9 @@ for (const book of BOOKS) {
       ? `<h2>More in ${esc(lane.title)}</h2><ul>${siblings.map((b) => `<li><a href="/books/${b.slug}">${esc(b.title)}</a></li>`).join("")}</ul>`
       : ""
   }</article>`;
-  // Fail the build rather than ship an untagged Amazon link or the retired subscription line.
-  const problems = fallbackProblems(bookBody);
+  // Fail the build on an untagged Amazon link, or a wrong or misplaced subscription line.
+  // KU membership comes from the guard's own canonical list, not from book.kindle_unlimited.
+  const problems = fallbackProblems(bookBody, book.slug);
   if (problems.length) throw new Error(`[prerender] /books/${book.slug}: ${problems.join("; ")}`);
   write(
     `/books/${book.slug}`,

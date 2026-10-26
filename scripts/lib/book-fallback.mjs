@@ -33,24 +33,3 @@ export function bookFallbackBuyHtml(book, { esc, withAmazonTag }) {
     .filter(Boolean)
     .join(" · ");
 }
-
-/**
- * Problems in fallback body HTML: an Amazon /dp/ link without tag=reeseastor-20, or the
- * retired subscription wording. Returns a list of messages (empty when clean).
- * JSON-LD is not checked: sameAs identifiers stay untagged on purpose.
- */
-export function fallbackProblems(bodyHtml) {
-  const problems = [];
-  for (const m of bodyHtml.matchAll(/<a\s[^>]*href="([^"]*amazon\.[^"]*\/dp\/[^"]*)"/gi)) {
-    const href = m[1].replace(/&amp;/g, "&");
-    let tag = null;
-    try {
-      tag = new URL(href).searchParams.get("tag");
-    } catch {
-      /* unparseable: reported below */
-    }
-    if (tag !== "reeseastor-20") problems.push(`Amazon link without tag=reeseastor-20: ${href}`);
-  }
-  if (bodyHtml.includes(RETIRED_KU_LINE)) problems.push(`retired line "${RETIRED_KU_LINE}"`);
-  return problems;
-}
