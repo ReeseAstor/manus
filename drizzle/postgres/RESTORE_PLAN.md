@@ -82,7 +82,7 @@ Use the Stripe dashboard as the source. Restore a product row only for something
 
 ## exclusive_content
 
-`/reader-club` can show its empty state ("New exclusive content coming soon!") once the table exists. Filling it is optional. `seed-exclusive-content.ts` has three items, and further copies are in the `.manus/db` logs. Review them before inserting.
+`/reader-club` can show its empty state ("New exclusive content coming soon!") once the table exists. Filling it is optional. `seed-exclusive-content.ts` was retired on 2026-10-26 (its characters are not series canon), so write new items before inserting. Older copies in the `.manus/db` logs carry the same problem.
 
 ## Order, once the owner says yes
 

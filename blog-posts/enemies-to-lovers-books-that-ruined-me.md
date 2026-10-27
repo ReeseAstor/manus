@@ -54,7 +54,7 @@ Douglas writes tension like a wire pulled taut. You can feel it vibrating throug
 
 ### The Spanish Love Deception by Elena Armas
 
-[The Spanish Love Deception](https://www.amazon.com/dp/B08WJMCFKR?tag=88away0d-20) combines enemies-to-lovers with fake dating in a way that feels fresh despite using two well-worn tropes. Catalina needs a date for her sister's wedding in Spain. The only person available is Aaron, her insufferable coworker. What follows is a slow-burn masterclass — the kind where you're screaming at both characters to just admit what's obvious to everyone else.
+[The Spanish Love Deception](https://www.amazon.com/dp/B08WJMCFKR?tag=88away0d-20) combines enemies-to-lovers with fake dating in a way that feels fresh despite using two well-worn tropes. Catalina needs a date for her sister's wedding in Spain. The only person available is Aaron, her insufferable coworker. What follows is a masterclass in tension, the kind where you're screaming at both characters to just admit what's obvious to everyone else.
 
 The Spanish setting adds romance and warmth, and Armas writes cultural details with authenticity that makes the world feel lived-in. The enemies-to-lovers arc is more "colleagues who drive each other crazy" than "genuine hatred," but the tension is no less effective for it.
 

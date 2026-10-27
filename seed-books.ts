@@ -114,7 +114,7 @@ Instead of turning her over to the police, he offers a deal: help him expose her
 
 As they work together to bring down a dangerous man, their forced alliance ignites into something neither expected. Late nights planning their next move turn into stolen kisses. Fake touches for the cameras become all too real.
 
-But with her father's threats escalating and David's empire at risk, Elena must decide: betray the man she's falling for, or risk everything for a chance at redemption and love.`,
+But with her father closing in and David's empire at risk, Elena must decide: betray the man she's falling for, or risk everything for a chance at redemption and love.`,
     sampleChapter: `Chapter One
 
 Elena Volkov had broken into exactly seven buildings in her life, and she'd never been caught.

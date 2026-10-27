@@ -46,6 +46,23 @@ await build({
   logLevel: "silent",
 });
 const sd = await import(pathToFileURL(bundled).href);
+// Same tagging helper the live store buttons use.
+const tagBundled = path.join(tmpDir, "amazon-tag.mjs");
+await build({
+  entryPoints: [path.join(root, "client/src/lib/amazon-tag.ts")],
+  bundle: true,
+  platform: "node",
+  format: "esm",
+  outfile: tagBundled,
+  logLevel: "silent",
+});
+const { withAmazonTag } = await import(pathToFileURL(tagBundled).href);
+const { bookFallbackFactsHtml, bookFallbackBuyHtml } = await import(
+  pathToFileURL(path.join(root, "scripts/lib/book-fallback.mjs")).href
+);
+const { fallbackProblems } = await import(
+  pathToFileURL(path.join(root, "scripts/lib/book-fallback-guard.mjs")).href
+);
 const { BOOKS, LANE_META, ROMANCE_LANES } = sd;
 const { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE, absoluteUrl } = sd;
 
@@ -172,14 +189,18 @@ for (const book of BOOKS) {
     book.tropes?.length ? `<li>Tropes: ${esc(book.tropes.join(", "))}</li>` : "",
     book.characters?.length ? `<li>Leads: ${esc(book.characters.join(" and "))}</li>` : "",
     book.publication_date ? `<li>Published: ${esc(book.publication_date)}</li>` : "",
-    book.kindle_unlimited ? `<li>Available in Kindle Unlimited</li>` : "",
+    bookFallbackFactsHtml(book, { esc }),
   ].join("");
-  const buy = [
-    book.retailers.amazon_kindle ? `<a href="${esc(book.retailers.amazon_kindle)}">Read on Amazon</a>` : "",
-    book.retailers.bookfunnel ? `<a href="${esc(book.retailers.bookfunnel)}">Get it free</a>` : "",
-  ]
-    .filter(Boolean)
-    .join(" · ");
+  const buy = bookFallbackBuyHtml(book, { esc, withAmazonTag });
+  const bookBody = `<article><h1>${esc(book.title)}</h1><p><em>${esc(book.tagline)}</em></p><img src="${esc(book.cover_image)}" alt="${esc(book.title)} by Reese Astor, cover" width="400" height="600" /><p>${esc(book.blurb)}</p><ul>${facts}</ul><p>${buy}</p>${
+    siblings.length
+      ? `<h2>More in ${esc(lane.title)}</h2><ul>${siblings.map((b) => `<li><a href="/books/${b.slug}">${esc(b.title)}</a></li>`).join("")}</ul>`
+      : ""
+  }</article>`;
+  // Fail the build on an untagged Amazon link, or a wrong or misplaced subscription line.
+  // KU membership comes from the guard's own canonical list, not from book.kindle_unlimited.
+  const problems = fallbackProblems(bookBody, book.slug);
+  if (problems.length) throw new Error(`[prerender] /books/${book.slug}: ${problems.join("; ")}`);
   write(
     `/books/${book.slug}`,
     renderPage({
@@ -196,11 +217,7 @@ for (const book of BOOKS) {
           { name: book.title, path: `/books/${book.slug}` },
         ]),
       ],
-      body: `<article><h1>${esc(book.title)}</h1><p><em>${esc(book.tagline)}</em></p><img src="${esc(book.cover_image)}" alt="${esc(book.title)} by Reese Astor, cover" width="400" height="600" /><p>${esc(book.blurb)}</p><ul>${facts}</ul><p>${buy}</p>${
-        siblings.length
-          ? `<h2>More in ${esc(lane.title)}</h2><ul>${siblings.map((b) => `<li><a href="/books/${b.slug}">${esc(b.title)}</a></li>`).join("")}</ul>`
-          : ""
-      }</article>`,
+      body: bookBody,
     }),
   );
 }
