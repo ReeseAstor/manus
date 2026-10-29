@@ -74,7 +74,7 @@ export default function Privacy() {
           <section className="space-y-4">
             <h2 className="font-playfair text-2xl font-bold text-foreground">Cookies</h2>
             <p>
-              Our website uses cookies to distinguish you from other users of our website. This helps us to provide you with a good experience when you browse our website and also allows us to improve our site.
+              Our website uses cookies to distinguish you from other users of our website. This helps us to provide you with a good experience when you browse our website and also allows us to improve our site. We use Google Analytics to understand how visitors use the site; it sets its own cookies. You can opt out with Google's browser add-on at https://tools.google.com/dlpage/gaoptout.
             </p>
           </section>
 
@@ -83,7 +83,7 @@ export default function Privacy() {
             <p>We may share your data with third-party service providers who assist us in operating our website and conducting our business, including:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Email marketing platforms</li>
-              <li>Website analytics services</li>
+              <li>Website analytics services (Google Analytics)</li>
               <li>Payment processors (for coaching services)</li>
               <li>Social media platforms</li>
             </ul>
