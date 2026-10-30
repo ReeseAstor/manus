@@ -24,4 +24,18 @@ describe(`blog post 4 source (${SLUG})`, () => {
     expect(md).toContain("*Tropes: Nanny Romance, Single Dad, Forbidden Romance*");
     expect(md).toContain("four unforgettable love stories");
   });
+  it("F1: Book 3 timing matches Amazon ('Almost four years after one snowbound weekend in Chicago')", () => {
+    expect(md).toContain(
+      "Almost four years after one snowbound weekend in Chicago, Sophia has built a life for herself and her daughter, a daughter with unmistakable storm-gray eyes that match the billionaire who just walked back into her life.",
+    );
+    expect(md).not.toMatch(/three years/i);
+  });
 });
+
+describe("blog post 4: Amazon links (QA F2)", () => {
+  it("post 4's third-party links use the verified ASINs, each tagged reeseastor-20 exactly once", () => {
+    for (const a of ["B0B36FKPS8", "B08Y6DCS1Y", "B00TG1CZFC", "B0CFPJYX7P", "B0C9TWJKP5"]) expect(md).toContain(`https://www.amazon.com/dp/${a}?tag=reeseastor-20)`);
+    for (const m of md.matchAll(/https:\/\/www\.amazon\.com\/[^\s)]+/g)) expect(m[0].match(/tag=/g)?.length, m[0]).toBe(1);
+  });
+});
+

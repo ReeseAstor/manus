@@ -157,6 +157,73 @@ describe("/books no-JS fallback", () => {
     expect(fallbackProblems(ok, ku)).toEqual([]);
   });
 
+  it("F5 (QA re-card): markup splits, any separator, KU tokens, confusables, escaped JSON-LD, free claims", () => {
+    const ok = `<li>${APPROVED_LINE}</li>`;
+    const ku = "the-billionaire-s-fake-wife";
+    const nonKu = "the-first-acquisition";
+    // QA evidence/probes.mjs, wording probes (each injected into body, meta description and JSON-LD)
+    const probes: Record<string, string> = {
+      plain: "Kindle Unlimited", lower: "kindle unlimited", upper: "KINDLE UNLIMITED", mixed: "kInDlE uNlImItEd",
+      "cyr-K": "\u041Aindle Unlimited", "cyr-i,e": "K\u0456ndl\u0435 Unlimited", "armenian U": "Kindle \u054Dnlimited",
+      "greek iota": "K\u03B9ndle Unlimited",
+      fullwidth: "\uFF2B\uFF49\uFF4E\uFF44\uFF4C\uFF45 \uFF35\uFF4E\uFF4C\uFF49\uFF4D\uFF49\uFF54\uFF45\uFF44",
+      "math bold": "\uD835\uDC0A\uD835\uDC22\uD835\uDC27\uD835\uDC1D\uD835\uDC25\uD835\uDC1E Unlimited",
+      "kelvin K": "\u212Aindle Unlimited", zwj: "Kin\u200Ddle Unli\u200Dmited", zwsp: "Kindle\u200BUnlimited",
+      "soft hyphen": "Kin\u00ADdle Unlimited", nbsp: "Kindle\u00A0Unlimited", "&nbsp;": "Kindle&nbsp;Unlimited",
+      "numeric entity": "K&#105;ndle Unlimited", "hex entity": "&#x4B;indle Unlimited", "double space": "Kindle   Unlimited",
+      newline: "Kindle\nUnlimited", hyphen: "Kindle-Unlimited", "en dash": "Kindle\u2013Unlimited",
+      "em dash": "Kindle\u2014Unlimited", slash: "Kindle/Unlimited", middot: "Kindle\u00B7Unlimited",
+      "tag split b": "Kindle <b>Unlimited</b>", "tag split span": "Kin<span>dle</span> Unlimited",
+      "comment split": "Kindle<!-- -->Unlimited", "Kindle+": "Kindle+", "Kindle +": "Kindle +", "Kindle&#43;": "Kindle&#43;",
+      "Kindle&plus;": "Kindle&plus;", "fullwidth plus": "Kindle\uFF0B", "small plus": "Kindle\uFE62", "heavy plus": "Kindle \u2795",
+      KU: "Read free in KU", "K.U.": "Read free in K.U.", "KU alone": "Now in KU", "K.U. alone": "Now in K.U.",
+      "Kindle Unltd": "Kindle Unltd", "read free": "Read free today", "fr\u0435e cyrillic": "Read fr\u0435e with Kindle",
+      "$0.00": "$0.00 to read", "homoglyph exact line": "Read free with \u041Aindle+ (formerly Kindle Unlimited).",
+      "retired line": "Available in Kindle Unlimited", "retired line cyrillic": "Available in \u041Aindle Unlimited",
+      "retired line lower": "available in kindle unlimited", "JSON \\u escape": "Kindle\\u0020Unlimited",
+      "unknown confusable (Cherokee-free, Latin with stroke)": "K\u0268ndle Unlimited",
+      "double-encoded entity": "K&amp;#105;ndle Unlimited",
+    };
+    const ld = (desc: string) =>
+      `<script type="application/ld+json">{"@type":"Book","sameAs":["https://www.amazon.com/dp/B0D82GWFD9"],"description":"${desc}"}</script>`;
+    for (const [name, s] of Object.entries(probes)) {
+      const asJson = JSON.stringify(s).slice(1, -1);
+      expect(fallbackProblems(`<p>${s}</p>`, nonKu), `nonKU body: ${name}`).not.toEqual([]);
+      expect(fallbackProblems(`<meta name="description" content="${s.replace(/"/g, "&quot;")}">`, nonKu), `nonKU meta: ${name}`).not.toEqual([]);
+      expect(fallbackProblems(ld(asJson), nonKu), `nonKU JSON-LD: ${name}`).not.toEqual([]);
+      expect(fallbackProblems(`${ok}<p>${s}</p>`, ku), `KU body: ${name}`).not.toEqual([]);
+    }
+    // JSON-LD with escapes that only exist inside the JSON string
+    expect(fallbackProblems(ld("Kindle\\nUnlimited"), nonKu)).not.toEqual([]);
+    expect(fallbackProblems(ld("Kindle\\u00a0Unlimited"), nonKu)).not.toEqual([]);
+    // things that must stay allowed: words that merely contain K/U, and the real offer wording
+    for (const s of ["Kumar wrote a haiku", "KUDOS to the team", "SKU 1234", "Kindle edition", "unlimited love", "a kindled flame", "Free book", "Get it free", "price $3.99"]) {
+      expect(fallbackProblems(`${ok}<p>${s}</p>`, ku), s).toEqual([]);
+      expect(fallbackProblems(`<p>${s}</p>`, nonKu), s).toEqual([]);
+    }
+    expect(fallbackProblems(ld("A steamy romance.") + "<p>Get it free</p>", nonKu)).toEqual([]);
+  });
+
+  it("F5f: Amazon links in JSON-LD and the body: short links, /gp/product/, escaped slashes, single quotes, doubled tags", () => {
+    const ok = `<li>${APPROVED_LINE}</li>`;
+    const ku = "the-billionaire-s-fake-wife";
+    const ld = (raw: string) => `<script type="application/ld+json">{"@type":"Book","sameAs":["${raw}"]}</script>`;
+    expect(fallbackProblems(ld("https://www.amazon.com/dp/B0FCCBNF8X") + ok, ku)).toEqual([]);
+    for (const raw of [
+      "https://www.amazon.com/dp/B0FCCBNF8X?tag=reeseastor-20", "https://www.amazon.com/dp/B0FCCBNF8X/ref=x",
+      "http://www.amazon.com/dp/B0FCCBNF8X", "https://amzn.to/abc", "https://www.amazon.com/gp/product/B0FCCBNF8X?tag=x",
+      "https:\\/\\/www.amazon.com\\/dp\\/B0FCCBNF8X?tag=x", "https:\\/\\/amzn.to\\/abc", "https://a.co/d/abc",
+    ]) expect(fallbackProblems(ld(raw) + ok, ku), raw).not.toEqual([]);
+    for (const link of [
+      '<a href="https://amzn.to/3xyz">buy</a>', '<a href="https://www.amazon.com/gp/product/B0D82GWFD9">buy</a>',
+      "<a href='https://www.amazon.com/dp/B0D82GWFD9'>buy</a>", '<a href="https://www.amazon.com/dp/B0D82GWFD9">buy</a>',
+      `<a href="https://www.amazon.com/dp/B0D82GWFD9?tag=${"88away0d" + "-20"}&tag=reeseastor-20">x</a>`,
+      '<a href="https://www.amazon.com/dp/B0D82GWFD9?tag=reeseastor-20&amp;tag=reeseastor-20">x</a>',
+      "<a href=https://www.amazon.com/dp/B0D82GWFD9>x</a>",
+    ]) expect(fallbackProblems(`${ok}${link}`, ku), link).not.toEqual([]);
+    expect(fallbackProblems(`${ok}<a href='https://www.amazon.com/gp/product/B0D82GWFD9?tag=reeseastor-20'>x</a>`, ku)).toEqual([]);
+  });
+
   it("G3: the guard's KU lists carry a dated amazon.com verification note", () => {
     const guardSrc = fs.readFileSync(path.join(__dirname, "../scripts/lib/book-fallback-guard.mjs"), "utf8");
     expect(guardSrc).toMatch(/KU verified on amazon\.com \d{4}-\d{2}-\d{2}/);

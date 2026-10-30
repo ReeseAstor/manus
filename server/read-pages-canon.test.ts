@@ -38,4 +38,29 @@ describe("/read static pages: canon on marketing surfaces", () => {
     for (const t of FW_CHIPS) expect(fw.html).toContain(`<h3>${t}</h3>`);
     expect(fw.html).not.toMatch(/Pregnant heroine|Protective hero/);
   });
+
+  it("F4: the whole Fake Wife page uses the books.ts tropes (hero bullet, 'Read it if', chips, grid)", () => {
+    const fw = pages.find((p) => p.name === "the-billionaires-fake-wife")!;
+    const lower = fakeWife.tropes.map((t) => t.toLowerCase());
+    const phrase = `${cap(lower[0])}, ${lower.slice(1, -1).join(", ")}${lower.length > 2 ? " and " : ""}${lower[lower.length - 1]}`;
+    expect(fw.html).toContain(`<li>${phrase}</li>`);
+    expect(fw.html).toContain(`<li>You love ${phrase.charAt(0).toLowerCase()}${phrase.slice(1)}</li>`);
+    // no trope wording anywhere on the page that is not in books.ts (the Amazon subtitle "Pregnant and Protected" is allowed: QA ruling)
+    const withoutSubtitle = fw.html.split("Pregnant and Protected").join("");
+    expect(withoutSubtitle).not.toMatch(/pregnan|protective hero/i);
+  });
+
+  it("Baby Secret taglines say 'almost four years' (Amazon), never 'three years'", () => {
+    for (const p of pages) expect(p.html, p.name).not.toMatch(/missed three years/i);
+    const bs = pages.find((p) => p.name === "the-billionaires-baby-secret")!;
+    expect(bs.html).toContain("He missed almost four years. He&#x27;s not missing another day.");
+  });
+});
+
+describe("books.ts canon vs Amazon (QA F3)", () => {
+  it("Baby Secret blurb opens with 'Almost four years ago' and the snowbound Chicago weekend", () => {
+    const bs = BOOKS.find((b) => b.slug === "the-billionaire-s-baby-secret")!;
+    expect(bs.blurb.startsWith("Almost four years ago, Sophia Reed spent one snowbound weekend in Chicago")).toBe(true);
+    expect(bs.blurb).not.toMatch(/three years/i);
+  });
 });

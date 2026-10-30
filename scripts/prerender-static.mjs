@@ -363,7 +363,7 @@ const llms = [
       .sort((a, b) => (a.series_position ?? 999) - (b.series_position ?? 999))
       .map(
         (b) =>
-          `- [${b.title}](${SITE_URL}/books/${b.slug}): ${b.position_label ?? ""}${b.position_label ? ". " : ""}${b.tropes?.length ? `Tropes: ${b.tropes.join(", ")}. ` : ""}${b.characters?.length ? `Leads: ${b.characters.join(" and ")}. ` : ""}${b.kindle_unlimited ? "In Kindle Unlimited." : ""}`.trim(),
+          `- [${b.title}](${SITE_URL}/books/${b.slug}): ${b.position_label ?? ""}${b.position_label ? ". " : ""}${b.tropes?.length ? `Tropes: ${b.tropes.join(", ")}. ` : ""}${b.characters?.length ? `Leads: ${b.characters.join(" and ")}. ` : ""}${b.kindle_unlimited ? "Read free with Kindle+ (formerly Kindle Unlimited)." : ""}`.trim(),
       ),
     "",
   ]),
