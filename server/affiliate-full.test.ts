@@ -58,16 +58,20 @@ describe("Favorites Products Data", () => {
     expect(favoritesCategories.length).toBe(4);
   });
 
-  it("should have 4 products per category", async () => {
+  it("should have at least 2 products per category (2-column grid)", async () => {
+    // 2026-10-30: 3 cards whose Amazon products were gone (404) were removed rather than re-pointed,
+    // because their copy described those exact products. Categories may hold 2-4 cards.
     const { favoritesCategories } = await import("../client/src/data/favoritesProducts");
     favoritesCategories.forEach((cat) => {
-      expect(cat.products.length).toBe(4);
+      expect(cat.products.length).toBeGreaterThanOrEqual(2);
+      expect(cat.products.length).toBeLessThanOrEqual(4);
     });
   });
 
   it("should have valid affiliate URLs with correct store ID on all products", async () => {
-    const { allFavoritesProducts } = await import("../client/src/data/favoritesProducts");
-    expect(allFavoritesProducts.length).toBe(16);
+    const { allFavoritesProducts, favoritesCategories } = await import("../client/src/data/favoritesProducts");
+    expect(allFavoritesProducts.length).toBe(13);
+    expect(allFavoritesProducts.length).toBe(favoritesCategories.reduce((n, c) => n + c.products.length, 0));
     allFavoritesProducts.forEach((p) => {
       expect(p.affiliateUrl).toContain("tag=reeseastor-20");
       expect(p.affiliateUrl).toContain("amazon.com");
