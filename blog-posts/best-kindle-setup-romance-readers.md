@@ -10,7 +10,7 @@ Let me save you the research spiral. If you read romance — especially if you r
 
 ### The Kindle Paperwhite (2024)
 
-The [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20) is the one I use every single day. Here's why it wins for romance readers specifically:
+The [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20) is the one I use every single day. Here's why it wins for romance readers specifically:
 
 **The warm light is everything.** Romance readers are night readers. We stay up too late, we read "just one more chapter" six times, and we need a screen that doesn't blast blue light into our faces at midnight. The Paperwhite's adjustable warm light means I can read until 2 AM without wrecking my sleep schedule (more than the book already is).
 
@@ -36,11 +36,11 @@ Your Kindle goes everywhere with you. It needs protection. But it also needs to 
 
 ### My Pick: A Slim Fabric Case
 
-I use a [fabric book-style case](https://www.amazon.com/dp/B0CFPN2YMK?tag=reeseastor-20) — it protects the screen, adds almost no weight, and has a magnetic closure that wakes the Kindle when you open it. The auto-wake feature sounds minor but it matters when you're pulling your Kindle out twenty times a day for five-minute reading sessions.
+I use a [fabric book-style case](https://www.amazon.com/dp/B0CM7RF1KR?tag=reeseastor-20) — it protects the screen, adds almost no weight, and has a magnetic closure that wakes the Kindle when you open it. The auto-wake feature sounds minor but it matters when you're pulling your Kindle out twenty times a day for five-minute reading sessions.
 
 ### For the Aesthetic Readers: Book Sleeves
 
-If you prefer your Kindle naked (no case) but want protection in your bag, a [padded book sleeve](https://www.amazon.com/dp/B0D5BDHG7V?tag=reeseastor-20) is the move. They come in gorgeous patterns — florals, dark academia, bookish prints — and they protect without adding bulk to the device itself. I keep one in my work bag and one in my nightstand drawer.
+If you prefer your Kindle naked (no case) but want protection in your bag, a [padded book sleeve](https://www.amazon.com/dp/B0C9TWJKP5?tag=reeseastor-20) is the move. They come in gorgeous patterns — florals, dark academia, bookish prints — and they protect without adding bulk to the device itself. I keep one in my work bag and one in my nightstand drawer.
 
 ## The Accessories That Actually Matter
 
@@ -48,7 +48,7 @@ Most Kindle accessories are unnecessary. These three aren't.
 
 ### A PopSocket or Ring Grip
 
-This changed my reading life. Sticking a [phone grip](https://www.amazon.com/dp/B0BT3HLJNQ?tag=reeseastor-20) on the back of your Kindle (or on a clear case) means you can hold it one-handed without gripping. This matters for side-lying reading in bed, for reading while eating, for reading while doing literally anything else with your other hand. It sounds silly until you try it, and then you wonder how you ever read without one.
+This changed my reading life. Sticking a [phone grip](https://www.amazon.com/dp/B07QVYLDRL?tag=reeseastor-20) on the back of your Kindle (or on a clear case) means you can hold it one-handed without gripping. This matters for side-lying reading in bed, for reading while eating, for reading while doing literally anything else with your other hand. It sounds silly until you try it, and then you wonder how you ever read without one.
 
 ### A Book Light (For Non-Kindle Readers in Your Life)
 
@@ -74,10 +74,10 @@ A few settings that improve the romance reading experience:
 
 Here's my exact daily reading setup:
 
-- [Kindle Paperwhite 2024](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20) — the workhorse
-- [Fabric case](https://www.amazon.com/dp/B0CFPN2YMK?tag=reeseastor-20) — slim, magnetic, auto-wake
+- [Kindle Paperwhite 2024](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20) — the workhorse
+- [Fabric case](https://www.amazon.com/dp/B0CM7RF1KR?tag=reeseastor-20) — slim, magnetic, auto-wake
 - PopSocket on the back — one-handed reading
-- Kindle Unlimited subscription — because I read 20+ romance novels a month and buying them all would bankrupt me
+- Kindle+ subscription (formerly Kindle Unlimited) — because I read 20+ romance novels a month and buying them all would bankrupt me
 - A [reading candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) — because atmosphere matters
 
 Total investment: around $180 for the Kindle + case + grip. That's less than what I'd spend on physical books in a single month at my reading pace. The math works out fast.

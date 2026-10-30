@@ -28,15 +28,15 @@ These are books I've read and loved — not just books set in New York, but book
 
 ### King of Wrath by Ana Huang
 
-[King of Wrath](https://www.amazon.com/dp/B09MFKDNBY?tag=reeseastor-20) is set among Manhattan's ultra-wealthy, and Huang captures the specific brand of power that exists in New York's social elite. The arranged marriage between Dante and Vivian plays out against charity galas, exclusive restaurants, and the kind of penthouse that only exists in this city. The Manhattan setting isn't decoration — it's pressure. Everyone is watching, and that surveillance drives the tension between two people who can't afford to show weakness.
+[King of Wrath](https://www.amazon.com/dp/B0B36FKPS8?tag=reeseastor-20) is set among Manhattan's ultra-wealthy, and Huang captures the specific brand of power that exists in New York's social elite. The arranged marriage between Dante and Vivian plays out against charity galas, exclusive restaurants, and the kind of penthouse that only exists in this city. The Manhattan setting isn't decoration — it's pressure. Everyone is watching, and that surveillance drives the tension between two people who can't afford to show weakness.
 
 ### Part of Your World by Abby Jimenez
 
-[Part of Your World](https://www.amazon.com/dp/B09FJ4YWNG?tag=reeseastor-20) isn't set entirely in Manhattan — it moves between a small town and the city — but the contrast is the point. The heroine's life in New York represents everything she's supposed to want: the prestigious career, the right social circles, the expected path. Watching her choose something different is deeply satisfying, and Jimenez writes the pull between city ambition and small-town authenticity with real nuance.
+[Part of Your World](https://www.amazon.com/dp/B09BN2WNPP?tag=reeseastor-20) isn't set entirely in Manhattan — it moves between a small town and the city — but the contrast is the point. The heroine's life in New York represents everything she's supposed to want: the prestigious career, the right social circles, the expected path. Watching her choose something different is deeply satisfying, and Jimenez writes the pull between city ambition and small-town authenticity with real nuance.
 
 ### Twisted Love by Ana Huang
 
-[Twisted Love](https://www.amazon.com/dp/B08QGBR5NF?tag=reeseastor-20) uses its East Coast setting to amplify the isolation of its hero. Alex Volkov's world is cold, controlled, and expensive — all qualities that Manhattan embodies. When warmth enters his life, the contrast is stark and effective.
+[Twisted Love](https://www.amazon.com/dp/B08Y6DCS1Y?tag=reeseastor-20) uses its East Coast setting to amplify the isolation of its hero. Alex Volkov's world is cold, controlled, and expensive — all qualities that Manhattan embodies. When warmth enters his life, the contrast is stark and effective.
 
 ### Verity by Colleen Hoover
 
@@ -54,7 +54,7 @@ Different Manhattan neighborhoods carry distinct associations that shape charact
 
 ## Reading NYC Romance: Setting the Mood
 
-There's something about reading Manhattan romance while actually feeling like you're there. I keep a [library-scented candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) burning when I read NYC-set books — the old paper and leather notes make my living room feel like a private library in a Midtown penthouse. And honestly, reading these on a [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20) late at night with the warm light feels appropriately atmospheric. Manhattan is a nighttime city, and these books read best after dark.
+There's something about reading Manhattan romance while actually feeling like you're there. I keep a [library-scented candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) burning when I read NYC-set books — the old paper and leather notes make my living room feel like a private library in a Midtown penthouse. And honestly, reading these on a [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20) late at night with the warm light feels appropriately atmospheric. Manhattan is a nighttime city, and these books read best after dark.
 
 ## Final Thoughts
 

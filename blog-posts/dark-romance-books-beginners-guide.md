@@ -22,11 +22,11 @@ These books have darker themes but won't keep you up at night questioning your l
 
 ### Twisted Love by Ana Huang
 
-[Twisted Love](https://www.amazon.com/dp/B08QGBR5NF?tag=reeseastor-20) features a cold, calculating hero with a dark past and zero emotional availability — until he meets the one person who cracks him open. Alex Volkov is controlling and secretive, but Huang keeps things within boundaries that most readers find comfortable. The darkness here is more about emotional intensity than graphic content. It's the book that's converted more "I don't read dark romance" readers than any other.
+[Twisted Love](https://www.amazon.com/dp/B08Y6DCS1Y?tag=reeseastor-20) features a cold, calculating hero with a dark past and zero emotional availability — until he meets the one person who cracks him open. Alex Volkov is controlling and secretive, but Huang keeps things within boundaries that most readers find comfortable. The darkness here is more about emotional intensity than graphic content. It's the book that's converted more "I don't read dark romance" readers than any other.
 
 ### King of Wrath by Ana Huang
 
-[King of Wrath](https://www.amazon.com/dp/B09MFKDNBY?tag=reeseastor-20) sits at the intersection of billionaire romance and dark romance. Dante Russo is powerful, possessive, and not particularly interested in being a good person — except when it comes to Vivian. The arranged marriage setup creates a power imbalance that Huang navigates with skill. Dark enough to feel dangerous, controlled enough to feel safe.
+[King of Wrath](https://www.amazon.com/dp/B0B36FKPS8?tag=reeseastor-20) sits at the intersection of billionaire romance and dark romance. Dante Russo is powerful, possessive, and not particularly interested in being a good person — except when it comes to Vivian. The arranged marriage setup creates a power imbalance that Huang navigates with skill. Dark enough to feel dangerous, controlled enough to feel safe.
 
 ## Level 2: Properly Dark (Once You Know You Like It)
 
@@ -34,7 +34,7 @@ These books lean harder into morally gray territory. The heroes do things that w
 
 ### Haunting Adeline by H.D. Carlton
 
-[Haunting Adeline](https://www.amazon.com/dp/B09BFCGKN8?tag=reeseastor-20) is the book that launched a thousand BookTok videos. Zade is a vigilante hacker who becomes obsessed with Adeline — a writer living in her grandmother's haunted house. He stalks her. He breaks into her home. He's also fighting a human trafficking ring. The moral complexity is the point. This book has trigger warnings for a reason, but it's also genuinely well-written with a plot that goes far beyond the romance. Read the content warnings before diving in.
+[Haunting Adeline](https://www.amazon.com/dp/B09CLVJJ77?tag=reeseastor-20) is the book that launched a thousand BookTok videos. Zade is a vigilante hacker who becomes obsessed with Adeline — a writer living in her grandmother's haunted house. He stalks her. He breaks into her home. He's also fighting a human trafficking ring. The moral complexity is the point. This book has trigger warnings for a reason, but it's also genuinely well-written with a plot that goes far beyond the romance. Read the content warnings before diving in.
 
 ### God of Malice by Rina Kent
 
@@ -67,7 +67,7 @@ Dark romance often contains content that some readers find distressing. Before p
 
 ## Reading Dark Romance: The Right Atmosphere
 
-Dark romance reads differently than contemporary romance. These aren't books for sunny afternoons at the beach. They're books for late nights, dark rooms, and the kind of quiet where your imagination can run wild. I read mine on my [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20) with the lights off — the built-in warm light creates the perfect moody atmosphere. A [dark-scented candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) with leather and smoke notes completes the vibe.
+Dark romance reads differently than contemporary romance. These aren't books for sunny afternoons at the beach. They're books for late nights, dark rooms, and the kind of quiet where your imagination can run wild. I read mine on my [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20) with the lights off — the built-in warm light creates the perfect moody atmosphere. A [dark-scented candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) with leather and smoke notes completes the vibe.
 
 ## Where Dark Romance Meets Billionaire Romance
 

@@ -34,7 +34,7 @@ For paperbacks, the cozy setup works even better — physical books want candlel
 
 And yes, on deadline nights, I burn the [“Smells Like She's Writing a Bestseller” Soy Candle](https://www.amazon.com/dp/B0CMTXKBWW?tag=reeseastor-20). The label is a lie until it isn't.
 
-**Socks matter more than you think.** I don't know the science and I don't need to — [HAPPYPOP Book Lover Fuzzy Socks](https://www.amazon.com/dp/B0F1THN236?tag=reeseastor-20) are the official uniform of a good reading night. Warm feet, cozy brain, better reading.
+**Socks matter more than you think.** I don't know the science and I don't need to — [HAPPYPOP Book Lover Fuzzy Socks](https://www.amazon.com/dp/B0BXLN1ZMH?tag=reeseastor-20) are the official uniform of a good reading night. Warm feet, cozy brain, better reading.
 
 ## The Ritual: How It All Comes Together
 

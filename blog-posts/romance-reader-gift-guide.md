@@ -28,7 +28,7 @@ Rechargeable, clips onto any book, three color temperatures, six brightness sett
 
 Every one of these has earned its place in a reader's stocking:
 
-**Book Lover Fuzzy Socks** — [HAPPYPOP Book Lover Fuzzy Socks](https://www.amazon.com/dp/B0F1THN236?tag=reeseastor-20) are the official uniform of a good reading night. Cozy, soft, and printed with bookish charm.
+**Book Lover Fuzzy Socks** — [HAPPYPOP Book Lover Fuzzy Socks](https://www.amazon.com/dp/B0BXLN1ZMH?tag=reeseastor-20) are the official uniform of a good reading night. Cozy, soft, and printed with bookish charm.
 
 **A Wine Glass with a Sense of Humor** — The ["Too Many Books" Wine Glass](https://www.amazon.com/dp/B0FWC3HD8X?tag=reeseastor-20) says everything a book lover needs to say without saying anything at all. It's the glass that gets laughed at, photographed, and used constantly.
 

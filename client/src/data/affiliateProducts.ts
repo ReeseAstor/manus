@@ -61,7 +61,7 @@ export const affiliateProductsBySlug: Record<string, {
         rel: "noopener noreferrer nofollow",
       },
       "HAPPYPOP Book Lover Fuzzy Socks": {
-        url: "https://www.amazon.com/dp/B0F1THN236?tag=reeseastor-20",
+        url: "https://www.amazon.com/dp/B0BXLN1ZMH?tag=reeseastor-20",
         rel: "noopener noreferrer nofollow",
       },
       "Book Lover Wine Glass": {
@@ -79,7 +79,7 @@ export const affiliateProductsBySlug: Record<string, {
     topPicks: [
       {
         name: "Kindle Paperwhite (2024)",
-        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20",
+        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20",
         description: "The perfect e-reader for binge-reading entire romance series. Warm adjustable light, weeks of battery life, and waterproof design for bath-time reading.",
         whyRecommend: "If you're going to binge-read a 5-book series, you need a device that won't die on you. This one lasts weeks.",
         priceRange: "Around $150",
@@ -103,7 +103,7 @@ export const affiliateProductsBySlug: Record<string, {
     topPicks: [
       {
         name: "Kindle Paperwhite (2024)",
-        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20",
+        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20",
         description: "The workhorse e-reader for heavy romance readers. 6.8-inch screen, warm adjustable light, waterproof, and weeks of battery life.",
         whyRecommend: "This is the one I use every single day. If you read 200+ books a year, this is your device.",
         priceRange: "Around $150",
@@ -130,7 +130,7 @@ export const affiliateProductsBySlug: Record<string, {
     topPicks: [
       {
         name: "Kindle Paperwhite (2024)",
-        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20",
+        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20",
         description: "Most viral BookTok romances are in Kindle Unlimited. The Paperwhite is the best way to read them all without going broke.",
         whyRecommend: "I go through BookTok picks fast — one every two days. KU on a Paperwhite is the most cost-effective way to keep up.",
         priceRange: "Around $150",
@@ -144,7 +144,7 @@ export const affiliateProductsBySlug: Record<string, {
     topPicks: [
       {
         name: "Kindle Paperwhite (2024)",
-        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20",
+        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20",
         description: "The foundation of any reading self-care routine. Single-purpose device means no notifications pulling you out of the story.",
         whyRecommend: "Removing my phone and reading on a dedicated device was the single biggest improvement to my reading life.",
         priceRange: "Around $150",

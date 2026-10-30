@@ -36,15 +36,15 @@ These are the books I actually recommend when someone asks me for secret baby re
 
 ### Reckless by Elsie Silver
 
-If you haven't read [Reckless](https://www.amazon.com/dp/B0BVTMGK6Y?tag=reeseastor-20), you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series — small-town, rodeo cowboy hero, a heroine who kept their daughter secret for years. The reveal scene is devastating in the best way, and Silver writes the hero's journey from shock to devoted father with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
+If you haven't read [Reckless](https://www.amazon.com/dp/B0BTZQ7TGP?tag=reeseastor-20), you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series — small-town, rodeo cowboy hero, a heroine who kept their daughter secret for years. The reveal scene is devastating in the best way, and Silver writes the hero's journey from shock to devoted father with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
 
 ### Reminders of Him by Colleen Hoover
 
-[Reminders of Him](https://www.amazon.com/dp/B09FKGXQMC?tag=reeseastor-20) isn't a traditional secret baby romance — it's more complex than that. A woman returns home after prison to fight for a relationship with the daughter she barely knows. The entire town has turned against her, including the people raising her child. It's gut-wrenching and hopeful in equal measure. Hoover writes the kind of emotional devastation that stays with you for days.
+[Reminders of Him](https://www.amazon.com/dp/B0976V6YSL?tag=reeseastor-20) isn't a traditional secret baby romance — it's more complex than that. A woman returns home after prison to fight for a relationship with the daughter she barely knows. The entire town has turned against her, including the people raising her child. It's gut-wrenching and hopeful in equal measure. Hoover writes the kind of emotional devastation that stays with you for days.
 
 ### The Fall Risk by Abby Jimenez
 
-Abby Jimenez is one of the best contemporary romance writers working right now. [The Fall Risk](https://www.amazon.com/dp/B0DKFXNHFV?tag=reeseastor-20) delivers the emotional complexity she's known for — characters with real problems, humor that doesn't undercut the stakes, and a love story that earns every moment. If you loved Part of Your World, this is your next read.
+Abby Jimenez is one of the best contemporary romance writers working right now. [The Fall Risk](https://www.amazon.com/dp/B0DD7X5V3V?tag=reeseastor-20) delivers the emotional complexity she's known for — characters with real problems, humor that doesn't undercut the stakes, and a love story that earns every moment. If you loved Part of Your World, this is your next read.
 
 ### A Court of Thorns and Roses by Sarah J. Maas
 
@@ -62,7 +62,7 @@ Abby Jimenez is one of the best contemporary romance writers working right now. 
 
 ## Reading Essentials for an Emotional Binge
 
-Secret baby books require tissues. That's just a fact. But they also require the right reading environment — these are books you want to sink into without interruption. I read mine on a [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20) so I can read in bed without disturbing anyone (because I will be up until 2 AM, and I will be crying). A warm blanket and a [bookish candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) complete the setup.
+Secret baby books require tissues. That's just a fact. But they also require the right reading environment — these are books you want to sink into without interruption. I read mine on a [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20) so I can read in bed without disturbing anyone (because I will be up until 2 AM, and I will be crying). A warm blanket and a [bookish candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) complete the setup.
 
 ## Final Thoughts
 

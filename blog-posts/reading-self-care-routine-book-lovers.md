@@ -14,7 +14,7 @@ This is what happens on a regular Tuesday when I have nothing special planned bu
 
 **8:35 PM**: I light whatever candle is on my nightstand. Right now it's a [library-scented one](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) — old paper, leather, a hint of vanilla. I've burned through probably fifteen of these over the past two years. The scent has become a trigger: I smell it and my brain shifts into reading mode. Pavlovian, but it works.
 
-**8:40 PM**: I get into bed with my [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20), warm light on, regular light off. The room is dim. The candle is flickering. I'm comfortable. This is when the day actually ends for me — not when I finished work, not when I finished dinner, but when I open my book.
+**8:40 PM**: I get into bed with my [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20), warm light on, regular light off. The room is dim. The candle is flickering. I'm comfortable. This is when the day actually ends for me — not when I finished work, not when I finished dinner, but when I open my book.
 
 **9:00-9:30 PM**: I read until I'm sleepy. Sometimes that's twenty minutes. Sometimes it's two hours if the book is particularly good. I don't set a timer. I don't force myself to stop at a specific time. I just read until my eyes get heavy, then I blow out the candle and sleep.
 
@@ -24,9 +24,9 @@ That's it. No elaborate skincare routine happening simultaneously. No journaling
 
 Friday or Saturday night, when I have nowhere to be the next morning, I go harder.
 
-**The Bath**: I run a hot bath with whatever bath salts are under the sink. Nothing fancy — I buy the big bags from the drugstore. The Kindle comes with me (it's waterproof, and I've tested this extensively). I prop it on the edge of the tub or hold it above the water. I've been doing this for years without incident, but I understand the anxiety. A [waterproof phone pouch](https://www.amazon.com/dp/B085HN5DPG?tag=reeseastor-20) works too if you read on your phone and want protection.
+**The Bath**: I run a hot bath with whatever bath salts are under the sink. Nothing fancy — I buy the big bags from the drugstore. The Kindle comes with me (it's waterproof, and I've tested this extensively). I prop it on the edge of the tub or hold it above the water. I've been doing this for years without incident, but I understand the anxiety. A [waterproof phone pouch](https://www.amazon.com/dp/B079HV3TC9?tag=reeseastor-20) works too if you read on your phone and want protection.
 
-**The Setup**: After the bath, I build what I privately call "the nest." This involves: my bed, every pillow I own arranged for maximum support, a [weighted blanket](https://www.amazon.com/dp/B0C1LBXLG4?tag=reeseastor-20) (I resisted these for years and now I'm a convert — the gentle pressure is genuinely calming), and a cup of something warm. Usually herbal tea. Sometimes hot chocolate if the book calls for it.
+**The Setup**: After the bath, I build what I privately call "the nest." This involves: my bed, every pillow I own arranged for maximum support, a [weighted blanket](https://www.amazon.com/dp/B097DK6ZCR?tag=reeseastor-20) (I resisted these for years and now I'm a convert — the gentle pressure is genuinely calming), and a cup of something warm. Usually herbal tea. Sometimes hot chocolate if the book calls for it.
 
 **The Reading**: I read for as long as I want. No guilt about staying up late. No alarm set for the morning. This is when I finish books — when I read the last hundred pages in one sitting because nothing is pulling me away. These are the nights I ugly-cry over fictional characters and feel zero embarrassment about it.
 
@@ -36,7 +36,7 @@ I've tried a lot of "reading accessories" over the years. Most are unnecessary. 
 
 ### The Kindle Paperwhite
 
-I've mentioned it already, but the [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20) is the foundation of everything. Before I had one, I read on my phone, which meant every reading session was interrupted by notifications. The Kindle does one thing — displays books — and that single-purpose nature is its greatest feature. No notifications. No temptation to check email. Just the story.
+I've mentioned it already, but the [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20) is the foundation of everything. Before I had one, I read on my phone, which meant every reading session was interrupted by notifications. The Kindle does one thing — displays books — and that single-purpose nature is its greatest feature. No notifications. No temptation to check email. Just the story.
 
 ### A Dedicated Reading Light
 
@@ -48,7 +48,7 @@ I'm particular about this. The candle can't be too strong (headache), can't be f
 
 ### Comfortable Reading Position
 
-This sounds obvious but most people read in positions that cause neck strain, back pain, or arm fatigue. I spent actual time figuring out my optimal reading position: slightly reclined (not flat), pillow behind my lower back, Kindle held at eye level (not in my lap — that's how you get neck problems). A [reading pillow](https://www.amazon.com/dp/B0BVNLF7GY?tag=reeseastor-20) with arms helps if you read sitting up in bed. It looks ridiculous. It works perfectly.
+This sounds obvious but most people read in positions that cause neck strain, back pain, or arm fatigue. I spent actual time figuring out my optimal reading position: slightly reclined (not flat), pillow behind my lower back, Kindle held at eye level (not in my lap — that's how you get neck problems). A [reading pillow](https://www.amazon.com/dp/B09V518DRK?tag=reeseastor-20) with arms helps if you read sitting up in bed. It looks ridiculous. It works perfectly.
 
 ## What I Don't Do
 

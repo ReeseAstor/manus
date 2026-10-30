@@ -16,13 +16,13 @@ The algorithm rewards emotional reactions, not nuanced criticism. A book that ma
 
 ### Haunting Adeline by H.D. Carlton
 
-[Haunting Adeline](https://www.amazon.com/dp/B09BFCGKN8?tag=reeseastor-20) is the most divisive BookTok romance, and that's exactly why it went viral. People either love it or are horrified by it, and both reactions generate engagement. The hero is a stalker. The content warnings are extensive. The plot involves human trafficking. It shouldn't work as romance. And yet.
+[Haunting Adeline](https://www.amazon.com/dp/B09CLVJJ77?tag=reeseastor-20) is the most divisive BookTok romance, and that's exactly why it went viral. People either love it or are horrified by it, and both reactions generate engagement. The hero is a stalker. The content warnings are extensive. The plot involves human trafficking. It shouldn't work as romance. And yet.
 
 **My honest take**: It's better written than its critics suggest and more problematic than its fans admit. Carlton has genuine skill with atmosphere and pacing. The mystery plot is compelling independent of the romance. But this is a book that requires you to separate fiction from reality completely, and not every reader can or should do that. Know yourself before picking this up.
 
 ### Things We Never Got Over by Lucy Score
 
-[Things We Never Got Over](https://www.amazon.com/dp/B09FGCFZ9S?tag=reeseastor-20) went viral for the grumpy hero, and honestly, Knox Morgan deserves every thirsty comment. Score writes the grumpy/sunshine dynamic with a deft hand — Knox's grumpiness has real roots, Naomi's sunshine isn't naive, and their chemistry builds to a satisfying payoff.
+[Things We Never Got Over](https://www.amazon.com/dp/B09PNM8FFN?tag=reeseastor-20) went viral for the grumpy hero, and honestly, Knox Morgan deserves every thirsty comment. Score writes the grumpy/sunshine dynamic with a deft hand — Knox's grumpiness has real roots, Naomi's sunshine isn't naive, and their chemistry builds to a satisfying payoff.
 
 **My honest take**: This one earns the hype. It's long — over 500 pages — but it never drags. The small-town setting is charming without being saccharine, and the secondary characters are developed enough that you'll want their books too (and they exist). A safe recommendation for anyone curious about BookTok romance.
 
@@ -36,7 +36,7 @@ The algorithm rewards emotional reactions, not nuanced criticism. A book that ma
 
 ### The Love Hypothesis by Ali Hazelwood
 
-[The Love Hypothesis](https://www.amazon.com/dp/B08R4JFQKQ?tag=reeseastor-20) went viral for the fake-dating setup and the tall, brooding love interest. It's a perfectly pleasant romance with a STEM setting that feels fresh.
+[The Love Hypothesis](https://www.amazon.com/dp/B08T6XN4FP?tag=reeseastor-20) went viral for the fake-dating setup and the tall, brooding love interest. It's a perfectly pleasant romance with a STEM setting that feels fresh.
 
 **My honest take**: It's fine. It's enjoyable. It's not going to change your life. The writing is competent, the characters are likeable, and the romance follows a predictable but satisfying arc. If you want something light and fun, it delivers. If you're expecting the emotional devastation that BookTok promised, you'll be slightly underwhelmed. Good airplane book.
 
@@ -68,9 +68,9 @@ If you're using BookTok to find your next read (which is valid — it's how I've
 
 ## My Reading Setup for Testing BookTok Picks
 
-I go through these fast — usually one every two days — so my setup is optimized for volume. [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20) with Kindle Unlimited handles most of them (the majority of viral romance is in KU). I keep a running list in my phone's notes app: title, whether I finished it, one-sentence verdict. It's become a useful reference when readers ask me for recommendations.
+I go through these fast — usually one every two days — so my setup is optimized for volume. [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20) with Kindle+ (formerly Kindle Unlimited) handles most of them (the majority of viral romance is in Kindle+). I keep a running list in my phone's notes app: title, whether I finished it, one-sentence verdict. It's become a useful reference when readers ask me for recommendations.
 
-For the physical copies that BookTok convinced me to buy (because sometimes you want the pretty edition on your shelf), I use [clear book stands](https://www.amazon.com/dp/B0BXJH5C3G?tag=reeseastor-20) to display the ones that earned their place. The rest go to the used bookstore.
+For the physical copies that BookTok convinced me to buy (because sometimes you want the pretty edition on your shelf), I use [clear book stands](https://www.amazon.com/dp/B0B7MCLBRM?tag=reeseastor-20) to display the ones that earned their place. The rest go to the used bookstore.
 
 ## Final Verdict
 
