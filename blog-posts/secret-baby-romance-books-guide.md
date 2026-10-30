@@ -18,13 +18,13 @@ The secret baby trope has been a romance staple for decades, and for good reason
 
 For readers seeking a secret baby romance that delivers on every level — emotional depth, sizzling chemistry, and a hero's transformation that feels earned — **The Billionaire's Baby Secret** sets the standard.
 
-Three years ago, Sophia Reed walked away from a hotel room and a man she should have never trusted. Rising mogul Dominic Kane was everything she knew she should avoid: powerful, commanding, and completely wrong for a woman trying to build stability from nothing. But one night changed everything, and Sophia left Manhattan carrying a secret she never planned to reveal.
+Almost four years ago, Sophia Reed spent one snowbound weekend in Chicago with Dominic Kane. He said he would call. He never did. Now she's a single mother in Astoria, mid-pitch in the Kane Industries boardroom, when Dominic walks in as chief executive again, and one look at the photo on her phone tells him everything: storm-gray eyes. His.
 
-Now Dominic is back, and the daughter Sophia has protected has storm-gray eyes that match the billionaire who just discovered he's a father. What follows is a masterclass in secret baby romance — the confrontation, the negotiation, the slow rebuilding of trust between two people who never stopped wanting each other.
+What follows is a masterclass in secret baby romance — the confrontation, the negotiation, the slow rebuilding of trust between two people who never stopped wanting each other.
 
 ### What Makes This Book Stand Out
 
-Sophia's reasons for keeping her daughter hidden are understandable without being contrived. She wasn't trying to punish Dominic or manipulate him — she was protecting herself and her child from a man she believed would never prioritize family over empire.
+Sophia didn't hide her daughter to punish anyone. She called Dominic eleven times and never heard back, and the real question becomes who made sure he never got her messages.
 
 Dominic's reaction to discovering he has a daughter feels authentic. He's angry, yes, but his anger transforms into determination rather than cruelty. He doesn't try to take Bella away from Sophia or use his wealth as a weapon. Instead, he sets out to prove he can be the father his daughter deserves and the partner Sophia needs.
 
@@ -36,7 +36,7 @@ These are the books I actually recommend when someone asks me for secret baby re
 
 ### Reckless by Elsie Silver
 
-If you haven't read [Reckless](https://www.amazon.com/dp/B0BTZQ7TGP?tag=reeseastor-20), you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series — small-town, rodeo cowboy hero, a heroine who kept their daughter secret for years. The reveal scene is devastating in the best way, and Silver writes the hero's journey from shock to devoted father with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
+If you haven't read [Reckless](https://www.amazon.com/dp/B0BTZQ7TGP?tag=reeseastor-20), you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series: a one-night stand with rowdy bull rider Theo Silva, a heroine almost free of a toxic marriage, and a little plus sign that makes their secret impossible to keep. It's a surprise-pregnancy story rather than a years-later reveal, and Silver writes what comes after that plus sign with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
 
 ### Reminders of Him by Colleen Hoover
 
@@ -54,7 +54,7 @@ Abby Jimenez is one of the best contemporary romance writers working right now. 
 
 **Consider the Heat Level**: Secret baby romance ranges from sweet to scorching. The Manhattan Money Kings series offers steamy scenes balanced with substantial emotional development. Elsie Silver's books run similarly warm.
 
-**Think About the Hero's Reaction**: How the hero responds to discovering he's a father significantly impacts the reading experience. Some readers prefer heroes who are immediately protective and devoted, while others enjoy watching a reluctant hero transform. Dominic Kane falls into the latter category — his growth feels genuine because it doesn't happen overnight.
+**Think About the Hero's Reaction**: How the hero responds to discovering he's a father significantly impacts the reading experience. Some readers prefer heroes who are immediately protective and devoted, while others enjoy watching a hero earn his place. Dominic Kane is the first kind: he wants to make up for almost four years by Thursday, and the story is about what that costs him.
 
 **Evaluate the Heroine's Reasons**: The best secret baby romances give heroines compelling reasons for keeping their secret. Look for stories where her choices, even if imperfect, make sense given her circumstances.
 

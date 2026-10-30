@@ -32,7 +32,7 @@ These are books I've read and loved — not just books set in New York, but book
 
 ### Part of Your World by Abby Jimenez
 
-[Part of Your World](https://www.amazon.com/dp/B09BN2WNPP?tag=reeseastor-20) isn't set entirely in Manhattan — it moves between a small town and the city — but the contrast is the point. The heroine's life in New York represents everything she's supposed to want: the prestigious career, the right social circles, the expected path. Watching her choose something different is deeply satisfying, and Jimenez writes the pull between city ambition and small-town authenticity with real nuance.
+[Part of Your World](https://www.amazon.com/dp/B09BN2WNPP?tag=reeseastor-20) isn't a New York book: it moves between Minneapolis, where Alexis works as an ER doctor, and Wakan, a tiny Minnesota town. It earns a place here for the same city-versus-small-town pull. Alexis's life in the city represents everything she's supposed to want: the prestigious career, the right social circles, the expected path. Watching her choose something different is deeply satisfying, and Jimenez writes the pull between city ambition and small-town authenticity with real nuance.
 
 ### Twisted Love by Ana Huang
 
