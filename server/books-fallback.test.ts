@@ -14,7 +14,8 @@ const { KINDLE_PLUS_LINE, RETIRED_KU_LINE, bookFallbackFactsHtml, bookFallbackBu
   bookFallbackFactsHtml: (book: unknown, deps: unknown) => string;
   bookFallbackBuyHtml: (book: unknown, deps: unknown) => string;
 };
-const { EXPECTED_KINDLE_PLUS_LINE, RETIRED_KU_TEXT, KU_TITLE_SLUGS, NON_KU_TITLE_SLUGS, fallbackProblems } = guard as {
+const { EXPECTED_KINDLE_PLUS_LINE, RETIRED_KU_TEXT, KU_TITLE_SLUGS, NON_KU_TITLE_SLUGS, fallbackProblems, normalizeForScan } = guard as {
+  normalizeForScan: (s: string) => string;
   EXPECTED_KINDLE_PLUS_LINE: string;
   RETIRED_KU_TEXT: string;
   KU_TITLE_SLUGS: readonly string[];
@@ -119,6 +120,48 @@ describe("/books no-JS fallback", () => {
     expect(fallbackProblems("<li></li>", "a-new-title").length).toBeGreaterThan(0);
   });
 
+  it("G1: checks JSON-LD in the full page: Amazon identifiers must be clean, untagged /dp/ URLs", () => {
+    const ok = `<li>${APPROVED_LINE}</li>`;
+    const ku = "the-billionaire-s-fake-wife";
+    const ld = (url: string) => `<script type="application/ld+json" data-pre="1">{"sameAs":["${url}"]}</script>`;
+    expect(fallbackProblems(ld("https://www.amazon.com/dp/B0FCCBNF8X") + ok, ku)).toEqual([]);
+    expect(fallbackProblems(ld("https://www.amazon.com/dp/B0FCCBNF8X?tag=reeseastor-20") + ok, ku).length).toBeGreaterThan(0);
+    expect(fallbackProblems(ld("https://www.amazon.com/dp/B0FCCBNF8X?ref_=x") + ok, ku).length).toBeGreaterThan(0);
+    expect(fallbackProblems(ld("http://amazon.com/dp/B0FCCBNF8X") + ok, ku).length).toBeGreaterThan(0);
+    // stray wording in the head (meta / JSON-LD) is caught too
+    expect(fallbackProblems(`<meta name="description" content="In Kindle Unlimited">${ok}`, ku).length).toBeGreaterThan(0);
+  });
+
+  it("G2: lookalike characters, entities and odd spaces cannot hide Kindle Unlimited / Kindle+", () => {
+    const ok = `<li>${APPROVED_LINE}</li>`;
+    const ku = "the-billionaire-s-fake-wife";
+    const sneaky = [
+      "K\u0456ndle Unlimited", // Cyrillic i
+      "Kindle Unl\u0456m\u0456ted",
+      "\u039Aindle Unlimited", // Greek capital Kappa
+      "Kin\u200Bdle Unlimited", // zero-width space
+      "Kindle\u00A0Unlimited", // no-break space
+      "Kindle&nbsp;Unlimited",
+      "Kindle&#160;Unlimited",
+      "Kindle\u2009Unlimited", // thin space
+      "\uFF2Bindle Unlimited", // fullwidth K
+      "Kindle-Unlimited",
+      "Kindle\uFF0B", // fullwidth plus
+      "Kindle&#43; members",
+      "Kindle&#x2B; members",
+      "Kin\u00ADdle Unlimited", // soft hyphen
+    ];
+    for (const s of sneaky) expect(fallbackProblems(`${ok}<p>${s}</p>`, ku), JSON.stringify(s)).not.toEqual([]);
+    expect(normalizeForScan("K\u0456n\u200Bdle&nbsp;\uFF35nlimited")).toBe("Kindle Unlimited");
+    // the exact approved line itself stays allowed
+    expect(fallbackProblems(ok, ku)).toEqual([]);
+  });
+
+  it("G3: the guard's KU lists carry a dated amazon.com verification note", () => {
+    const guardSrc = fs.readFileSync(path.join(__dirname, "../scripts/lib/book-fallback-guard.mjs"), "utf8");
+    expect(guardSrc).toMatch(/KU verified on amazon\.com \d{4}-\d{2}-\d{2}/);
+  });
+
   it("runs this test file in the Vercel build and npm build, before the prerender", () => {
     const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, "../vercel.json"), "utf8"));
     const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, "../package.json"), "utf8"));
@@ -136,7 +179,9 @@ describe("/books no-JS fallback", () => {
     expect(src).toContain('scripts/lib/book-fallback-guard.mjs');
     const guardSrc = fs.readFileSync(path.join(__dirname, "../scripts/lib/book-fallback-guard.mjs"), "utf8");
     expect(guardSrc).not.toMatch(/from\s+["'][^"']*(book-fallback\.mjs|books)["']|import\(/);
-    expect(src).toMatch(/fallbackProblems\(bookBody, book\.slug\)[\s\S]{0,80}throw new Error/);
+    expect(src).toMatch(/fallbackProblems\(bookPage, book\.slug\)[\s\S]{0,80}throw new Error/);
+    expect(src).toMatch(/const bookPage = renderPage\(/);
+    expect(src).toContain("write(`/books/${book.slug}`, bookPage)");
     expect(src).not.toMatch(/href="\$\{esc\(book\.retailers\.amazon_kindle\)\}"/);
   });
 });

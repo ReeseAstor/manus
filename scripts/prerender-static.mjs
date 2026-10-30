@@ -197,29 +197,28 @@ for (const book of BOOKS) {
       ? `<h2>More in ${esc(lane.title)}</h2><ul>${siblings.map((b) => `<li><a href="/books/${b.slug}">${esc(b.title)}</a></li>`).join("")}</ul>`
       : ""
   }</article>`;
-  // Fail the build on an untagged Amazon link, or a wrong or misplaced subscription line.
-  // KU membership comes from the guard's own canonical list, not from book.kindle_unlimited.
-  const problems = fallbackProblems(bookBody, book.slug);
+  const bookPage = renderPage({
+    route: `/books/${book.slug}`,
+    title: `${book.title} by Reese Astor | ${lane.title}${book.position_label ? ` ${book.position_label}` : ""}`,
+    description: `${book.tagline} ${book.blurb}`,
+    ogType: "book",
+    image: book.cover_image_square ?? book.cover_image,
+    schemas: [
+      sd.bookSchema(book),
+      sd.breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Books", path: "/books" },
+        { name: book.title, path: `/books/${book.slug}` },
+      ]),
+    ],
+    body: bookBody,
+  });
+  // Fail the build on an untagged Amazon link, a wrong or misplaced subscription line, or an
+  // unclean JSON-LD Amazon identifier. The guard reads the full rendered page (head, JSON-LD,
+  // body); KU membership comes from its own canonical list, not from book.kindle_unlimited.
+  const problems = fallbackProblems(bookPage, book.slug);
   if (problems.length) throw new Error(`[prerender] /books/${book.slug}: ${problems.join("; ")}`);
-  write(
-    `/books/${book.slug}`,
-    renderPage({
-      route: `/books/${book.slug}`,
-      title: `${book.title} by Reese Astor | ${lane.title}${book.position_label ? ` ${book.position_label}` : ""}`,
-      description: `${book.tagline} ${book.blurb}`,
-      ogType: "book",
-      image: book.cover_image_square ?? book.cover_image,
-      schemas: [
-        sd.bookSchema(book),
-        sd.breadcrumbSchema([
-          { name: "Home", path: "/" },
-          { name: "Books", path: "/books" },
-          { name: book.title, path: `/books/${book.slug}` },
-        ]),
-      ],
-      body: bookBody,
-    }),
-  );
+  write(`/books/${book.slug}`, bookPage);
 }
 
 // ── Static info pages ──────────────────────────────────────────────────────
