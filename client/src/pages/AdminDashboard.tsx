@@ -189,7 +189,7 @@ export default function AdminDashboard() {
           title: "AI Studio",
           description: "Images, video, music & chat with KIE API",
           icon: Sparkles,
-          href: "/admin/ai-studio",
+          href: "/admin/studio",
           color: "from-yellow-500/20 to-yellow-600/10",
           borderColor: "border-yellow-500/30",
           iconColor: "text-yellow-400",
@@ -315,7 +315,7 @@ export default function AdminDashboard() {
   const quickActions = [
     { label: "New Blog Post", icon: PenTool, href: "/admin/blog/new", color: "text-amber-400" },
     { label: "New Newsletter", icon: Mail, href: "/admin/newsletters", color: "text-pink-400" },
-    { label: "AI Studio", icon: Sparkles, href: "/admin/ai-studio", color: "text-yellow-400" },
+    { label: "AI Studio", icon: Sparkles, href: "/admin/studio", color: "text-yellow-400" },
     { label: "Run QA Check", icon: CheckCircle2, href: "/admin/qa", color: "text-emerald-400" },
     { label: "Scan Links", icon: Link2, href: "/admin/links", color: "text-purple-400" },
     { label: "Generate Report", icon: FileText, href: "/admin/reports", color: "text-indigo-400" },
@@ -617,7 +617,7 @@ export default function AdminDashboard() {
                         <ArrowRight className="h-3 w-3 text-gray-500" />
                       </Button>
                     </Link>
-                    <Link href="/admin/ai-studio">
+                    <Link href="/admin/studio">
                       <Button className="w-full justify-between bg-white/10 hover:bg-white/20 text-white text-xs h-9 px-3">
                         <span className="flex items-center gap-2">
                           <Sparkles className="h-3 w-3 text-yellow-400" />
