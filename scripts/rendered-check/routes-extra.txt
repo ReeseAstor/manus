@@ -1,0 +1,25 @@
+# Routes checked in addition to every <loc> in /sitemap.xml (pages a reader can reach that the sitemap may omit).
+/
+/books
+/about
+/blog
+/newsletter
+/free-book
+/press
+/contact
+/privacy
+/terms
+/reader-club
+/welcome-back
+/stay-subscribed
+/quiz
+/romance-quiz
+/shop
+/favorites
+/why-buy-direct
+/vip-club
+/newsletter-archive
+/vip-audio
+/sms
+/this-page-does-not-exist
+/read
