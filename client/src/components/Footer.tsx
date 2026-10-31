@@ -22,7 +22,7 @@ export function Footer() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-semibold hover:bg-primary/20 transition-colors"
             >
               <Gift className="h-4 w-4" />
-              Free prequel when you join my newsletter.
+              Get a Free Book
             </a>
           </div>
 
@@ -36,7 +36,7 @@ export function Footer() {
               <Link href="/free-book">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
                   <BookOpen className="h-3 w-3" />
-                  Newsletter Prequel
+                  Free Book
                 </a>
               </Link>
               <Link href="/newsletter">

@@ -18,8 +18,6 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 
 // ───── Lazy: secondary pages (code-split, load on demand) ─────
-// Admin pages and their route table: one admin-only chunk, loaded only after AdminRoute passes.
-const AdminRoutes = lazy(() => import("./pages/AdminRoutes"));
 const Press = lazy(() => import("./pages/Press"));
 const PurchaseSuccess = lazy(() => import("./pages/PurchaseSuccess"));
 const ExclusiveContentDetail = lazy(() => import("./pages/ExclusiveContentDetail"));
@@ -27,8 +25,37 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const SmsAlerts = lazy(() => import("./pages/SmsAlerts"));
 
-// ───── Lazy: rarely-hit and gated routes ─────
+// ───── Lazy: admin, editors, and rarely-hit gated routes ─────
+const Admin = lazy(() => import("./pages/Admin"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const AdminQA = lazy(() => import("./pages/AdminQA"));
+const AdminLinks = lazy(() => import("./pages/AdminLinks"));
+const AdminBooks = lazy(() => import("./pages/AdminBooks"));
+const AdminCanonArchive = lazy(() => import("./pages/AdminCanonArchive"));
+const AdminReports = lazy(() => import("./pages/AdminReports"));
+const AdminCommandCenter = lazy(() => import("./pages/AdminCommandCenter"));
+const AdminStripeAnalytics = lazy(() => import("./pages/AdminStripeAnalytics"));
+const AdminEmailTemplates = lazy(() => import("./pages/AdminEmailTemplates"));
+const AdminAffiliateAnalytics = lazy(() => import("./pages/AdminAffiliateAnalytics"));
+const AdminPartnerApplications = lazy(() => import("./pages/AdminPartnerApplications"));
+const AdminSocialMediaKit = lazy(() => import("./pages/AdminSocialMediaKit"));
+const AdminSwitchy = lazy(() => import("./pages/AdminSwitchy"));
+const AdminAudioGenerator = lazy(() => import("./pages/AdminAudioGenerator"));
+const AdminWebhooks = lazy(() => import("./pages/AdminWebhooks"));
+const AdminTwilio = lazy(() => import("./pages/AdminTwilio"));
+const AdminSmsAnalytics = lazy(() => import("./pages/AdminSmsAnalytics"));
+const AdminAIUsage = lazy(() => import("./pages/AdminAIUsage"));
+const ExclusiveContentManager = lazy(() => import("./pages/ExclusiveContentManager"));
 const StaySubscribed = lazy(() => import("./pages/StaySubscribed"));
+const AdminAIStudio = lazy(() => import("./pages/AdminAIStudio"));
+const WritingStudio = lazy(() => import("./pages/WritingStudio"));
+const BlogEditor = lazy(() => import("./pages/BlogEditor"));
+const NewsletterManager = lazy(() =>
+  import("./pages/NewsletterManager").then(m => ({ default: m.NewsletterManager })),
+);
+const NewsletterEditor = lazy(() =>
+  import("./pages/NewsletterEditor").then(m => ({ default: m.NewsletterEditor })),
+);
 const CharacterQuiz = lazy(() => import("./pages/CharacterQuiz"));
 const WhyBuyDirectPage = lazy(() => import("./pages/WhyBuyDirectPage"));
 const Profile = lazy(() => import("./pages/Profile"));
@@ -147,9 +174,32 @@ function Router() {
         <Route path={"/contact"} component={Contact} />
         <Route path={"/blog"} component={Blog} />
         <Route path={"/blog/:slug"} component={BlogPost} />
-        {/* Every /admin/* route lives in the admin-only AdminRoutes chunk (sealed from the public CDN). */}
-        <Route path={"/admin"}><AdminRoute><AdminRoutes /></AdminRoute></Route>
-        <Route path={"/admin/*"}><AdminRoute><AdminRoutes /></AdminRoute></Route>
+        <Route path={"/admin"}><AdminRoute><Admin /></AdminRoute></Route>
+        <Route path={"/admin/dashboard"}><AdminRoute><AdminDashboard /></AdminRoute></Route>
+        <Route path={"/admin/qa"}><AdminRoute><AdminQA /></AdminRoute></Route>
+        <Route path={"/admin/links"}><AdminRoute><AdminLinks /></AdminRoute></Route>
+        <Route path={"/admin/books"}><AdminRoute><AdminBooks /></AdminRoute></Route>
+        <Route path={"/admin/canon-archive"}><AdminRoute><AdminCanonArchive /></AdminRoute></Route>
+        <Route path={"/admin/reports"}><AdminRoute><AdminReports /></AdminRoute></Route>
+        <Route path={"/admin/command-center"}><AdminRoute><AdminCommandCenter /></AdminRoute></Route>
+        <Route path={"/admin/stripe-analytics"}><AdminRoute><AdminStripeAnalytics /></AdminRoute></Route>
+        <Route path={"/admin/email-templates"}><AdminRoute><AdminEmailTemplates /></AdminRoute></Route>
+        <Route path={"/admin/ai-usage"}><AdminRoute><AdminAIUsage /></AdminRoute></Route>
+        <Route path={"/admin/exclusive-content"}><AdminRoute><ExclusiveContentManager /></AdminRoute></Route>
+        <Route path={"/admin/affiliate-analytics"}><AdminRoute><AdminAffiliateAnalytics /></AdminRoute></Route>
+        <Route path={"/admin/partner-applications"}><AdminRoute><AdminPartnerApplications /></AdminRoute></Route>
+        <Route path={"/admin/social-media-kit"}><AdminRoute><AdminSocialMediaKit /></AdminRoute></Route>
+        <Route path={"/admin/switchy"}><AdminRoute><AdminSwitchy /></AdminRoute></Route>
+        <Route path={"/admin/audio"}><AdminRoute><AdminAudioGenerator /></AdminRoute></Route>
+        <Route path={"/admin/webhooks"}><AdminRoute><AdminWebhooks /></AdminRoute></Route>
+        <Route path={"/admin/twilio"}><AdminRoute><AdminTwilio /></AdminRoute></Route>
+        <Route path={"/admin/sms-analytics"}><AdminRoute><AdminSmsAnalytics /></AdminRoute></Route>
+        <Route path={"/admin/ai-studio"}><AdminRoute><AdminAIStudio /></AdminRoute></Route>
+        <Route path={"/admin/writing-studio"}><AdminRoute><WritingStudio /></AdminRoute></Route>
+        <Route path={"/admin/blog/new"}><AdminRoute><BlogEditor /></AdminRoute></Route>
+        <Route path={"/admin/blog/edit/:id"}><AdminRoute><BlogEditor /></AdminRoute></Route>
+        <Route path={"/admin/newsletters"}><AdminRoute><NewsletterManager /></AdminRoute></Route>
+        <Route path={"/admin/newsletter/:id"}><AdminRoute><NewsletterEditor /></AdminRoute></Route>
         <Route path={"/privacy"} component={Privacy} />
         <Route path={"/terms"} component={Terms} />
         <Route path={"/sms"} component={SmsAlerts} />

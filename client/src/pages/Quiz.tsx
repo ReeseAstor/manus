@@ -51,18 +51,18 @@ const quizQuestions: QuizQuestion[] = [
     id: 4,
     question: "Pick a movie that makes your heart race",
     options: [
-      { text: "The Proposal: love born from rivalry", trope: "enemies", emoji: "🎬" },
-      { text: "Atonement: love that defies the rules", trope: "forbidden", emoji: "🎭" },
-      { text: "The Notebook: love that finds its way back", trope: "second-chance", emoji: "📓" },
-      { text: "Fifty Shades: power, control, surrender", trope: "boss", emoji: "🖤" },
+      { text: "The Proposal — love born from rivalry", trope: "enemies", emoji: "🎬" },
+      { text: "Atonement — love that defies the rules", trope: "forbidden", emoji: "🎭" },
+      { text: "The Notebook — love that finds its way back", trope: "second-chance", emoji: "📓" },
+      { text: "Fifty Shades — power, control, surrender", trope: "boss", emoji: "🖤" },
     ],
   },
   {
     id: 5,
     question: "How do you handle conflict?",
     options: [
-      { text: "I fight back. The tension is half the fun", trope: "enemies", emoji: "⚡" },
-      { text: "I keep it hidden. Some battles are private", trope: "forbidden", emoji: "🤫" },
+      { text: "I fight back — the tension is half the fun", trope: "enemies", emoji: "⚡" },
+      { text: "I keep it hidden — some battles are private", trope: "forbidden", emoji: "🤫" },
       { text: "I reflect on what went wrong and try again", trope: "second-chance", emoji: "🪞" },
       { text: "I take charge and find the solution", trope: "boss", emoji: "👑" },
     ],
@@ -108,7 +108,7 @@ export const tropeResults: Record<string, TropeResult> = {
     title: "Enemies-to-Lovers",
     subtitle: "You thrive on tension",
     description:
-      "You're drawn to the electric spark between two people who can't stand each other, until they can't resist each other. The banter, the tension, the moment when hate melts into something far more dangerous... that's your sweet spot. You believe the best love stories start with a fight.",
+      "You're drawn to the electric spark between two people who can't stand each other — until they can't resist each other. The banter, the tension, the moment when hate melts into something far more dangerous... that's your sweet spot. You believe the best love stories start with a fight.",
     bookTitle: "Hostile Tender",
     bookSubtitle: "Hudson Dynasty Book 1",
     bookLink: "https://www.amazon.com/dp/B0H1F9PV97",
@@ -134,7 +134,7 @@ export const tropeResults: Record<string, TropeResult> = {
     title: "Secret Baby / Second Chance",
     subtitle: "Love always finds its way back",
     description:
-      "You believe in fate, in the loves that come back around stronger, and in the secrets that change everything. There's something irresistible about unfinished business, about two people who were torn apart finding their way back to each other. You know that sometimes the best love stories have a plot twist.",
+      "You believe in fate — in the loves that come back around stronger, and in the secrets that change everything. There's something irresistible about unfinished business, about two people who were torn apart finding their way back to each other. You know that sometimes the best love stories have a plot twist.",
     bookTitle: "The Billionaire's Baby Secret",
     bookSubtitle: "Manhattan Money Kings Book 3",
     bookLink: "https://www.amazon.com/dp/B0G12LBZ24",
@@ -287,7 +287,7 @@ export default function Quiz() {
             What's Your <span className="text-[#7A4F4C]">Romance Trope</span>?
           </h1>
           <p className="text-lg text-[#6E5F5A] max-w-2xl mx-auto">
-            Answer 7 quick questions to discover which romance trope matches your personality, plus get a personalized book recommendation.
+            Answer 7 quick questions to discover which romance trope matches your personality — plus get a personalized book recommendation.
           </p>
         </motion.div>
 
@@ -377,7 +377,7 @@ export default function Quiz() {
                     We've identified your romance trope personality.
                   </p>
                   <p className="text-[#6E5F5A] mb-8">
-                    Enter your email to reveal your result and get a <span className="text-[#7A4F4C] font-semibold">romance novel matched to your trope</span>, free when you join my newsletter.
+                    Enter your email to reveal your result and get a <span className="text-[#7A4F4C] font-semibold">free romance novel</span> matched to your trope.
                   </p>
 
                   <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
@@ -422,7 +422,7 @@ export default function Quiz() {
                   </form>
 
                   <p className="text-xs text-[#6E5F5A] mt-6">
-                    You'll also get a link to the prequel, free when you join my newsletter. No spam, ever. Unsubscribe anytime.
+                    You'll also get a link to the free prequel. No spam, ever. Unsubscribe anytime.
                   </p>
                 </div>
               </motion.div>
@@ -476,7 +476,7 @@ export default function Quiz() {
                           <span className="text-sm text-[#6E5F5A] ml-2">Manhattan Money Kings</span>
                         </div>
                         <p className="text-[#6E5F5A] mb-6 leading-relaxed">
-                          Based on your quiz results, this book from the Manhattan Money Kings series is your perfect match. Your copy is being delivered to your inbox now!
+                          Based on your quiz results, this book from the Manhattan Money Kings series is your perfect match. A free copy is being delivered to your inbox now!
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
                           <Button
@@ -484,7 +484,7 @@ export default function Quiz() {
                             className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-6 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                           >
                             <BookOpen className="mr-2 h-5 w-5" />
-                            Get Your Copy
+                            Get Your Free Book
                           </Button>
                           <Button
                             onClick={() => window.open(withAmazonTag(result.bookLink), "_blank")}

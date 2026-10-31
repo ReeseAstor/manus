@@ -328,7 +328,7 @@ export default function Contact() {
               Looking for something specific?
             </h2>
             <p className="text-xl text-[#6E5F5A] mb-8">
-              Browse the books, or get The First Acquisition, free when you join my newsletter.
+              Browse the books, or grab your free copy of The First Acquisition.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -344,7 +344,7 @@ export default function Contact() {
                 variant="outline"
                 className="border-2 border-[#4A3B3A]/20 bg-[#EBD6D3]/30 hover:bg-[#EBD6D3]/60 text-[#4A3B3A] font-semibold px-10 py-7 rounded-full"
               >
-                <a href="/free-book">Get the Prequel</a>
+                <a href="/free-book">Get Free Book</a>
               </Button>
             </div>
           </motion.div>
