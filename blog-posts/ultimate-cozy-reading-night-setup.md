@@ -24,7 +24,7 @@ Warm light only after sunset. Trust me on this one. Your eyes and your sleep cyc
 
 ## The Device: Kindle or Physical Book
 
-Both get a home in my routine. For ebooks, especially advance copies and NetGalley arcs, I read on the [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20). The glare-free 7" display, weeks of battery life, and waterproof design make it perfect for bath-time reading without anxiety. If you're a heavy reader and don't have one yet, this is the upgrade that will genuinely change your reading life.
+Both get a home in my routine. For ebooks, especially advance copies and NetGalley arcs, I read on the [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20). The no-glare 7" display, weeks of battery life, and waterproof design make it perfect for bath-time reading without anxiety. If you're a heavy reader and don't have one yet, this is the upgrade that will genuinely change your reading life.
 
 For paperbacks, the cozy setup works even better: physical books want candlelight, a blanket, and zero clocks in sight.
 

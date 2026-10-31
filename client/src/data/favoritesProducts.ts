@@ -29,7 +29,7 @@ export const favoritesCategories: ProductCategory[] = [
       {
         name: "Kindle Paperwhite (7\" Display, Latest Model)",
         affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20",
-        description: "The fastest Kindle ever with a glare-free 7\" display, weeks of battery life, and waterproof design. Adjustable warm light for comfortable reading day or night.",
+        description: "The fastest Kindle ever with a no-glare 7\" display, weeks of battery life, and waterproof design. Adjustable warm light for comfortable reading day or night.",
         whyRecommend: "This is the one device that genuinely changed my reading life. I read 3x more books after switching to Kindle.",
         priceRange: "Around $150",
         rating: 4.7,

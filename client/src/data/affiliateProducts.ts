@@ -17,7 +17,7 @@ export const affiliateProductsBySlug: Record<string, {
       {
         name: "Kindle Paperwhite (7\" Display, Latest Model)",
         affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20",
-        description: "The fastest Kindle ever with a glare-free 7\" display, weeks of battery life, and waterproof design. Perfect for bath-time reading without anxiety.",
+        description: "The fastest Kindle ever with a no-glare 7\" display, weeks of battery life, and waterproof design. Perfect for bath-time reading without anxiety.",
         whyRecommend: "If you're a heavy reader and don't have one yet, this is the upgrade that will genuinely change your reading life.",
         priceRange: "Around $150",
         rating: 4.7,
@@ -167,7 +167,7 @@ export const affiliateProductsBySlug: Record<string, {
       {
         name: "Kindle Paperwhite (7\" Display, Latest Model)",
         affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20",
-        description: "The ultimate gift for any serious reader. Glare-free 7\" display, weeks of battery life, waterproof design, and adjustable warm light for comfortable reading day or night.",
+        description: "The ultimate gift for any serious reader. No-glare 7\" display, weeks of battery life, waterproof design, and adjustable warm light for comfortable reading day or night.",
         whyRecommend: "Every book they download after this becomes part of your gift. It's the one upgrade that genuinely changes a reader's life.",
         priceRange: "Around $150",
         rating: 4.7,
