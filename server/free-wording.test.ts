@@ -56,6 +56,17 @@ describe("free wording (newsletter-only prequels)", () => {
     expect(pre).toMatch(/name="twitter:description" content="\$\{esc\(desc\)\}"/);
   });
 
+  it("SEO title/description on the offer pages fit the SPA limits (60/160), so truncation never drops 'newsletter'", () => {
+    for (const f of ["Home", "FreeBook", "Newsletter", "ReaderClub"]) {
+      const src = fs.readFileSync(path.join(root, `client/src/pages/${f}.tsx`), "utf8");
+      for (const m of src.matchAll(/\n\s+title="([^"]*)"/g)) expect(m[1].length, `${f} title: ${m[1]}`).toBeLessThanOrEqual(60);
+      for (const m of src.matchAll(/\n\s+description="([^"]*)"/g)) expect(m[1].length, `${f} description: ${m[1]}`).toBeLessThanOrEqual(160);
+    }
+    const seo = fs.readFileSync(path.join(root, "client/src/components/ui/enhanced-seo-head.tsx"), "utf8");
+    expect(seo).toContain("title.length > 60");
+    expect(seo).toContain("description.length > 160");
+  });
+
   it("the prerender fails the build on a bare 'free' in any page or llms.txt", () => {
     const pre = fs.readFileSync(path.join(root, "scripts/prerender-static.mjs"), "utf8");
     expect(pre).toMatch(/function write\(route, html\) \{\s*assertNoBareFree\(route, html\);/);

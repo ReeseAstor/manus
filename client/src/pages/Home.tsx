@@ -238,7 +238,7 @@ export default function Home() {
     >
       <EnhancedSEOHead
         title="Reese Astor | Steamy Billionaire Romance"
-        description="Steamy billionaire romance from Reese Astor. Start with The First Acquisition (Hudson Dynasty) or The Billionaire's One Night Stand, each free when you join my newsletter."
+        description="Start with The First Acquisition or The Billionaire's One Night Stand, each free when you join my newsletter. Steamy billionaire romance by Reese Astor."
         canonical="/"
         keywords={[
           "billionaire romance prequel",

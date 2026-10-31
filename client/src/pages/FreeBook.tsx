@@ -10,7 +10,7 @@ import { EnhancedSEOHead, generateBookSchema } from "@/components/ui/enhanced-se
 
 export default function FreeBook() {
   useEffect(() => {
-    document.title = "The First Acquisition: Free When You Join My Newsletter | Reese Astor";
+    document.title = "The First Acquisition: Free With My Newsletter | Reese Astor";
   }, []);
 
   const [email, setEmail] = useState("");
@@ -84,7 +84,7 @@ export default function FreeBook() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7]" style={{ overflowX: "clip" }}>
       <EnhancedSEOHead
-        title="The First Acquisition: Free When You Join My Newsletter | Reese Astor"
+        title="The First Acquisition: Free With My Newsletter | Reese Astor"
         description="Start the Hudson Dynasty with The First Acquisition, free when you join my newsletter."
         canonical="/free-book"
         ogType="book"

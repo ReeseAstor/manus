@@ -23,14 +23,14 @@ import { pinPost } from '@/lib/pin-post';
  */
 export default function Newsletter() {
   useEffect(() => {
-    document.title = "Join Reese Astor's Newsletter | Free Prequel & New Release Alerts";
+    document.title = "Reese Astor's Newsletter | Free Prequel & Release Alerts";
   }, []);
 
   // ─── Main Page ──────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7] relative overflow-hidden">
       <EnhancedSEOHead
-        title="Join Reese Astor's Newsletter | Free Prequel & New Release Alerts"
+        title="Reese Astor's Newsletter | Free Prequel & Release Alerts"
         description="Get The First Acquisition free when you join Reese Astor's newsletter, plus bonus scenes, early cover reveals, ARC invitations, and new release alerts."
         canonical="/newsletter"
         keywords={["romance newsletter", "Reese Astor newsletter", "Hudson Dynasty prequel", "book release alerts", "bonus scenes", "reader newsletter"]}
