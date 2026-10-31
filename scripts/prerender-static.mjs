@@ -122,9 +122,9 @@ function renderPage({ route, title, description, ogType = "website", image, sche
 
 // QA rule 2026-10-30: the newsletter prequels are free only when you join the newsletter.
 const { bareFreeClaims } = await import(pathToFileURL(path.join(root, "scripts/lib/free-wording-guard.mjs")).href);
-function assertNoBareFree(where, text) {
-  const hits = bareFreeClaims(text, { kind: "html" });
-  if (hits.length) throw new Error(`[prerender] bare "free" near a newsletter prequel in ${where}: ${hits.map((h) => JSON.stringify(h.sentence)).join("; ")}`);
+function assertNoBareFree(where, text, { kind = "html" } = {}) {
+  const hits = bareFreeClaims(text, { kind });
+  if (hits.length) throw new Error(`[prerender] 'free' without "join … newsletter" in ${where}: ${hits.map((h) => `${JSON.stringify(h.sentence)} (${h.near})`).join("; ")}`);
 }
 
 function write(route, html) {
@@ -389,7 +389,7 @@ const llms = [
   ...blogPosts.slice(0, 30).map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug})`),
   "",
 ].join("\n");
-assertNoBareFree("llms.txt", llms);
+assertNoBareFree("llms.txt", llms, { kind: "markdown" });
 fs.writeFileSync(path.join(publicDir, "llms.txt"), llms);
 
 fs.rmSync(tmpDir, { recursive: true, force: true });
