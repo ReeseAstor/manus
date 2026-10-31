@@ -19,6 +19,11 @@ Covers every <loc> in BASE/sitemap.xml (rewritten onto BASE), routes-extra.txt, 
        excerpt quoted from the published text: only [data-book-excerpt], and only on the two pages in
        EXCERPT_ROUTES, exactly one block each (QA D2); the marker anywhere else is itself a FAIL.
   Text files are checked as plain text: each line an element ('free' guard, dashes).
+  Age rule (QA R3, website scope): a number next to an age word ("five-year-old", "aged 5", "turns 16", "3rd grade") fails in
+    visible text (no-JS and SPA), title/meta description, text files and tRPC payloads (scripts/lib/age-number-guard.mjs).
+  tRPC payloads (QA G-8): every /api/trpc/ response the SPA receives is parsed and each string value is checked for dashes,
+    the age rule and the 'free' guard, so DB text that reaches the browser but is not shown (e.g. a post past the first page
+    of /blog) still fails. Each payload finding is reported once (first route that received it).
 Fails closed: Chromium not launching, a route not loading or timing out, an HTTP error, a guard error, or a page
 with no text is a FAIL, never a skip. Third-party embed text (the MailerLite form) counts as visible text; its
 hits are tagged [embed] so they can be routed to the asset owner, but they still FAIL.
@@ -201,6 +206,41 @@ EXTRACT = r"""(LINE) => {
 # QA D2: the dash exemption marker may sit only on these two quoted excerpts, one block each.
 EXCERPT_ROUTES = {"/read/poison-pill", "/read/the-billionaires-one-night-stand"}
 
+DASH_RE = re.compile("\u2014|\\s\u2013\\s")
+def plain_text(html):
+    t = re.sub(r"(?is)<(head|script|style|noscript|template)\b.*?</\1>", " ", html or "")
+    t = re.sub(r"<[^>]+>", " ", t).replace("&nbsp;", " ")
+    return re.sub(r"\s+", " ", t)
+def walk_strings(v, path="$"):
+    if isinstance(v, str): yield path, v
+    elif isinstance(v, list):
+        for i, x in enumerate(v): yield from walk_strings(x, f"{path}[{i}]")
+    elif isinstance(v, dict):
+        for k, x in v.items(): yield from walk_strings(x, f"{path}.{k}")
+payload_seen = set(); payload_stats = {"responses": 0, "strings": 0}
+def check_payloads(route, label, responses, g):
+    for r in responses:
+        try:
+            body = r.text()
+        except Exception as e:
+            fail(route, f"[{label}] tRPC payload unreadable (fail closed): {r.url[:120]} {str(e)[:80]}"); continue
+        payload_stats["responses"] += 1
+        try: data = json.loads(body)
+        except Exception: fail(route, f"[{label}] tRPC payload is not JSON (fail closed): {r.url[:120]}"); continue
+        proc = re.sub(r"\?.*$", "", r.url.split("/api/trpc/", 1)[1])[:80]
+        for path, sv in walk_strings(data):
+            payload_stats["strings"] += 1
+            if len(sv) < 3 or (sv.startswith(("http://", "https://", "/")) and " " not in sv): continue
+            finds = []
+            if DASH_RE.search(sv): finds.append(f"dash :: {sv[max(0, DASH_RE.search(sv).start() - 80):DASH_RE.search(sv).end() + 80]}")
+            for h in g.ask(op="age", text=sv): finds.append(f"age number '{h['match']}' :: {h['context']}")
+            for h in g.ask(op="free", src=sv, kind="markdown"): finds.append(f"free: {h['near']} :: {h['sentence']}")
+            for f_ in finds:
+                key = (proc, path, f_)
+                if key in payload_seen: continue
+                payload_seen.add(key)
+                fail(route, f"[{label}] [tRPC payload {proc} {path}] {f_[:240]}")
+
 def books_slug(route):
     m = re.search(r"/books/([a-z0-9-]+)(?:\.html|/)?$", route.split("?")[0])
     return m.group(1) if m else None
@@ -267,12 +307,18 @@ def main():
         # 2) and 3) rendered without and with JavaScript
         for label, ctx in (("no-JS", ctx_nojs), ("SPA", ctx_js)):
             pg = ctx.new_page()
+            trpc = []
+            if label == "SPA": pg.on("response", lambda r: trpc.append(r) if "/api/trpc/" in r.url else None)
             try:
                 pg.goto(base + route, wait_until="networkidle" if label == "SPA" else "load", timeout=NAV_TIMEOUT_MS)
                 if label == "SPA": pg.wait_for_timeout(2500)
                 x = pg.evaluate(EXTRACT, LINE)
             except Exception as e:
                 fail(route, f"[{label}] render failed or timed out (fail closed): {str(e)[:200]}"); pg.close(); continue
+            if label == "SPA":
+                rep.setdefault("trpc", [r.url.split("/api/trpc/", 1)[1][:120] for r in trpc])
+                try: check_payloads(route, label, trpc, g)
+                except Exception as e: fail(route, f"[{label}] tRPC payload check error (fail closed): {e}")
             pg.close()
             if label == "SPA" and x["textLen"] >= 40: rendered_ok += 1
             rep[label] = {"textLen": x["textLen"], "title": x["title"], "dashes": x["dashes"], "embed": x["embed"][:20], "pseudo": x["pseudo"][:20]}
@@ -282,6 +328,8 @@ def main():
                 if x["pseudo"]:
                     for h in g.ask(op="free", src="".join(f"<p>{p}</p>" for p in x["pseudo"]), kind="html"): fail(route, f"[{label}] free (::before/::after): {h['sentence']}")
                 for d in x["dashes"]: fail(route, f"[{label}] dash in visible text :: {d}")
+                for h in g.ask(op="age", text=plain_text(x["full"]) + " \n " + (x["title"] or "") + " \n " + (x["metaDescription"] or "")):
+                    fail(route, f"[{label}] age number '{h['match']}' :: {h['context']}")
                 want = 1 if route.rstrip("/").removesuffix("/index.html") in EXCERPT_ROUTES else 0
                 if x["excerptMarks"] != want: fail(route, f"[{label}] [data-book-excerpt] blocks: {x['excerptMarks']} (allowed here: {want}; QA D2)")
                 for d in (x["title"], x["metaDescription"]):
@@ -314,6 +362,7 @@ def main():
             for h in g.ask(op="free", src=body, kind="markdown"): fail(t, f"[text] free: {h['near']} :: {h['sentence']}")
             for k, l in enumerate(body.split("\n")):
                 if re.search("\u2014|\\s\u2013\\s", l): fail(t, f"[text] dash on line {k + 1} :: {l.strip()[:160]}")
+            for h in g.ask(op="age", text=body): fail(t, f"[text] age number '{h['match']}' :: {h['context']}")
             print(f"checked {t} ({len(body)} bytes)")
         except Exception as e:
             fail(t, f"read error (fail closed): {e}")
@@ -323,6 +372,7 @@ def main():
     if transport["reads"] and transport["reads_retried"] > TRANSPORT_UNSTABLE_SHARE * transport["reads"]:
         fail("(transport)", f"transport unstable: {transport['reads_retried']} of {transport['reads']} raw reads needed a retry (over {int(TRANSPORT_UNSTABLE_SHARE * 100)}%)")
     json.dump({"base": base, "started": started, "routes": routes, "text_files": txt, "fails": fails, "pages": report}, open(os.path.join(out, "rendered-check.json"), "w"), indent=1, ensure_ascii=False)
+    print(f"tRPC payloads scanned: {payload_stats['responses']} responses, {payload_stats['strings']} string values")
     print(f"pages planned {len(routes)}, rendered with text {rendered_ok}, floor {floor}")
     print(f"summary: {len(routes)} pages x (raw, no-JS, SPA) + {len(txt)} text files, {len(fails)} failures")
     verdict_lines(len(fails))
