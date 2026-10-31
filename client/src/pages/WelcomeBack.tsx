@@ -129,7 +129,7 @@ export default function WelcomeBack() {
               </span>
             </Link>
             <p style={{ margin: "24px 0 0", color: "#6E5F5A", fontSize: 14, fontFamily: "Arial, sans-serif" }}>
-              Or get the prequel, free with my newsletter:{" "}
+              Or get the prequel, free when you join my newsletter:{" "}
               <a href="https://dl.bookfunnel.com/kw1yge3479" style={{ color: "#7A4F4C" }}>The First Acquisition</a>
             </p>
           </>

@@ -64,7 +64,7 @@ const LEAD_MAGNETS: LeadMagnet[] = [
   {
     id: "first-acquisition",
     series: "Hudson Dynasty",
-    offer: "Free with my newsletter",
+    offer: "Free when you join my newsletter",
     title: "The First Acquisition",
     description:
       "A darker corporate romance prequel with fake engagement tension, forensic scandal, boardroom warfare, a media firestorm, and a morally gray billionaire hero.",
@@ -81,7 +81,7 @@ const LEAD_MAGNETS: LeadMagnet[] = [
   {
     id: "one-night-stand",
     series: "Manhattan Money Kings",
-    offer: "Free with my newsletter",
+    offer: "Free when you join my newsletter",
     title: "The Billionaire’s One Night Stand",
     description:
       "A high-heat billionaire romance novella about one dangerous night, professional ambition, betrayal, and a desire neither of them can control.",
@@ -519,7 +519,7 @@ export default function Home() {
                                     borderRadius: 0,
                                   }}
                                 >
-                                Free with newsletter <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                                Free when you join my newsletter <ArrowRight className="h-3 w-3" aria-hidden="true" />
                               </a>
                             )}
                           </span>

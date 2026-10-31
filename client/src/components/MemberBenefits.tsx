@@ -124,7 +124,7 @@ export function MemberBenefits() {
               </h3>
               <ul className="space-y-4">
                 {[
-                  "The First Acquisition, free with my newsletter",
+                  "The First Acquisition, free when you join my newsletter",
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-[#4A3B3A]">
                     <div className="w-5 h-5 rounded-full bg-[#4A3B3A] flex items-center justify-center">

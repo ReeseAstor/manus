@@ -23,14 +23,14 @@ import { pinPost } from '@/lib/pin-post';
  */
 export default function Newsletter() {
   useEffect(() => {
-    document.title = "Reese Astor's Newsletter | Free Prequel & Release Alerts";
+    document.title = "Reese Astor's Newsletter | Prequel & Release Alerts";
   }, []);
 
   // ─── Main Page ──────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7] relative overflow-hidden">
       <EnhancedSEOHead
-        title="Reese Astor's Newsletter | Free Prequel & Release Alerts"
+        title="Reese Astor's Newsletter | Prequel & Release Alerts"
         description="Get The First Acquisition free when you join Reese Astor's newsletter, plus bonus scenes, early cover reveals, ARC invitations, and new release alerts."
         canonical="/newsletter"
         keywords={["romance newsletter", "Reese Astor newsletter", "Hudson Dynasty prequel", "book release alerts", "bonus scenes", "reader newsletter"]}
@@ -101,7 +101,7 @@ export default function Newsletter() {
                       className="relative w-20 h-28 object-cover rounded-lg shadow-xl"
                     />
                     <div className="absolute -top-2 -right-2 bg-[#4A3B3A] text-[#FAF7F7] text-[10px] font-bold px-2 py-0.5 rounded-full font-['Cormorant_Garamond']">
-                      Free with newsletter
+                      Free when you join my newsletter
                     </div>
                   </div>
                   <div>
@@ -274,7 +274,7 @@ export default function Newsletter() {
                 Don't Miss Out
               </h2>
               <p className="text-[#6E5F5A] font-['Cormorant_Garamond'] mb-8 max-w-lg mx-auto">
-                Join readers who get new-release news and The First Acquisition, free with my newsletter. About two emails a month, no spam.
+                Join readers who get new-release news and The First Acquisition, free when you join my newsletter. About two emails a month, no spam.
               </p>
 
               {/* MailerLite embedded form (k0kQw5) */}

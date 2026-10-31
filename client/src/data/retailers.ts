@@ -59,7 +59,7 @@ export const RETAILERS: Record<RetailerKey, RetailerMeta> = {
   },
   bookfunnel: {
     key: "bookfunnel",
-    label: "Free with my newsletter",
+    label: "Free when you join my newsletter",
     order: 70,
   },
 };

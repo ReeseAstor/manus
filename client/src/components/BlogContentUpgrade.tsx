@@ -48,7 +48,7 @@ const contentUpgrades: Record<string, ContentUpgrade> = {
   },
   "how-to-start-romance-book-club": {
     slug: "how-to-start-romance-book-club",
-    title: "Book Club Discussion Guide, Free With My Newsletter",
+    title: "Book Club Discussion Guide, Free When You Join My Newsletter",
     description:
       "Download the complete discussion guide for The First Acquisition — 25 questions, character analysis prompts, and wine pairing suggestions.",
     ctaText: "Get the Guide",

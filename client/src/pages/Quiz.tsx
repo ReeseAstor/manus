@@ -422,7 +422,7 @@ export default function Quiz() {
                   </form>
 
                   <p className="text-xs text-[#6E5F5A] mt-6">
-                    You'll also get a link to the prequel, free with my newsletter. No spam, ever. Unsubscribe anytime.
+                    You'll also get a link to the prequel, free when you join my newsletter. No spam, ever. Unsubscribe anytime.
                   </p>
                 </div>
               </motion.div>

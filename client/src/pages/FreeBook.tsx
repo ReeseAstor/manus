@@ -10,7 +10,7 @@ import { EnhancedSEOHead, generateBookSchema } from "@/components/ui/enhanced-se
 
 export default function FreeBook() {
   useEffect(() => {
-    document.title = "The First Acquisition: Free With My Newsletter | Reese Astor";
+    document.title = "The First Acquisition: Free When You Join My Newsletter";
   }, []);
 
   const [email, setEmail] = useState("");
@@ -84,7 +84,7 @@ export default function FreeBook() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7]" style={{ overflowX: "clip" }}>
       <EnhancedSEOHead
-        title="The First Acquisition: Free With My Newsletter | Reese Astor"
+        title="The First Acquisition: Free When You Join My Newsletter"
         description="Start the Hudson Dynasty with The First Acquisition, free when you join my newsletter."
         canonical="/free-book"
         ogType="book"
@@ -122,7 +122,7 @@ export default function FreeBook() {
                 <div className="absolute -inset-12 bg-gradient-to-r from-[#C9A3A0]/30 to-transparent blur-3xl rounded-full" />
                 <div className="relative">
                   <div className="absolute -top-4 -right-2 md:-top-6 md:-right-6 z-10 px-6 py-3 md:px-8 md:py-4 rounded-full bg-[#4A3B3A] text-[#FAF7F7] font-bold text-xl shadow-2xl animate-pulse">
-                    Free with my newsletter
+                    Free when you join my newsletter
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 shadow-2xl">
                     <img

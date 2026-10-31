@@ -40,7 +40,7 @@ export default function NewReleaseSignup() {
   };
 
   const benefits = [
-    { icon: Gift, text: "The First Acquisition, free with my newsletter" },
+    { icon: Gift, text: "The First Acquisition, free when you join my newsletter" },
     { icon: Bell, text: "New release alerts before anyone else" },
     { icon: BookOpen, text: "Exclusive bonus chapters & epilogues" },
   ];

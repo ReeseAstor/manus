@@ -240,7 +240,7 @@ const simple = [
   },
   {
     route: "/free-book",
-    title: "The First Acquisition: Free With My Newsletter | Reese Astor",
+    title: "The First Acquisition: Free When You Join My Newsletter",
     description:
       "Start the Hudson Dynasty with The First Acquisition, free when you join my newsletter.",
     schemas: [],

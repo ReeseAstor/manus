@@ -83,7 +83,7 @@ export default function Shop() {
                       {book.position_label ? ` • ${book.position_label}` : ""}
                     </p>
                     {book.price_usd === 0 && (
-                      <p className="text-xl font-bold text-[#7A4F4C] mb-4">Free with my newsletter</p>
+                      <p className="text-xl font-bold text-[#7A4F4C] mb-4">Free when you join my newsletter</p>
                     )}
                     <RetailerButtons book={book} layout="stack" />
                   </div>
