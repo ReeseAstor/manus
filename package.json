@@ -13,7 +13,7 @@
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test:books-fallback": "vitest run server/books-fallback.test.ts",
+    "test:books-fallback": "vitest run server/books-fallback.test.ts server/free-wording.test.ts server/blog-facts.test.ts",
     "brand:sweep": "node scripts/brand-sweep-report.mjs --files",
     "db:push": "drizzle-kit generate && drizzle-kit migrate"
   },
