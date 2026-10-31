@@ -19,7 +19,7 @@ export function NewsletterPopup({ isOpen, onClose }: NewsletterPopupProps) {
 
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
-      toast.success("Success! Check your email for your download link.");
+      toast.success("Success! Check your email for your free book download link.");
       setEmail("");
       setName("");
       onClose();
@@ -104,15 +104,15 @@ export function NewsletterPopup({ isOpen, onClose }: NewsletterPopupProps) {
 
                   {/* Heading */}
                   <h2 className="text-[#7A4F4C] text-3xl md:text-4xl font-serif font-bold text-center mb-3">
-                    Get Your Copy
+                    Get Your Free Book
                   </h2>
 
                   <p className="text-[#4A3B3A]/80 text-center mb-6 text-base leading-relaxed">
                     Join my newsletter and receive{" "}
                     <span className="text-[#7A4F4C] font-semibold">
-                      The First Acquisition
+                      "The First Acquisition"
                     </span>{" "}
-                    free, plus insider news.
+                    absolutely free, plus insider writing tips.
                   </p>
 
                   {/* Form */}
@@ -151,7 +151,7 @@ export function NewsletterPopup({ isOpen, onClose }: NewsletterPopupProps) {
                       ) : (
                         <span className="flex items-center gap-2">
                           <Mail className="w-5 h-5" />
-                          Join & Get the Book
+                          Get My Free Book
                         </span>
                       )}
                     </Button>

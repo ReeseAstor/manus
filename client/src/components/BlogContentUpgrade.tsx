@@ -18,7 +18,7 @@ const contentUpgrades: Record<string, ContentUpgrade> = {
     slug: "ultimate-cozy-reading-night-setup",
     title: "Download the Cozy Reading Night Checklist",
     description:
-      "Get the complete printable checklist with everything you need for the perfect reading night, plus 5 bonus cozy drink recipes.",
+      "Get the complete printable checklist with everything you need for the perfect reading night — plus 5 bonus cozy drink recipes.",
     ctaText: "Send Me the Checklist",
     icon: "download",
   },
@@ -34,7 +34,7 @@ const contentUpgrades: Record<string, ContentUpgrade> = {
     slug: "5-tips-writing-steamy-scenes",
     title: "Free: My 10-Point Steamy Scene Checklist",
     description:
-      "The blog gives you 5 tips, but my private checklist covers all 10 elements that make a steamy scene unforgettable.",
+      "The blog gives you 5 tips — but my private checklist covers all 10 elements that make a steamy scene unforgettable.",
     ctaText: "Get the Checklist",
     icon: "sparkles",
   },
@@ -42,15 +42,15 @@ const contentUpgrades: Record<string, ContentUpgrade> = {
     slug: "behind-scenes-manhattan-money-kings",
     title: "Exclusive Character Profiles & Family Tree",
     description:
-      "Get the full character dossiers, family tree, and timeline of the Manhattan Money Kings world, including details that never made it into the books.",
+      "Get the full character dossiers, family tree, and timeline of the Manhattan Money Kings world — including details that never made it into the books.",
     ctaText: "Send Me the Profiles",
     icon: "sparkles",
   },
   "how-to-start-romance-book-club": {
     slug: "how-to-start-romance-book-club",
-    title: "Book Club Discussion Guide, Free When You Join My Newsletter",
+    title: "Free Book Club Discussion Guide",
     description:
-      "Download the complete discussion guide for The First Acquisition: 25 questions, character analysis prompts, and wine pairing suggestions.",
+      "Download the complete discussion guide for The First Acquisition — 25 questions, character analysis prompts, and wine pairing suggestions.",
     ctaText: "Get the Guide",
     icon: "download",
   },
@@ -102,7 +102,7 @@ export function BlogContentUpgrade({ blogSlug }: BlogContentUpgradeProps) {
           <h3 className="font-serif text-xl font-bold text-[#4A3B3A]">You're In!</h3>
         </div>
         <p className="text-[#6E5F5A]">
-          Check your inbox. Your content upgrade is on its way. While you wait, why not explore the{" "}
+          Check your inbox — your content upgrade is on its way. While you wait, why not explore the{" "}
           <a href="/books" className="text-[#7A4F4C] hover:underline">
             Manhattan Money Kings series
           </a>
@@ -124,7 +124,7 @@ export function BlogContentUpgrade({ blogSlug }: BlogContentUpgradeProps) {
           </div>
           <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#C9A3A0]/10 border border-[#B59A6A]/20">
             <span className="text-xs text-[#7A4F4C] font-medium tracking-wider uppercase">
-              Bonus Content
+              Free Bonus Content
             </span>
           </div>
         </div>
@@ -151,7 +151,7 @@ export function BlogContentUpgrade({ blogSlug }: BlogContentUpgradeProps) {
         </form>
 
         <p className="text-xs text-[#6E5F5A] mt-3">
-          Plus a romance novel, free when you join my newsletter. No spam, ever. Unsubscribe anytime.
+          Plus a free romance novel. No spam, ever. Unsubscribe anytime.
         </p>
       </div>
     </div>

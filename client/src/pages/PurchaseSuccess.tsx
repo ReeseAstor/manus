@@ -106,7 +106,7 @@ export default function PurchaseSuccess() {
           >
             <Link href="/newsletter">
               <Button className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-8 py-6 rounded-xl">
-                Join My Newsletter &amp; Get the Prequel
+                Get the Free Book &amp; Updates
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>

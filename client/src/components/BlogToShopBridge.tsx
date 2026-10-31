@@ -23,7 +23,7 @@ const recommendations: Record<string, { title: string; tagline: string; bookSlug
   },
   "behind-the-scenes": {
     title: "Experience the Full Story",
-    tagline: "You've seen behind the curtain. Now experience the world of Manhattan's most powerful billionaires.",
+    tagline: "You've seen behind the curtain — now experience the world of Manhattan's most powerful billionaires.",
     bookSlug: "the-billionaire-s-executive-assistant",
     bookTitle: "The Billionaire's Executive Assistant",
   },

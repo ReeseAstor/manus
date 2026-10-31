@@ -478,7 +478,7 @@ export default function VipClub() {
                     "David's hand found the small of my back, his touch sending electricity through the silk of my dress. 'We shouldn't,' I whispered, even as I leaned into him. His gilded eyes darkened. 'Then tell me to stop.' But we both knew I wouldn't..."
                   </p>
                   <div className="mt-3 text-center">
-                    <span className="text-[#7A4F4C] text-xs font-semibold">Continues for members…</span>
+                    <span className="text-[#7A4F4C] text-xs font-semibold">— Continues for members —</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-[#6E5F5A]">
@@ -645,10 +645,10 @@ export default function VipClub() {
               <CardContent>
                 <div className="bg-[#FAF7F7]/50 p-4 rounded-lg border border-[#C9A3A0]/10 mb-4">
                   <p className="text-[#6E5F5A] text-sm italic leading-relaxed">
-                    "The office was silent except for the hum of my computer and the pounding of my heart. I didn't hear Michael approach until his shadow fell across my desk. 'You're still here,' he said, his voice rough with exhaustion, or something else entirely..."
+                    "The office was silent except for the hum of my computer and the pounding of my heart. I didn't hear Michael approach until his shadow fell across my desk. 'You're still here,' he said, his voice rough with exhaustion—or something else entirely..."
                   </p>
                   <div className="mt-3 text-center">
-                    <span className="text-[#7A4F4C] text-xs font-semibold">Continues for members…</span>
+                    <span className="text-[#7A4F4C] text-xs font-semibold">— Continues for members —</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-[#6E5F5A]">
@@ -680,10 +680,10 @@ export default function VipClub() {
               <CardContent>
                 <div className="bg-[#FAF7F7]/50 p-4 rounded-lg border border-[#C9A3A0]/10 mb-4">
                   <p className="text-[#6E5F5A] text-sm italic leading-relaxed">
-                    "The last person I expected to see at Kane Industries was Dominic Kane himself. Three years hadn't changed him: same intense dark eyes, same commanding presence that once made my knees weak. Still made them weak, apparently..."
+                    "The last person I expected to see at Kane Industries was Dominic Kane himself. Three years hadn't changed him—same intense dark eyes, same commanding presence that once made my knees weak. Still made them weak, apparently..."
                   </p>
                   <div className="mt-3 text-center">
-                    <span className="text-[#7A4F4C] text-xs font-semibold">Continues for members…</span>
+                    <span className="text-[#7A4F4C] text-xs font-semibold">— Continues for members —</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-[#6E5F5A]">
@@ -739,12 +739,12 @@ export default function VipClub() {
                     <DialogDescription className="text-[#6E5F5A]">Sarah & Michael • Manhattan Money Kings</DialogDescription>
                   </DialogHeader>
                   <div className="mt-6 space-y-4 text-[#6E5F5A] leading-relaxed">
-                    <p className="italic">The office was silent except for the hum of my computer and the pounding of my heart. I didn't hear Michael approach until his shadow fell across my desk. 'You're still here,' he said, his voice rough with exhaustion, or something else entirely.</p>
+                    <p className="italic">The office was silent except for the hum of my computer and the pounding of my heart. I didn't hear Michael approach until his shadow fell across my desk. 'You're still here,' he said, his voice rough with exhaustion—or something else entirely.</p>
                     <p>I looked up to find him standing there, tie loosened, shirt sleeves rolled up, looking more human than I'd ever seen him. More dangerous, too.</p>
                     <p>"The Redwood Project deadline is tomorrow," I managed, trying to ignore how my pulse quickened at his proximity. "I wanted to make sure everything was perfect."</p>
                     <p>"It already is." He moved closer, perching on the edge of my desk. "You're perfect, Sarah. Do you know that?"</p>
-                    <p>My breath caught. We'd been dancing around this for months: stolen glances, accidental touches, tension thick enough to cut. But we'd never crossed the line. Until now.</p>
-                    <p>"Mr. Hastings…" I started, but he cut me off with a look that made heat pool low in my belly.</p>
+                    <p>My breath caught. We'd been dancing around this for months—stolen glances, accidental touches, tension thick enough to cut. But we'd never crossed the line. Until now.</p>
+                    <p>"Mr. Hastings—" I started, but he cut me off with a look that made heat pool low in my belly.</p>
                     <p>"Michael," he corrected softly. "When we're alone like this, I want to hear you say my name."</p>
                     <p>"Michael," I whispered, and something in his eyes ignited. He reached out, tucking a strand of hair behind my ear, his fingers lingering against my cheek.</p>
                     <p>"I've been trying to be professional," he murmured. "Trying to keep my distance. But Sarah, I can't anymore. Tell me you feel this too."</p>
@@ -771,19 +771,19 @@ export default function VipClub() {
                     <DialogDescription className="text-[#6E5F5A]">Sophia & Dominic • Manhattan Money Kings</DialogDescription>
                   </DialogHeader>
                   <div className="mt-6 space-y-4 text-[#6E5F5A] leading-relaxed">
-                    <p className="italic">The last person I expected to see at Kane Industries was Dominic Kane himself. Three years hadn't changed him: same intense dark eyes, same commanding presence that once made my knees weak. Still made them weak, apparently.</p>
+                    <p className="italic">The last person I expected to see at Kane Industries was Dominic Kane himself. Three years hadn't changed him—same intense dark eyes, same commanding presence that once made my knees weak. Still made them weak, apparently.</p>
                     <p>"Sophia." My name on his lips sent a shiver down my spine. "I didn't know you were the candidate."</p>
                     <p>"Would it have mattered?" I kept my voice steady despite my racing heart. "You made it clear three years ago that we were a mistake."</p>
                     <p>His jaw tightened. "That's not what I said."</p>
                     <p>"You said we wanted different things. That your career came first. That I deserved someone who could give me more." The words still stung, even after all this time.</p>
                     <p>"And I was an idiot." He moved closer, and I backed up until I hit his desk. "I've regretted it every single day since."</p>
-                    <p>"Dominic…" I warned, but he was already there, caging me in with his arms on either side of me.</p>
+                    <p>"Dominic—" I warned, but he was already there, caging me in with his arms on either side of me.</p>
                     <p>"Tell me you haven't thought about us," he challenged, his voice low and dangerous. "Tell me you don't remember how good we were together."</p>
                     <p>I couldn't. Because I did remember. Every heated kiss, every whispered promise, every night tangled in his sheets. I remembered it all too well.</p>
                     <p>"That was a long time ago," I managed weakly.</p>
                     <p>"Then let me remind you." His hand cupped my face, thumb brushing my lower lip. "Unless you want me to stop?"</p>
                     <p>I should have said yes. Should have pushed him away. Instead, I grabbed his tie and pulled him down to me, our lips meeting in a kiss that was three years of longing and regret and desperate need all rolled into one.</p>
-                    <p>He groaned against my mouth, lifting me onto the desk and stepping between my thighs. His hands were everywhere: my hair, my waist, sliding up my thighs beneath my skirt. I arched into him, all rational thought abandoning me as his lips trailed down my neck.</p>
+                    <p>He groaned against my mouth, lifting me onto the desk and stepping between my thighs. His hands were everywhere—my hair, my waist, sliding up my thighs beneath my skirt. I arched into him, all rational thought abandoning me as his lips trailed down my neck.</p>
                     <div className="bg-[#7A4F4C]/30 border border-[#C9A3A0]/20 rounded-lg p-6 text-center">
                       <Lock className="w-12 h-12 text-[#7A4F4C] mx-auto mb-3" />
                       <p className="text-[#4A3B3A] font-semibold mb-2">Continue Reading</p>

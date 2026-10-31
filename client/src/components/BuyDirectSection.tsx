@@ -23,7 +23,7 @@ export function BuyDirectSection({
   isMember = false,
 }: BuyDirectSectionProps) {
   const formatPrice = (cents: number) => {
-    if (cents === 0) return "Free when you join my newsletter";
+    if (cents === 0) return "FREE";
     return `$${(cents / 100).toFixed(2)}`;
   };
 

@@ -23,17 +23,17 @@ import { pinPost } from '@/lib/pin-post';
  */
 export default function Newsletter() {
   useEffect(() => {
-    document.title = "Reese Astor's Newsletter | Prequel & Release Alerts";
+    document.title = "Join Reese Astor's Newsletter | Free Book & New Release Alerts";
   }, []);
 
   // ─── Main Page ──────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7] relative overflow-hidden">
       <EnhancedSEOHead
-        title="Reese Astor's Newsletter | Prequel & Release Alerts"
-        description="Get The First Acquisition free when you join Reese Astor's newsletter, plus bonus scenes, early cover reveals, ARC invitations, and new release alerts."
+        title="Join Reese Astor's Newsletter | Free Book & New Release Alerts"
+        description="Subscribe to Reese Astor's newsletter and get The First Acquisition free. Receive bonus scenes, early cover reveals, ARC invitations, and new release alerts."
         canonical="/newsletter"
-        keywords={["romance newsletter", "Reese Astor newsletter", "Hudson Dynasty prequel", "book release alerts", "bonus scenes", "reader newsletter"]}
+        keywords={["romance newsletter", "Reese Astor newsletter", "free romance book", "book release alerts", "bonus scenes", "reader newsletter"]}
       />
 
       {/* Ambient lighting effects */}
@@ -53,15 +53,15 @@ export default function Newsletter() {
               </div>
 
               <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl lg:text-6xl font-bold text-[#4A3B3A] mb-6 leading-[1.1]">
-                Get the Prequel
+                Get a Free Book
                 <span className="block text-[#7A4F4C] italic mt-2">
                   & Never Miss a Release
                 </span>
               </h1>
 
               <p className="text-lg text-[#6E5F5A] mb-8 font-['Cormorant_Garamond'] leading-relaxed max-w-lg">
-                Join the Hudson Dynasty inner circle.
-                <em className="text-[#7A4F4C]"> The First Acquisition</em> is free when you join my newsletter, 
+                Join the Hudson Dynasty inner circle. Get your free copy of 
+                <em className="text-[#7A4F4C]"> The First Acquisition</em>, 
                 plus new release alerts, bonus scenes, and early cover reveals delivered 
                 straight to your inbox.
               </p>
@@ -78,7 +78,7 @@ export default function Newsletter() {
                 </span>
                 <span className="flex items-center gap-2">
                   <Gift className="w-4 h-4 text-[#7A4F4C]/60" />
-                  Prequel arrives instantly
+                  Instant free book
                 </span>
               </div>
             </Reveal>
@@ -101,12 +101,12 @@ export default function Newsletter() {
                       className="relative w-20 h-28 object-cover rounded-lg shadow-xl"
                     />
                     <div className="absolute -top-2 -right-2 bg-[#4A3B3A] text-[#FAF7F7] text-[10px] font-bold px-2 py-0.5 rounded-full font-['Cormorant_Garamond']">
-                      Free when you join my newsletter
+                      FREE
                     </div>
                   </div>
                   <div>
                     <p className="text-[#7A4F4C] text-xs font-semibold font-['Cormorant_Garamond'] uppercase tracking-wider mb-1">
-                      Your newsletter welcome gift
+                      Your Free Gift
                     </p>
                     <h3 className="font-['Cormorant_Garamond'] text-lg font-bold text-[#4A3B3A] leading-tight">
                       The First Acquisition
@@ -122,8 +122,8 @@ export default function Newsletter() {
 
                 {/* Expectation setting — improves open rates & reduces spam complaints */}
                 <p className="text-xs text-[#6E5F5A] text-center font-['Cormorant_Garamond'] mt-4 leading-relaxed">
-                  Expect about <span className="text-[#7A4F4C]">a couple of emails a month</span>. Your
-                  book link arrives instantly. Check your inbox (and the promotions tab).
+                  Expect about <span className="text-[#7A4F4C]">a couple of emails a month</span>. Your free
+                  book link arrives instantly — check your inbox (and promotions tab).
                 </p>
 
                 {/* Explicit consent — GDPR / CAN-SPAM compliant */}
@@ -135,7 +135,7 @@ export default function Newsletter() {
                       Privacy Policy
                     </span>
                   </Link>
-                  . No spam, and you can unsubscribe in one click anytime.
+                  . No spam — unsubscribe in one click anytime.
                 </p>
               </GlassCard>
             </Reveal>
@@ -210,7 +210,7 @@ export default function Newsletter() {
               A Family Built on Acquisitions. A Ledger That Remembers Everything.
             </h2>
             <p className="text-[#6E5F5A] font-['Cormorant_Garamond'] max-w-2xl mx-auto">
-              Start with the Hudson Dynasty prequel, free when you join my newsletter, then read on with Hostile Tender, Poison Pill and Golden Parachute.
+              Start with the free Hudson Dynasty prequel, then read on with Hostile Tender, Poison Pill and Golden Parachute.
             </p>
           </Reveal>
 
@@ -220,7 +220,7 @@ export default function Newsletter() {
               .sort((x, y) => (x.series_position ?? 0) - (y.series_position ?? 0))
               .map((b) => ({
                 src: b.cover_image as string,
-                label: b.series_position === 0 ? "Newsletter prequel" : b.position_label,
+                label: b.series_position === 0 ? "FREE prequel" : b.position_label,
                 alt: b.title,
               }))
               .map((book, i) => (
@@ -274,7 +274,7 @@ export default function Newsletter() {
                 Don't Miss Out
               </h2>
               <p className="text-[#6E5F5A] font-['Cormorant_Garamond'] mb-8 max-w-lg mx-auto">
-                Join readers who get new-release news and The First Acquisition, free when you join my newsletter. About two emails a month, no spam.
+                Join readers who get new-release news and a free book — all delivered to their inbox. About two emails a month, no spam.
               </p>
 
               {/* MailerLite embedded form (k0kQw5) */}
@@ -285,7 +285,7 @@ export default function Newsletter() {
                 {/* Deliverability tip — boosts inbox placement & engagement */}
                 <p className="text-[11px] text-[#6E5F5A] text-center font-['Cormorant_Garamond'] mt-4 leading-relaxed max-w-md mx-auto">
                   Tip: add <span className="text-[#7A4F4C]">hello@reeseastor.com</span> to your
-                  contacts so your book never lands in spam. Unsubscribe anytime. See our{' '}
+                  contacts so your free book never lands in spam. Unsubscribe anytime — see our{' '}
                   <Link href="/privacy">
                     <span className="text-[#6E5F5A] underline underline-offset-2 hover:text-[#7A4F4C] cursor-pointer">
                       Privacy Policy

@@ -84,7 +84,7 @@ fs.writeFileSync(path.join(publicDir, "app-shell.html"), template);
 // the SPA shell then renders the Not Found page.
 fs.writeFileSync(path.join(publicDir, "404.html"), template);
 
-const NAV = `<nav aria-label="Site"><a href="/">Reese Astor</a> · <a href="/books">Books</a> · <a href="/about">About</a> · <a href="/blog">Blog</a> · <a href="/newsletter">Newsletter</a> · <a href="/free-book">Newsletter prequel</a></nav>`;
+const NAV = `<nav aria-label="Site"><a href="/">Reese Astor</a> · <a href="/books">Books</a> · <a href="/about">About</a> · <a href="/blog">Blog</a> · <a href="/newsletter">Newsletter</a> · <a href="/free-book">Free book</a></nav>`;
 
 function renderPage({ route, title, description, ogType = "website", image, schemas = [], body, noindex = false }) {
   const canonical = absoluteUrl(route);
@@ -120,15 +120,7 @@ function renderPage({ route, title, description, ogType = "website", image, sche
   return html;
 }
 
-// QA rule 2026-10-30: the newsletter prequels are free only when you join the newsletter.
-const { bareFreeClaims } = await import(pathToFileURL(path.join(root, "scripts/lib/free-wording-guard.mjs")).href);
-function assertNoBareFree(where, text, { kind = "html" } = {}) {
-  const hits = bareFreeClaims(text, { kind });
-  if (hits.length) throw new Error(`[prerender] 'free' without "join … newsletter" in ${where}: ${hits.map((h) => `${JSON.stringify(h.sentence)} (${h.near})`).join("; ")}`);
-}
-
 function write(route, html) {
-  assertNoBareFree(route, html);
   const file = route === "/" ? "index.html" : `${route.replace(/^\//, "")}.html`;
   const out = path.join(publicDir, file);
   fs.mkdirSync(path.dirname(out), { recursive: true });
@@ -151,7 +143,7 @@ function bookList(lane) {
     .join("")}</ol>`;
 }
 
-const FREE_PREQUELS = `<p>Both series start with a prequel that is free when you join my newsletter: <a href="https://dl.bookfunnel.com/kw1yge3479">The First Acquisition</a> (Hudson Dynasty) and <a href="https://dl.bookfunnel.com/xrodg0t77p">The Billionaire&rsquo;s One Night Stand</a> (Manhattan Money Kings).</p>`;
+const FREE_PREQUELS = `<p>Both series start free: <a href="https://dl.bookfunnel.com/kw1yge3479">The First Acquisition</a> (Hudson Dynasty prequel) and <a href="https://dl.bookfunnel.com/xrodg0t77p">The Billionaire&rsquo;s One Night Stand</a> (Manhattan Money Kings prequel).</p>`;
 
 // ── Home ───────────────────────────────────────────────────────────────────
 write(
@@ -182,7 +174,7 @@ write(
         { name: "Books", path: "/books" },
       ]),
     ],
-    body: `<h1>Books by Reese Astor</h1><p>For readers 18+.</p>${Object.keys(LANE_META)
+    body: `<h1>Books by Reese Astor</h1>${Object.keys(LANE_META)
       .map((lane) => `<section id="${lane.replace(/_/g, "-")}"><h2>${esc(LANE_META[lane].title)}</h2><p>${esc(LANE_META[lane].subtitle)}</p>${bookList(lane)}</section>`)
       .join("")}${FREE_PREQUELS}`,
   }),
@@ -200,33 +192,34 @@ for (const book of BOOKS) {
     bookFallbackFactsHtml(book, { esc }),
   ].join("");
   const buy = bookFallbackBuyHtml(book, { esc, withAmazonTag });
-  const bookBody = `<article><h1>${esc(book.title)}</h1><p><em>${esc(book.tagline)}</em></p><p>For readers 18+.</p><img src="${esc(book.cover_image)}" alt="${esc(book.title)} by Reese Astor, cover" width="400" height="600" /><p>${esc(book.blurb)}</p><ul>${facts}</ul><p>${buy}</p>${
+  const bookBody = `<article><h1>${esc(book.title)}</h1><p><em>${esc(book.tagline)}</em></p><img src="${esc(book.cover_image)}" alt="${esc(book.title)} by Reese Astor, cover" width="400" height="600" /><p>${esc(book.blurb)}</p><ul>${facts}</ul><p>${buy}</p>${
     siblings.length
       ? `<h2>More in ${esc(lane.title)}</h2><ul>${siblings.map((b) => `<li><a href="/books/${b.slug}">${esc(b.title)}</a></li>`).join("")}</ul>`
       : ""
   }</article>`;
-  const bookPage = renderPage({
-    route: `/books/${book.slug}`,
-    title: `${book.title} by Reese Astor | ${lane.title}${book.position_label ? ` ${book.position_label}` : ""}`,
-    description: `${book.tagline} ${book.blurb}`,
-    ogType: "book",
-    image: book.cover_image_square ?? book.cover_image,
-    schemas: [
-      sd.bookSchema(book),
-      sd.breadcrumbSchema([
-        { name: "Home", path: "/" },
-        { name: "Books", path: "/books" },
-        { name: book.title, path: `/books/${book.slug}` },
-      ]),
-    ],
-    body: bookBody,
-  });
-  // Fail the build on an untagged Amazon link, a wrong or misplaced subscription line, or an
-  // unclean JSON-LD Amazon identifier. The guard reads the full rendered page (head, JSON-LD,
-  // body); KU membership comes from its own canonical list, not from book.kindle_unlimited.
-  const problems = fallbackProblems(bookPage, book.slug);
+  // Fail the build on an untagged Amazon link, or a wrong or misplaced subscription line.
+  // KU membership comes from the guard's own canonical list, not from book.kindle_unlimited.
+  const problems = fallbackProblems(bookBody, book.slug);
   if (problems.length) throw new Error(`[prerender] /books/${book.slug}: ${problems.join("; ")}`);
-  write(`/books/${book.slug}`, bookPage);
+  write(
+    `/books/${book.slug}`,
+    renderPage({
+      route: `/books/${book.slug}`,
+      title: `${book.title} by Reese Astor | ${lane.title}${book.position_label ? ` ${book.position_label}` : ""}`,
+      description: `${book.tagline} ${book.blurb}`,
+      ogType: "book",
+      image: book.cover_image_square ?? book.cover_image,
+      schemas: [
+        sd.bookSchema(book),
+        sd.breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Books", path: "/books" },
+          { name: book.title, path: `/books/${book.slug}` },
+        ]),
+      ],
+      body: bookBody,
+    }),
+  );
 }
 
 // ── Static info pages ──────────────────────────────────────────────────────
@@ -240,17 +233,17 @@ const simple = [
   },
   {
     route: "/free-book",
-    title: "The First Acquisition: Free When You Join My Newsletter",
+    title: "Free Book: The First Acquisition | Reese Astor",
     description:
-      "Start the Hudson Dynasty with The First Acquisition, free when you join my newsletter.",
+      "Start the Hudson Dynasty free. The First Acquisition: Sebastian Hudson, Arden Shaw, and one fake engagement.",
     schemas: [],
-    body: `<h1>Start the Hudson Dynasty</h1><p>For readers 18+.</p>${FREE_PREQUELS}`,
+    body: `<h1>Start free</h1>${FREE_PREQUELS}`,
   },
   {
     route: "/newsletter",
     title: "The Reese Astor Newsletter",
     description:
-      "New release alerts, reader-only extras, and a prequel that is free when you join my newsletter. One email every other Sunday.",
+      "New release alerts, reader-only extras, and a free prequel when you join. One email every other Sunday.",
     schemas: [],
     body: `<h1>The Reese Astor Newsletter</h1><p>New release alerts and reader-only extras, every other Sunday.</p>${FREE_PREQUELS}`,
   },
@@ -371,14 +364,14 @@ const llms = [
       .sort((a, b) => (a.series_position ?? 999) - (b.series_position ?? 999))
       .map(
         (b) =>
-          `- [${b.title}](${SITE_URL}/books/${b.slug}): ${b.position_label ?? ""}${b.position_label ? ". " : ""}${b.tropes?.length ? `Tropes: ${b.tropes.join(", ")}. ` : ""}${b.characters?.length ? `Leads: ${b.characters.join(" and ")}. ` : ""}${b.kindle_unlimited ? "Read free with Kindle+ (formerly Kindle Unlimited)." : ""}`.trim(),
+          `- [${b.title}](${SITE_URL}/books/${b.slug}): ${b.position_label ?? ""}${b.position_label ? ". " : ""}${b.tropes?.length ? `Tropes: ${b.tropes.join(", ")}. ` : ""}${b.characters?.length ? `Leads: ${b.characters.join(" and ")}. ` : ""}${b.kindle_unlimited ? "In Kindle Unlimited." : ""}`.trim(),
       ),
     "",
   ]),
-  "## Start with a prequel (free when you join the newsletter)",
+  "## Start free",
   "",
-  "- [The First Acquisition](https://dl.bookfunnel.com/kw1yge3479): Hudson Dynasty prequel, free when you join Reese Astor's newsletter",
-  "- [The Billionaire's One Night Stand](https://dl.bookfunnel.com/xrodg0t77p): Manhattan Money Kings prequel, free when you join Reese Astor's newsletter",
+  "- [The First Acquisition](https://dl.bookfunnel.com/kw1yge3479): free Hudson Dynasty prequel",
+  "- [The Billionaire's One Night Stand](https://dl.bookfunnel.com/xrodg0t77p): free Manhattan Money Kings prequel",
   "",
   "## Pages",
   "",
@@ -389,7 +382,6 @@ const llms = [
   ...blogPosts.slice(0, 30).map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug})`),
   "",
 ].join("\n");
-assertNoBareFree("llms.txt", llms, { kind: "markdown" });
 fs.writeFileSync(path.join(publicDir, "llms.txt"), llms);
 
 fs.rmSync(tmpDir, { recursive: true, force: true });

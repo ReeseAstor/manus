@@ -8,7 +8,7 @@ config({ path: path.join(__dirname, '..', '.env') });
 const mysql2 = await import('mysql2/promise');
 const connection = await mysql2.createConnection(process.env.DATABASE_URL);
 
-const TAG = 'reeseastor-20';
+const TAG = '88away0d-20';
 const SLUGS = [
   'ultimate-cozy-reading-night-setup',
   'best-billionaire-romance-books-after-manhattan-money-kings',

@@ -91,9 +91,6 @@ function BookLayout({ book }: { book: Book }) {
             >
               {book.tagline}
             </p>
-            <p data-age-notice className="text-[15px] mt-4" style={{ color: TEXT_SOFT }}>
-              For readers 18+.
-            </p>
           </motion.div>
 
           <motion.div
@@ -105,7 +102,7 @@ function BookLayout({ book }: { book: Book }) {
             <CoverHalo
               src={book.cover_image_square ?? book.cover_image}
               title={book.title}
-              alt={`Cover of ${book.title}`}
+              alt={`${book.title} — cover`}
               width={320}
             />
           </motion.div>
@@ -165,7 +162,7 @@ function BookLayout({ book }: { book: Book }) {
                       <CoverHalo
                         src={other.cover_image}
                         title={other.title}
-                        alt={`Cover of ${other.title}`}
+                        alt={`${other.title} — cover`}
                         width={180}
                       />
                     </div>
