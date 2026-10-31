@@ -129,7 +129,7 @@ export default function LuxuryHero() {
                 variant="outline" 
                 className="font-semibold text-lg px-8 py-6 rounded-full border-2 border-primary/50 backdrop-blur-sm hover:bg-primary/10 transition-all duration-300 hover:scale-105"
               >
-                Get the Prequel
+                Get Free Prequel
               </Button>
             </Link>
           </motion.div>

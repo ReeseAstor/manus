@@ -64,16 +64,16 @@ const LEAD_MAGNETS: LeadMagnet[] = [
   {
     id: "first-acquisition",
     series: "Hudson Dynasty",
-    offer: "Free when you join my newsletter",
+    offer: "Free Book",
     title: "The First Acquisition",
     description:
       "A darker corporate romance prequel with fake engagement tension, forensic scandal, boardroom warfare, a media firestorm, and a morally gray billionaire hero.",
     bestFor:
       "Best for readers who want corporate danger, forced proximity, fake engagement, legal tension, and a ruthless billionaire with secrets.",
-    cta: "Get The First Acquisition",
+    cta: "Get The First Acquisition Free",
     href: LINKS.firstAcquisition,
     cover: "/covers/hd-0-first-acquisition.jpg",
-    coverAlt: "The First Acquisition, a Hudson Dynasty billionaire romance by Reese Astor",
+    coverAlt: "The First Acquisition — a Hudson Dynasty billionaire romance by Reese Astor",
     eager: true,
     accent: WINE,
     label: WINE,
@@ -81,17 +81,17 @@ const LEAD_MAGNETS: LeadMagnet[] = [
   {
     id: "one-night-stand",
     series: "Manhattan Money Kings",
-    offer: "Free when you join my newsletter",
+    offer: "Free Starter Novella",
     title: "The Billionaire’s One Night Stand",
     description:
       "A high-heat billionaire romance novella about one dangerous night, professional ambition, betrayal, and a desire neither of them can control.",
     bestFor:
       "Best for readers who want workplace tension, billionaire heat, emotional betrayal, sharp banter, and a fast, steamy read.",
-    cta: "Get One Night Stand",
+    cta: "Get One Night Stand Free",
     href: LINKS.oneNightStand,
     cover: "/covers/mmk-0-one-night-stand.jpg",
     coverAlt:
-      "The Billionaire’s One Night Stand, a Manhattan Money Kings billionaire romance by Reese Astor",
+      "The Billionaire’s One Night Stand — a Manhattan Money Kings billionaire romance by Reese Astor",
     accent: GOLD,
     label: BRONZE,
   },
@@ -220,7 +220,7 @@ export default function Home() {
   const [showStickyCta, setShowStickyCta] = useState(false);
 
   useEffect(() => {
-    document.title = "Reese Astor | Steamy Billionaire Romance";
+    document.title = "Reese Astor | Free Steamy Billionaire Romance";
   }, []);
 
   // Reveal the mobile sticky CTA once the hero cards have scrolled away.
@@ -237,16 +237,16 @@ export default function Home() {
       style={{ background: INK, color: TEXT }}
     >
       <EnhancedSEOHead
-        title="Reese Astor | Steamy Billionaire Romance"
-        description="Start with The First Acquisition or The Billionaire's One Night Stand, each free when you join my newsletter. Steamy billionaire romance by Reese Astor."
+        title="Reese Astor | Free Steamy Billionaire Romance"
+        description="Get two free steamy billionaire romances from Reese Astor: The First Acquisition (Hudson Dynasty) and The Billionaire's One Night Stand. Boardroom betrayal, forbidden attraction, high heat."
         canonical="/"
         keywords={[
-          "billionaire romance prequel",
+          "free billionaire romance",
           "steamy billionaire romance",
           "Reese Astor",
           "Manhattan Money Kings",
           "Hudson Dynasty",
-          "Reese Astor newsletter",
+          "free romance book",
           "corporate romance",
           "morally gray billionaire",
         ]}
@@ -280,14 +280,14 @@ export default function Home() {
               className="font-inter text-[11px] font-semibold uppercase"
               style={{ color: GOLD, letterSpacing: "0.34em" }}
             >
-              Start here · Free when you join my newsletter
+              Start here · Two free books
             </div>
             <h1
               id="hero-heading"
               className="font-display font-normal text-[34px] leading-[1.05] mt-5 sm:text-[52px] lg:text-[60px]"
               style={{ color: TEXT, letterSpacing: "-0.022em", textWrap: "balance" }}
             >
-              Choose Your First Steamy <em className="font-normal italic">Billionaire Romance</em>
+              Choose Your Free Steamy <em className="font-normal italic">Billionaire Romance</em>
             </h1>
             <p
               className="font-cormorant mx-auto mt-6 max-w-[640px] text-[19px] leading-[1.55] sm:text-[22px]"
@@ -406,7 +406,7 @@ export default function Home() {
                           className="font-inter text-[10px] uppercase mt-3 text-center"
                           style={{ color: CARD_MUTED, letterSpacing: "0.14em" }}
                         >
-                          Free when you join my newsletter · Delivered by BookFunnel
+                          Free instant download · Delivered by BookFunnel
                         </p>
                       </div>
                     </div>
@@ -519,7 +519,7 @@ export default function Home() {
                                     borderRadius: 0,
                                   }}
                                 >
-                                Free when you join my newsletter <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                                Free <ArrowRight className="h-3 w-3" aria-hidden="true" />
                               </a>
                             )}
                           </span>
@@ -595,7 +595,7 @@ export default function Home() {
             className="font-display font-normal text-[32px] leading-[1.1] sm:text-[44px]"
             style={{ color: TEXT, letterSpacing: "-0.02em", textWrap: "balance" }}
           >
-            Start Reading Reese Astor
+            Start Reading Reese Astor Free
           </h2>
           <p
             className="font-cormorant italic text-[19px] leading-[1.55] mt-5 sm:text-[22px]"
@@ -605,17 +605,17 @@ export default function Home() {
           </p>
           <div className="mt-10 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
             <FreeBookButton href={LINKS.firstAcquisition} tone="dark">
-              Get The First Acquisition
+              Get The First Acquisition Free
             </FreeBookButton>
             <FreeBookButton href={LINKS.oneNightStand} tone="dark">
-              Get One Night Stand
+              Get One Night Stand Free
             </FreeBookButton>
           </div>
           <p
             className="font-inter text-[11px] uppercase mt-6"
             style={{ color: TEXT_SOFT, letterSpacing: "0.2em" }}
           >
-            Both free when you join my newsletter · Delivered by BookFunnel
+            Free instant downloads · Delivered by BookFunnel
           </p>
         </Reveal>
       </section>
@@ -658,7 +658,7 @@ export default function Home() {
             className="h-[18px] w-[18px] transition-transform duration-300 group-hover:scale-110"
             aria-hidden="true"
           />
-          Choose your first book
+          Choose your free book
         </a>
       </div>
     </div>

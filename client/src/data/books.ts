@@ -164,8 +164,8 @@ export const BOOKS: Book[] = [
     position_label: "Book 3",
     tagline: "One night. One secret. One second chance he refuses to lose.",
     blurb:
-      "Almost four years ago, Sophia Reed spent one snowbound weekend in Chicago with rising mogul " +
-      "Dominic Kane. He said he would call. He never did. Now the CEO who controls outcomes for a living is back, and the daughter " +
+      "Three years ago, Sophia Reed walked away from a hotel room and a man she should never have trusted, " +
+      "rising mogul Dominic Kane. Now the CEO who controls outcomes for a living is back, and the daughter " +
       "Sophia has protected has eyes he can't deny. When Dominic returns to reclaim his empire, he " +
       "discovers the truth he was never meant to miss.",
     pull_quote: "“He could buy silence. He could not buy back the years.”",

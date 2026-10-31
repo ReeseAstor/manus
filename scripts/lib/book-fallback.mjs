@@ -28,7 +28,7 @@ export function bookFallbackBuyHtml(book, { esc, withAmazonTag }) {
     book.retailers.amazon_kindle
       ? `<a href="${esc(withAmazonTag(book.retailers.amazon_kindle))}">Read on Amazon</a>`
       : "",
-    book.retailers.bookfunnel ? `<a href="${esc(book.retailers.bookfunnel)}">Free when you join my newsletter</a>` : "",
+    book.retailers.bookfunnel ? `<a href="${esc(book.retailers.bookfunnel)}">Get it free</a>` : "",
   ]
     .filter(Boolean)
     .join(" · ");
