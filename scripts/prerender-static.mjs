@@ -285,18 +285,8 @@ const RETIRED = new Set(
     ?.map((s) => s.slice(1, -1)) ?? [],
 );
 
-function mdToHtml(md = "") {
-  return md
-    .split(/\n{2,}/)
-    .map((block) => {
-      const t = block.trim();
-      if (!t) return "";
-      const h = t.match(/^(#{1,4})\s+(.*)$/);
-      if (h) return `<h${Math.min(h[1].length + 1, 4)}>${esc(h[2])}</h${Math.min(h[1].length + 1, 4)}>`;
-      return `<p>${esc(t.replace(/[*_`]/g, "")).replace(/\n/g, " ")}</p>`;
-    })
-    .join("");
-}
+// Markdown -> HTML with the SPA's parser stack (react-markdown + remark-gfm): real lists, <hr>, links (QA CARD-v6 F3).
+const { mdToHtml } = await import(pathToFileURL(path.join(root, "scripts/lib/prerender-markdown.mjs")).href);
 
 const blogPosts = [];
 if (process.env.DATABASE_URL) {

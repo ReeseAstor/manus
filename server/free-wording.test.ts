@@ -4,6 +4,8 @@ import { describe, expect, it } from "vitest";
 import { RETIRED_BLOG_SLUGS } from "../shared/const";
 // @ts-expect-error plain .mjs module without types
 import { bareFreeClaims } from "../scripts/lib/free-wording-guard.mjs";
+// @ts-expect-error plain .mjs module without type declarations
+import * as prerenderMarkdown from "../scripts/lib/prerender-markdown.mjs";
 
 type Hit = { sentence: string; near: string };
 const scan = bareFreeClaims as (src: string, opts?: { kind?: "html" | "source" | "markdown" }) => Hit[];
@@ -168,12 +170,14 @@ describe("free wording (newsletter-only prequels)", () => {
 
   it("blog-posts/*.md (= the DB bodies after 01-forward-update.sql) pass the guard as the production prerender renders them", () => {
     // Production builds have DATABASE_URL, so scripts/prerender-static.mjs prerenders every published, non-retired post
-    // through write() and this guard. Render each .md the same way (esc + mdToHtml copied from the prerender).
+    // through write() and this guard. Render each .md the same way (esc copied from the prerender; mdToHtml is the
+    // prerender's own module, scripts/lib/prerender-markdown.mjs, since QA CARD-v6 F3).
     const pre = fs.readFileSync(path.join(root, "scripts/prerender-static.mjs"), "utf8");
     const escSrc = pre.match(/const esc = \(s = ""\) =>[\s\S]*?;\n/)?.[0];
-    const mdSrc = pre.match(/function mdToHtml\(md = ""\) \{[\s\S]*?\n\}\n/)?.[0];
-    expect(escSrc && mdSrc).toBeTruthy();
-    const { esc, mdToHtml } = new Function(`${escSrc}\n${mdSrc}\nreturn { esc, mdToHtml };`)() as { esc: (s: string) => string; mdToHtml: (s: string) => string };
+    expect(escSrc).toBeTruthy();
+    expect(pre).toContain('import(pathToFileURL(path.join(root, "scripts/lib/prerender-markdown.mjs")).href)');
+    const { esc } = new Function(`${escSrc}\nreturn { esc };`)() as { esc: (s: string) => string };
+    const { mdToHtml } = prerenderMarkdown as { mdToHtml: (s: string) => string };
     // Retired slugs are never prerendered (RETIRED_BLOG_SLUGS), so they are skipped as the prerender skips them.
     const files = fs.globSync("blog-posts/*.md", { cwd: root }).filter((f) => !(RETIRED_BLOG_SLUGS as readonly string[]).includes(path.basename(f, ".md")));
     // 9 public posts after QA ruling R1 (10/31: secret-baby-romance-books-guide retired).
