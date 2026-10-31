@@ -22,9 +22,10 @@ Covers every <loc> in BASE/sitemap.xml (rewritten onto BASE), routes-extra.txt, 
 Fails closed: Chromium not launching, a route not loading or timing out, an HTTP error, a guard error, or a page
 with no text is a FAIL, never a skip. Third-party embed text (the MailerLite form) counts as visible text; its
 hits are tagged [embed] so they can be routed to the asset owner, but they still FAIL.
-The last line of output is exactly: VERDICT: PASS 0 | VERDICT: FAIL <fail count>.
+Raw reads get a bounded transport-only retry (see http_get); each retry logs 'RETRY <url> <attempt> <error>'.
+The last two lines are 'retries: N (...)' and exactly: VERDICT: PASS 0 | VERDICT: FAIL <fail count>.
 """
-import json, os, re, subprocess, sys, time, urllib.request, urllib.error, glob
+import json, os, re, subprocess, sys, time, urllib.request, urllib.error, glob, socket, ssl, http.client
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
@@ -34,13 +35,62 @@ fails = []
 def fail(route, msg):
     fails.append((route, msg)); print(f"FAIL {route}: {msg}", flush=True)
 
-def http_get(url):
+# Bounded transport-only retry for raw reads (sitemap, raw page HTML, text files). Rendered reads (Chromium) are not retried.
+# Retried: TRANSPORT_ERRORS below (SSL EOF, connection reset/closed, timeout, DNS) and HTTP 502/503/504.
+# Never retried: any other HTTP status, and anything about content (content is judged only after a read succeeds).
+# All attempts failing is a FAIL, as before. If more than TRANSPORT_UNSTABLE_SHARE of reads needed a retry, the run FAILs
+# ("transport unstable") even when every read eventually succeeded.
+RAW_ATTEMPTS = 3
+RAW_BACKOFF_S = (1, 3)
+RETRY_STATUS = {502, 503, 504}
+TRANSPORT_UNSTABLE_SHARE = 0.10
+transport = {"reads": 0, "reads_retried": 0, "retries": 0}
+_sleep = time.sleep  # tests replace this to record the backoff without waiting
+
+def is_transport_error(e):
+    if isinstance(e, urllib.error.HTTPError):
+        return e.code in RETRY_STATUS
+    if isinstance(e, urllib.error.URLError):          # urlopen wraps socket/SSL/DNS errors in URLError(reason=<error>)
+        if not isinstance(e.reason, BaseException): return False   # e.g. "unknown url type": not transport
+        e = e.reason
+    return isinstance(e, TRANSPORT_ERRORS)
+
+# The exact transport list (QA retry spec): SSL EOF, connection reset or closed, timeout, DNS. Certificate errors,
+# connection refused and every other exception are not retried.
+TRANSPORT_ERRORS = (ssl.SSLEOFError, ssl.SSLZeroReturnError,                       # SSL EOF / TLS closed
+                    ConnectionResetError, ConnectionAbortedError, BrokenPipeError,  # reset / closed
+                    http.client.RemoteDisconnected, http.client.IncompleteRead,     # closed before / during the response
+                    socket.timeout, TimeoutError,                                   # timeout
+                    socket.gaierror)                                                # DNS
+
+def verdict_lines(n_fails):
+    print(f"retries: {transport['retries']} (raw reads {transport['reads']}, needing a retry {transport['reads_retried']})")
+    print(f"VERDICT: {'PASS' if not n_fails else 'FAIL'} {n_fails}", flush=True)
+
+def _http_get_once(url):
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (rendered-check)"})
-    try:
-        with urllib.request.urlopen(req, timeout=40) as r:
-            return r.status, r.read().decode("utf-8", "replace"), r.geturl()
-    except urllib.error.HTTPError as e:
-        return e.code, e.read().decode("utf-8", "replace"), url
+    with urllib.request.urlopen(req, timeout=40) as r:
+        return r.status, r.read().decode("utf-8", "replace"), r.geturl()
+
+def http_get(url):
+    transport["reads"] += 1
+    retried = False
+    for attempt in range(1, RAW_ATTEMPTS + 1):
+        try:
+            return _http_get_once(url)
+        except urllib.error.HTTPError as e:
+            if e.code not in RETRY_STATUS or attempt == RAW_ATTEMPTS:
+                try: return e.code, e.read().decode("utf-8", "replace"), url
+                finally: e.close()
+            err = e; e.close()
+        except Exception as e:
+            if not is_transport_error(e) or attempt == RAW_ATTEMPTS:
+                raise
+            err = e
+        print(f"RETRY {url} {attempt} {type(err).__name__}: {str(err)[:160]}", flush=True)
+        transport["retries"] += 1
+        if not retried: transport["reads_retried"] += 1; retried = True
+        _sleep(RAW_BACKOFF_S[attempt - 1])
 
 class Guards:
     def __init__(self):
@@ -157,7 +207,7 @@ def books_slug(route):
 
 def main():
     args = sys.argv[1:]
-    if len(args) < 2: print("usage: rendered-check.py BASE OUT [--routes FILE] [--no-sitemap]"); print("VERDICT: FAIL 1"); return 1
+    if len(args) < 2: print("usage: rendered-check.py BASE OUT [--routes FILE] [--no-sitemap]"); verdict_lines(1); return 1
     base, out = args[0].rstrip("/"), args[1]
     extra_files = [args[k + 1] for k, a in enumerate(args) if a == "--routes"] or [os.path.join(HERE, "routes-extra.txt")]
     use_sitemap = "--no-sitemap" not in args
@@ -188,7 +238,7 @@ def main():
     try:
         g = Guards(); meta = g.ask(op="meta")
     except Exception as e:
-        fail("(guards)", f"guard process failed: {e}"); print(f"VERDICT: FAIL {len(fails)}"); return 1
+        fail("(guards)", f"guard process failed: {e}"); verdict_lines(len(fails)); return 1
     LINE, KU, NONKU = meta["line"], set(meta["ku"]), set(meta["nonku"])
     from playwright.sync_api import sync_playwright
     report = {}
@@ -197,7 +247,7 @@ def main():
         browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox", "--disable-dev-shm-usage"])
         print(f"chromium {browser.version}")
     except Exception as e:
-        fail("(chromium)", f"Chromium did not launch: {e}"); print(f"VERDICT: FAIL {len(fails)}"); return 1
+        fail("(chromium)", f"Chromium did not launch: {e}"); verdict_lines(len(fails)); return 1
     ctx_js = browser.new_context(viewport={"width": 1366, "height": 900})
     ctx_nojs = browser.new_context(viewport={"width": 1366, "height": 900}, java_script_enabled=False)
     for route in routes:
@@ -270,10 +320,12 @@ def main():
     try: browser.close(); pw.stop()
     except Exception: pass
     if rendered_ok < floor: fail("(routes)", f"only {rendered_ok} pages rendered with text, floor is {floor} (fail closed)")
+    if transport["reads"] and transport["reads_retried"] > TRANSPORT_UNSTABLE_SHARE * transport["reads"]:
+        fail("(transport)", f"transport unstable: {transport['reads_retried']} of {transport['reads']} raw reads needed a retry (over {int(TRANSPORT_UNSTABLE_SHARE * 100)}%)")
     json.dump({"base": base, "started": started, "routes": routes, "text_files": txt, "fails": fails, "pages": report}, open(os.path.join(out, "rendered-check.json"), "w"), indent=1, ensure_ascii=False)
     print(f"pages planned {len(routes)}, rendered with text {rendered_ok}, floor {floor}")
     print(f"summary: {len(routes)} pages x (raw, no-JS, SPA) + {len(txt)} text files, {len(fails)} failures")
-    print(f"VERDICT: {'PASS' if not fails else 'FAIL'} {len(fails)}")
+    verdict_lines(len(fails))
     return 0 if not fails else 1
 
 if __name__ == "__main__":
@@ -281,5 +333,5 @@ if __name__ == "__main__":
         sys.exit(main())
     except Exception as e:
         print(f"FAIL (rendered-check crashed, fail closed): {e}")
-        print(f"VERDICT: FAIL {len(fails) + 1}")
+        verdict_lines(len(fails) + 1)
         sys.exit(1)
