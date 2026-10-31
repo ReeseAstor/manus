@@ -15,7 +15,6 @@ export interface ProductCategory {
   id: string;
   title: string;
   subtitle: string;
-  emoji: string;
   products: AffiliateProduct[];
 }
 
@@ -24,7 +23,6 @@ export const favoritesCategories: ProductCategory[] = [
     id: "reading-essentials",
     title: "Reading Essentials",
     subtitle: "The tools that make every reading session feel luxurious",
-    emoji: "📖",
     products: [
       {
         name: "Kindle Paperwhite (7\" Display, Latest Model)",
@@ -64,7 +62,6 @@ export const favoritesCategories: ProductCategory[] = [
     id: "cozy-atmosphere",
     title: "Cozy Atmosphere",
     subtitle: "Set the mood for your perfect reading night",
-    emoji: "🕯️",
     products: [
       {
         name: "Classical Library Candle",
@@ -104,7 +101,6 @@ export const favoritesCategories: ProductCategory[] = [
     id: "book-lover-gifts",
     title: "Book Lover Gifts",
     subtitle: "Perfect presents for the romance reader in your life",
-    emoji: "🎁",
     products: [
       {
         name: "Book Lover Wine Glass",
@@ -128,7 +124,6 @@ export const favoritesCategories: ProductCategory[] = [
     id: "writers-desk",
     title: "Writer's Desk",
     subtitle: "My actual writing setup: the tools behind the books",
-    emoji: "✍️",
     products: [
       {
         name: "Moleskine Classic Notebook (Large, Ruled)",

@@ -123,7 +123,7 @@ export default function Favorites() {
                       : "bg-[#EBD6D3]/30 text-[#6E5F5A] hover:text-[#4A3B3A] border border-[#4A3B3A]/10"
                   }`}
                 >
-                  {cat.emoji} {cat.title} ({cat.products.length})
+                  {cat.title} ({cat.products.length})
                 </button>
               ))}
             </div>
@@ -146,15 +146,14 @@ export default function Favorites() {
               {/* Category Header */}
               <div className="mb-8">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">{category.emoji}</span>
                   <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#4A3B3A]">
                     {category.title}
                   </h2>
                 </div>
-                <p className="text-[#6E5F5A] text-sm ml-12">
+                <p className="text-[#6E5F5A] text-sm">
                   {category.subtitle}
                 </p>
-                <div className="w-24 h-0.5 bg-gradient-to-r from-[#C9A3A0] to-transparent mt-4 ml-12" />
+                <div className="w-24 h-0.5 bg-gradient-to-r from-[#C9A3A0] to-transparent mt-4" />
               </div>
 
               {/* Product Grid */}
