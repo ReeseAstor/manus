@@ -41,7 +41,7 @@ export function MemberBenefits() {
         >
           <span className="inline-flex items-center gap-2 bg-[#C9A3A0]/10 border border-[#B59A6A]/30 rounded-full px-4 py-2 text-[#7A4F4C] text-sm font-semibold mb-6">
             <Sparkles className="w-4 h-4" />
-            No Cost to Join
+            Open to All Readers
           </span>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#4A3B3A] mb-6">
             Member Benefits

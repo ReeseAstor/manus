@@ -124,7 +124,7 @@ export function BlogContentUpgrade({ blogSlug }: BlogContentUpgradeProps) {
           </div>
           <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#C9A3A0]/10 border border-[#B59A6A]/20">
             <span className="text-xs text-[#7A4F4C] font-medium tracking-wider uppercase">
-              Free Bonus Content
+              Bonus Content
             </span>
           </div>
         </div>

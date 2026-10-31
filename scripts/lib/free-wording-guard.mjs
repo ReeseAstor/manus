@@ -1,177 +1,389 @@
 /**
- * QA rule (2026-10-30, ruling c of the v3 card): The First Acquisition, The Billionaire's One Night
- * Stand and the Beneath His Shadow prequel The Photograph He Kept cost $0.99 in stores and are free
- * only when a reader joins the newsletter. So, on every page and source string:
- * - every "free" (or "freebie") passes only if its own sentence or UI element has a form of "join"
- *   AND "newsletter" ("Free prequel when you join my newsletter."). There is no title requirement
- *   for a pass, and no title is needed to fail: a CTA like "Start reading free" fails on its own;
- * - "free with (my/the/her) newsletter", "Free with newsletter", "newsletter subscribers get (it)
- *   free" and "Free Prequel" in a <title>, og:title, twitter:title or page title always fail;
- * - synonyms ("complimentary", "no cost", "at no charge", "$0") within 200 characters of an offer
- *   title or "prequel" follow the same join + newsletter rule;
- * - text is normalised the same way as the books fallback guard: comments and tags removed (so
- *   fr<b>ee</b> is read as "free"), the full HTML5 entity table decoded, soft hyphens and zero-width
- *   characters dropped, NFKC (fullwidth, math letters) and lookalike letters folded; data-*
- *   attributes, meta content, alt/title/aria-label and JSON-LD are read too;
- * - the approved Kindle+ line and Reader's Club "Join for free" / "No Cost to Join" are exempt only
- *   when no offer title is in the same section (they may never stand next to a prequel);
- * - non-prequel offers (ruling c) are listed by name: the free quiz, the steamy scene checklist and
- *   "Free Bonus Content" content upgrades, the "Free" membership tier label.
- * Used by scripts/prerender-static.mjs (fails the build) and server/free-wording.test.ts.
+ * QA rule (2026-10-30, ruling c of the v3 card; v5 per the v4 card G1-G8 and rulings 2-4): The First
+ * Acquisition, The Billionaire's One Night Stand and The Photograph He Kept cost $0.99 in stores and
+ * are free only when a reader joins the newsletter. On every page and source string:
+ * - G1: a "free" (or "freebie") passes only if its own sentence has a join clause tied to the
+ *   newsletter ("join … newsletter" within 4 words, or "when you/they/readers join … newsletter"),
+ *   and the sentence does not negate it or make it optional ("no need to", "without", "skip",
+ *   "optional", "not required", "don't have/need to", "never"). No title is needed to fail or pass;
+ * - G2: "free with/via/through/w//from/in/for … newsletter", "free for (newsletter) subscribers/
+ *   members/readers" and "newsletter subscribers/readers/members (who) get/receive … free" always fail;
+ * - G3: a sentence ends at . ! ? … (plus closing quotes or brackets); every block element, <a> and
+ *   <button> is its own element;
+ * - G4: text is read from an HTML tree: comments removed with no gap, the full entity table decoded,
+ *   zero-width and soft hyphens dropped, NFKC, lookalike letters (incl. small capitals and IPA)
+ *   folded, letter-spaced "f r e e" joined; meta content, alt, title, aria-*, placeholder, value,
+ *   label and data-* attributes (quoted or not), <textarea> text and JSON-LD strings are read too;
+ * - G5: synonyms ("complimentary", "no cost", "no charge", "costs nothing", "on the house",
+ *   "gratis", "zero dollars/cost", "$0", "0.00 USD") follow the same rule next to an offer title;
+ * - G6/G7 (rulings 2, 3): every named exemption, the approved Kindle+ line included, applies only
+ *   when its nearest container (article, section, li, or a div with a heading; the whole page when
+ *   there is none) holds no offer title in its text or its alt/title/aria-label, with no length cap.
+ *   Empty elements and <br> never form a boundary. There is no always-exempt list; only the
+ *   /free-book path, #free-book anchor and id="free-book" are not reader copy;
+ * - G8: "Free Prequel" in a <title>, og:/twitter:title, a page title prop or JSON-LD name,
+ *   headline or alternativeHeadline always fails.
+ * Used by scripts/prerender-static.mjs (fails the build), the v5 rendered check and
+ * server/free-wording.test.ts.
  */
 import { normalizeForScan } from "./book-fallback-guard.mjs";
 
-/** Titles and phrases that tie a nearby "free" (or synonym) to the newsletter offer. */
+/** Titles and phrases that tie a "free" (or synonym) to the newsletter offer. */
 export const OFFER_TITLES = [
   /the\s+first\s+acquisition/i,
-  /one\s+night\s+stand/i,
+  // The title, not the trope: "The Billionaire's One Night Stand", "One Night Stand" (title case) or
+  // ONE NIGHT STAND; the lowercase trope chip "One night stand" on a KU card is not the prequel.
+  /billionaire\W{0,2}s\s+one\s+night\s+stand|\bOne\s+Night\s+Stand\b|\bONE\s+NIGHT\s+STAND\b/,
   /the\s+photograph\s+he\s+kept/i,
   /\bprequel/i,
   /\bfree[\s-]+(?:book|copy|ebook|e-book|novella|romance|starter|gift|download|read)/i,
 ];
-
+const hasOffer = (t) => OFFER_TITLES.some((re) => re.test(t));
+/** The first offer title in t, with a little context (for the failure message), or "". */
+function offerAt(t) {
+  for (const re of OFFER_TITLES) {
+    const m = t.match(re);
+    if (m) return `offer "${m[0]}" in the same container: …${t.slice(Math.max(0, m.index - 40), m.index + m[0].length + 20).replace(/\s+/g, " ")}…`;
+  }
+  return "";
+}
 const WINDOW = 200;
 
-/** Non-offer uses of "free", removed everywhere (also next to a title). */
-const EXEMPT_ALWAYS = [
-  /\bfree Kindle (?:app|reading app)s?\b/gi,
-  /\bfree advance (?:reader )?copies\b/gi,
-  /\b(?:glare|royalty|spam|gluten|toll|duty|cruelty|hands|risk|worry|stress|guilt|ad|clutter|scent|fragrance|BPA|lint|tangle|smudge|sugar|fee|interest|hassle|stain|wrinkle|lag|eye[\s-]?strain)-free\b/gi,
-  /\bfeel free(?! *[,.:;!?-]* *it'?s free)\b/gi,
-  /[\/#]free-books?\b|\bfree-books?\b|\bid=["']free-books?["']/gi, // the /free-book route and #free-books anchor
-  // Non-prequel offers, outside the rule per QA ruling (c): the quiz and the blog content upgrades.
-  /\b(?:take (?:my|this) )?free (?:\d+-question )?(?:romance |book boyfriend )?quiz\b/gi,
-  /\bFree: My 10-Point Steamy Scene Checklist\b/g,
-  /\bFree Bonus Content\b/g,
-  // "free of" = rid of ("almost free of a toxic marriage"), not a price; "free of charge/cost" still counts.
-  /\bfree of\b(?! *(?:charge|cost))/gi,
-  // Software pricing tiers (e.g. a newsletter tool's free tier), not a book offer.
-  /\bfree (?:tier|plan|trial|version|account)s?\b/gi,
-  // Reader's Club badge: membership costs nothing (ruling c), it is not a book offer.
-  /\bNo Cost to Join\b/gi,
-];
-/** Exempt only when no offer title is within WINDOW characters (QA v3: never next to a prequel). */
+/** Not reader copy: the /free-book route, the #free-book anchor and the free-book id (ruling 2). */
+const PATHS = [/(?<=[\/#])free-books?\b/gi, /\bid\s*=\s*["']?free-books?\b/gi];
+
+/** Exempt only when the nearest container holds no offer title (rulings 2 and 3). */
 const EXEMPT_AWAY_FROM_OFFER = [
   /Read free with Kindle\+ \(formerly Kindle Unlimited\)\.?/g, // approved KU line, KU titles only
-  // Reader's Club membership (ruling c: outside the rule), never next to a prequel.
+  /\bfree Kindle (?:reading )?apps?\b/gi,
+  /\bfree advance (?:reader )?copies\b/gi,
+  /\b(?:glare|royalty|spam|gluten|cruelty|hands|worry|stress|guilt|ad|clutter|scent|fragrance|BPA|lint|tangle|smudge|sugar|hassle|stain|wrinkle|lag|eye[\s-]?strain)-free\b/gi,
+  /\bfeel free(?! *[,.:;!?-]* *it'?s free)\b/gi,
+  /\b(?:take (?:my|this) )?free (?:\d+-question )?(?:romance |book boyfriend )?quiz\b/gi,
+  /\bFree: My 10-Point Steamy Scene Checklist\b/g,
+  /\bfree of\b(?! *(?:any |all |extra )?(?:charge|cost|fee|payment|price|obligation)s?\b)/gi,
   /\bjoin(?:s|ed|ing)? (?:the club |the Reader'?s Club |Reader'?s Club )?(?:\()?(?:for )?free\b\)?|\bfree to join\b|\bfree (?:club )?membership\b/gi,
+  /\bNo Cost to Join\b/gi,
 ];
 
 const HARD_FAIL = [
-  [/\bfree\s+with\s+(?:my\s+|the\s+|her\s+|our\s+|reese\s+astor'?s\s+)?newsletter\b/gi, '"free with … newsletter" (does not say join)'],
-  [/\bnewsletter\s+subscribers\s+get\s+(?:it\s+|them\s+|this\s+)?free\b/gi, '"newsletter subscribers get free" (does not say join)'],
+  [/\bfree\s+(?:with|via|through|w\/|from|in|for)\s+(?:\S+\s+){0,3}?newsletter\b/gi, '"free with/via/for … newsletter" (does not say join)'],
+  [/\bfree\s+for\s+(?:newsletter\s+)?(?:subscribers|members|readers)\b/gi, '"free for subscribers" (does not say join)'],
+  [/\bnewsletter\s+(?:subscribers|readers|members)\s+(?:who\s+)?(?:get|got|receive|received)\b[^.!?\n]{0,30}\bfree\b/gi, '"newsletter subscribers get … free" (does not say join)'],
   [/\bfree\b[^\n.!?]{0,40}\bno\s+newsletter\b|\bno\s+newsletter\s+(?:required|needed|necessary)\b/gi, "'free' with the newsletter negated"],
 ];
 const FREE_RE = /\bfree(?:bies?)?\b/gi;
-const SYNONYM_RE = /\bcomplimentary\b|\bno[\s-]+cost\b|\bat\s+no\s+charge\b|\bfor\s+nothing\b|(?<![\w$])\$\s?0(?:\.00)?(?![\d,]|\.\d)/gi;
-const JOIN_RE = /\bjoin(?:s|ed|ing)?\b/i;
-const NEWSLETTER_RE = /newsletter/i;
-const BLOCK_TAGS = "p|h[1-6]|li|ul|ol|div|button|Button|label|section|article|main|aside|nav|header|footer|summary|details|td|th|tr|table|title|option|dt|dd|dl|figcaption|figure|blockquote|br|hr|form|fieldset|legend|caption|meta|link|img|input|textarea|select|script|noscript|template|svg";
-const ATTR_RE = /\b(?:content|alt|title|aria-label|aria-description|placeholder|value|data-[\w-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi;
+const SYNONYM_RE = /\bcomplimentary\b|\bno[\s-]+cost\b|\bno\s+charge\b|\bfor\s+nothing\b|\bcosts?\s+nothing\b|\bon\s+the\s+house\b|\bgratis\b|\bzero\s+(?:dollars?|cost)\b|(?<![\w$])\$\s?0(?:\.00)?(?![\d,]|\.\d)|(?<![\w.$])0\.00\s*(?:USD|dollars?)\b/gi;
+const LINK_RE = [/\bjoin(?:s|ed|ing)?\b(?:\s+\S+){0,4}?\s+newsletter\b/i, /\bwhen\s+(?:you|they|readers)\s+join\b[^.!?…\n]{0,80}?\bnewsletter\b/i];
+const NEG_RE = /\b(?:no need to|without|skip(?:s|ped|ping)?|optional(?:ly)?|not required|don'?t (?:have|need) to|never)\b/i;
+const linked = (s) => LINK_RE.some((re) => re.test(s)) && !NEG_RE.test(s);
+const SPACED_FREE = /\bf(?:[\s._*\u00B7\u2022-]{1,3})r(?:[\s._*\u00B7\u2022-]{1,3})e(?:[\s._*\u00B7\u2022-]{1,3})e\b/gi;
+const norm = (t) => normalizeForScan(t).replace(SPACED_FREE, "free").replace(/[ \t]+/g, " ");
 
-/** Page titles: <title>, og:/twitter:title, title="…" props, document.title = "…", title: "…". */
-function titleTexts(src) {
+// ---- HTML tree ---------------------------------------------------------------------------------
+const VOID = new Set("area base br col embed hr img input link meta param source track wbr keygen".split(" "));
+const RAW_TEXT = new Set(["script", "style", "textarea", "title", "xmp", "noscript"]);
+const BLOCK = new Set(("p h1 h2 h3 h4 h5 h6 li ul ol div button label section article main aside nav header footer summary details " +
+  "td th tr table title option dt dd dl figcaption figure blockquote br hr form fieldset legend caption meta link img input " +
+  "textarea select template svg a dialog body head html pre address").split(" "));
+const CONTAINER = new Set(["article", "section", "li"]);
+const READ_ATTR = /^(?:content|alt|title|aria-label|aria-description|aria-roledescription|placeholder|value|label|data-[\w-]+)$/i;
+const IMPLIED_CLOSE = { li: ["li"], p: ["p"], option: ["option"], dt: ["dt", "dd"], dd: ["dt", "dd"], tr: ["tr", "td", "th"], td: ["td", "th"], th: ["td", "th"] };
+
+function parseAttrs(s) {
   const out = [];
-  for (const m of src.matchAll(/<title\b[^>]*>([\s\S]*?)<\/title>/gi)) out.push(m[1]);
-  for (const m of src.matchAll(/<meta\b[^>]*>/gi)) {
-    if (!/(?:property|name)\s*=\s*["'](?:og:title|twitter:title|title)["']/i.test(m[0])) continue;
-    const c = m[0].match(/\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
-    if (c) out.push(c[1] ?? c[2]);
-  }
-  for (const m of src.matchAll(/(?:\btitle\s*=\s*|document\.title\s*=\s*|\btitle\s*:\s*)(?:"([^"]*)"|'([^']*)'|`([^`]*)`)/g)) out.push(m[1] ?? m[2] ?? m[3]);
-  return out.map((t) => normalizeForScan(t));
+  for (const m of s.matchAll(/([^\s"'>\/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g)) out.push([m[1].toLowerCase(), m[2] ?? m[3] ?? m[4] ?? ""]);
+  return out;
 }
 
-/** Normalise each line separately, so the "\n" sentence/element boundaries survive. */
-const normLines = (t) => t.split("\n").map((l) => normalizeForScan(l)).join("\n");
+/** A tolerant HTML tree (enough for the guard): elements, text, comments dropped with no gap. */
+export function parseHtml(src) {
+  const root = { tag: "#root", attrs: [], children: [], parent: null };
+  let cur = root;
+  const TAG = /<!--[\s\S]*?(?:--!?>|$)|<!\[CDATA\[[\s\S]*?(?:\]\]>|$)|<![^>]*>|<\?[^>]*>|<\/\s*([A-Za-z][\w:-]*)[^>]*>|<([A-Za-z][\w:-]*)((?:\s*[^\s"'>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s"'=<>`]+))?)*)\s*\/?\s*>/g;
+  let last = 0;
+  const text = (t) => t && cur.children.push({ text: t, parent: cur });
+  for (let m; (m = TAG.exec(src)); ) {
+    text(src.slice(last, m.index));
+    last = TAG.lastIndex;
+    if (m[1]) {
+      const name = m[1].toLowerCase();
+      for (let n = cur; n && n !== root; n = n.parent) if (n.tag === name) { cur = n.parent; break; }
+      continue;
+    }
+    if (!m[2]) continue; // comment, doctype, CDATA: removed with no gap
+    const tag = m[2].toLowerCase();
+    for (const c of IMPLIED_CLOSE[tag] ?? []) {
+      if (cur.tag === c) { cur = cur.parent; break; }
+    }
+    const el = { tag, attrs: parseAttrs(m[3] || ""), children: [], parent: cur };
+    cur.children.push(el);
+    if (VOID.has(tag) || /\/\s*>$/.test(m[0])) continue; // void or self-closing (SVG, JSX)
+    if (RAW_TEXT.has(tag)) {
+      const end = src.slice(last).search(new RegExp(`</\\s*${tag}\\s*>`, "i"));
+      const body = end < 0 ? src.slice(last) : src.slice(last, last + end);
+      el.children.push({ text: body, parent: el, raw: true });
+      last = end < 0 ? src.length : last + end;
+      const close = src.slice(last).match(new RegExp(`^</\\s*${tag}\\s*>`, "i"));
+      if (close) last += close[0].length;
+      TAG.lastIndex = last;
+      continue;
+    }
+    cur = el;
+  }
+  text(src.slice(last));
+  return root;
+}
+
+const isHeading = (n) => /^h[1-6]$/.test(n.tag) || (n.attrs ?? []).some(([k, v]) => k === "role" && v === "heading");
+function hasHeading(n) {
+  for (const c of n.children ?? []) if (c.tag && (isHeading(c) || (!CONTAINER.has(c.tag) && hasHeading(c)))) return true;
+  return false;
+}
+const isContainer = (n) => n.tag === "#root" || CONTAINER.has(n.tag) || (n.tag === "div" && hasHeading(n));
 
 /**
- * Reader text views of an HTML page, a TSX/TS source or Markdown (one view), with sentence/element boundaries as "\n".
- * Two views: inline tags removed with no gap (fr<b>ee</b> -> free) and with a space (so
- * <span>Get</span><span>free</span> still reads as two words).
+ * Units of reader text: each block element's text (tight and spaced views), each readable attribute,
+ * each JSON-LD string, each <textarea>; with the nearest container and title-ness recorded.
  */
-export function readerViews(src, { kind = "html" } = {}) {
-  // Markdown (llms.txt): every line (list item, heading, paragraph) is its own element.
-  if (kind === "markdown") return [normLines(src.split("\n").join("\n\n\n")).replace(/[ \t]+/g, " ")];
-  let t = src.replace(/<!--[\s\S]*?-->/g, " ");
-  const attrs = [];
-  for (const m of t.matchAll(ATTR_RE)) attrs.push(m[1] ?? m[2]);
-  // JSON-LD stays (crawlers read it); JSON string quotes become boundaries.
-  t = t.replace(/<script\b[^>]*ld\+json[^>]*>([\s\S]*?)<\/script>/gi, (_, j) => `\n${j.replace(/\\"/g, "'").replace(/"/g, "\n")}\n`);
-  t = t.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "\n").replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "\n");
-  if (kind === "source") {
-    t = t.replace(/\b(?:tier|plan)\s*\|\|\s*["'`]Free["'`]/g, " "); // a membership tier label, not an offer
-    t = t.replace(/\/\*[\s\S]*?\*\//g, "\n").replace(/(^|[^:])\/\/[^\n]*/g, "$1\n").replace(/\{\s*["'`]\s*["'`]\s*\}/g, " ");
-    t = t.replace(/\s*\n\s*/g, " ").replace(/["`]|[{}]|\\n|[;,]\s*$/g, "\n");
-  } else {
-    t = t.replace(/\s*\n\s*/g, " ");
-  }
-  t = t.replace(new RegExp(`</?(?:${BLOCK_TAGS})\\b[^>]*>`, "gi"), "\n");
-  const tight = t.replace(/<\/?[A-Za-z][^>]*>/g, "");
-  const spaced = t.replace(/<\/?[A-Za-z][^>]*>/g, " ");
-  const tail = attrs.join("\n\n\n"); // each attribute value is its own element (a section)
-  return [tight, spaced].map((v) => normLines(`${v}\n\n\n${tail}`).replace(/[ \t]+/g, " "));
-}
-
-/** Back-compat for callers of the v3 API: the first (tight) view. */
-export const readerText = (src, opts) => readerViews(src, opts)[0];
-
-function sentenceAt(t, i) {
-  const start = Math.max(t.lastIndexOf("\n", i), ...[".", "!", "?"].map((p) => { const k = t.lastIndexOf(p + " ", i); return k < 0 ? -1 : k + 1; }));
-  const ends = ["\n", ". ", "! ", "? "].map((p) => t.indexOf(p, i)).filter((k) => k >= 0);
-  const end = ends.length ? Math.min(...ends) + 1 : t.length;
-  return t.slice(start + 1, end).trim();
-}
-
-const nearOffer = (t, i, len = 0) => OFFER_TITLES.find((re) => re.test(t.slice(Math.max(0, i - WINDOW), i + len + WINDOW)));
-
-// A section break: a blank line between elements (two or more empty lines in the reader text).
-const SECTION_BREAK = /\n(?:[ \t]*\n){2,}/g;
-/**
- * The exempt phrase's own section: up to WINDOW characters either side, stopping at a section
- * break. So "The First Acquisition. Read free with Kindle+ …" (same element, QA v3 probe) is not
- * exempt, while a KU book card on a series page is not tied to the prequel band further down.
- */
-export function sectionAround(t, i, len) {
-  let a = Math.max(0, i - WINDOW);
-  let b = Math.min(t.length, i + len + WINDOW);
-  const base = a;
-  for (const m of t.slice(base, i).matchAll(SECTION_BREAK)) a = base + m.index + m[0].length;
-  const after = t.slice(i + len, b).search(SECTION_BREAK);
-  if (after >= 0) b = i + len + after;
-  return t.slice(a, b);
-}
-const offerInSection = (t, i, len) => OFFER_TITLES.find((re) => re.test(sectionAround(t, i, len)));
-
-function scanView(view) {
-  const out = [];
-  for (const [re, why] of HARD_FAIL) for (const m of view.matchAll(re)) out.push({ sentence: sentenceAt(view, m.index).slice(0, 160), near: why });
-  // Exemptions: blank them out (same length, so offsets stay valid for the window checks).
-  let t = view;
-  const blank = (s) => " ".repeat(s.length);
-  for (const re of EXEMPT_ALWAYS) t = t.replace(re, blank);
-  for (const re of EXEMPT_AWAY_FROM_OFFER)
-    t = t.replace(re, (m, ...rest) => {
-      const i = rest.find((x) => typeof x === "number");
-      return offerInSection(view, i, m.length) ? m : blank(m);
-    });
-  const check = (m, kind) => {
-    const sentence = sentenceAt(t, m.index);
-    if (JOIN_RE.test(sentence) && NEWSLETTER_RE.test(sentence)) return;
-    const near = nearOffer(t, m.index, m[0].length);
-    if (kind === "synonym" && !near) return; // synonyms only count next to an offer
-    out.push({ sentence: sentence.slice(0, 160), near: near ? String(near) : `${kind} without "join … newsletter"` });
+function htmlUnits(src) {
+  const root = parseHtml(src);
+  const units = [];
+  const titles = [];
+  const containerText = new Map(); // container -> raw text of all its units (for the offer check)
+  const add = (tight, spaced, cont, extra = {}) => {
+    if (!/\S/.test(tight + spaced)) return;
+    units.push({ tight, spaced, cont, ...extra });
+    for (let c = cont; c; c = c.parentCont) containerText.set(c, (containerText.get(c) ?? "") + "\n" + tight + "\n" + spaced);
   };
-  for (const m of t.matchAll(FREE_RE)) check(m, "free");
-  for (const m of t.matchAll(SYNONYM_RE)) check(m, "synonym");
+  const walk = (n, cont) => {
+    let buf = { tight: "", spaced: "" };
+    const flush = () => { add(buf.tight, buf.spaced, cont); buf = { tight: "", spaced: "" }; };
+    for (const c of n.children) {
+      if (c.text !== undefined) {
+        if (c.raw) continue;
+        buf.tight += c.text.replace(/\s*\n\s*/g, " ");
+        buf.spaced += c.text.replace(/\s*\n\s*/g, " ");
+        continue;
+      }
+      let cc = cont;
+      if (isContainer(c)) { cc = c; c.parentCont = cont; }
+      // <meta> values and the <title> stand alone (search results, social cards): each is its own container.
+      if (c.tag === "meta" || c.tag === "title") { cc = { tag: c.tag, parentCont: null }; }
+      for (const [k, v] of c.attrs) if (READ_ATTR.test(k) && v) add(v, v, cc, { attr: k, el: c });
+      if (c.tag === "title") { titles.push(c.children.map((x) => x.text ?? "").join("")); }
+      if (c.tag === "meta") {
+        const key = (c.attrs.find(([k]) => k === "property" || k === "name") ?? [])[1] ?? "";
+        const content = (c.attrs.find(([k]) => k === "content") ?? [])[1];
+        if (/^(?:og:title|twitter:title|title)$/i.test(key) && content) titles.push(content);
+      }
+      if (c.tag === "script") {
+        const body = c.children.map((x) => x.text ?? "").join("");
+        if ((c.attrs.find(([k]) => k === "type") ?? [])[1]?.toLowerCase().includes("ld+json")) {
+          flush();
+          for (const [key, s, obj] of jsonLdStrings(body, cc)) {
+            add(s, s, obj, { jsonld: key });
+            if (/^(?:name|headline|alternativeHeadline)$/.test(key)) titles.push(s);
+          }
+        }
+        continue;
+      }
+      if (c.tag === "style") continue;
+      if (c.tag === "textarea" || c.tag === "title" || c.tag === "noscript" || c.tag === "xmp") {
+        flush();
+        const body = c.children.map((x) => x.text ?? "").join("");
+        if (c.tag === "noscript") walk(parseHtml(body), cc); else add(body, body, cc);
+        continue;
+      }
+      if (BLOCK.has(c.tag) || cc !== cont) {
+        flush();
+        walk(c, cc);
+      } else {
+        // inline element: its text joins the current unit (fr<b>ee</b> -> free), block children split it
+        buf.spaced += " ";
+        walkInline(c, cc, buf, flush, walk, add);
+        buf.spaced += " ";
+      }
+    }
+    flush();
+  };
+  const walkInline = (n, cont, buf, flush, walkFn, addFn) => {
+    for (const c of n.children) {
+      if (c.text !== undefined) {
+        if (c.raw) continue;
+        buf.tight += c.text.replace(/\s*\n\s*/g, " ");
+        buf.spaced += c.text.replace(/\s*\n\s*/g, " ");
+        continue;
+      }
+      for (const [k, v] of c.attrs) if (READ_ATTR.test(k) && v) addFn(v, v, cont, { attr: k, el: c });
+      if (c.tag === "script" || c.tag === "style") continue;
+      if (BLOCK.has(c.tag) || isContainer(c)) {
+        flush();
+        if (isContainer(c)) c.parentCont = cont;
+        walkFn(c, isContainer(c) ? c : cont);
+      } else {
+        buf.spaced += " ";
+        walkInline(c, cont, buf, flush, walkFn, addFn);
+        buf.spaced += " ";
+      }
+    }
+  };
+  walk(root, root);
+  return { units, titles, containerText };
+}
+
+/**
+ * [key, string, container] for every string in the JSON-LD blocks (decoded). Each JSON object is a
+ * container (a FAQ Question, a Book, an Offer), nested in its parent object; non-JSON text is split
+ * on quotes and kept in the script's container.
+ */
+function jsonLdStrings(body, outer) {
+  const out = [];
+  const walk = (v, key, cont) => {
+    if (typeof v === "string") out.push([key, v, cont]);
+    else if (Array.isArray(v)) v.forEach((x) => walk(x, key, cont));
+    else if (v && typeof v === "object") {
+      const own = { tag: "json-object", parentCont: cont };
+      for (const [k, x] of Object.entries(v)) walk(x, k, own);
+    }
+  };
+  try {
+    walk(JSON.parse(body), "", outer);
+  } catch {
+    for (const s of body.replace(/\\"/g, "'").split('"')) out.push(["", s, outer]);
+  }
+  return out;
+}
+
+// ---- Source (TSX/TS) and Markdown --------------------------------------------------------------
+/**
+ * JSX tags with their attributes removed (quotes and {…} depth respected, so className="…" or
+ * onClick={() => a > b} never splits the text). Readable attribute values (alt, title, aria-label,
+ * placeholder, label, value, content, data-*) are returned as their own units.
+ */
+function stripJsxTags(src) {
+  const attrs = [];
+  let out = "";
+  let i = 0;
+  while (i < src.length) {
+    const lt = src.indexOf("<", i);
+    if (lt < 0) { out += src.slice(i); break; }
+    const name = src.slice(lt).match(/^<\/?([A-Za-z][\w.]*)/);
+    if (!name) { out += src.slice(i, lt + 1); i = lt + 1; continue; }
+    out += src.slice(i, lt);
+    let k = lt + name[0].length, depth = 0, q = "";
+    const start = k;
+    for (; k < src.length; k++) {
+      const ch = src[k];
+      if (q) { if (ch === q && src[k - 1] !== "\\") q = ""; continue; }
+      if (ch === '"' || ch === "'" || ch === "`") q = ch;
+      else if (ch === "{") depth++;
+      else if (ch === "}") depth--;
+      else if (ch === ">" && depth <= 0) break;
+    }
+    const body = src.slice(start, k);
+    for (const m of body.matchAll(/\b(alt|title|aria-label|aria-description|placeholder|label|value|content|data-[\w-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|\{\s*["'`]([^"'`]*)["'`]\s*\})/g)) attrs.push(m[2] ?? m[3] ?? m[4]);
+    out += `<${name[0].slice(1)}${/\/\s*$/.test(body) ? "/" : ""}>`;
+    i = k + 1;
+  }
+  return { out, attrs };
+}
+function sourceUnits(src) {
+  let t = src.replace(/<!--[\s\S]*?-->/g, "");
+  t = t.replace(/\b(?:tier|plan)\s*\|\|\s*["'`]Free["'`]/g, " "); // VIP membership tier label (ruling 2: source-only, exact)
+  t = t.replace(/\/\*[\s\S]*?\*\//g, "\n").replace(/(^|[^:])\/\/[^\n]*/g, "$1\n");
+  t = t.replace(/(["'`])\s*\+\s*(["'`])/g, ""); // "Fr" + "ee" string concatenation
+  t = t.replace(/\{\s*(["'`])(\s*)\1\s*\}/g, "$2"); // {" "} and {""} in JSX
+  const { out, attrs } = stripJsxTags(t);
+  t = out.replace(/\s*\n\s*/g, " ").replace(/["`]|[{}]|\\n|[;,]\s*$/g, "\n");
+  t = t.replace(new RegExp(`</?(?:${[...BLOCK].join("|")}|Button|Link|A|DialogTitle|DialogDescription|CardTitle|CardDescription)/?>`, "g"), "\n");
+  const lines = [...t.split("\n"), ...attrs];
+  const units = lines
+    .map((l) => ({ tight: l.replace(/<\/?[A-Za-z][\w.]*\/?>/g, ""), spaced: l.replace(/<\/?[A-Za-z][\w.]*\/?>/g, " ") }))
+    .filter((u) => /\S/.test(u.tight));
+  // Container in source: the unit and its neighbours within WINDOW characters (the rendered and
+  // prerendered scans apply the DOM container rule to what readers actually get).
+  const doc = units.map((u) => u.tight).join("\n");
+  const containerText = new Map();
+  let off = 0;
+  for (const u of units) {
+    u.cont = { tag: "source" };
+    containerText.set(u.cont, doc.slice(Math.max(0, off - WINDOW), off + u.tight.length + WINDOW));
+    off += u.tight.length + 1;
+  }
+  const titles = [];
+  for (const m of src.matchAll(/(?:\btitle\s*=\s*|document\.title\s*=\s*|\btitle\s*:\s*)(?:"([^"]*)"|'([^']*)'|`([^`]*)`)/g)) titles.push(m[1] ?? m[2] ?? m[3]);
+  return { units, titles, containerText };
+}
+/** Markdown / plain text (llms.txt, robots.txt): every line is its own element and container. */
+function markdownUnits(src) {
+  const units = [];
+  const containerText = new Map();
+  for (const line of src.split("\n")) {
+    if (!/\S/.test(line)) continue;
+    const cont = { tag: "line" };
+    units.push({ tight: line, spaced: line, cont });
+    containerText.set(cont, line);
+  }
+  return { units, titles: src.split("\n").filter((l) => /^#\s/.test(l)).map((l) => l.slice(2)), containerText };
+}
+
+// ---- Scan --------------------------------------------------------------------------------------
+const SENT_END = /[.!?\u2026]["'\u201D\u2019)\]]*(?=\s|$)|\u2026/g;
+function sentenceAt(t, i) {
+  let start = 0;
+  let end = t.length;
+  for (const m of t.matchAll(SENT_END)) {
+    const e = m.index + m[0].length;
+    if (e <= i) start = e;
+    else if (m.index >= i) { end = e; break; }
+  }
+  return t.slice(start, end).trim();
+}
+
+function scanUnit(text, offerInContainer, docWindow) {
+  const out = [];
+  for (const [re, why] of HARD_FAIL) for (const m of text.matchAll(re)) out.push({ sentence: sentenceAt(text, m.index).slice(0, 160), near: why });
+  const blank = (s) => " ".repeat(s.length);
+  let t = text;
+  for (const re of PATHS) t = t.replace(re, blank);
+  if (!offerInContainer) for (const re of EXEMPT_AWAY_FROM_OFFER) t = t.replace(re, blank);
+  for (const m of t.matchAll(FREE_RE)) {
+    const s = sentenceAt(t, m.index);
+    if (linked(s)) continue;
+    out.push({ sentence: s.slice(0, 160), near: offerInContainer ? `free next to an offer, no join … newsletter (${offerInContainer})` : 'free without "join … newsletter"' });
+  }
+  for (const m of t.matchAll(SYNONYM_RE)) {
+    const s = sentenceAt(t, m.index);
+    if (linked(s)) continue;
+    if (!hasOffer(s) && !hasOffer(docWindow(m.index, m[0].length))) continue; // synonyms count next to an offer
+    out.push({ sentence: s.slice(0, 160), near: `synonym "${m[0]}" next to an offer` });
+  }
   return out;
 }
 
 /** 'free' claims that break the newsletter-join rule: [{ sentence, near }]. Empty when clean. */
-export function bareFreeClaims(src, opts) {
+export function bareFreeClaims(src, { kind = "html" } = {}) {
+  const { units, titles, containerText } = kind === "source" ? sourceUnits(src) : kind === "markdown" ? markdownUnits(src) : htmlUnits(src);
+  const offerCache = new Map();
+  const offerIn = (c) => {
+    if (!offerCache.has(c)) offerCache.set(c, offerAt(norm(containerText.get(c) ?? "")));
+    return offerCache.get(c);
+  };
+  // Document order, for the synonym window.
+  const views = units.map((u) => [norm(u.tight), norm(u.spaced)]);
+  const doc = views.map((v) => v[0]).join("\n");
+  const starts = [];
+  views.reduce((o, v, k) => ((starts[k] = o), o + v[0].length + 1), 0);
   const seen = new Map();
-  for (const view of readerViews(src, opts)) for (const h of scanView(view)) seen.set(`${h.near}|${h.sentence}`, h);
-  for (const title of titleTexts(src))
+  units.forEach((u, k) => {
+    const offer = offerIn(u.cont);
+    for (const [vi, text] of views[k].entries()) {
+      const win = (i, len) => (vi === 0 ? doc.slice(Math.max(0, starts[k] + i - WINDOW), starts[k] + i + len + WINDOW) : text.slice(Math.max(0, i - WINDOW), i + len + WINDOW));
+      for (const h of scanUnit(text, offer, win)) seen.set(`${h.near}|${h.sentence}`, h);
+    }
+  });
+  for (const title of titles.map(norm))
     if (/\bfree\s+prequels?\b/i.test(title)) seen.set(`title|${title}`, { sentence: title.slice(0, 160), near: '"Free Prequel" in a page title' });
   return [...seen.values()];
 }

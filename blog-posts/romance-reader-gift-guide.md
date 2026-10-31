@@ -8,7 +8,7 @@ This guide is the answer. Every item on this list is something I've either used 
 
 ## The Big Gift: A Kindle Paperwhite
 
-If you're buying one big gift, make it this. The [Kindle Paperwhite (7" Display, Latest Model)](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20) is the ultimate gift for any serious reader: glare-free display, weeks of battery life, waterproof design, and adjustable warm light for comfortable reading day or night.
+If you're buying one big gift, make it this. The [Kindle Paperwhite (7" Display, Latest Model)](https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20) is the ultimate gift for any serious reader: no-glare display, weeks of battery life, waterproof design, and adjustable warm light for comfortable reading day or night.
 
 I say this as someone who reads on one daily: every book they download after this becomes part of your gift. It's the one upgrade that genuinely changes a reader's life.
 

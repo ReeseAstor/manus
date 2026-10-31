@@ -41,12 +41,21 @@ const QA_MUST_FAIL: [string, string][] = [
   ["free download", "<a>Free download</a>"],
   ["'feel free' exemption abused", "<p>The First Acquisition: feel free, it's free.</p>"],
 ];
+// v5: cases that passed before and now must fail by QA's v4 rulings 2 and 3.
+const RULED_NOW_FAIL: [string, string][] = [
+  ["v3 control 'glare-free' next to a prequel (ruling 2)", "<p>A glare-free display for The First Acquisition.</p>"],
+  ["v3 control 'free Kindle app' next to a prequel (ruling 2)", "<p>Read The First Acquisition in the free Kindle app.</p>"],
+  ["blank lines are not a container boundary (ruling 3)", "<div><h3>Hostile Tender</h3><p>One night stand</p></div>\n\n\n<p>Read free with Kindle+ (formerly Kindle Unlimited).</p>\n\n\n<section><h2>The First Acquisition, free when you join the newsletter</h2></section>"],
+  ["software free tier exemption dropped (ruling 2)", "<p>The platform has a free tier that covers everything you need to start.</p>"],
+];
 const QA_MUST_PASS: [string, string][] = [
   ["canonical", "<p>Start the Hudson Dynasty with The First Acquisition, free when you join my newsletter.</p>"],
   ["short form", "<p>Free prequel when you join my newsletter.</p>"],
   ["KU line on KU title", "<p>Hostile Tender. Read free with Kindle+ (formerly Kindle Unlimited).</p>"],
-  ["glare-free", "<p>A glare-free display for The First Acquisition.</p>"],
-  ["free Kindle app", "<p>Read The First Acquisition in the free Kindle app.</p>"],
+  // v5: QA v4 ruling 2 moved every exemption to away-from-offer, so the v3 controls "glare-free" and "free
+  // Kindle app" next to The First Acquisition now must fail (RULED_NOW_FAIL); here they stand away from an offer.
+  ["glare-free (away from an offer)", "<p>A glare-free display for night reading.</p>"],
+  ["free Kindle app (away from an offer)", "<p>Read Hostile Tender in the free Kindle app.</p>"],
   ["third person", "<p>The First Acquisition, free when you join Reese Astor's newsletter.</p>"],
 ];
 // PE's own probes on top of QA's (v4).
@@ -89,11 +98,10 @@ const PE_MUST_PASS: [string, string][] = [
   ["/read wording", "<h3>Free when you join the newsletter</h3>"],
   ["FAQ wording", "<summary>Is there a free book when I join the newsletter?</summary>"],
   ["Reader's Club, no prequel nearby", "<button>Join Reader's Club (Free)</button>"],
-  ["KU card on a series page, prequel band in a later section", "<div><h3>Hostile Tender</h3><p>One night stand</p></div>\n\n\n<p>Read free with Kindle+ (formerly Kindle Unlimited).</p>\n\n\n<section><h2>The First Acquisition, free when you join the newsletter</h2></section>"],
+  ["KU card on a series page (its own card container), prequel in another section", "<section><div><h3>Hostile Tender</h3><ul><li>One night stand</li></ul><a>Read free with Kindle+ (formerly Kindle Unlimited).</a></div></section><section><h2>The First Acquisition, free when you join the newsletter</h2></section>"],
   ["royalty-free", "<p>Royalty-free photo.</p>"],
   ["free-book route", '<a href="/free-book">Newsletter prequel</a>'],
   ["free of = rid of (post 12, Amazon blurb)", "<p>A one-night stand with Theo Silva, a heroine almost free of a toxic marriage.</p>"],
-  ["software free tier", "<p>The platform has a free tier that covers everything you need to start.</p>"],
   ["DB post v4 wording (row 13)", "<p>A reader magnet is the free book or bonus content readers get when they join your newsletter.</p>"],
   ["llms.txt: KU item under a prequel item", "- [The First Acquisition](https://x): Prequel.\n- [Hostile Tender](https://y): Book 1. Read free with Kindle+ (formerly Kindle Unlimited)."],
 ];
@@ -114,6 +122,9 @@ describe("free wording (newsletter-only prequels)", () => {
     expect(QA_MUST_PASS.length).toBe(6);
   });
 
+  it("v5: cases QA's v4 rulings 2 and 3 turned into must-fail", () => {
+    expect(RULED_NOW_FAIL.filter(([, h]) => scan(h, kindOf(h)).length === 0).map(([n]) => n)).toEqual([]);
+  });
   it("catches PE's added probes and keeps PE's controls clean", () => {
     const missed = PE_MUST_FAIL.filter(([, h]) => scan(h, kindOf(h)).length === 0).map(([n]) => n);
     const flagged = PE_MUST_PASS.filter(([, h]) => scan(h, kindOf(h)).length > 0).map(([n, h]) => `${n}: ${JSON.stringify(scan(h, kindOf(h)))}`);
