@@ -91,6 +91,9 @@ function BookLayout({ book }: { book: Book }) {
             >
               {book.tagline}
             </p>
+            <p data-age-notice className="text-[15px] mt-4" style={{ color: TEXT_SOFT }}>
+              For readers 18+.
+            </p>
           </motion.div>
 
           <motion.div

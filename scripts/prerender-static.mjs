@@ -182,7 +182,7 @@ write(
         { name: "Books", path: "/books" },
       ]),
     ],
-    body: `<h1>Books by Reese Astor</h1>${Object.keys(LANE_META)
+    body: `<h1>Books by Reese Astor</h1><p>For readers 18+.</p>${Object.keys(LANE_META)
       .map((lane) => `<section id="${lane.replace(/_/g, "-")}"><h2>${esc(LANE_META[lane].title)}</h2><p>${esc(LANE_META[lane].subtitle)}</p>${bookList(lane)}</section>`)
       .join("")}${FREE_PREQUELS}`,
   }),
@@ -200,7 +200,7 @@ for (const book of BOOKS) {
     bookFallbackFactsHtml(book, { esc }),
   ].join("");
   const buy = bookFallbackBuyHtml(book, { esc, withAmazonTag });
-  const bookBody = `<article><h1>${esc(book.title)}</h1><p><em>${esc(book.tagline)}</em></p><img src="${esc(book.cover_image)}" alt="${esc(book.title)} by Reese Astor, cover" width="400" height="600" /><p>${esc(book.blurb)}</p><ul>${facts}</ul><p>${buy}</p>${
+  const bookBody = `<article><h1>${esc(book.title)}</h1><p><em>${esc(book.tagline)}</em></p><p>For readers 18+.</p><img src="${esc(book.cover_image)}" alt="${esc(book.title)} by Reese Astor, cover" width="400" height="600" /><p>${esc(book.blurb)}</p><ul>${facts}</ul><p>${buy}</p>${
     siblings.length
       ? `<h2>More in ${esc(lane.title)}</h2><ul>${siblings.map((b) => `<li><a href="/books/${b.slug}">${esc(b.title)}</a></li>`).join("")}</ul>`
       : ""
@@ -244,7 +244,7 @@ const simple = [
     description:
       "Start the Hudson Dynasty with The First Acquisition, free when you join my newsletter.",
     schemas: [],
-    body: `<h1>Start the Hudson Dynasty</h1>${FREE_PREQUELS}`,
+    body: `<h1>Start the Hudson Dynasty</h1><p>For readers 18+.</p>${FREE_PREQUELS}`,
   },
   {
     route: "/newsletter",
