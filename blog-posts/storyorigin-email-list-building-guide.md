@@ -16,9 +16,9 @@ Consider the math: if you have 1,000 email subscribers and you send a new releas
 
 Before you can grow a list, you need three things in place: a reader magnet, an email service provider, and a way to grow.
 
-**A reader magnet** is the free book or bonus content you offer in exchange for an email address. For romance authors, the most effective reader magnets are prequel novellas, bonus epilogues, or the first book in a series.
+**A reader magnet** is the free book or bonus content readers get when they join your newsletter. For romance authors, the most effective reader magnets are prequel novellas, bonus epilogues, or the first book in a series.
 
-For the Manhattan Money Kings series, the free prequel novella *The Billionaire's One Night Stand* became my lead magnet. It introduces readers to the world before the main series begins.
+For the Manhattan Money Kings series, the prequel novella *The Billionaire's One Night Stand*, free when readers join my newsletter, became my lead magnet. It introduces readers to the world before the main series begins.
 
 ## StoryOrigin: The Tool That Changed How I Build My List
 
@@ -26,7 +26,7 @@ For the Manhattan Money Kings series, the free prequel novella *The Billionaire'
 
 **Reader Magnet Delivery**: StoryOrigin handles delivery automatically. Reader downloads the book, gets added to your list, receives the file. Clean, professional, zero manual work.
 
-**Group Promotions**: StoryOrigin hosts group promos where multiple authors bundle their free books together. A reader downloads one collection and gets exposed to five, ten, or twenty romance authors they hadn't heard of before. If they love your free book, they stay subscribed.
+**Group Promotions**: StoryOrigin hosts group promos where multiple authors bundle books that readers get free when they join each author's newsletter. A reader downloads one collection and gets exposed to five, ten, or twenty romance authors they hadn't heard of before. If they love your book, they stay subscribed.
 
 **Newsletter Swaps**: Once you have a small list, you can arrange newsletter swaps with other romance authors at your subscriber level. You feature their book to your readers; they feature your book to theirs. Both lists grow. These partnerships often outperform paid advertising.
 
@@ -46,7 +46,7 @@ Months 5-6: You've been consistent. Your open rates are above 30%. You're partic
 
 Growing a list is only half the equation. Keeping subscribers engaged and converting them into book buyers is where the revenue comes from.
 
-The welcome sequence matters most. When someone downloads your free book, they're warm. They're curious about you. That's the moment to send a 4-5 email sequence that introduces your world, your characters, and eventually, your paid books.
+The welcome sequence matters most. When someone joins your newsletter for your free book, they're warm. They're curious about you. That's the moment to send a 4-5 email sequence that introduces your world, your characters, and eventually, your paid books.
 
 The Manhattan Money Kings welcome sequence looks like this: welcome email with book delivery, character introductions for the paid series, my personal author story, a limited-time offer on Book 1, and a series bundle offer before the sequence ends.
 

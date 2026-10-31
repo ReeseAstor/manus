@@ -76,6 +76,10 @@ const PE_MUST_FAIL: [string, string][] = [
   ["TSX source CTA without title", 'export const X = () => <Button>Start reading free</Button>;'],
   ["TSX source label", 'const offer = { label: "Free with my newsletter" };'],
   ["llms.txt: KU line on the prequel's own list item", "- [The First Acquisition](https://x): Prequel. Read free with Kindle+ (formerly Kindle Unlimited)."],
+  ["free of charge next to a prequel", "<p>The First Acquisition, free of charge.</p>"],
+  ["DB post v3 wording (row 8)", "<p><em>The prequel novella is free if you want to test the waters.</em></p>"],
+  ["DB post v3 wording (rows 4, 9)", "<p>Start the series free: The prequel novella, The Billionaire's One Night Stand, is available as a free download.</p>"],
+  ["DB post v3 wording (row 11)", "<p>The prequel novella The Billionaire's One Night Stand is free on my site.</p>"],
   ["llms.txt: bare free on a prequel item", "- [The Billionaire's One Night Stand](https://x): Manhattan Money Kings prequel, free"],
 ];
 const PE_MUST_PASS: [string, string][] = [
@@ -87,6 +91,9 @@ const PE_MUST_PASS: [string, string][] = [
   ["KU card on a series page, prequel band in a later section", "<div><h3>Hostile Tender</h3><p>One night stand</p></div>\n\n\n<p>Read free with Kindle+ (formerly Kindle Unlimited).</p>\n\n\n<section><h2>The First Acquisition, free when you join the newsletter</h2></section>"],
   ["royalty-free", "<p>Royalty-free photo.</p>"],
   ["free-book route", '<a href="/free-book">Newsletter prequel</a>'],
+  ["free of = rid of (post 12, Amazon blurb)", "<p>A one-night stand with Theo Silva, a heroine almost free of a toxic marriage.</p>"],
+  ["software free tier", "<p>The platform has a free tier that covers everything you need to start.</p>"],
+  ["DB post v4 wording (row 13)", "<p>A reader magnet is the free book or bonus content readers get when they join your newsletter.</p>"],
   ["llms.txt: KU item under a prequel item", "- [The First Acquisition](https://x): Prequel.\n- [Hostile Tender](https://y): Book 1. Read free with Kindle+ (formerly Kindle Unlimited)."],
 ];
 
@@ -144,6 +151,24 @@ describe("free wording (newsletter-only prequels)", () => {
     const files = fs.globSync("client/public/read/**/*.html", { cwd: root });
     expect(files.length).toBeGreaterThan(10);
     const hits = files.flatMap((f) => scan(fs.readFileSync(path.join(root, f), "utf8")).map((h) => `${f}: ${h.sentence}`));
+    expect(hits).toEqual([]);
+  });
+
+  it("blog-posts/*.md (= the DB bodies after 01-forward-update.sql) pass the guard as the production prerender renders them", () => {
+    // Production builds have DATABASE_URL, so scripts/prerender-static.mjs prerenders every published, non-retired post
+    // through write() and this guard. Render each .md the same way (esc + mdToHtml copied from the prerender).
+    const pre = fs.readFileSync(path.join(root, "scripts/prerender-static.mjs"), "utf8");
+    const escSrc = pre.match(/const esc = \(s = ""\) =>[\s\S]*?;\n/)?.[0];
+    const mdSrc = pre.match(/function mdToHtml\(md = ""\) \{[\s\S]*?\n\}\n/)?.[0];
+    expect(escSrc && mdSrc).toBeTruthy();
+    const { esc, mdToHtml } = new Function(`${escSrc}\n${mdSrc}\nreturn { esc, mdToHtml };`)() as { esc: (s: string) => string; mdToHtml: (s: string) => string };
+    const files = fs.globSync("blog-posts/*.md", { cwd: root });
+    expect(files.length).toBeGreaterThan(10);
+    const hits = files.flatMap((f) => {
+      const t = fs.readFileSync(path.join(root, f), "utf8");
+      const html = `<article><h1>${esc(t.split("\n")[0].replace(/^# /, ""))}</h1>${mdToHtml(t.replace(/^# .*\n+/, ""))}</article>`;
+      return scan(html).map((h) => `${f}: ${h.sentence}`);
+    });
     expect(hits).toEqual([]);
   });
 

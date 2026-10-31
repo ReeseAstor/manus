@@ -43,6 +43,10 @@ const EXEMPT_ALWAYS = [
   /\b(?:take (?:my|this) )?free (?:\d+-question )?(?:romance |book boyfriend )?quiz\b/gi,
   /\bFree: My 10-Point Steamy Scene Checklist\b/g,
   /\bFree Bonus Content\b/g,
+  // "free of" = rid of ("almost free of a toxic marriage"), not a price; "free of charge/cost" still counts.
+  /\bfree of\b(?! *(?:charge|cost))/gi,
+  // Software pricing tiers (e.g. a newsletter tool's free tier), not a book offer.
+  /\bfree (?:tier|plan|trial|version|account)s?\b/gi,
   // Reader's Club badge: membership costs nothing (ruling c), it is not a book offer.
   /\bNo Cost to Join\b/gi,
 ];

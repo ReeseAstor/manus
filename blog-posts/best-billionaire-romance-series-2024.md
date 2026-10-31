@@ -46,7 +46,7 @@ Book 3 brings together **Dominic Kane** and **Sophia Reed** in a secret baby rom
 
 *Tropes: Nanny Romance, Single Dad, Forbidden Romance*
 
-**Start the series free**: The prequel novella, *The Billionaire's One Night Stand*, is available as a free download and introduces readers to the world of Manhattan's elite.
+**Start the series with the prequel**: The prequel novella, *The Billionaire's One Night Stand*, is free when you join my newsletter and introduces readers to the world of Manhattan's elite.
 
 ## Kings of Sin Series by Ana Huang
 
@@ -88,7 +88,7 @@ Since we're talking about binge-reading entire series, I'll share what I actuall
 
 The best billionaire romance series transport readers into worlds of luxury and passion while delivering the emotional satisfaction of watching two people find their way to each other despite the odds. Whether you're new to the genre or a longtime fan, the series recommended here offer something special.
 
-For readers ready to fall in love with Manhattan's most eligible billionaires, the **Manhattan Money Kings series** provides the perfect entry point. Start with the free prequel, then prepare to binge-read your way through four unforgettable love stories.
+For readers ready to fall in love with Manhattan's most eligible billionaires, the **Manhattan Money Kings series** provides the perfect entry point. Start with the prequel, free when you join my newsletter, then prepare to binge-read your way through four unforgettable love stories.
 
 *What's your favorite billionaire romance series? I'm always looking for my next obsession.*
 

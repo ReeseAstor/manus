@@ -20,7 +20,7 @@ I'm putting my own book first because I wrote it specifically to scratch this it
 
 What makes this one work (and I say this as the person who lived with these characters for months) is that their opposition isn't superficial. Michael represents everything Sarah has spent her life fighting against — unchecked power, inherited privilege, the assumption that money buys compliance. And Sarah represents everything Michael finds threatening — someone who sees through him, who won't perform deference, who makes him want things he's trained himself not to need.
 
-*The prequel novella is free if you want to test the waters.*
+*The prequel novella is free when you join my newsletter, if you want to test the waters.*
 
 ### King of Wrath by Ana Huang
 

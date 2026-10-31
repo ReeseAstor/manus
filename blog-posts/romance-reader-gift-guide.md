@@ -40,7 +40,7 @@ The [Aimuan Reading Pillow with Arms](https://www.amazon.com/dp/B09V518DRK?tag=r
 
 ## The Ultimate Gift: A New Series
 
-And if you want to give them a gift that isn't a physical thing at all — give them a story. My **Manhattan Money Kings** series starts with *The Billionaire's Executive Assistant*, and the prequel novella *The Billionaire's One Night Stand* is free on my site — the perfect taste-test for a new reader.
+And if you want to give them a gift that isn't a physical thing at all — give them a story. My **Manhattan Money Kings** series starts with *The Billionaire's Executive Assistant*, and the prequel novella *The Billionaire's One Night Stand* is free when you join my newsletter, the perfect taste-test for a new reader.
 
 For the true gift experience, pair the series with the blanket hoodie and the library candle. That's a complete reading night in a box.
 

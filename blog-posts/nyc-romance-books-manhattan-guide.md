@@ -20,7 +20,7 @@ What distinguishes this series is the attention to authentic Manhattan details. 
 
 The series spans Midtown boardrooms, Brooklyn apartments, the private clubs of the Upper East Side, and the quiet corners of Central Park where even billionaires can be vulnerable. Each book works as a standalone romance while building a larger world readers want to return to.
 
-**Start the series free**: The prequel novella, *The Billionaire's One Night Stand*, is available as a free download.
+**Start the series with the prequel**: The prequel novella, *The Billionaire's One Night Stand*, is free when you join my newsletter.
 
 ## More NYC Romance I Genuinely Recommend
 
