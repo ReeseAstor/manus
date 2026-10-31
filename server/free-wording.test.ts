@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { RETIRED_BLOG_SLUGS } from "../shared/const";
 // @ts-expect-error plain .mjs module without types
 import { bareFreeClaims } from "../scripts/lib/free-wording-guard.mjs";
 
@@ -162,8 +163,9 @@ describe("free wording (newsletter-only prequels)", () => {
     const mdSrc = pre.match(/function mdToHtml\(md = ""\) \{[\s\S]*?\n\}\n/)?.[0];
     expect(escSrc && mdSrc).toBeTruthy();
     const { esc, mdToHtml } = new Function(`${escSrc}\n${mdSrc}\nreturn { esc, mdToHtml };`)() as { esc: (s: string) => string; mdToHtml: (s: string) => string };
-    const files = fs.globSync("blog-posts/*.md", { cwd: root });
-    expect(files.length).toBeGreaterThan(10);
+    // Retired slugs are never prerendered (RETIRED_BLOG_SLUGS), so they are skipped as the prerender skips them.
+    const files = fs.globSync("blog-posts/*.md", { cwd: root }).filter((f) => !(RETIRED_BLOG_SLUGS as readonly string[]).includes(path.basename(f, ".md")));
+    expect(files.length).toBeGreaterThan(9);
     const hits = files.flatMap((f) => {
       const t = fs.readFileSync(path.join(root, f), "utf8");
       const html = `<article><h1>${esc(t.split("\n")[0].replace(/^# /, ""))}</h1>${mdToHtml(t.replace(/^# .*\n+/, ""))}</article>`;

@@ -17,4 +17,14 @@ describe("retired blog slugs", () => {
     expect(await getBlogPostBySlug("a-live-post")).toBeUndefined();
     expect(warn).toHaveBeenCalled();
   });
+
+  it("retires the AI workflow posts and the storyorigin list-building post (QA rulings 10/30)", () => {
+    for (const slug of [
+      "ai-assisted-romance-writing-workflow",
+      "romance-author-writing-tools-setup",
+      "quality-control-workflows-romance-authors",
+      "storyorigin-email-list-building-guide",
+    ])
+      expect(RETIRED_BLOG_SLUGS as readonly string[]).toContain(slug);
+  });
 });
