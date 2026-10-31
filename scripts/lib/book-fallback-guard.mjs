@@ -4,6 +4,7 @@
  * catalog flag (books.ts kindle_unlimited): the expected line and KU membership are written
  * out here, so changing the generator or flipping a flag cannot make its own check pass.
  */
+import { HTML5_ENTITIES, LEGACY_NO_SEMICOLON } from "./html5-entities.mjs";
 
 /** The only approved subscription line, byte-exact. */
 export const EXPECTED_KINDLE_PLUS_LINE = "Read free with Kindle+ (formerly Kindle Unlimited).";
@@ -66,25 +67,38 @@ const HOMOGLYPHS = {
   "\u2212": "-", "\uFE62": "+", "\u2795": "+", "\u02D6": "+", "\u2A72": "+", "\u2A01": "+", "\u16ED": "+",
 };
 
-const NAMED_ENTITIES = {
-  nbsp: " ", ensp: " ", emsp: " ", thinsp: " ", plus: "+", amp: "&", lt: "<", gt: ">", quot: '"', apos: "'",
-  shy: "", zwj: "", zwnj: "", middot: "\u00B7", ndash: "\u2013", mdash: "\u2014", sol: "/", hyphen: "-",
-  period: ".", lpar: "(", rpar: ")", colon: ":", comma: ",", dollar: "$", num: "#",
-};
+// Marker left where an entity-like "&name" could not be decoded (QA v2 gap). It is a non-word
+// character, so "Kindle&bogus;Unlimited" still reads as Kindle<sep>Unlimited, and fallbackProblems
+// fails closed when one sits next to a kindle/unlimited/plus word.
+const UNKNOWN_ENTITY = "\uFFFD";
+const LEGACY_RE = new RegExp(`&(${LEGACY_NO_SEMICOLON.join("|")})`, "g");
 
-function decodeEntities(text) {
-  // Repeat so double-encoded text (&amp;#105;) is decoded too.
+function safeCodePoint(n) {
+  return Number.isInteger(n) && n >= 0 && n <= 0x10ffff ? String.fromCodePoint(n) : UNKNOWN_ENTITY;
+}
+
+/**
+ * Full HTML5 decoding (QA v2 gap): numeric references, every WHATWG named reference with ';'
+ * (case-sensitive, as browsers do: &NonBreakingSpace; &hairsp; &ThinSpace;), the 106 legacy names
+ * browsers also accept without ';' (&nbsp, &amp, &shy ...), and anything else entity-shaped becomes
+ * UNKNOWN_ENTITY. Repeated so double-encoded text (&amp;#105;, &amp;nbsp;) is decoded too.
+ */
+function decodeEntities(text, { passes = 4, failClosed = true } = {}) {
   let t = text;
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < passes; i++) {
     const before = t;
     t = t
-      .replace(/&#x([0-9a-f]+);?/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
-      .replace(/&#(\d+);?/g, (_, d) => String.fromCodePoint(Number(d)))
-      .replace(/&([a-z]+);/gi, (m, n) => (n.toLowerCase() in NAMED_ENTITIES ? NAMED_ENTITIES[n.toLowerCase()] : m));
+      .replace(/&#x([0-9a-f]+);?/gi, (_, h) => safeCodePoint(parseInt(h, 16)))
+      .replace(/&#(\d+);?/g, (_, d) => safeCodePoint(Number(d)))
+      .replace(/&([A-Za-z][A-Za-z0-9]*);/g, (m, n) => (Object.hasOwn(HTML5_ENTITIES, n) ? HTML5_ENTITIES[n] : m))
+      .replace(LEGACY_RE, (_, n) => HTML5_ENTITIES[n]);
     if (t === before) break;
   }
-  return t;
+  return failClosed ? t.replace(/&[A-Za-z][A-Za-z0-9]*;?/g, UNKNOWN_ENTITY) : t;
 }
+
+/** An attribute value as the browser reads it: one decoding pass, unknown names left as written. */
+const decodeAttr = (v) => decodeEntities(v, { passes: 1, failClosed: false });
 
 /** JSON string escapes (\\uXXXX, \\n, \\/ ...) decoded, for JSON-LD text that is not valid JSON. */
 function decodeJsonEscapes(text) {
@@ -105,12 +119,35 @@ export function normalizeForScan(text) {
   t = t.normalize("NFKC").replace(/[\u200B-\u200F\u2060-\u2064\uFEFF\u00AD\u034F\u180E\u061C]/g, "");
   t = [...t].map((c) => HOMOGLYPHS[c] ?? c).join("");
   t = t.normalize("NFKD").replace(/\p{M}/gu, "");
-  return t.replace(/[\s\u00A0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000]+/g, " ");
+  return t.replace(/[\s\u00A0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000\u3164\u2800\uFFA0\u115F\u1160]+/g, " ");
 }
 
 /** Visible text: comments and tags removed (QA F5a), so markup cannot split a word. */
 function stripMarkup(html) {
-  return html.replace(/<!--[\s\S]*?-->/g, "").replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, " ").replace(/<[^>]+>/g, "");
+  return html.replace(/<!--[\s\S]*?-->/g, "").replace(/<(script|style|template)\b[^>]*>[\s\S]*?<\/\1>/gi, " ").replace(/<[^>]+>/g, "");
+}
+
+// An element a reader does not see: hidden attribute, aria-hidden="true", class hidden/sr-only/invisible,
+// or inline display:none / visibility:hidden. Used only for the exact Kindle+ line count (QA v2 gap).
+const HIDDEN_OPEN = /<([a-z][a-z0-9-]*)\b(?=[^>]*(?:\shidden(?=[\s=>/])|aria-hidden\s*=\s*["']?true|class\s*=\s*["'][^"']*\b(?:hidden|sr-only|invisible)\b|style\s*=\s*["'][^"']*(?:display\s*:\s*none|visibility\s*:\s*hidden)))[^>]*>/i;
+
+/** Reader-visible text for the exact-line count: no comments, scripts, head, attributes or hidden elements. */
+export function visibleText(html) {
+  let t = html.replace(/<!--[\s\S]*?-->/g, "").replace(/<(script|style|template|noscript|head)\b[^>]*>[\s\S]*?<\/\1>/gi, " ");
+  for (let n = 0; n < 2000; n++) {
+    const m = HIDDEN_OPEN.exec(t);
+    if (!m) break;
+    const re = new RegExp(`<(/?)${m[1]}\\b[^>]*>`, "gi");
+    re.lastIndex = m.index + m[0].length;
+    let depth = /\/>$/.test(m[0]) ? 0 : 1;
+    let end = depth === 0 ? re.lastIndex : t.length; // unclosed hidden element: drop to the end (fail closed)
+    for (let r; depth > 0 && (r = re.exec(t)); ) {
+      depth += r[1] ? -1 : 1;
+      if (depth === 0) end = r.index + r[0].length;
+    }
+    t = t.slice(0, m.index) + " " + t.slice(end);
+  }
+  return decodeEntities(t.replace(/<[^>]+>/g, ""));
 }
 
 /** Every string value inside the page's JSON-LD blocks, JSON-decoded (QA F5e). */
@@ -137,9 +174,15 @@ function readableAttributes(html) {
 }
 
 const AMAZON_HOST = /(?:^|\.)(?:amazon\.[a-z.]+|amzn\.(?:to|com|eu|asia)|a\.co)$/i;
-const STRAY_RE = /kindle\W{0,3}unl[a-z]*|kindle\W{0,2}\+/gi;
+// Separators: up to 6 non-word characters or underscores (whitespace collapsed first), so
+// "Kindle -- Unlimited", "Kindle —— Unlimited", "Kindle_Unlimited" are caught (QA v2 gap).
+const STRAY_RE = /kindle[\W_]{0,6}unl[a-z]*|kindle[\W_]{0,6}(?:\+|plus(?![a-z]))|kindle[\W_]{0,6}countdown|countdown[\W_]{0,3}deal/gi;
+// Entity-shaped text the decoder could not resolve, right next to a kindle/unlimited/plus word: fail closed.
+const UNKNOWN_NEAR_RE = /kindle[\W_]{0,6}\uFFFD|\uFFFD[\W_]{0,6}(?:unl|plus|\+)/gi;
 const FREE_CLAIM_RE = /read\W{0,3}(?:it\W{0,3})?(?:for\W{0,3})?free|\$\s?0(?:\.00)?(?![\d.])/gi;
-const KU_TOKEN_RE = /(?<![A-Za-z0-9])K\.?\s?U\.?(?![A-Za-z0-9])/g;
+// KU in any case and with up to two separators (K-U, K/U, K·U, K_U, k.u., ku, Ku, JSON K\u002dU);
+// Kumar, haiku and SKU do not match (QA v2 gap).
+const KU_TOKEN_RE = /(?<![\p{L}\p{N}])k[\W_]{0,2}u(?![\p{L}\p{N}])/giu;
 
 /** Fail closed (QA F5d): a word shaped like kindle/unlimited that still holds a non-ASCII letter. */
 function confusableTokens(text) {
@@ -187,8 +230,17 @@ function countOf(haystack, needle) {
  */
 export function fallbackProblems(bodyHtml, slug) {
   const problems = [];
-  for (const m of bodyHtml.matchAll(/<a\s[^>]*?\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi)) {
-    const href = decodeEntities(m[1] ?? m[2] ?? m[3] ?? "").trim();
+  const hrefs = [];
+  for (const m of bodyHtml.matchAll(/<(?:a|area)\s[^>]*?\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi)) hrefs.push(m[1] ?? m[2] ?? m[3] ?? "");
+  // <meta http-equiv="refresh" content="5;url=..."> redirects a reader too (QA v2 gap).
+  for (const m of bodyHtml.matchAll(/<meta\b[^>]*>/gi)) {
+    if (!/http-equiv\s*=\s*["']?refresh/i.test(m[0])) continue;
+    const c = m[0].match(/\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
+    const u = decodeAttr(c?.[1] ?? c?.[2] ?? "").match(/url\s*=\s*['"]?([^'"\s]+)/i);
+    if (u) hrefs.push(u[1]);
+  }
+  for (const raw of hrefs) {
+    const href = decodeAttr(raw).trim();
     let url = null;
     try {
       url = new URL(href, "https://reeseastor.com/");
@@ -205,12 +257,14 @@ export function fallbackProblems(bodyHtml, slug) {
       continue;
     }
     if (!/\/(?:dp|gp\/product|gp\/aw\/d|exec\/obidos\/asin|o\/asin)\//i.test(url.pathname)) continue; // author/search pages
-    const tags = url.searchParams.getAll("tag");
+    const tags = [...url.searchParams].filter(([k]) => k.toLowerCase() === "tag").map(([, v]) => v); // TAG= counts too
     if (tags.length !== 1 || tags[0] !== "reeseastor-20") problems.push(`Amazon link without exactly one tag=reeseastor-20: ${href}`);
   }
   if (bodyHtml.includes(RETIRED_KU_TEXT)) problems.push(`retired line "${RETIRED_KU_TEXT}"`);
 
-  const lines = countOf(bodyHtml, EXPECTED_KINDLE_PLUS_LINE);
+  // Counted on reader-visible text (QA v2 gap): a copy kept in a comment, an attribute or a hidden
+  // element does not count.
+  const lines = countOf(visibleText(bodyHtml).replace(/\s+/g, " "), EXPECTED_KINDLE_PLUS_LINE);
   if (slug !== undefined) {
     if (KU_TITLE_SLUGS.includes(slug)) {
       if (lines !== 1) problems.push(`KU title needs "${EXPECTED_KINDLE_PLUS_LINE}" exactly once, found ${lines}`);
@@ -229,15 +283,19 @@ export function fallbackProblems(bodyHtml, slug) {
     ...readableAttributes(withoutLine).map((s) => stripMarkup(decodeEntities(s))),
     ...ldStrings.map((s) => stripMarkup(decodeEntities(s))),
   ].map(normalizeForScan);
+  views.push(...views.map((v) => normalizeForScan(stripMarkup(v)))); // markup that only appears after decoding
   const stray = new Set();
   const ku = new Set();
   const confusable = new Set();
+  const unknownNear = new Set();
   for (const v of views) {
     for (const m of v.matchAll(STRAY_RE)) stray.add(m[0]);
     for (const w of confusableTokens(v)) confusable.add(w);
+    for (const m of v.matchAll(UNKNOWN_NEAR_RE)) unknownNear.add(m[0]);
   }
   // KU tokens: reader-visible text, readable attributes and JSON-LD only (not asset hashes or code).
   for (const v of views.slice(1)) for (const m of v.matchAll(KU_TOKEN_RE)) ku.add(m[0].trim());
+  if (unknownNear.size) problems.push(`undecodable entity next to kindle/unlimited/plus (fail closed): ${[...unknownNear].join(", ")}`);
   // "Read free" / "$0.00" claims belong only to the exact Kindle+ line (KU pages) and never on
   // non-KU pages; the free-book offer uses "Get it free" / "Free book" wording instead.
   const freeClaims = new Set();
@@ -247,6 +305,11 @@ export function fallbackProblems(bodyHtml, slug) {
   if (ku.size) problems.push(`standalone KU token: ${[...ku].join(", ")}`);
   if (confusable.size) problems.push(`kindle/unlimited-shaped word with a non-ASCII letter: ${[...confusable].join(", ")}`);
 
+  // Schemeless Amazon references in JSON-LD (www.amazon.com/dp/..., amzn.to/...) are never a clean identifier (QA v2 gap).
+  for (const s of ldStrings) {
+    for (const u of decodeEntities(s).matchAll(/(?<![\w.\/:-])((?:[\w-]+\.)*(?:amazon\.[a-z]{2,}(?:\.[a-z]{2})?|amzn\.(?:to|com|eu|asia)|a\.co)\/[^\s"'<>]*)/gi))
+      problems.push(`JSON-LD Amazon URL without https:// scheme: ${u[1]}`);
+  }
   for (const s of ldStrings) {
     const decoded = decodeEntities(s);
     for (const u of decoded.matchAll(/(?:https?:)?\/\/[^\s"'<>]+/gi)) {

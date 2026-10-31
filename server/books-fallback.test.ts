@@ -224,6 +224,132 @@ describe("/books no-JS fallback", () => {
     expect(fallbackProblems(`${ok}<a href='https://www.amazon.com/gp/product/B0D82GWFD9?tag=reeseastor-20'>x</a>`, ku)).toEqual([]);
   });
 
+  // QA card v2 (2026-10-30) probes, ported from evidence-v2/probes-qa-v2.mjs and probes-qa-v2b.mjs.
+  // Fixtures are the two rendered preview pages QA probed (dpl_2FPSjh328nVEjKmMQmTTupdWcEUx).
+  describe("QA v2 probes (probes-qa-v2*.mjs)", () => {
+    const fx = (f: string) => fs.readFileSync(path.join(__dirname, "__fixtures__/books-fallback", f), "utf8");
+    const KU = fx("ku-the-billionaire-s-fake-wife.html");
+    const NON = fx("non-ku-the-first-acquisition.html");
+    const KU_SLUG = "the-billionaire-s-fake-wife";
+    const NON_SLUG = "the-first-acquisition";
+    const inBody = (page: string, s: string) => page.replace("</article>", `<p>${s}</p></article>`);
+    const inMeta = (s: string) => NON.replace(/<meta name="description" content="/, `$&${s.replace(/"/g, "&quot;")} `);
+    const inLd = (s: string) => NON.replace(/("@type":"Book"[^<]*?"description":")/, `$1${JSON.stringify(s).slice(1, -1).replace(/<\//g, "<\\/")} `);
+    const inLdRaw = (s: string) => NON.replace(/("@type":"Book"[^<]*?"description":")/, `$1${s} `);
+
+    it("fixtures are clean as captured", () => {
+      expect(fallbackProblems(KU, KU_SLUG)).toEqual([]);
+      expect(fallbackProblems(NON, NON_SLUG)).toEqual([]);
+    });
+
+    const P: Record<string, string> = {
+      "split <i> mid-word": "Kind<i>le</i> Unli<i>mited</i>", "split <br>": "Kindle<br>Unlimited", "split <wbr>": "Kindle Unlim<wbr>ited",
+      "split nested spans+attrs": "<span class=\"a\">Kin</span><span data-x='1'>dle</span>&#32;<em>Unlimited</em>",
+      "split comment mid-word": "Kin<!--x-->dle Unl<!-- y -->imited",
+      "figure dash": "Kindle\u2012Unlimited", "minus sign": "Kindle\u2212Unlimited", "double hyphen spaced": "Kindle -- Unlimited",
+      "spaced em dash x2": "Kindle \u2014\u2014 Unlimited", "fraction slash": "Kindle\u2044Unlimited", "backslash": "Kindle\\Unlimited",
+      "bullet": "Kindle\u2022Unlimited", "katakana middot": "Kindle\u30FBUnlimited", "underscore": "Kindle_Unlimited", "pipe": "Kindle|Unlimited",
+      "lower ku": "read free in ku", "K U spaced": "Read it in K U today", "K-U": "in K-U", "K/U": "in K/U", "K·U": "in K\u00B7U",
+      "KU+": "on KU+", "#KU hashtag": "#KU", "KU cyr K": "in \u041AU", "KU fullwidth": "in \uFF2B\uFF35", "Kindle Plus spelled": "Read with Kindle Plus",
+      "K.U lowercase dots": "in k.u.", "armenian K": "\u053Findle Unlimited", "armenian small n": "Kindle U\u0578limited",
+      "cyrillic palochka": "Kind\u04CFe Unlimited", "cyrillic dotted i": "K\u0456ndle Unlimited", "greek mix": "\u039Aindle Unlim\u03B9ted",
+      "Cherokee K": "\u13E6indle Unlimited", "dotless i + script l": "K\u0131nd\u2113e Unlimited", "accented": "K\u00EDndl\u00E9 \u00DAnlimited",
+      "combining acute": "Ki\u0301ndle Unlimited", "small capital U": "Kindle \u1D1Cnlimited", "math script": "\uD835\uDCA6indle Unlimited",
+      "Lisu K": "\uA4D7indle Unlimited", "JSON \\n": "Kindle\\nUnlimited", "JSON \\u004b": "\\u004bindle Unlimited",
+      "JSON \\u003c tags": "Kindle\\u003cb\\u003eUnlimited", "JSON \\/": "Kindle\\/Unlimited", "&shy;": "Kin&shy;dle Unlimited",
+      "&#173;": "Kindle Unli&#173;mited", "&nbsp no semicolon": "Kindle&nbspUnlimited", "&NonBreakingSpace;": "Kindle&NonBreakingSpace;Unlimited",
+      "&hairsp;": "Kindle&hairsp;Unlimited", "&#x00A0;": "Kindle&#x00A0;Unlimited", "&amp;nbsp;": "Kindle&amp;nbsp;Unlimited",
+      "U+202F": "Kindle\u202FUnlimited", "U+2060": "Kin\u2060dle Unlimited", "U+180E": "Kindle\u180EUnlimited", "U+3164": "Kindle\u3164Unlimited",
+      "U+2800": "Kindle\u2800Unlimited", "$0 bare": "Read it for $0", "free to read in KU": "Free to read in Kindle Unlimited",
+      "Countdown deal": "Kindle Countdown Deal: $0.99 this week",
+    };
+    it.each(Object.entries(P))("probes-qa-v2: %s is caught in the body, meta description, JSON-LD and on a KU page", (_n, s) => {
+      for (const page of [inBody(NON, s), inMeta(s), inLd(s)]) {
+        expect(page).not.toBe(NON);
+        expect(fallbackProblems(page, NON_SLUG).length).toBeGreaterThan(0);
+      }
+      expect(fallbackProblems(inBody(KU, s), KU_SLUG).length).toBeGreaterThan(0);
+    });
+
+    const ISO: Record<string, string> = {
+      "in ku": "Find it in ku", "in Ku": "Find it in Ku", "k.u.": "Find it in k.u.", "K-U": "Find it in K-U", "K/U": "Find it in K/U",
+      "K·U": "Find it in K\u00B7U", "K_U": "Find it in K_U", "Kindle Plus": "Find it on Kindle Plus", "KindlePlus": "Find it on KindlePlus",
+      "Kindle -- Unlimited": "Kindle -- Unlimited", "Kindle_Unlimited": "Kindle_Unlimited", "&nbsp": "Kindle&nbspUnlimited",
+      "&NonBreakingSpace;": "Kindle&NonBreakingSpace;Unlimited", "&hairsp;": "Kindle&hairsp;Unlimited", "&ThinSpace;": "Kindle&ThinSpace;Unlimited",
+      "Kindle - - Unlimited": "Kindle - - Unlimited", "unknown entity (fail closed)": "Kindle&madeupname;Unlimited",
+      "unknown entity, no semicolon (fail closed)": "Kindle&zzUnlimited",
+    };
+    it.each(Object.entries(ISO))("probes-qa-v2b: isolated %s (no 'read free' words) is caught on both pages", (_n, s) => {
+      expect(fallbackProblems(inBody(NON, s), NON_SLUG).length).toBeGreaterThan(0);
+      expect(fallbackProblems(inBody(KU, s), KU_SLUG).length).toBeGreaterThan(0);
+    });
+
+    const RAW: Record<string, string> = {
+      "\\u003cb\\u003e split": "Kindle\\u003cb\\u003eUnlimited", "\\u00ad shy": "Kin\\u00addle Unlimited",
+      "\\u2014\\u2014 spaced": "Kindle \\u2014\\u2014 Unlimited", "K\\u002dU": "in K\\u002dU", "\\u004bU": "in \\u004bU",
+      "&nbsp no semicolon in JSON": "Kindle&nbspUnlimited",
+    };
+    it.each(Object.entries(RAW))("probes-qa-v2b: raw-escaped JSON-LD %s is caught", (_n, s) => {
+      const page = inLdRaw(s);
+      expect(page).not.toBe(NON);
+      expect(fallbackProblems(page, NON_SLUG).length).toBeGreaterThan(0);
+    });
+
+    it("controls stay clean: Kumar, haiku, SKU, plain entities", () => {
+      for (const s of ["Kumar wrote a haiku about the SKU", "Tom &amp; Jerry &copy; 2026 &nbsp;", "Kudos to the book club", "Back up your library"])
+        expect(fallbackProblems(inBody(NON, s), NON_SLUG), s).toEqual([]);
+    });
+
+    it("exact Kindle+ line is counted on visible text only (comment, data- attribute, hidden span do not count)", () => {
+      const LINE = EXPECTED_KINDLE_PLUS_LINE;
+      expect(KU.split(LINE).length - 1).toBeGreaterThan(0);
+      const swap = (keep: string) => KU.split(LINE).join("§").replace("§", keep).split("§").join("Get your copy");
+      for (const keep of [`<!-- ${LINE} -->`, `<span data-note="${LINE}"></span>`, `<span hidden>${LINE}</span>`,
+        `<span aria-hidden="true">${LINE}</span>`, `<span style="display:none">${LINE}</span>`, `<span class="sr-only">${LINE}</span>`])
+        expect(fallbackProblems(swap(keep), KU_SLUG), keep).toContain(`KU title needs "${LINE}" exactly once, found 0`);
+    });
+
+    const LINKS: Record<string, [string, boolean]> = {
+      "protocol-relative untagged": ['<a href="//www.amazon.com/dp/B0D82GWFD9">x</a>', true],
+      "amazon.co.uk untagged": ['<a href="https://www.amazon.co.uk/dp/B0D82GWFD9">x</a>', true],
+      "smile untagged": ['<a href="https://smile.amazon.com/dp/B0D82GWFD9">x</a>', true],
+      "title-slug path untagged": ['<a href="https://www.amazon.com/Some-Title/dp/B0D82GWFD9/ref=sr_1_1">x</a>', true],
+      "gp/product wrong tag": ['<a href="https://www.amazon.com/gp/product/B0D82GWFD9?tag=88away0d-20">x</a>', true],
+      "amzn.to uppercase host": ['<a href="https://AMZN.TO/3abc">x</a>', true], "amzn.eu": ['<a href="https://amzn.eu/d/abc">x</a>', true],
+      "a.co/d": ['<a href="https://a.co/d/abc">x</a>', true],
+      "entity-obfuscated host": ['<a href="https://www.am&#97;zon.com/dp/B0D82GWFD9">x</a>', true],
+      "tag in fragment only": ['<a href="https://www.amazon.com/dp/B0D82GWFD9#tag=reeseastor-20">x</a>', true],
+      "tag twice": ['<a href="https://www.amazon.com/dp/B0D82GWFD9?tag=reeseastor-20&amp;tag=reeseastor-20">x</a>', true],
+      "uppercase TAG param + good tag": ['<a href="https://www.amazon.com/dp/B0D82GWFD9?TAG=88away0d-20&tag=reeseastor-20">x</a>', true],
+      "uppercase <A HREF>": ['<A HREF="https://www.amazon.com/dp/B0D82GWFD9">x</A>', true],
+      "newline before href": ['<a\n  class="b"\n  href="https://www.amazon.com/dp/B0D82GWFD9">x</a>', true],
+      "meta refresh to amzn.to": ['<meta http-equiv="refresh" content="5;url=https://amzn.to/3abc">', true],
+      "area href untagged": ['<map><area href="https://www.amazon.com/dp/B0D82GWFD9"></map>', true],
+      "control: gp/product tagged": ['<a href="https://www.amazon.com/gp/product/B0D82GWFD9?tag=reeseastor-20">x</a>', false],
+      "control: dp tagged": ['<a href="https://www.amazon.com/dp/B0D82GWFD9?tag=reeseastor-20">x</a>', false],
+      "control: area tagged": ['<map><area href="https://www.amazon.com/dp/B0D82GWFD9?tag=reeseastor-20"></map>', false],
+    };
+    it.each(Object.entries(LINKS))("probes-qa-v2 link: %s", (_n, [l, bad]) => {
+      const n = fallbackProblems(NON.replace("</article>", `${l}</article>`), NON_SLUG).length;
+      if (bad) expect(n).toBeGreaterThan(0);
+      else expect(n).toBe(0);
+    });
+
+    const LDURLS: Record<string, [string, boolean]> = {
+      "schemeless www.amazon.com": ["www.amazon.com/dp/B0D82GWFD9?tag=x", true], "schemeless amzn.to": ["amzn.to/abc", true],
+      "https gp/product": ["https://www.amazon.com/gp/product/B0D82GWFD9", true], "amazon.co.uk dp": ["https://www.amazon.co.uk/dp/B0D82GWFD9", true],
+      "\\u002F escaped": ["https:\\u002F\\u002Fwww.amazon.com\\u002Fdp\\u002FB0D82GWFD9?tag=x", true],
+      "control: clean dp": ["https://www.amazon.com/dp/B0D82GWFD9", false],
+    };
+    it.each(Object.entries(LDURLS))("probes-qa-v2 JSON-LD url: %s", (_n, [u, bad]) => {
+      const page = NON.replace(/"sameAs":\[?"[^"]*"/, (m) => m.replace(/"https[^"]*"$/, `"${u}"`));
+      if (bad) expect(page).not.toBe(NON);
+      const n = fallbackProblems(page, NON_SLUG).length;
+      if (bad) expect(n).toBeGreaterThan(0);
+      else expect(n).toBe(0);
+    });
+  });
+
   it("G3: the guard's KU lists carry a dated amazon.com verification note", () => {
     const guardSrc = fs.readFileSync(path.join(__dirname, "../scripts/lib/book-fallback-guard.mjs"), "utf8");
     expect(guardSrc).toMatch(/KU verified on amazon\.com \d{4}-\d{2}-\d{2}/);
