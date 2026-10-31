@@ -24,11 +24,19 @@ describe(`blog post 4 source (${SLUG})`, () => {
     expect(md).toContain("*Tropes: Nanny Romance, Single Dad, Forbidden Romance*");
     expect(md).toContain("four unforgettable love stories");
   });
-  it("F1: Book 3 timing matches Amazon ('Almost four years after one snowbound weekend in Chicago')", () => {
+  it("F1: Book 3 timing matches Amazon, word for word (QA CARD-v6 F1, 10/31/2026)", () => {
     expect(md).toContain(
-      "Almost four years after one snowbound weekend in Chicago, Sophia has built a life for herself and her daughter, a daughter with unmistakable storm-gray eyes that match the billionaire who just walked back into her life.",
+      "Book 3 brings together **Dominic Kane** and **Sophia Reed** in a second chance romance that will have you reaching for tissues. Almost four years ago, she called him eleven times. Now he's back, and her daughter has his eyes.",
     );
+    expect(md).toContain("*Tropes: A secret baby and a second chance, A single mom who sets the rules*");
     expect(md).not.toMatch(/three years/i);
+  });
+  it("QA CARD-v6 F1: Book 4 paragraph is the exact card text (no paraphrased child words)", () => {
+    expect(md).toContain(
+      "**Camille Torres** takes a live-in job in billionaire **Ethan Calloway**'s Park Avenue penthouse and never expects to become the family they both need. Ethan hasn't smiled since his wife died, and seven nannies have left in two years. The last thing he needs is a nanny with quick wit, warm hands, and a mouth that talks back.",
+    );
+    expect(md).not.toMatch(/silent daughter|storm-gray|five-year-old|Secret baby\?/i);
+    expect(md).toContain("*For readers 18+.*");
   });
 });
 

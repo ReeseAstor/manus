@@ -38,13 +38,13 @@ The second installment introduces **David Kim**, a billionaire CEO, in a fake ma
 
 ### Book 3: The Billionaire's Baby Secret
 
-Book 3 brings together **Dominic Kane** and **Sophia Reed** in a secret baby romance that will have you reaching for tissues. Almost four years after one snowbound weekend in Chicago, Sophia has built a life for herself and her daughter, a daughter with unmistakable storm-gray eyes that match the billionaire who just walked back into her life.
+Book 3 brings together **Dominic Kane** and **Sophia Reed** in a second chance romance that will have you reaching for tissues. Almost four years ago, she called him eleven times. Now he's back, and her daughter has his eyes.
 
-*Tropes: Secret Baby, Second Chance, Single Mom Romance*
+*Tropes: A secret baby and a second chance, A single mom who sets the rules*
 
 ### Book 4: The Billionaire's Forbidden Nanny
 
-**Camille Torres** takes a job caring for billionaire **Ethan Calloway**'s silent daughter and never expects to become the family they both need. Ethan hasn't smiled since his wife died, his daughter hasn't said a word, and seven nannies have quit. The last thing he needs is a nanny with quick wit, warm hands, and a mouth that talks back.
+**Camille Torres** takes a live-in job in billionaire **Ethan Calloway**'s Park Avenue penthouse and never expects to become the family they both need. Ethan hasn't smiled since his wife died, and seven nannies have left in two years. The last thing he needs is a nanny with quick wit, warm hands, and a mouth that talks back.
 
 *Tropes: Nanny Romance, Single Dad, Forbidden Romance*
 
