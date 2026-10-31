@@ -13,7 +13,7 @@ export function ExitIntentPopup() {
 
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
-      toast.success("Check your inbox for your free book!");
+      toast.success("Check your inbox for your copy!");
       setIsVisible(false);
       localStorage.setItem("reese_exit_popup_converted", "true");
     },
@@ -115,11 +115,11 @@ export function ExitIntentPopup() {
 
                 {/* Headline */}
                 <h2 className="font-serif text-3xl font-bold text-[#4A3B3A] mb-3">
-                  Wait — Before You Go!
+                  Wait, Before You Go!
                 </h2>
 
                 <p className="text-[#6E5F5A] text-lg mb-2">
-                  Get <span className="text-[#7A4F4C] font-semibold">The First Acquisition</span>, a free Hudson Dynasty prequel novella.
+                  Get <span className="text-[#7A4F4C] font-semibold">The First Acquisition</span>, a Hudson Dynasty prequel novella, free when you join my newsletter.
                 </p>
 
                 <p className="text-[#6E5F5A] text-sm mb-6">
@@ -152,7 +152,7 @@ export function ExitIntentPopup() {
                     ) : (
                       <span className="flex items-center gap-2 justify-center">
                         <Sparkles className="h-5 w-5" />
-                        Send Me the Free Book
+                        Join & Send Me the Book
                       </span>
                     )}
                   </Button>
@@ -166,7 +166,7 @@ export function ExitIntentPopup() {
                   onClick={handleDismiss}
                   className="mt-4 text-sm text-[#6E5F5A] hover:text-[#6E5F5A] transition-colors underline"
                 >
-                  No thanks, I'll pass on the free book
+                  No thanks, maybe later
                 </button>
               </div>
             </div>

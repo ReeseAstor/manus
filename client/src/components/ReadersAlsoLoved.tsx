@@ -19,7 +19,7 @@ const TROPE_RECOMMENDATIONS: Record<string, {
   },
   "forbidden-love": {
     label: "Forbidden Love",
-    description: "You're drawn to the thrill of what you can't have — and the courage to take it anyway.",
+    description: "You're drawn to the thrill of what you can't have, and the courage to take it anyway.",
     matchReason: "Because you crave forbidden, high-stakes romance",
   },
   "second-chance": {

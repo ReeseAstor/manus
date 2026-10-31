@@ -196,7 +196,7 @@ export default function Permission() {
             <CoverHalo
               src={book.cover_image_square ?? book.cover_image}
               title={book.title}
-              alt="The Need for Permission — audiobook cover"
+              alt="The Need for Permission audiobook cover"
               width={400}
             />
           </motion.div>

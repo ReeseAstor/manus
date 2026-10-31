@@ -70,11 +70,11 @@ export default function Favorites() {
             </h1>
 
             <p className="text-lg md:text-xl text-[#6E5F5A] max-w-2xl mx-auto leading-relaxed mb-4">
-              My personally curated collection of products I actually use and love — from the reading pillow that changed my life to the candle that smells like a Manhattan library.
+              My personally curated collection of products I actually use and love, from the reading pillow that changed my life to the candle that smells like a Manhattan library.
             </p>
 
             <p className="text-sm text-[#6E5F5A] max-w-xl mx-auto">
-              Every product on this page is something I've personally tried and genuinely recommend. No filler, no fluff — just the things that make reading and writing better.
+              Every product on this page is something I've personally tried and genuinely recommend. No filler, no fluff, just the things that make reading and writing better.
             </p>
           </motion.div>
         </div>
@@ -123,7 +123,7 @@ export default function Favorites() {
                       : "bg-[#EBD6D3]/30 text-[#6E5F5A] hover:text-[#4A3B3A] border border-[#4A3B3A]/10"
                   }`}
                 >
-                  {cat.emoji} {cat.title} ({cat.products.length})
+                  {cat.title} ({cat.products.length})
                 </button>
               ))}
             </div>
@@ -146,15 +146,14 @@ export default function Favorites() {
               {/* Category Header */}
               <div className="mb-8">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">{category.emoji}</span>
                   <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#4A3B3A]">
                     {category.title}
                   </h2>
                 </div>
-                <p className="text-[#6E5F5A] text-sm ml-12">
+                <p className="text-[#6E5F5A] text-sm">
                   {category.subtitle}
                 </p>
-                <div className="w-24 h-0.5 bg-gradient-to-r from-[#C9A3A0] to-transparent mt-4 ml-12" />
+                <div className="w-24 h-0.5 bg-gradient-to-r from-[#C9A3A0] to-transparent mt-4" />
               </div>
 
               {/* Product Grid */}

@@ -643,7 +643,7 @@ export default function AdminCommandCenter() {
               <div className="grid grid-cols-2 gap-2">
                 {[
                   { label: "Admin Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
-                  { label: "AI Studio", href: "/admin/ai-studio", icon: Sparkles },
+                  { label: "AI Studio", href: "/admin/studio", icon: Sparkles },
                   { label: "Blog Editor", href: "/admin/blog/new", icon: PenTool },
                   { label: "Newsletters", href: "/admin/newsletters", icon: Mail },
                   { label: "QA Center", href: "/admin/qa", icon: CheckCircle2 },

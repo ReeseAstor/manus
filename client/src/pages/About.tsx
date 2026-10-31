@@ -58,7 +58,7 @@ export default function About() {
                 control everything except the women who walk into their lives.
               </p>
               <p>
-                If you are new, start with a free prequel:{" "}
+                If you are new, start with a prequel, free when you join my newsletter:{" "}
                 <a className="text-[#7A4F4C] underline" href="https://dl.bookfunnel.com/kw1yge3479" target="_blank" rel="noopener noreferrer">
                   The First Acquisition
                 </a>{" "}
