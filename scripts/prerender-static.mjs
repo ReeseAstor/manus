@@ -84,7 +84,7 @@ fs.writeFileSync(path.join(publicDir, "app-shell.html"), template);
 // the SPA shell then renders the Not Found page.
 fs.writeFileSync(path.join(publicDir, "404.html"), template);
 
-const NAV = `<nav aria-label="Site"><a href="/">Reese Astor</a> · <a href="/books">Books</a> · <a href="/about">About</a> · <a href="/blog">Blog</a> · <a href="/newsletter">Newsletter</a> · <a href="/free-book">Free book</a></nav>`;
+const NAV = `<nav aria-label="Site"><a href="/">Reese Astor</a> · <a href="/books">Books</a> · <a href="/about">About</a> · <a href="/blog">Blog</a> · <a href="/newsletter">Newsletter</a> · <a href="/free-book">Newsletter prequel</a></nav>`;
 
 function renderPage({ route, title, description, ogType = "website", image, schemas = [], body, noindex = false }) {
   const canonical = absoluteUrl(route);
@@ -143,7 +143,7 @@ function bookList(lane) {
     .join("")}</ol>`;
 }
 
-const FREE_PREQUELS = `<p>Both series start free: <a href="https://dl.bookfunnel.com/kw1yge3479">The First Acquisition</a> (Hudson Dynasty prequel) and <a href="https://dl.bookfunnel.com/xrodg0t77p">The Billionaire&rsquo;s One Night Stand</a> (Manhattan Money Kings prequel).</p>`;
+const FREE_PREQUELS = `<p>Both series start with a prequel that is free when you join my newsletter: <a href="https://dl.bookfunnel.com/kw1yge3479">The First Acquisition</a> (Hudson Dynasty) and <a href="https://dl.bookfunnel.com/xrodg0t77p">The Billionaire&rsquo;s One Night Stand</a> (Manhattan Money Kings).</p>`;
 
 // ── Home ───────────────────────────────────────────────────────────────────
 write(
@@ -232,17 +232,17 @@ const simple = [
   },
   {
     route: "/free-book",
-    title: "Free Book: The First Acquisition | Reese Astor",
+    title: "The First Acquisition: Free When You Join My Newsletter | Reese Astor",
     description:
-      "Start the Hudson Dynasty free. The First Acquisition: Sebastian Hudson, Arden Shaw, and one fake engagement.",
+      "Start the Hudson Dynasty with The First Acquisition, free when you join my newsletter.",
     schemas: [],
-    body: `<h1>Start free</h1>${FREE_PREQUELS}`,
+    body: `<h1>Start the Hudson Dynasty</h1>${FREE_PREQUELS}`,
   },
   {
     route: "/newsletter",
     title: "The Reese Astor Newsletter",
     description:
-      "New release alerts, reader-only extras, and a free prequel when you join. One email every other Sunday.",
+      "New release alerts, reader-only extras, and a prequel that is free when you join my newsletter. One email every other Sunday.",
     schemas: [],
     body: `<h1>The Reese Astor Newsletter</h1><p>New release alerts and reader-only extras, every other Sunday.</p>${FREE_PREQUELS}`,
   },
@@ -367,10 +367,10 @@ const llms = [
       ),
     "",
   ]),
-  "## Start free",
+  "## Start with a prequel (free when you join the newsletter)",
   "",
-  "- [The First Acquisition](https://dl.bookfunnel.com/kw1yge3479): free Hudson Dynasty prequel",
-  "- [The Billionaire's One Night Stand](https://dl.bookfunnel.com/xrodg0t77p): free Manhattan Money Kings prequel",
+  "- [The First Acquisition](https://dl.bookfunnel.com/kw1yge3479): Hudson Dynasty prequel, free when you join Reese Astor's newsletter",
+  "- [The Billionaire's One Night Stand](https://dl.bookfunnel.com/xrodg0t77p): Manhattan Money Kings prequel, free when you join Reese Astor's newsletter",
   "",
   "## Pages",
   "",
