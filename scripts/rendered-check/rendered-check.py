@@ -1,6 +1,7 @@
 """Rendered guard (QA v4 card, accepted design with conditions, 2026-10-30 10:06 PM).
 
-Usage: python3 scripts/rendered-check/rendered-check.py <BASE_URL> <OUT_DIR> [--routes FILE ...] [--no-sitemap]
+Usage: python3 scripts/rendered-check/rendered-check.py <BASE_URL> <OUT_DIR> [--routes FILE ...] [--no-sitemap] [--min-pages N]
+  --min-pages: fail closed if fewer pages are planned or rendered (default 55 on reeseastor.com, 44 elsewhere; QA R-a).
   BASE_URL  the preview (before the merge) or https://reeseastor.com (right after the deploy).
 Covers every <loc> in BASE/sitemap.xml (rewritten onto BASE), routes-extra.txt, and the served text files
 (/llms.txt, /robots.txt and every *.txt in client/public). For each page:
@@ -15,7 +16,8 @@ Covers every <loc> in BASE/sitemap.xml (rewritten onto BASE), routes-extra.txt, 
      - on /books/<slug>: the exact Kindle+ line visible at least once (exactly once without JS) and never present
        hidden on a KU title; never present at all on a non-KU title;
      - em dashes (and spaced en dashes) in visible text, <title> and the meta description, except inside a book
-       excerpt quoted from the published text (.excerpt).
+       excerpt quoted from the published text: only [data-book-excerpt], and only on the two pages in
+       EXCERPT_ROUTES, exactly one block each (QA D2); the marker anywhere else is itself a FAIL.
   Text files are checked as plain text: each line an element ('free' guard, dashes).
 Fails closed: Chromium not launching, a route not loading or timing out, an HTTP error, a guard error, or a page
 with no text is a FAIL, never a skip. Third-party embed text (the MailerLite form) counts as visible text; its
@@ -122,7 +124,7 @@ EXTRACT = r"""(LINE) => {
     total += t.trim().length;
     const inEmbed = !!(p && p.closest(".ml-embedded,[class*='ml-form'],[id^='mlb2']"));
     if (inEmbed) embed.push(t.trim().slice(0, 200));
-    if (/\u2014|\s\u2013\s/.test(t) && !(p && p.closest(".excerpt,[data-book-excerpt]"))) dashes.push((inEmbed ? "[embed] " : "") + t.trim().slice(0, 200));
+    if (/\u2014|\s\u2013\s/.test(t) && !(p && p.closest("[data-book-excerpt]"))) dashes.push((inEmbed ? "[embed] " : "") + t.trim().slice(0, 200));
   }
   const pseudo = [];
   for (const el of document.querySelectorAll("body *")) {
@@ -143,8 +145,11 @@ EXTRACT = r"""(LINE) => {
   flatten(fullClone);
   const md = document.querySelector('meta[name="description"]');
   return { full: "<!doctype html>" + fullClone.outerHTML, visible: "<!doctype html>" + clone.outerHTML, textLen: total,
-           pseudo, dashes, embed, title: document.title, metaDescription: md ? md.content : "", innerText: (document.body ? document.body.innerText : "").slice(0, 400) };
+           pseudo, dashes, embed, excerptMarks: document.querySelectorAll("[data-book-excerpt]").length, title: document.title, metaDescription: md ? md.content : "", innerText: (document.body ? document.body.innerText : "").slice(0, 400) };
 }"""
+
+# QA D2: the dash exemption marker may sit only on these two quoted excerpts, one block each.
+EXCERPT_ROUTES = {"/read/poison-pill", "/read/the-billionaires-one-night-stand"}
 
 def books_slug(route):
     m = re.search(r"/books/([a-z0-9-]+)(?:\.html|/)?$", route.split("?")[0])
@@ -156,6 +161,8 @@ def main():
     base, out = args[0].rstrip("/"), args[1]
     extra_files = [args[k + 1] for k, a in enumerate(args) if a == "--routes"] or [os.path.join(HERE, "routes-extra.txt")]
     use_sitemap = "--no-sitemap" not in args
+    mp = [args[k + 1] for k, a in enumerate(args) if a == "--min-pages"]
+    floor = int(mp[0]) if mp else (55 if re.match(r"^https?://(www\.)?reeseastor\.com$", base) else 44)
     os.makedirs(out, exist_ok=True)
     started = time.strftime("%Y-%m-%d %H:%M:%S %Z")
     print(f"rendered-check {base} started {started}")
@@ -175,7 +182,9 @@ def main():
     txt = ["/llms.txt", "/robots.txt"] + ["/" + os.path.relpath(p, os.path.join(REPO, "client", "public")) for p in glob.glob(os.path.join(REPO, "client", "public", "**", "*.txt"), recursive=True)]
     txt = sorted(set(t for t in txt if not t.startswith("/read/")) | {"/llms.txt", "/robots.txt"}) if use_sitemap else [t for t in routes if t.endswith(".txt")]
     routes = [r for r in routes if not r.endswith(".txt")]
-    print(f"routes: {len(routes)} pages, {len(txt)} text files")
+    print(f"routes: {len(routes)} pages, {len(txt)} text files (page floor {floor})")
+    if len(routes) < floor: fail("(routes)", f"only {len(routes)} pages planned, floor is {floor} (fail closed)")
+    rendered_ok = 0
     try:
         g = Guards(); meta = g.ask(op="meta")
     except Exception as e:
@@ -215,6 +224,7 @@ def main():
             except Exception as e:
                 fail(route, f"[{label}] render failed or timed out (fail closed): {str(e)[:200]}"); pg.close(); continue
             pg.close()
+            if label == "SPA" and x["textLen"] >= 40: rendered_ok += 1
             rep[label] = {"textLen": x["textLen"], "title": x["title"], "dashes": x["dashes"], "embed": x["embed"][:20], "pseudo": x["pseudo"][:20]}
             if x["textLen"] < 40: fail(route, f"[{label}] page has no visible text ({x['textLen']} chars; fail closed)"); continue
             try:
@@ -222,6 +232,8 @@ def main():
                 if x["pseudo"]:
                     for h in g.ask(op="free", src="".join(f"<p>{p}</p>" for p in x["pseudo"]), kind="html"): fail(route, f"[{label}] free (::before/::after): {h['sentence']}")
                 for d in x["dashes"]: fail(route, f"[{label}] dash in visible text :: {d}")
+                want = 1 if route.rstrip("/").removesuffix("/index.html") in EXCERPT_ROUTES else 0
+                if x["excerptMarks"] != want: fail(route, f"[{label}] [data-book-excerpt] blocks: {x['excerptMarks']} (allowed here: {want}; QA D2)")
                 for d in (x["title"], x["metaDescription"]):
                     if re.search("\u2014|\\s\u2013\\s", d or ""): fail(route, f"[{label}] dash in title/meta description :: {d[:160]}")
                 if slug:
@@ -257,7 +269,9 @@ def main():
             fail(t, f"read error (fail closed): {e}")
     try: browser.close(); pw.stop()
     except Exception: pass
+    if rendered_ok < floor: fail("(routes)", f"only {rendered_ok} pages rendered with text, floor is {floor} (fail closed)")
     json.dump({"base": base, "started": started, "routes": routes, "text_files": txt, "fails": fails, "pages": report}, open(os.path.join(out, "rendered-check.json"), "w"), indent=1, ensure_ascii=False)
+    print(f"pages planned {len(routes)}, rendered with text {rendered_ok}, floor {floor}")
     print(f"summary: {len(routes)} pages x (raw, no-JS, SPA) + {len(txt)} text files, {len(fails)} failures")
     print(f"VERDICT: {'PASS' if not fails else 'FAIL'} {len(fails)}")
     return 0 if not fails else 1

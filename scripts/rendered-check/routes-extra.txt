@@ -23,3 +23,15 @@
 /sms
 /this-page-does-not-exist
 /read
+# /read pages (QA v5 card R-a: every /read/* page)
+/read/hudson-dynasty
+/read/manhattan-money-kings
+/read/the-first-acquisition
+/read/the-billionaires-one-night-stand
+/read/hostile-tender
+/read/poison-pill
+/read/golden-parachute
+/read/the-billionaires-executive-assistant
+/read/the-billionaires-fake-wife
+/read/the-billionaires-baby-secret
+/read/the-billionaires-forbidden-nanny
