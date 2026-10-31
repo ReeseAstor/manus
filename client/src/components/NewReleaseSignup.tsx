@@ -14,7 +14,7 @@ export default function NewReleaseSignup() {
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
       setIsSubmitted(true);
-      toast.success("Welcome to the inner circle! Your free book is on its way.");
+      toast.success("Welcome to the newsletter! Your copy of The First Acquisition is on its way.");
       // Open BookFunnel after signup
       setTimeout(() => {
         window.open("https://dl.bookfunnel.com/kw1yge3479", "_blank");
@@ -40,7 +40,7 @@ export default function NewReleaseSignup() {
   };
 
   const benefits = [
-    { icon: Gift, text: "Free copy of The First Acquisition" },
+    { icon: Gift, text: "The First Acquisition, free with my newsletter" },
     { icon: Bell, text: "New release alerts before anyone else" },
     { icon: BookOpen, text: "Exclusive bonus chapters & epilogues" },
   ];
@@ -84,7 +84,7 @@ export default function NewReleaseSignup() {
                   Join the VIP Reader List
                 </h2>
                 <p className="text-xl text-[#6E5F5A] mb-4 max-w-2xl mx-auto leading-relaxed">
-                  Get a <span className="text-[#7A4F4C] font-semibold">free copy of The First Acquisition</span> plus
+                  Get <span className="text-[#7A4F4C] font-semibold">The First Acquisition free when you join my newsletter</span>, plus
                   exclusive content, early release alerts, and bonus chapters.
                 </p>
                 <p className="text-sm text-[#6E5F5A] mb-10">
@@ -162,7 +162,7 @@ export default function NewReleaseSignup() {
                     ) : (
                       <span className="flex items-center gap-2">
                         <Gift className="h-5 w-5" />
-                        Get My Free Book
+                        Join & Get the Book
                       </span>
                     )}
                   </Button>
@@ -188,7 +188,7 @@ export default function NewReleaseSignup() {
                   You're In!
                 </h2>
                 <p className="text-xl text-[#6E5F5A] mb-6 max-w-lg mx-auto leading-relaxed">
-                  Your free copy of{" "}
+                  Your copy of{" "}
                   <span className="text-[#7A4F4C] font-semibold">
                     The First Acquisition
                   </span>
@@ -202,7 +202,7 @@ export default function NewReleaseSignup() {
                   className="btn-premium bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-8 py-6 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                 >
                   <BookOpen className="mr-2 h-5 w-5" />
-                  Get Your Free Book
+                  Get Your Copy
                 </Button>
               </motion.div>
             )}

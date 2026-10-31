@@ -48,7 +48,7 @@ const contentUpgrades: Record<string, ContentUpgrade> = {
   },
   "how-to-start-romance-book-club": {
     slug: "how-to-start-romance-book-club",
-    title: "Free Book Club Discussion Guide",
+    title: "Book Club Discussion Guide, Free With My Newsletter",
     description:
       "Download the complete discussion guide for The First Acquisition — 25 questions, character analysis prompts, and wine pairing suggestions.",
     ctaText: "Get the Guide",
@@ -151,7 +151,7 @@ export function BlogContentUpgrade({ blogSlug }: BlogContentUpgradeProps) {
         </form>
 
         <p className="text-xs text-[#6E5F5A] mt-3">
-          Plus a free romance novel. No spam, ever. Unsubscribe anytime.
+          Plus a romance novel, free when you join my newsletter. No spam, ever. Unsubscribe anytime.
         </p>
       </div>
     </div>

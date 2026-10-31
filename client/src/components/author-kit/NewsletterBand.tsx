@@ -62,12 +62,12 @@ export function NewsletterBand({ onSubscribe, freeBookHref = "/free-book" }: Pro
           className="font-cormorant italic text-[21px] leading-[1.55] mb-11"
           style={{ color: TEXT_SOFT, textWrap: "pretty" }}
         >
-          News, new releases, and a free prequel novella, straight from Reese.
+          Join my newsletter for news, new releases, and a free prequel novella.
         </p>
 
         {subscribed ? (
           <div className="font-cormorant italic text-[22px]" style={{ color: GOLD }}>
-            Welcome. Your free prequel novella is on its way.
+            Welcome. Your prequel novella is on its way.
           </div>
         ) : (
           <>
@@ -124,7 +124,7 @@ export function NewsletterBand({ onSubscribe, freeBookHref = "/free-book" }: Pro
           className="font-cormorant italic text-[17px] inline-block mt-[26px] no-underline pb-0.5"
           style={{ color: GOLD, borderBottom: `1px solid ${GOLD_SOFT}` }}
         >
-          Or claim your free prequel novella instantly →
+          Or get the prequel novella, free with my newsletter →
         </a>
       </motion.div>
     </section>

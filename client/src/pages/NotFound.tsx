@@ -63,7 +63,7 @@ export default function NotFound() {
             >
               <Search className="w-8 h-8 text-[#7A4F4C] mb-2" />
               <h4 className="font-semibold text-[#4A3B3A] mb-1">Newsletter</h4>
-              <p className="text-sm text-[#6E5F5A]">Free book &amp; release news</p>
+              <p className="text-sm text-[#6E5F5A]">Prequel free with the newsletter, plus release news</p>
             </button>
             <button
               onClick={() => setLocation('/blog')}

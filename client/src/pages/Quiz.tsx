@@ -377,7 +377,7 @@ export default function Quiz() {
                     We've identified your romance trope personality.
                   </p>
                   <p className="text-[#6E5F5A] mb-8">
-                    Enter your email to reveal your result and get a <span className="text-[#7A4F4C] font-semibold">free romance novel</span> matched to your trope.
+                    Enter your email to reveal your result and get a <span className="text-[#7A4F4C] font-semibold">romance novel matched to your trope</span>, free when you join my newsletter.
                   </p>
 
                   <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
@@ -422,7 +422,7 @@ export default function Quiz() {
                   </form>
 
                   <p className="text-xs text-[#6E5F5A] mt-6">
-                    You'll also get a link to the free prequel. No spam, ever. Unsubscribe anytime.
+                    You'll also get a link to the prequel, free with my newsletter. No spam, ever. Unsubscribe anytime.
                   </p>
                 </div>
               </motion.div>
@@ -476,7 +476,7 @@ export default function Quiz() {
                           <span className="text-sm text-[#6E5F5A] ml-2">Manhattan Money Kings</span>
                         </div>
                         <p className="text-[#6E5F5A] mb-6 leading-relaxed">
-                          Based on your quiz results, this book from the Manhattan Money Kings series is your perfect match. A free copy is being delivered to your inbox now!
+                          Based on your quiz results, this book from the Manhattan Money Kings series is your perfect match. Your copy is being delivered to your inbox now!
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
                           <Button
@@ -484,7 +484,7 @@ export default function Quiz() {
                             className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-6 py-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                           >
                             <BookOpen className="mr-2 h-5 w-5" />
-                            Get Your Free Book
+                            Get Your Copy
                           </Button>
                           <Button
                             onClick={() => window.open(withAmazonTag(result.bookLink), "_blank")}
