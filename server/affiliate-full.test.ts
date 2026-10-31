@@ -84,7 +84,9 @@ describe("Favorites Products Data", () => {
       expect(cat.id).toBeTruthy();
       expect(cat.title).toBeTruthy();
       expect(cat.subtitle).toBeTruthy();
-      expect(cat.emoji).toBeTruthy();
+      // QA v5 C1: category labels carry no emoji.
+      expect("emoji" in cat).toBe(false);
+      expect(`${cat.title} ${cat.subtitle}`).not.toMatch(/\p{Extended_Pictographic}|\uFE0F/u);
     });
   });
 
