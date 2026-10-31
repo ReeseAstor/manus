@@ -136,19 +136,38 @@ function stripMarkup(html) {
   return html.replace(/<!--[\s\S]*?-->/g, "").replace(/<(script|style|template)\b[^>]*>[\s\S]*?<\/\1>/gi, " ").replace(/<[^>]+>/g, "");
 }
 
-// An element a reader does not see: hidden attribute, aria-hidden="true", class hidden/sr-only/invisible,
-// or inline display:none / visibility:hidden / font-size:0 / opacity:0 (QA v3). Used only for the exact
-// Kindle+ line count (QA v2 gap).
-const HIDDEN_OPEN = /<([a-z][a-z0-9-]*)\b(?=[^>]*(?:\shidden(?=[\s=>/])|aria-hidden\s*=\s*["']?true|class\s*=\s*["'][^"']*\b(?:hidden|sr-only|invisible)\b|style\s*=\s*["'][^"']*(?:display\s*:\s*none|visibility\s*:\s*hidden|font-size\s*:\s*0(?![.\d]*[1-9])|opacity\s*:\s*0(?![.\d]*[1-9]))))[^>]*>/i;
+// An element a reader does not see (static first pass; the v5 rendered check is authoritative, QA v4 K1):
+// hidden attribute, aria-hidden="true", <dialog>/<details> without open, hidden utility classes, or an
+// inline style that hides it (display:none, visibility:hidden, content-visibility:hidden, font-size/opacity/
+// height/width/max-height 0 (also ".0"), color:transparent, clip/clip-path, offscreen -999px positioning or
+// text-indent, transform:scale(0)).
+const Z = String.raw`0*\.?0+(?![\d.]*[1-9])`;
+const HIDDEN_CLASSES = String.raw`hidden|sr-only|invisible|screen-reader-text|d-none|opacity-0|visually-hidden|collapse|hide`;
+const HIDDEN_STYLE = String.raw`display\s*:\s*none|visibility\s*:\s*hidden|content-visibility\s*:\s*hidden|font-size\s*:\s*${Z}|opacity\s*:\s*${Z}|(?:max-)?(?:height|width)\s*:\s*${Z}|color\s*:\s*(?:transparent|rgba\([^)]*,\s*${Z}\s*\))|clip(?:-path)?\s*:|(?:left|top|right|bottom|text-indent|margin-left|margin-top)\s*:\s*-\s*\d{3,}|transform\s*:\s*[^;"']*scale[XY]?\(\s*${Z}`;
+const HIDDEN_OPEN = new RegExp(String.raw`<([a-z][a-z0-9-]*)\b(?=[^>]*(?:\shidden(?=[\s=>/])|aria-hidden\s*=\s*["']?true|class\s*=\s*["']?[^"'>]*\b(?:${HIDDEN_CLASSES})\b|style\s*=\s*["'][^"']*(?:${HIDDEN_STYLE})))[^>]*>|<(dialog|details)\b(?![^>]*\sopen\b)[^>]*>`, "i");
+/** Classes and ids that a <style> block in the same document hides (e.g. .x{position:absolute;left:-9999px}). */
+function styleHiddenSelectors(html) {
+  const names = [];
+  for (const b of html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi))
+    for (const r of b[1].matchAll(/([^{}]+)\{([^}]*)\}/g))
+      if (new RegExp(HIDDEN_STYLE, "i").test(r[2])) for (const m of r[1].matchAll(/([.#])([\w-]+)/g)) names.push([m[1], m[2]]);
+  return names;
+}
 
 /** Reader-visible text for the exact-line count: no comments, scripts, head, attributes or hidden elements. */
 export function visibleText(html) {
   // <textarea> holds form text, <svg>/<title> are tooltips or accessible names, not reading text (QA v3).
   let t = html.replace(/<!--[\s\S]*?-->/g, "").replace(/<(script|style|template|noscript|head|textarea|svg|title)\b[^>]*>[\s\S]*?<\/\1>/gi, " ");
+  // Elements hidden by the document's own <style> rules: mark them hidden inline first.
+  for (const [kind, name] of styleHiddenSelectors(html)) {
+    const attr = kind === "." ? String.raw`class\s*=\s*["']?[^"'>]*\b` : String.raw`id\s*=\s*["']?`;
+    t = t.replace(new RegExp(String.raw`<([a-z][a-z0-9-]*)\b(?=[^>]*${attr}${name.replace(/[-]/g, "\\-")}\b)`, "gi"), "<$1 hidden");
+  }
   for (let n = 0; n < 2000; n++) {
     const m = HIDDEN_OPEN.exec(t);
     if (!m) break;
-    const re = new RegExp(`<(/?)${m[1]}\\b[^>]*>`, "gi");
+    const tag = m[1] ?? m[2];
+    const re = new RegExp(`<(/?)${tag}\\b[^>]*>`, "gi");
     re.lastIndex = m.index + m[0].length;
     let depth = /\/>$/.test(m[0]) ? 0 : 1;
     let end = depth === 0 ? re.lastIndex : t.length; // unclosed hidden element: drop to the end (fail closed)
@@ -188,11 +207,21 @@ const AMAZON_HOST = /(?:^|\.)(?:amazon\.[a-z.]+|amzn\.(?:to|com|eu|asia)|a\.co)$
 // Separators: up to 6 non-word characters or underscores (whitespace collapsed first), so
 // "Kindle -- Unlimited", "Kindle —— Unlimited", "Kindle_Unlimited" are caught (QA v2 gap).
 // "Count-down", "Count down" and "Countdown" in any form (QA v3): Countdown Deals are a KDP Select promotion.
-const STRAY_RE = /kindle[\W_]{0,6}unl[a-z]*|kindle[\W_]{0,6}(?:\+|plus(?![a-z]))|(?<![a-z])count[\W_]{0,3}down/gi;
+// v5 (QA v4 K3/K4): "Kindle's Unlimited", inner hyphens or dots ("Un-limited", "C.O.U.N.T.D.O.W.N"), and the
+// lookalikes I/l/1/| for l and i, 0 for o and \u222A for U inside the kindle, unlimited and countdown tokens.
+const g = String.raw`[\W_]?`;
+const L = "[li1|!\u00A1]";
+const KINDLE = String.raw`k${g}${L}${g}n${g}d${g}${L}${g}e`;
+const UNLIMITED = String.raw`[u\u222A\u03BC]${g}n${g}${L}${g}${L}${g}m${g}${L}${g}t`;
+const COUNTDOWN = String.raw`(?<![a-z])c${g}[o0]${g}[u\u222A]${g}n${g}t[\W_]{0,3}d${g}[o0]${g}w${g}n`;
+const STRAY_RE = new RegExp(String.raw`${KINDLE}[\W_]{0,6}(?:['\u2019]s[\W_]{0,6})?(?:${UNLIMITED}|unl[a-z]*)|${KINDLE}[\W_]{0,6}(?:\+|plus(?![a-z]))|${COUNTDOWN}`, "gi");
 // "K+" as its own token (Kindle+ shorthand, QA v3); "10K+" and "OK+" do not match.
 const K_PLUS_RE = /(?<![\p{L}\p{N}])k[\W_]{0,2}\+/giu;
 // Limited-time 99 cent promotions (Countdown Deal wording without the name, QA v3).
-const PROMO_RE = /(?:\$\s?0?\.99|\b99\s?(?:\u00A2|c\b|cents?\b))[^.\n]{0,60}?limited[\W_]{0,3}time|limited[\W_]{0,3}time[^.\n]{0,60}?(?:\$\s?0?\.99|\b99\s?(?:\u00A2|c\b|cents?\b))/gi;
+// v5 (QA v4 K4): any 99 cent price within 60 characters of a time limit, either order.
+const PRICE99 = String.raw`(?:\$\s?0?\.99\b|\b99\s?(?:\u00A2|c\b|cents?\b)|ninety[\s-]nine\s+cents)`;
+const TIME_LIMIT = String.raw`(?:today\s+only|this\s+week(?:end)?|for\s+(?:\d+|one|two|three|four|five|six|seven)\s+(?:more\s+)?(?:hours?|days?)|\bends?\b|\bending\b|\buntil\b|\btill\b|\bsale\b|drops?\s+to|limited\b|price\s+drop|\bdeal\b|\bonly\s+through\b)`;
+const PROMO_RE = new RegExp(String.raw`${PRICE99}[^\n]{0,60}?${TIME_LIMIT}|${TIME_LIMIT}[^\n]{0,60}?${PRICE99}`, "gi");
 // Entity-shaped text the decoder could not resolve, right next to a kindle/unlimited/plus word: fail closed.
 const UNKNOWN_NEAR_RE = /kindle[\W_]{0,6}\uFFFD|\uFFFD[\W_]{0,6}(?:unl|plus|\+)/gi;
 const FREE_CLAIM_RE = /read\W{0,3}(?:it\W{0,3})?(?:for\W{0,3})?free|\$\s?0(?:\.00)?(?![\d.])/gi;
