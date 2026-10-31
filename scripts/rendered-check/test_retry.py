@@ -182,7 +182,7 @@ class EndToEnd(unittest.TestCase):
         try: rc, out, lines = self.run_check(site)
         finally: site.stop()
         self.assertEqual(rc, 1); self.assertTail(lines, r"^VERDICT: FAIL [1-9]\d*$")
-        self.assertRegex(out, r"FAIL /p7: \[(no-JS|SPA)\] dash in visible text")
+        self.assertRegex(out, r"FAIL /p7: \[(no-JS|SPA)\] DASH .\u2014. in visible text")
         self.assertNotIn("RETRY", out); self.assertIn("retries: 0 ", out); self.assertEqual(site.raw_hits["/p7"], 1)
 
     def test_e2e_transport_unstable_over_10_percent_fails(self):

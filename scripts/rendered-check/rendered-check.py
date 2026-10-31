@@ -21,6 +21,12 @@ Covers every <loc> in BASE/sitemap.xml (rewritten onto BASE), routes-extra.txt, 
   Text files are checked as plain text: each line an element ('free' guard, dashes).
   Age rule (QA R3, website scope): a number next to an age word ("five-year-old", "aged 5", "turns 16", "3rd grade") fails in
     raw HTML (incl. head, meta and JSON-LD), visible text (no-JS and SPA), title/meta description, text files and tRPC payloads (scripts/lib/age-number-guard.mjs).
+  Brand rules (QA CARD-v6 F2; scripts/lib/brand-rules.mjs, shared with the blog column scan): DASH (U+2010-U+2015, U+2212, "--",
+    a spaced hyphen inside a line), EMOJI, AI, COUNTDOWN, in every channel: raw HTML (text, readable attributes and JSON-LD strings;
+    style, non-JSON-LD scripts and comments removed), no-JS and SPA visible text (incl. ::before/::after), title/meta description,
+    text files and tRPC strings. Only the two approved [data-book-excerpt] blocks are skipped (QA D2, dash rule's original exemption).
+    Text files and tRPC strings are markdown: a leading list marker ("- ", "* ") and hr-only lines are ignored there (and only there).
+    robots.txt crawler directive lines (User-agent/Allow/Disallow/Sitemap) are listed as notes, not scanned for AI.
   tRPC payloads (QA G-8): every /api/trpc/ response the SPA receives is parsed and each string value is checked for dashes,
     the age rule and the 'free' guard, so DB text that reaches the browser but is not shown (e.g. a post past the first page
     of /blog) still fails. Each payload finding is reported once (first route that received it).
@@ -30,6 +36,7 @@ hits are tagged [embed] so they can be routed to the asset owner, but they still
 Raw reads get a bounded transport-only retry (see http_get); each retry logs 'RETRY <url> <attempt> <error>'.
 The last two lines are 'retries: N (...)' and exactly: VERDICT: PASS 0 | VERDICT: FAIL <fail count>.
 """
+import html as html_lib
 import json, os, re, subprocess, sys, time, urllib.request, urllib.error, glob, socket, ssl, http.client
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -108,6 +115,12 @@ class Guards:
         if not r.get("ok"): raise RuntimeError(r.get("error"))
         return r["result"]
 
+SCROLL_THROUGH = r"""async () => {
+  const step = Math.max(200, Math.floor(innerHeight * 0.8));
+  for (let y = 0, i = 0; y < document.documentElement.scrollHeight && i < 200; y += step, i++) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); }
+  scrollTo(0, document.documentElement.scrollHeight); await new Promise((r) => setTimeout(r, 300)); scrollTo(0, 0);
+}"""
+
 EXTRACT = r"""(LINE) => {
   // An element whose whole text is exactly the approved Kindle+ line (the SPA splits it across two spans
   // so it wraps nicely) is read as that line, in both serialised copies; nothing else is joined.
@@ -169,7 +182,7 @@ EXTRACT = r"""(LINE) => {
     return false;
   };
   const walker = document.createTreeWalker(document.body || document.documentElement, NodeFilter.SHOW_TEXT);
-  const hiddenIdx = []; const dashes = []; const embed = [];
+  const hiddenIdx = []; const dashes = []; const embed = []; const visText = []; const exText = [];
   let i = 0, total = 0;
   for (let n; (n = walker.nextNode()); i++) {
     const t = n.textContent; if (!t.trim()) continue;
@@ -180,6 +193,8 @@ EXTRACT = r"""(LINE) => {
     const inEmbed = !!(p && p.closest(".ml-embedded,[class*='ml-form'],[id^='mlb2']"));
     if (inEmbed) embed.push(t.trim().slice(0, 200));
     if (/\u2014|\s\u2013\s/.test(t) && !(p && p.closest("[data-book-excerpt]"))) dashes.push((inEmbed ? "[embed] " : "") + t.trim().slice(0, 200));
+    if (p && p.closest("[data-book-excerpt]")) exText.push(t.replace(/\s+/g, " ").trim());
+    else visText.push((inEmbed ? "[embed] " : "") + t.replace(/\s+/g, " ").trim());
   }
   const pseudo = [];
   for (const el of document.querySelectorAll("body *")) {
@@ -200,7 +215,7 @@ EXTRACT = r"""(LINE) => {
   flatten(fullClone);
   const md = document.querySelector('meta[name="description"]');
   return { full: "<!doctype html>" + fullClone.outerHTML, visible: "<!doctype html>" + clone.outerHTML, textLen: total,
-           pseudo, dashes, embed, excerptMarks: document.querySelectorAll("[data-book-excerpt]").length, title: document.title, metaDescription: md ? md.content : "", innerText: (document.body ? document.body.innerText : "").slice(0, 400) };
+           pseudo, dashes, embed, visText: visText.join("\n"), exText: exText.join("\n"), excerptMarks: document.querySelectorAll("[data-book-excerpt]").length, title: document.title, metaDescription: md ? md.content : "", innerText: (document.body ? document.body.innerText : "").slice(0, 400) };
 }"""
 
 # QA D2: the dash exemption marker may sit only on these two quoted excerpts, one block each.
@@ -217,6 +232,38 @@ def walk_strings(v, path="$"):
         for i, x in enumerate(v): yield from walk_strings(x, f"{path}[{i}]")
     elif isinstance(v, dict):
         for k, x in v.items(): yield from walk_strings(x, f"{path}.{k}")
+def strip_excerpts(html, removed=None):
+    """Remove the approved <div ... data-book-excerpt> blocks (balanced <div> match) from raw HTML; removed blocks go to `removed`."""
+    out = html
+    while True:
+        m = re.search(r"<div\b[^>]*\bdata-book-excerpt\b[^>]*>", out)
+        if not m: return out
+        depth, k = 1, m.end()
+        for t in re.finditer(r"<(/?)div\b[^>]*>", out[k:]):
+            depth += -1 if t.group(1) else 1
+            if depth == 0:
+                if removed is not None: removed.append(out[m.start():k + t.end()])
+                out = out[:m.start()] + " " + out[k + t.end():]; break
+        else:
+            if removed is not None: removed.append(out[m.start():])
+            return out[:m.start()]
+def raw_channels(raw):
+    """Raw HTML -> (visible-ish text, readable attribute values, JSON-LD strings). Style, scripts (except JSON-LD) and comments removed."""
+    ex = []
+    h = strip_excerpts(re.sub(r"(?s)<!--.*?-->", " ", raw), ex)
+    ld = []
+    for m in re.finditer(r"(?is)<script\b[^>]*type=[\"']application/ld\+json[\"'][^>]*>(.*?)</script>", h):
+        try: ld += [v for _, v in walk_strings(json.loads(m.group(1)))]
+        except Exception: ld.append(m.group(1))
+    body = re.sub(r"(?is)<(style|script|template)\b.*?</\1>", " ", h)
+    attrs = [html_lib.unescape(a or b) for a, b in re.findall(r"""\b(?:content|alt|title|aria-label|placeholder)\s*=\s*(?:"([^"]*)"|'([^']*)')""", body)]
+    text = html_lib.unescape(re.sub(r"<[^>]+>", " ", body))
+    url = lambda v: re.match(r"^(https?:|/|#|data:)\S*$", v.strip()) is not None
+    extext = html_lib.unescape(re.sub(r"<[^>]+>", " ", " ".join(ex)))
+    return text, [a for a in attrs if a.strip() and not url(a)], [v for v in ld if v.strip() and not url(v)], extext
+def brand(g, text, mode="text"):
+    return g.ask(op="brand", text=text, mode=mode)
+
 payload_seen = set(); payload_stats = {"responses": 0, "strings": 0}
 def check_payloads(route, label, responses, g):
     for r in responses:
@@ -232,7 +279,7 @@ def check_payloads(route, label, responses, g):
             payload_stats["strings"] += 1
             if len(sv) < 3 or (sv.startswith(("http://", "https://", "/")) and " " not in sv): continue
             finds = []
-            if DASH_RE.search(sv): finds.append(f"dash :: {sv[max(0, DASH_RE.search(sv).start() - 80):DASH_RE.search(sv).end() + 80]}")
+            for h in brand(g, sv, "lines"): finds.append(f"{h['rule']} {h['match']!r} :: {h['context']}")
             for h in g.ask(op="age", text=sv): finds.append(f"age number '{h['match']}' :: {h['context']}")
             for h in g.ask(op="free", src=sv, kind="markdown"): finds.append(f"free: {h['near']} :: {h['sentence']}")
             for f_ in finds:
@@ -300,6 +347,11 @@ def main():
             rep["http"] = st; rep["final_url"] = final
             if st >= 400 and route != "/this-page-does-not-exist": fail(route, f"HTTP {st}")
             for h in g.ask(op="free", src=raw, kind="html"): fail(route, f"[raw HTML] free: {h['near']} :: {h['sentence']}")
+            rtext, rattrs, rld, rex = raw_channels(raw)
+            for h in brand(g, rex):
+                if h["rule"] != "DASH": fail(route, f"[raw HTML] [data-book-excerpt] {h['rule']} {h['match']!r} :: {h['context']}")
+            for label_, src_ in (("[raw HTML] text", rtext), ("[raw HTML] attribute", "\n".join(rattrs)), ("[raw HTML] JSON-LD", "\n".join(rld))):
+                for h in brand(g, src_): fail(route, f"{label_} {h['rule']} {h['match']!r} :: {h['context']}")
             # QA R3 age rule on the raw HTML incl. <head>, meta, JSON-LD and inline scripts (tags removed, script/style text kept).
             for h in g.ask(op="age", text=re.sub(r"<[^>]+>", " ", raw).replace("&nbsp;", " ")): fail(route, f"[raw HTML] age number '{h['match']}' :: {h['context']}")
             if slug:
@@ -313,7 +365,11 @@ def main():
             if label == "SPA": pg.on("response", lambda r: trpc.append(r) if "/api/trpc/" in r.url else None)
             try:
                 pg.goto(base + route, wait_until="networkidle" if label == "SPA" else "load", timeout=NAV_TIMEOUT_MS)
-                if label == "SPA": pg.wait_for_timeout(2500)
+                if label == "SPA":
+                    pg.wait_for_timeout(2500)
+                    # Scroll through the page so scroll-triggered (in-view) animations reveal their text before it is read
+                    # (QA CARD-v6 F2 proof: /blog cards below the fold stayed at opacity 0 and were skipped as hidden).
+                    pg.evaluate(SCROLL_THROUGH); pg.wait_for_timeout(1200)
                 x = pg.evaluate(EXTRACT, LINE)
             except Exception as e:
                 fail(route, f"[{label}] render failed or timed out (fail closed): {str(e)[:200]}"); pg.close(); continue
@@ -329,13 +385,16 @@ def main():
                 for h in g.ask(op="free", src=x["full"], kind="html"): fail(route, f"[{label}] free: {h['near']} :: {h['sentence']}")
                 if x["pseudo"]:
                     for h in g.ask(op="free", src="".join(f"<p>{p}</p>" for p in x["pseudo"]), kind="html"): fail(route, f"[{label}] free (::before/::after): {h['sentence']}")
-                for d in x["dashes"]: fail(route, f"[{label}] dash in visible text :: {d}")
+                for h in brand(g, x["visText"]): fail(route, f"[{label}] {h['rule']} {h['match']!r} in visible text :: {h['context']}")
+                for h in brand(g, x["exText"]):
+                    if h["rule"] != "DASH": fail(route, f"[{label}] {h['rule']} {h['match']!r} in [data-book-excerpt] :: {h['context']}")
+                for h in brand(g, "\n".join(x["pseudo"])): fail(route, f"[{label}] {h['rule']} {h['match']!r} in ::before/::after :: {h['context']}")
                 for h in g.ask(op="age", text=plain_text(x["full"]) + " \n " + (x["title"] or "") + " \n " + (x["metaDescription"] or "")):
                     fail(route, f"[{label}] age number '{h['match']}' :: {h['context']}")
                 want = 1 if route.rstrip("/").removesuffix("/index.html") in EXCERPT_ROUTES else 0
                 if x["excerptMarks"] != want: fail(route, f"[{label}] [data-book-excerpt] blocks: {x['excerptMarks']} (allowed here: {want}; QA D2)")
-                for d in (x["title"], x["metaDescription"]):
-                    if re.search("\u2014|\\s\u2013\\s", d or ""): fail(route, f"[{label}] dash in title/meta description :: {d[:160]}")
+                for nm, d in (("title", x["title"]), ("meta description", x["metaDescription"])):
+                    for h in brand(g, d or ""): fail(route, f"[{label}] {h['rule']} {h['match']!r} in {nm} :: {h['context']}")
                 if slug:
                     for pr in g.ask(op="ku", html=x["full"], slug=None): fail(route, f"[{label}] books guard: {pr}")
                     vis = g.ask(op="visible", html=x["visible"]).count(LINE)
@@ -362,8 +421,13 @@ def main():
                 continue
             if not body.strip(): fail(t, "empty (fail closed)"); continue
             for h in g.ask(op="free", src=body, kind="markdown"): fail(t, f"[text] free: {h['near']} :: {h['sentence']}")
-            for k, l in enumerate(body.split("\n")):
-                if re.search("\u2014|\\s\u2013\\s", l): fail(t, f"[text] dash on line {k + 1} :: {l.strip()[:160]}")
+            scan_body = body
+            if t == "/robots.txt":
+                directives = [l for l in body.split("\n") if re.match(r"^\s*(User-agent|Allow|Disallow|Sitemap|Crawl-delay)\s*:", l, re.I)]
+                for l in directives:
+                    if any(h["rule"] == "AI" for h in brand(g, l)): print(f"note {t}: crawler directive, not scanned for AI :: {l.strip()}")
+                scan_body = "\n".join(l for l in body.split("\n") if l not in directives)
+            for h in brand(g, scan_body, "lines"): fail(t, f"[text] {h['rule']} {h['match']!r} :: {h['context']}")
             for h in g.ask(op="age", text=body): fail(t, f"[text] age number '{h['match']}' :: {h['context']}")
             print(f"checked {t} ({len(body)} bytes)")
         except Exception as e:
