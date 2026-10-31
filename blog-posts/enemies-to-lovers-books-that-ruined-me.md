@@ -48,7 +48,7 @@ The grumpy/sunshine dynamic layered over enemies-to-lovers is a combination that
 
 ### Punk 57 by Penelope Douglas
 
-[Punk 57](https://www.amazon.com/dp/B01KB8XC5A?tag=reeseastor-20) is enemies-to-lovers with a secret identity twist that makes the dynamic more complex. Two pen pals who've never met end up at the same school, but one of them doesn't know who the other is. The result is a relationship built on honesty (through letters) and antagonism (in person), and watching those two versions collide is genuinely thrilling.
+[Punk 57](https://www.amazon.com/dp/B01KB8XC5A?tag=reeseastor-20) is enemies-to-lovers with a secret identity twist that makes the dynamic more complex. Two pen pals who've never met end up face to face, but one of them doesn't know who the other is. The result is a relationship built on honesty (through letters) and antagonism (in person), and watching those two versions collide is genuinely thrilling.
 
 Douglas writes tension like a wire pulled taut. You can feel it vibrating through every interaction, and when it finally snaps, the payoff is enormous.
 

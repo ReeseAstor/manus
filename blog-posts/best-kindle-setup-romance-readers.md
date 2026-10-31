@@ -36,7 +36,7 @@ Your Kindle goes everywhere with you. It needs protection. But it also needs to 
 
 ### My Pick: A Slim Fabric Case
 
-I use a [fabric book-style case](https://www.amazon.com/dp/B0CM7RF1KR?tag=reeseastor-20). It protects the screen, adds almost no weight, and has a magnetic closure that wakes the Kindle when you open it. The auto-wake feature sounds minor but it matters when you're pulling your Kindle out twenty times a day for five-minute reading sessions.
+I use a [fabric book-style case](https://www.amazon.com/dp/B0CM7RF1KR?tag=reeseastor-20). It protects the screen, adds almost no weight, and has a magnetic closure that wakes the Kindle when you open it. The auto-wake feature sounds like a small thing, but it matters when you're pulling your Kindle out twenty times a day for five-minute reading sessions.
 
 ### For the Aesthetic Readers: Book Sleeves
 

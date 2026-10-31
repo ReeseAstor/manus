@@ -2,6 +2,8 @@
 
 *Looking for your next book boyfriend? These billionaire romance series deliver swoon-worthy heroes, emotional depth, and the kind of chemistry that keeps you reading until 3 AM.*
 
+*For readers 18+.*
+
 There's something irresistible about billionaire romance. Maybe it's the fantasy of being swept off your feet by someone who could buy you anything but chooses to give you everything that matters instead. Or perhaps it's watching powerful men who control boardrooms become completely undone by love. Whatever draws you to the genre, there are some exceptional series worth adding to your TBR pile.
 
 I've read more billionaire romance than I can count (it's basically research for my day job), and these are the series I genuinely recommend to friends. No filler picks. Every one of these kept me up past midnight.
@@ -42,7 +44,7 @@ Book 3 brings together **Dominic Kane** and **Sophia Reed** in a secret baby rom
 
 ### Book 4: The Billionaire's Forbidden Nanny
 
-**Camille Torres** takes a job caring for billionaire **Ethan Calloway**'s silent daughter and never expects to become the family they both need. Ethan hasn't smiled since his wife died, his five-year-old hasn't spoken, and seven nannies have quit. The last thing he needs is a nanny with quick wit, warm hands, and a mouth that talks back.
+**Camille Torres** takes a job caring for billionaire **Ethan Calloway**'s silent daughter and never expects to become the family they both need. Ethan hasn't smiled since his wife died, his daughter hasn't said a word, and seven nannies have quit. The last thing he needs is a nanny with quick wit, warm hands, and a mouth that talks back.
 
 *Tropes: Nanny Romance, Single Dad, Forbidden Romance*
 
@@ -74,7 +76,7 @@ With so many options available, finding the right series for your reading mood c
 
 **Heat Level**: Billionaire romance spans from sweet to scorching. The Manhattan Money Kings series and Kings of Sin both offer steamy scenes balanced with emotional development, perfect for readers who want both.
 
-**Tropes**: Are you in the mood for enemies to lovers? Fake relationship? Secret baby? Most series lean into specific tropes, so identifying what you're craving helps narrow your options.
+**Tropes**: Are you in the mood for enemies to lovers? Fake relationship? Second chance? Most series lean into specific tropes, so identifying what you're craving helps narrow your options.
 
 **Setting**: Some readers love the glamour of New York City, while others prefer small-town settings or international backdrops. Manhattan Money Kings is perfect for NYC lovers.
 
