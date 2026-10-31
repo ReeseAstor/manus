@@ -20,7 +20,7 @@ Covers every <loc> in BASE/sitemap.xml (rewritten onto BASE), routes-extra.txt, 
        EXCERPT_ROUTES, exactly one block each (QA D2); the marker anywhere else is itself a FAIL.
   Text files are checked as plain text: each line an element ('free' guard, dashes).
   Age rule (QA R3, website scope): a number next to an age word ("five-year-old", "aged 5", "turns 16", "3rd grade") fails in
-    visible text (no-JS and SPA), title/meta description, text files and tRPC payloads (scripts/lib/age-number-guard.mjs).
+    raw HTML (incl. head, meta and JSON-LD), visible text (no-JS and SPA), title/meta description, text files and tRPC payloads (scripts/lib/age-number-guard.mjs).
   tRPC payloads (QA G-8): every /api/trpc/ response the SPA receives is parsed and each string value is checked for dashes,
     the age rule and the 'free' guard, so DB text that reaches the browser but is not shown (e.g. a post past the first page
     of /blog) still fails. Each payload finding is reported once (first route that received it).
@@ -300,6 +300,8 @@ def main():
             rep["http"] = st; rep["final_url"] = final
             if st >= 400 and route != "/this-page-does-not-exist": fail(route, f"HTTP {st}")
             for h in g.ask(op="free", src=raw, kind="html"): fail(route, f"[raw HTML] free: {h['near']} :: {h['sentence']}")
+            # QA R3 age rule on the raw HTML incl. <head>, meta, JSON-LD and inline scripts (tags removed, script/style text kept).
+            for h in g.ask(op="age", text=re.sub(r"<[^>]+>", " ", raw).replace("&nbsp;", " ")): fail(route, f"[raw HTML] age number '{h['match']}' :: {h['context']}")
             if slug:
                 for pr in g.ask(op="ku", html=raw, slug=slug): fail(route, f"[raw HTML] books guard: {pr}")
         except Exception as e:
