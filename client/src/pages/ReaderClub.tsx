@@ -72,7 +72,7 @@ export default function ReaderClub() {
     <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7]">
       <EnhancedSEOHead
         title="Reader's Club | Reese Astor"
-        description="New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free."
+        description="New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free when you join my newsletter."
         canonical="/reader-club"
         keywords={["reader club", "Reese Astor", "The First Acquisition", "romance reader community"]}
       />
@@ -104,7 +104,7 @@ export default function ReaderClub() {
           </h1>
           
           <p className="text-xl md:text-2xl text-[#6E5F5A] mb-8 leading-relaxed">
-            New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free.
+            New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free when you join my newsletter.
           </p>
 
           {!isMember && !joined && (
@@ -128,7 +128,7 @@ export default function ReaderClub() {
                 disabled={joinMutation.isPending}
                 className="px-8 py-4 bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300"
               >
-                {joinMutation.isPending ? "Joining..." : "Join Free"}
+                {joinMutation.isPending ? "Joining..." : "Join Now"}
               </Button>
             </motion.form>
           )}
@@ -148,7 +148,7 @@ export default function ReaderClub() {
                   href="/free-book"
                   className="text-[#7A4F4C] font-semibold underline underline-offset-4"
                 >
-                  Get the free book
+                  Get the prequel
                 </Link>
               )}
             </motion.div>
@@ -288,7 +288,7 @@ export default function ReaderClub() {
               Ready to Join?
             </h2>
             <p className="text-[#6E5F5A] text-lg mb-8">
-              New-release news from Reese Astor. The First Acquisition is free. Joining is free.
+              New-release news from Reese Astor. The First Acquisition is free when you join my newsletter, and joining costs nothing.
             </p>
             <Button
               onClick={() => {

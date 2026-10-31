@@ -25,6 +25,7 @@ if (fs.existsSync(adminDir)) {
 }
 
 const requiredPrefixes = [
+  "AdminRoutes-",
   "WritingStudio-",
   "Admin-",
   "AdminDashboard-",

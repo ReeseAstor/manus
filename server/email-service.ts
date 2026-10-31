@@ -99,7 +99,7 @@ export function generateDownloadLinks(bookId: number): {
     30002: "https://swiy.co/mmk",  // Complete trilogy
     30003: "https://swiy.co/05",   // Ultimate collection (incl. prequel)
     30004: "https://swiy.co/b01",  // Executive Assistant
-    30005: "https://www.amazon.com/dp/B0FCCBNF8X?tag=reeseastor-20",  // Fake Wife (Kindle; swiy.co/2rd was the paperback, 88away0d-20)
+    30005: "https://www.amazon.com/dp/B0FCCBNF8X?tag=reeseastor-20",  // Fake Wife (Kindle; swiy.co/2rd was the paperback)
     30006: "https://swiy.co/3rd",  // Baby Secret
   };
 

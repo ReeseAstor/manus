@@ -8,7 +8,7 @@ describe("withAmazonTag", () => {
     );
   });
   it("keeps an existing tag", () => {
-    const href = "https://www.amazon.com/dp/B0CMTXKBWW?tag=88away0d-20";
+    const href = "https://www.amazon.com/dp/B0CMTXKBWW?tag=someoneelse-20";
     expect(withAmazonTag(href)).toBe(href);
   });
   it("leaves other links alone", () => {
