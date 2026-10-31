@@ -70,11 +70,11 @@ export default function Favorites() {
             </h1>
 
             <p className="text-lg md:text-xl text-[#6E5F5A] max-w-2xl mx-auto leading-relaxed mb-4">
-              My personally curated collection of products I actually use and love — from the reading pillow that changed my life to the candle that smells like a Manhattan library.
+              My personally curated collection of products I actually use and love, from the reading pillow that changed my life to the candle that smells like a Manhattan library.
             </p>
 
             <p className="text-sm text-[#6E5F5A] max-w-xl mx-auto">
-              Every product on this page is something I've personally tried and genuinely recommend. No filler, no fluff — just the things that make reading and writing better.
+              Every product on this page is something I've personally tried and genuinely recommend. No filler, no fluff, just the things that make reading and writing better.
             </p>
           </motion.div>
         </div>

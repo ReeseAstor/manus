@@ -115,7 +115,7 @@ export function ExitIntentPopup() {
 
                 {/* Headline */}
                 <h2 className="font-serif text-3xl font-bold text-[#4A3B3A] mb-3">
-                  Wait — Before You Go!
+                  Wait, Before You Go!
                 </h2>
 
                 <p className="text-[#6E5F5A] text-lg mb-2">

@@ -49,7 +49,7 @@ export default function WelcomeBack() {
             </h2>
             <p style={{ margin: "0 0 8px", color: "#6E5F5A", fontSize: 16, lineHeight: 1.8 }}>
               I wrote a brand-new bonus chapter that takes place after the events of the
-              Manhattan Money Kings trilogy. It's never been published anywhere — and it's yours,
+              Manhattan Money Kings trilogy. It's never been published anywhere, and it's yours,
               just for coming back.
             </p>
             <p style={{ margin: "0 0 32px", color: "#6E5F5A", fontSize: 14, lineHeight: 1.7 }}>
@@ -110,7 +110,7 @@ export default function WelcomeBack() {
             </h2>
             <p style={{ margin: "0 0 24px", color: "#6E5F5A", fontSize: 16, lineHeight: 1.8 }}>
               The bonus chapter (plus every other exclusive scene, deleted chapter, and
-              behind-the-scenes look) lives in the Reader's Club — your private corner of the penthouse.
+              behind-the-scenes look) lives in the Reader's Club, your private corner of the penthouse.
             </p>
             <Link href="/newsletter">
               <span style={{

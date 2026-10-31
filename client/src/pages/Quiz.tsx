@@ -51,18 +51,18 @@ const quizQuestions: QuizQuestion[] = [
     id: 4,
     question: "Pick a movie that makes your heart race",
     options: [
-      { text: "The Proposal — love born from rivalry", trope: "enemies", emoji: "🎬" },
-      { text: "Atonement — love that defies the rules", trope: "forbidden", emoji: "🎭" },
-      { text: "The Notebook — love that finds its way back", trope: "second-chance", emoji: "📓" },
-      { text: "Fifty Shades — power, control, surrender", trope: "boss", emoji: "🖤" },
+      { text: "The Proposal: love born from rivalry", trope: "enemies", emoji: "🎬" },
+      { text: "Atonement: love that defies the rules", trope: "forbidden", emoji: "🎭" },
+      { text: "The Notebook: love that finds its way back", trope: "second-chance", emoji: "📓" },
+      { text: "Fifty Shades: power, control, surrender", trope: "boss", emoji: "🖤" },
     ],
   },
   {
     id: 5,
     question: "How do you handle conflict?",
     options: [
-      { text: "I fight back — the tension is half the fun", trope: "enemies", emoji: "⚡" },
-      { text: "I keep it hidden — some battles are private", trope: "forbidden", emoji: "🤫" },
+      { text: "I fight back. The tension is half the fun", trope: "enemies", emoji: "⚡" },
+      { text: "I keep it hidden. Some battles are private", trope: "forbidden", emoji: "🤫" },
       { text: "I reflect on what went wrong and try again", trope: "second-chance", emoji: "🪞" },
       { text: "I take charge and find the solution", trope: "boss", emoji: "👑" },
     ],
@@ -108,7 +108,7 @@ export const tropeResults: Record<string, TropeResult> = {
     title: "Enemies-to-Lovers",
     subtitle: "You thrive on tension",
     description:
-      "You're drawn to the electric spark between two people who can't stand each other — until they can't resist each other. The banter, the tension, the moment when hate melts into something far more dangerous... that's your sweet spot. You believe the best love stories start with a fight.",
+      "You're drawn to the electric spark between two people who can't stand each other, until they can't resist each other. The banter, the tension, the moment when hate melts into something far more dangerous... that's your sweet spot. You believe the best love stories start with a fight.",
     bookTitle: "Hostile Tender",
     bookSubtitle: "Hudson Dynasty Book 1",
     bookLink: "https://www.amazon.com/dp/B0H1F9PV97",
@@ -134,7 +134,7 @@ export const tropeResults: Record<string, TropeResult> = {
     title: "Secret Baby / Second Chance",
     subtitle: "Love always finds its way back",
     description:
-      "You believe in fate — in the loves that come back around stronger, and in the secrets that change everything. There's something irresistible about unfinished business, about two people who were torn apart finding their way back to each other. You know that sometimes the best love stories have a plot twist.",
+      "You believe in fate, in the loves that come back around stronger, and in the secrets that change everything. There's something irresistible about unfinished business, about two people who were torn apart finding their way back to each other. You know that sometimes the best love stories have a plot twist.",
     bookTitle: "The Billionaire's Baby Secret",
     bookSubtitle: "Manhattan Money Kings Book 3",
     bookLink: "https://www.amazon.com/dp/B0G12LBZ24",
@@ -287,7 +287,7 @@ export default function Quiz() {
             What's Your <span className="text-[#7A4F4C]">Romance Trope</span>?
           </h1>
           <p className="text-lg text-[#6E5F5A] max-w-2xl mx-auto">
-            Answer 7 quick questions to discover which romance trope matches your personality — plus get a personalized book recommendation.
+            Answer 7 quick questions to discover which romance trope matches your personality, plus get a personalized book recommendation.
           </p>
         </motion.div>
 

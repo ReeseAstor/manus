@@ -275,7 +275,7 @@ export default function Blog() {
                   className="flex justify-center mt-16"
                 >
                   <p className="text-[#6E5F5A] text-sm italic">
-                    You've reached the end — all {allDisplayPosts.length} posts loaded
+                    You've reached the end: all {allDisplayPosts.length} posts loaded
                   </p>
                 </motion.div>
               )}

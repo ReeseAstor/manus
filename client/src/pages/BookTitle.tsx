@@ -102,7 +102,7 @@ function BookLayout({ book }: { book: Book }) {
             <CoverHalo
               src={book.cover_image_square ?? book.cover_image}
               title={book.title}
-              alt={`${book.title} — cover`}
+              alt={`Cover of ${book.title}`}
               width={320}
             />
           </motion.div>
@@ -162,7 +162,7 @@ function BookLayout({ book }: { book: Book }) {
                       <CoverHalo
                         src={other.cover_image}
                         title={other.title}
-                        alt={`${other.title} — cover`}
+                        alt={`Cover of ${other.title}`}
                         width={180}
                       />
                     </div>

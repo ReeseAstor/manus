@@ -134,7 +134,7 @@ function CardGrid({ books, flagAudiobook }: { books: Book[]; flagAudiobook?: boo
                 <CoverHalo
                   src={book.cover_image}
                   title={book.title}
-                  alt={`${book.title} — cover`}
+                  alt={`Cover of ${book.title}`}
                   width={240}
                 />
               </div>
@@ -195,7 +195,7 @@ function HeroCard({ book }: { book: Book }) {
         <CoverHalo
           src={book.cover_image_square ?? book.cover_image}
           title={book.title}
-          alt={`${book.title} — cover`}
+          alt={`Cover of ${book.title}`}
           width={320}
         />
       </div>

@@ -123,7 +123,7 @@ export default function Newsletter() {
                 {/* Expectation setting — improves open rates & reduces spam complaints */}
                 <p className="text-xs text-[#6E5F5A] text-center font-['Cormorant_Garamond'] mt-4 leading-relaxed">
                   Expect about <span className="text-[#7A4F4C]">a couple of emails a month</span>. Your
-                  book link arrives instantly — check your inbox (and promotions tab).
+                  book link arrives instantly. Check your inbox (and the promotions tab).
                 </p>
 
                 {/* Explicit consent — GDPR / CAN-SPAM compliant */}
@@ -135,7 +135,7 @@ export default function Newsletter() {
                       Privacy Policy
                     </span>
                   </Link>
-                  . No spam — unsubscribe in one click anytime.
+                  . No spam, and you can unsubscribe in one click anytime.
                 </p>
               </GlassCard>
             </Reveal>
@@ -285,7 +285,7 @@ export default function Newsletter() {
                 {/* Deliverability tip — boosts inbox placement & engagement */}
                 <p className="text-[11px] text-[#6E5F5A] text-center font-['Cormorant_Garamond'] mt-4 leading-relaxed max-w-md mx-auto">
                   Tip: add <span className="text-[#7A4F4C]">hello@reeseastor.com</span> to your
-                  contacts so your book never lands in spam. Unsubscribe anytime — see our{' '}
+                  contacts so your book never lands in spam. Unsubscribe anytime. See our{' '}
                   <Link href="/privacy">
                     <span className="text-[#6E5F5A] underline underline-offset-2 hover:text-[#7A4F4C] cursor-pointer">
                       Privacy Policy

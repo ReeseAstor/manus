@@ -73,7 +73,7 @@ const LEAD_MAGNETS: LeadMagnet[] = [
     cta: "Get The First Acquisition",
     href: LINKS.firstAcquisition,
     cover: "/covers/hd-0-first-acquisition.jpg",
-    coverAlt: "The First Acquisition — a Hudson Dynasty billionaire romance by Reese Astor",
+    coverAlt: "The First Acquisition, a Hudson Dynasty billionaire romance by Reese Astor",
     eager: true,
     accent: WINE,
     label: WINE,
@@ -91,7 +91,7 @@ const LEAD_MAGNETS: LeadMagnet[] = [
     href: LINKS.oneNightStand,
     cover: "/covers/mmk-0-one-night-stand.jpg",
     coverAlt:
-      "The Billionaire’s One Night Stand — a Manhattan Money Kings billionaire romance by Reese Astor",
+      "The Billionaire’s One Night Stand, a Manhattan Money Kings billionaire romance by Reese Astor",
     accent: GOLD,
     label: BRONZE,
   },

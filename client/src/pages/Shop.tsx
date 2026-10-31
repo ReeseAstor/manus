@@ -66,7 +66,7 @@ export default function Shop() {
                     <div className="relative overflow-hidden cursor-pointer">
                       <img
                         src={book.cover_image ?? undefined}
-                        alt={`${book.title} — cover`}
+                        alt={`Cover of ${book.title}`}
                         className="w-full aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>

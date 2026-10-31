@@ -38,7 +38,7 @@ export const favoritesCategories: ProductCategory[] = [
         name: "Glocusent LED Book Light",
         affiliateUrl: "https://www.amazon.com/dp/B07WNRN9WQ?tag=reeseastor-20",
         description: "A rechargeable clip-on book light with 3 color temperatures and 6 brightness settings. Flexible neck design for perfect positioning.",
-        whyRecommend: "For physical book lovers — this tiny light means you can read in bed without waking anyone up.",
+        whyRecommend: "For physical book lovers, this tiny light means you can read in bed without waking anyone up.",
         priceRange: "Around $13",
         rating: 4.6,
       },
@@ -127,7 +127,7 @@ export const favoritesCategories: ProductCategory[] = [
   {
     id: "writers-desk",
     title: "Writer's Desk",
-    subtitle: "My actual writing setup — the tools behind the books",
+    subtitle: "My actual writing setup: the tools behind the books",
     emoji: "✍️",
     products: [
       {
