@@ -157,8 +157,10 @@ function htmlUnits(src) {
     for (let c = cont; c; c = c.parentCont) containerText.set(c, (containerText.get(c) ?? "") + "\n" + tight + "\n" + spaced);
   };
   const walk = (n, cont) => {
-    let buf = { tight: "", spaced: "" };
-    const flush = () => { add(buf.tight, buf.spaced, cont); buf = { tight: "", spaced: "" }; };
+    // One buffer object, reset in place: walkInline holds a reference to it, so text after a block
+    // inside an inline element (an <svg> icon in a <span>) is never dropped.
+    const buf = { tight: "", spaced: "" };
+    const flush = () => { add(buf.tight, buf.spaced, cont); buf.tight = ""; buf.spaced = ""; };
     for (const c of n.children) {
       if (c.text !== undefined) {
         if (c.raw) continue;
