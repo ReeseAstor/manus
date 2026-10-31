@@ -51,7 +51,14 @@ class Guards:
         if not r.get("ok"): raise RuntimeError(r.get("error"))
         return r["result"]
 
-EXTRACT = r"""() => {
+EXTRACT = r"""(LINE) => {
+  // An element whose whole text is exactly the approved Kindle+ line (the SPA splits it across two spans
+  // so it wraps nicely) is read as that line, in both serialised copies; nothing else is joined.
+  const flatten = (root) => {
+    for (const el of root.querySelectorAll("*")) {
+      if (el.children.length && el.textContent.replace(/\s+/g, " ").trim() === LINE) el.textContent = LINE;
+    }
+  };
   const W = document.documentElement.scrollWidth, H = document.documentElement.scrollHeight;
   const hiddenEl = new Map();
   const elHidden = (el) => {
@@ -131,8 +138,11 @@ EXTRACT = r"""() => {
   const drop = new Set(hiddenIdx); const rm = [];
   let j = 0; for (let n; (n = cw.nextNode()); j++) if (drop.has(j)) rm.push(n);
   rm.forEach((n) => (n.textContent = " "));
+  flatten(clone);
+  const fullClone = document.documentElement.cloneNode(true);
+  flatten(fullClone);
   const md = document.querySelector('meta[name="description"]');
-  return { full: "<!doctype html>" + document.documentElement.outerHTML, visible: "<!doctype html>" + clone.outerHTML, textLen: total,
+  return { full: "<!doctype html>" + fullClone.outerHTML, visible: "<!doctype html>" + clone.outerHTML, textLen: total,
            pseudo, dashes, embed, title: document.title, metaDescription: md ? md.content : "", innerText: (document.body ? document.body.innerText : "").slice(0, 400) };
 }"""
 
@@ -201,7 +211,7 @@ def main():
             try:
                 pg.goto(base + route, wait_until="networkidle" if label == "SPA" else "load", timeout=NAV_TIMEOUT_MS)
                 if label == "SPA": pg.wait_for_timeout(2500)
-                x = pg.evaluate(EXTRACT)
+                x = pg.evaluate(EXTRACT, LINE)
             except Exception as e:
                 fail(route, f"[{label}] render failed or timed out (fail closed): {str(e)[:200]}"); pg.close(); continue
             pg.close()

@@ -28,3 +28,17 @@ describe("retired blog slugs", () => {
       expect(RETIRED_BLOG_SLUGS as readonly string[]).toContain(slug);
   });
 });
+
+describe("vercel.json redirects (v5: row 13 retired)", () => {
+  it("301s every retired slug to /blog (trailingSlash:false strips a trailing slash first)", async () => {
+    const fs = await import("node:fs");
+    const path = await import("node:path");
+    const { RETIRED_BLOG_SLUGS: slugs } = await import("../shared/const");
+    const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "vercel.json"), "utf8"));
+    const r301 = new Set((cfg.redirects as { source: string; destination: string; statusCode?: number; permanent?: boolean }[])
+      .filter((r) => r.destination === "/blog" && (r.statusCode === 301 || r.permanent)).map((r) => r.source));
+    expect(cfg.trailingSlash).toBe(false);
+    const missing = slugs.map((s) => `/blog/${s}`).filter((s) => !r301.has(s));
+    expect(missing).toEqual([]);
+  });
+});
