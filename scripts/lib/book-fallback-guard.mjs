@@ -128,12 +128,14 @@ function stripMarkup(html) {
 }
 
 // An element a reader does not see: hidden attribute, aria-hidden="true", class hidden/sr-only/invisible,
-// or inline display:none / visibility:hidden. Used only for the exact Kindle+ line count (QA v2 gap).
-const HIDDEN_OPEN = /<([a-z][a-z0-9-]*)\b(?=[^>]*(?:\shidden(?=[\s=>/])|aria-hidden\s*=\s*["']?true|class\s*=\s*["'][^"']*\b(?:hidden|sr-only|invisible)\b|style\s*=\s*["'][^"']*(?:display\s*:\s*none|visibility\s*:\s*hidden)))[^>]*>/i;
+// or inline display:none / visibility:hidden / font-size:0 / opacity:0 (QA v3). Used only for the exact
+// Kindle+ line count (QA v2 gap).
+const HIDDEN_OPEN = /<([a-z][a-z0-9-]*)\b(?=[^>]*(?:\shidden(?=[\s=>/])|aria-hidden\s*=\s*["']?true|class\s*=\s*["'][^"']*\b(?:hidden|sr-only|invisible)\b|style\s*=\s*["'][^"']*(?:display\s*:\s*none|visibility\s*:\s*hidden|font-size\s*:\s*0(?![.\d]*[1-9])|opacity\s*:\s*0(?![.\d]*[1-9]))))[^>]*>/i;
 
 /** Reader-visible text for the exact-line count: no comments, scripts, head, attributes or hidden elements. */
 export function visibleText(html) {
-  let t = html.replace(/<!--[\s\S]*?-->/g, "").replace(/<(script|style|template|noscript|head)\b[^>]*>[\s\S]*?<\/\1>/gi, " ");
+  // <textarea> holds form text, <svg>/<title> are tooltips or accessible names, not reading text (QA v3).
+  let t = html.replace(/<!--[\s\S]*?-->/g, "").replace(/<(script|style|template|noscript|head|textarea|svg|title)\b[^>]*>[\s\S]*?<\/\1>/gi, " ");
   for (let n = 0; n < 2000; n++) {
     const m = HIDDEN_OPEN.exec(t);
     if (!m) break;
@@ -176,7 +178,12 @@ function readableAttributes(html) {
 const AMAZON_HOST = /(?:^|\.)(?:amazon\.[a-z.]+|amzn\.(?:to|com|eu|asia)|a\.co)$/i;
 // Separators: up to 6 non-word characters or underscores (whitespace collapsed first), so
 // "Kindle -- Unlimited", "Kindle —— Unlimited", "Kindle_Unlimited" are caught (QA v2 gap).
-const STRAY_RE = /kindle[\W_]{0,6}unl[a-z]*|kindle[\W_]{0,6}(?:\+|plus(?![a-z]))|kindle[\W_]{0,6}countdown|countdown[\W_]{0,3}deal/gi;
+// "Count-down", "Count down" and "Countdown" in any form (QA v3): Countdown Deals are a KDP Select promotion.
+const STRAY_RE = /kindle[\W_]{0,6}unl[a-z]*|kindle[\W_]{0,6}(?:\+|plus(?![a-z]))|(?<![a-z])count[\W_]{0,3}down/gi;
+// "K+" as its own token (Kindle+ shorthand, QA v3); "10K+" and "OK+" do not match.
+const K_PLUS_RE = /(?<![\p{L}\p{N}])k[\W_]{0,2}\+/giu;
+// Limited-time 99 cent promotions (Countdown Deal wording without the name, QA v3).
+const PROMO_RE = /(?:\$\s?0?\.99|\b99\s?(?:\u00A2|c\b|cents?\b))[^.\n]{0,60}?limited[\W_]{0,3}time|limited[\W_]{0,3}time[^.\n]{0,60}?(?:\$\s?0?\.99|\b99\s?(?:\u00A2|c\b|cents?\b))/gi;
 // Entity-shaped text the decoder could not resolve, right next to a kindle/unlimited/plus word: fail closed.
 const UNKNOWN_NEAR_RE = /kindle[\W_]{0,6}\uFFFD|\uFFFD[\W_]{0,6}(?:unl|plus|\+)/gi;
 const FREE_CLAIM_RE = /read\W{0,3}(?:it\W{0,3})?(?:for\W{0,3})?free|\$\s?0(?:\.00)?(?![\d.])/gi;
@@ -295,6 +302,14 @@ export function fallbackProblems(bodyHtml, slug) {
   }
   // KU tokens: reader-visible text, readable attributes and JSON-LD only (not asset hashes or code).
   for (const v of views.slice(1)) for (const m of v.matchAll(KU_TOKEN_RE)) ku.add(m[0].trim());
+  const kPlus = new Set();
+  const promo = new Set();
+  for (const v of views.slice(1)) {
+    for (const m of v.matchAll(K_PLUS_RE)) kPlus.add(m[0].trim());
+    for (const m of v.matchAll(PROMO_RE)) promo.add(m[0].trim());
+  }
+  if (kPlus.size) problems.push(`"K+" (Kindle+ shorthand) outside the exact line: ${[...kPlus].join(", ")}`);
+  if (promo.size) problems.push(`limited-time 99 cent promotion wording: ${[...promo].join(", ")}`);
   if (unknownNear.size) problems.push(`undecodable entity next to kindle/unlimited/plus (fail closed): ${[...unknownNear].join(", ")}`);
   // "Read free" / "$0.00" claims belong only to the exact Kindle+ line (KU pages) and never on
   // non-KU pages; the free-book offer uses "Get it free" / "Free book" wording instead.

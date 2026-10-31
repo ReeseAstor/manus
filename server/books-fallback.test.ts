@@ -350,6 +350,71 @@ describe("/books no-JS fallback", () => {
     });
   });
 
+  // QA card v3 (2026-10-30) probes, ported from evidence-v3/probes-ku-qa-v3.mjs. Fixtures are the two
+  // v3 preview pages QA probed (dpl_AxxwEVQp5eXBjuCKeKQ1Na9CWp5F).
+  describe("QA v3 probes (probes-ku-qa-v3.mjs)", () => {
+    const fx = (f: string) => fs.readFileSync(path.join(__dirname, "__fixtures__/books-fallback", f), "utf8");
+    const KU = fx("v3-ku-the-billionaire-s-fake-wife.html");
+    const NON = fx("v3-non-ku-the-first-acquisition.html");
+    const KU_SLUG = "the-billionaire-s-fake-wife";
+    const NON_SLUG = "the-first-acquisition";
+    const LINE = EXPECTED_KINDLE_PLUS_LINE;
+    const hideWith = (wrap: (l: string) => string) => KU.split(LINE).join("§").replace("§", wrap(LINE)).split("§").join("Get your copy");
+    const inj = (s: string) => NON.replace("</article>", `<p>${s}</p></article>`);
+
+    it("v3 fixtures are clean as captured", () => {
+      expect(KU.split(LINE).length - 1).toBeGreaterThan(0);
+      expect(fallbackProblems(KU, KU_SLUG)).toEqual([]);
+      expect(fallbackProblems(NON, NON_SLUG)).toEqual([]);
+    });
+
+    const HIDE: Record<string, (l: string) => string> = {
+      noscript: (l) => `<noscript>${l}</noscript>`, template: (l) => `<template>${l}</template>`,
+      textarea: (l) => `<textarea>${l}</textarea>`, "title attr only": (l) => `<span title="${l}"></span>`,
+      "aria-label only": (l) => `<a aria-label="${l}" href="#"></a>`, "style display : none (spaces)": (l) => `<span style="display : none">${l}</span>`,
+      "style visibility:hidden": (l) => `<span style="visibility:hidden">${l}</span>`, "style font-size:0": (l) => `<span style="font-size:0">${l}</span>`,
+      "style opacity:0": (l) => `<span style="opacity:0">${l}</span>`, "HIDDEN uppercase attr": (l) => `<span HIDDEN>${l}</span>`,
+      "class hidden (tailwind)": (l) => `<span class="hidden">${l}</span>`, "svg title": (l) => `<svg><title>${l}</title></svg>`,
+      // PE additions
+      "font-size:0px": (l) => `<span style="color:red; font-size:0px">${l}</span>`, "font-size: 0.0em": (l) => `<span style="font-size: 0.0em">${l}</span>`,
+      "opacity: 0.0": (l) => `<span style="opacity: 0.0">${l}</span>`, "opacity:0%": (l) => `<span style="opacity:0%">${l}</span>`,
+      "svg text": (l) => `<svg viewBox="0 0 1 1"><text>${l}</text></svg>`, "textarea with attrs": (l) => `<textarea readonly rows="1">${l}</textarea>`,
+    };
+    it.each(Object.entries(HIDE))("KU line hidden via %s does not count as the visible line", (_n, w) => {
+      expect(fallbackProblems(hideWith(w), KU_SLUG).length).toBeGreaterThan(0);
+    });
+    it("KU line only inside <head> <title> does not count", () => {
+      expect(fallbackProblems(KU.split(LINE).join("Get your copy").replace("<title>", `<title>${LINE} `), KU_SLUG).length).toBeGreaterThan(0);
+    });
+
+    const STRAY: Record<string, string> = {
+      "ZWSP inside KU": "read it in K\u200BU", "fullwidth KU": "read it in \uFF2B\uFF35", "math bold KU": "read it in \u{1D40A}\u{1D414}",
+      "#KindleUnlimited hashtag": "#KindleUnlimited", "typo Kindle Unlimted": "Kindle Unlimted", "Kindle Unltd": "Kindle Unltd",
+      "Kindle-Plus spelled K+": "Read with K+", "Count-down deal": "Count-down deal this week", "Count down deal spaced": "Count down deal this week",
+      "99 cent limited-time": "Only 99\u00A2 for a limited time", "Prime Reading": "Read free with Prime Reading",
+      // PE additions
+      "K + spaced": "Free on K +", "lower k+": "on k+ now", "Countdown alone": "Countdown ends Friday", "count_down": "count_down pricing",
+      "COUNT\u2014DOWN": "COUNT\u2014DOWN", "$0.99 for a limited time": "$0.99 for a limited time", "limited time, 99 cents": "Limited time: 99 cents",
+    };
+    it.each(Object.entries(STRAY))("non-KU page: %s is caught", (_n, s) => {
+      const page = inj(s);
+      expect(page).not.toBe(NON);
+      expect(fallbackProblems(page, NON_SLUG).length).toBeGreaterThan(0);
+    });
+    it("non-KU page: KU in alt and in og:image:alt is caught", () => {
+      expect(fallbackProblems(NON.replace("</article>", '<img alt="in KU now" src="x.jpg"></article>'), NON_SLUG).length).toBeGreaterThan(0);
+      expect(fallbackProblems(NON.replace("</head>", '<meta property="og:image:alt" content="Now in Kindle Unlimited"></head>'), NON_SLUG).length).toBeGreaterThan(0);
+    });
+    it("controls stay clean", () => {
+      expect(fallbackProblems(KU, KU_SLUG)).toEqual([]);
+      for (const s of ["A skull ring from Kuala Lumpur", "Loved by 10K+ readers", "Account down payment", "$0.99 ebook", "A limited edition print",
+        "<span style=\"opacity:0.85\">Book 2</span>", "<span style=\"font-size:0.9rem\">Book 2</span>"])
+        expect(fallbackProblems(inj(s), NON_SLUG), s).toEqual([]);
+      for (const keep of [`<span style="opacity:0.9">${LINE}</span>`, `<span style="font-size:10px">${LINE}</span>`])
+        expect(fallbackProblems(hideWith(() => keep), KU_SLUG), keep).toEqual([]);
+    });
+  });
+
   it("G3: the guard's KU lists carry a dated amazon.com verification note", () => {
     const guardSrc = fs.readFileSync(path.join(__dirname, "../scripts/lib/book-fallback-guard.mjs"), "utf8");
     expect(guardSrc).toMatch(/KU verified on amazon\.com \d{4}-\d{2}-\d{2}/);
