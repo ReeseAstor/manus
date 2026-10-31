@@ -127,7 +127,7 @@ export default function FreeBook() {
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 shadow-2xl">
                     <img
                       src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/uMHRMKanHXREGUzc.jpeg"
-                      alt="The First Acquisition - A Manhattan Billionaire Romance"
+                      alt="The First Acquisition: A Manhattan Billionaire Romance"
                       className="w-full rounded-2xl shadow-2xl"
                     />
                   </div>
@@ -173,6 +173,8 @@ export default function FreeBook() {
                 <p className="text-[#6E5F5A] text-xl leading-relaxed">
                   Power. Passion. Manhattan. She was hired to audit his empire. Falling for him could destroy them both. This high-heat corporate billionaire prequel novella is the perfect introduction to the Hudson Dynasty world.
                 </p>
+
+                <p data-age-notice className="text-[#6E5F5A] text-base font-medium">For readers 18+.</p>
 
                 {/* Email Signup Form */}
                 <div className="p-8 rounded-3xl bg-gradient-to-br from-[#C9A3A0]/10 via-transparent to-[#C9A3A0]/5 border-2 border-[#B59A6A]/20 backdrop-blur-xl shadow-2xl">
