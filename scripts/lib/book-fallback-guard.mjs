@@ -325,6 +325,8 @@ export function fallbackProblems(bodyHtml, slug) {
   const views = [
     withoutLine,
     stripMarkup(withoutLine),
+    // v5: tags as a space too, so "Golden Parachute</a></li></ul><p>K.U." is not read as "ParachuteK.U."
+    withoutLine.replace(/<!--[\s\S]*?-->/g, "").replace(/<(script|style|template)\b[^>]*>[\s\S]*?<\/\1>/gi, " ").replace(/<[^>]+>/g, " "),
     ...readableAttributes(withoutLine).map((s) => stripMarkup(decodeEntities(s))),
     ...ldStrings.map((s) => stripMarkup(decodeEntities(s))),
   ].map(normalizeForScan);

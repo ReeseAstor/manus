@@ -329,7 +329,8 @@ function markdownUnits(src) {
 }
 
 // ---- Scan --------------------------------------------------------------------------------------
-const SENT_END = /[.!?\u2026]["'\u201D\u2019)\]]*(?=\s|$)|\u2026/g;
+// NFKC turns "…" into "...", so three dots end a sentence too, with or without a space (QA v4 G3).
+const SENT_END = /\.{3}["'\u201D\u2019)\]]*|[.!?\u2026]["'\u201D\u2019)\]]*(?=\s|$)|\u2026/g;
 function sentenceAt(t, i) {
   let start = 0;
   let end = t.length;
