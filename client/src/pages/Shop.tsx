@@ -66,7 +66,7 @@ export default function Shop() {
                     <div className="relative overflow-hidden cursor-pointer">
                       <img
                         src={book.cover_image ?? undefined}
-                        alt={`${book.title} — cover`}
+                        alt={`Cover of ${book.title}`}
                         className="w-full aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
@@ -83,7 +83,7 @@ export default function Shop() {
                       {book.position_label ? ` • ${book.position_label}` : ""}
                     </p>
                     {book.price_usd === 0 && (
-                      <p className="text-xl font-bold text-[#7A4F4C] mb-4">Free</p>
+                      <p className="text-xl font-bold text-[#7A4F4C] mb-4">Free when you join my newsletter</p>
                     )}
                     <RetailerButtons book={book} layout="stack" />
                   </div>
@@ -107,7 +107,7 @@ export default function Shop() {
               Join the Reader's Club
             </h2>
             <p className="text-[#4A3B3A]/70 text-lg mb-8 max-w-2xl mx-auto">
-              New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free.
+              New-release news from Reese Astor. The First Acquisition, the Hudson Dynasty prequel, is free when you join my newsletter.
             </p>
             <Link href="/free-book">
               <Button className="bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold text-lg px-8 py-6 rounded-xl">

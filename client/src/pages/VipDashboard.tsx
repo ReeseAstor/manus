@@ -48,7 +48,7 @@ export default function VipDashboard() {
   const recentStories = stories?.slice(0, 3) || [];
   const memberSince = dashboard?.memberSince
     ? new Date(dashboard.memberSince).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })
-    : '—';
+    : '…';
   const nextBilling = dashboard?.currentPeriodEnd
     ? new Date(dashboard.currentPeriodEnd).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })
     : null;
@@ -133,7 +133,7 @@ export default function VipDashboard() {
                   <BookOpen className="w-6 h-6 text-[#7A4F4C]" />
                   <h3 className="text-sm font-semibold text-[#6E5F5A]">Stories Played</h3>
                 </div>
-                <p className="text-3xl font-bold text-[#4A3B3A]">{statsReady ? dashboard?.storiesPlayed ?? 0 : "—"}</p>
+                <p className="text-3xl font-bold text-[#4A3B3A]">{statsReady ? dashboard?.storiesPlayed ?? 0 : "…"}</p>
               </div>
 
               <div className="bg-[#FAF7F7] rounded-xl shadow-lg p-6">
@@ -141,7 +141,7 @@ export default function VipDashboard() {
                   <Headphones className="w-6 h-6 text-[#7A4F4C]" />
                   <h3 className="text-sm font-semibold text-[#6E5F5A]">Minutes Listened</h3>
                 </div>
-                <p className="text-3xl font-bold text-[#4A3B3A]">{statsReady ? dashboard?.minutesPlayed ?? 0 : "—"}</p>
+                <p className="text-3xl font-bold text-[#4A3B3A]">{statsReady ? dashboard?.minutesPlayed ?? 0 : "…"}</p>
               </div>
 
               <div className="bg-[#FAF7F7] rounded-xl shadow-lg p-6">
@@ -149,7 +149,7 @@ export default function VipDashboard() {
                   <Heart className="w-6 h-6 text-[#7A4F4C]" />
                   <h3 className="text-sm font-semibold text-[#6E5F5A]">Favorites</h3>
                 </div>
-                <p className="text-3xl font-bold text-[#4A3B3A]">{statsReady ? dashboard?.favorites.length ?? 0 : "—"}</p>
+                <p className="text-3xl font-bold text-[#4A3B3A]">{statsReady ? dashboard?.favorites.length ?? 0 : "…"}</p>
               </div>
 
               <div className="bg-[#FAF7F7] rounded-xl shadow-lg p-6">
