@@ -18,6 +18,9 @@ export const RETIRED_BLOG_SLUGS = [
   // 10/30/2026 QA ruling (v4 card, ruling 1): author-business post with a wrong
   // delivery fact; retired and unpublished with rows 1-3.
   "storyorigin-email-list-building-guide",
+  // 10/31/2026 QA ruling R1 (v6 re-card): child-word title, slug and excerpt;
+  // retired and unpublished (draft) with a 301 to /blog.
+  "secret-baby-romance-books-guide",
 ] as const;
 
 export function isRetiredBlogSlug(slug: string): boolean {

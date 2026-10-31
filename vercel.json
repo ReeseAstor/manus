@@ -70,6 +70,16 @@
       "statusCode": 301
     },
     {
+      "source": "/blog/secret-baby-romance-books-guide",
+      "destination": "/blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/secret-baby-romance-books-guide/",
+      "destination": "/blog",
+      "statusCode": 301
+    },
+    {
       "source": "/blog/dark-romance-books-beginners-guide",
       "destination": "/blog",
       "statusCode": 301
