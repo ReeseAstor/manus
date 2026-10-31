@@ -10,7 +10,7 @@ import { EnhancedSEOHead, generateBookSchema } from "@/components/ui/enhanced-se
 
 export default function FreeBook() {
   useEffect(() => {
-    document.title = "The First Acquisition: Free When You Join My Newsletter";
+    document.title = "Free Book: The First Acquisition | Reese Astor Romance";
   }, []);
 
   const [email, setEmail] = useState("");
@@ -18,7 +18,7 @@ export default function FreeBook() {
   const [formRenderedAt] = useState(() => Date.now());
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
-      toast.success("You're in! Redirecting you to your copy of The First Acquisition...");
+      toast.success("Success! Redirecting you to download your free book...");
       setEmail("");
       // Redirect to BookFunnel after a short delay
       setTimeout(() => {
@@ -27,7 +27,7 @@ export default function FreeBook() {
     },
     onError: (error) => {
       if (error.message?.includes("already subscribed")) {
-        toast.info("You're already on the list! Redirecting you to your copy...");
+        toast.info("You're already on the list! Redirecting to your free book...");
         setTimeout(() => {
           window.open("https://dl.bookfunnel.com/hj09ggitwi", "_blank");
         }, 1500);
@@ -51,7 +51,7 @@ export default function FreeBook() {
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
-    const text = "Start the Hudson Dynasty with The First Acquisition by Reese Astor, free when you join her newsletter.";
+    const text = "A free steamy billionaire romance by Reese Astor: The First Acquisition.";
     
     const shareUrls: Record<string, string> = {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
@@ -84,11 +84,11 @@ export default function FreeBook() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FAF7F7] via-[#F0E6E5] to-[#FAF7F7]" style={{ overflowX: "clip" }}>
       <EnhancedSEOHead
-        title="The First Acquisition: Free When You Join My Newsletter"
-        description="Start the Hudson Dynasty with The First Acquisition, free when you join my newsletter."
+        title="Free Book: The First Acquisition | Reese Astor Romance"
+        description="Download The First Acquisition for free. A steamy Manhattan billionaire romance and Hudson Dynasty prequel novella by Reese Astor. Join the newsletter and start reading today."
         canonical="/free-book"
         ogType="book"
-        keywords={["The First Acquisition", "Hudson Dynasty prequel", "Reese Astor newsletter", "billionaire romance prequel", "Hudson Dynasty", "Manhattan Money Kings"]}
+        keywords={["free romance book", "The First Acquisition", "free billionaire romance", "Reese Astor free book", "Hudson Dynasty", "Manhattan Money Kings", "reader magnet"]}
         structuredData={[freeBookSchema]}
       />
 
@@ -122,12 +122,12 @@ export default function FreeBook() {
                 <div className="absolute -inset-12 bg-gradient-to-r from-[#C9A3A0]/30 to-transparent blur-3xl rounded-full" />
                 <div className="relative">
                   <div className="absolute -top-4 -right-2 md:-top-6 md:-right-6 z-10 px-6 py-3 md:px-8 md:py-4 rounded-full bg-[#4A3B3A] text-[#FAF7F7] font-bold text-xl shadow-2xl animate-pulse">
-                    Free when you join my newsletter
+                    100% FREE
                   </div>
                   <div className="p-8 rounded-3xl bg-gradient-to-br from-[#FAF7F7]/5 to-[#FAF7F7]/[0.02] backdrop-blur-xl border border-[#4A3B3A]/10 shadow-2xl">
                     <img
                       src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663125551617/uMHRMKanHXREGUzc.jpeg"
-                      alt="The First Acquisition: A Manhattan Billionaire Romance"
+                      alt="The First Acquisition - A Manhattan Billionaire Romance"
                       className="w-full rounded-2xl shadow-2xl"
                     />
                   </div>
@@ -144,14 +144,14 @@ export default function FreeBook() {
                 <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#B59A6A]/30 bg-[#C9A3A0]/5 backdrop-blur-sm">
                   <Gift className="h-5 w-5 text-[#7A4F4C]" />
                   <span className="text-sm font-medium text-[#7A4F4C] tracking-widest uppercase">
-                    Free when you join my newsletter
+                    Free Book for New Readers
                   </span>
                 </div>
 
                 <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-[#4A3B3A] leading-[0.95]">
-                  Start the<br />
+                  Get Your<br />
                   <span className="text-[#7A4F4C] ">
-                    Hudson Dynasty
+                    Free Book
                   </span>
                 </h1>
 
@@ -166,15 +166,13 @@ export default function FreeBook() {
 
                 <div className="flex items-center gap-3 p-4 rounded-2xl bg-[#EBD6D3]/30 border border-[#4A3B3A]/10 w-fit">
                   <span className="text-[#4A3B3A] font-semibold">
-                    Free prequel when you join my newsletter.
+                    Free Hudson Dynasty prequel
                   </span>
                 </div>
 
                 <p className="text-[#6E5F5A] text-xl leading-relaxed">
                   Power. Passion. Manhattan. She was hired to audit his empire. Falling for him could destroy them both. This high-heat corporate billionaire prequel novella is the perfect introduction to the Hudson Dynasty world.
                 </p>
-
-                <p data-age-notice className="text-[#6E5F5A] text-base font-medium">For readers 18+.</p>
 
                 {/* Email Signup Form */}
                 <div className="p-8 rounded-3xl bg-gradient-to-br from-[#C9A3A0]/10 via-transparent to-[#C9A3A0]/5 border-2 border-[#B59A6A]/20 backdrop-blur-xl shadow-2xl">
@@ -200,7 +198,7 @@ export default function FreeBook() {
                           className="btn-premium bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold px-10 py-7 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                         >
                           <Mail className="mr-2 h-5 w-5" />
-                          {subscribeMutation.isPending ? "Sending..." : "Join & Get the Book"}
+                          {subscribeMutation.isPending ? "Sending..." : "Get Free Book"}
                         </Button>
                       </div>
                     </div>
@@ -240,7 +238,7 @@ export default function FreeBook() {
                 What You'll Get
               </h2>
               <p className="text-xl text-[#6E5F5A]">
-                The prequel is yours when you join my newsletter, plus new release news by email.
+                Your free prequel, plus news from Reese by email.
               </p>
             </div>
 
@@ -279,7 +277,7 @@ export default function FreeBook() {
               Know Someone Who'd Love This?
             </h2>
             <p className="text-[#6E5F5A] mb-8">
-              Tell a friend: The First Acquisition is free when they join my newsletter.
+              Share the love — tell a friend about this free book offer.
             </p>
             <div className="flex justify-center gap-4">
               {["facebook", "twitter", "pinterest"].map((platform) => (
@@ -317,7 +315,7 @@ export default function FreeBook() {
               <span className="text-[#7A4F4C]">the Hudson Dynasty?</span>
             </h2>
             <p className="text-xl text-[#6E5F5A] mb-10 leading-relaxed">
-              The First Acquisition is free when you join my newsletter.
+              Your free copy of The First Acquisition is waiting.
             </p>
             <Button
               asChild
@@ -326,7 +324,7 @@ export default function FreeBook() {
             >
               <a href="https://dl.bookfunnel.com/kw1yge3479" target="_blank" rel="noopener noreferrer">
                 <BookOpen className="mr-3 h-7 w-7" />
-                Join & Get Your Copy
+                Claim Your Free Copy Now
               </a>
             </Button>
           </motion.div>

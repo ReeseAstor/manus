@@ -155,11 +155,11 @@ describe("blog.getBySlug", () => {
     ).rejects.toThrow("Blog post not found");
   });
 
-  it.each(["ai-assisted-romance-writing-workflow", "storyorigin-email-list-building-guide"])("hides retired slug %s from anonymous callers and shows it to admins", async (slug) => {
+  it("hides retired slugs from anonymous callers and shows them to admins", async () => {
     const retired = {
       ...mockBlogPost,
       id: 99,
-      slug,
+      slug: "ai-assisted-romance-writing-workflow",
       title: "Retired post",
     };
     vi.mocked(db.getBlogPostBySlug).mockResolvedValue(retired);

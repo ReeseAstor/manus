@@ -1678,7 +1678,7 @@
 ## Blog Content & Amazon Affiliate Links
 - [x] Review existing blog structure and posts
 - [x] Research Amazon affiliate products for romance readers
-- [x] Update 3 existing blog posts with natural Amazon affiliate links (tag: reeseastor-20; the earlier tag was retired on 2026-10-30)
+- [x] Update 3 existing blog posts with natural Amazon affiliate links (tag: 88away0d-20)
 - [x] Create 5 new blog posts with affiliate-friendly topics
 - [x] Add proper FTC affiliate disclosure to all posts
 - [x] Register all posts in affiliateProducts.ts for FTC disclosure display

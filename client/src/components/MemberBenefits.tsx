@@ -17,9 +17,9 @@ interface Benefit {
 const benefits: Benefit[] = [
   {
     icon: Gift,
-    title: "Newsletter Prequel",
-    description: "Get The First Acquisition free when you join my newsletter. It is the Hudson Dynasty prequel.",
-    highlight: "NEWSLETTER GIFT",
+    title: "Free Book",
+    description: "Get The First Acquisition free when you join. It is the Hudson Dynasty prequel.",
+    highlight: "FREE BOOK",
   },
   {
     icon: Mail,
@@ -41,13 +41,13 @@ export function MemberBenefits() {
         >
           <span className="inline-flex items-center gap-2 bg-[#C9A3A0]/10 border border-[#B59A6A]/30 rounded-full px-4 py-2 text-[#7A4F4C] text-sm font-semibold mb-6">
             <Sparkles className="w-4 h-4" />
-            Open to All Readers
+            100% Free to Join
           </span>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#4A3B3A] mb-6">
             Member Benefits
           </h2>
           <p className="text-[#4A3B3A]/70 text-lg max-w-2xl mx-auto">
-            New-release news from Reese Astor, and The First Acquisition free when you join my newsletter.
+            New-release news from Reese Astor, and a free copy of The First Acquisition.
           </p>
         </motion.div>
 
@@ -124,7 +124,7 @@ export function MemberBenefits() {
               </h3>
               <ul className="space-y-4">
                 {[
-                  "The First Acquisition, free when you join my newsletter",
+                  "Free copy of The First Acquisition",
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-[#4A3B3A]">
                     <div className="w-5 h-5 rounded-full bg-[#4A3B3A] flex items-center justify-center">

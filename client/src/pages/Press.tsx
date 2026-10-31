@@ -78,7 +78,7 @@ export default function Press() {
             Intimate Psychological Narratives, a quieter line of audiobooks for late-night listening.
             The first title, <em>The Need for Permission: On the Quiet Recovery of Self-Trust</em>,
             is a ten-chapter, hour-long meditation on rebuilding self-trust. She believes romance novels
-            are more than entertainment. They&rsquo;re empowerment.
+            are more than entertainment &mdash; they&rsquo;re empowerment.
           </p>
         </div>
       </section>
