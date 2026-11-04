@@ -10,7 +10,7 @@ describe("Affiliate Products Data", () => {
     expect(cozy.topPicks.length).toBe(3);
     cozy.topPicks.forEach((p) => {
       expect(p.name).toBeTruthy();
-      expect(p.affiliateUrl).toContain("tag=88away0d-20");
+      expect(p.affiliateUrl).toContain("tag=reeseastor-20");
       expect(p.affiliateUrl).toContain("amazon.com");
       expect(p.description).toBeTruthy();
       expect(p.whyRecommend).toBeTruthy();
@@ -27,7 +27,7 @@ describe("Affiliate Products Data", () => {
     expect(gift.ftcDisclosure).toBe(true);
     expect(gift.topPicks.length).toBe(3);
     gift.topPicks.forEach((p) => {
-      expect(p.affiliateUrl).toContain("tag=88away0d-20");
+      expect(p.affiliateUrl).toContain("tag=reeseastor-20");
     });
   });
 
@@ -36,7 +36,7 @@ describe("Affiliate Products Data", () => {
     Object.values(affiliateProductsBySlug).forEach((article) => {
       Object.values(article.inlineProducts).forEach((link) => {
         expect(link.rel).toContain("nofollow");
-        expect(link.url).toContain("tag=88away0d-20");
+        expect(link.url).toContain("tag=reeseastor-20");
       });
     });
   });
@@ -69,7 +69,7 @@ describe("Favorites Products Data", () => {
     const { allFavoritesProducts } = await import("../client/src/data/favoritesProducts");
     expect(allFavoritesProducts.length).toBe(16);
     allFavoritesProducts.forEach((p) => {
-      expect(p.affiliateUrl).toContain("tag=88away0d-20");
+      expect(p.affiliateUrl).toContain("tag=reeseastor-20");
       expect(p.affiliateUrl).toContain("amazon.com");
     });
   });

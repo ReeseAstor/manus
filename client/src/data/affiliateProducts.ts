@@ -1,11 +1,138 @@
 import type { AffiliateProduct } from "@/components/AffiliateProductCard";
+import { AMAZON_ASSOCIATE_TAG } from "../lib/amazon-tag";
+
+export const PRODUCT_ASSOCIATE_TAG = AMAZON_ASSOCIATE_TAG;
+export const PRODUCT_LINK_REL = "sponsored noopener noreferrer nofollow";
+
+function product(
+  asin: string,
+  name: string,
+  editorialReason: string,
+  tradeoff: string,
+  noPurchaseAlternative: string,
+  aliases: string[] = [],
+  priceRange = "",
+  rating?: number,
+): AffiliateProduct {
+  return {
+    name,
+    affiliateUrl: `https://www.amazon.com/dp/${asin}?tag=${PRODUCT_ASSOCIATE_TAG}`,
+    description: editorialReason,
+    whyRecommend: editorialReason,
+    editorialReason,
+    tradeoff,
+    noPurchaseAlternative,
+    aliases,
+    // Retained for legacy consumers; cards intentionally do not display these.
+    priceRange,
+    rating,
+  };
+}
+
+const kindleReason = "A dedicated e-reader may help keep phone notifications out of a reading session.";
+const kindleTradeoff = "Check the exact generation, screen size, supported formats, and library compatibility. A device purchase does not include every book or subscription.";
+const kindleAlternative = "Use your current reader or phone with notifications paused, or borrow a print book from the library.";
+const pillowTradeoff = "Support and firmness are personal. Measure your chair or bed and check cleaning instructions and return options.";
+const pillowAlternative = "Try arranging pillows you already own behind your back and beneath your arms.";
+const candleTradeoff = "Fragrance is subjective and may not suit people with sensitivities. Keep flames away from books and never leave a candle unattended.";
+const candleAlternative = "Use an existing lamp and a quiet corner; fragrance is not needed for a reading or writing ritual.";
+const socksAlternative = "Wear your usual warm socks or use a blanket you already own.";
+const glassTradeoff = "Check capacity, material, and care instructions. A novelty design adds no reading benefit.";
+const glassAlternative = "Use a glass or mug you already own, with any drink you enjoy.";
 
 /**
- * Affiliate product data for blog articles.
- * Key = blog post slug, Value = array of products for that article.
- * Store ID: 88away0d-20
+ * Approved existing products only. Aliases identify specific named products,
+ * never broad topics such as “reading”, “pillow”, or “candle”.
+ * Existing ASINs are preserved, not represented as newly verified listings.
  */
+export const approvedAffiliateProducts: AffiliateProduct[] = [
+  product(
+    "B0CFPJYX7P", "Kindle Paperwhite (7-inch listing)",
+    kindleReason, kindleTradeoff, kindleAlternative,
+    ["Kindle Paperwhite", 'Kindle Paperwhite (7" Display, Latest Model)', 'Kindle Paperwhite (newest model, 7" display)', "Kindle Paperwhite (newest model)"],
+    "Around $150", 4.7,
+  ),
+  product(
+    "B0CFPJYX2T", "Kindle Paperwhite (2024)",
+    kindleReason, kindleTradeoff, kindleAlternative,
+    [], "Around $150", 4.7,
+  ),
+  product(
+    "B0BMPFB4TT", "Husband Pillow Original Shredded Memory Foam",
+    "A reading pillow with arms may offer another way to support a seated reading position.",
+    pillowTradeoff, pillowAlternative, ["Husband Pillow Original"], "Around $55", 4.5,
+  ),
+  product(
+    "B07WNRN9WQ", "Glocusent LED Book Light",
+    "A separate book light may help direct light onto a print page in a shared room.",
+    "Check the clip fit, charging requirements, and brightness settings. A small light may still disturb someone nearby.",
+    "Reposition a lamp you already own, or read beside a window during the day.",
+    ["Glocusent book light"], "Around $13", 4.6,
+  ),
+  product(
+    "B0CQS2SSFW", "Aimuan Reading Pillow",
+    "A reading pillow may be useful if your usual seating lacks support.",
+    pillowTradeoff, pillowAlternative,
+  ),
+  product(
+    "B09V518DRK", "Aimuan Reading Pillow with Arms",
+    "A pillow with arms is one option for changing your seated reading setup.",
+    pillowTradeoff, pillowAlternative,
+  ),
+  product(
+    "B0F1FY6XT7", "Classical Library Candle",
+    "A library-themed candle is an optional atmosphere detail for readers who enjoy fragrance.",
+    candleTradeoff, candleAlternative, [], "Around $20", 4.6,
+  ),
+  product(
+    "B0CMTXKBWW", '"Smells Like She\'s Writing a Bestseller" Soy Candle',
+    "A writing-themed label may make this an option for a small, personal gift.",
+    candleTradeoff, candleAlternative, ["Smells Like She's Writing a Bestseller"], "Around $22", 4.7,
+  ),
+  product(
+    "B0F1THN236", "HAPPYPOP Book Lover Fuzzy Socks",
+    "Book-themed socks are an optional way to add warmth to a reading evening.",
+    "Check sizing, fabric, and grip. Fuzzy socks may be slippery on smooth floors.",
+    socksAlternative,
+  ),
+  product(
+    "B0F8BPSCZV", "HAPPYPOP Book Lover Fuzzy Socks (gift guide listing)",
+    "Book-themed socks may suit a recipient who enjoys practical small gifts.",
+    "Check the exact design, size, and fabric rather than assuming every listing is identical.",
+    socksAlternative,
+  ),
+  product(
+    "B0DD4FWCJW", "Book Lover Wine Glass",
+    "A book-themed glass is an optional gift when you already know the recipient's taste.",
+    glassTradeoff, glassAlternative,
+  ),
+  product(
+    "B0FWC3HD8X", '"Too Many Books" Wine Glass',
+    "A book-themed glass may suit someone who enjoys novelty tableware.",
+    glassTradeoff, glassAlternative, ["Too Many Books Wine Glass"],
+  ),
+  product(
+    "B0CW63NL9F", "Huglanket Book Lovers Wearable Blanket Hoodie",
+    "A wearable blanket may leave your hands free while keeping you warm during a reading session.",
+    "Check sizing, fabric, and washing instructions. Bulky layers can be too warm or restrictive for some readers.",
+    "Use a sweater or blanket you already have.",
+    ["Huglanket Book Lovers Blanket Hoodie"], "Around $35", 4.6,
+  ),
+];
 
+const byAsin = new Map(approvedAffiliateProducts.map(p => [p.affiliateUrl.match(/\/dp\/([A-Z0-9]{10})/)![1], p]));
+function pick(asin: string): AffiliateProduct {
+  const entry = byAsin.get(asin);
+  if (!entry) throw new Error(`Unapproved product: ${asin}`);
+  return entry;
+}
+function inline(entries: [string, string][]) {
+  return Object.fromEntries(entries.map(([name, asin]) => [
+    name, { url: pick(asin).affiliateUrl, rel: PRODUCT_LINK_REL },
+  ]));
+}
+
+/** Explicit article curation takes precedence over automatic matches. */
 export const affiliateProductsBySlug: Record<string, {
   ftcDisclosure: boolean;
   topPicks: AffiliateProduct[];
@@ -13,238 +140,57 @@ export const affiliateProductsBySlug: Record<string, {
 }> = {
   "ultimate-cozy-reading-night-setup": {
     ftcDisclosure: true,
-    topPicks: [
-      {
-        name: "Kindle Paperwhite (7\" Display, Latest Model)",
-        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX7P?tag=88away0d-20",
-        description: "The fastest Kindle ever with a glare-free 7\" display, weeks of battery life, and waterproof design. Perfect for bath-time reading without anxiety.",
-        whyRecommend: "If you're a heavy reader and don't have one yet, this is the upgrade that will genuinely change your reading life.",
-        priceRange: "Around $150",
-        rating: 4.7,
-      },
-      {
-        name: "Husband Pillow Original Shredded Memory Foam",
-        affiliateUrl: "https://www.amazon.com/dp/B0BMPFB4TT?tag=88away0d-20",
-        description: "A bed rest reading pillow with arms, side pockets for your phone and glasses, and shredded memory foam that holds its shape for months.",
-        whyRecommend: "Your back will thank you — it's like a warm hug that cradles your head, neck, and arms while you read.",
-        priceRange: "Around $55",
-        rating: 4.5,
-      },
-      {
-        name: "Glocusent LED Book Light",
-        affiliateUrl: "https://www.amazon.com/dp/B07WNRN9WQ?tag=88away0d-20",
-        description: "A rechargeable clip-on book light with 3 color temperatures and 6 brightness settings. Flexible neck design for perfect positioning.",
-        whyRecommend: "It's the kind of thing you don't realize you need until you have it, and then you can't imagine reading without it.",
-        priceRange: "Around $13",
-        rating: 4.6,
-      },
-    ],
-    inlineProducts: {
-      "Husband Pillow Original Shredded Memory Foam": {
-        url: "https://www.amazon.com/dp/B0BMPFB4TT?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Aimuan Reading Pillow": {
-        url: "https://www.amazon.com/dp/B0CQS2SSFW?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Glocusent LED Book Light": {
-        url: "https://www.amazon.com/dp/B07WNRN9WQ?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Classical Library Candle": {
-        url: "https://www.amazon.com/dp/B0F1FY6XT7?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "\"Smells Like She's Writing a Bestseller\" Soy Candle": {
-        url: "https://www.amazon.com/dp/B0CMTXKBWW?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "HAPPYPOP Book Lover Fuzzy Socks": {
-        url: "https://www.amazon.com/dp/B0F1THN236?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Book Lover Wine Glass": {
-        url: "https://www.amazon.com/dp/B0DD4FWCJW?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Kindle Paperwhite (newest model, 7\" display)": {
-        url: "https://www.amazon.com/dp/B0CFPJYX7P?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-    },
+    topPicks: [pick("B0CFPJYX7P"), pick("B0BMPFB4TT"), pick("B07WNRN9WQ")],
+    inlineProducts: inline([
+      ["Husband Pillow Original Shredded Memory Foam", "B0BMPFB4TT"],
+      ["Aimuan Reading Pillow", "B0CQS2SSFW"],
+      ["Glocusent LED Book Light", "B07WNRN9WQ"],
+      ["Classical Library Candle", "B0F1FY6XT7"],
+      ['"Smells Like She\'s Writing a Bestseller" Soy Candle', "B0CMTXKBWW"],
+      ["HAPPYPOP Book Lover Fuzzy Socks", "B0F1THN236"],
+      ["Book Lover Wine Glass", "B0DD4FWCJW"],
+      ['Kindle Paperwhite (newest model, 7" display)', "B0CFPJYX7P"],
+    ]),
   },
   "best-billionaire-romance-series-2024": {
-    ftcDisclosure: true,
-    topPicks: [
-      {
-        name: "Kindle Paperwhite (2024)",
-        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=88away0d-20",
-        description: "The perfect e-reader for binge-reading entire romance series. Warm adjustable light, weeks of battery life, and waterproof design for bath-time reading.",
-        whyRecommend: "If you're going to binge-read a 5-book series, you need a device that won't die on you. This one lasts weeks.",
-        priceRange: "Around $150",
-        rating: 4.7,
-      },
-    ],
-    inlineProducts: {},
+    ftcDisclosure: true, topPicks: [pick("B0CFPJYX2T")], inlineProducts: {},
   },
   "nyc-romance-books-manhattan-guide": {
-    ftcDisclosure: true,
-    topPicks: [],
-    inlineProducts: {},
+    ftcDisclosure: true, topPicks: [], inlineProducts: {},
   },
   "secret-baby-romance-books-guide": {
-    ftcDisclosure: true,
-    topPicks: [],
-    inlineProducts: {},
+    ftcDisclosure: true, topPicks: [], inlineProducts: {},
   },
   "best-kindle-setup-romance-readers": {
-    ftcDisclosure: true,
-    topPicks: [
-      {
-        name: "Kindle Paperwhite (2024)",
-        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=88away0d-20",
-        description: "The workhorse e-reader for heavy romance readers. 6.8-inch screen, warm adjustable light, waterproof, and weeks of battery life.",
-        whyRecommend: "This is the one I use every single day. If you read 200+ books a year, this is your device.",
-        priceRange: "Around $150",
-        rating: 4.7,
-      },
-      {
-        name: "Glocusent LED Book Light",
-        affiliateUrl: "https://www.amazon.com/dp/B07WNRN9WQ?tag=88away0d-20",
-        description: "Rechargeable clip-on book light with 3 color temperatures and 6 brightness levels. For physical book nights.",
-        whyRecommend: "The best book light I've found after testing many. Clips on without being heavy, and the warm setting is perfect.",
-        priceRange: "Around $13",
-        rating: 4.6,
-      },
-    ],
-    inlineProducts: {},
+    ftcDisclosure: true, topPicks: [pick("B0CFPJYX2T"), pick("B07WNRN9WQ")], inlineProducts: {},
   },
   "enemies-to-lovers-books-that-ruined-me": {
-    ftcDisclosure: true,
-    topPicks: [],
-    inlineProducts: {},
+    ftcDisclosure: true, topPicks: [], inlineProducts: {},
   },
   "booktok-made-me-buy-it-honest-reviews": {
-    ftcDisclosure: true,
-    topPicks: [
-      {
-        name: "Kindle Paperwhite (2024)",
-        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=88away0d-20",
-        description: "Most viral BookTok romances are in Kindle Unlimited. The Paperwhite is the best way to read them all without going broke.",
-        whyRecommend: "I go through BookTok picks fast — one every two days. KU on a Paperwhite is the most cost-effective way to keep up.",
-        priceRange: "Around $150",
-        rating: 4.7,
-      },
-    ],
-    inlineProducts: {},
+    ftcDisclosure: true, topPicks: [pick("B0CFPJYX2T")], inlineProducts: {},
   },
   "reading-self-care-routine-book-lovers": {
-    ftcDisclosure: true,
-    topPicks: [
-      {
-        name: "Kindle Paperwhite (2024)",
-        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX2T?tag=88away0d-20",
-        description: "The foundation of any reading self-care routine. Single-purpose device means no notifications pulling you out of the story.",
-        whyRecommend: "Removing my phone and reading on a dedicated device was the single biggest improvement to my reading life.",
-        priceRange: "Around $150",
-        rating: 4.7,
-      },
-      {
-        name: "Glocusent LED Book Light",
-        affiliateUrl: "https://www.amazon.com/dp/B07WNRN9WQ?tag=88away0d-20",
-        description: "For physical book nights — clips on, multiple brightness levels, rechargeable, and warm light that won't disturb anyone.",
-        whyRecommend: "I use it twice a week for physical ARCs and special editions. The warm light setting is perfect for nighttime reading.",
-        priceRange: "Around $13",
-        rating: 4.6,
-      },
-    ],
-    inlineProducts: {},
+    ftcDisclosure: true, topPicks: [pick("B0CFPJYX2T"), pick("B07WNRN9WQ")], inlineProducts: {},
   },
   "romance-reader-gift-guide": {
     ftcDisclosure: true,
-    topPicks: [
-      {
-        name: "Kindle Paperwhite (7\" Display, Latest Model)",
-        affiliateUrl: "https://www.amazon.com/dp/B0CFPJYX7P?tag=88away0d-20",
-        description: "The ultimate gift for any serious reader. Glare-free 7\" display, weeks of battery life, waterproof design, and adjustable warm light for comfortable reading day or night.",
-        whyRecommend: "Every book they download after this becomes part of your gift. It's the one upgrade that genuinely changes a reader's life.",
-        priceRange: "Around $150",
-        rating: 4.7,
-      },
-      {
-        name: "Huglanket Book Lovers Wearable Blanket Hoodie",
-        affiliateUrl: "https://www.amazon.com/dp/B0CW63NL9F?tag=88away0d-20",
-        description: "An oversized sherpa-lined blanket hoodie with 'My Weekend is All Booked' text. Double-sided fabric with soft flannel and cozy fleece — perfect for marathon reading sessions.",
-        whyRecommend: "It's the gift that turns every reading night into an event. Once they put it on, they won't want to take it off.",
-        priceRange: "Around $35",
-        rating: 4.6,
-      },
-      {
-        name: "Glocusent LED Book Light",
-        affiliateUrl: "https://www.amazon.com/dp/B07WNRN9WQ?tag=88away0d-20",
-        description: "A rechargeable clip-on book light with 3 color temperatures and 6 brightness settings. Flexible neck design for perfect positioning without disturbing anyone.",
-        whyRecommend: "The gift readers don't know they need until they have it. Then they can't imagine reading without it.",
-        priceRange: "Around $13",
-        rating: 4.6,
-      },
-    ],
-    inlineProducts: {
-      "HAPPYPOP Book Lover Fuzzy Socks": {
-        url: "https://www.amazon.com/dp/B0F8BPSCZV?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "\"Too Many Books\" Wine Glass": {
-        url: "https://www.amazon.com/dp/B0FWC3HD8X?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Classical Library Candle": {
-        url: "https://www.amazon.com/dp/B0F1FY6XT7?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Glocusent LED Book Light": {
-        url: "https://www.amazon.com/dp/B07WNRN9WQ?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Aimuan Reading Pillow with Arms": {
-        url: "https://www.amazon.com/dp/B09V518DRK?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "Kindle Paperwhite (newest model)": {
-        url: "https://www.amazon.com/dp/B0CFPJYX7P?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-    },
+    topPicks: [pick("B0CFPJYX7P"), pick("B0CW63NL9F"), pick("B07WNRN9WQ")],
+    inlineProducts: inline([
+      ["HAPPYPOP Book Lover Fuzzy Socks", "B0F8BPSCZV"],
+      ['"Too Many Books" Wine Glass', "B0FWC3HD8X"],
+      ["Classical Library Candle", "B0F1FY6XT7"],
+      ["Glocusent LED Book Light", "B07WNRN9WQ"],
+      ["Aimuan Reading Pillow with Arms", "B09V518DRK"],
+      ["Kindle Paperwhite (newest model)", "B0CFPJYX7P"],
+    ]),
   },
   "what-i-burn-while-i-write": {
     ftcDisclosure: true,
-    topPicks: [
-      {
-        name: "Classical Library Candle",
-        affiliateUrl: "https://www.amazon.com/dp/B0F1FY6XT7?tag=88away0d-20",
-        description: "A soy wax candle with notes of aged leather, mahogany, and old paper. Designed to evoke the feeling of a grand library.",
-        whyRecommend: "The candle that lives on my writing desk — light it and you're in the library of a Manhattan penthouse. Pure magic.",
-        priceRange: "Around $20",
-        rating: 4.6,
-      },
-      {
-        name: "\"Smells Like She's Writing a Bestseller\" Soy Candle",
-        affiliateUrl: "https://www.amazon.com/dp/B0CMTXKBWW?tag=88away0d-20",
-        description: "A hand-poured soy candle with a witty label and a warm, sweet scent. Perfect for deadline nights and gifting to authors.",
-        whyRecommend: "Every writer deserves to smell like the thing they're chasing. It's also my favorite gift for other authors.",
-        priceRange: "Around $22",
-        rating: 4.7,
-      },
-    ],
-    inlineProducts: {
-      "Classical Library Candle": {
-        url: "https://www.amazon.com/dp/B0F1FY6XT7?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-      "\"Smells Like She's Writing a Bestseller\" Soy Candle": {
-        url: "https://www.amazon.com/dp/B0CMTXKBWW?tag=88away0d-20",
-        rel: "noopener noreferrer nofollow",
-      },
-    },
+    topPicks: [pick("B0F1FY6XT7"), pick("B0CMTXKBWW")],
+    inlineProducts: inline([
+      ["Classical Library Candle", "B0F1FY6XT7"],
+      ['"Smells Like She\'s Writing a Bestseller" Soy Candle', "B0CMTXKBWW"],
+    ]),
   },
 };

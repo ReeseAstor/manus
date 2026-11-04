@@ -3,7 +3,7 @@ import { affiliateProductsBySlug } from "../client/src/data/affiliateProducts";
 import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 
-const AFFILIATE_TAG = "88away0d-20";
+const AFFILIATE_TAG = "reeseastor-20";
 
 const newBlogSlugs = [
   "best-kindle-setup-romance-readers",

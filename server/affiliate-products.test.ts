@@ -16,7 +16,7 @@ describe("Affiliate Products Data", () => {
     const { affiliateProductsBySlug } = await import("../client/src/data/affiliateProducts");
     
     const data = affiliateProductsBySlug["ultimate-cozy-reading-night-setup"];
-    const storeTag = "88away0d-20";
+    const storeTag = "reeseastor-20";
     
     // Check top picks
     for (const product of data.topPicks) {
@@ -33,7 +33,7 @@ describe("Affiliate Products Data", () => {
     const { affiliateProductsBySlug } = await import("../client/src/data/affiliateProducts");
     
     const data = affiliateProductsBySlug["ultimate-cozy-reading-night-setup"];
-    const storeTag = "88away0d-20";
+    const storeTag = "reeseastor-20";
     
     // Check inline products
     for (const [name, link] of Object.entries(data.inlineProducts)) {

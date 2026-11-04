@@ -1,16 +1,23 @@
-import { motion } from "framer-motion";
-import { ExternalLink, Star, ShoppingCart } from "lucide-react";
+import React from "react";
+import { ExternalLink } from "lucide-react";
 import { trpc } from "../lib/trpc";
 import { useLocation } from "wouter";
+import { withAmazonTag } from "../lib/amazon-tag";
+import { AFFILIATE_LINK_REL, isAmazonAffiliateDestination } from "../lib/blog-recommendations";
 
 export interface AffiliateProduct {
   name: string;
   affiliateUrl: string;
   description: string;
   whyRecommend: string;
+  /** Legacy catalog metadata, not displayed without live verification. */
   priceRange: string;
   rating?: number;
   imageUrl?: string;
+  aliases?: string[];
+  editorialReason?: string;
+  tradeoff?: string;
+  noPurchaseAlternative?: string;
 }
 
 interface AffiliateProductCardProps {
@@ -22,88 +29,52 @@ interface AffiliateProductCardProps {
 export function AffiliateProductCard({ product, index, sourceSlug }: AffiliateProductCardProps) {
   const [location] = useLocation();
   const trackClick = trpc.affiliateTracking.trackClick.useMutation();
-
   const slug = sourceSlug || location.replace(/^\/blog\//, "").replace(/\/$/, "") || "unknown";
+  const affiliateUrl = withAmazonTag(product.affiliateUrl);
+  const safeDestination = isAmazonAffiliateDestination(affiliateUrl);
 
   const handleClick = () => {
     trackClick.mutate({
       productName: product.name,
-      affiliateUrl: product.affiliateUrl,
+      affiliateUrl,
       sourceSlug: slug,
       clickType: "card",
     });
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#FAF7F7]/[0.06] to-[#FAF7F7]/[0.02] border border-[#4A3B3A]/10 hover:border-[#B59A6A]/40 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-[#C9A3A0]/5"
+    <article
+      className="rounded-2xl border border-[#4A3B3A]/15 bg-[#FAF7F7] p-5 sm:p-6 space-y-4"
+      aria-label={`Optional recommendation ${index + 1}: ${product.name}`}
     >
-      <div className="p-6 space-y-4">
-        {/* Product Header */}
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex-1">
-            <h4 className="font-serif text-lg font-bold text-[#4A3B3A] group-hover:text-[#7A4F4C] transition-colors leading-tight">
-              {product.name}
-            </h4>
-            <p className="text-[#7A4F4C]/80 font-medium text-sm mt-1">
-              {product.priceRange}
-            </p>
-          </div>
-          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#C9A3A0]/10 flex items-center justify-center border border-[#B59A6A]/20">
-            <ShoppingCart className="w-5 h-5 text-[#7A4F4C]" />
-          </div>
+      <h4 className="font-serif text-xl text-[#4A3B3A] leading-snug">{product.name}</h4>
+      <p className="text-[#6E5F5A] text-sm leading-relaxed">
+        {product.editorialReason || "An optional item to compare if it meets a specific need in your reading or writing routine."}
+      </p>
+      <dl className="space-y-3 text-sm leading-relaxed text-[#6E5F5A]">
+        <div>
+          <dt className="font-semibold text-[#4A3B3A]">Consider before buying</dt>
+          <dd>{product.tradeoff || "Check the current specifications, fit, care instructions, and return policy. An item you already own may work just as well."}</dd>
         </div>
-
-        {/* Rating Stars */}
-        {product.rating && (
-          <div className="flex items-center gap-1">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`w-4 h-4 ${
-                  i < Math.floor(product.rating!)
-                    ? "text-[#7A4F4C] fill-[#7A4F4C]"
-                    : i < product.rating!
-                    ? "text-[#7A4F4C] fill-[#7A4F4C]/50"
-                    : "text-[#6E5F5A]"
-                }`}
-              />
-            ))}
-            <span className="text-xs text-[#6E5F5A] ml-1">({product.rating})</span>
-          </div>
-        )}
-
-        {/* Description */}
-        <p className="text-[#6E5F5A] text-sm leading-relaxed">
-          {product.description}
-        </p>
-
-        {/* Why Recommend */}
-        <div className="flex items-start gap-2 p-3 rounded-xl bg-[#C9A3A0]/5 border border-[#B59A6A]/10">
-          <span className="text-[#7A4F4C] text-xs font-bold uppercase tracking-wider flex-shrink-0 mt-0.5">Why I love it:</span>
-          <p className="text-[#6E5F5A] text-xs leading-relaxed">{product.whyRecommend}</p>
+        <div>
+          <dt className="font-semibold text-[#4A3B3A]">No purchase needed</dt>
+          <dd>{product.noPurchaseAlternative || "Start with what you have, borrow from a friend, or try your library before adding something new."}</dd>
         </div>
-
-        {/* CTA Button */}
+      </dl>
+      {safeDestination && (
         <a
-          href={product.affiliateUrl}
+          href={affiliateUrl}
           target="_blank"
-          rel="noopener noreferrer nofollow"
+          rel={AFFILIATE_LINK_REL}
           onClick={handleClick}
-          className="flex items-center justify-center gap-2 w-full py-3 px-6 rounded-full bg-[#4A3B3A] hover:bg-[#7A4F4C] text-[#FAF7F7] font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-[#C9A3A0]/20"
+          className="inline-flex items-center gap-2 py-2 text-sm text-[#7A4F4C] underline underline-offset-4 hover:text-[#4A3B3A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
         >
-          Check Price on Amazon
-          <ExternalLink className="w-4 h-4" />
+          View {product.name} on Amazon
+          <ExternalLink className="w-4 h-4 shrink-0" aria-hidden="true" />
+          <span className="sr-only"> (affiliate link, opens in a new tab)</span>
         </a>
-      </div>
-
-      {/* Decorative corner accent */}
-      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#C9A3A0]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-    </motion.div>
+      )}
+    </article>
   );
 }
 
@@ -114,38 +85,40 @@ interface AffiliateProductSectionProps {
   sourceSlug?: string;
 }
 
-export function AffiliateProductSection({ products, title = "Top Picks", subtitle = "Recommended products from this article", sourceSlug }: AffiliateProductSectionProps) {
-  return (
-    <div className="my-12">
-      {/* Section Header */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A3A0]/10 border border-[#B59A6A]/20 mb-4">
-          <ShoppingCart className="w-4 h-4 text-[#7A4F4C]" />
-          <span className="text-[#7A4F4C] text-sm font-bold uppercase tracking-wider">{title}</span>
-        </div>
-        <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#4A3B3A] mb-2">
-          {subtitle}
-        </h3>
-        <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#C9A3A0] to-transparent mx-auto" />
-      </div>
+export function AffiliateProductSection({
+  products,
+  title = "Optional reading companions",
+  subtitle = "Items mentioned in this article",
+  sourceSlug,
+}: AffiliateProductSectionProps) {
+  if (products.length === 0) return null;
 
-      {/* Product Grid */}
-      <div className="grid md:grid-cols-3 gap-6">
+  return (
+    <section className="my-12 border-t border-[#4A3B3A]/15 pt-8" aria-label={title}>
+      <header className="mb-6 space-y-2">
+        <p className="text-sm text-[#7A4F4C]">{title}</p>
+        <h3 className="font-serif text-2xl text-[#4A3B3A]">{subtitle}</h3>
+        <p className="text-sm leading-relaxed text-[#6E5F5A]">
+          These are optional, not a reading checklist. Prices and availability can change; compare the current listing before deciding.
+        </p>
+      </header>
+      <FTCDisclosure />
+      <div className="grid gap-4">
         {products.map((product, index) => (
-          <AffiliateProductCard key={index} product={product} index={index} sourceSlug={sourceSlug} />
+          <AffiliateProductCard key={product.affiliateUrl} product={product} index={index} sourceSlug={sourceSlug} />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
 export function FTCDisclosure() {
   return (
-    <div className="mb-8 p-4 rounded-xl bg-[#EBD6D3]/0 border border-[#4A3B3A]/10">
-      <p className="text-[#6E5F5A] text-xs leading-relaxed italic">
-        <span className="font-semibold text-[#6E5F5A]">Disclosure:</span>{" "}
-        As an Amazon Associate I earn from qualifying purchases. This means I may earn a small commission at no extra cost to you if you click a link and make a purchase.
+    <aside className="mb-6 p-4 rounded-xl bg-[#EBD6D3]/20 border border-[#4A3B3A]/10" aria-label="Affiliate disclosure">
+      <p className="text-[#6E5F5A] text-sm leading-relaxed">
+        <span className="font-semibold text-[#4A3B3A]">Affiliate disclosure:</span>{" "}
+        As an Amazon Associate I earn from qualifying purchases. Amazon links may earn a commission at no extra cost to you. You do not need to buy anything to enjoy this article.
       </p>
-    </div>
+    </aside>
   );
 }

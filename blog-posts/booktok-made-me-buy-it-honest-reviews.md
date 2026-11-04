@@ -10,25 +10,25 @@ The algorithm rewards emotional reactions, not nuanced criticism. A book that ma
 
 ### It Ends with Us by Colleen Hoover
 
-[It Ends with Us](https://www.amazon.com/dp/B0176M3U10?tag=88away0d-20) became the defining BookTok romance for a reason. Hoover tackles domestic violence with nuance that most romance authors wouldn't attempt, and she does it within a love story that's genuinely compelling. The twist — if you can call it that — reframes everything you thought you understood about the characters.
+[It Ends with Us](https://www.amazon.com/dp/B0176M3U10?tag=reeseastor-20) became the defining BookTok romance for a reason. Hoover tackles domestic violence with nuance that most romance authors wouldn't attempt, and she does it within a love story that's genuinely compelling. The twist — if you can call it that — reframes everything you thought you understood about the characters.
 
 **My honest take**: It deserves the hype. It's not a comfortable read, and it's not traditional romance (there's no guaranteed HEA in the way romance readers expect), but it's powerful storytelling that uses the romance framework to say something important. Read it once. You won't need to read it again, but you'll be glad you did.
 
 ### Haunting Adeline by H.D. Carlton
 
-[Haunting Adeline](https://www.amazon.com/dp/B09BFCGKN8?tag=88away0d-20) is the most divisive BookTok romance, and that's exactly why it went viral. People either love it or are horrified by it, and both reactions generate engagement. The hero is a stalker. The content warnings are extensive. The plot involves human trafficking. It shouldn't work as romance. And yet.
+[Haunting Adeline](https://www.amazon.com/dp/B09BFCGKN8?tag=reeseastor-20) is the most divisive BookTok romance, and that's exactly why it went viral. People either love it or are horrified by it, and both reactions generate engagement. The hero is a stalker. The content warnings are extensive. The plot involves human trafficking. It shouldn't work as romance. And yet.
 
 **My honest take**: It's better written than its critics suggest and more problematic than its fans admit. Carlton has genuine skill with atmosphere and pacing. The mystery plot is compelling independent of the romance. But this is a book that requires you to separate fiction from reality completely, and not every reader can or should do that. Know yourself before picking this up.
 
 ### Things We Never Got Over by Lucy Score
 
-[Things We Never Got Over](https://www.amazon.com/dp/B09FGCFZ9S?tag=88away0d-20) went viral for the grumpy hero, and honestly, Knox Morgan deserves every thirsty comment. Score writes the grumpy/sunshine dynamic with a deft hand — Knox's grumpiness has real roots, Naomi's sunshine isn't naive, and their chemistry builds to a satisfying payoff.
+[Things We Never Got Over](https://www.amazon.com/dp/B09FGCFZ9S?tag=reeseastor-20) went viral for the grumpy hero, and honestly, Knox Morgan deserves every thirsty comment. Score writes the grumpy/sunshine dynamic with a deft hand — Knox's grumpiness has real roots, Naomi's sunshine isn't naive, and their chemistry builds to a satisfying payoff.
 
 **My honest take**: This one earns the hype. It's long — over 500 pages — but it never drags. The small-town setting is charming without being saccharine, and the secondary characters are developed enough that you'll want their books too (and they exist). A safe recommendation for anyone curious about BookTok romance.
 
 ### A Court of Thorns and Roses by Sarah J. Maas
 
-[A Court of Thorns and Roses](https://www.amazon.com/dp/B00OZP5VRS?tag=88away0d-20) predates BookTok, but the platform gave it a massive second life. The series — particularly books 2 and 3 — became the standard against which all fantasy romance is measured. Rhysand is the BookTok boyfriend, and the fandom's devotion to him is genuinely impressive.
+[A Court of Thorns and Roses](https://www.amazon.com/dp/B00OZP5VRS?tag=reeseastor-20) predates BookTok, but the platform gave it a massive second life. The series — particularly books 2 and 3 — became the standard against which all fantasy romance is measured. Rhysand is the BookTok boyfriend, and the fandom's devotion to him is genuinely impressive.
 
 **My honest take**: Book 1 is good. Book 2 is where it becomes extraordinary. Maas's ability to write a love interest reveal — to make you fall for someone you didn't expect — is masterful. The worldbuilding is lush, the stakes are real, and the romance delivers on every level. If you haven't read this series, you're missing context for approximately 40% of BookTok content.
 
@@ -36,7 +36,7 @@ The algorithm rewards emotional reactions, not nuanced criticism. A book that ma
 
 ### The Love Hypothesis by Ali Hazelwood
 
-[The Love Hypothesis](https://www.amazon.com/dp/B08R4JFQKQ?tag=88away0d-20) went viral for the fake-dating setup and the tall, brooding love interest. It's a perfectly pleasant romance with a STEM setting that feels fresh.
+[The Love Hypothesis](https://www.amazon.com/dp/B08R4JFQKQ?tag=reeseastor-20) went viral for the fake-dating setup and the tall, brooding love interest. It's a perfectly pleasant romance with a STEM setting that feels fresh.
 
 **My honest take**: It's fine. It's enjoyable. It's not going to change your life. The writing is competent, the characters are likeable, and the romance follows a predictable but satisfying arc. If you want something light and fun, it delivers. If you're expecting the emotional devastation that BookTok promised, you'll be slightly underwhelmed. Good airplane book.
 
@@ -68,9 +68,9 @@ If you're using BookTok to find your next read (which is valid — it's how I've
 
 ## My Reading Setup for Testing BookTok Picks
 
-I go through these fast — usually one every two days — so my setup is optimized for volume. [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX2T?tag=88away0d-20) with Kindle Unlimited handles most of them (the majority of viral romance is in KU). I keep a running list in my phone's notes app: title, whether I finished it, one-sentence verdict. It's become a useful reference when readers ask me for recommendations.
+I go through these fast — usually one every two days — so my setup is optimized for volume. [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20) with Kindle Unlimited handles most of them (the majority of viral romance is in KU). I keep a running list in my phone's notes app: title, whether I finished it, one-sentence verdict. It's become a useful reference when readers ask me for recommendations.
 
-For the physical copies that BookTok convinced me to buy (because sometimes you want the pretty edition on your shelf), I use [clear book stands](https://www.amazon.com/dp/B0BXJH5C3G?tag=88away0d-20) to display the ones that earned their place. The rest go to the used bookstore.
+For the physical copies that BookTok convinced me to buy (because sometimes you want the pretty edition on your shelf), I use [clear book stands](https://www.amazon.com/dp/B0BXJH5C3G?tag=reeseastor-20) to display the ones that earned their place. The rest go to the used bookstore.
 
 ## Final Verdict
 

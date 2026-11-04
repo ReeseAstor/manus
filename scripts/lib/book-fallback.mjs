@@ -21,7 +21,7 @@ export function bookFallbackFactsHtml(book, { esc }) {
 
 /**
  * Buy links for the fallback page. Amazon book links get tag=reeseastor-20 through the
- * same helper the live buttons use (query parameters are kept; an existing tag is left as is).
+ * same helper the live buttons use (query parameters are kept; legacy tags are normalized).
  */
 export function bookFallbackBuyHtml(book, { esc, withAmazonTag }) {
   return [
