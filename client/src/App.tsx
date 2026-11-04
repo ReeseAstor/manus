@@ -4,7 +4,7 @@ import "./styles/animations.css";
 import { lazy, Suspense, type ComponentType } from "react";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import NotFound from "@/pages/NotFound";
-import { Redirect, Route, Switch } from "wouter";
+import { Redirect, Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
@@ -211,6 +211,8 @@ function Router() {
 }
 
 function App() {
+  const [location] = useLocation();
+  const readingJournal = location === "/blog" || location.startsWith("/blog/");
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
@@ -222,8 +224,8 @@ function App() {
               <Router />
             </main>
             <Footer />
-            <EmailCapturePopup />
-            <ExitIntentPopup />
+            {!readingJournal && <EmailCapturePopup />}
+            {!readingJournal && <ExitIntentPopup />}
           </div>
         </TooltipProvider>
       </ThemeProvider>

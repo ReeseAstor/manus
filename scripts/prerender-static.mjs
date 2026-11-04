@@ -249,10 +249,10 @@ const simple = [
   },
   {
     route: "/blog",
-    title: "Blog | Reese Astor",
-    description: "Notes from Reese Astor: the money terms behind the books, reading lists, and behind-the-scenes posts.",
+    title: "The Fine Print | Reese Astor",
+    description: "Reading lists, small rituals, and notes on Manhattan romance. A quieter corner of Reese Astor's world.",
     schemas: [],
-    body: `<h1>Blog</h1><p>The money terms behind the books, reading lists, and behind-the-scenes posts.</p>`,
+    body: `<h1>The Fine Print</h1><p>For the life between chapters.</p><p>Reading lists, small rituals, and a closer look at the stories from Reese Astor.</p>`,
   },
   {
     route: "/press",
