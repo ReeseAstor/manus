@@ -33,3 +33,12 @@ export function bookFallbackBuyHtml(book, { esc, withAmazonTag }) {
     .filter(Boolean)
     .join(" · ");
 }
+
+/** Same confirmed edition choices as the live title page; never link drafts. */
+export function bookFallbackEditionsHtml({ editions, labels, esc, withAmazonTag }) {
+  const live = editions.filter(edition => edition.status === "live" && /^[A-Z0-9]{10}$/.test(edition.asin || ""));
+  if (!live.length) return "";
+  return `<details><summary>Formats and Amazon editions</summary><p>Choose the format that suits you. Check Amazon for current prices, availability, and edition details.</p><aside aria-label="Affiliate disclosure">As an Amazon Associate I earn from qualifying purchases. Amazon links may earn a commission at no extra cost to you.</aside><ul>${live.map(edition =>
+    `<li><a href="${esc(withAmazonTag(`https://www.amazon.com/dp/${edition.asin}`))}" target="_blank" rel="sponsored noopener noreferrer nofollow">${esc(labels[edition.format])}</a></li>`
+  ).join("")}</ul></details>`;
+}

@@ -57,7 +57,7 @@ await build({
   logLevel: "silent",
 });
 const { withAmazonTag } = await import(pathToFileURL(tagBundled).href);
-const { bookFallbackFactsHtml, bookFallbackBuyHtml } = await import(
+const { bookFallbackFactsHtml, bookFallbackBuyHtml, bookFallbackEditionsHtml } = await import(
   pathToFileURL(path.join(root, "scripts/lib/book-fallback.mjs")).href
 );
 const { fallbackProblems } = await import(
@@ -192,7 +192,8 @@ for (const book of BOOKS) {
     bookFallbackFactsHtml(book, { esc }),
   ].join("");
   const buy = bookFallbackBuyHtml(book, { esc, withAmazonTag });
-  const bookBody = `<article><h1>${esc(book.title)}</h1><p><em>${esc(book.tagline)}</em></p><img src="${esc(book.cover_image)}" alt="${esc(book.title)} by Reese Astor, cover" width="400" height="600" /><p>${esc(book.blurb)}</p><ul>${facts}</ul><p>${buy}</p>${
+  const editions = bookFallbackEditionsHtml({ editions: sd.getLiveBookEditions(book.slug), labels: sd.EDITION_LABELS, esc, withAmazonTag });
+  const bookBody = `<article><h1>${esc(book.title)}</h1><p><em>${esc(book.tagline)}</em></p><img src="${esc(book.cover_image)}" alt="${esc(book.title)} by Reese Astor, cover" width="400" height="600" /><p>${esc(book.blurb)}</p><ul>${facts}</ul><p>${buy}</p>${editions}${
     siblings.length
       ? `<h2>More in ${esc(lane.title)}</h2><ul>${siblings.map((b) => `<li><a href="/books/${b.slug}">${esc(b.title)}</a></li>`).join("")}</ul>`
       : ""
