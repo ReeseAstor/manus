@@ -225,7 +225,11 @@ export default function Home() {
 
   // Reveal the mobile sticky CTA once the hero cards have scrolled away.
   useEffect(() => {
-    const onScroll = () => setShowStickyCta(window.scrollY > 720);
+    const onScroll = () => {
+      const books = document.getElementById("free-books");
+      const footer = document.querySelector("footer");
+      setShowStickyCta(Boolean(books && books.getBoundingClientRect().bottom < 80 && (!footer || footer.getBoundingClientRect().top > window.innerHeight)));
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -256,7 +260,7 @@ export default function Home() {
       {/* ───────────────── 1 + 2. HERO with the two free books above the fold ── */}
       <section
         aria-labelledby="hero-heading"
-        className="relative overflow-hidden px-5 pt-14 pb-20 sm:px-8 sm:pt-20 sm:pb-28"
+        className="home-opening relative overflow-hidden px-5 pt-10 pb-14 sm:px-8 sm:pt-16 sm:pb-20"
         style={{
           background: `radial-gradient(120% 90% at 50% 0%, ${RAISED} 0%, ${INK} 55%),
                        radial-gradient(80% 60% at 85% 10%, rgba(201, 163, 160,0.28) 0%, transparent 60%)`,
@@ -284,17 +288,17 @@ export default function Home() {
             </div>
             <h1
               id="hero-heading"
-              className="font-display font-normal text-[34px] leading-[1.05] mt-5 sm:text-[52px] lg:text-[60px]"
+              className="font-display font-normal text-[42px] leading-[1.08] mt-5 sm:text-[64px] lg:text-[76px]"
               style={{ color: TEXT, letterSpacing: "-0.022em", textWrap: "balance" }}
             >
-              Choose Your Free Steamy <em className="font-normal italic">Billionaire Romance</em>
+              Power. Desire.<br /><em className="font-normal italic">Your next obsession.</em>
             </h1>
             <p
               className="font-cormorant mx-auto mt-6 max-w-[640px] text-[19px] leading-[1.55] sm:text-[22px]"
               style={{ color: TEXT_SOFT, textWrap: "pretty" }}
             >
-              Enter the Reese Astor world of ruthless billionaires, ambitious women, dangerous
-              attraction, boardroom betrayal, and love that never stays simple.
+              Ruthless billionaires. Ambitious women. Love with consequences.
+              Discover your next world with a free romance.
             </p>
             <p
               className="font-inter mx-auto mt-5 max-w-[560px] text-[12px] leading-[1.7]"
@@ -303,8 +307,9 @@ export default function Home() {
               For adult romance readers 18+. You&rsquo;ll also receive new release alerts, bonus
               scenes, and Reese Astor reader updates.
             </p>
-            <div className="mt-9 flex justify-center">
-              <Ornament width={110} />
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              <a href="#free-books" className="home-text-link">Choose your free book <ArrowRight aria-hidden="true" className="size-4" /></a>
+              <a href="/books" className="home-text-link">Explore all books</a>
             </div>
           </Reveal>
 
@@ -317,7 +322,7 @@ export default function Home() {
               <li key={book.id} className="flex">
                 <Reveal delay={i * 0.08} className="flex w-full">
                     <article
-                    className="group flex w-full flex-col overflow-hidden hover:-translate-y-1.5 hover:shadow-2xl"
+                    className="home-book-card group flex w-full flex-col overflow-hidden"
                     style={{
                       background: IVORY,
                       border: `1px solid ${IVORY_RULE}`,
@@ -334,7 +339,7 @@ export default function Home() {
 
                     {/* Cover display shelf — dark stage so the cover art pops. */}
                     <div
-                      className="relative flex items-center justify-center px-6 pt-8 pb-7"
+                      className="home-book-cover relative flex items-center justify-center px-6 pt-8 pb-7"
                       style={{ background: `linear-gradient(165deg, ${RAISED} 0%, ${INK} 100%)` }}
                     >
                       <span
@@ -369,7 +374,7 @@ export default function Home() {
                       />
                     </div>
 
-                    <div className="flex flex-1 flex-col p-7 sm:p-8">
+                    <div className="home-book-details flex flex-1 flex-col p-5 sm:p-7">
                       <span
                         className="font-inter text-[11px] font-semibold uppercase"
                         style={{ color: book.label, letterSpacing: "0.24em" }}
@@ -510,7 +515,7 @@ export default function Home() {
                                   href={series.freeStarter.href}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="font-inter ml-2 inline-flex items-center gap-1 align-middle text-[10px] font-bold uppercase no-underline transition-transform duration-300 hover:scale-105"
+                                  className="font-inter ml-2 inline-flex min-h-11 min-w-11 items-center justify-center gap-1 align-middle text-[11px] font-bold uppercase no-underline"
                                   style={{
                                     color: INK,
                                     background: GOLD,
