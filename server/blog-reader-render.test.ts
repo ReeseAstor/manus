@@ -25,6 +25,15 @@ describe("article reader rendering", () => {
     expect(html).not.toContain('href="javascript:');
     expect(html).toContain("<h2>A quiet note</h2>");
   });
+  it("preserves rich-text CMS paragraphs and headings while sanitizing attributes", () => {
+    const html = render('<h2>Reading rituals</h2><p>A quiet evening.</p><img src="/reading.jpg" onerror="alert(1)"><a href="https://www.amazon.com/dp/B07WNRN9WQ?tag=88away0d-20" onclick="alert(1)">Book light</a>');
+    expect(html).toContain("<h2>Reading rituals</h2>");
+    expect(html).toContain("<p>A quiet evening.</p>");
+    expect(html).toContain("tag=reeseastor-20");
+    expect(html).toContain('rel="sponsored noopener noreferrer nofollow"');
+    expect(html).not.toContain("onerror=");
+    expect(html).not.toContain("onclick=");
+  });
   it("offers reading preferences without requiring storage or an account", () => {
     const html = render("A quiet note.");
     expect(html).toContain('aria-pressed="false"');

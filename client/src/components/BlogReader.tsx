@@ -1,6 +1,8 @@
 import { memo, useEffect, useRef, useState } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 import { headingId, parseSavedProgress, readingProgress } from "@/lib/blog-reading";
 import { AFFILIATE_LINK_REL, isAmazonAffiliateDestination } from "@/lib/blog-recommendations";
 import { withAmazonTag } from "@/lib/amazon-tag";
@@ -18,7 +20,7 @@ const markdownComponents: Components = {
   img: ({ src, alt }) => <img src={src} alt={alt ?? ""} loading="lazy" decoding="async" />,
 };
 const ArticleMarkdown = memo(function ArticleMarkdown({ content }: { content: string }) {
-  return <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>{content}</ReactMarkdown>;
+  return <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSanitize]} components={markdownComponents}>{content}</ReactMarkdown>;
 });
 
 export function BlogReader({ slug, content }: { slug: string; content: string }) {
