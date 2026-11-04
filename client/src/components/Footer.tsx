@@ -5,7 +5,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border/40 bg-card">
+    <footer className="border-t border-border/40 bg-card [&_a]:min-h-11 [&_a]:inline-flex [&_a]:items-center [&_a[aria-label]]:min-w-11 [&_a[aria-label]]:justify-center">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
@@ -30,28 +30,28 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold text-foreground">Quick Links</h4>
             <nav className="flex flex-col space-y-2">
-              <Link href="/books">
+              <Link asChild href="/books">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Books</a>
               </Link>
-              <Link href="/free-book">
+              <Link asChild href="/free-book">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
                   <BookOpen className="h-3 w-3" />
                   Free Book
                 </a>
               </Link>
-              <Link href="/newsletter">
+              <Link asChild href="/newsletter">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
                   <Bell className="h-3 w-3" />
                   Newsletter
                 </a>
               </Link>
-              <Link href="/blog">
+              <Link asChild href="/blog">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Blog</a>
               </Link>
-              <Link href="/favorites">
+              <Link asChild href="/favorites">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Reese's Favorites</a>
               </Link>
-              <Link href="/about">
+              <Link asChild href="/about">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">About</a>
               </Link>
               <a
@@ -69,16 +69,16 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold text-foreground">Legal</h4>
             <nav className="flex flex-col space-y-2">
-              <Link href="/privacy">
+              <Link asChild href="/privacy">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
               </Link>
-              <Link href="/terms">
+              <Link asChild href="/terms">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
               </Link>
-              <Link href="/sms">
+              <Link asChild href="/sms">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Text Alerts</a>
               </Link>
-              <Link href="/contact">
+              <Link asChild href="/contact">
                 <a className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</a>
               </Link>
             </nav>
@@ -90,6 +90,7 @@ export function Footer() {
             <div className="flex space-x-4">
               <a
                 href="https://www.instagram.com/reeseastor/"
+                aria-label="Reese Astor on Instagram"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -98,6 +99,7 @@ export function Footer() {
               </a>
               <a
                 href="https://www.facebook.com/people/Reese-Astor/61571178214136/"
+                aria-label="Reese Astor on Facebook"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -106,6 +108,7 @@ export function Footer() {
               </a>
               <a
                 href="mailto:contact@reeseastor.com"
+                aria-label="Email Reese Astor"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="h-5 w-5" />

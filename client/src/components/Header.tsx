@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "./ui/button";
 import { Menu, X, User, ShoppingBag, Settings, LogOut, ChevronDown } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
@@ -10,6 +10,25 @@ export function Header() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const { user, loading, logout } = useAuth();
+  const [location] = useLocation();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setUserMenuOpen(false);
+  }, [location]);
+
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        setUserMenuOpen(false);
+        if (mobileMenuOpen) menuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [mobileMenuOpen]);
 
   // Close user menu when clicking outside
   useEffect(() => {
@@ -36,11 +55,12 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="site-header sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <div className="container flex h-16 items-center justify-between">
         <Link href="/">
           <span className="flex items-center space-x-2 text-foreground hover:text-primary transition-colors cursor-pointer">
-            <span className="font-playfair text-2xl font-bold">Reese Astor</span>
+            <span className="flex flex-col gap-0.5"><span className="font-playfair text-2xl">Reese Astor</span><span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Romance with consequences</span></span>
           </span>
         </Link>
 
@@ -139,7 +159,9 @@ export function Header() {
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden"
+          className="md:hidden size-11"
+          ref={menuButtonRef}
+          aria-controls="mobile-navigation"
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileMenuOpen}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -150,10 +172,11 @@ export function Header() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border/40 bg-background">
-          <nav className="container flex flex-col space-y-4 py-4">
+        <div id="mobile-navigation" className="md:hidden border-t border-border bg-background max-h-[calc(100dvh-64px)] overflow-y-auto overscroll-contain">
+          <nav aria-label="Mobile navigation" className="container mobile-navigation flex flex-col gap-1 py-4">
+            <Link href="/free-book" className="mobile-free-book" onClick={() => setMobileMenuOpen(false)}>Find your free read <span aria-hidden="true">↗</span></Link>
             {[...navLinks, ...secondaryNavLinks].map((link) => (
-              <Link key={link.href} href={link.href}>
+              <Link key={link.href} href={link.href} aria-current={location === link.href ? "page" : undefined} onClick={() => setMobileMenuOpen(false)}>
                 <span
                   className="text-sm font-medium transition-colors cursor-pointer text-muted-foreground hover:text-primary"
                   onClick={() => setMobileMenuOpen(false)}
