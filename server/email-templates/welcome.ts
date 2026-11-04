@@ -5,6 +5,8 @@
  * Includes a link to download the free prequel novella.
  */
 
+import { PUBLISHER_MAILING_LINES } from "../../shared/publisher";
+
 export interface WelcomeEmailData {
   subscriberName?: string;
 }
@@ -185,6 +187,9 @@ export function generateWelcomeEmail(data: WelcomeEmailData): string {
               </table>
               <p style="margin: 0; color: rgba(229, 229, 229, 0.4); font-size: 12px; line-height: 1.6;">
                 You're receiving this email because you signed up for new release alerts from Reese Astor.
+              </p>
+              <p style="margin: 12px 0 0; color: #b8b8b8; font-size: 12px; line-height: 1.6;">
+                ${PUBLISHER_MAILING_LINES.join("<br>")}
               </p>
             </td>
           </tr>

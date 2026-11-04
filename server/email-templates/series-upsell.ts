@@ -5,6 +5,8 @@
  * Design: Dark luxury gold Manhattan aesthetic matching all other sequences
  */
 
+import { PUBLISHER_MAILING_LINES } from "../../shared/publisher";
+
 const SITE_URL = "https://reeseastor.com";
 
 function wrapInTemplate(options: {
@@ -79,6 +81,9 @@ ${bodyContent}
           <!-- Footer -->
           <tr>
             <td style="padding: 24px 40px 30px; text-align: center;">
+              <p style="margin: 0 0 12px; color: #b8b8b8; font-size: 12px; line-height: 1.6; font-family: Arial, sans-serif;">
+                ${PUBLISHER_MAILING_LINES.join("<br>")}
+              </p>
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto 16px;">
                 <tr>
                   <td style="padding: 0 12px;"><a href="${SITE_URL}" style="color: #d4af37; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Website</a></td>

@@ -17,6 +17,7 @@ import {
   absoluteUrl,
 } from "../../../shared/site";
 import { BOOKS, LANE_META, getBooksInLane, type Book, type Lane } from "./books";
+import { editionAmazonUrl, getLiveBookEditions, type EditionFormat } from "./book-editions";
 
 const ROMANCE_LANES: Lane[] = ["hudson_dynasty", "manhattan_money_kings"];
 
@@ -65,6 +66,14 @@ export function bookUrl(book: Book) {
 export function bookSchema(book: Book) {
   const isAudio = book.format === "audiobook";
   const offerUrl = book.retailers.bookfunnel ?? book.retailers.amazon_kindle ?? undefined;
+  const offerPrice = book.retailers.bookfunnel ? 0 : book.price_usd;
+  const editions = getLiveBookEditions(book.slug);
+  const formats: Record<EditionFormat, string> = {
+    ebook: "EBook",
+    audiobook: "AudiobookFormat",
+    paperback: "Paperback",
+    hardcover: "Hardcover",
+  };
   return {
     "@context": "https://schema.org",
     "@type": isAudio ? "Audiobook" : "Book",
@@ -94,11 +103,36 @@ export function bookSchema(book: Book) {
         }
       : {}),
     ...(book.asin ? { sameAs: [`https://www.amazon.com/dp/${book.asin}`] } : {}),
-    ...(book.price_usd != null && offerUrl
+    ...(editions.length
+      ? {
+          workExample: editions.map(edition => ({
+            "@type": edition.format === "audiobook" ? "Audiobook" : "Book",
+            "@id": `${bookUrl(book)}#edition-${edition.format}`,
+            name: book.title,
+            bookFormat: `https://schema.org/${formats[edition.format]}`,
+            author: { "@id": AUTHOR_ID, "@type": "Person", name: SITE_NAME },
+            exampleOfWork: { "@id": bookId(book) },
+            sameAs: [`https://www.amazon.com/dp/${edition.asin}`],
+            url: editionAmazonUrl(edition),
+            ...(edition.price_usd != null
+              ? {
+                  offers: {
+                    "@type": "Offer",
+                    price: edition.price_usd.toFixed(2),
+                    priceCurrency: "USD",
+                    availability: "https://schema.org/InStock",
+                    url: editionAmazonUrl(edition),
+                  },
+                }
+              : {}),
+          })),
+        }
+      : {}),
+    ...(offerPrice != null && offerUrl
       ? {
           offers: {
             "@type": "Offer",
-            price: book.price_usd.toFixed(2),
+            price: offerPrice.toFixed(2),
             priceCurrency: "USD",
             availability: "https://schema.org/InStock",
             url: offerUrl,
@@ -147,4 +181,5 @@ export function readingOrder(lane: Lane): string[] {
 }
 
 export { BOOKS, LANE_META, ROMANCE_LANES };
+export { getLiveBookEditions, EDITION_LABELS } from "./book-editions";
 export { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE, absoluteUrl } from "../../../shared/site";

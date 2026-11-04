@@ -14,16 +14,17 @@ describe("static book catalog", () => {
       ["the-billionaires-forbidden-nanny", "Book 4", "B0GDZ4T164"],
       ["the-first-acquisition", "Prequel novella", "B0D82GWFD9"],
       ["hostile-tender", "Book 1", "B0H1F9PV97"],
-      ["poison-pills", "Book 2", "B0H53BP5S1"],
+      ["poison-pill", "Book 2", "B0H53BP5S1"],
       ["golden-parachute", "Book 3", "B0HDKNP9F6"],
     ]);
     expect(BOOKS.some((book) => book.slug === "the-need-for-permission")).toBe(false);
   });
 
-  it("uses plain Amazon links for the prequel and the Fake Wife ebook", () => {
+  it("keeps BookFunnel primary for the prequel and a direct Kindle link for Fake Wife", () => {
     const ons = BOOKS.find((book) => book.slug === "the-billionaires-one-night-stand");
     const fakeWife = BOOKS.find((book) => book.slug === "the-billionaire-s-fake-wife");
-    expect(ons?.retailers.amazon_kindle).toBe("https://www.amazon.com/dp/B0DSG7NKGP");
+    expect(ons?.retailers.bookfunnel).toBe("https://dl.bookfunnel.com/xrodg0t77p");
+    expect(ons?.retailers.amazon_kindle).toBeUndefined();
     expect(fakeWife?.retailers.amazon_kindle).toBe("https://www.amazon.com/dp/B0FCCBNF8X");
     for (const book of BOOKS) {
       const href = book.retailers.amazon_kindle;
@@ -38,11 +39,12 @@ describe("static book catalog", () => {
     expect(ku["golden-parachute"]).toBe(true);
   });
 
-  it("uses the KDP description for Golden Parachute", () => {
+  it("retains Golden Parachute's established story details without inventing a price", () => {
     const book = BOOKS.find((entry) => entry.slug === "golden-parachute");
-    expect(book?.tagline).toContain("He can restructure a billion dollars of bad debt");
+    expect(book?.blurb).toContain("restructure a billion dollars of bad debt");
     expect(book?.blurb).toContain("Miri Doyle-Levine");
     expect(book?.blurb).toContain("Kai Hsu");
+    expect(book?.price_usd).toBeNull();
   });
 
   it("keeps every local cover file in client/public", () => {

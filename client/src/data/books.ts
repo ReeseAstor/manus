@@ -1,5 +1,6 @@
 /**
- * Reese Astor catalog — single source of truth.
+ * Reese Astor title catalog — canonical titles, reading order, and story details.
+ * Confirmed format-specific ASINs and observed prices live in book-editions.ts.
  *
  * Add a new book by adding one entry to BOOKS below. The /books catalog,
  * each /books/[slug] page, and structured data are generated from this file.
@@ -39,10 +40,11 @@ export type Book = {
   publication_date: string | null;
   kindle_unlimited: boolean;
   retailers: Partial<Record<RetailerKey, string | null>>;
+  /** True only for confirmed live audio; false does not assert no edition exists. */
   audiobook_available: boolean;
   isbn: string | null;
   asin: string | null;
-  /** Listed price in USD, used for structured data. */
+  /** Amazon Kindle list price in USD; free BookFunnel offers are separate. */
   price_usd: number | null;
   /** Trope keywords, as readers search them. Used in JSON-LD and llms.txt. */
   tropes?: string[];
@@ -78,7 +80,7 @@ export const BOOKS: Book[] = [
     title: "The Billionaire's One Night Stand",
     lane: "manhattan_money_kings",
     series_position: 0,
-    format: "ebook",
+    format: "ebook_and_audiobook",
     position_label: "Prequel",
     tagline: "One night with Manhattan's most ruthless CEO.",
     blurb:
@@ -89,15 +91,14 @@ export const BOOKS: Book[] = [
     cover_image: "/covers/mmk-0-one-night-stand.jpg",
     publication_date: null,
     kindle_unlimited: false,
-    // Free prequel: BookFunnel is the only link shown, so the Amazon $0.99
-    // listing never competes with the newsletter signup.
+    // BookFunnel remains primary; paid editions are secondary title-page choices.
     retailers: {
       bookfunnel: "https://dl.bookfunnel.com/xrodg0t77p",
     },
-    audiobook_available: false,
+    audiobook_available: true,
     isbn: null,
     asin: "B0DSG7NKGP",
-    price_usd: 0,
+    price_usd: 0.99,
     tropes: ["one night stand", "billionaire romance", "Manhattan"],
     characters: ["James", "Victoria"],
   },
@@ -106,7 +107,7 @@ export const BOOKS: Book[] = [
     title: "The Billionaire's Executive Assistant",
     lane: "manhattan_money_kings",
     series_position: 1,
-    format: "ebook",
+    format: "ebook_and_audiobook",
     position_label: "Book 1",
     tagline: "The boardroom was never the most dangerous room.",
     blurb:
@@ -133,7 +134,7 @@ export const BOOKS: Book[] = [
     title: "The Billionaire's Fake Wife",
     lane: "manhattan_money_kings",
     series_position: 2,
-    format: "ebook",
+    format: "ebook_and_audiobook",
     position_label: "Book 2",
     tagline: "A ruthless engagement that turns devastatingly real.",
     blurb:
@@ -160,7 +161,7 @@ export const BOOKS: Book[] = [
     title: "The Billionaire's Baby Secret",
     lane: "manhattan_money_kings",
     series_position: 3,
-    format: "ebook",
+    format: "ebook_and_audiobook",
     position_label: "Book 3",
     tagline: "One night. One secret. One second chance he refuses to lose.",
     blurb:
@@ -187,7 +188,7 @@ export const BOOKS: Book[] = [
     title: "The Billionaire's Forbidden Nanny",
     lane: "manhattan_money_kings",
     series_position: 4,
-    format: "ebook",
+    format: "ebook_and_audiobook",
     position_label: "Book 4",
     tagline: "She's the nanny. He's her boss. His mother wants her gone.",
     blurb:
@@ -227,7 +228,7 @@ export const BOOKS: Book[] = [
     cover_image: "/covers/hd-0-first-acquisition.jpg",
     publication_date: null,
     kindle_unlimited: false,
-    // Free prequel: BookFunnel only (see note on the MMK prequel above).
+    // Free BookFunnel action stays primary; paid editions are secondary.
     retailers: {
       bookfunnel: "https://dl.bookfunnel.com/kw1yge3479",
       audible: null,
@@ -235,7 +236,7 @@ export const BOOKS: Book[] = [
     audiobook_available: true,
     isbn: null,
     asin: "B0D82GWFD9",
-    price_usd: 0,
+    price_usd: 0.99,
     tropes: ["fake engagement", "billionaire romance"],
     characters: ["Sebastian Hudson", "Arden Shaw"],
   },
@@ -244,7 +245,7 @@ export const BOOKS: Book[] = [
     title: "Hostile Tender",
     lane: "hudson_dynasty",
     series_position: 1,
-    format: "ebook",
+    format: "ebook_and_audiobook",
     position_label: "Book 1",
     tagline: "Trust is a weapon. Desire is the risk.",
     blurb:
@@ -259,7 +260,7 @@ export const BOOKS: Book[] = [
       amazon_kindle: "https://www.amazon.com/dp/B0H1F9PV97",
       audible: null,
     },
-    audiobook_available: false,
+    audiobook_available: true,
     isbn: null,
     asin: "B0H1F9PV97",
     price_usd: 4.99,
@@ -271,7 +272,7 @@ export const BOOKS: Book[] = [
     title: "Poison Pill",
     lane: "hudson_dynasty",
     series_position: 2,
-    format: "ebook",
+    format: "ebook_and_audiobook",
     position_label: "Book 2",
     tagline: "Power has a price. Love is the liability.",
     blurb:
@@ -285,7 +286,7 @@ export const BOOKS: Book[] = [
       amazon_kindle: "https://www.amazon.com/dp/B0H53BP5S1",
       audible: null,
     },
-    audiobook_available: false,
+    audiobook_available: true,
     isbn: null,
     asin: "B0H53BP5S1", // verified live on amazon.com/dp/B0H53BP5S1 (Poison Pill, Reese Astor) 10/26/2026
     price_usd: 4.99,
@@ -314,7 +315,7 @@ export const BOOKS: Book[] = [
     audiobook_available: false,
     isbn: null,
     asin: "B0HDKNP9F6", // verified on amazon.es / amazon.it listings 10/26/2026
-    price_usd: 4.99, // live Kindle price on amazon.com/dp/B0HDKNP9F6 10/26/2026; JSON-LD offers only
+    price_usd: null, // Owner's current master leaves the Amazon US price unconfirmed.
     tropes: ["class divide", "dual POV", "high heat", "HEA"],
     characters: ["Kai Hsu", "Miri Doyle-Levine"],
   },

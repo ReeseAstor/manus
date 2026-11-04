@@ -53,7 +53,7 @@ export default function BooksCatalog() {
             className="font-cormorant italic text-[20px] mt-6 max-w-[640px] mx-auto"
             style={{ color: TEXT_SOFT, textWrap: "pretty" }}
           >
-            Three lines, distinct in voice and tempo. Choose the room you want to be in tonight.
+            Two series, each with its own reading order. Start with a prequel or choose a standalone.
           </p>
         </div>
       </section>

@@ -122,7 +122,7 @@ describe("/books no-JS fallback", () => {
   it("runs this test file in the Vercel build and npm build, before the prerender", () => {
     const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, "../vercel.json"), "utf8"));
     const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, "../package.json"), "utf8"));
-    expect(pkg.scripts["test:books-fallback"]).toBe("vitest run server/books-fallback.test.ts");
+    expect(pkg.scripts["test:books-fallback"]).toBe("vitest run server/books-fallback.test.ts server/books-catalog.test.ts server/book-editions.test.ts");
     for (const cmd of [vercel.buildCommand as string, pkg.scripts.build as string]) {
       expect(cmd.startsWith("npm run test:books-fallback && ")).toBe(true);
     }

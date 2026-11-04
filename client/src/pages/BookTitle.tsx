@@ -24,6 +24,7 @@ import {
   type Book,
 } from "@/data/books";
 import { bookSchema, breadcrumbSchema } from "@/data/structured-data";
+import { BookEditions } from "@/components/BookEditions";
 
 export default function BookTitle() {
   const { slug } = useParams<{ slug: string }>();
@@ -109,6 +110,7 @@ function BookLayout({ book }: { book: Book }) {
 
           <div className="mt-12 max-w-[640px] mx-auto">
             <RetailerButtons book={book} layout="grid" />
+            <BookEditions slug={book.slug} title={book.title} />
           </div>
         </div>
       </section>

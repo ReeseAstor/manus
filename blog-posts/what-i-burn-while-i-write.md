@@ -10,7 +10,7 @@ So here's the honest inventory of my writing desk candle collection — what I b
 
 ## The Everyday Writing Candle: My Signature
 
-The one candle that never leaves my desk is the [Classical Library Candle](https://www.amazon.com/dp/B0F1FY6XT7?tag=88away0d-20). It's a soy wax candle with notes of aged leather, mahogany, and old paper — designed, I'm convinced, to smell like the library I want to live in.
+The one candle that never leaves my desk is the [Classical Library Candle](https://www.amazon.com/dp/B0F1FY6XT7?tag=reeseastor-20). It's a soy wax candle with notes of aged leather, mahogany, and old paper — designed, I'm convinced, to smell like the library I want to live in.
 
 I light this one the second I sit down to write. There's something about the scent that tells my brain *it's time*. By the time the room smells like a grand library, my protagonist is usually telling me what she wants.
 
@@ -18,7 +18,7 @@ Close your eyes, light this candle, and suddenly you're in the library of a Manh
 
 ## The Deadline Candle: A Little Humor at 1 AM
 
-Every author has a night where the chapter is *almost* done and the words have left the building. On those nights I light the [“Smells Like She's Writing a Bestseller” Soy Candle](https://www.amazon.com/dp/B0CMTXKBWW?tag=88away0d-20).
+Every author has a night where the chapter is *almost* done and the words have left the building. On those nights I light the [“Smells Like She's Writing a Bestseller” Soy Candle](https://www.amazon.com/dp/B0CMTXKBWW?tag=reeseastor-20).
 
 The label, when I'm lying in bed at 1 AM, might still be aspirational. But the scent — warm, cinnamony, sweet — is the kind of comfort that keeps you going when the plot has wandered off. It's also my favorite gift to give other authors, because every writer needs to smell like the thing they're chasing.
 
@@ -44,7 +44,7 @@ The Classical Library candle is as close as I've found to bottling the *idea* of
 
 Candles are the cheapest mood-setter an author owns. Two good ones — one for drafting, one for deadlines — have quietly changed how I write.
 
-If you want to smell exactly what my writing desk smells like, start with the [Classical Library Candle](https://www.amazon.com/dp/B0F1FY6XT7?tag=88away0d-20) and the ["Smells Like She's Writing a Bestseller" Soy Candle](https://www.amazon.com/dp/B0CMTXKBWW?tag=88away0d-20). And if you burn them while reading my books? We're officially on the same wavelength.
+If you want to smell exactly what my writing desk smells like, start with the [Classical Library Candle](https://www.amazon.com/dp/B0F1FY6XT7?tag=reeseastor-20) and the ["Smells Like She's Writing a Bestseller" Soy Candle](https://www.amazon.com/dp/B0CMTXKBWW?tag=reeseastor-20). And if you burn them while reading my books? We're officially on the same wavelength.
 
 Light one, close your eyes, and disappear into the story.
 
