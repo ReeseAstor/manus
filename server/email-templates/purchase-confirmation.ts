@@ -5,6 +5,8 @@
  * with a link to the purchased book.
  */
 
+import { PUBLISHER_MAILING_LINES } from "../../shared/publisher";
+
 export interface PurchaseConfirmationData {
   customerName: string;
   customerEmail: string;
@@ -268,6 +270,9 @@ export function generatePurchaseConfirmationEmail(data: PurchaseConfirmationData
       </p>
       <p class="footer-text">
         © ${new Date().getFullYear()} Reese Astor. All rights reserved.
+      </p>
+      <p style="margin: 12px 0 0; color: #b8b8b8; font-size: 12px; line-height: 1.6;">
+        ${PUBLISHER_MAILING_LINES.join("<br>")}
       </p>
     </div>
   </div>

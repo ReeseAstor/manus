@@ -1,5 +1,7 @@
+import React from "react";
 import { Link } from "wouter";
 import { Facebook, Instagram, Mail, BookOpen, Gift, Bell } from "lucide-react";
+import { PUBLISHER_MAILING_LINES } from "@shared/publisher";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -119,6 +121,9 @@ export function Footer() {
 
         <div className="mt-8 pt-8 border-t border-border/40 text-center text-sm text-muted-foreground">
           <p>&copy; {currentYear} Reese Astor. All rights reserved.</p>
+          <address className="mt-3 text-xs leading-relaxed not-italic" aria-label="Publisher mailing address">
+            {PUBLISHER_MAILING_LINES.map(line => <span key={line} className="block">{line}</span>)}
+          </address>
         </div>
       </div>
     </footer>

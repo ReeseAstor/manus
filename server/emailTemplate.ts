@@ -3,6 +3,8 @@
  * Email-safe HTML with inline styles for maximum compatibility
  */
 
+import { PUBLISHER_MAILING_LINES } from "../shared/publisher";
+
 interface EmailTemplateOptions {
   subject: string;
   preheader?: string;
@@ -121,6 +123,9 @@ export function generateEmailTemplate(options: EmailTemplateOptions): string {
               </table>
 
               <!-- Address & Unsubscribe -->
+              <p style="margin: 0 0 12px; color: #b8b8b8; font-size: 12px; line-height: 1.6;">
+                ${PUBLISHER_MAILING_LINES.join("<br>")}
+              </p>
               <p style="margin: 0 0 10px; color: rgba(229, 229, 229, 0.4); font-size: 12px; line-height: 1.6;">
                 You're receiving this email because you subscribed to Reese Astor's newsletter.
               </p>
