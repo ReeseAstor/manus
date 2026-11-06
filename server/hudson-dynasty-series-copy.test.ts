@@ -4,15 +4,14 @@ import { describe, expect, it } from "vitest";
 
 /**
  * The Hudson Dynasty series card for The First Acquisition (ASIN B0D82GWFD9)
- * must use the published listing hook. The older deal line does not match the
- * novella: Arden Shaw audits Hudson Vale and is pushed into a fake engagement
- * with Sebastian Hudson.
+ * must use the live US Kindle listing hook (checked 11/05/2026).
  */
 const PAGE = path.join(process.cwd(), "client/public/read/hudson-dynasty/index.html");
 
 const STALE_HOOK = "Three weeks. One ring. Zero feelings. That’s the deal.";
-const PUBLISHED_HOOK =
+const REJECTED_HOOK =
   "She was hired to audit his empire. Falling for him could destroy them both.";
+const PUBLISHED_HOOK = "She was hired to audit him. The board wants her to wear his ring.";
 
 const OTHER_CARD_BLURBS = [
   "One anonymous night. One Bronx building. Neither of them can afford to lose.",
@@ -39,6 +38,8 @@ describe("Hudson Dynasty series page, First Acquisition card", () => {
     expect(card).toContain(`<p>${PUBLISHED_HOOK}</p>`);
     expect(card).not.toContain(STALE_HOOK);
     expect(html).not.toContain(STALE_HOOK);
+    expect(card).not.toContain(REJECTED_HOOK);
+    expect(html).not.toContain(REJECTED_HOOK);
   });
 
   it("keeps the card's label, tropes, and Kindle link on the published book", () => {
