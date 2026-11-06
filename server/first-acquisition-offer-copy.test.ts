@@ -37,7 +37,7 @@ function count(html: string, needle: string): number {
 }
 
 function jsonLdStrings(html: string): string[] {
-  const blocks = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g) ?? [];
+  const blocks = [...html.matchAll(/<script\b[^>]*\btype\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]);
   const out: string[] = [];
   const walk = (node: unknown) => {
     if (typeof node === "string") out.push(node);
@@ -45,7 +45,7 @@ function jsonLdStrings(html: string): string[] {
     else if (node && typeof node === "object") Object.values(node).forEach(walk);
   };
   for (const block of blocks) {
-    walk(JSON.parse(block.replace(/^<script[^>]*>/, "").replace(/<\/script>$/, "")));
+    walk(JSON.parse(block));
   }
   return out;
 }
@@ -70,6 +70,18 @@ export function sentencesIn(html: string): string[] {
 
 function elementTexts(html: string, re: RegExp): string[] {
   return [...html.matchAll(re)].map((match) => match[0].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
+}
+
+/** Reader-visible or snippet text carried in attributes: alt, aria-label, title, and description/title meta content. URLs are ignored. */
+export function attributeTexts(html: string): string[] {
+  const out: string[] = [];
+  for (const m of html.matchAll(/\s(?:alt|aria-label|title)\s*=\s*(["'])([\s\S]*?)\1/gi)) out.push(m[2]);
+  for (const tag of html.match(/<meta\b[^>]*>/gi) ?? []) {
+    if (!/(?:name|property)\s*=\s*["'](?:description|og:description|twitter:description|og:title|twitter:title)["']/i.test(tag)) continue;
+    const c = tag.match(/\bcontent\s*=\s*(["'])([\s\S]*?)\1/i);
+    if (c) out.push(c[2]);
+  }
+  return out.map((t) => t.replace(/&amp;/g, "&").replace(/\s+/g, " ").trim()).filter(Boolean);
 }
 
 function claimUnits(html: string): string[] {
@@ -99,7 +111,9 @@ function hasJoinNewsletter(text: string): boolean {
 
 /** Headings, buttons, stat cells, and sentences, each judged on its own. */
 export function bareFreeClaims(html: string): string[] {
-  const units = [...claimUnits(html), ...sentencesIn(html)];
+  const attrs = attributeTexts(html);
+  const attrSentences = attrs.flatMap((t) => t.split(/(?<=[.!?])\s+/).map((x) => x.trim()).filter(Boolean));
+  const units = [...claimUnits(html), ...sentencesIn(html), ...attrs, ...attrSentences];
   return units.filter((unit) => bookFreeWord(unit) && !hasJoinNewsletter(unit));
 }
 
@@ -108,7 +122,7 @@ export function deliveryProblems(html: string): string[] {
   return sentencesIn(html).filter((sentence) => {
     const receiving = /download|read it free|get it free|get the free|yours free|open the bookfunnel|bookfunnel copy/i.test(sentence);
     if (!receiving) return false;
-    if (/\binstant\b/i.test(sentence)) return true;
+    if (/\b(?:instant|instantly|immediately|right away|in seconds)\b/i.test(sentence)) return true;
     return !/(?:by email|sent by email|emailed)/i.test(sentence);
   });
 }
@@ -126,6 +140,15 @@ describe("The First Acquisition offer copy", () => {
     expect(bareFreeClaims("<p>Read on any Kindle or in the free Kindle app.</p>")).toEqual([]);
     expect(bareFreeClaims("<p>The Reese Astor ARC Team sends free advance copies to readers who leave an honest review.</p>")).toEqual([]);
     expect(bareFreeClaims("<summary>Is there a free book?</summary>")).toEqual([]);
+    expect(bareFreeClaims('<img src="c.jpg" alt="Get The First Acquisition free">')).toContain("Get The First Acquisition free");
+    expect(bareFreeClaims('<a class="btn" href="x" aria-label="Read it free">Join the newsletter to get the free download link by email.</a>')).toContain("Read it free");
+    expect(bareFreeClaims('<meta name="description" content="Read The First Acquisition free.">')).toContain("Read The First Acquisition free.");
+    expect(bareFreeClaims('<meta property="og:description" content="Free ebook.">')).toContain("Free ebook.");
+    expect(bareFreeClaims('<script type="application/ld+json" id="faq" data-rh="true">{"text":"Read it free."}</script>')).toContain("Read it free.");
+    expect(bareFreeClaims("<script type='application/ld+json'>{\"text\":\"Read it free.\"}</script>")).toContain("Read it free.");
+    expect(bareFreeClaims('<p>Claim <a href="x">The First Acquisition</a> <a href="y">today free.</a></p>')).toContain("today free.");
+    expect(bareFreeClaims('<img src="https://cdn.example/free-book.jpg" alt="Free when you join the newsletter.">')).toEqual([]);
+    expect(bareFreeClaims('<a href="https://example.com/get-it-free" aria-label="Cover of The First Acquisition">Read</a>')).toEqual([]);
     expect(html).toContain(`<h3>Free when you join the newsletter</h3>`);
     expect(html).toContain(`<b>Free when you join the newsletter</b><span>download link by email</span>`);
     expect(html).toContain('<p class="label">Reader newsletter</p>');
@@ -147,6 +170,7 @@ describe("The First Acquisition offer copy", () => {
     ]);
     expect(deliveryProblems("<p>Read it free from BookFunnel.</p>")).toEqual(["Read it free from BookFunnel."]);
     expect(deliveryProblems("<p>The download is instant.</p>")).toEqual(["The download is instant."]);
+    expect(deliveryProblems("<p>The download link arrives immediately by email.</p>")).toEqual(["The download link arrives immediately by email."]);
     expect(deliveryProblems("<p>The download link is sent by email after you join the newsletter.</p>")).toEqual([]);
     expect(html).toContain("<p>The download link is sent by email after you join the newsletter.</p>");
     expect(html).toContain("The download link for the free ebook is sent by email after you join the newsletter.");
