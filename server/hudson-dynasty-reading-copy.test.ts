@@ -14,7 +14,7 @@ const DESC_SUFFIX = "A steamy fake engagement romance, Hudson Dynasty prequel.";
 const BOOK_TITLE = "The First Acquisition: Fake Engagement Romance | Reese Astor";
 const CHECKED = "11/05/2026";
 const NOTE = `As of ${CHECKED}, 3 of the 4 books are included with Kindle+ (formerly Kindle Unlimited). The First Acquisition is not. Also on Kindle and in paperback.`;
-const FAQ = `As of ${CHECKED}, 3 of the 4 books were included with Kindle+ (formerly Kindle Unlimited). The First Acquisition is not in Kindle+. It's on Kindle, and it's free when you join the newsletter.`;
+const FAQ = `As of ${CHECKED}, 3 of the 4 books were included with Kindle+ (formerly Kindle Unlimited). The First Acquisition is not in Kindle+. It’s on Kindle, and it’s free when you join the newsletter.`;
 
 const BOOK = path.join(process.cwd(), "client/public/read/the-first-acquisition/index.html");
 const SERIES = path.join(process.cwd(), "client/public/read/hudson-dynasty/index.html");
@@ -35,20 +35,17 @@ function count(html: string, needle: string): number {
   return html.split(needle).length - 1;
 }
 
-/** Sentences from plain text, visible copy, JSON-LD strings, or markup. */
+/** Sentences from plain text, visible copy, JSON-LD strings, or markup. Tags become line breaks so a heading is not merged into the next paragraph. */
 function sentencesIn(input: string): string[] {
   const text = input
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<[^>]+>/g, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, "\n")
+    .replace(/<[^>]+>/g, "\n")
     .replace(/&amp;/g, "&")
     .replace(/&#39;|&apos;/g, "'")
-    .replace(/&quot;/g, '"')
-    .replace(/\s+/g, " ")
-    .trim();
-  if (!text) return [];
+    .replace(/&quot;/g, '"');
   return text
-    .split(/(?<=[.!?])\s+/)
-    .map((sentence) => sentence.replace(/^["'\s]+|["'\s]+$/g, "").trim())
+    .split(/\n+|(?<=[.!?])\s+/)
+    .map((sentence) => sentence.replace(/\s+/g, " ").replace(/^["'\s]+|["'\s]+$/g, "").trim())
     .filter(Boolean);
 }
 
@@ -70,10 +67,10 @@ function visibleCopy(html: string): string {
   return html.replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ");
 }
 
-/** Sentences that offer The First Acquisition free without join + newsletter. */
+/** Sentences that offer the prequel free without join + newsletter. */
 function freeAcquisitionGaps(inputs: string[]): string[] {
   return inputs.flatMap(sentencesIn).filter((sentence) => {
-    if (!/\bfree\b/i.test(sentence) || !/\bFirst Acquisition\b/.test(sentence)) return false;
+    if (!/\bfree\b/i.test(sentence) || !/\b(First Acquisition|prequel|novella)\b/i.test(sentence)) return false;
     return !(/\bjoin\b/i.test(sentence) && /\bnewsletter\b/i.test(sentence));
   });
 }
@@ -137,7 +134,7 @@ describe("Hudson Dynasty series page", () => {
       "As of 11/05/2026, 3 of the 4 books are included with Kindle+ (formerly Kindle Unlimited). The First Acquisition is not. Also on Kindle and in paperback.",
     );
     expect(FAQ).toBe(
-      "As of 11/05/2026, 3 of the 4 books were included with Kindle+ (formerly Kindle Unlimited). The First Acquisition is not in Kindle+. It's on Kindle, and it's free when you join the newsletter.",
+      "As of 11/05/2026, 3 of the 4 books were included with Kindle+ (formerly Kindle Unlimited). The First Acquisition is not in Kindle+. It’s on Kindle, and it’s free when you join the newsletter.",
     );
     expect(NOTE).toContain(CHECKED);
     expect(FAQ).toContain(CHECKED);
@@ -171,6 +168,16 @@ describe("Hudson Dynasty series page", () => {
     expect(freeAcquisitionGaps(['{"text":"The First Acquisition is free on BookFunnel."}'])).toEqual([
       '{"text":"The First Acquisition is free on BookFunnel."}',
     ]);
+    expect(freeAcquisitionGaps(["<h2>Get The First Acquisition free</h2><p>Join the newsletter.</p>"])).toEqual([
+      "Get The First Acquisition free",
+    ]);
+    expect(freeAcquisitionGaps(["<a>Get the prequel free</a>"])).toEqual(["Get the prequel free"]);
+    expect(html).not.toContain("Free to read");
+    expect(html).toContain('<p class="label">Reader newsletter</p>');
+    expect(html).toContain('<h2 id="su">Join the newsletter and get The First Acquisition free</h2>');
+    expect(html).toContain(
+      '<a class="btn ghost" href="https://reeseastor.com/newsletter" data-cta="newsletter">Join the newsletter for the free prequel</a>',
+    );
   });
 
   it("uses the published prequel hook and leaves the other card blurbs and retailer links in place", () => {
@@ -185,7 +192,7 @@ describe("Hudson Dynasty series page", () => {
     expect(count(html, 'href="https://www.amazon.com/dp/B0H53BP5S1?tag=reeseastor-20"')).toBe(1);
     expect(count(html, 'href="https://www.amazon.com/dp/B0HDKNP9F6?tag=reeseastor-20"')).toBe(1);
     expect(html).toContain('data-cta="amazon-ku-entry">Start Book 1</a>');
-    expect(html).toContain('data-cta="newsletter">Get the prequel free</a>');
+    expect(html).toContain('data-cta="newsletter">Join the newsletter for the free prequel</a>');
     expect(html).toContain('data-cta="newsletter">Join and get the novella</a>');
   });
 });
