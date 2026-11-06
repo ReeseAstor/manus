@@ -193,7 +193,7 @@ export const BOOKS: Book[] = [
     blurb:
       "When Camille Torres takes a job caring for billionaire Ethan Calloway's silent daughter, she never " +
       "expected to become the family they both need. Ethan hasn't smiled since his wife died. His " +
-      "five-year-old daughter hasn't spoken. Seven nannies have quit. He doesn't need another " +
+      "five-year-old daughter hasn't spoken. Seven nannies have left. He doesn't need another " +
       "complication, especially not one with quick wit, warm hands, and a mouth that talks back.",
     pull_quote: "“She also had something Gloria would never understand: a little girl who finally called her Mama.”",
     cover_image: "/author-kit/mmk-4-forbidden-nanny.jpg",
