@@ -37,6 +37,21 @@ function count(html: string, needle: string): number {
 
 const ALLOWED_FREE = "Read free with Kindle+ (formerly Kindle Unlimited).";
 const VOID_TAGS = new Set(["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"]);
+const OWN_UNIT_TAGS = new Set(["a", "em", "strong", "b", "i", "small", "span"]);
+const SKIP_META_KEYS = new Set([
+  "og:url",
+  "og:image",
+  "og:image:url",
+  "og:image:secure_url",
+  "twitter:image",
+  "twitter:image:src",
+  "og:type",
+  "twitter:card",
+  "robots",
+  "viewport",
+  "theme-color",
+  "charset",
+]);
 const BLOCK_TAGS = new Set([
   "address", "article", "aside", "blockquote", "br", "button", "caption", "dd", "details", "div", "dl", "dt",
   "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "header", "hr",
@@ -72,8 +87,11 @@ function hasBtnClass(attrs: string): boolean {
 function jsonLdStrings(html: string): string[] {
   const out: string[] = [];
   const walk = (node: unknown) => {
-    if (typeof node === "string") out.push(node);
-    else if (Array.isArray(node)) node.forEach(walk);
+    if (typeof node === "string") {
+      if (!/^https?:\/\//i.test(node.trim())) out.push(node);
+      return;
+    }
+    if (Array.isArray(node)) node.forEach(walk);
     else if (node && typeof node === "object") Object.values(node as Record<string, unknown>).forEach(walk);
   };
   for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
@@ -92,7 +110,7 @@ function metaContents(html: string): string[] {
     const attrs = match[1] ?? "";
     const key = attrs.match(/\b(?:name|property)\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
     const name = (key?.[1] ?? key?.[2] ?? "").toLowerCase();
-    if (name !== "description" && name !== "og:description" && name !== "twitter:description") continue;
+    if (SKIP_META_KEYS.has(name)) continue;
     const content = attrs.match(/\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
     if (content) out.push(decode(content[1] ?? content[2] ?? ""));
   }
@@ -121,32 +139,27 @@ function visibleAttrUnits(html: string): string[] {
 
 /**
  * Sentence view. Block elements and .btn links stay separate.
- * Every anchor close appends a space so adjacent plain anchors cannot glue a sentence together.
- * Each anchor's own text is also returned and judged on its own.
+ * Anchor, em, strong, b, i, small, and span closes append a space.
+ * Each of those elements is also judged on its own.
  */
 function sentenceUnits(html: string): string[] {
   let text = "";
-  const frames: { separate: boolean; isAnchor: boolean; buf: string }[] = [];
-  const anchorTexts: string[] = [];
+  const frames: { separate: boolean; own: boolean; buf: string }[] = [];
+  const ownTexts: string[] = [];
   const re = /<!--[\s\S]*?-->|<\/([a-zA-Z0-9]+)\s*>|<([a-zA-Z0-9]+)([^>]*)>|([^<]+)/g;
   for (const match of html.matchAll(re)) {
     if (match[0].startsWith("<!--")) continue;
     if (match[4] != null) {
       const decoded = decode(match[4]);
       text += decoded;
-      for (let i = frames.length - 1; i >= 0; i--) {
-        if (frames[i].isAnchor) {
-          frames[i].buf += decoded;
-          break;
-        }
-      }
+      for (const frame of frames) if (frame.own) frame.buf += decoded;
       continue;
     }
     if (match[1]) {
       const frame = frames.pop();
       if (!frame) continue;
-      if (frame.isAnchor) {
-        anchorTexts.push(frame.buf);
+      if (frame.own) {
+        ownTexts.push(frame.buf);
         text += " ";
       }
       if (frame.separate) text += "\n";
@@ -157,9 +170,9 @@ function sentenceUnits(html: string): string[] {
     const separate = hasBtnClass(attrs) || BLOCK_TAGS.has(tag);
     if (separate) text += "\n";
     const selfClosing = /\/\s*$/.test(attrs) || VOID_TAGS.has(tag);
-    if (!selfClosing) frames.push({ separate, isAnchor: tag === "a", buf: "" });
+    if (!selfClosing) frames.push({ separate, own: OWN_UNIT_TAGS.has(tag), buf: "" });
   }
-  return [...splitSentences(text), ...anchorTexts.flatMap((value) => splitSentences(value))];
+  return [...splitSentences(text), ...ownTexts.flatMap((value) => splitSentences(value))];
 }
 
 /** Element view: each button, heading, p, li, summary, label, span, and .btn link. */
@@ -180,7 +193,7 @@ function bareUnits(input: string): string[] {
 /**
  * Subject-free free-offer guard. Any unit containing "free" must also contain
  * "join" and "newsletter", except the exact Kindle+ button sentence.
- * Checks sentences, inline anchors, block and button elements, alt, aria-label, description meta, and JSON-LD.
+ * Checks sentences, inline anchors and emphasis, block and button elements, alt, aria-label, meta copy, and JSON-LD.
  */
 function subjectFreeGaps(inputs: string[]): string[] {
   const seen = new Set<string>();
@@ -339,6 +352,22 @@ describe("Hudson Dynasty series page", () => {
     expect(subjectFreeGaps(['<script id="book" type="application/ld+json" data-rh="true">{"description":"It is free."}</script>'])).toEqual(["It is free."]);
     expect(subjectFreeGaps(['<script data-n="1" type=\'application/ld+json\'>{"name":"It is free."}</script>'])).toEqual(["It is free."]);
     expect(subjectFreeGaps(['<script type="application/ld+json" id="ok">{"description":"Free when you join the newsletter."}</script>'])).toEqual([]);
+    expect(subjectFreeGaps(['<meta property="og:title" content="Get it free">'])).toEqual(["Get it free"]);
+    expect(subjectFreeGaps(['<meta name="twitter:title" content="Get it free">'])).toEqual(["Get it free"]);
+    expect(subjectFreeGaps(['<meta name="twitter:image:alt" content="Get it free">'])).toEqual(["Get it free"]);
+    expect(subjectFreeGaps(['<meta property="og:image:alt" content="Get it free">'])).toEqual(["Get it free"]);
+    expect(subjectFreeGaps(['<meta property="og:title" content="Free when you join the newsletter.">'])).toEqual([]);
+    expect(subjectFreeGaps(['<meta property="og:image" content="https://cdn.example/free-book.jpg">'])).toEqual([]);
+    expect(subjectFreeGaps(['<meta property="og:image:secure_url" content="https://cdn.example/get-it-free.jpg">'])).toEqual([]);
+    expect(subjectFreeGaps(['<meta name="twitter:image" content="https://cdn.example/free-book.jpg">'])).toEqual([]);
+    expect(subjectFreeGaps(['<meta name="robots" content="index, follow, max-image-preview:large">'])).toEqual([]);
+    expect(subjectFreeGaps(['<p><em>Get it free</em><strong>Join newsletter</strong></p>'])).toEqual(["Get it free"]);
+    expect(subjectFreeGaps(['<p><b>Get it free</b> <b>Join the newsletter</b></p>'])).toEqual(["Get it free"]);
+    expect(subjectFreeGaps(['<p><em>Free when you join the newsletter.</em><strong>Shop now.</strong></p>'])).toEqual([]);
+    expect(subjectFreeGaps(['<p><b>Free when you join the newsletter.</b> <b>Read on.</b></p>'])).toEqual([]);
+    expect(subjectFreeGaps(['<script type="application/ld+json">{"url":"https://example.com/join-the-newsletter","description":"It is free."}</script>'])).toEqual(["It is free."]);
+    expect(subjectFreeGaps(['<script type="application/ld+json">{"url":"https://example.com/get-it-free","description":"Free when you join the newsletter."}</script>'])).toEqual([]);
+    expect(() => subjectFreeGaps(['<script type="application/ld+json">{not json</script>'])).toThrow();
     expect(html).not.toContain("Free to read");
     expect(html).toContain('<p class="label">Reader newsletter</p>');
     expect(html).toContain('<h2 id="su">Join the newsletter and get The First Acquisition free</h2>');
