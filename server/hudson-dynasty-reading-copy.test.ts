@@ -54,7 +54,7 @@ function decode(text: string): string {
 }
 
 function normalize(text: string): string {
-  return text.replace(/\s+/g, " ").trim();
+  return text.replace(/\s+/g, " ").replace(/\s+([,.;:!?])/g, "$1").trim();
 }
 
 function splitSentences(text: string): string[] {
@@ -70,15 +70,18 @@ function hasBtnClass(attrs: string): boolean {
 }
 
 function jsonLdStrings(html: string): string[] {
-  const blocks = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi) ?? [];
   const out: string[] = [];
   const walk = (node: unknown) => {
     if (typeof node === "string") out.push(node);
     else if (Array.isArray(node)) node.forEach(walk);
     else if (node && typeof node === "object") Object.values(node as Record<string, unknown>).forEach(walk);
   };
-  for (const block of blocks) {
-    walk(JSON.parse(block.replace(/^<script[^>]*>/i, "").replace(/<\/script>$/i, "")));
+  for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+    const attrs = match[1] ?? "";
+    if (!/\btype\s*=\s*(?:"application\/ld\+json"|'application\/ld\+json')/i.test(attrs)) continue;
+    const body = match[2]?.trim();
+    if (!body) continue;
+    walk(JSON.parse(body));
   }
   return out;
 }
@@ -86,25 +89,67 @@ function jsonLdStrings(html: string): string[] {
 function metaContents(html: string): string[] {
   const out: string[] = [];
   for (const match of html.matchAll(/<meta\b([^>]*)>/gi)) {
-    const content = match[1].match(/\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
+    const attrs = match[1] ?? "";
+    const key = attrs.match(/\b(?:name|property)\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
+    const name = (key?.[1] ?? key?.[2] ?? "").toLowerCase();
+    if (name !== "description" && name !== "og:description" && name !== "twitter:description") continue;
+    const content = attrs.match(/\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
     if (content) out.push(decode(content[1] ?? content[2] ?? ""));
   }
   return out;
 }
 
-/** Sentence view: inline tags stay in the sentence; block elements and each .btn link are separate. */
+function quotedAttr(attrs: string, name: string): string | undefined {
+  const match = attrs.match(new RegExp(`\\b${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)')`, "i"));
+  if (!match) return undefined;
+  return decode(match[1] ?? match[2] ?? "");
+}
+
+/** Visible-equivalent alt and aria-label only. href, src, and other URL metadata are ignored. */
+function visibleAttrUnits(html: string): string[] {
+  const units: string[] = [];
+  const stripped = html.replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ");
+  for (const match of stripped.matchAll(/<[a-zA-Z0-9]+\b([^>]*)>/g)) {
+    const attrs = match[1] ?? "";
+    for (const name of ["alt", "aria-label"]) {
+      const value = quotedAttr(attrs, name);
+      if (value) units.push(...splitSentences(value));
+    }
+  }
+  return units;
+}
+
+/**
+ * Sentence view. Block elements and .btn links stay separate.
+ * Every anchor close appends a space so adjacent plain anchors cannot glue a sentence together.
+ * Each anchor's own text is also returned and judged on its own.
+ */
 function sentenceUnits(html: string): string[] {
   let text = "";
-  const separateStack: boolean[] = [];
+  const frames: { separate: boolean; isAnchor: boolean; buf: string }[] = [];
+  const anchorTexts: string[] = [];
   const re = /<!--[\s\S]*?-->|<\/([a-zA-Z0-9]+)\s*>|<([a-zA-Z0-9]+)([^>]*)>|([^<]+)/g;
   for (const match of html.matchAll(re)) {
     if (match[0].startsWith("<!--")) continue;
     if (match[4] != null) {
-      text += decode(match[4]);
+      const decoded = decode(match[4]);
+      text += decoded;
+      for (let i = frames.length - 1; i >= 0; i--) {
+        if (frames[i].isAnchor) {
+          frames[i].buf += decoded;
+          break;
+        }
+      }
       continue;
     }
     if (match[1]) {
-      if (separateStack.pop()) text += "\n";
+      const frame = frames.pop();
+      if (!frame) continue;
+      if (frame.isAnchor) {
+        anchorTexts.push(frame.buf);
+        text += " ";
+      }
+      if (frame.separate) text += "\n";
       continue;
     }
     const tag = match[2].toLowerCase();
@@ -112,9 +157,9 @@ function sentenceUnits(html: string): string[] {
     const separate = hasBtnClass(attrs) || BLOCK_TAGS.has(tag);
     if (separate) text += "\n";
     const selfClosing = /\/\s*$/.test(attrs) || VOID_TAGS.has(tag);
-    if (!selfClosing) separateStack.push(separate);
+    if (!selfClosing) frames.push({ separate, isAnchor: tag === "a", buf: "" });
   }
-  return splitSentences(text);
+  return [...splitSentences(text), ...anchorTexts.flatMap((value) => splitSentences(value))];
 }
 
 /** Element view: each button, heading, p, li, summary, label, span, and .btn link. */
@@ -129,13 +174,13 @@ function elementUnits(html: string): string[] {
 
 function bareUnits(input: string): string[] {
   const stripped = input.replace(/<script[\s\S]*?<\/script>/gi, "\n").replace(/<style[\s\S]*?<\/style>/gi, "\n");
-  return [...sentenceUnits(stripped), ...elementUnits(stripped)];
+  return [...sentenceUnits(stripped), ...elementUnits(stripped), ...visibleAttrUnits(stripped)];
 }
 
 /**
  * Subject-free free-offer guard. Any unit containing "free" must also contain
  * "join" and "newsletter", except the exact Kindle+ button sentence.
- * Checks sentences, block and button elements, meta content, and JSON-LD.
+ * Checks sentences, inline anchors, block and button elements, alt, aria-label, description meta, and JSON-LD.
  */
 function subjectFreeGaps(inputs: string[]): string[] {
   const seen = new Set<string>();
@@ -275,6 +320,25 @@ describe("Hudson Dynasty series page", () => {
       ["<label>Download it free</label>", "Download it free"],
     ];
     for (const [input, flagged] of mutants) expect(subjectFreeGaps([input]), input).toEqual([flagged]);
+    expect(subjectFreeGaps(['<p>Claim <a>The First Acquisition</a> <a>today free.</a></p>'])).toEqual([
+      "Claim The First Acquisition today free.",
+      "today free.",
+    ]);
+    expect(subjectFreeGaps(['<p><a>Free when you join the newsletter.</a><a>Shop now.</a></p>'])).toEqual([]);
+    expect(subjectFreeGaps(['<p><a>Get it free</a><a>Join the newsletter</a></p>'])).toEqual(["Get it free"]);
+    expect(subjectFreeGaps(['<p><a>It is free.</a><a>Join the newsletter.</a></p>'])).toEqual(["It is free."]);
+    expect(subjectFreeGaps(['<p><a>Free.</a><a>when you join the newsletter.</a></p>'])).toEqual(["Free."]);
+    expect(subjectFreeGaps(['<img alt="Get it free" src="https://cdn.example/join-the-newsletter.jpg">'])).toEqual(["Get it free"]);
+    expect(subjectFreeGaps(['<a href="https://example.com/join-the-newsletter" aria-label="Download it free">Start</a>'])).toEqual(["Download it free"]);
+    expect(subjectFreeGaps(['<img alt="Free when you join the newsletter." src="https://cdn.example/not-a-word.jpg">'])).toEqual([]);
+    expect(subjectFreeGaps(['<a href="https://example.com/get-it-free" aria-label="Free when you join the newsletter.">Read</a>'])).toEqual([]);
+    expect(subjectFreeGaps(['<img alt="Read free with Kindle+ (formerly Kindle Unlimited)." src="https://cdn.example/free-book.jpg">'])).toEqual([]);
+    expect(subjectFreeGaps(['<meta property="og:url" content="https://example.com/free-book">'])).toEqual([]);
+    expect(subjectFreeGaps(['<a href="https://example.com/free-download">Join the newsletter for the book.</a>'])).toEqual([]);
+    expect(subjectFreeGaps(['<meta property="og:description" content="Get it free.">'])).toEqual(["Get it free."]);
+    expect(subjectFreeGaps(['<script id="book" type="application/ld+json" data-rh="true">{"description":"It is free."}</script>'])).toEqual(["It is free."]);
+    expect(subjectFreeGaps(['<script data-n="1" type=\'application/ld+json\'>{"name":"It is free."}</script>'])).toEqual(["It is free."]);
+    expect(subjectFreeGaps(['<script type="application/ld+json" id="ok">{"description":"Free when you join the newsletter."}</script>'])).toEqual([]);
     expect(html).not.toContain("Free to read");
     expect(html).toContain('<p class="label">Reader newsletter</p>');
     expect(html).toContain('<h2 id="su">Join the newsletter and get The First Acquisition free</h2>');
