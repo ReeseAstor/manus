@@ -247,7 +247,7 @@ describe("The First Acquisition reading page", () => {
     expect(html).toContain('"url":"https://www.amazon.com/dp/B0D82GWFD9"');
     expect(html).toContain('"url":"https://www.amazon.com/dp/B0GWL7GC98"');
     expect(html).toContain('href="https://booksprout.co/reviewer/team/54354/reese-astor-arc-team"');
-    expect(html).toContain("Read it free on BookFunnel");
+    expect(html).toContain('data-cta="bookfunnel-hd">Join the newsletter to get the free download link by email.</a>');
     expect(html).toContain(">Get it on Kindle</a>");
   });
 });
