@@ -86,7 +86,7 @@ export const BOOKS: Book[] = [
     blurb:
       "Victoria walked into an upscale Manhattan bar the night she was passed over for partner. James, " +
       "the self-made tech billionaire every magazine wants to profile, was not supposed to be the one who " +
-      "noticed. One night was the plan. He has other ideas.",
+      "noticed. One weekend was the plan. He has other ideas.",
     pull_quote: "“You were supposed to be a stranger. You decided otherwise.”",
     cover_image: "/covers/mmk-0-one-night-stand.jpg",
     publication_date: null,
@@ -163,12 +163,11 @@ export const BOOKS: Book[] = [
     series_position: 3,
     format: "ebook_and_audiobook",
     position_label: "Book 3",
-    tagline: "One night. One secret. One second chance he refuses to lose.",
+    tagline: "Almost four years ago, she called him eleven times. Now he's back, and her daughter has his eyes.",
     blurb:
-      "Three years ago, Sophia Reed walked away from a hotel room and a man she should never have trusted, " +
-      "rising mogul Dominic Kane. Now the CEO who controls outcomes for a living is back, and the daughter " +
-      "Sophia has protected has eyes he can't deny. When Dominic returns to reclaim his empire, he " +
-      "discovers the truth he was never meant to miss.",
+      "Almost four years ago, Sophia Reed spent one snowbound weekend in Chicago with Dominic Kane. He promised to call. " +
+      "He never did. She called him eleven times, and someone made sure he never knew. Now Dominic is back in Manhattan " +
+      "as CEO, and one photo tells him everything he missed: a little girl with his storm-gray eyes.",
     pull_quote: "“He could buy silence. He could not buy back the years.”",
     cover_image: "/author-kit/mmk-3-baby-secret.jpg",
     publication_date: null,
