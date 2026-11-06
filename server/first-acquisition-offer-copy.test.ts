@@ -4,7 +4,8 @@ import { describe, expect, it } from "vitest";
 
 /**
  * Copy guard for /read/the-first-acquisition only.
- * The series page, the book hook, and the offer URLs are outside this edit.
+ * On this branch the published hook is the #74 line, five times, and the old deal line is absent.
+ * Offer URLs stay as published.
  */
 const PAGE = path.join(process.cwd(), "client/public/read/the-first-acquisition/index.html");
 
@@ -13,6 +14,7 @@ const BUTTON = "Join the newsletter to get the free download link by email.";
 const KINDLE_PLUS = `As of ${CHECKED}, it is not in Kindle+ (formerly Kindle Unlimited). It is free when you join the newsletter, and the download link is sent by email. It is also sold on Kindle.`;
 const START = "With Book 1, Hostile Tender, or with the prequel novella, The First Acquisition, which is free when you join the newsletter. The download link is sent by email.";
 const FREE_BOOK = "Yes. Join Reese Astor\u2019s newsletter and The First Acquisition, the Hudson Dynasty prequel novella, is free. The download link is sent by email. You can unsubscribe anytime.";
+const HOOK = "She was hired to audit him. The board wants her to wear his ring.";
 const DEAL = "Three weeks. One ring. Zero feelings. That\u2019s the deal.";
 const TRADEMARK = "Amazon, Kindle and Kindle Unlimited are trademarks of Amazon.com, Inc. or its affiliates.";
 
@@ -224,15 +226,15 @@ describe("The First Acquisition offer copy", () => {
     expect(html).toContain("The Reese Astor ARC Team sends free advance copies to readers who leave an honest review.");
   });
 
-  it("leaves the book hook and the story in place", () => {
-    expect(count(html, DEAL)).toBe(5);
-    expect(html).toContain(`<p class="tagline">${DEAL}</p>`);
-    expect(html).toContain(`<meta name="description" content="${DEAL} A steamy fake engagement romance, Hudson Dynasty prequel.">`);
+  it("uses the published hook from #74 and leaves the story in place", () => {
+    expect(count(html, HOOK)).toBe(5);
+    expect(html).not.toContain(DEAL);
+    expect(html).toContain(`<p class="tagline">${HOOK}</p>`);
+    expect(html).toContain(`<meta name="description" content="${HOOK} A steamy fake engagement romance, Hudson Dynasty prequel.">`);
     expect(html).toContain(`<h1>The First Acquisition</h1>`);
     expect(html).toContain(
       "Forensic compliance attorney Arden Shaw has been hired to find out who is bleeding Hudson Vale Capital dry",
     );
     expect(html).toContain("<p>The boardroom smelled like flop sweat and dying careers.</p>");
-    expect(html).not.toContain("She was hired to audit him. The board wants her to wear his ring.");
   });
 });
