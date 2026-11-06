@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 
 /**
  * Public reading-page copy for the Hudson Dynasty hook, the series-hero
- * newsletter condition, and the Kindle Unlimited availability note.
+ * newsletter condition, and the Kindle+ availability note.
  * Offers and links stay on the destinations already published in these files.
  */
 const PUBLISHED_HOOK = "She was hired to audit him. The board wants her to wear his ring.";
@@ -12,7 +12,9 @@ const STALE_HOOK = "Three weeks. One ring. Zero feelings. That’s the deal.";
 const REJECTED_HOOK = "She was hired to audit his empire. Falling for him could destroy them both.";
 const DESC_SUFFIX = "A steamy fake engagement romance, Hudson Dynasty prequel.";
 const BOOK_TITLE = "The First Acquisition: Fake Engagement Romance | Reese Astor";
-const CHECKED = "11/06/2026";
+const CHECKED = "11/05/2026";
+const NOTE = `As of ${CHECKED}, 3 of the 4 books are included with Kindle+ (formerly Kindle Unlimited). The First Acquisition is not. Also on Kindle and in paperback.`;
+const FAQ = `As of ${CHECKED}, 3 of the 4 books were included with Kindle+ (formerly Kindle Unlimited). The First Acquisition is not in Kindle+. It's on Kindle, and it's free when you join the newsletter.`;
 
 const BOOK = path.join(process.cwd(), "client/public/read/the-first-acquisition/index.html");
 const SERIES = path.join(process.cwd(), "client/public/read/hudson-dynasty/index.html");
@@ -31,6 +33,49 @@ function meta(html: string, attr: "name" | "property", key: string): string {
 
 function count(html: string, needle: string): number {
   return html.split(needle).length - 1;
+}
+
+/** Sentences from plain text, visible copy, JSON-LD strings, or markup. */
+function sentencesIn(input: string): string[] {
+  const text = input
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!text) return [];
+  return text
+    .split(/(?<=[.!?])\s+/)
+    .map((sentence) => sentence.replace(/^["'\s]+|["'\s]+$/g, "").trim())
+    .filter(Boolean);
+}
+
+function jsonLdStrings(html: string): string[] {
+  const blocks = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g) ?? [];
+  const out: string[] = [];
+  const walk = (node: unknown) => {
+    if (typeof node === "string") out.push(node);
+    else if (Array.isArray(node)) node.forEach(walk);
+    else if (node && typeof node === "object") Object.values(node).forEach(walk);
+  };
+  for (const block of blocks) {
+    walk(JSON.parse(block.replace(/^<script[^>]*>/, "").replace(/<\/script>$/, "")));
+  }
+  return out;
+}
+
+function visibleCopy(html: string): string {
+  return html.replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ");
+}
+
+/** Sentences that offer The First Acquisition free without join + newsletter. */
+function freeAcquisitionGaps(inputs: string[]): string[] {
+  return inputs.flatMap(sentencesIn).filter((sentence) => {
+    if (!/\bfree\b/i.test(sentence) || !/\bFirst Acquisition\b/.test(sentence)) return false;
+    return !(/\bjoin\b/i.test(sentence) && /\bnewsletter\b/i.test(sentence));
+  });
 }
 
 describe("The First Acquisition reading page", () => {
@@ -87,20 +132,45 @@ describe("Hudson Dynasty series page", () => {
     expect(html).not.toContain("dl.bookfunnel.com");
   });
 
-  it("states the verified Kindle Unlimited split with today's check date", () => {
-    const note =
-      "3 of the 4 books are included with a Kindle Unlimited subscription (checked 11/06/2026). The First Acquisition is not in Kindle Unlimited. Also on Kindle and in paperback.";
-    const faq =
-      "3 of the 4 books were included with a Kindle Unlimited subscription when we checked on 11/06/2026. The First Acquisition is not in Kindle Unlimited; it’s on Kindle and free on BookFunnel.";
-    expect(html).toContain(`<p class="note">${note}</p>`);
-    expect(count(html, faq)).toBe(2);
-    expect(html).toContain(CHECKED);
+  it("states the Kindle+ split checked on 11/05/2026", () => {
+    expect(NOTE).toBe(
+      "As of 11/05/2026, 3 of the 4 books are included with Kindle+ (formerly Kindle Unlimited). The First Acquisition is not. Also on Kindle and in paperback.",
+    );
+    expect(FAQ).toBe(
+      "As of 11/05/2026, 3 of the 4 books were included with Kindle+ (formerly Kindle Unlimited). The First Acquisition is not in Kindle+. It's on Kindle, and it's free when you join the newsletter.",
+    );
+    expect(NOTE).toContain(CHECKED);
+    expect(FAQ).toContain(CHECKED);
+    expect(html).toContain(`<p class="note">${NOTE}</p>`);
+    expect(count(html, FAQ)).toBe(2);
+    expect(count(html, "Are they in Kindle+?")).toBe(2);
+    expect(html).not.toContain("Are they in Kindle Unlimited?");
+    expect(html).not.toContain("Kindle Unlimited subscription");
+    expect(html).not.toContain("free on BookFunnel");
+    expect(html).not.toContain("11/06/2026");
     expect(html).not.toContain("10/23/2026");
-    expect(note).not.toMatch(/[\u2014\u2013]/);
+    expect(NOTE).not.toMatch(/[\u2014\u2013]/);
+    expect(FAQ).not.toMatch(/[\u2014\u2013]/);
+    expect(html).toContain("Amazon, Kindle and Kindle Unlimited are trademarks of Amazon.com, Inc. or its affiliates.");
     const head = html.slice(0, html.indexOf("</head>"));
     const body = html.slice(html.indexOf("<body>"));
     expect(count(head, "Read free with Kindle+ (formerly Kindle Unlimited).")).toBe(3);
     expect(count(body, "Read free with Kindle+ (formerly Kindle Unlimited).")).toBe(3);
+  });
+
+  it("requires join and newsletter in every First Acquisition free sentence", () => {
+    const hero = html.match(/<p>Start with Book 1,[\s\S]*?<\/p>/)?.[0] ?? "";
+    const plain = "The First Acquisition is free when you join the newsletter.";
+    const markup = '<p><a href="/read/the-first-acquisition">The First Acquisition</a> is free when you join the newsletter.</p>';
+    const jsonLd = '{"text":"The First Acquisition is free when you join the newsletter."}';
+    expect(freeAcquisitionGaps([plain, markup, jsonLd, hero, FAQ, visibleCopy(html), ...jsonLdStrings(html)])).toEqual([]);
+    expect(freeAcquisitionGaps(["The First Acquisition is free on BookFunnel."])).toEqual([
+      "The First Acquisition is free on BookFunnel.",
+    ]);
+    expect(freeAcquisitionGaps(["<p>The First Acquisition is free.</p>"])).toEqual(["The First Acquisition is free."]);
+    expect(freeAcquisitionGaps(['{"text":"The First Acquisition is free on BookFunnel."}'])).toEqual([
+      '{"text":"The First Acquisition is free on BookFunnel."}',
+    ]);
   });
 
   it("uses the published prequel hook and leaves the other card blurbs and retailer links in place", () => {
