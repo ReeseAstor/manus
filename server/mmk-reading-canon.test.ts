@@ -23,6 +23,10 @@ const WEEKEND_HOOK = "One weekend. Her terms. On Monday, he owns her firm.";
 const MARRIAGE_HOOK = "She broke into the wrong penthouse. Now the man she robbed wants to marry her.";
 const DAUGHTER_HOOK =
   "Almost four years ago, she called him eleven times. Now he&#x27;s back, and her daughter has his eyes.";
+const JOB_HOOK = "She needs this job. She cannot need him.";
+const NANNY_HOOK =
+  "Ethan Calloway&#x27;s daughter, Lily, is five. Her mother died twenty-six months ago, and Lily hasn&#x27;t said a word since. Seven nannies have left in two years.";
+const COFFEE_HOOK = "She threw coffee on a billionaire in his own elevator. Then she found out she was the four o&#x27;clock.";
 
 const STALE_HOOKS = [
   "One night, no strings. Then Monday, and he owns her firm.",
@@ -45,10 +49,14 @@ describe("Manhattan Money Kings series landing", () => {
   const baby = card(SERIES, "/read/the-billionaires-baby-secret");
   const nanny = card(SERIES, "/read/the-billionaires-forbidden-nanny");
 
-  it("uses the published hooks for the three corrected cards", () => {
+  it("uses a verbatim Kindle passage as every series-card blurb", () => {
     expect(ons).toContain(`<p>${WEEKEND_HOOK}</p>`);
+    expect(assistant).toContain(`<p>${JOB_HOOK}</p>`);
     expect(fakeWife).toContain(`<p>${MARRIAGE_HOOK}</p>`);
     expect(baby).toContain(`<p>${DAUGHTER_HOOK}</p>`);
+    expect(nanny).toContain(`<p>${NANNY_HOOK}</p>`);
+    expect(nanny).not.toContain("chose the eighth");
+    expect(SERIES).not.toContain("nannies quit");
     for (const stale of STALE_HOOKS) expect(SERIES).not.toContain(stale);
   });
 
@@ -63,7 +71,7 @@ describe("Manhattan Money Kings series landing", () => {
     expect(baby).toContain("<li>Secret baby</li>");
     expect(baby).toContain("<li>Second chance</li>");
     expect(baby).toContain("<li>Single mom</li>");
-    expect(nanny).toContain("Seven nannies quit. His silent daughter chose the eighth.");
+    expect(nanny).toContain(NANNY_HOOK);
     expect(nanny).toContain("<li>Forbidden</li>");
     expect(nanny).toContain("<li>Single dad</li>");
     expect(nanny).toContain("<li>Nanny romance</li>");
@@ -120,8 +128,12 @@ describe("reading pages for the corrected books", () => {
     expect(FAKE_WIFE).toContain("<h3>Pregnant heroine</h3>");
     expect(FAKE_WIFE).toContain("https://www.amazon.com/dp/B0FCCBNF8X?tag=reeseastor-20");
     expect(FAKE_WIFE).toContain("https://www.amazon.com/dp/B0FD33W6H6?tag=reeseastor-20");
-    expect(NANNY).toContain("His silent daughter chose the eighth.");
-    expect(NANNY).toContain("his silent little girl");
+    expect(NANNY).toContain(NANNY_HOOK);
+    expect(NANNY).toContain(COFFEE_HOOK);
+    expect(NANNY).toContain("Lily hasn&#x27;t said a word since");
+    expect(NANNY).toContain("holds it up to Camille&#x27;s face");
+    expect(NANNY).not.toContain("chose the eighth");
+    expect(NANNY).not.toContain("asshole");
     expect(NANNY).toContain("https://www.amazon.com/dp/B0GDZ4T164?tag=reeseastor-20");
   });
 
@@ -155,6 +167,14 @@ describe("catalog blurbs for the same two books", () => {
     expect(book?.tropes).toContain("one night stand");
     expect(book?.price_usd).toBe(0.99);
     expect(book?.retailers.bookfunnel).toBe("https://dl.bookfunnel.com/xrodg0t77p");
+  });
+
+  it("keeps Forbidden Nanny's daughter in the catalog blurb", () => {
+    const book = BOOKS.find((entry) => entry.slug === "the-billionaires-forbidden-nanny");
+    expect(book?.blurb).toContain("silent daughter");
+    expect(book?.blurb).toContain("Seven nannies have left");
+    expect(book?.blurb).not.toContain("have quit");
+    expect(book?.retailers.amazon_kindle).toBe("https://www.amazon.com/dp/B0GDZ4T164");
   });
 });
 
