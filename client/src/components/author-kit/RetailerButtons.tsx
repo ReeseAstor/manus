@@ -30,6 +30,7 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
     `font-inter ${layout === "stack" ? "flex w-full" : "inline-flex"} items-center justify-center gap-2 text-[11px] font-semibold uppercase no-underline transition-all duration-200 hover:-translate-y-px text-center`;
 
   return (
+    <>
     <div
       className={
         layout === "stack"
@@ -60,11 +61,6 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
           </span>
         </a>
       )}
-      {retailers.some(retailer => retailer.meta.key === "bookfunnel") ? (
-        <p className="font-cormorant text-[16px] leading-snug sm:col-span-2" style={{ color: TEXT }}>
-          The free book is emailed to you after you join the newsletter.
-        </p>
-      ) : null}
       {retailers.map(({ meta, href }) => {
         // If we already showed KU primary for Amazon, render Amazon as a
         // secondary "Buy" outline button.
@@ -90,5 +86,11 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
         );
       })}
     </div>
+    {retailers.some(retailer => retailer.meta.key === "bookfunnel") ? (
+      <p className="font-cormorant text-[16px] leading-snug mt-3" style={{ color: TEXT }}>
+        The free book is emailed to you after you join the newsletter.
+      </p>
+    ) : null}
+    </>
   );
 }
