@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { BOOKS } from "../client/src/data/books";
+import { LANE_META, ROMANCE_LANES } from "../client/src/data/structured-data";
 import { withAmazonTag } from "../client/src/lib/amazon-tag";
 // @ts-expect-error plain .mjs module without type declarations
 import * as fallback from "../scripts/lib/book-fallback.mjs";
@@ -138,5 +139,18 @@ describe("/books no-JS fallback", () => {
     expect(guardSrc).not.toMatch(/from\s+["'][^"']*(book-fallback\.mjs|books)["']|import\(/);
     expect(src).toMatch(/fallbackProblems\(bookBody, book\.slug\)[\s\S]{0,80}throw new Error/);
     expect(src).not.toMatch(/href="\$\{esc\(book\.retailers\.amazon_kindle\)\}"/);
+  });
+
+  it("prerenders /books with the romance lanes only", () => {
+    const src = fs.readFileSync(path.join(__dirname, "../scripts/prerender-static.mjs"), "utf8");
+    const booksRoute = src.slice(src.indexOf('route: "/books"'), src.indexOf("// ── Book pages"));
+    expect(booksRoute).toContain("${ROMANCE_LANES");
+    expect(booksRoute).not.toContain("Object.keys(LANE_META)");
+    const html = `<h1>Books by Reese Astor</h1>${ROMANCE_LANES.map(
+      (lane) =>
+        `<section id="${lane.replace(/_/g, "-")}"><h2>${LANE_META[lane].title}</h2><p>${LANE_META[lane].subtitle}</p></section>`,
+    ).join("")}`;
+    expect(html).not.toContain("Intimate Psychological Narratives");
+    expect(Object.values(LANE_META).map((lane) => lane.title)).toContain("Intimate Psychological Narratives");
   });
 });

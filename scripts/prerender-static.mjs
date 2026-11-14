@@ -174,7 +174,7 @@ write(
         { name: "Books", path: "/books" },
       ]),
     ],
-    body: `<h1>Books by Reese Astor</h1>${Object.keys(LANE_META)
+    body: `<h1>Books by Reese Astor</h1>${ROMANCE_LANES
       .map((lane) => `<section id="${lane.replace(/_/g, "-")}"><h2>${esc(LANE_META[lane].title)}</h2><p>${esc(LANE_META[lane].subtitle)}</p>${bookList(lane)}</section>`)
       .join("")}${FREE_PREQUELS}`,
   }),

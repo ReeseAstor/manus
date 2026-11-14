@@ -38,7 +38,8 @@ describe("D3 newsletter delivery copy", () => {
     expect(band).not.toContain("by email");
     const newsletter = read("client/src/pages/Newsletter.tsx");
     expect(newsletter).not.toMatch(/arrives instantly|Instant free book/i);
-    expect(newsletter).toContain("free book is included when you join. Check your inbox and the promotions tab.");
+    expect(newsletter).toContain("book is included when you join. Check your inbox and the promotions tab.");
+    expect(newsletter).not.toContain("free free");
     expect(newsletter).not.toContain("emailed to you");
     expect(newsletter).toContain("Free book by email");
   });
@@ -66,7 +67,8 @@ describe("D3 newsletter delivery copy", () => {
     expect(prequel?.retailers.bookfunnel).toBe("https://dl.bookfunnel.com/kw1yge3479");
     const fallback = read("scripts/lib/book-fallback.mjs");
     expect(fallback).toContain(">Join the newsletter</a>");
-    expect(fallback).toContain("Join the newsletter to get the free book.");
+    expect(fallback).toContain("The book is free when you join.");
+    expect(fallback).not.toContain("Join the newsletter to get the free book.");
     expect(fallback).not.toContain("emailed to you");
     expect(fallback).not.toContain(">Get it free</a>");
   });
