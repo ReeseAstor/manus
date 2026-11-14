@@ -411,7 +411,7 @@ export default function Home() {
                           className="font-inter text-[10px] uppercase mt-3 text-center"
                           style={{ color: CARD_MUTED, letterSpacing: "0.14em" }}
                         >
-                          Free instant download · Delivered by BookFunnel
+                          Join the newsletter and get your free download.
                         </p>
                       </div>
                     </div>
@@ -620,7 +620,7 @@ export default function Home() {
             className="font-inter text-[11px] uppercase mt-6"
             style={{ color: TEXT_SOFT, letterSpacing: "0.2em" }}
           >
-            Free instant downloads · Delivered by BookFunnel
+            Join the newsletter and get your free downloads.
           </p>
         </Reveal>
       </section>

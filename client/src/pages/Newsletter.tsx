@@ -78,7 +78,7 @@ export default function Newsletter() {
                 </span>
                 <span className="flex items-center gap-2">
                   <Gift className="w-4 h-4 text-[#7A4F4C]/60" />
-                  Instant free book
+                  Free book by email
                 </span>
               </div>
             </Reveal>
@@ -123,7 +123,7 @@ export default function Newsletter() {
                 {/* Expectation setting — improves open rates & reduces spam complaints */}
                 <p className="text-xs text-[#6E5F5A] text-center font-['Cormorant_Garamond'] mt-4 leading-relaxed">
                   Expect about <span className="text-[#7A4F4C]">a couple of emails a month</span>. Your free
-                  book link arrives instantly — check your inbox (and promotions tab).
+                  book is included when you join. Check your inbox and the promotions tab.
                 </p>
 
                 {/* Explicit consent — GDPR / CAN-SPAM compliant */}
@@ -135,7 +135,7 @@ export default function Newsletter() {
                       Privacy Policy
                     </span>
                   </Link>
-                  . No spam — unsubscribe in one click anytime.
+                  . No spam. Unsubscribe in one click anytime.
                 </p>
               </GlassCard>
             </Reveal>
@@ -274,7 +274,7 @@ export default function Newsletter() {
                 Don't Miss Out
               </h2>
               <p className="text-[#6E5F5A] font-['Cormorant_Garamond'] mb-8 max-w-lg mx-auto">
-                Join readers who get new-release news and a free book — all delivered to their inbox. About two emails a month, no spam.
+                Join readers who get new-release news and a free book, all delivered to their inbox. About two emails a month, no spam.
               </p>
 
               {/* MailerLite embedded form (k0kQw5) */}
@@ -285,7 +285,7 @@ export default function Newsletter() {
                 {/* Deliverability tip — boosts inbox placement & engagement */}
                 <p className="text-[11px] text-[#6E5F5A] text-center font-['Cormorant_Garamond'] mt-4 leading-relaxed max-w-md mx-auto">
                   Tip: add <span className="text-[#7A4F4C]">hello@reeseastor.com</span> to your
-                  contacts so your free book never lands in spam. Unsubscribe anytime — see our{' '}
+                  contacts so your free book never lands in spam. Unsubscribe anytime. See our{' '}
                   <Link href="/privacy">
                     <span className="text-[#6E5F5A] underline underline-offset-2 hover:text-[#7A4F4C] cursor-pointer">
                       Privacy Policy

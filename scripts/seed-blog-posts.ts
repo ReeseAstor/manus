@@ -30,6 +30,7 @@ const retiredSlugs = new Set([
   "ai-assisted-romance-writing-workflow",
   "romance-author-writing-tools-setup",
   "quality-control-workflows-romance-authors",
+  "storyorigin-email-list-building-guide",
 ]);
 
 function parsePost(md: string): { title: string; excerpt: string; content: string } {

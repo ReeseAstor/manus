@@ -30,6 +30,7 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
     `font-inter ${layout === "stack" ? "flex w-full" : "inline-flex"} items-center justify-center gap-2 text-[11px] font-semibold uppercase no-underline transition-all duration-200 hover:-translate-y-px text-center`;
 
   return (
+    <>
     <div
       className={
         layout === "stack"
@@ -85,5 +86,11 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
         );
       })}
     </div>
+    {retailers.some(retailer => retailer.meta.key === "bookfunnel") ? (
+      <p className="font-cormorant text-[16px] leading-snug mt-3" style={{ color: TEXT }}>
+        Join the newsletter to get the free book.
+      </p>
+    ) : null}
+    </>
   );
 }
