@@ -65,7 +65,7 @@ export default function FreeBook() {
   };
 
   const benefits = [
-    "Instant access to the complete novella",
+    "The complete novella, emailed after you join the newsletter",
     "The perfect introduction to the Hudson Dynasty series",
     "New release alerts",
     "Bonus scenes and early cover reveals",
@@ -171,7 +171,7 @@ export default function FreeBook() {
                 </div>
 
                 <p className="text-[#6E5F5A] text-xl leading-relaxed">
-                  Power. Passion. Manhattan. She was hired to audit his empire. Falling for him could destroy them both. This high-heat corporate billionaire prequel novella is the perfect introduction to the Hudson Dynasty world.
+                  Power. Passion. Manhattan. She was hired to audit him. The board wants her to wear his ring. This high-heat corporate billionaire prequel novella is the perfect introduction to the Hudson Dynasty world.
                 </p>
 
                 {/* Email Signup Form */}
@@ -180,7 +180,7 @@ export default function FreeBook() {
                     <HoneypotField value={companyWebsite} onChange={setCompanyWebsite} />
                     <div>
                       <label className="text-sm font-medium text-[#4A3B3A] mb-3 block tracking-wide uppercase">
-                        Enter your email for instant access:
+                        Enter your email to join the newsletter. The book is emailed to you:
                       </label>
                       <div className="flex flex-col sm:flex-row gap-3">
                         <Input
@@ -277,7 +277,7 @@ export default function FreeBook() {
               Know Someone Who'd Love This?
             </h2>
             <p className="text-[#6E5F5A] mb-8">
-              Share the love — tell a friend about this free book offer.
+              Share the love. Tell a friend about this free book offer.
             </p>
             <div className="flex justify-center gap-4">
               {["facebook", "twitter", "pinterest"].map((platform) => (

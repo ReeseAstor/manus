@@ -49,17 +49,19 @@ const pending = (
  * Listings with unpublished changes remain live. Targets and internal launch
  * decisions are intentionally not published. KU applies to the Kindle record,
  * not audiobook/print editions. Other pen names stay outside this catalog.
+ * Audiobook rows whose Amazon pages 404 are not_created, not in-stock offers.
+ * The Fake Wife audiobook stays: listing B0GWK27PX7 is live at $13.99.
  */
 export const BOOK_EDITIONS: Record<string, readonly BookEdition[]> = {
   "the-billionaires-one-night-stand": [
     live("ebook", "B0DSG7NKGP", 0.99, "815-iFRAlpL"),
-    live("audiobook", "B0FXF34B46", 3.99, "81oaDAdim3L"),
+    pending("audiobook", "not_created"),
     live("paperback", "B0DVH8RNK1", 9.99, "71b1pqSQ4NL"),
     pending("hardcover", "draft"),
   ],
   "the-billionaire-s-executive-assistant": [
     live("ebook", "B0F2W8QL7S", 3.99, "81n7gqi8zAL"),
-    live("audiobook", "B0GWK722LX", 13.99, "81GIs9vuzQL"),
+    pending("audiobook", "not_created"),
     live("paperback", "B0F32RT9V8", 13.99, "71EEwrtJzwL"),
     pending("hardcover", "draft"),
   ],
@@ -71,31 +73,31 @@ export const BOOK_EDITIONS: Record<string, readonly BookEdition[]> = {
   ],
   "the-billionaire-s-baby-secret": [
     live("ebook", "B0G12LBZ24", 3.99, "81hYkwGuvqL"),
-    live("audiobook", "B0GWK16XYG", 13.99, "81CjbufcOWL"),
+    pending("audiobook", "not_created"),
     live("paperback", "B0G4N8ZVL3", 13.99, "61KQwHzuCNL"),
     pending("hardcover", "draft"),
   ],
   "the-billionaires-forbidden-nanny": [
     live("ebook", "B0GDZ4T164", 3.99, "81Cdj2AkyyL"),
-    live("audiobook", "B0GWK1YQZZ", 13.99, "81JiPKyPJdL"),
-    live("paperback", "B0GMHN9PK2", 19.99, "612EJijg48L"),
+    pending("audiobook", "not_created"),
+    live("paperback", "B0GMHN9PK2", 16.99, "612EJijg48L"),
     pending("hardcover", "not_created"),
   ],
   "the-first-acquisition": [
     live("ebook", "B0D82GWFD9", 0.99, "81VwCSpuUkL"),
-    live("audiobook", "B0GWFWVF3B", 13.99, "81j-5bUK2uL"),
+    pending("audiobook", "not_created"),
     live("paperback", "B0GWL7GC98", 9.99, "71ZEkAKeqSL"),
     pending("hardcover", "not_created"),
   ],
   "hostile-tender": [
     live("ebook", "B0H1F9PV97", 4.99, "81iGQzEnacL"),
-    live("audiobook", "B0H671DP6S", 14.99, "81ZBXFLE+yL"),
+    pending("audiobook", "not_created"),
     live("paperback", "B0H1MFF5XG", 15.99, "71PVMbLOGgL"),
     pending("hardcover", "not_created"),
   ],
   "poison-pill": [
     live("ebook", "B0H53BP5S1", 4.99, "818PdEVWgOL"),
-    live("audiobook", "B0H6KSLP1T", 14.99, "81H2DWDqefL"),
+    pending("audiobook", "not_created"),
     live("paperback", "B0H67479F1", 15.99, "71eW05DRmJL"),
     pending("hardcover", "not_created"),
   ],

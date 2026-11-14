@@ -81,7 +81,7 @@ export default function NotFound() {
           <p className="text-[#4A3B3A] italic">
             "Not all who wander are lost... but this page definitely is."
           </p>
-          <p className="text-sm text-[#6E5F5A] mt-2">— Reese Astor</p>
+          <p className="text-sm text-[#6E5F5A] mt-2">Reese Astor</p>
         </div>
       </div>
     </div>

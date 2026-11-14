@@ -60,6 +60,11 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
           </span>
         </a>
       )}
+      {retailers.some(retailer => retailer.meta.key === "bookfunnel") ? (
+        <p className="font-cormorant text-[16px] leading-snug sm:col-span-2" style={{ color: TEXT }}>
+          The free book is emailed to you after you join the newsletter.
+        </p>
+      ) : null}
       {retailers.map(({ meta, href }) => {
         // If we already showed KU primary for Amazon, render Amazon as a
         // secondary "Buy" outline button.
