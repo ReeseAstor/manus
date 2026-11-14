@@ -123,7 +123,7 @@ export default function Newsletter() {
                 {/* Expectation setting — improves open rates & reduces spam complaints */}
                 <p className="text-xs text-[#6E5F5A] text-center font-['Cormorant_Garamond'] mt-4 leading-relaxed">
                   Expect about <span className="text-[#7A4F4C]">a couple of emails a month</span>. Your free
-                  book link is emailed to you. Check your inbox and the promotions tab.
+                  free book is included when you join. Check your inbox and the promotions tab.
                 </p>
 
                 {/* Explicit consent — GDPR / CAN-SPAM compliant */}

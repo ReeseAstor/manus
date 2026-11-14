@@ -88,7 +88,7 @@ export function RetailerButtons({ book, layout = "grid", hideKindleUnlimited }: 
     </div>
     {retailers.some(retailer => retailer.meta.key === "bookfunnel") ? (
       <p className="font-cormorant text-[16px] leading-snug mt-3" style={{ color: TEXT }}>
-        The free book is emailed to you after you join the newsletter.
+        Join the newsletter to get the free book.
       </p>
     ) : null}
     </>

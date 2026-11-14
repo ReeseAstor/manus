@@ -3,7 +3,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "wouter";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import { trpc } from "@/lib/trpc";
-import { EmbeddedCheckoutModal } from "@/components/EmbeddedCheckoutModal";
 import {
   AudioSamplePlayer,
   CoverHalo,
@@ -37,13 +36,6 @@ const audiobookSchema = {
   "inLanguage": "en",
   "url": CANONICAL_URL,
   "publisher": { "@type": "Organization", "name": "Reese Astor" },
-  "offers": {
-    "@type": "AggregateOffer",
-    "lowPrice": "4.99",
-    "highPrice": "4.99",
-    "priceCurrency": "USD",
-    "offerCount": 1,
-  },
 };
 
 export default function Permission() {
@@ -56,36 +48,6 @@ export default function Permission() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Embedded Stripe checkout for direct purchase ($4.99 audiobook). Keeps
-  // the user on reeseastor.com rather than handing off to Gumroad.
-  // The mutation runs on button click; once it resolves we open the modal
-  // with the secret already in hand — no thunk, no stale closure.
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [checkoutSecret, setCheckoutSecret] = useState<string | null>(null);
-  const [checkoutError, setCheckoutError] = useState<string | null>(null);
-  const permissionCheckout = trpc.stripe.createPermissionCheckout.useMutation({
-    onSuccess: (data) => {
-      setCheckoutSecret(data.clientSecret);
-      setCheckoutError(null);
-      setCheckoutOpen(true);
-    },
-    onError: (err) => {
-      setCheckoutError(err.message || "Unable to start checkout.");
-      setCheckoutOpen(true);
-    },
-  });
-  const startPermissionCheckout = () => {
-    if (permissionCheckout.isPending) return;
-    setCheckoutSecret(null);
-    setCheckoutError(null);
-    permissionCheckout.mutate({});
-  };
-  const closePermissionCheckout = () => {
-    setCheckoutOpen(false);
-    setCheckoutSecret(null);
-    setCheckoutError(null);
-  };
 
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => setSubmitted(true),
@@ -161,28 +123,6 @@ export default function Permission() {
             </p>
 
             <div className="mt-10 max-w-[560px] space-y-4">
-              <button
-                type="button"
-                onClick={startPermissionCheckout}
-                disabled={permissionCheckout.isPending}
-                className="font-inter w-full inline-flex items-center justify-center gap-2 text-[12px] font-semibold uppercase no-underline transition-all duration-200 hover:-translate-y-px disabled:opacity-60 disabled:cursor-wait"
-                style={{
-                  color: INK,
-                  background: GOLD,
-                  padding: "18px 28px",
-                  letterSpacing: "0.22em",
-                  border: "none",
-                  borderRadius: 4,
-                }}
-              >
-                {permissionCheckout.isPending ? "Opening checkout…" : "Listen now · $4.99"}
-              </button>
-              <div
-                className="font-cormorant italic text-center"
-                style={{ color: TEXT_SOFT, fontSize: 14 }}
-              >
-                or choose another retailer
-              </div>
               <RetailerButtons book={book} layout="grid" />
             </div>
           </motion.div>
@@ -359,13 +299,6 @@ export default function Permission() {
         </div>
       </section>
 
-      <EmbeddedCheckoutModal
-        open={checkoutOpen}
-        onClose={closePermissionCheckout}
-        clientSecret={checkoutSecret}
-        error={checkoutError}
-        title="Order The Need for Permission"
-      />
     </div>
   );
 }

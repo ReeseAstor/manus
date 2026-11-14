@@ -65,7 +65,7 @@ export default function FreeBook() {
   };
 
   const benefits = [
-    "The complete novella, emailed after you join the newsletter",
+    "The complete novella, free when you join the newsletter",
     "The perfect introduction to the Hudson Dynasty series",
     "New release alerts",
     "Bonus scenes and early cover reveals",
@@ -180,7 +180,7 @@ export default function FreeBook() {
                     <HoneypotField value={companyWebsite} onChange={setCompanyWebsite} />
                     <div>
                       <label className="text-sm font-medium text-[#4A3B3A] mb-3 block tracking-wide uppercase">
-                        Enter your email to join the newsletter. The book is emailed to you:
+                        Enter your email to join the newsletter and get your free download:
                       </label>
                       <div className="flex flex-col sm:flex-row gap-3">
                         <Input

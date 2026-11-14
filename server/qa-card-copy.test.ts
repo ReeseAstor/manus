@@ -15,8 +15,9 @@ describe("D3 newsletter delivery copy", () => {
   it("stops promising an instant download on the home lead magnets", () => {
     const home = read("client/src/pages/Home.tsx");
     expect(home).not.toMatch(/instant download/i);
-    expect(home).toContain("Join the newsletter. The book is emailed to you.");
-    expect(home).toContain("Join the newsletter. The books are emailed to you.");
+    expect(home).toContain("Join the newsletter and get your free download.");
+    expect(home).toContain("Join the newsletter and get your free downloads.");
+    expect(home).not.toContain("emailed to you");
     expect(home).toContain('href={LINKS.firstAcquisition}');
     expect(home).toContain('href={LINKS.oneNightStand}');
   });
@@ -24,18 +25,21 @@ describe("D3 newsletter delivery copy", () => {
   it("says the free-book form joins the newsletter and emails the novella", () => {
     const page = read("client/src/pages/FreeBook.tsx");
     expect(page).not.toMatch(/instant access/i);
-    expect(page).toContain("Enter your email to join the newsletter. The book is emailed to you:");
-    expect(page).toContain("The complete novella, emailed after you join the newsletter");
+    expect(page).toContain("Enter your email to join the newsletter and get your free download:");
+    expect(page).toContain("The complete novella, free when you join the newsletter");
+    expect(page).not.toContain("emailed");
     expect(page).toContain("https://dl.bookfunnel.com/hj09ggitwi");
   });
 
   it("rewrites the book-page prequel line and the newsletter arrival line", () => {
     const band = read("client/src/components/author-kit/NewsletterBand.tsx");
     expect(band).not.toMatch(/instantly/i);
-    expect(band).toContain("Or join the newsletter and get the free prequel novella by email →");
+    expect(band).toContain("Or join the newsletter and get the free prequel novella →");
+    expect(band).not.toContain("by email");
     const newsletter = read("client/src/pages/Newsletter.tsx");
     expect(newsletter).not.toMatch(/arrives instantly|Instant free book/i);
-    expect(newsletter).toContain("book link is emailed to you. Check your inbox and the promotions tab.");
+    expect(newsletter).toContain("free book is included when you join. Check your inbox and the promotions tab.");
+    expect(newsletter).not.toContain("emailed to you");
     expect(newsletter).toContain("Free book by email");
   });
 
@@ -62,7 +66,8 @@ describe("D3 newsletter delivery copy", () => {
     expect(prequel?.retailers.bookfunnel).toBe("https://dl.bookfunnel.com/kw1yge3479");
     const fallback = read("scripts/lib/book-fallback.mjs");
     expect(fallback).toContain(">Join the newsletter</a>");
-    expect(fallback).toContain("The free book is emailed to you.");
+    expect(fallback).toContain("Join the newsletter to get the free book.");
+    expect(fallback).not.toContain("emailed to you");
     expect(fallback).not.toContain(">Get it free</a>");
   });
 });
@@ -75,6 +80,14 @@ describe("D4 canon hooks", () => {
     const book = BOOKS.find(entry => entry.slug === "the-first-acquisition");
     expect(book?.tagline).toBe(PUBLISHED_HOOK);
     expect(book?.tagline).not.toBe(OFFERED_DEAL);
+  });
+
+  it("uses the published hook in the welcome email", () => {
+    const welcome = read("server/email-templates/welcome.ts");
+    expect(welcome).toContain(
+      "She was hired to audit him. The board wants her to wear his ring. A high-heat corporate billionaire romance novella.",
+    );
+    expect(welcome).not.toContain(REJECTED_HOOK);
   });
 
   it("uses the one-weekend canon on the One Night Stand catalog tagline", () => {

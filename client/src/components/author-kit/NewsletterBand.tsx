@@ -124,7 +124,7 @@ export function NewsletterBand({ onSubscribe, freeBookHref = "/free-book" }: Pro
           className="font-cormorant italic text-[17px] inline-block mt-[26px] no-underline pb-0.5"
           style={{ color: GOLD, borderBottom: `1px solid ${GOLD_SOFT}` }}
         >
-          Or join the newsletter and get the free prequel novella by email →
+          Or join the newsletter and get the free prequel novella →
         </a>
       </motion.div>
     </section>
