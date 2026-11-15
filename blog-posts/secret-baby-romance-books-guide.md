@@ -18,7 +18,7 @@ The secret baby trope has been a romance staple for decades, and for good reason
 
 For readers seeking a secret baby romance that delivers on every level (emotional depth, sizzling chemistry, and a hero's transformation that feels earned) **The Billionaire's Baby Secret** sets the standard.
 
-Three years ago, Sophia Reed walked away from a hotel room and a man she should have never trusted. Rising mogul Dominic Kane was everything she knew she should avoid: powerful, commanding, and completely wrong for a woman trying to build stability from nothing. But one night changed everything, and Sophia left Manhattan carrying a secret she never planned to reveal.
+Almost four years ago, Sophia Reed walked away from a hotel room and a man she should have never trusted. Rising mogul Dominic Kane was everything she knew she should avoid: powerful, commanding, and completely wrong for a woman trying to build stability from nothing. But one night changed everything, and Sophia left Manhattan carrying a secret she never planned to reveal.
 
 Now Dominic is back, and Bella, whom Sophia has protected, has storm-gray eyes that match the billionaire who just discovered he's a father. What follows is a masterclass in secret baby romance: the confrontation, the negotiation, the slow rebuilding of trust between two people who never stopped wanting each other.
 
@@ -58,7 +58,7 @@ Abby Jimenez is one of the best contemporary romance writers working right now. 
 
 **Evaluate the Heroine's Reasons**: The best secret baby romances give heroines compelling reasons for keeping their secret. Look for stories where her choices, even if imperfect, make sense given her circumstances.
 
-**Check the Timeline**: Secret baby books place that reveal anywhere from a newborn chapter to a teenage one. Where the story sits on that timeline changes the dynamics. An earlier point leaves more room for bonding scenes, while a later one means the years between the secret and the reveal already shape the story.
+**Check the Timeline**: Secret baby books place that reveal anywhere from the first months to many years later. Where the story sits on that timeline changes the dynamics. An earlier point leaves more room for bonding scenes, while a later one means the years between the secret and the reveal already shape the story.
 
 ## Reading Essentials for an Emotional Binge
 

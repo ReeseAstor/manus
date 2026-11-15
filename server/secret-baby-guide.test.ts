@@ -42,6 +42,9 @@ describe("secret baby guide house style", () => {
       /\btoddler\b/i,
       /\bdaughter\b/i,
       /\bson\b/i,
+      /\bnewborn\b/i,
+      /\binfant\b/i,
+      /\bteen(?:age(?:r)?)?s?\b/i,
     ];
     for (const pattern of banned) {
       expect(guide).not.toMatch(pattern);
