@@ -18,16 +18,17 @@ type ArchivedNewsletter = { status: string };
  * archive, not a 500 that leaves /newsletter-archive on "Loading newsletters...".
  */
 export async function loadPublicNewsletterArchive<T extends ArchivedNewsletter>(
-  load: () => Promise<T[]>,
+  load: () => Promise<T[] | null | undefined>,
 ): Promise<T[]> {
   try {
     const newsletters = await load();
+    if (!newsletters?.length) return [];
     return newsletters.filter(newsletter => newsletter.status === "sent");
   } catch (error) {
-    if (missingNewslettersTable(error)) {
-      console.error("[newsletters.getAll] archive table is missing; returning an empty list");
-      return [];
-    }
-    throw error;
+    const reason = missingNewslettersTable(error)
+      ? "archive table is missing"
+      : "archive read failed";
+    console.error(`[newsletters.getAll] ${reason}; returning an empty list`, error);
+    return [];
   }
 }

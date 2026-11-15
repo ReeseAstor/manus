@@ -8,9 +8,9 @@ The secret baby trope has been a romance staple for decades, and for good reason
 
 **The Revelation Scene**: Every secret baby book builds toward that moment when the hero discovers the truth. Done well, this scene delivers an emotional wallop that few other tropes can match. The shock, the betrayal, the dawning realization, readers live for these moments.
 
-**Instant Stakes**: Unlike romances where the couple has time to figure things out, secret baby stories come with built-in urgency. There's a child involved, which means every decision carries weight. The hero can't simply walk away, and the heroine can't pretend the past doesn't matter.
+**Instant Stakes**: Unlike romances where the couple has time to figure things out, secret baby stories come with built-in urgency. There's a baby involved, which means every decision carries weight. The hero can't simply walk away, and the heroine can't pretend the past doesn't matter.
 
-**Redemption Arcs**: Many secret baby romances feature heroes who weren't ready for fatherhood when the child was conceived. Watching them grow into the role, often while winning back the heroine's trust, provides deeply satisfying character development.
+**Redemption Arcs**: Many secret baby romances feature heroes who weren't ready for fatherhood when the baby was conceived. Watching them grow into the role, often while winning back the heroine's trust, provides deeply satisfying character development.
 
 **Found Family**: At its heart, the secret baby trope is about building a family. Readers who love watching characters create something meaningful together find these stories particularly rewarding.
 
@@ -24,7 +24,7 @@ Now Dominic is back, and the daughter Sophia has protected has storm-gray eyes t
 
 ### What Makes This Book Stand Out
 
-Sophia's reasons for keeping her daughter hidden are understandable without being contrived. She wasn't trying to punish Dominic or manipulate him. She was protecting herself and her child from a man she believed would never prioritize family over empire.
+Sophia's reasons for keeping her daughter hidden are understandable without being contrived. She wasn't trying to punish Dominic or manipulate him. She was protecting herself and her daughter from a man she believed would never prioritize family over empire.
 
 Dominic's reaction to discovering he has a daughter feels authentic. He's angry, yes, but his anger transforms into determination rather than cruelty. He doesn't try to take Bella away from Sophia or use his wealth as a weapon. Instead, he sets out to prove he can be the father his daughter deserves and the partner Sophia needs.
 
@@ -36,15 +36,15 @@ These are the books I actually recommend when someone asks me for secret baby re
 
 ### Reckless by Elsie Silver
 
-If you haven't read [Reckless](https://www.amazon.com/dp/B0BVTMGK6Y?tag=reeseastor-20), you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series: small-town, rodeo cowboy hero, a heroine who kept their daughter secret for years. The reveal scene is devastating in the best way, and Silver writes the hero's journey from shock to devoted father with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
+If you haven't read Reckless, you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series: small-town, rodeo cowboy hero, a heroine who kept their daughter secret for years. The reveal scene is devastating in the best way, and Silver writes the hero's journey from shock to devoted father with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
 
 ### Reminders of Him by Colleen Hoover
 
-[Reminders of Him](https://www.amazon.com/dp/B09FKGXQMC?tag=reeseastor-20) isn't a traditional secret baby romance. It's more complex than that. A woman returns home after prison to fight for a relationship with the daughter she barely knows. The entire town has turned against her, including the people raising her child. It's gut-wrenching and hopeful in equal measure. Hoover writes the kind of emotional devastation that stays with you for days.
+Reminders of Him isn't a traditional secret baby romance. It's more complex than that. A woman returns home after prison to fight for a relationship with the daughter she barely knows. The entire town has turned against her, including the people raising her daughter. It's gut-wrenching and hopeful in equal measure. Hoover writes the kind of emotional devastation that stays with you for days.
 
 ### The Fall Risk by Abby Jimenez
 
-Abby Jimenez is one of the best contemporary romance writers working right now. [The Fall Risk](https://www.amazon.com/dp/B0DKFXNHFV?tag=reeseastor-20) delivers the emotional complexity she's known for: characters with real problems, humor that doesn't undercut the stakes, and a love story that earns every moment. If you loved Part of Your World, this is your next read.
+Abby Jimenez is one of the best contemporary romance writers working right now. The Fall Risk delivers the emotional complexity she's known for: characters with real problems, humor that doesn't undercut the stakes, and a love story that earns every moment. If you loved Part of Your World, this is your next read.
 
 ### A Court of Thorns and Roses by Sarah J. Maas
 
@@ -58,11 +58,11 @@ Abby Jimenez is one of the best contemporary romance writers working right now. 
 
 **Evaluate the Heroine's Reasons**: The best secret baby romances give heroines compelling reasons for keeping their secret. Look for stories where her choices, even if imperfect, make sense given her circumstances.
 
-**Check the Child's Age**: Secret baby books feature children ranging from newborns to teenagers. The child's age affects the story's dynamics significantly. Younger children allow for more bonding scenes, while older children can have their own opinions about the situation.
+**Check the Little One's Age**: Secret baby books feature little ones ranging from newborns to teenagers. How old they are affects the story's dynamics significantly. A younger son or daughter leaves more room for bonding scenes, while an older one can have their own opinions about the situation.
 
 ## Reading Essentials for an Emotional Binge
 
-Secret baby books require tissues. That's just a fact. But they also require the right reading environment, these are books you want to sink into without interruption. I read mine on a [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20) so I can read in bed without disturbing anyone (because I will be up until 2 AM, and I will be crying). A warm blanket and a [bookish candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) complete the setup.
+Secret baby books require tissues. That's just a fact. But they also require the right reading environment, these are books you want to sink into without interruption. I read mine on a Kindle Paperwhite so I can read in bed without disturbing anyone (because I will be up until 2 AM, and I will be crying). A warm blanket and a [bookish candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) complete the setup.
 
 ## Final Thoughts
 

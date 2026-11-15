@@ -46,25 +46,25 @@ Book 3 brings together **Dominic Kane** and **Sophia Reed** in a secret baby rom
 
 Ana Huang writes billionaire romance with razor-sharp wit and enough heat to melt your Kindle. The Kings of Sin series follows a group of powerful men (each defined by a deadly sin) as they fall for women who challenge everything they thought they wanted.
 
-[King of Wrath](https://www.amazon.com/dp/B09MFKDNBY?tag=reeseastor-20) kicks off the series with an arranged marriage between a ruthless CEO and a woman who refuses to be controlled. The tension between Dante and Vivian is exquisite. They're forced together by circumstance but kept apart by pride, and watching them crack each other's defenses is deeply satisfying.
+King of Wrath kicks off the series with an arranged marriage between a ruthless CEO and a woman who refuses to be controlled. The tension between Dante and Vivian is exquisite. They're forced together by circumstance but kept apart by pride, and watching them crack each other's defenses is deeply satisfying.
 
 What I love about this series is that Huang doesn't shy away from the darker edges of wealth and power. These aren't sanitized billionaires. They're complicated, sometimes morally gray, and always compelling.
 
 ## Twisted Series by Ana Huang
 
-If you prefer your billionaire romance with a darker edge, Huang's [Twisted Love](https://www.amazon.com/dp/B08QGBR5NF?tag=reeseastor-20) delivers. Alex Volkov is cold, calculating, and hiding secrets that could destroy everything. When he becomes the reluctant guardian of his best friend's sister, the tension is almost unbearable.
+If you prefer your billionaire romance with a darker edge, Huang's Twisted Love delivers. Alex Volkov is cold, calculating, and hiding secrets that could destroy everything. When he becomes the reluctant guardian of his best friend's sister, the tension is almost unbearable.
 
 The entire Twisted series follows interconnected characters in a world of wealth and danger. Each book works as a standalone, but reading them in order rewards you with callbacks and character development that builds across the series.
 
 ## Chestnut Springs Series by Elsie Silver
 
-Elsie Silver's Chestnut Springs series proves that billionaire romance doesn't have to be set in a city to be compelling. [Flawless](https://www.amazon.com/dp/B0B2PPMV8Y?tag=reeseastor-20) introduces a small-town setting where wealth meets authenticity, and the results are addictive.
+Elsie Silver's Chestnut Springs series proves that billionaire romance doesn't have to be set in a city to be compelling. Flawless introduces a small-town setting where wealth meets authenticity, and the results are addictive.
 
 These books have a warmth to them that's different from the Manhattan ice of most billionaire romance. The heroes are powerful but grounded, the heroines are fierce but vulnerable, and the small-town community adds a layer of found family that makes every book feel like coming home.
 
 ## The Deal by Elle Kennedy
 
-[The Deal](https://www.amazon.com/dp/B00LD1ORBI?tag=reeseastor-20) isn't strictly billionaire romance (it's college romance) but I'm including it because it's one of the most-recommended books in the genre for good reason. If you're looking for something lighter between heavier reads, this delivers banter, chemistry, and a hero who earns his HEA in the most satisfying way.
+The Deal isn't strictly billionaire romance (it's college romance) but I'm including it because it's one of the most-recommended books in the genre for good reason. If you're looking for something lighter between heavier reads, this delivers banter, chemistry, and a hero who earns his HEA in the most satisfying way.
 
 Elle Kennedy writes dialogue that crackles, and the Off-Campus series has become a gateway drug for countless romance readers. Start here if you want something fun before diving back into the high-stakes world of billionaires.
 
@@ -82,7 +82,7 @@ With so many options available, finding the right series for your reading mood c
 
 ## My Reading Setup for Binge-Reading
 
-Since we're talking about binge-reading entire series, I'll share what I actually use for marathon reading sessions. The [Kindle Paperwhite](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20) is non-negotiable for me: the warm light means I can read until 2 AM without wrecking my sleep, and the battery lasts weeks. I pair it with a [book sleeve](https://www.amazon.com/dp/B0D5BDHG7V?tag=reeseastor-20) for protection and a good reading candle for atmosphere.
+Since we're talking about binge-reading entire series, I'll share what I actually use for marathon reading sessions. The Kindle Paperwhite is non-negotiable for me: the warm light means I can read until 2 AM without wrecking my sleep, and the battery lasts weeks. I pair it with a book sleeve for protection and a good reading candle for atmosphere.
 
 ## Final Thoughts
 
@@ -91,7 +91,3 @@ The best billionaire romance series transport readers into worlds of luxury and 
 For readers ready to fall in love with Manhattan's most eligible billionaires, the **Manhattan Money Kings series** provides the perfect entry point. Start with the free prequel, then prepare to binge-read your way through four unforgettable love stories.
 
 *What's your favorite billionaire romance series? I'm always looking for my next obsession.*
-
----
-
-*Disclosure: Some links in this post are affiliate links. If you purchase through them, I may earn a small commission at no extra cost to you. I only recommend books and products I genuinely love.*

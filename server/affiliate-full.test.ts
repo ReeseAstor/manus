@@ -171,6 +171,13 @@ describe("FTC Compliance", () => {
   it("should have FTC disclosure enabled for all articles with affiliate products", async () => {
     const { affiliateProductsBySlug } = await import("../client/src/data/affiliateProducts");
     Object.entries(affiliateProductsBySlug).forEach(([slug, article]) => {
+      const hasAffiliateProducts =
+        article.topPicks.length > 0 || Object.keys(article.inlineProducts).length > 0;
+      if (slug === "best-billionaire-romance-series-2024") {
+        expect(hasAffiliateProducts).toBe(false);
+        expect(article.ftcDisclosure).toBe(false);
+        return;
+      }
       expect(article.ftcDisclosure).toBe(true);
     });
   });
