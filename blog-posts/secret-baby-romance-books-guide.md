@@ -8,9 +8,9 @@ The secret baby trope has been a romance staple for decades, and for good reason
 
 **The Revelation Scene**: Every secret baby book builds toward that moment when the hero discovers the truth. Done well, this scene delivers an emotional wallop that few other tropes can match. The shock, the betrayal, the dawning realization, readers live for these moments.
 
-**Instant Stakes**: Unlike romances where the couple has time to figure things out, secret baby stories come with built-in urgency. There's an heir involved, which means every decision carries weight. The hero can't simply walk away, and the heroine can't pretend the past doesn't matter.
+**Instant Stakes**: Unlike romances where the couple has time to figure things out, secret baby stories come with built-in urgency. The secret already ties their lives together, which means every decision carries weight. The hero can't simply walk away, and the heroine can't pretend the past doesn't matter.
 
-**Redemption Arcs**: Many secret baby romances feature heroes who weren't ready for fatherhood when the heir was conceived. Watching them grow into the role, often while winning back the heroine's trust, provides deeply satisfying character development.
+**Redemption Arcs**: Many secret baby romances feature heroes who weren't ready for fatherhood when the secret began. Watching them grow into the role, often while winning back the heroine's trust, provides deeply satisfying character development.
 
 **Found Family**: At its heart, the secret baby trope is about building a family. Readers who love watching characters create something meaningful together find these stories particularly rewarding.
 
@@ -20,13 +20,13 @@ For readers seeking a secret baby romance that delivers on every level (emotiona
 
 Three years ago, Sophia Reed walked away from a hotel room and a man she should have never trusted. Rising mogul Dominic Kane was everything she knew she should avoid: powerful, commanding, and completely wrong for a woman trying to build stability from nothing. But one night changed everything, and Sophia left Manhattan carrying a secret she never planned to reveal.
 
-Now Dominic is back, and the daughter Sophia has protected has storm-gray eyes that match the billionaire who just discovered he's a father. What follows is a masterclass in secret baby romance: the confrontation, the negotiation, the slow rebuilding of trust between two people who never stopped wanting each other.
+Now Dominic is back, and Bella, whom Sophia has protected, has storm-gray eyes that match the billionaire who just discovered he's a father. What follows is a masterclass in secret baby romance: the confrontation, the negotiation, the slow rebuilding of trust between two people who never stopped wanting each other.
 
 ### What Makes This Book Stand Out
 
-Sophia's reasons for keeping her daughter hidden are understandable without being contrived. She wasn't trying to punish Dominic or manipulate him. She was protecting herself and the secret from a man she believed would never prioritize family over empire.
+Sophia's reasons for keeping Bella hidden are understandable without being contrived. She wasn't trying to punish Dominic or manipulate him. She was protecting herself and the secret from a man she believed would never prioritize family over empire.
 
-Dominic's reaction to discovering he has a daughter feels authentic. He's angry, yes, but his anger transforms into determination rather than cruelty. He doesn't try to take Bella away from Sophia or use his wealth as a weapon. Instead, he sets out to prove he can be the father his daughter deserves and the partner Sophia needs.
+Dominic's reaction to discovering Bella feels authentic. He's angry, yes, but his anger transforms into determination rather than cruelty. He doesn't try to take Bella away from Sophia or use his wealth as a weapon. Instead, he sets out to prove he can be the father Bella deserves and the partner Sophia needs.
 
 *This book is the third in the Manhattan Money Kings series but works beautifully as a standalone.*
 
@@ -36,11 +36,11 @@ These are the books I actually recommend when someone asks me for secret baby re
 
 ### Reckless by Elsie Silver
 
-If you haven't read Reckless, you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series: small-town, rodeo cowboy hero, a heroine who kept their daughter secret for years. The reveal scene is devastating in the best way, and Silver writes the hero's journey from shock to devoted father with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
+If you haven't read Reckless, you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series: small-town, rodeo cowboy hero, a heroine who kept Vivi secret for years. The reveal scene is devastating in the best way, and Silver writes the hero's journey from shock to devoted father with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
 
 ### Reminders of Him by Colleen Hoover
 
-Reminders of Him isn't a traditional secret baby romance. It's more complex than that. A woman returns home after prison to fight for a relationship with the heir she barely knows. The entire town has turned against her, including the people raising the heir. It's gut-wrenching and hopeful in equal measure. Hoover writes the kind of emotional devastation that stays with you for days.
+Reminders of Him isn't a traditional secret baby romance. It's more complex than that. A woman returns home after prison to fight for a relationship with Diem, whom she barely knows. The entire town has turned against her, including the people raising Diem. It's gut-wrenching and hopeful in equal measure. Hoover writes the kind of emotional devastation that stays with you for days.
 
 ### The Fall Risk by Abby Jimenez
 
@@ -58,7 +58,7 @@ Abby Jimenez is one of the best contemporary romance writers working right now. 
 
 **Evaluate the Heroine's Reasons**: The best secret baby romances give heroines compelling reasons for keeping their secret. Look for stories where her choices, even if imperfect, make sense given her circumstances.
 
-**Check the Timeline**: Secret baby books place the surprise heir anywhere from a newborn to a teenager. Where the story sits on that timeline changes the dynamics. An earlier point leaves more room for bonding scenes, while a later one lets the heir have a say about the situation.
+**Check the Timeline**: Secret baby books place that reveal anywhere from a newborn chapter to a teenage one. Where the story sits on that timeline changes the dynamics. An earlier point leaves more room for bonding scenes, while a later one means the years between the secret and the reveal already shape the story.
 
 ## Reading Essentials for an Emotional Binge
 

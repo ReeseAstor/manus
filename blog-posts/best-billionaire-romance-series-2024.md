@@ -36,7 +36,7 @@ The second installment introduces **David Kim**, a billionaire CEO, in a fake ma
 
 ### Book 3: The Billionaire's Baby Secret
 
-Book 3 brings together **Dominic Kane** and **Sophia Reed** in a secret baby romance that will have you reaching for tissues. Three years after one weekend in Chicago, Sophia has built a life for herself and her daughter, a daughter with unmistakable storm-gray eyes that match the billionaire who just walked back into her life.
+Book 3 brings together **Dominic Kane** and **Sophia Reed** in a secret baby romance that will have you reaching for tissues. Three years after one weekend in Chicago, Sophia has built a life for herself and Bella, who has unmistakable storm-gray eyes that match the billionaire who just walked back into her life.
 
 *Tropes: Secret Baby, Second Chance, Single Mom Romance*
 

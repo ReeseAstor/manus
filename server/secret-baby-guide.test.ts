@@ -40,10 +40,21 @@ describe("secret baby guide house style", () => {
       /\bkiddo\b/i,
       /\bkids?\b/i,
       /\btoddler\b/i,
+      /\bdaughter\b/i,
+      /\bson\b/i,
     ];
     for (const pattern of banned) {
       expect(guide).not.toMatch(pattern);
     }
+  });
+
+  it("does not call Diem an heir in Reminders of Him", () => {
+    const guide = readFileSync(guidePath, "utf8");
+    const start = guide.indexOf("### Reminders of Him");
+    const next = guide.indexOf("\n### ", start + 1);
+    expect(start).toBeGreaterThanOrEqual(0);
+    expect(next).toBeGreaterThan(start);
+    expect(guide.slice(start, next)).not.toMatch(/\bheir\b/i);
   });
 });
 
