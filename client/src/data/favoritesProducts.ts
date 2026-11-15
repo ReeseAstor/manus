@@ -90,14 +90,6 @@ export const favoritesCategories: ProductCategory[] = [
         priceRange: "Around $35",
         rating: 4.6,
       },
-      {
-        name: "HAPPYPOP Book Lover Fuzzy Socks",
-        affiliateUrl: "https://www.amazon.com/dp/B0F1THN236?tag=reeseastor-20",
-        description: "Cozy fuzzy socks with book-themed designs. Soft, warm, and perfect for curling up with a good romance novel.",
-        whyRecommend: "The perfect finishing touch for a cozy reading night. Warm feet = happy reader.",
-        priceRange: "Around $12",
-        rating: 4.5,
-      },
     ],
   },
   {

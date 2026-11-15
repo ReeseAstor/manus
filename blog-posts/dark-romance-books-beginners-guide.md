@@ -2,13 +2,13 @@
 
 *You've heard the whispers. You've seen the BookTok videos with the black covers and the trigger warnings. You're curious. Here's how to dip your toe into dark romance without diving straight into the deep end.*
 
-I'll be honest — I didn't think dark romance was for me. I write billionaire romance with emotional depth, not morally gray antiheroes who do terrible things. But then a friend handed me a book and said "just try it," and I understood immediately why this subgenre has exploded. Dark romance, when done well, isn't about glorifying bad behavior. It's about exploring the edges of desire, power, and obsession in a space where the reader is safe but the characters absolutely are not.
+I'll be honest. I didn't think dark romance was for me. I write billionaire romance with emotional depth, not morally gray antiheroes who do terrible things. But then a friend handed me a book and said "just try it," and I understood immediately why this subgenre has exploded. Dark romance, when done well, isn't about glorifying bad behavior. It's about exploring the edges of desire, power, and obsession in a space where the reader is safe but the characters absolutely are not.
 
 If you're curious but nervous, this guide is for you. I've organized these recommendations from "dark-ish" to "genuinely dark," so you can find your comfort level without accidentally reading something you weren't ready for.
 
 ## What Even Is Dark Romance?
 
-Dark romance is a subgenre where the love interest — or both main characters — operate outside conventional morality. The heroes might be criminals, stalkers, captors, or morally bankrupt in ways that would be terrifying in real life but create incredible tension on the page. The key distinction: dark romance still delivers a love story. The couple ends up together. There's emotional satisfaction at the end, even if the journey there is twisted.
+Dark romance is a subgenre where the love interest, or both main characters, operate outside conventional morality. The heroes might be criminals, stalkers, captors, or morally bankrupt in ways that would be terrifying in real life but create incredible tension on the page. The key distinction: dark romance still delivers a love story. The couple ends up together. There's emotional satisfaction at the end, even if the journey there is twisted.
 
 It's not for everyone, and that's completely fine. But if you're drawn to complex power dynamics, morally gray characters, and the question of whether love can exist in extreme circumstances, dark romance might be your thing.
 
@@ -47,23 +47,25 @@ For readers who want dark romance with secret societies, power games, and heroes
 ## How to Know If Dark Romance Is for You
 
 You might love dark romance if you:
-- Enjoy true crime podcasts or psychological thrillers
-- Find yourself drawn to the villain in movies
-- Like romance with genuine stakes and danger
-- Want to explore power dynamics in fiction
-- Appreciate complex morality over clear-cut good vs. evil
+
+1. Enjoy true crime podcasts or psychological thrillers.
+2. Find yourself drawn to the villain in movies.
+3. Like romance with genuine stakes and danger.
+4. Want to explore power dynamics in fiction.
+5. Appreciate complex morality over clear-cut good vs. evil.
 
 You might want to skip it if you:
-- Prefer romance as comfort reading
-- Need heroes who are unambiguously good people
-- Find possessive behavior triggering rather than thrilling
-- Want lighthearted, feel-good stories
+
+1. Prefer romance as comfort reading.
+2. Need heroes who are unambiguously good people.
+3. Find possessive behavior triggering rather than thrilling.
+4. Want lighthearted, feel-good stories.
 
 Both preferences are completely valid. Romance is a big genre, and there's room for all of us.
 
 ## A Note on Content Warnings
 
-Dark romance often contains content that some readers find distressing. Before picking up any book in this subgenre, I recommend checking content warnings on sites like StoryGraph or the author's website. Knowing what you're walking into doesn't spoil the story — it lets you choose what you're comfortable with.
+Dark romance often contains content that some readers find distressing. Before picking up any book in this subgenre, I recommend checking content warnings on sites like StoryGraph or the author's website. Knowing what you're walking into doesn't spoil the story. It lets you choose what you're comfortable with.
 
 ## Reading Dark Romance: The Right Atmosphere
 
@@ -73,7 +75,7 @@ Dark romance reads differently than contemporary romance. These aren't books for
 
 If you're a billionaire romance reader wondering whether dark romance is for you, the overlap is bigger than you'd think. Both subgenres explore power dynamics, both feature heroes who are used to getting what they want, and both create tension through the collision of control and vulnerability.
 
-The Manhattan Money Kings series sits at the lighter end of this spectrum — the heroes are powerful and commanding but not morally bankrupt. If you love the power dynamics in billionaire romance and want to push that boundary further, dark romance is the natural next step.
+The Manhattan Money Kings series sits at the lighter end of this spectrum. The heroes are powerful and commanding but not morally bankrupt. If you love the power dynamics in billionaire romance and want to push that boundary further, dark romance is the natural next step.
 
 *What was your gateway into dark romance? Or are you still deciding whether to take the plunge?*
 

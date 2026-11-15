@@ -74,11 +74,11 @@ A few settings that improve the romance reading experience:
 
 Here's my exact daily reading setup:
 
-- Kindle Paperwhite 2024, the workhorse
-- Fabric case: slim, magnetic, auto-wake
-- PopSocket on the back, one-handed reading
-- Kindle Unlimited subscription, because I read 20+ romance novels a month and buying them all would bankrupt me
-- A [reading candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20), because atmosphere matters
+1. Kindle Paperwhite 2024, the workhorse.
+2. Fabric case: slim, magnetic, auto-wake.
+3. PopSocket on the back, one-handed reading.
+4. Kindle Unlimited subscription, because I read 20+ romance novels a month and buying them all would bankrupt me.
+5. A [reading candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20), because atmosphere matters.
 
 Total investment: around $180 for the Kindle + case + grip. That's less than what I'd spend on physical books in a single month at my reading pace. The math works out fast.
 

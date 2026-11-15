@@ -26,9 +26,9 @@ The label, when I'm lying in bed at 1 AM, might still be aspirational. But the s
 
 Just like anyone else, I flip my candles with the calendar:
 
-- **Fall drafting season**: mahogany and leather notes, heavier wood, the darker stuff. Autumn in the moneymaking world is suspense season.
-- **Winter**: lighter, sweeter, cotton and vanilla. My read-and-rewrite season, when warmth matters more than edge.
-- **Spring/summer**: clean, bright, bergamot or cedar. Fast-paced contest season, when my brain needs to move.
+1. **Fall drafting season**: mahogany and leather notes, heavier wood, the darker stuff. Autumn in the moneymaking world is suspense season.
+2. **Winter**: lighter, sweeter, cotton and vanilla. My read-and-rewrite season, when warmth matters more than edge.
+3. **Spring/summer**: clean, bright, bergamot or cedar. Fast-paced contest season, when my brain needs to move.
 
 ## When I Don't Burn a Candle
 

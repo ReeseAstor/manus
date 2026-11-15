@@ -32,9 +32,18 @@ const deadBlogAsins = [
 ];
 
 describe("secret baby guide house style", () => {
-  it("does not use child or children", () => {
+  it("does not use child-coded wording", () => {
     const guide = readFileSync(guidePath, "utf8");
-    expect(guide).not.toMatch(/\bchild(?:ren)?\b/i);
+    const banned = [
+      /\bchild(?:ren)?\b/i,
+      /\blittle ones?\b/i,
+      /\bkiddo\b/i,
+      /\bkids?\b/i,
+      /\btoddler\b/i,
+    ];
+    for (const pattern of banned) {
+      expect(guide).not.toMatch(pattern);
+    }
   });
 });
 

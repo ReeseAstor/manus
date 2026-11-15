@@ -58,16 +58,22 @@ describe("Favorites Products Data", () => {
     expect(favoritesCategories.length).toBe(4);
   });
 
-  it("should have 4 products per category", async () => {
-    const { favoritesCategories } = await import("../client/src/data/favoritesProducts");
-    favoritesCategories.forEach((cat) => {
-      expect(cat.products.length).toBe(4);
+  it("should list the remaining favorites after the dead socks listing is removed", async () => {
+    const { favoritesCategories, allFavoritesProducts } = await import("../client/src/data/favoritesProducts");
+    const counts = Object.fromEntries(favoritesCategories.map(cat => [cat.id, cat.products.length]));
+    expect(counts).toEqual({
+      "reading-essentials": 4,
+      "cozy-atmosphere": 3,
+      "book-lover-gifts": 4,
+      "writers-desk": 4,
     });
+    expect(allFavoritesProducts.length).toBe(15);
+    expect(allFavoritesProducts.some(product => product.affiliateUrl.includes("B0F1THN236"))).toBe(false);
   });
 
   it("should have valid affiliate URLs with correct store ID on all products", async () => {
     const { allFavoritesProducts } = await import("../client/src/data/favoritesProducts");
-    expect(allFavoritesProducts.length).toBe(16);
+    expect(allFavoritesProducts.length).toBe(15);
     allFavoritesProducts.forEach((p) => {
       expect(p.affiliateUrl).toContain("tag=reeseastor-20");
       expect(p.affiliateUrl).toContain("amazon.com");
