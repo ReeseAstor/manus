@@ -1,4 +1,5 @@
 import { COOKIE_NAME, isRetiredBlogSlug } from "@shared/const";
+import { loadPublicNewsletterArchive } from "./newsletter-archive";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { aiRouter } from "./routers/ai-simple";
@@ -549,9 +550,7 @@ export const appRouter = router({
     }),
 
     getAll: publicProcedure.query(async () => {
-      // Public access to sent newsletters only
-      const newsletters = await getAllNewsletters();
-      return newsletters.filter((n) => n.status === "sent");
+      return await loadPublicNewsletterArchive(getAllNewsletters);
     }),
 
     getById: publicProcedure

@@ -80,9 +80,9 @@ export const BOOKS: Book[] = [
     title: "The Billionaire's One Night Stand",
     lane: "manhattan_money_kings",
     series_position: 0,
-    format: "ebook_and_audiobook",
+    format: "ebook",
     position_label: "Prequel",
-    tagline: "One night with Manhattan's most ruthless CEO.",
+    tagline: "One weekend. Her terms. On Monday, he owns her firm.",
     blurb:
       "Victoria walked into an upscale Manhattan bar the night she was passed over for partner. James, " +
       "the self-made tech billionaire every magazine wants to profile, was not supposed to be the one who " +
@@ -95,7 +95,7 @@ export const BOOKS: Book[] = [
     retailers: {
       bookfunnel: "https://dl.bookfunnel.com/xrodg0t77p",
     },
-    audiobook_available: true,
+    audiobook_available: false,
     isbn: null,
     asin: "B0DSG7NKGP",
     price_usd: 0.99,
@@ -107,7 +107,7 @@ export const BOOKS: Book[] = [
     title: "The Billionaire's Executive Assistant",
     lane: "manhattan_money_kings",
     series_position: 1,
-    format: "ebook_and_audiobook",
+    format: "ebook",
     position_label: "Book 1",
     tagline: "The boardroom was never the most dangerous room.",
     blurb:
@@ -122,7 +122,7 @@ export const BOOKS: Book[] = [
     retailers: {
       amazon_kindle: "https://www.amazon.com/dp/B0F2W8QL7S",
     },
-    audiobook_available: true,
+    audiobook_available: false,
     isbn: null,
     asin: "B0F2W8QL7S",
     price_usd: 3.99,
@@ -161,7 +161,7 @@ export const BOOKS: Book[] = [
     title: "The Billionaire's Baby Secret",
     lane: "manhattan_money_kings",
     series_position: 3,
-    format: "ebook_and_audiobook",
+    format: "ebook",
     position_label: "Book 3",
     tagline: "Almost four years ago, she called him eleven times. Now he's back, and her daughter has his eyes.",
     blurb:
@@ -175,7 +175,7 @@ export const BOOKS: Book[] = [
     retailers: {
       amazon_kindle: "https://www.amazon.com/dp/B0G12LBZ24",
     },
-    audiobook_available: true,
+    audiobook_available: false,
     isbn: null,
     asin: "B0G12LBZ24",
     price_usd: 3.99,
@@ -187,7 +187,7 @@ export const BOOKS: Book[] = [
     title: "The Billionaire's Forbidden Nanny",
     lane: "manhattan_money_kings",
     series_position: 4,
-    format: "ebook_and_audiobook",
+    format: "ebook",
     position_label: "Book 4",
     tagline: "She's the nanny. He's her boss. His mother wants her gone.",
     blurb:
@@ -202,7 +202,7 @@ export const BOOKS: Book[] = [
     retailers: {
       amazon_kindle: "https://www.amazon.com/dp/B0GDZ4T164",
     },
-    audiobook_available: true,
+    audiobook_available: false,
     isbn: null,
     asin: "B0GDZ4T164",
     price_usd: 3.99,
@@ -217,9 +217,9 @@ export const BOOKS: Book[] = [
     title: "The First Acquisition",
     lane: "hudson_dynasty",
     series_position: 0,
-    format: "ebook_and_audiobook",
+    format: "ebook",
     position_label: "Prequel novella",
-    tagline: "One fake engagement. One deal neither of them can afford to lose.",
+    tagline: "She was hired to audit him. The board wants her to wear his ring.",
     blurb:
       "Sebastian Hudson, CEO. Arden Shaw, forensic compliance attorney. One fake engagement that is " +
       "supposed to protect them both. The Hudson Dynasty starts here.",
@@ -232,7 +232,7 @@ export const BOOKS: Book[] = [
       bookfunnel: "https://dl.bookfunnel.com/kw1yge3479",
       audible: null,
     },
-    audiobook_available: true,
+    audiobook_available: false,
     isbn: null,
     asin: "B0D82GWFD9",
     price_usd: 0.99,
@@ -244,7 +244,7 @@ export const BOOKS: Book[] = [
     title: "Hostile Tender",
     lane: "hudson_dynasty",
     series_position: 1,
-    format: "ebook_and_audiobook",
+    format: "ebook",
     position_label: "Book 1",
     tagline: "Trust is a weapon. Desire is the risk.",
     blurb:
@@ -259,7 +259,7 @@ export const BOOKS: Book[] = [
       amazon_kindle: "https://www.amazon.com/dp/B0H1F9PV97",
       audible: null,
     },
-    audiobook_available: true,
+    audiobook_available: false,
     isbn: null,
     asin: "B0H1F9PV97",
     price_usd: 4.99,
@@ -271,7 +271,7 @@ export const BOOKS: Book[] = [
     title: "Poison Pill",
     lane: "hudson_dynasty",
     series_position: 2,
-    format: "ebook_and_audiobook",
+    format: "ebook",
     position_label: "Book 2",
     tagline: "Power has a price. Love is the liability.",
     blurb:
@@ -285,7 +285,7 @@ export const BOOKS: Book[] = [
       amazon_kindle: "https://www.amazon.com/dp/B0H53BP5S1",
       audible: null,
     },
-    audiobook_available: true,
+    audiobook_available: false,
     isbn: null,
     asin: "B0H53BP5S1", // verified live on amazon.com/dp/B0H53BP5S1 (Poison Pill, Reese Astor) 10/26/2026
     price_usd: 4.99,

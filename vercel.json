@@ -115,6 +115,16 @@
       "permanent": true
     },
     {
+      "source": "/blog/storyorigin-email-list-building-guide",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/storyorigin-email-list-building-guide/",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
       "source": "/books/audit-of-the-heart",
       "destination": "/books/the-first-acquisition",
       "permanent": true

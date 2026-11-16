@@ -58,8 +58,7 @@ export default function Press() {
             style={{ color: TEXT, textWrap: "pretty" }}
           >
             Reese Astor writes steamy billionaire romance set in Manhattan and is the author of the
-            Hudson Dynasty and Manhattan Money Kings series. Her new line, Intimate Psychological Narratives,
-            launches in 2026 with the audiobook <em>The Need for Permission</em>.
+            Hudson Dynasty and Manhattan Money Kings series.
           </p>
         </div>
       </section>
@@ -73,12 +72,9 @@ export default function Press() {
           >
             Reese Astor writes contemporary billionaire romance set among New York&rsquo;s most powerful
             families: the Manhattan Money Kings (a prequel and four standalone novels) and the Hudson
-            Dynasty (a prequel novella, <em>Hostile Tender</em>, <em>Poison Pill</em> and
-            <em>Golden Parachute</em>). Every book stands alone and ends happily. In 2026 she launches
-            Intimate Psychological Narratives, a quieter line of audiobooks for late-night listening.
-            The first title, <em>The Need for Permission: On the Quiet Recovery of Self-Trust</em>,
-            is a ten-chapter, hour-long meditation on rebuilding self-trust. She believes romance novels
-            are more than entertainment &mdash; they&rsquo;re empowerment.
+            Dynasty (a prequel novella, <em>Hostile Tender</em>, <em>Poison Pill</em> and{" "}
+            <em>Golden Parachute</em>). Every book stands alone and ends happily. She believes romance novels
+            are more than entertainment. They&rsquo;re empowerment.
           </p>
         </div>
       </section>

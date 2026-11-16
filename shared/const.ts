@@ -15,6 +15,8 @@ export const RETIRED_BLOG_SLUGS = [
   "email-list-building-authors",
   "self-publishing-romance-amazon-kdp-beginners-guide",
   "author-email-list-strategy-sell-books",
+  // 10/30/2026 retire ruling: author-business post with a StoryOrigin affiliate link.
+  "storyorigin-email-list-building-guide",
 ] as const;
 
 export function isRetiredBlogSlug(slug: string): boolean {

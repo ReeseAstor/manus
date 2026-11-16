@@ -299,7 +299,7 @@ function NewsletterBand({ onSubscribe }) {
           A couple of emails a month · Unsubscribe anytime
         </p>
         <a href="https://swiy.co/bf0" target="_blank" rel="noopener" style={{ display: "inline-block", marginTop: 26, fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontSize: 17, color: GOLD, textDecoration: "none", borderBottom: "1px solid " + GOLD_SOFT, paddingBottom: 2 }}>
-          Or claim your free prequel novella instantly →
+          Or join the newsletter and get the free prequel novella →
         </a>
       </div>
     </section>

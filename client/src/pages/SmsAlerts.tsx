@@ -30,7 +30,7 @@ export default function SmsAlerts() {
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Get new release alerts and exclusive offers from
-            Reese Astor &mdash; sent straight to your phone, never anywhere else.
+            Reese Astor, sent straight to your phone, never anywhere else.
           </p>
         </div>
 
