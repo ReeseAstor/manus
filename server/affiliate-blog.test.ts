@@ -35,6 +35,10 @@ describe("Affiliate Blog Posts", () => {
       it(`should contain affiliate tag in ${slug}`, () => {
         const filePath = join(process.cwd(), "blog-posts", `${slug}.md`);
         const content = readFileSync(filePath, "utf-8");
+        if (slug === "best-billionaire-romance-series-2024") {
+          expect(content).not.toContain("amazon.com");
+          return;
+        }
         expect(content).toContain(`tag=${AFFILIATE_TAG}`);
       });
     }
@@ -45,6 +49,10 @@ describe("Affiliate Blog Posts", () => {
       it(`should contain disclosure text in ${slug}`, () => {
         const filePath = join(process.cwd(), "blog-posts", `${slug}.md`);
         const content = readFileSync(filePath, "utf-8");
+        if (slug === "best-billionaire-romance-series-2024") {
+          expect(content.toLowerCase()).not.toContain("affiliate");
+          return;
+        }
         expect(content.toLowerCase()).toContain("affiliate");
         expect(content.toLowerCase()).toContain("disclosure");
       });
@@ -55,7 +63,9 @@ describe("Affiliate Blog Posts", () => {
     for (const slug of allAffiliateSlugs) {
       it(`should have affiliate data entry for ${slug}`, () => {
         expect(affiliateProductsBySlug[slug]).toBeDefined();
-        expect(affiliateProductsBySlug[slug].ftcDisclosure).toBe(true);
+        expect(affiliateProductsBySlug[slug].ftcDisclosure).toBe(
+          slug !== "best-billionaire-romance-series-2024",
+        );
       });
     }
   });

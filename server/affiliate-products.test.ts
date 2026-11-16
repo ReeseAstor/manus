@@ -50,13 +50,12 @@ describe("Affiliate Products Data", () => {
     const data = affiliateProductsBySlug["ultimate-cozy-reading-night-setup"];
     const inlineProducts = Object.keys(data.inlineProducts);
     
-    expect(inlineProducts.length).toBe(8);
+    expect(inlineProducts.length).toBe(7);
     
     // Verify key products are present
     expect(inlineProducts).toContain("Husband Pillow Original Shredded Memory Foam");
     expect(inlineProducts).toContain("Glocusent LED Book Light");
     expect(inlineProducts).toContain("Classical Library Candle");
-    expect(inlineProducts).toContain("HAPPYPOP Book Lover Fuzzy Socks");
     expect(inlineProducts).toContain("Book Lover Wine Glass");
   });
 

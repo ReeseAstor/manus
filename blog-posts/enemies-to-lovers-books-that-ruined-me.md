@@ -24,31 +24,31 @@ What makes this one work (and I say this as the person who lived with these char
 
 ### King of Wrath by Ana Huang
 
-[King of Wrath](https://www.amazon.com/dp/B09MFKDNBY?tag=reeseastor-20) does something clever with the enemies-to-lovers setup: it makes the characters enemies by circumstance rather than choice. Dante and Vivian are forced into an engagement neither wants, and their resentment is directed at the situation as much as at each other. But Huang layers in genuine personality conflicts (his coldness against her warmth, his control against her independence) that make the thawing feel earned.
+King of Wrath does something clever with the enemies-to-lovers setup: it makes the characters enemies by circumstance rather than choice. Dante and Vivian are forced into an engagement neither wants, and their resentment is directed at the situation as much as at each other. But Huang layers in genuine personality conflicts (his coldness against her warmth, his control against her independence) that make the thawing feel earned.
 
 The moment Dante starts to crack is one of the best "oh no, he's falling first" scenes I've read. You can feel him fighting it, and losing, and being furious about losing. Perfection.
 
 ### The Deal by Elle Kennedy
 
-[The Deal](https://www.amazon.com/dp/B00LD1ORBI?tag=reeseastor-20) is lighter than the others on this list, but it belongs here because the banter is unmatched. Hannah and Garrett don't hate each other exactly. They're more like two people who find each other deeply annoying and are forced into proximity by a mutually beneficial arrangement. The fake-dating element adds structure to their antagonism, and Kennedy writes dialogue that crackles with the specific energy of two smart people trying to get under each other's skin.
+The Deal is lighter than the others on this list, but it belongs here because the banter is unmatched. Hannah and Garrett don't hate each other exactly. They're more like two people who find each other deeply annoying and are forced into proximity by a mutually beneficial arrangement. The fake-dating element adds structure to their antagonism, and Kennedy writes dialogue that crackles with the specific energy of two smart people trying to get under each other's skin.
 
 This is the book I recommend when someone says "I want enemies to lovers but I don't want to cry." You'll laugh instead. A lot.
 
 ### Twisted Love by Ana Huang
 
-[Twisted Love](https://www.amazon.com/dp/B08QGBR5NF?tag=reeseastor-20) takes the enemies-to-lovers dynamic and adds a layer of genuine danger. Alex Volkov isn't just cold. He's calculating, secretive, and harboring a vendetta that could destroy the heroine's family. The "enemies" part isn't bickering. It's a man who has every reason to use her and a woman who doesn't know she should be afraid.
+Twisted Love takes the enemies-to-lovers dynamic and adds a layer of genuine danger. Alex Volkov isn't just cold. He's calculating, secretive, and harboring a vendetta that could destroy the heroine's family. The "enemies" part isn't bickering. It's a man who has every reason to use her and a woman who doesn't know she should be afraid.
 
 When the shift happens (when Alex realizes he'd rather destroy his own plans than hurt her) it hits differently because the stakes are real. This isn't "I find you annoying." This is "I was going to ruin your life and now I'd ruin my own to protect you."
 
 ### Things We Never Got Over by Lucy Score
 
-[Things We Never Got Over](https://www.amazon.com/dp/B09FGCFZ9S?tag=reeseastor-20) is enemies-to-lovers meets small town romance, and it works beautifully. Knox is grumpy, closed-off, and determined to dislike the woman who's just arrived in his town under chaotic circumstances. Naomi is dealing with a family crisis and doesn't have time for his attitude. Their antagonism is rooted in misunderstanding and self-protection, and Score unravels it slowly enough that every moment of softening feels significant.
+Things We Never Got Over is enemies-to-lovers meets small town romance, and it works beautifully. Knox is grumpy, closed-off, and determined to dislike the woman who's just arrived in his town under chaotic circumstances. Naomi is dealing with a family crisis and doesn't have time for his attitude. Their antagonism is rooted in misunderstanding and self-protection, and Score unravels it slowly enough that every moment of softening feels significant.
 
 The grumpy/sunshine dynamic layered over enemies-to-lovers is a combination that shouldn't work as well as it does. But Score makes it sing.
 
 ### Punk 57 by Penelope Douglas
 
-[Punk 57](https://www.amazon.com/dp/B01N0V3PEI?tag=reeseastor-20) is enemies-to-lovers with a secret identity twist that makes the dynamic more complex. Two pen pals who've never met end up at the same school, but one of them doesn't know who the other is. The result is a relationship built on honesty (through letters) and antagonism (in person), and watching those two versions collide is genuinely thrilling.
+Punk 57 is enemies-to-lovers with a secret identity twist that makes the dynamic more complex. Two pen pals who've never met end up at the same school, but one of them doesn't know who the other is. The result is a relationship built on honesty (through letters) and antagonism (in person), and watching those two versions collide is genuinely thrilling.
 
 Douglas writes tension like a wire pulled taut. You can feel it vibrating through every interaction, and when it finally snaps, the payoff is enormous.
 
@@ -66,7 +66,7 @@ When enemies become lovers, it means both characters have been seen (truly seen,
 
 ## Reading These: A Warning
 
-Enemies-to-lovers books are binge books. You will not read one chapter and put it down. You will not read one book and stop. Plan accordingly. Clear your weekend. Charge your [Kindle](https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20). Stock snacks. Tell your people you'll be unavailable.
+Enemies-to-lovers books are binge books. You will not read one chapter and put it down. You will not read one book and stop. Plan accordingly. Clear your weekend. Charge your Kindle. Stock snacks. Tell your people you'll be unavailable.
 
 I'm not being dramatic. I'm being accurate.
 

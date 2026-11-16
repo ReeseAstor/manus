@@ -50,7 +50,7 @@ describe("approved blog recommendations", () => {
 
   it("prefers the specific variant over a shorter overlapping product alias", () => {
     expect(resolve("Kindle Paperwhite (2024)").products.map(p => p.affiliateUrl)).toEqual([
-      "https://www.amazon.com/dp/B0CFPJYX2T?tag=reeseastor-20",
+      "https://www.amazon.com/dp/B0CFPJYX7P?tag=reeseastor-20",
     ]);
     expect(resolve("Aimuan Reading Pillow with Arms").products).toHaveLength(1);
   });

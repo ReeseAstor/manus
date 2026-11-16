@@ -53,11 +53,6 @@ export const approvedAffiliateProducts: AffiliateProduct[] = [
     "Around $150", 4.7,
   ),
   product(
-    "B0CFPJYX2T", "Kindle Paperwhite (2024)",
-    kindleReason, kindleTradeoff, kindleAlternative,
-    [], "Around $150", 4.7,
-  ),
-  product(
     "B0BMPFB4TT", "Husband Pillow Original Shredded Memory Foam",
     "A reading pillow with arms may offer another way to support a seated reading position.",
     pillowTradeoff, pillowAlternative, ["Husband Pillow Original"], "Around $55", 4.5,
@@ -88,12 +83,6 @@ export const approvedAffiliateProducts: AffiliateProduct[] = [
     "B0CMTXKBWW", '"Smells Like She\'s Writing a Bestseller" Soy Candle',
     "A writing-themed label may make this an option for a small, personal gift.",
     candleTradeoff, candleAlternative, ["Smells Like She's Writing a Bestseller"], "Around $22", 4.7,
-  ),
-  product(
-    "B0F1THN236", "HAPPYPOP Book Lover Fuzzy Socks",
-    "Book-themed socks are an optional way to add warmth to a reading evening.",
-    "Check sizing, fabric, and grip. Fuzzy socks may be slippery on smooth floors.",
-    socksAlternative,
   ),
   product(
     "B0F8BPSCZV", "HAPPYPOP Book Lover Fuzzy Socks (gift guide listing)",
@@ -147,13 +136,12 @@ export const affiliateProductsBySlug: Record<string, {
       ["Glocusent LED Book Light", "B07WNRN9WQ"],
       ["Classical Library Candle", "B0F1FY6XT7"],
       ['"Smells Like She\'s Writing a Bestseller" Soy Candle', "B0CMTXKBWW"],
-      ["HAPPYPOP Book Lover Fuzzy Socks", "B0F1THN236"],
       ["Book Lover Wine Glass", "B0DD4FWCJW"],
       ['Kindle Paperwhite (newest model, 7" display)', "B0CFPJYX7P"],
     ]),
   },
   "best-billionaire-romance-series-2024": {
-    ftcDisclosure: true, topPicks: [pick("B0CFPJYX2T")], inlineProducts: {},
+    ftcDisclosure: false, topPicks: [], inlineProducts: {},
   },
   "nyc-romance-books-manhattan-guide": {
     ftcDisclosure: true, topPicks: [], inlineProducts: {},
@@ -162,16 +150,16 @@ export const affiliateProductsBySlug: Record<string, {
     ftcDisclosure: true, topPicks: [], inlineProducts: {},
   },
   "best-kindle-setup-romance-readers": {
-    ftcDisclosure: true, topPicks: [pick("B0CFPJYX2T"), pick("B07WNRN9WQ")], inlineProducts: {},
+    ftcDisclosure: true, topPicks: [pick("B07WNRN9WQ")], inlineProducts: {},
   },
   "enemies-to-lovers-books-that-ruined-me": {
     ftcDisclosure: true, topPicks: [], inlineProducts: {},
   },
   "booktok-made-me-buy-it-honest-reviews": {
-    ftcDisclosure: true, topPicks: [pick("B0CFPJYX2T")], inlineProducts: {},
+    ftcDisclosure: true, topPicks: [], inlineProducts: {},
   },
   "reading-self-care-routine-book-lovers": {
-    ftcDisclosure: true, topPicks: [pick("B0CFPJYX2T"), pick("B07WNRN9WQ")], inlineProducts: {},
+    ftcDisclosure: true, topPicks: [pick("B07WNRN9WQ")], inlineProducts: {},
   },
   "romance-reader-gift-guide": {
     ftcDisclosure: true,
