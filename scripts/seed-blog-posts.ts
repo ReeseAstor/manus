@@ -32,6 +32,7 @@ const SEED_BANNED_COPY: { label: string; pattern: RegExp }[] = [
   { label: "6.8-inch Paperwhite claim", pattern: /6\.8-inch/i },
   { label: "The Fall Risk as a secret-baby rec", pattern: /The Fall Risk/ },
   { label: "unsourced 52-week bestseller claim", pattern: /all 52 weeks/i },
+  { label: "kept Vivi secret for years", pattern: /kept Vivi secret for years/i },
 ];
 
 /** Throws if markdown would write unavailable ASINs, static prices, or retired product names. */

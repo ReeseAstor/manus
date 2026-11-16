@@ -36,7 +36,7 @@ These are the books I actually recommend when someone asks me for secret baby re
 
 ### Reckless by Elsie Silver
 
-If you haven't read Reckless, you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series: small-town, rodeo cowboy hero, a heroine who kept Vivi secret for years. The reveal scene is devastating in the best way, and Silver writes the hero's journey from shock to devoted father with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
+If you haven't read Reckless, you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series: small-town, rodeo cowboy hero, a heroine who kept Vivi a secret. The reveal scene is devastating in the best way, and Silver writes the hero's journey from shock to devoted father with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
 
 ### Reminders of Him by Colleen Hoover
 

@@ -82,5 +82,7 @@ describe("seeded blog-posts affiliate copy", () => {
     expect(() => assertSeedableBlogCopy("The 6.8-inch screen is the sweet spot.", "x")).toThrow(/6\.8-inch/);
     expect(() => assertSeedableBlogCopy("### The Fall Risk by Abby Jimenez", "x")).toThrow(/Fall Risk/);
     expect(() => assertSeedableBlogCopy("It appeared on every list, all 52 weeks.", "x")).toThrow(/52-week/);
+    expect(() => assertSeedableBlogCopy("a heroine who kept Vivi secret for years.", "x")).toThrow(/kept Vivi secret for years/);
+    expect(() => assertSeedableBlogCopy("a heroine who kept Vivi a secret.", "x")).not.toThrow();
   });
 });
