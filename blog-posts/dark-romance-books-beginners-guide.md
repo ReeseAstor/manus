@@ -69,7 +69,7 @@ Dark romance often contains content that some readers find distressing. Before p
 
 ## Reading Dark Romance: The Right Atmosphere
 
-Dark romance reads differently than contemporary romance. These aren't books for sunny afternoons at the beach. They're books for late nights, dark rooms, and the kind of quiet where your imagination can run wild. I read mine on my Kindle Paperwhite with the lights off. The built-in warm light creates the perfect moody atmosphere. A [dark-scented candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) with leather and smoke notes completes the vibe.
+Dark romance reads differently than contemporary romance. These aren't books for sunny afternoons at the beach. They're books for late nights, dark rooms, and the kind of quiet where your imagination can run wild. I read mine on my Kindle Paperwhite with the lights off. The built-in warm light creates the perfect moody atmosphere. A [library bookish candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) with teakwood, leather, patchouli, and ambergris notes completes the vibe.
 
 ## Where Dark Romance Meets Billionaire Romance
 

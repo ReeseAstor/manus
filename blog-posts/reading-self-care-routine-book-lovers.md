@@ -12,7 +12,7 @@ This is what happens on a regular Tuesday when I have nothing special planned bu
 
 **8:30 PM**: I put my phone in another room. This is the single most impactful thing I've done for my reading life. Not on the nightstand. Not face-down on the bed. In another room. The first week was genuinely difficult. Now it's automatic.
 
-**8:35 PM**: I light whatever candle is on my nightstand. Right now it's a [library-scented one](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20): old paper, leather, a hint of vanilla. I've burned through probably fifteen of these over the past two years. The scent has become a trigger: I smell it and my brain shifts into reading mode. Pavlovian, but it works.
+**8:35 PM**: I light whatever candle is on my nightstand. Right now it's a [library-scented one](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20): teakwood, leather, patchouli, and ambergris. I've burned through probably fifteen of these over the past two years. The scent has become a trigger: I smell it and my brain shifts into reading mode. Pavlovian, but it works.
 
 **8:40 PM**: I get into bed with my Kindle Paperwhite, warm light on, regular light off. The room is dim. The candle is flickering. I'm comfortable. This is when the day actually ends for me: not when I finished work, not when I finished dinner, but when I open my book.
 
@@ -40,11 +40,11 @@ I've mentioned it already, but the Kindle Paperwhite is the foundation of everyt
 
 ### A Dedicated Reading Light
 
-For physical book nights (because sometimes you want paper), the [Glocusent book light](https://www.amazon.com/dp/B07WNRN9WQ?tag=reeseastor-20) clips onto the cover and provides warm, adjustable light without disturbing anyone else in the room. I use it maybe twice a week when I'm reading a physical ARC or a book I bought specifically for the beautiful cover.
+For physical book nights (because sometimes you want paper), the [Glocusent Neck Reading Light](https://www.amazon.com/dp/B07WNRN9WQ?tag=reeseastor-20) sits around your neck and provides warm, adjustable light without disturbing anyone else in the room. I use it maybe twice a week when I'm reading a physical ARC or a book I bought specifically for the beautiful cover.
 
 ### The Right Candle
 
-I'm particular about this. The candle can't be too strong (headache), can't be floral (distracting), and can't be food-scented (makes me hungry). Library, leather, sandalwood, cedar, these are reading scents. They're warm and grounding without demanding attention. I keep two or three on rotation: a [classical library candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) for most nights, and something with cedar and tobacco for darker reads.
+I'm particular about this. The candle can't be too strong (headache), can't be floral (distracting), and can't be food-scented (makes me hungry). Library, leather, sandalwood, cedar, these are reading scents. They're warm and grounding without demanding attention. I keep two or three on rotation: a [library bookish candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) for most nights, and something with cedar and tobacco for darker reads.
 
 ### Comfortable Reading Position
 

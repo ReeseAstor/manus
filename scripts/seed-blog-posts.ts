@@ -1,13 +1,48 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { Client } from "pg";
 
 const BLOG_DIR = path.join(import.meta.dirname ?? __dirname, "..", "blog-posts");
-const DATABASE_URL = process.env.DATABASE_URL;
 
-if (!DATABASE_URL) {
-  console.error("DATABASE_URL environment variable is not set");
-  process.exit(1);
+/** UPDATE must never write publishedAt; re-seeding an existing slug preserves the original date. */
+export const UPDATE_EXISTING_POST_SQL = `UPDATE blog_posts SET title=$1, excerpt=$2, content=$3, category=$4, "readTime"=$5,
+         published='published' WHERE slug=$6`;
+
+/** Only INSERT sets publishedAt. The bound Date is stored as a UTC instant. */
+export const INSERT_NEW_POST_SQL = `INSERT INTO blog_posts (title, slug, excerpt, content, category, "readTime", published, "authorId", "publishedAt")
+         VALUES ($1,$2,$3,$4,$5,$6,'published',$7,$8)`;
+
+/** UTC instant used only when inserting a new slug. */
+export function publishedAtForNewPost(now: Date = new Date(), earlierInserts = 0): Date {
+  return new Date(now.getTime() - earlierInserts * 86_400_000);
+}
+
+/** Copy #80 removed from /favorites: the seed must not republish these into blog_posts. */
+export const SEED_UNAVAILABLE_ASINS = ["B0CW63NL9F", "B0CMTXKBWW", "B0DD4FWCJW"] as const;
+
+const SEED_BANNED_COPY: { label: string; pattern: RegExp }[] = [
+  { label: "Original Shredded", pattern: /Original Shredded/i },
+  { label: "Latest Model", pattern: /Latest Model/i },
+  { label: "Glocusent LED Book Light", pattern: /Glocusent LED Book Light/i },
+  { label: "Huglanket", pattern: /Huglanket/i },
+  { label: "mahogany", pattern: /mahogany/i },
+  { label: "em or en dash", pattern: /[\u2013\u2014]/ },
+  { label: "static Amazon price", pattern: /\$\s*\d/ },
+];
+
+/** Throws if markdown would write unavailable ASINs, static prices, or retired product names. */
+export function assertSeedableBlogCopy(text: string, slug: string): void {
+  for (const asin of SEED_UNAVAILABLE_ASINS) {
+    if (text.includes(asin)) {
+      throw new Error(`Seed refused for ${slug}: unavailable ASIN ${asin}`);
+    }
+  }
+  for (const { label, pattern } of SEED_BANNED_COPY) {
+    if (pattern.test(text)) {
+      throw new Error(`Seed refused for ${slug}: banned copy (${label})`);
+    }
+  }
 }
 
 const categoryBySlug: Record<string, string> = {
@@ -26,7 +61,7 @@ const categoryBySlug: Record<string, string> = {
 };
 
 // Retired on purpose. Re-seeding these would put AI-workflow posts back on the public site.
-const retiredSlugs = new Set([
+export const SEED_RETIRED_SLUGS = new Set([
   "ai-assisted-romance-writing-workflow",
   "romance-author-writing-tools-setup",
   "quality-control-workflows-romance-authors",
@@ -53,7 +88,13 @@ function readTimeFor(content: string): string {
   return `${mins} min read`;
 }
 
-async function seed() {
+export async function seed(env: NodeJS.ProcessEnv = process.env) {
+  const DATABASE_URL = env.DATABASE_URL;
+  if (!DATABASE_URL) {
+    console.error("DATABASE_URL environment variable is not set");
+    process.exit(1);
+  }
+
   const client = new Client({ connectionString: DATABASE_URL, ssl: { rejectUnauthorized: false } });
   await client.connect();
 
@@ -70,29 +111,29 @@ async function seed() {
 
   for (const file of files) {
     const slug = file.replace(/\.md$/, "");
-    if (retiredSlugs.has(slug)) {
+    if (SEED_RETIRED_SLUGS.has(slug)) {
       console.log(`⊘ Skipped retired post: ${slug}`);
       continue;
     }
     const md = await readFile(path.join(BLOG_DIR, file), "utf8");
+    assertSeedableBlogCopy(md, slug);
     const { title, excerpt, content } = parsePost(md);
     const category = categoryBySlug[slug] ?? "Reading Recommendations";
     const readTime = readTimeFor(content);
-    const publishedAt = new Date(Date.now() - created * 86400000);
 
     const existing = await client.query("SELECT id FROM blog_posts WHERE slug = $1", [slug]);
     if (existing.rows.length > 0) {
+      // Do not set publishedAt: an UPDATE must preserve the existing publish date.
       await client.query(
-        `UPDATE blog_posts SET title=$1, excerpt=$2, content=$3, category=$4, "readTime"=$5,
-         published='published', "publishedAt"=$6 WHERE slug=$7`,
-        [title, excerpt, content, category, readTime, publishedAt, slug]
+        UPDATE_EXISTING_POST_SQL,
+        [title, excerpt, content, category, readTime, slug]
       );
       updated++;
       console.log(`✎ Updated: ${slug}`);
     } else {
+      const publishedAt = publishedAtForNewPost(new Date(), created);
       await client.query(
-        `INSERT INTO blog_posts (title, slug, excerpt, content, category, "readTime", published, "authorId", "publishedAt")
-         VALUES ($1,$2,$3,$4,$5,$6,'published',$7,$8)`,
+        INSERT_NEW_POST_SQL,
         [title, slug, excerpt, content, category, readTime, authorId, publishedAt]
       );
       created++;
@@ -105,7 +146,10 @@ async function seed() {
   await client.end();
 }
 
-seed().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+const entry = process.argv[1];
+if (entry && import.meta.url === pathToFileURL(path.resolve(entry)).href) {
+  seed().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}
