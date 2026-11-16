@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, ExternalLink, Star, ShoppingCart, Search, Filter, ArrowUp, Sparkles } from "lucide-react";
+import { Heart, ExternalLink, ShoppingCart, Search, Filter, ArrowUp, Sparkles } from "lucide-react";
 import { favoritesCategories, allFavoritesProducts } from "@/data/favoritesProducts";
 import { FTCDisclosure } from "@/components/AffiliateProductCard";
 import { trpc } from "@/lib/trpc";
@@ -70,11 +70,11 @@ export default function Favorites() {
             </h1>
 
             <p className="text-lg md:text-xl text-[#6E5F5A] max-w-2xl mx-auto leading-relaxed mb-4">
-              My personally curated collection of products I actually use and love — from the reading pillow that changed my life to the candle that smells like a Manhattan library.
+              My personally curated collection of products I actually use and love, from the reading pillow that changed my life to the candle that smells like a Manhattan library.
             </p>
 
             <p className="text-sm text-[#6E5F5A] max-w-xl mx-auto">
-              Every product on this page is something I've personally tried and genuinely recommend. No filler, no fluff — just the things that make reading and writing better.
+              Every product on this page is something I've personally tried and genuinely recommend. No filler, no fluff, just the things that make reading and writing better.
             </p>
           </motion.div>
         </div>
@@ -176,32 +176,13 @@ export default function Favorites() {
                             {product.name}
                           </h3>
                           <p className="text-[#7A4F4C]/80 font-medium text-sm mt-1">
-                            {product.priceRange}
+                            See Amazon for the current price and rating
                           </p>
                         </div>
                         <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#C9A3A0]/10 flex items-center justify-center border border-[#B59A6A]/20">
                           <ShoppingCart className="w-5 h-5 text-[#7A4F4C]" />
                         </div>
                       </div>
-
-                      {/* Rating Stars */}
-                      {product.rating && (
-                        <div className="flex items-center gap-1">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`w-4 h-4 ${
-                                i < Math.floor(product.rating!)
-                                  ? "text-[#7A4F4C] fill-[#7A4F4C]"
-                                  : i < product.rating!
-                                  ? "text-[#7A4F4C] fill-[#7A4F4C]/50"
-                                  : "text-[#6E5F5A]"
-                              }`}
-                            />
-                          ))}
-                          <span className="text-xs text-[#6E5F5A] ml-1">({product.rating})</span>
-                        </div>
-                      )}
 
                       {/* Description */}
                       <p className="text-[#6E5F5A] text-sm leading-relaxed">

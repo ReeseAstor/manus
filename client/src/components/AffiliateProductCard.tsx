@@ -11,7 +11,7 @@ export interface AffiliateProduct {
   description: string;
   whyRecommend: string;
   /** Legacy catalog metadata, not displayed without live verification. */
-  priceRange: string;
+  priceRange?: string;
   rating?: number;
   imageUrl?: string;
   aliases?: string[];
