@@ -13,7 +13,7 @@ export function ExitIntentPopup() {
 
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: () => {
-      toast.success("Check your inbox for your free book!");
+      toast.success("Check your inbox for the download link.");
       setIsVisible(false);
       localStorage.setItem("reese_exit_popup_converted", "true");
     },

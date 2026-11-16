@@ -218,4 +218,18 @@ describe("Amazon Product Link Validation", () => {
     const uniqueAsins = new Set(asins);
     expect(uniqueAsins.size).toBe(asins.length);
   });
+
+  it("replaces the three live-scan 404 listings with verified ASINs", async () => {
+    const { allFavoritesProducts } = await import("../client/src/data/favoritesProducts");
+    const asins = allFavoritesProducts.map((p) => {
+      const match = p.affiliateUrl.match(/\/dp\/([A-Z0-9]{10})/);
+      return match ? match[1] : null;
+    });
+    expect(asins).not.toContain("B08B4GHZ5L");
+    expect(asins).not.toContain("B0BN9QGKQG");
+    expect(asins).not.toContain("B0D9FQGQCR");
+    expect(asins).toContain("B0C6MD8YBR");
+    expect(asins).toContain("B078SDB5WY");
+    expect(asins).toContain("B07PGW7C8R");
+  });
 });
