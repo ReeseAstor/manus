@@ -139,9 +139,9 @@ export const favoritesCategories: ProductCategory[] = [
     emoji: "✍️",
     products: [
       {
-        name: "Moleskine Classic Notebook (Large, Ruled)",
+        name: "Moleskine Classic Notebook, Large, Plain, Sapphire Blue, Hard Cover",
         affiliateUrl: "https://www.amazon.com/dp/B015NG45Q0?tag=reeseastor-20",
-        description: "The iconic Moleskine notebook with ivory-colored ruled pages, elastic closure, and ribbon bookmark. 240 pages of pure writing potential.",
+        description: "The iconic Moleskine notebook with ivory-colored plain pages, elastic closure, and ribbon bookmark. 240 pages of pure writing potential.",
         whyRecommend: "Every Manhattan Money Kings plot started in a Moleskine. There's something about the feel of these pages that unlocks creativity.",
         priceRange: "Around $20",
         rating: 4.7,
@@ -155,12 +155,12 @@ export const favoritesCategories: ProductCategory[] = [
         rating: 4.8,
       },
       {
-        name: "Bose QuietComfort Ultra Headphones",
+        name: "Bose QuietComfort Headphones",
         affiliateUrl: "https://www.amazon.com/dp/B0CCZ26B5V?tag=reeseastor-20",
-        description: "World-class noise cancellation with immersive spatial audio. Up to 24 hours of battery life. The ultimate focus tool for writers.",
+        description: "Active noise cancellation with high-fidelity audio and up to 24 hours of battery life. The ultimate focus tool for writers.",
         whyRecommend: "I write in coffee shops. These headphones create a bubble of silence that lets me disappear into my characters' world.",
-        priceRange: "Around $380",
-        rating: 4.6,
+        priceRange: "Around $330",
+        rating: 4.5,
       },
       {
         name: "VISOONE Blue Light Blocking Glasses",

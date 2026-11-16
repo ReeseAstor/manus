@@ -232,4 +232,17 @@ describe("Amazon Product Link Validation", () => {
     expect(asins).toContain("B078SDB5WY");
     expect(asins).toContain("B07PGW7C8R");
   });
+
+  it("matches the live Moleskine and Bose listing names and drops Ultra-only claims", async () => {
+    const { allFavoritesProducts } = await import("../client/src/data/favoritesProducts");
+    const moleskine = allFavoritesProducts.find((p) => p.affiliateUrl.includes("B015NG45Q0"));
+    const bose = allFavoritesProducts.find((p) => p.affiliateUrl.includes("B0CCZ26B5V"));
+    expect(moleskine?.name).toBe("Moleskine Classic Notebook, Large, Plain, Sapphire Blue, Hard Cover");
+    expect(moleskine?.name).not.toMatch(/ruled/i);
+    expect(moleskine?.description).toMatch(/plain pages/i);
+    expect(moleskine?.description).not.toMatch(/ruled/i);
+    expect(bose?.name).toBe("Bose QuietComfort Headphones");
+    expect(bose?.name).not.toMatch(/ultra/i);
+    expect(bose?.description).not.toMatch(/ultra|immersive|spatial audio/i);
+  });
 });

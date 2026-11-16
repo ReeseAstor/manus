@@ -84,6 +84,13 @@ describe("Exit-intent toast copy", () => {
     expect(toastLine?.[1]).toBe("Check your inbox for the download link.");
     expect(toastLine?.[1]).not.toMatch(/[\u2014\u2013]/);
   });
+
+  it("uses a comma in the exit-intent headline and has no em or en dashes", () => {
+    const popup = read("client/src/components/ExitIntentPopup.tsx");
+    expect(popup).toContain("Wait, Before You Go!");
+    expect(popup).not.toContain("Wait — Before You Go!");
+    expect(popup).not.toMatch(/[\u2014\u2013]/);
+  });
 });
 
 describe("D4 canon hooks", () => {
