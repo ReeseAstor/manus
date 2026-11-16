@@ -79,5 +79,8 @@ describe("seeded blog-posts affiliate copy", () => {
     expect(() => assertSeedableBlogCopy("Notes of mahogany and leather", "x")).toThrow(/mahogany/);
     expect(() => assertSeedableBlogCopy("A cozy night\u2014finally", "x")).toThrow(/em or en dash/);
     expect(() => assertSeedableBlogCopy("Around $180 for the Kindle", "x")).toThrow(/static Amazon price/);
+    expect(() => assertSeedableBlogCopy("The 6.8-inch screen is the sweet spot.", "x")).toThrow(/6\.8-inch/);
+    expect(() => assertSeedableBlogCopy("### The Fall Risk by Abby Jimenez", "x")).toThrow(/Fall Risk/);
+    expect(() => assertSeedableBlogCopy("It appeared on every list, all 52 weeks.", "x")).toThrow(/52-week/);
   });
 });

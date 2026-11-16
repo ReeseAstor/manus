@@ -42,10 +42,6 @@ If you haven't read Reckless, you're missing one of the best secret baby romance
 
 Reminders of Him isn't a traditional secret baby romance. It's more complex than that. A woman returns home after prison to fight for a relationship with Diem, whom she barely knows. The entire town has turned against her, including the people raising Diem. It's gut-wrenching and hopeful in equal measure. Hoover writes the kind of emotional devastation that stays with you for days.
 
-### The Fall Risk by Abby Jimenez
-
-Abby Jimenez is one of the best contemporary romance writers working right now. The Fall Risk delivers the emotional complexity she's known for: characters with real problems, humor that doesn't undercut the stakes, and a love story that earns every moment. If you loved Part of Your World, this is your next read.
-
 ### A Court of Thorns and Roses by Sarah J. Maas
 
 [A Court of Thorns and Roses](https://www.amazon.com/dp/B00OZP5VRS?tag=reeseastor-20) isn't secret baby romance, but I'm including it because so many secret baby readers also love fantasy romance with high emotional stakes. If you've never tried Maas, this series delivers the kind of sweeping, gut-punch romance that secret baby fans crave. The stakes are life-and-death, the love interests are complicated, and the emotional payoffs are enormous.

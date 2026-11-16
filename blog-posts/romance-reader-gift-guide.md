@@ -36,7 +36,7 @@ Every one of these has earned its place in a reader's stocking:
 
 ## The Upgrade for Serious Readers: Reading Pillow
 
-The [Aimuan Reading Pillow with Arms, Ivory](https://www.amazon.com/dp/B09V518DRK?tag=reeseastor-20) is the grown-up version of propping yourself up on regular pillows and waking up with a neck crick. It has arms for support, a carry handle, and a cozy rabbit-fur cover stuffed with pp cotton. If they read in bed, this is the gift.
+The [Aimuan Reading Pillow with Arms, Ivory](https://www.amazon.com/dp/B09V518DRK?tag=reeseastor-20) is the grown-up version of propping yourself up on regular pillows and waking up with a neck crick. It has arms for support, a carry handle, polyester fill, and a 100% polyester cover. If they read in bed, this is the gift.
 
 ## The Ultimate Gift: A New Series
 

@@ -29,6 +29,9 @@ const SEED_BANNED_COPY: { label: string; pattern: RegExp }[] = [
   { label: "mahogany", pattern: /mahogany/i },
   { label: "em or en dash", pattern: /[\u2013\u2014]/ },
   { label: "static Amazon price", pattern: /\$\s*\d/ },
+  { label: "6.8-inch Paperwhite claim", pattern: /6\.8-inch/i },
+  { label: "The Fall Risk as a secret-baby rec", pattern: /The Fall Risk/ },
+  { label: "unsourced 52-week bestseller claim", pattern: /all 52 weeks/i },
 ];
 
 /** Throws if markdown would write unavailable ASINs, static prices, or retired product names. */

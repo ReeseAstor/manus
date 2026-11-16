@@ -18,7 +18,7 @@ The Kindle Paperwhite is the one I use every single day. Here's why it wins for 
 
 **It's waterproof.** Bath readers, this is for you. I've dropped mine in the tub twice. It survived both times without complaint.
 
-**The 6.8-inch screen is the sweet spot.** Big enough to read comfortably, small enough to hold in one hand while lying on your side in bed. This matters more than people realize: romance readers read in bed, and one-handed reading is non-negotiable.
+**The 7-inch screen is the sweet spot.** Big enough to read comfortably, small enough to hold in one hand while lying on your side in bed. This matters more than people realize: romance readers read in bed, and one-handed reading is non-negotiable.
 
 **Storage isn't an issue.** Even the base model holds thousands of books. You will never fill it with romance novels alone.
 

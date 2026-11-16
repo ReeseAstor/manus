@@ -12,7 +12,7 @@ Before you light anything, you need a spot that physically supports hours of rea
 
 My absolute essential is the [Husband Pillow Medium Reading Pillow with Arms, Purple](https://www.amazon.com/dp/B0BMPFB4TT?tag=reeseastor-20): a medium bed-rest reading pillow with arms, a neck roll, side pockets for your phone and glasses, and a removable cover. It's filled with memory foam for sitting up in bed. Your back will thank you, and it's like a warm hug that cradles your head, neck, and arms while you read.
 
-If you want a plush option for a couch reading corner, the [Aimuan Reading Pillow with Arms, Large, Blush](https://www.amazon.com/dp/B0CQS2SSFW?tag=reeseastor-20) does the job too: an 18-inch pillow with arms, a carry handle, and a cozy rabbit-fur cover stuffed with pp cotton.
+If you want a plush option for a couch reading corner, the [Aimuan Reading Pillow with Arms, Large, Blush](https://www.amazon.com/dp/B0CQS2SSFW?tag=reeseastor-20) does the job too: an 18-inch pillow with arms, a carry handle, and a cotton cover stuffed with pp cotton.
 
 ## The Light: Because My Eyes Deserve Better Than a Phone Screen
 

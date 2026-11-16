@@ -18,7 +18,7 @@ These books have darker themes but won't keep you up at night questioning your l
 
 ### Verity by Colleen Hoover
 
-[Verity](https://www.amazon.com/dp/B07HJYTRMD?tag=reeseastor-20) is technically a thriller, but it's become a gateway into dark romance for thousands of readers. A struggling writer discovers a manuscript that reveals horrifying truths about a bestselling author's life. The romantic tension is undeniable, the atmosphere is suffocating, and the ending will have you texting everyone you know. If you've never read anything "dark," start here. It's accessible, it's gripping, and it'll tell you whether you want more.
+[Verity](https://www.amazon.com/dp/B07HJYTRMD?tag=reeseastor-20) is technically a thriller, but it's become a gateway into dark romance for many readers. A struggling writer discovers a manuscript that reveals horrifying truths about a bestselling author's life. The romantic tension is undeniable, the atmosphere is suffocating, and the ending will have you texting everyone you know. If you've never read anything "dark," start here. It's accessible, it's gripping, and it'll tell you whether you want more.
 
 ### Twisted Love by Ana Huang
 
@@ -38,7 +38,7 @@ Haunting Adeline is the book that launched a thousand BookTok videos. Zade is a 
 
 ### God of Malice by Rina Kent
 
-God of Malice is part of Kent's Legacy of Gods series, and it's become one of the most popular dark romances of the last two years. It appeared on every single weekly Amazon bestseller list in 2025, all 52 weeks. The hero is genuinely unhinged, the heroine is not a pushover, and the university setting adds a layer of claustrophobia that intensifies everything.
+God of Malice is part of Kent's Legacy of Gods series, and it's a frequently recommended starting point for readers who already like darker new-adult romance. The hero is genuinely unhinged, the heroine is not a pushover, and the university setting adds a layer of claustrophobia that intensifies everything.
 
 ### The Ritual by Shantel Tessier
 
