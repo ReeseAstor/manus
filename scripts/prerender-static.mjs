@@ -79,7 +79,7 @@ await build({
   outfile: datesBundled,
   logLevel: "silent",
 });
-const { articleJsonLdDates } = await import(pathToFileURL(datesBundled).href);
+const { articleJsonLdDates, toIsoDate } = await import(pathToFileURL(datesBundled).href);
 const { bookFallbackFactsHtml, bookFallbackBuyHtml, bookFallbackEditionsHtml } = await import(
   pathToFileURL(path.join(root, "scripts/lib/book-fallback.mjs")).href
 );
@@ -272,13 +272,6 @@ const simple = [
     body: `<h1>The Reese Astor Newsletter</h1><p>New release alerts and reader-only extras, every other Sunday.</p>${FREE_PREQUELS}`,
   },
   {
-    route: "/blog",
-    title: "The Fine Print | Reese Astor",
-    description: "Reading lists, small rituals, and notes on Manhattan romance. A quieter corner of Reese Astor's world.",
-    schemas: [],
-    body: `<h1>The Fine Print</h1><p>For the life between chapters.</p><p>Reading lists, small rituals, and a closer look at the stories from Reese Astor.</p>`,
-  },
-  {
     route: "/press",
     title: "Press Kit | Reese Astor",
     description: "Bio, covers, and media contact for Reese Astor, author of steamy billionaire romance.",
@@ -363,6 +356,45 @@ for (const p of blogPosts) {
     }),
   );
 }
+
+
+function formatBlogListDate(value) {
+  const iso = toIsoDate(value);
+  if (!iso) return "";
+  return new Date(iso).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+function blogIndexBody(posts) {
+  const intro =
+    "<h1>The Fine Print</h1><p>For the life between chapters.</p><p>Reading lists, small rituals, and a closer look at the stories from Reese Astor.</p>";
+  if (!posts.length) return intro;
+  const items = posts
+    .map((p) => {
+      const iso = toIsoDate(p.publishedAt);
+      const label = formatBlogListDate(p.publishedAt);
+      const date = iso && label ? `<time datetime="${esc(iso)}">${esc(label)}</time>` : "";
+      const excerpt = p.excerpt ? `<p>${esc(p.excerpt)}</p>` : "";
+      return `<article><h2><a href="/blog/${esc(p.slug)}">${esc(p.title)}</a></h2>${excerpt}${date}</article>`;
+    })
+    .join("");
+  return `${intro}<div class="journal-grid">${items}</div>`;
+}
+
+write(
+  "/blog",
+  renderPage({
+    route: "/blog",
+    title: "The Fine Print | Reese Astor",
+    description: "Reading lists, small rituals, and notes on Manhattan romance. A quieter corner of Reese Astor's world.",
+    schemas: [],
+    body: blogIndexBody(blogPosts),
+  }),
+);
 
 // ── llms.txt (https://llmstxt.org) ─────────────────────────────────────────
 const llms = [
