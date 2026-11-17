@@ -99,22 +99,28 @@ describe("Favorites Products Data", () => {
     expect(ids).toContain("writers-desk");
   });
 
-  it("should have ratings between 0 and 5 for all products", async () => {
+  it("does not state static Amazon prices or star ratings on /favorites", async () => {
     const { allFavoritesProducts } = await import("../client/src/data/favoritesProducts");
     allFavoritesProducts.forEach((p) => {
-      if (p.rating) {
-        expect(p.rating).toBeGreaterThan(0);
-        expect(p.rating).toBeLessThanOrEqual(5);
-      }
+      expect(p).not.toHaveProperty("priceRange");
+      expect(p).not.toHaveProperty("rating");
+      expect(JSON.stringify(p)).not.toMatch(/\$/);
+      expect(JSON.stringify(p)).not.toMatch(/[\u2014\u2013]/);
     });
-  });
-
-  it("should have price ranges for all products", async () => {
-    const { allFavoritesProducts } = await import("../client/src/data/favoritesProducts");
-    allFavoritesProducts.forEach((p) => {
-      expect(p.priceRange).toBeTruthy();
-      expect(p.priceRange).toMatch(/\$/);
-    });
+    const { readFileSync } = await import("node:fs");
+    const { join } = await import("node:path");
+    const data = readFileSync(join(process.cwd(), "client/src/data/favoritesProducts.ts"), "utf8");
+    const page = readFileSync(join(process.cwd(), "client/src/pages/Favorites.tsx"), "utf8");
+    expect(data).not.toMatch(/priceRange/);
+    expect(data).not.toMatch(/\brating\s*:/);
+    expect(data).not.toMatch(/Around \$/);
+    expect(data).not.toMatch(/\$[0-9]/);
+    expect(data).not.toMatch(/[\u2014\u2013]/);
+    expect(page).not.toMatch(/product\.priceRange/);
+    expect(page).not.toMatch(/product\.rating/);
+    expect(page).not.toMatch(/Around \$/);
+    expect(page).not.toMatch(/[\u2014\u2013]/);
+    expect(page).toContain("See Amazon for the current price and rating");
   });
 
   it("should have personal recommendations (whyRecommend) for all products", async () => {
@@ -217,5 +223,65 @@ describe("Amazon Product Link Validation", () => {
     }).filter(Boolean);
     const uniqueAsins = new Set(asins);
     expect(uniqueAsins.size).toBe(asins.length);
+  });
+
+  it("replaces the 404 and unavailable listings with verified ASINs", async () => {
+    const { allFavoritesProducts } = await import("../client/src/data/favoritesProducts");
+    const asins = allFavoritesProducts.map((p) => {
+      const match = p.affiliateUrl.match(/\/dp\/([A-Z0-9]{10})/);
+      return match ? match[1] : null;
+    });
+    expect(asins).not.toContain("B08B4GHZ5L");
+    expect(asins).not.toContain("B0BN9QGKQG");
+    expect(asins).not.toContain("B0D9FQGQCR");
+    expect(asins).not.toContain("B0CMTXKBWW");
+    expect(asins).not.toContain("B0CW63NL9F");
+    expect(asins).not.toContain("B0DD4FWCJW");
+    expect(asins).toContain("B0C6MD8YBR");
+    expect(asins).toContain("B078SDB5WY");
+    expect(asins).toContain("B07PGW7C8R");
+    expect(asins).toContain("B0DXPL9RL2");
+    expect(asins).toContain("B0FXWF75B4");
+    expect(asins).toContain("B0DTYGQYGQ");
+  });
+
+  it("matches the live Moleskine, Bose, Pilot, pillow, and candle attributes", async () => {
+    const { allFavoritesProducts } = await import("../client/src/data/favoritesProducts");
+    const byAsin = Object.fromEntries(
+      allFavoritesProducts.map((p) => {
+        const match = p.affiliateUrl.match(/\/dp\/([A-Z0-9]{10})/);
+        return [match?.[1], p];
+      }),
+    );
+    const moleskine = byAsin.B015NG45Q0;
+    const bose = byAsin.B0CCZ26B5V;
+    const pilot = byAsin.B00006JNJ8;
+    const pillow = byAsin.B0BMPFB4TT;
+    const candle = byAsin.B0F1FY6XT7;
+    const kindle = byAsin.B0CFPJYX7P;
+    const light = byAsin.B07WNRN9WQ;
+    const aimuan = byAsin.B09V518DRK;
+    expect(moleskine?.name).toBe("Moleskine Classic Notebook, Large, Plain, Sapphire Blue, Hard Cover");
+    expect(moleskine?.description).toMatch(/plain pages/i);
+    expect(moleskine?.description).not.toMatch(/ruled/i);
+    expect(bose?.name).toBe("Bose QuietComfort Headphones");
+    expect(bose?.name).not.toMatch(/ultra/i);
+    expect(bose?.description).not.toMatch(/\bultra\b|immersive|spatial audio/i);
+    expect(pilot?.name).toContain("0.5mm Extra Fine");
+    expect(pilot?.name).not.toMatch(/0\.7/);
+    expect(pilot?.description).toMatch(/0\.5 mm/);
+    expect(pillow?.name).toBe("Husband Pillow Medium Reading Pillow with Arms, Purple");
+    expect(pillow?.name).not.toMatch(/Original Shredded/i);
+    expect(pillow?.description).not.toMatch(/shredded/i);
+    expect(candle?.description).toMatch(/bergamot rose/);
+    expect(candle?.description).toMatch(/cedarwood/);
+    expect(candle?.description).not.toMatch(/mahogany|old paper/i);
+    expect(kindle?.name).toContain("2024 model");
+    expect(kindle?.name).not.toMatch(/Latest Model/i);
+    expect(kindle?.description).not.toMatch(/fastest Kindle/i);
+    expect(light?.name).toMatch(/Neck Reading Light/);
+    expect(light?.description).not.toMatch(/clip-on/i);
+    expect(aimuan?.name).toContain("Ivory");
+    expect(aimuan?.description).not.toMatch(/detachable neck roll|side pockets/i);
   });
 });

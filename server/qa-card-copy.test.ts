@@ -74,6 +74,25 @@ describe("D3 newsletter delivery copy", () => {
   });
 });
 
+describe("Exit-intent toast copy", () => {
+  it("promises an emailed download link, not an instant free book", () => {
+    const popup = read("client/src/components/ExitIntentPopup.tsx");
+    expect(popup).not.toContain("Check your inbox for your free book!");
+    expect(popup).toContain('toast.success("Check your inbox for the download link.")');
+    expect(popup).not.toMatch(/instant/i);
+    const toastLine = popup.match(/toast\.success\("([^"]+)"\)/);
+    expect(toastLine?.[1]).toBe("Check your inbox for the download link.");
+    expect(toastLine?.[1]).not.toMatch(/[\u2014\u2013]/);
+  });
+
+  it("uses a comma in the exit-intent headline and has no em or en dashes", () => {
+    const popup = read("client/src/components/ExitIntentPopup.tsx");
+    expect(popup).toContain("Wait, Before You Go!");
+    expect(popup).not.toContain("Wait — Before You Go!");
+    expect(popup).not.toMatch(/[\u2014\u2013]/);
+  });
+});
+
 describe("D4 canon hooks", () => {
   it("uses the published First Acquisition hook on the free-book page and the book tagline", () => {
     const page = read("client/src/pages/FreeBook.tsx");
