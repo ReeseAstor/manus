@@ -3,6 +3,7 @@ export { BookCard } from "./BookCard";
 export { BookHero } from "./BookHero";
 export { CoverHalo } from "./CoverHalo";
 export { Eyebrow } from "./Eyebrow";
+export { MembershipOffers } from "./MembershipOffers";
 export { NewsletterBand } from "./NewsletterBand";
 export { Ornament } from "./Ornament";
 export { PraiseQuote } from "./PraiseQuote";
