@@ -57,6 +57,29 @@ await build({
   logLevel: "silent",
 });
 const { withAmazonTag } = await import(pathToFileURL(tagBundled).href);
+const mdBundled = path.join(tmpDir, "blog-markdown.mjs");
+await build({
+  entryPoints: [path.join(root, "scripts/lib/render-blog-markdown.ts")],
+  bundle: true,
+  platform: "node",
+  format: "esm",
+  outfile: mdBundled,
+  jsx: "automatic",
+  packages: "external",
+  logLevel: "silent",
+  alias: { "@": path.join(root, "client/src") },
+});
+const { renderBlogMarkdownToHtml } = await import(pathToFileURL(mdBundled).href);
+const datesBundled = path.join(tmpDir, "blog-dates.mjs");
+await build({
+  entryPoints: [path.join(root, "shared/blog-dates.ts")],
+  bundle: true,
+  platform: "node",
+  format: "esm",
+  outfile: datesBundled,
+  logLevel: "silent",
+});
+const { articleJsonLdDates, toIsoDate, formatBlogListDate } = await import(pathToFileURL(datesBundled).href);
 const { bookFallbackFactsHtml, bookFallbackBuyHtml, bookFallbackEditionsHtml } = await import(
   pathToFileURL(path.join(root, "scripts/lib/book-fallback.mjs")).href
 );
@@ -249,13 +272,6 @@ const simple = [
     body: `<h1>The Reese Astor Newsletter</h1><p>New release alerts and reader-only extras, every other Sunday.</p>${FREE_PREQUELS}`,
   },
   {
-    route: "/blog",
-    title: "The Fine Print | Reese Astor",
-    description: "Reading lists, small rituals, and notes on Manhattan romance. A quieter corner of Reese Astor's world.",
-    schemas: [],
-    body: `<h1>The Fine Print</h1><p>For the life between chapters.</p><p>Reading lists, small rituals, and a closer look at the stories from Reese Astor.</p>`,
-  },
-  {
     route: "/press",
     title: "Press Kit | Reese Astor",
     description: "Bio, covers, and media contact for Reese Astor, author of steamy billionaire romance.",
@@ -280,16 +296,7 @@ const RETIRED = new Set(
 );
 
 function mdToHtml(md = "") {
-  return md
-    .split(/\n{2,}/)
-    .map((block) => {
-      const t = block.trim();
-      if (!t) return "";
-      const h = t.match(/^(#{1,4})\s+(.*)$/);
-      if (h) return `<h${Math.min(h[1].length + 1, 4)}>${esc(h[2])}</h${Math.min(h[1].length + 1, 4)}>`;
-      return `<p>${esc(t.replace(/[*_`]/g, "")).replace(/\n/g, " ")}</p>`;
-    })
-    .join("");
+  return renderBlogMarkdownToHtml(md);
 }
 
 const blogPosts = [];
@@ -313,8 +320,10 @@ if (process.env.DATABASE_URL) {
 }
 for (const p of blogPosts) {
   const route = `/blog/${p.slug}`;
-  const published = p.publishedAt ? new Date(p.publishedAt).toISOString() : undefined;
-  const modified = p.updatedAt ? new Date(p.updatedAt).toISOString() : published;
+  const { datePublished: published, dateModified: modified } = articleJsonLdDates(
+    p.publishedAt,
+    p.updatedAt,
+  );
   write(
     route,
     renderPage({
@@ -347,6 +356,34 @@ for (const p of blogPosts) {
     }),
   );
 }
+
+
+function blogIndexBody(posts) {
+  const intro =
+    "<h1>The Fine Print</h1><p>For the life between chapters.</p><p>Reading lists, small rituals, and a closer look at the stories from Reese Astor.</p>";
+  if (!posts.length) return intro;
+  const items = posts
+    .map((p) => {
+      const iso = toIsoDate(p.publishedAt);
+      const label = formatBlogListDate(p.publishedAt);
+      const date = iso && label ? `<time datetime="${esc(iso)}">${esc(label)}</time>` : "";
+      const excerpt = p.excerpt ? `<p>${esc(p.excerpt)}</p>` : "";
+      return `<article><h2><a href="/blog/${esc(p.slug)}">${esc(p.title)}</a></h2>${excerpt}${date}</article>`;
+    })
+    .join("");
+  return `${intro}<div class="journal-grid">${items}</div>`;
+}
+
+write(
+  "/blog",
+  renderPage({
+    route: "/blog",
+    title: "The Fine Print | Reese Astor",
+    description: "Reading lists, small rituals, and notes on Manhattan romance. A quieter corner of Reese Astor's world.",
+    schemas: [],
+    body: blogIndexBody(blogPosts),
+  }),
+);
 
 // ── llms.txt (https://llmstxt.org) ─────────────────────────────────────────
 const llms = [

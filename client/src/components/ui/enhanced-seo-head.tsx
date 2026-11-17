@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { articleJsonLdDates, laterIsoDate } from '@shared/blog-dates';
 import { SITE_URL, AUTHOR_ID, DEFAULT_OG_IMAGE, absoluteUrl } from '@shared/site';
 
 interface SEOProps {
@@ -47,6 +48,7 @@ export function EnhancedSEOHead({
   const robotsContent = noindex || nofollow 
     ? `${noindex ? 'noindex' : 'index'},${nofollow ? 'nofollow' : 'follow'}` 
     : 'index,follow';
+  const articleModified = laterIsoDate(modifiedDate, publishDate);
 
   return (
     <Helmet>
@@ -82,7 +84,7 @@ export function EnhancedSEOHead({
       {ogType === 'article' && publishDate && (
         <>
           <meta property="article:published_time" content={publishDate} />
-          {modifiedDate && <meta property="article:modified_time" content={modifiedDate} />}
+          {articleModified && <meta property="article:modified_time" content={articleModified} />}
           <meta property="article:author" content={author} />
           <meta property="article:section" content="The Fine Print" />
         </>
@@ -175,8 +177,7 @@ export function generateArticleSchema(article: {
     "description": article.description,
     "url": article.url,
     "image": article.image,
-    "datePublished": article.publishDate,
-    "dateModified": article.modifiedDate || article.publishDate,
+    ...articleJsonLdDates(article.publishDate, article.modifiedDate),
     "author": { "@type": "Person", "@id": AUTHOR_ID, "name": "Reese Astor", "url": SITE_URL },
     "publisher": { "@type": "Organization", "name": "88Away LLC", "url": SITE_URL },
     ...(article.keywords && { "keywords": article.keywords.join(', ') })

@@ -102,7 +102,7 @@ export function AffiliateProductSection({
           These are optional, not a reading checklist. Prices and availability can change; compare the current listing before deciding.
         </p>
       </header>
-      <FTCDisclosure />
+      <FTCDisclosure subject="article" />
       <div className="grid gap-4">
         {products.map((product, index) => (
           <AffiliateProductCard key={product.affiliateUrl} product={product} index={index} sourceSlug={sourceSlug} />
@@ -112,12 +112,16 @@ export function AffiliateProductSection({
   );
 }
 
-export function FTCDisclosure() {
+export function FTCDisclosure({
+  subject = "page",
+}: {
+  subject?: "article" | "page";
+} = {}) {
   return (
     <aside className="mb-6 p-4 rounded-xl bg-[#EBD6D3]/20 border border-[#4A3B3A]/10" aria-label="Affiliate disclosure">
       <p className="text-[#6E5F5A] text-sm leading-relaxed">
         <span className="font-semibold text-[#4A3B3A]">Affiliate disclosure:</span>{" "}
-        As an Amazon Associate I earn from qualifying purchases. Amazon links may earn a commission at no extra cost to you. You do not need to buy anything to enjoy this article.
+        As an Amazon Associate I earn from qualifying purchases. Amazon links may earn a commission at no extra cost to you. You do not need to buy anything to enjoy this {subject}.
       </p>
     </aside>
   );

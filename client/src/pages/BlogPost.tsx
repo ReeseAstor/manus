@@ -161,7 +161,7 @@ export default function BlogPost() {
         className="journal-narrow journal-article-body"
         aria-label={post.title}
       >
-        {recommendations.hasAffiliateLinks && <FTCDisclosure />}
+        {recommendations.hasAffiliateLinks && <FTCDisclosure subject="article" />}
         {post.audioUrl && (
           <section className="journal-audio" aria-label="Audio version">
             <h2>Prefer to listen?</h2>

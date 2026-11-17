@@ -1,65 +1,13 @@
 import React, { memo, useEffect, useRef, useState } from "react";
-import ReactMarkdown, { type Components } from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
-import rehypeSanitize from "rehype-sanitize";
 import {
   headingId,
   parseSavedProgress,
   readingProgress,
 } from "@/lib/blog-reading";
-import {
-  AFFILIATE_LINK_REL,
-  isAmazonAffiliateDestination,
-} from "@/lib/blog-recommendations";
-import { withAmazonTag } from "@/lib/amazon-tag";
+import { BlogArticleMarkdown } from "@/lib/blog-markdown";
 
 type Section = { id: string; title: string };
-const markdownComponents: Components = {
-  a: ({ href, children }) => {
-    const affiliate = !!href && isAmazonAffiliateDestination(href);
-    const external = !!href && /^https?:\/\//i.test(href);
-    return (
-      <a
-        href={affiliate ? withAmazonTag(href) : href}
-        target={external ? "_blank" : undefined}
-        rel={
-          affiliate
-            ? AFFILIATE_LINK_REL
-            : external
-              ? "noopener noreferrer"
-              : undefined
-        }
-      >
-        {children}
-        {external && (
-          <span className="sr-only">
-            {" "}
-            (opens in a new tab{affiliate ? ", affiliate link" : ""})
-          </span>
-        )}
-      </a>
-    );
-  },
-  img: ({ src, alt }) => (
-    <img src={src} alt={alt ?? ""} loading="lazy" decoding="async" />
-  ),
-};
-const ArticleMarkdown = memo(function ArticleMarkdown({
-  content,
-}: {
-  content: string;
-}) {
-  return (
-    <ReactMarkdown
-      remarkPlugins={[remarkGfm]}
-      rehypePlugins={[rehypeRaw, rehypeSanitize]}
-      components={markdownComponents}
-    >
-      {content}
-    </ReactMarkdown>
-  );
-});
+const ArticleMarkdown = memo(BlogArticleMarkdown);
 
 export function BlogReader({
   slug,
