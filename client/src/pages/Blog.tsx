@@ -3,22 +3,13 @@ import { Link } from "wouter";
 import { ArrowRight, Search } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { matchesBlogSearch, readingMinutes } from "@/lib/blog-reading";
+import { formatBlogListDate } from "@shared/blog-dates";
 import { EnhancedSEOHead } from "@/components/ui/enhanced-seo-head";
 import { BlogContentUpgrade } from "@/components/BlogContentUpgrade";
 import "@/styles/blog.css";
 
 const POSTS_PER_PAGE = 9;
-const dateLabel = (date: string | Date | null) => {
-  if (!date) return "";
-  const parsed = new Date(date);
-  return Number.isNaN(parsed.getTime())
-    ? ""
-    : parsed.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      });
-};
+const dateLabel = (date: string | Date | null) => formatBlogListDate(date);
 
 export default function Blog() {
   const [query, setQuery] = useState("");

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   articleJsonLdDates,
+  formatBlogListDate,
   laterIsoDate,
   toIsoDate,
 } from "../shared/blog-dates";
@@ -53,5 +54,15 @@ describe("article JSON-LD dates", () => {
     expect(Date.parse(schema.dateModified)).toBeGreaterThanOrEqual(
       Date.parse(schema.datePublished),
     );
+  });
+});
+
+describe("blog list dates", () => {
+  it("formats list dates in America/New_York", () => {
+    expect(formatBlogListDate("2026-11-15T23:46:04.902Z")).toBe("Nov 15, 2026");
+    // 04:30 UTC is still the previous evening in ET.
+    expect(formatBlogListDate("2026-11-16T04:30:00.000Z")).toBe("Nov 15, 2026");
+    expect(formatBlogListDate("2026-11-16T05:00:00.000Z")).toBe("Nov 16, 2026");
+    expect(formatBlogListDate(null)).toBe("");
   });
 });

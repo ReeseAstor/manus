@@ -79,7 +79,7 @@ await build({
   outfile: datesBundled,
   logLevel: "silent",
 });
-const { articleJsonLdDates, toIsoDate } = await import(pathToFileURL(datesBundled).href);
+const { articleJsonLdDates, toIsoDate, formatBlogListDate } = await import(pathToFileURL(datesBundled).href);
 const { bookFallbackFactsHtml, bookFallbackBuyHtml, bookFallbackEditionsHtml } = await import(
   pathToFileURL(path.join(root, "scripts/lib/book-fallback.mjs")).href
 );
@@ -357,17 +357,6 @@ for (const p of blogPosts) {
   );
 }
 
-
-function formatBlogListDate(value) {
-  const iso = toIsoDate(value);
-  if (!iso) return "";
-  return new Date(iso).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-}
 
 function blogIndexBody(posts) {
   const intro =

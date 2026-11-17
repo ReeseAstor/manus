@@ -34,3 +34,17 @@ export function articleJsonLdDates(
     ...(dateModified ? { dateModified } : {}),
   };
 }
+
+export const BLOG_DISPLAY_TIME_ZONE = "America/New_York";
+
+/** Visible blog list date, always in America/New_York so prerender and the client match. */
+export function formatBlogListDate(value: string | Date | null | undefined): string {
+  const iso = toIsoDate(value);
+  if (!iso) return "";
+  return new Date(iso).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: BLOG_DISPLAY_TIME_ZONE,
+  });
+}
