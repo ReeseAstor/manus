@@ -9,6 +9,7 @@ import {
   GOLD_SOFT,
   INK,
   KIT_EASE,
+  MembershipOffers,
   Ornament,
   RetailerButtons,
   SURFACE,
@@ -61,6 +62,12 @@ export default function BooksCatalog() {
       {LANE_ORDER.map((lane, i) => (
         <LaneSection key={lane} lane={lane} dividerAbove={i > 0} />
       ))}
+
+      <section className="px-6 md:px-16 pb-[100px]">
+        <div className="max-w-[1100px] mx-auto">
+          <MembershipOffers />
+        </div>
+      </section>
     </div>
   );
 }

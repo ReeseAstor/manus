@@ -10,6 +10,7 @@ import {
   GOLD_SOFT,
   INK,
   KIT_EASE,
+  MembershipOffers,
   NewsletterBand,
   Ornament,
   RetailerButtons,
@@ -111,6 +112,7 @@ function BookLayout({ book }: { book: Book }) {
           <div className="mt-12 max-w-[640px] mx-auto">
             <RetailerButtons book={book} layout="grid" />
             <BookEditions slug={book.slug} title={book.title} />
+            <MembershipOffers layout="stack" />
           </div>
         </div>
       </section>
