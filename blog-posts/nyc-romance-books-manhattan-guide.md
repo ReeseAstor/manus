@@ -54,7 +54,7 @@ Different Manhattan neighborhoods carry distinct associations that shape charact
 
 ## Reading NYC Romance: Setting the Mood
 
-There's something about reading Manhattan romance while actually feeling like you're there. I keep a [library-scented candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) burning when I read NYC-set books, the old paper and leather notes make my living room feel like a private library in a Midtown penthouse. And honestly, reading these on a Kindle Paperwhite late at night with the warm light feels appropriately atmospheric. Manhattan is a nighttime city, and these books read best after dark.
+There's something about reading Manhattan romance while actually feeling like you're there. I keep a [library-scented candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20) burning when I read NYC-set books, the teakwood, leather, patchouli, and ambergris notes make my living room feel like a private library in a Midtown penthouse. And honestly, reading these on a Kindle Paperwhite late at night with the warm light feels appropriately atmospheric. Manhattan is a nighttime city, and these books read best after dark.
 
 ## Final Thoughts
 

@@ -14,9 +14,8 @@ describe("Affiliate Products Data", () => {
       expect(p.affiliateUrl).toContain("amazon.com");
       expect(p.description).toBeTruthy();
       expect(p.whyRecommend).toBeTruthy();
-      expect(p.priceRange).toBeTruthy();
-      expect(p.rating).toBeGreaterThan(0);
-      expect(p.rating).toBeLessThanOrEqual(5);
+      expect(p).not.toHaveProperty("priceRange");
+      expect(p).not.toHaveProperty("rating");
     });
   });
 

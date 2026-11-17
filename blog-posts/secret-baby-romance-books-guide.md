@@ -36,15 +36,11 @@ These are the books I actually recommend when someone asks me for secret baby re
 
 ### Reckless by Elsie Silver
 
-If you haven't read Reckless, you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series: small-town, rodeo cowboy hero, a heroine who kept Vivi secret for years. The reveal scene is devastating in the best way, and Silver writes the hero's journey from shock to devoted father with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
+If you haven't read Reckless, you're missing one of the best secret baby romances of the last few years. It's set in the Chestnut Springs series: small-town, rodeo cowboy hero, a heroine who kept Vivi a secret. The reveal scene is devastating in the best way, and Silver writes the hero's journey from shock to devoted father with so much tenderness. The found family elements and small-town warmth make this one I've reread multiple times.
 
 ### Reminders of Him by Colleen Hoover
 
 Reminders of Him isn't a traditional secret baby romance. It's more complex than that. A woman returns home after prison to fight for a relationship with Diem, whom she barely knows. The entire town has turned against her, including the people raising Diem. It's gut-wrenching and hopeful in equal measure. Hoover writes the kind of emotional devastation that stays with you for days.
-
-### The Fall Risk by Abby Jimenez
-
-Abby Jimenez is one of the best contemporary romance writers working right now. The Fall Risk delivers the emotional complexity she's known for: characters with real problems, humor that doesn't undercut the stakes, and a love story that earns every moment. If you loved Part of Your World, this is your next read.
 
 ### A Court of Thorns and Roses by Sarah J. Maas
 

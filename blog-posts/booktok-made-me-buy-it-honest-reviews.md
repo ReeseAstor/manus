@@ -2,7 +2,7 @@
 
 *I bought every viral BookTok romance so you don't have to. Some lived up to the hype. Some didn't. Here's my honest take on each one.*
 
-BookTok has an extraordinary power: it can take a book from obscurity to bestseller status overnight. A single 30-second video with the right emotional hook can move tens of thousands of copies. As a romance author, I find this both fascinating and slightly terrifying. As a romance reader, I find it useful, but not always reliable.
+BookTok has an extraordinary power: a single 30-second video with the right emotional hook can send a previously quiet book racing into view overnight. As a romance author, I find this both fascinating and slightly terrifying. As a romance reader, I find it useful, but not always reliable.
 
 The algorithm rewards emotional reactions, not nuanced criticism. A book that makes someone cry on camera goes viral whether or not it's actually well-written. So I've been systematically reading the most-hyped BookTok romances and giving you my honest assessment. No sponsorships. No pressure to agree with the crowd. Just one romance professional's opinion.
 

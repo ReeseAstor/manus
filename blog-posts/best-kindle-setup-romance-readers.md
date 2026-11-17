@@ -8,7 +8,7 @@ I read somewhere between 200 and 300 books a year. Most of them are romance. Mos
 
 Let me save you the research spiral. If you read romance (especially if you read a lot of it) there's really only one choice that makes sense.
 
-### The Kindle Paperwhite (2024)
+### The Kindle Paperwhite 16GB (2024 model)
 
 The Kindle Paperwhite is the one I use every single day. Here's why it wins for romance readers specifically:
 
@@ -18,7 +18,7 @@ The Kindle Paperwhite is the one I use every single day. Here's why it wins for 
 
 **It's waterproof.** Bath readers, this is for you. I've dropped mine in the tub twice. It survived both times without complaint.
 
-**The 6.8-inch screen is the sweet spot.** Big enough to read comfortably, small enough to hold in one hand while lying on your side in bed. This matters more than people realize: romance readers read in bed, and one-handed reading is non-negotiable.
+**The 7-inch screen is the sweet spot.** Big enough to read comfortably, small enough to hold in one hand while lying on your side in bed. This matters more than people realize: romance readers read in bed, and one-handed reading is non-negotiable.
 
 **Storage isn't an issue.** Even the base model holds thousands of books. You will never fill it with romance novels alone.
 
@@ -52,7 +52,7 @@ This changed my reading life. Sticking a phone grip on the back of your Kindle (
 
 ### A Book Light (For Non-Kindle Readers in Your Life)
 
-If you also read physical books (or if you're buying a gift for someone who does) the [Glocusent LED Book Light](https://www.amazon.com/dp/B07WNRN9WQ?tag=reeseastor-20) is the best one I've found. Rechargeable, multiple brightness levels, flexible neck, and it clips onto the book without being heavy. Around $20 and genuinely useful.
+If you also read physical books (or if you're buying a gift for someone who does) the [Glocusent Neck Reading Light](https://www.amazon.com/dp/B07WNRN9WQ?tag=reeseastor-20) is the best one I've found. Rechargeable, multiple brightness levels, a flexible neck, and hands-free so it doesn't weigh down the book. Genuinely useful.
 
 ### A Waterproof Bluetooth Speaker
 
@@ -74,13 +74,13 @@ A few settings that improve the romance reading experience:
 
 Here's my exact daily reading setup:
 
-1. Kindle Paperwhite 2024, the workhorse.
+1. Kindle Paperwhite 16GB (2024 model), the workhorse.
 2. Fabric case: slim, magnetic, auto-wake.
 3. PopSocket on the back, one-handed reading.
 4. Kindle Unlimited subscription, because I read 20+ romance novels a month and buying them all would bankrupt me.
-5. A [reading candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20), because atmosphere matters.
+5. A [library bookish reading candle](https://www.amazon.com/dp/B087YPT934?tag=reeseastor-20), because atmosphere matters.
 
-Total investment: around $180 for the Kindle + case + grip. That's less than what I'd spend on physical books in a single month at my reading pace. The math works out fast.
+The Kindle, case, and grip cost less than what I'd spend on physical books in a single month at my reading pace. The math works out fast.
 
 ## Why E-Readers Changed Romance Reading
 

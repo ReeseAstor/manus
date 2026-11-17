@@ -28,13 +28,13 @@ describe("approved blog recommendations", () => {
   it("matches complete product names and aliases in title or content, case-insensitively", () => {
     const result = resolve("Try a GLOCUSENT book light.", "A Kindle Paperwhite reading setup");
     expect(result.products.map(p => p.name)).toEqual([
-      "Kindle Paperwhite (7-inch listing)", "Glocusent LED Book Light",
+      "Kindle Paperwhite 16GB (2024 model)", "Glocusent Neck Reading Light",
     ]);
     expect(result.hasAffiliateLinks).toBe(true);
   });
 
   it("handles punctuation, curly apostrophes, and repeated whitespace", () => {
-    const result = resolve("“Smells Like She’s Writing a Bestseller” and Glocusent\nLED Book Light.");
+    const result = resolve("“Smells Like She’s Writing a Bestseller” and Glocusent\nNeck Reading Light.");
     expect(result.products).toHaveLength(2);
   });
 
@@ -45,7 +45,7 @@ describe("approved blog recommendations", () => {
   });
 
   it("ignores HTML attributes, comments, and scripts when matching product names", () => {
-    expect(resolve('<div title="Kindle Paperwhite">Hello</div><!-- Glocusent LED Book Light --><script>Kindle Paperwhite</script>').products).toEqual([]);
+    expect(resolve('<div title="Kindle Paperwhite">Hello</div><!-- Glocusent Neck Reading Light --><script>Kindle Paperwhite</script>').products).toEqual([]);
   });
 
   it("prefers the specific variant over a shorter overlapping product alias", () => {
@@ -62,7 +62,7 @@ describe("approved blog recommendations", () => {
   });
 
   it("deduplicates repeated names, aliases, and ASIN links", () => {
-    const result = resolve("Glocusent book light, Glocusent LED Book Light. https://www.amazon.com/dp/B07WNRN9WQ https://amazon.com/gp/aw/d/B07WNRN9WQ");
+    const result = resolve("Glocusent book light, Glocusent Neck Reading Light. https://www.amazon.com/dp/B07WNRN9WQ https://amazon.com/gp/aw/d/B07WNRN9WQ");
     expect(result.products).toHaveLength(1);
   });
 
