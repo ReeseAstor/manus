@@ -57,6 +57,19 @@ await build({
   logLevel: "silent",
 });
 const { withAmazonTag } = await import(pathToFileURL(tagBundled).href);
+const mdBundled = path.join(tmpDir, "blog-markdown.mjs");
+await build({
+  entryPoints: [path.join(root, "client/src/lib/blog-markdown.tsx")],
+  bundle: true,
+  platform: "node",
+  format: "esm",
+  outfile: mdBundled,
+  jsx: "automatic",
+  packages: "external",
+  logLevel: "silent",
+  alias: { "@": path.join(root, "client/src") },
+});
+const { renderBlogMarkdownToHtml } = await import(pathToFileURL(mdBundled).href);
 const { bookFallbackFactsHtml, bookFallbackBuyHtml, bookFallbackEditionsHtml } = await import(
   pathToFileURL(path.join(root, "scripts/lib/book-fallback.mjs")).href
 );
@@ -280,16 +293,7 @@ const RETIRED = new Set(
 );
 
 function mdToHtml(md = "") {
-  return md
-    .split(/\n{2,}/)
-    .map((block) => {
-      const t = block.trim();
-      if (!t) return "";
-      const h = t.match(/^(#{1,4})\s+(.*)$/);
-      if (h) return `<h${Math.min(h[1].length + 1, 4)}>${esc(h[2])}</h${Math.min(h[1].length + 1, 4)}>`;
-      return `<p>${esc(t.replace(/[*_`]/g, "")).replace(/\n/g, " ")}</p>`;
-    })
-    .join("");
+  return renderBlogMarkdownToHtml(md);
 }
 
 const blogPosts = [];
