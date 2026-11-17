@@ -59,7 +59,7 @@ await build({
 const { withAmazonTag } = await import(pathToFileURL(tagBundled).href);
 const mdBundled = path.join(tmpDir, "blog-markdown.mjs");
 await build({
-  entryPoints: [path.join(root, "client/src/lib/blog-markdown.tsx")],
+  entryPoints: [path.join(root, "scripts/lib/render-blog-markdown.ts")],
   bundle: true,
   platform: "node",
   format: "esm",

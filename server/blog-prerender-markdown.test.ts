@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { PRODUCT_LINK_REL } from "../client/src/data/affiliateProducts";
-import { renderBlogMarkdownToHtml } from "../client/src/lib/blog-markdown";
+import { renderBlogMarkdownToHtml } from "../scripts/lib/render-blog-markdown";
 
 const BLOG_DIR = path.resolve(import.meta.dirname, "../blog-posts");
 
@@ -71,5 +71,24 @@ describe("blog markdown prerender (shared with the client reader)", () => {
     expect(rawLinks).toBe(0);
     expect(dashParagraphs).toBe(0);
     expect(amazonAnchors).toBeGreaterThanOrEqual(29);
+  });
+});
+
+describe("client markdown module stays browser-safe", () => {
+  it("does not import react-dom/server or renderToStaticMarkup", () => {
+    const source = readFileSync(
+      path.resolve(import.meta.dirname, "../client/src/lib/blog-markdown.tsx"),
+      "utf8",
+    );
+    const reader = readFileSync(
+      path.resolve(import.meta.dirname, "../client/src/components/BlogReader.tsx"),
+      "utf8",
+    );
+    expect(source).not.toContain("react-dom/server");
+    expect(source).not.toContain("renderToStaticMarkup");
+    expect(reader).not.toContain("react-dom/server");
+    expect(reader).not.toContain("renderToStaticMarkup");
+    expect(reader).toContain("BlogArticleMarkdown");
+    expect(reader).not.toContain("renderBlogMarkdownToHtml");
   });
 });

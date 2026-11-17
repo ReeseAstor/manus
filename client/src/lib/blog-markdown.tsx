@@ -1,5 +1,4 @@
-import React, { createElement, type ReactNode } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
+import React, { type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -51,9 +50,4 @@ export function BlogArticleMarkdown({ content }: { content: string }) {
       {content}
     </ReactMarkdown>
   );
-}
-
-/** Same markdown pipeline the client reader uses, as static HTML for prerender. */
-export function renderBlogMarkdownToHtml(content: string): string {
-  return renderToStaticMarkup(createElement(BlogArticleMarkdown, { content }));
 }
