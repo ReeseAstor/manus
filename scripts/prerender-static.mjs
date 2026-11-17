@@ -70,6 +70,16 @@ await build({
   alias: { "@": path.join(root, "client/src") },
 });
 const { renderBlogMarkdownToHtml } = await import(pathToFileURL(mdBundled).href);
+const datesBundled = path.join(tmpDir, "blog-dates.mjs");
+await build({
+  entryPoints: [path.join(root, "shared/blog-dates.ts")],
+  bundle: true,
+  platform: "node",
+  format: "esm",
+  outfile: datesBundled,
+  logLevel: "silent",
+});
+const { articleJsonLdDates } = await import(pathToFileURL(datesBundled).href);
 const { bookFallbackFactsHtml, bookFallbackBuyHtml, bookFallbackEditionsHtml } = await import(
   pathToFileURL(path.join(root, "scripts/lib/book-fallback.mjs")).href
 );
@@ -317,8 +327,10 @@ if (process.env.DATABASE_URL) {
 }
 for (const p of blogPosts) {
   const route = `/blog/${p.slug}`;
-  const published = p.publishedAt ? new Date(p.publishedAt).toISOString() : undefined;
-  const modified = p.updatedAt ? new Date(p.updatedAt).toISOString() : published;
+  const { datePublished: published, dateModified: modified } = articleJsonLdDates(
+    p.publishedAt,
+    p.updatedAt,
+  );
   write(
     route,
     renderPage({
