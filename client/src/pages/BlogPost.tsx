@@ -11,6 +11,10 @@ import {
   FTCDisclosure,
 } from "@/components/AffiliateProductCard";
 import {
+  AFFILIATE_DISCLOSURE,
+  MEMBERSHIP_OFFERS,
+} from "@/data/membership-offers";
+import {
   EnhancedSEOHead,
   generateArticleSchema,
 } from "@/components/ui/enhanced-seo-head";
@@ -188,6 +192,30 @@ export default function BlogPost() {
             />
           </section>
         )}
+        <section
+          className="journal-membership"
+          aria-label="Amazon membership offers"
+        >
+          <p className="journal-eyebrow">Reading options</p>
+          <p className="journal-membership-links">
+            {MEMBERSHIP_OFFERS.map((offer) => (
+              <a
+                key={offer.key}
+                className="journal-link"
+                href={offer.href}
+                target="_blank"
+                rel="sponsored noopener noreferrer nofollow"
+              >
+                {offer.label}
+                <span className="sr-only">
+                  {" "}
+                  (affiliate link, opens in a new tab)
+                </span>
+              </a>
+            ))}
+          </p>
+          <p className="journal-membership-note">{AFFILIATE_DISCLOSURE}</p>
+        </section>
         <footer className="journal-author">
           <p className="journal-eyebrow">Written by Reese Astor</p>
           <p>
