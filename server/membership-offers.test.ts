@@ -39,4 +39,12 @@ describe("Amazon membership offers", () => {
       source("client/src/components/author-kit/MembershipOffers.tsx"),
     ).toContain('rel="sponsored noopener noreferrer nofollow"');
   });
+
+  it("also rides the blog, the surface with measured affiliate clicks", () => {
+    const post = source("client/src/pages/BlogPost.tsx");
+    expect(post).toContain("MEMBERSHIP_OFFERS.map");
+    expect(post).toContain('rel="sponsored noopener noreferrer nofollow"');
+    expect(post).toContain("{AFFILIATE_DISCLOSURE}");
+    expect(source("client/src/styles/blog.css")).toContain(".journal-membership");
+  });
 });
